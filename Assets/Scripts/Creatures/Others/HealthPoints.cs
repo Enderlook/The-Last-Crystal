@@ -17,7 +17,7 @@ public class HealthPoints
         get => _max;
         set {
             _max = value;
-            bar.UpdateValues(Current, Max);
+            bar?.UpdateValues(Current, Max);
             if (Max <= 0 && die != null) die();
         }
     }
@@ -34,7 +34,7 @@ public class HealthPoints
         get => _current;
         set {
             _current = value;
-            bar.UpdateValues(Current, Max);
+            bar?.UpdateValues(Current, Max);
             if (Current <= 0 && die != null) die();
         }
     }
@@ -64,11 +64,15 @@ public class HealthPoints
     public float Ratio => Current / Max;
 
     /// <summary>
-    /// Whenever the health bar is showed or hidden.
+    /// Whenever the health bar is showed or hidden.<br/>
+    /// If <seealso cref="bar"/> is <see langword="null"/>, <see langword="false"/> will be returned.
     /// </summary>
     public bool IsVisible {
-        get => bar.IsVisible;
-        set => bar.IsVisible = value;
+        get => bar == null ? false : bar.IsVisible;
+        set {
+            if (bar != null)
+                bar.IsVisible = value;
+        }
     }
 
     /// <summary>
@@ -84,7 +88,7 @@ public class HealthPoints
     public void Initialize()
     {
         float current = startingCurrent == -1 ? startingMax : startingCurrent;
-        bar.ManualUpdate(startingMax, current);
+        bar?.ManualUpdate(startingMax, current);
         Current = current;
         Max = startingMax;
     }
