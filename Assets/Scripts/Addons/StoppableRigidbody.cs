@@ -1,16 +1,11 @@
-﻿using UnityEngine;
+﻿using CreaturesAddons;
+using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class StoppableRigidbody : MonoBehaviour
+public class StoppableRigidbody : MonoBehaviour, IBuild
 {
-    private Rigidbody2D Rigidbody2D {
-        get {
-            if (thisRigidbody2D == null)
-                thisRigidbody2D = gameObject.GetComponent<Rigidbody2D>();
-            return thisRigidbody2D;
-        }
-    }
     private Rigidbody2D thisRigidbody2D;
+
+    void IBuild.Build(Creature creature) => thisRigidbody2D = creature.thisRigidbody2D;
 
     private float angularVelocity;
     private Vector2 velocity;
@@ -25,30 +20,30 @@ public class StoppableRigidbody : MonoBehaviour
             if (speedMultiplier == value) return;
             if (speedMultiplier == 0)
             {
-                Rigidbody2D.isKinematic = false;
-                Rigidbody2D.velocity = velocity;
-                Rigidbody2D.angularVelocity = angularVelocity;
+                thisRigidbody2D.isKinematic = false;
+                thisRigidbody2D.velocity = velocity;
+                thisRigidbody2D.angularVelocity = angularVelocity;
             }
             else
             {
-                Rigidbody2D.mass *= speedMultiplier;
-                Rigidbody2D.velocity /= speedMultiplier;
-                Rigidbody2D.angularVelocity /= speedMultiplier;
+                thisRigidbody2D.mass *= speedMultiplier;
+                thisRigidbody2D.velocity /= speedMultiplier;
+                thisRigidbody2D.angularVelocity /= speedMultiplier;
             }
             speedMultiplier = value;
             if (speedMultiplier == 0)
             {
-                velocity = Rigidbody2D.velocity;
-                angularVelocity = Rigidbody2D.angularVelocity;
-                Rigidbody2D.velocity = Vector2.zero;
-                Rigidbody2D.angularVelocity = 0;
-                Rigidbody2D.isKinematic = true;
+                velocity = thisRigidbody2D.velocity;
+                angularVelocity = thisRigidbody2D.angularVelocity;
+                thisRigidbody2D.velocity = Vector2.zero;
+                thisRigidbody2D.angularVelocity = 0;
+                thisRigidbody2D.isKinematic = true;
             }
             else
             {
-                Rigidbody2D.mass /= speedMultiplier;
-                Rigidbody2D.velocity *= speedMultiplier;
-                Rigidbody2D.angularVelocity *= speedMultiplier;
+                thisRigidbody2D.mass /= speedMultiplier;
+                thisRigidbody2D.velocity *= speedMultiplier;
+                thisRigidbody2D.angularVelocity *= speedMultiplier;
             }
         }
     }
