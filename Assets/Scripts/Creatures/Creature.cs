@@ -15,6 +15,9 @@ public class Creature : MonoBehaviour
     [Tooltip("StoppableRigidbody Script")]
     public StoppableRigidbody stoppableRigidbody;
 
+    [Tooltip("Rigidbody Component.")]
+    public Rigidbody2D thisRigidbody2D;
+
     private IInitialize[] initializes;
     private IDie[] dies;
     private IUpdate[] updates;
