@@ -8,12 +8,18 @@ public class Creature : MonoBehaviour
     [Tooltip("Health.")]
     public HealthPoints healthPoints;
 
+    [Tooltip("Movement speed.")]
+    public float speed;
+
     [Header("Setup")]
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
 
     [Tooltip("StoppableRigidbody Script")]
     public StoppableRigidbody stoppableRigidbody;
+
+    [Tooltip("Rigidbody Component.")]
+    public Rigidbody2D thisRigidbody2D;
 
     private IInitialize[] initializes;
     private IDie[] dies;
@@ -56,7 +62,7 @@ public class Creature : MonoBehaviour
             return;
         }
         healthPoints.Update(Time.deltaTime);
-        move?.Move(Time.deltaTime, SpeedMultiplier);
+        move?.Move(Time.deltaTime, SpeedMultiplier * speed);
         Array.ForEach(updates, e => e.Update(Time.deltaTime));
     }
 
