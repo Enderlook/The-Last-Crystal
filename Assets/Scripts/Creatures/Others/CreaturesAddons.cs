@@ -1,12 +1,8 @@
 ﻿namespace CreaturesAddons
 {
-    public interface IBuild
+    public interface IAwake
     {
-        void Build(Creature creature);
-    }
-    public interface IInitialize
-    {
-        void Initialize();
+        void Awake(Creature creature);
     }
     public interface IDie
     {
