@@ -1,11 +1,11 @@
 ﻿using CreaturesAddons;
 using UnityEngine;
 
-public class StoppableRigidbody : MonoBehaviour, IBuild
+public class StoppableRigidbody : MonoBehaviour, IAwake
 {
     private Rigidbody2D thisRigidbody2D;
 
-    void IBuild.Build(Creature creature) => thisRigidbody2D = creature.thisRigidbody2D;
+    void IAwake.Awake(Creature creature) => thisRigidbody2D = creature.thisRigidbody2D;
 
     private float angularVelocity;
     private Vector2 velocity;
