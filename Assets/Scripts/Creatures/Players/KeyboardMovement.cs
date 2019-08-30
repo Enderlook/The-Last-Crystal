@@ -1,7 +1,7 @@
 ﻿using CreaturesAddons;
 using UnityEngine;
 
-public class KeyboardMovement : MonoBehaviour, IMove, IBuild
+public class KeyboardMovement : MonoBehaviour, IMove, IAwake
 {
     [Header("Configuration")]
     [Tooltip("Move right key.")]
@@ -29,7 +29,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IBuild
 
     private Rigidbody2D thisRigidbody2D;
 
-    void IBuild.Build(Creature creature)
+    void IAwake.Awake(Creature creature)
     {
         thisRigidbody2D = creature.thisRigidbody2D;
         remainingJumps = maxJumps;
