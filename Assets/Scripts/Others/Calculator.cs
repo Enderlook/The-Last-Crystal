@@ -58,7 +58,12 @@ public class Calculator
     /// </summary>
     private void MakeRegex(bool compile = false)
     {
-        IEnumerable<string> mathfMethods = typeof(Mathf).GetMethods(BindingFlags.Public | BindingFlags.Static).Where(e => e.GetParameters().Length == 1 || e.GetParameters().Length == 2).Select(e => e.Name.ToLower());
+        IEnumerable<string> mathfMethods = typeof(Mathf).GetMethods(BindingFlags.Public | BindingFlags.Static)
+            .Where(e =>
+            {
+                int parameters = e.GetParameters().Length;
+                return parameters == 1 || parameters == 2;
+            }).Select(e => e.Name.ToLower());
         string operatorsPattern = string.Join("|", operators.Keys.Select(e => @"\" + e).Concat(mathfMethods));
         string numberPattern = @"(\d+(?>\.?\,?\d+)?)";
         string pattern = @"\(?" + numberPattern + @"(" + operatorsPattern + @")" + numberPattern + @"\)?";
@@ -94,50 +99,47 @@ public class Calculator
     /// </summary>
     /// <param name="match">Match from the regex.</param>
     /// <returns></returns>
-    private string Replace(Match match)
+    private string Replace(Match m)
     {
-        GroupCollection groups = match.Groups;
+        GroupCollection groups = m.Groups;
+        string operation = groups[2].Value;
+        float right = float.Parse(groups[3].Value);
         if (string.IsNullOrEmpty(groups[1].Value))
-        {
-            string key = groups[2].Value.FirstCharToUpper();
-            MethodInfo method = typeof(Mathf).GetMethod(key);
-            if (method != null)
-            {
-                if (method.GetParameters().Length == 1)
-                    return method.Invoke(typeof(Mathf),
-                            new object[] {
-                                float.Parse(groups[3].Value),
-                            }).ToString();
-                throw new System.Exception("The method found doesn't have a correct amount of arguments.");
-            }
-            else
-                throw new System.Exception($"No method found in {nameof(Mathf)} class called {key}.");
-        }
+            return operation == "-" ? Compute(operation, 0f, right) : Compute(operation, right);
         else
         {
-            string key = groups[2].Value;
-            if (operators.TryGetValue(key, out System.Func<float, float, float> operation))
-                return operation(
-                    float.Parse(groups[1].Value),
-                    float.Parse(groups[3].Value)
-                ).ToString();
-            else
-            {
-                key = key.FirstCharToUpper();
-                MethodInfo method = typeof(Mathf).GetMethod(key);
-                if (method != null)
-                {
-                    if (method.GetParameters().Length == 2)
-                        return method.Invoke(typeof(Mathf),
-                            new object[] {
-                            float.Parse(groups[1].Value),
-                            float.Parse(groups[3].Value)
-                            }).ToString();
-                    throw new System.Exception("The method found doesn't have a correct amount of arguments.");
-                }
-                else
-                    throw new System.Exception($"No method found in {nameof(Mathf)} class called {key}.");
-            }
+            float left = float.Parse(groups[1].Value);
+            return operators.TryGetValue(operation, out System.Func<float, float, float> func)
+                ? func(left, right).ToString() : Compute(operation, left, right);
         }
+    }
+
+    /// <summary>
+    /// Compute current operations using a method from <see cref="Mathf"/> through reflection.
+    /// </summary>
+    /// <param name="nameOfMethod">Name of method to look for using reflection.</param>
+    /// <param name="parameters">Parameters to pass in <paramref name="nameOfMethod"/> method.</param>
+    /// <returns>Result of the <paramref name="nameOfMethod"/> method.</returns>
+    private string Compute(string nameOfMethod, params float[] parameters)
+    {
+        string key = nameOfMethod.FirstCharToUpper();
+        MethodInfo method = typeof(Mathf).GetMethod(key);
+        if (method != null)
+        {
+            string Invoke(params float[] args)
+            {
+                object[] objects = new object[args.Length];
+                for (int i = 0; i < args.Length; i++)
+                {
+                    objects[i] = args[i];
+                }
+                return method.Invoke(typeof(Mathf), objects).ToString();
+            }
+
+            if (method.GetParameters().Length == parameters.Length)
+                return Invoke(parameters);
+            throw new System.Exception("The method found doesn't have a correct amount of arguments.");
+        }
+        throw new System.Exception($"No method found in {nameof(Mathf)} class called {key}.");
     }
 }
