@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -41,24 +42,13 @@ public class Calculator
         }
     }
 
-    private readonly Dictionary<string, System.Func<float[], float>> operators = new Dictionary<string, System.Func<float[], float>>()
+    private readonly Dictionary<string, System.Func<float, float, float>> operators = new Dictionary<string, System.Func<float, float, float>>()
     {
-        { "+", (float[] args) => args[0] + args[1] },
-        { "-", (float[] args) => args[0] - args[1] },
-        { "*", (float[] args) => args[0] * args[1] },
-        { "/", (float[] args) => args[0] / args[1] },
-        { "^", (float[] args) => Mathf.Pow(args[0], args[1]) },
-        { "log", (float[] args) => Mathf.Log(args[0], args[1]) },
-        { "cos", (float[] args) => Mathf.Cos(args[0]) },
-        { "sin", (float[] args) => Mathf.Sin(args[0]) },
-        { "tan", (float[] args) => Mathf.Tan(args[0]) },
-        { "abs", (float[] args) => Mathf.Abs(args[0]) },
-        { "floor", (float[] args) => Mathf.Floor(args[0]) },
-        { "ceil", (float[] args) => Mathf.Ceil(args[0]) },
-        { "round", (float[] args) => Mathf.Round(args[0]) },
-        { "sqrt", (float[] args) => Mathf.Sqrt(args[0]) },
-        { "max", (float[] args) => Mathf.Max(args[0]) },
-        { "min", (float[] args) => Mathf.Min(args[0]) },
+        { "+", (float l, float r) => l + r },
+        { "-", (float l, float r) => l - r },
+        { "*", (float l, float r) => l * r },
+        { "/", (float l, float r) => l / r },
+        { "^", (float l, float r) => Mathf.Pow(l, r) },
     };
 
     /// <summary>
@@ -79,7 +69,8 @@ public class Calculator
     /// </summary>
     private void MakeRegex(bool compile = false)
     {
-        string operatorsPattern = string.Join("|", operators.Keys.Select(e => @"\" + e));
+        IEnumerable<string> mathfMethods = typeof(Mathf).GetMethods(BindingFlags.Public | BindingFlags.Static).Where(e => e.GetParameters().Length == 1 || e.GetParameters().Length == 2).Select(e => e.Name.ToLower());
+        string operatorsPattern = string.Join("|", operators.Keys.Select(e => @"\" + e).Concat(mathfMethods));
         string numberPattern = @"(\d+(?>\.?\,?\d+)?)";
         string pattern = @"\(?" + numberPattern + @"(" + operatorsPattern + @")" + numberPattern + @"\)?";
 
@@ -115,17 +106,47 @@ public class Calculator
     private string Replace(Match match)
     {
         GroupCollection groups = match.Groups;
-        if (match.Groups.Count == 4)
-            return operators[groups[2].Value](
-                new float[2] {
+        if (string.IsNullOrEmpty(groups[1].Value))
+        {
+            string key = groups[2].Value.FirstCharToUpper();
+            MethodInfo method = typeof(Mathf).GetMethod(key);
+            if (method != null)
+            {
+                if (method.GetParameters().Length == 1)
+                    return method.Invoke(typeof(Mathf),
+                            new object[] {
+                                float.Parse(groups[3].Value),
+                            }).ToString();
+                throw new System.Exception("The method found doesn't have a correct amount of arguments.");
+            }
+            else
+                throw new System.Exception($"No method found in {nameof(Mathf)} class called {key}.");
+        }
+        else
+        {
+            string key = groups[2].Value;
+            if (operators.TryGetValue(key, out System.Func<float, float, float> operation))
+                return operation(
                     float.Parse(groups[1].Value),
                     float.Parse(groups[3].Value)
-                }).ToString();
-        else if (match.Groups.Count == 3)
-            return operators[groups[1].Value](
-                new float[1] {
-                    float.Parse(groups[2].Value)
-                }).ToString();
-        throw new System.Exception("Wrong number of groups.");
+                ).ToString();
+            else
+            {
+                key = key.FirstCharToUpper();
+                MethodInfo method = typeof(Mathf).GetMethod(key);
+                if (method != null)
+                {
+                    if (method.GetParameters().Length == 2)
+                        return method.Invoke(typeof(Mathf),
+                            new object[] {
+                            float.Parse(groups[1].Value),
+                            float.Parse(groups[3].Value)
+                            }).ToString();
+                    throw new System.Exception("The method found doesn't have a correct amount of arguments.");
+                }
+                else
+                    throw new System.Exception($"No method found in {nameof(Mathf)} class called {key}.");
+            }
+        }
     }
 }
