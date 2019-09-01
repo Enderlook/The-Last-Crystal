@@ -99,7 +99,7 @@ namespace FloatPool
         /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
         /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        public override  (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
         {
             if (amount < 0)
                 Debug.LogWarning($"The amount was negative. {nameof(Current)} is increasing.");
@@ -315,6 +315,25 @@ namespace FloatPool
             (float remaining, float taken) result = base.Increase(amount, allowOverflow);
             callback.Invoke();
             return result;
+        }
+    }
+
+    [System.Serializable]
+    public class DecreaseReductionDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    {
+        [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
+        public Calculator reductionFormula;
+
+        public override void Initialize()
+        {
+            if (string.IsNullOrEmpty(reductionFormula.formula))
+                reductionFormula.formula = "{0}";
+            base.Initialize();
+        }
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            return base.Decrease(reductionFormula.Calculate(amount, Current, Max), allowUnderflow);
         }
     }
 }
