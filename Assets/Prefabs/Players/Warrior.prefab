@@ -672,6 +672,16 @@ PrefabInstance:
       propertyPath: healthPoints.decorable.decorable.startingMax
       value: 35
       objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: health.decorable.decorable.decorable.startingMax
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: health.reductionPercent
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 8157229962283897169, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Mass

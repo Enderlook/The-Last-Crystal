@@ -99,7 +99,7 @@ namespace FloatPool
         /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
         /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        public override  (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
         {
             if (amount < 0)
                 Debug.LogWarning($"The amount was negative. {nameof(Current)} is increasing.");
@@ -316,5 +316,15 @@ namespace FloatPool
             callback.Invoke();
             return result;
         }
+    }
+
+    [System.Serializable]
+    public class DecreaseReductionDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    {
+        [Tooltip("Reduction percent done in Decrease method.")]
+        [Range(0, 1)]
+        public float reductionPercent;
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => base.Decrease(amount * (1 - reductionPercent), allowUnderflow);
     }
 }
