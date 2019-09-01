@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace FloatPool
 {
@@ -335,6 +335,35 @@ namespace FloatPool
         {
             if (audioSource != null && playlist != null && !audioSource.isPlaying)
                 playlist.Play(audioSource, Settings.IsSoundActive);
+        }
+    }
+
+    public class ChangeCallbackDecorator : Decorator
+    {
+        private System.Action callback;
+
+        /// <summary>
+        /// Configure the object.
+        /// </summary>
+        /// <param name="callback">Executed each time <see cref="Current"/> or <see cref="Max"/> changes.</param>
+        public void SetConfiguration(System.Action callback)
+        {
+            this.callback = callback;
+        }
+
+        public override float Max {
+            get => base.Max;
+            set {
+                base.Max = value;
+                callback?.Invoke();
+            }
+        }
+        public override float Current {
+            get => base.Current;
+            set {
+                base.Current = value;
+                callback?.Invoke();
+            }
         }
     }
 }
