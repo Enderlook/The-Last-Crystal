@@ -184,4 +184,38 @@ namespace FloatPool
             }
         }
     }
+
+    public class BarDecorator : Decorator
+    {
+        private HealthBar bar;
+
+        /// <summary>
+        /// Configure the object.
+        /// </summary>
+        /// <param name="bar">Bar used to show values.</param>
+        public void SetConfiguration(HealthBar bar) => this.bar = bar;
+
+        private void UpdateValues() => bar?.UpdateValues(Current, Max);
+
+        public override float Max {
+            get => base.Max;
+            set {
+                base.Max = value;
+                UpdateValues();
+            }
+        }
+        public override float Current {
+            get => base.Current;
+            set {
+                base.Current = value;
+                UpdateValues();
+            }
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            bar?.ManualUpdate(Current, Max);
+        }
+    }
 }
