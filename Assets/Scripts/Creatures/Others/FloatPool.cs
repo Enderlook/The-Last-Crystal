@@ -3,80 +3,70 @@ using UnityEngine.Events;
 
 namespace FloatPool
 {
-    public interface IFloatPool
+    public abstract class AbstractFloatPool
     {
         /// <summary>
         /// Maximum amount. <see cref="Current"/> can't be greater than this value.<br/>
         /// </summary>
         /// <seealso cref="Current"/>
-        float Max { get; set; }
-
+        public virtual float Max { get; internal set; }
         /// <summary>
         /// Current amount. It can't be greater than <see cref="MaxCurrent"/><br/>
         /// </summary>
         /// <seealso cref="Max"/>
-        float Current { get; set; }
-
+        public virtual float Current { get; internal set; }
         /// <summary>
         /// Ration between <see cref="Current"/> and <see cref="Max"/>.
         /// </summary>
-        float Ratio { get; set; }
+        public virtual float Ratio {
+            get => Current / Max;
+            internal set => Current = Max / value;
+        }
 
-        void Initialize();
+        public abstract void Initialize();
         /// <summary>
         /// Update values.
         /// </summary>
         /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
-        void Update(float deltatime);
-
+        public abstract void Update(float deltatime);
         /// <summary>
         /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
         /// </summary>
         /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
         /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
-
+        public abstract (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
         /// <summary>
         /// Increase <see cref="Current"/> by <paramref name="amount"/>.
         /// </summary>
         /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
         /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
+        public abstract (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
     }
 
     [System.Serializable]
-    public class FloatPool : IFloatPool
+    public class FloatPool : AbstractFloatPool
     {
         [Header("Main Configuration")]
         [Tooltip("Maximum Current.")]
         public float startingMax = 100;
-        public float Max { get; set; }
-
 
         [Tooltip("Starting Current. Set -1 to use Max value.")]
         public float startingCurrent = -1;
-
-        public float Current { get; set; }
-
-        public float Ratio {
-            get => Current / Max;
-            set => Current = Max / value;
-        }
 
         /// <summary>
         /// Initializes the value of <see cref="Current"/> and <see cref="Max"/> with <see cref="startingCurrent"/> and <seealso cref="startingMax"/>.
         /// If <see cref="startingCurrent"/> is -1, <see cref="startingMax"/> will be used instead to set <see cref="Current"/>..
         /// </summary>
-        public void Initialize()
+        public override void Initialize()
         {
             float current = startingCurrent == -1 ? startingMax : startingCurrent;
             Current = current;
             Max = startingMax;
         }
 
-        public void Update(float deltaTime) { }
+        public override void Update(float deltaTime) { }
 
         /// <summary>
         /// Changes the value of <see cref="Current"/> by <paramref name="amount"/>, and clamp values to 0 and <see cref="Max"/> if <paramref name="allowUnderflow"/> and <paramref name="allowOverflow"/> are <see langword="false"/>, respectively.
@@ -109,7 +99,7 @@ namespace FloatPool
         /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
         /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        public override  (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
         {
             if (amount < 0)
                 Debug.LogWarning($"The amount was negative. {nameof(Current)} is increasing.");
@@ -124,7 +114,7 @@ namespace FloatPool
         /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
         /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        public (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
         {
             if (amount < 0)
                 Debug.LogWarning($"The amount was negative. {nameof(Current)} is decreasing.");
@@ -133,55 +123,48 @@ namespace FloatPool
         }
     }
 
-    public abstract class Decorator<T> : IFloatPool where T : IFloatPool
+    public abstract class Decorator<T> : AbstractFloatPool where T : AbstractFloatPool
     {
         public T decorable;
 
-        public virtual float Max { get => decorable.Max; set => decorable.Max = value; }
-        public virtual float Current { get => decorable.Current; set => decorable.Current = value; }
-        public virtual float Ratio { get => decorable.Ratio; set => decorable.Ratio = value; }
+        public override float Max { get => decorable.Max; internal set => decorable.Max = value; }
+        public override float Current { get => decorable.Current; internal set => decorable.Current = value; }
+        public override float Ratio { get => decorable.Ratio; internal set => decorable.Ratio = value; }
 
-        public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
-        public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
-        public virtual void Initialize() => decorable.Initialize();
-        public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
+        public override void Initialize() => decorable.Initialize();
+        public override void Update(float deltaTime) => decorable.Update(deltaTime);
     }
 
     [System.Serializable]
-    public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
+    public class CallbackDecorator<T> : Decorator<T> where T : AbstractFloatPool
     {
         [Header("Callback Configuration")]
-        [Tooltip("Event called when Max or Current become 0 or bellow.")]
+        [Tooltip("Event called when Current become 0 or bellow.")]
         public UnityEvent emptyCallback;
         [Tooltip("Event called when Current reaches Max.")]
         public UnityEvent fullCallback;
 
-        private void CheckEmpty(float value)
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
         {
-            if (value == 0)
-                emptyCallback.Invoke();
+            (float remaining, float taken) result = base.Increase(amount, allowOverflow);
+            if (Current == Max)
+                fullCallback.Invoke();
+            return result;
         }
 
-        public override float Max {
-            get => base.Max;
-            set {
-                base.Max = value;
-                CheckEmpty(value);
-            }
-        }
-        public override float Current {
-            get => base.Current;
-            set {
-                base.Current = value;
-                CheckEmpty(value);
-                if (value == Max)
-                    fullCallback.Invoke();
-            }
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+            if (Current == 0)
+                emptyCallback.Invoke();
+            return result;
         }
     }
 
     [System.Serializable]
-    public class BarDecorator<T> : Decorator<T> where T : IFloatPool
+    public class BarDecorator<T> : Decorator<T> where T : AbstractFloatPool
     {
         [Header("Bar Configuration")]
         [Tooltip("Bar used to show values.")]
@@ -189,25 +172,24 @@ namespace FloatPool
 
         private void UpdateValues() => bar?.UpdateValues(Current, Max);
 
-        public override float Max {
-            get => base.Max;
-            set {
-                base.Max = value;
-                UpdateValues();
-            }
-        }
-        public override float Current {
-            get => base.Current;
-            set {
-                base.Current = value;
-                UpdateValues();
-            }
-        }
-
         public override void Initialize()
         {
             base.Initialize();
             bar?.ManualUpdate(Current, Max);
+        }
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+            UpdateValues();
+            return result;
+        }
+
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+        {
+            (float remaining, float taken) result = base.Increase(amount, allowOverflow);
+            UpdateValues();
+            return result;
         }
     }
 
@@ -215,7 +197,7 @@ namespace FloatPool
     public class UnityEventBoolean : UnityEvent<bool> { }
 
     [System.Serializable]
-    public class RechargingDecorator<T> : Decorator<T> where T : IFloatPool
+    public class RechargingDecorator<T> : Decorator<T> where T : AbstractFloatPool
     {
         [Header("Recharging Configuration")]
         [Tooltip("Value per second increases in Current.")]
@@ -316,24 +298,23 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class ChangeCallbackDecorator<T> : Decorator<T> where T : IFloatPool
+    public class ChangeCallbackDecorator<T> : Decorator<T> where T : AbstractFloatPool
     {
         [Tooltip("Event executed each time Max or Current values changes.")]
         public UnityEvent callback;
 
-        public override float Max {
-            get => base.Max;
-            set {
-                base.Max = value;
-                callback.Invoke();
-            }
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+            callback.Invoke();
+            return result;
         }
-        public override float Current {
-            get => base.Current;
-            set {
-                base.Current = value;
-                callback.Invoke();
-            }
+
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+        {
+            (float remaining, float taken) result = base.Increase(amount, allowOverflow);
+            callback.Invoke();
+            return result;
         }
     }
 }

@@ -7,7 +7,7 @@ public class Creature : MonoBehaviour
 {
     [Header("Configuration")]
     [Tooltip("Health.")]
-    public FloatPoolB healthPoints;
+    public FloatPoolB health;
 
     [Serializable]
     public class FloatPoolA : BarDecorator<FloatPool.FloatPool> { }
@@ -38,7 +38,7 @@ public class Creature : MonoBehaviour
 
     private void Awake()
     {
-        healthPoints.Initialize();
+        health.Initialize();
         LoadComponents();
     }
 
@@ -52,7 +52,7 @@ public class Creature : MonoBehaviour
 
     protected virtual void Update()
     {
-        healthPoints.Update(Time.deltaTime);
+        health.Update(Time.deltaTime);
         move?.Move(Time.deltaTime, SpeedMultiplier * speed);
         Array.ForEach(updates, e => e.Update(Time.deltaTime));
     }
@@ -61,7 +61,7 @@ public class Creature : MonoBehaviour
     /// Takes healing increasing its <see cref="Health"/>.
     /// </summary>
     /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
-    public void TakeHealing(float amount) => healthPoints.Increase(amount);
+    public void TakeHealing(float amount) => health.Increase(amount);
 
     /// <summary>
     /// Take damage reducing its <see cref="Health"/>.
@@ -70,9 +70,9 @@ public class Creature : MonoBehaviour
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
-        healthPoints.Decrease(amount);
+        health.Decrease(amount);
         if (displayDamage)
-            SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Ratio));
+            SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), health.Ratio));
     }
 
     /// <summary>
