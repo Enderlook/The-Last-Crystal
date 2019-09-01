@@ -143,4 +143,45 @@ namespace FloatPool
         public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
         public virtual void Initialize() => decorable.Initialize();
     }
+
+    [System.Serializable]
+    public class CallbackDecorator : Decorator
+    {
+        private System.Action emptyCallback;
+        private System.Action fullCallback;
+
+        /// <summary>
+        /// Configure the object.
+        /// </summary>
+        /// <param name="emptyCallback">Method called when <see cref="Max"/> or <see cref="Current"/> become 0.</param>
+        /// <param name="fullCallback">Method called when <see cref="Current"/> becomes <see cref="Max"/>.</param>
+        public void SetConfiguration(System.Action emptyCallback = null, System.Action fullCallback = null)
+        {
+            this.emptyCallback = emptyCallback;
+            this.fullCallback = fullCallback;
+        }
+
+        private void CheckEmpty(float value)
+        {
+            if (value == 0)
+                emptyCallback?.Invoke();
+        }
+
+        public override float Max {
+            get => base.Max;
+            set {
+                base.Max = value;
+                CheckEmpty(value);
+            }
+        }
+        public override float Current {
+            get => base.Current;
+            set {
+                base.Current = value;
+                CheckEmpty(value);
+                if (value == Max)
+                    fullCallback?.Invoke();
+            }
+        }
+    }
 }
