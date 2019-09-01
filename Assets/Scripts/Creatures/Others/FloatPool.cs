@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace FloatPool
 {
@@ -155,24 +156,16 @@ namespace FloatPool
     [System.Serializable]
     public class CallbackDecorator : Decorator
     {
-        private System.Action emptyCallback;
-        private System.Action fullCallback;
-
-        /// <summary>
-        /// Configure the object.
-        /// </summary>
-        /// <param name="emptyCallback">Method called when <see cref="Max"/> or <see cref="Current"/> become 0.</param>
-        /// <param name="fullCallback">Method called when <see cref="Current"/> becomes <see cref="Max"/>.</param>
-        public void SetConfiguration(System.Action emptyCallback = null, System.Action fullCallback = null)
-        {
-            this.emptyCallback = emptyCallback;
-            this.fullCallback = fullCallback;
-        }
+        [Header("Callback Configuration")]
+        [Tooltip("Event called when Max or Current become 0 or bellow.")]
+        public UnityEvent emptyCallback;
+        [Tooltip("Event called when Current reaches Max.")]
+        public UnityEvent fullCallback;
 
         private void CheckEmpty(float value)
         {
             if (value == 0)
-                emptyCallback?.Invoke();
+                emptyCallback.Invoke();
         }
 
         public override float Max {
@@ -188,20 +181,17 @@ namespace FloatPool
                 base.Current = value;
                 CheckEmpty(value);
                 if (value == Max)
-                    fullCallback?.Invoke();
+                    fullCallback.Invoke();
             }
         }
     }
 
+    [System.Serializable]
     public class BarDecorator : Decorator
     {
-        private HealthBar bar;
-
-        /// <summary>
-        /// Configure the object.
-        /// </summary>
-        /// <param name="bar">Bar used to show values.</param>
-        public void SetConfiguration(HealthBar bar) => this.bar = bar;
+        [Header("Bar Configuration")]
+        [Tooltip("Bar used to show values.")]
+        public HealthBar bar;
 
         private void UpdateValues() => bar?.UpdateValues(Current, Max);
 
@@ -227,40 +217,32 @@ namespace FloatPool
         }
     }
 
+    [System.Serializable]
+    public class UnityEventBoolean : UnityEvent<bool> { }
+
     public class RechargingDecorator : Decorator
     {
-        private float rechargeRate;
-        private float rechargingDelay;
-        private float _currentRechargingDelay = 0f;
-        private Playlist playlist;
-        private AudioSource audioSource;
-        private System.Action startCallback;
-        private bool _startCalled = false;
-        private System.Action<bool> endCallback;
-        private System.Action<bool> activeCallback;
+        [Header("Recharging Configuration")]
+        [Tooltip("Value per second increases in Current.")]
+        public float rechargeRate;
 
-        /// <summary>
-        /// Configure the object.
-        /// </summary>
-        /// <param name="rechargeRate">Points per second it increases <see cref="Current"/>.</param>
-        /// <param name="rechargingDelay">Amount of time in seconds after call <see cref="Decrease(float, bool)"/> in order to start recharging.</param>
-        /// <param name="playlist">Sound played while recharging.</param>
-        /// <param name="audioSource">Audio Source used to play sound.</param>
-        /// <param name="startCallback">Callback executed when start recharging</param>
-        /// <param name="activeCallback">Callback executed per <see cref="Update(float)"/> call when <see cref="_currentRechargingDelay"/> is 0.
-        /// On <see langword="true"/>, it is recharging.</param>
-        /// <param name="endCallback">Callback executed when end recharging.<br/>
-        /// On <see langword="true"/>, it ended before <see cref="Current"/> reached <see cref="Max"/>, due <see cref="Decrease(float, bool)"/> call.</param>
-        public void SetConfiguration(float rechargeRate, float rechargingDelay, Playlist playlist, AudioSource audioSource, System.Action startCallback, System.Action<bool> activeCallback, System.Action<bool> endCallback)
-        {
-            this.rechargeRate = rechargeRate;
-            this.rechargingDelay = rechargingDelay;
-            this.playlist = playlist;
-            this.audioSource = audioSource;
-            this.startCallback = startCallback;
-            this.activeCallback = activeCallback;
-            this.endCallback = endCallback;
-        }
+        [Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
+        public float rechargingDelay;
+        private float _currentRechargingDelay = 0f;
+
+        [Tooltip("Sound played while recharging.")]
+        public Playlist playlist;
+        [Tooltip("Audio Source used to play sound.")]
+        public AudioSource audioSource;
+
+        [Tooltip("Event executed when start recharging.")]
+        public UnityEvent startCallback;
+        private bool _startCalled = false;
+        [Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
+        public UnityEventBoolean endCallback;
+        [Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
+        public UnityEventBoolean activeCallback;
+
         public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
         {
             ResetRechargingDelay(true);
@@ -292,11 +274,11 @@ namespace FloatPool
                     CallStartCallback();
                     Increase(rechargeRate * deltaTime);
                     PlayRechargingSound();
-                    activeCallback?.Invoke(true);
+                    activeCallback.Invoke(true);
                 }
                 else
                 {
-                    activeCallback?.Invoke(false);
+                    activeCallback.Invoke(false);
                     CallEndCallback(false);
                 }
             }
@@ -313,7 +295,7 @@ namespace FloatPool
             if (!_startCalled)
             {
                 _startCalled = true;
-                startCallback();
+                startCallback.Invoke();
             }
         }
 
@@ -327,7 +309,7 @@ namespace FloatPool
             if (_startCalled)
             {
                 _startCalled = false;
-                endCallback(isForced);
+                endCallback.Invoke(isForced);
             }
         }
 
@@ -338,31 +320,24 @@ namespace FloatPool
         }
     }
 
+    [System.Serializable]
     public class ChangeCallbackDecorator : Decorator
     {
-        private System.Action callback;
-
-        /// <summary>
-        /// Configure the object.
-        /// </summary>
-        /// <param name="callback">Executed each time <see cref="Current"/> or <see cref="Max"/> changes.</param>
-        public void SetConfiguration(System.Action callback)
-        {
-            this.callback = callback;
-        }
+        [Tooltip("Event executed each time Max or Current values changes.")]
+        public UnityEvent callback;
 
         public override float Max {
             get => base.Max;
             set {
                 base.Max = value;
-                callback?.Invoke();
+                callback.Invoke();
             }
         }
         public override float Current {
             get => base.Current;
             set {
                 base.Current = value;
-                callback?.Invoke();
+                callback.Invoke();
             }
         }
     }
