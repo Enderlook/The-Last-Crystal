@@ -429,11 +429,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1934395073931956579, guid: 09b7f3303549141429131ad61f5971e0,
-        type: 3}
-      propertyPath: health.reductionFormula.formula
-      value: '{0}*0,8'
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b7f3303549141429131ad61f5971e0, type: 3}
 --- !u!1 &592686825
