@@ -1,12 +1,18 @@
 using System;
 using CreaturesAddons;
 using UnityEngine;
+using FloatPool;
 
 public class Creature : MonoBehaviour
 {
     [Header("Configuration")]
     [Tooltip("Health.")]
-    public HealthPoints healthPoints;
+    public FloatPoolB healthPoints;
+
+    [Serializable]
+    public class FloatPoolA : BarDecorator<FloatPool.FloatPool> { }
+    [Serializable]
+    public class FloatPoolB : CallbackDecorator<FloatPoolA> { }
 
     [Tooltip("Movement speed.")]
     public float speed;
@@ -24,7 +30,7 @@ public class Creature : MonoBehaviour
     private IDie[] dies;
     private IUpdate[] updates;
     private IMove move;
-    
+
     public float SpeedMultiplier {
         get => stoppableRigidbody.SpeedMultiplier;
         set => stoppableRigidbody.SpeedMultiplier = value;
@@ -32,7 +38,6 @@ public class Creature : MonoBehaviour
 
     private void Awake()
     {
-        healthPoints.SetDie(Die);
         healthPoints.Initialize();
         LoadComponents();
     }
@@ -56,7 +61,7 @@ public class Creature : MonoBehaviour
     /// Takes healing increasing its <see cref="Health"/>.
     /// </summary>
     /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
-    public void TakeHealing(float amount) => healthPoints.TakeHealing(amount);
+    public void TakeHealing(float amount) => healthPoints.Increase(amount);
 
     /// <summary>
     /// Take damage reducing its <see cref="Health"/>.
@@ -65,7 +70,7 @@ public class Creature : MonoBehaviour
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
-        healthPoints.TakeDamage(amount);
+        healthPoints.Decrease(amount);
         if (displayDamage)
             SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Ratio));
     }
