@@ -30,14 +30,24 @@ public class Calculator
         }
     }
 
-    private static readonly Dictionary<string, System.Func<float, float, float>> operators = new Dictionary<string, System.Func<float, float, float>>()
+    private static readonly Dictionary<string, System.Func<float[], float>> operators = new Dictionary<string, System.Func<float[], float>>()
     {
-        { "+", (float l, float r) => l + r },
-        { "-", (float l, float r) => l - r },
-        { "*", (float l, float r) => l * r },
-        { "/", (float l, float r) => l / r },
-        { "^", Mathf.Pow },
-        { "log", Mathf.Log },
+        { "+", (float[] args) => args[0] + args[1] },
+        { "-", (float[] args) => args[0] - args[1] },
+        { "*", (float[] args) => args[0] * args[1] },
+        { "/", (float[] args) => args[0] / args[1] },
+        { "^", (float[] args) => Mathf.Pow(args[0], args[1]) },
+        { "log", (float[] args) => Mathf.Log(args[0], args[1]) },
+        { "cos", (float[] args) => Mathf.Cos(args[0]) },
+        { "sin", (float[] args) => Mathf.Sin(args[0]) },
+        { "tan", (float[] args) => Mathf.Tan(args[0]) },
+        { "abs", (float[] args) => Mathf.Abs(args[0]) },
+        { "floor", (float[] args) => Mathf.Floor(args[0]) },
+        { "ceil", (float[] args) => Mathf.Ceil(args[0]) },
+        { "round", (float[] args) => Mathf.Round(args[0]) },
+        { "sqrt", (float[] args) => Mathf.Sqrt(args[0]) },
+        { "max", (float[] args) => Mathf.Max(args[0]) },
+        { "min", (float[] args) => Mathf.Min(args[0]) },
     };
 
     /// <summary>
@@ -96,6 +106,17 @@ public class Calculator
     private string Replace(Match match)
     {
         GroupCollection groups = match.Groups;
-        return operators[groups[2].Value](float.Parse(groups[1].Value), float.Parse(groups[3].Value)).ToString();
+        if (match.Groups.Count == 4)
+            return operators[groups[2].Value](
+                new float[2] {
+                    float.Parse(groups[1].Value),
+                    float.Parse(groups[3].Value)
+                }).ToString();
+        else if (match.Groups.Count == 3)
+            return operators[groups[1].Value](
+                new float[1] {
+                    float.Parse(groups[2].Value)
+                }).ToString();
+        throw new System.Exception("Wrong number of groups.");
     }
 }
