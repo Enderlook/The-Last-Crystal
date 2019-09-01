@@ -124,4 +124,23 @@ namespace FloatPool
             return (remaining, amount - remaining);
         }
     }
+
+    public abstract class Decorator : IFloatPool
+    {
+        protected IFloatPool decorable;
+
+        /// <summary>
+        /// Set decorable. Mandatory.
+        /// </summary>
+        /// <param name="decorable">Decorable.</param>
+        public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
+
+        public virtual float Max { get => decorable.Max; set => decorable.Max = value; }
+        public virtual float Current { get => decorable.Current; set => decorable.Current = value; }
+        public virtual float Ratio { get => decorable.Ratio; set => decorable.Ratio = value; }
+
+        public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
+        public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
+        public virtual void Initialize() => decorable.Initialize();
+    }
 }
