@@ -321,10 +321,12 @@ namespace FloatPool
     [System.Serializable]
     public class DecreaseReductionDecorator<T> : Decorator<T> where T : AbstractFloatPool
     {
-        [Tooltip("Reduction percent done in Decrease method.")]
-        [Range(0, 1)]
-        public float reductionPercent;
+        [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.")]
+        public Calculator reductionFormula;
 
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => base.Decrease(amount * (1 - reductionPercent), allowUnderflow);
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            return base.Decrease(reductionFormula.Calculate(amount), allowUnderflow);
+        }
     }
 }
