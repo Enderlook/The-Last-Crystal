@@ -22,6 +22,11 @@ namespace FloatPool
         float Ratio { get; set; }
 
         void Initialize();
+        /// <summary>
+        /// Update values.
+        /// </summary>
+        /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
+        void Update(float deltatime);
 
         /// <summary>
         /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
@@ -69,6 +74,8 @@ namespace FloatPool
             Current = current;
             Max = startingMax;
         }
+
+        public void Update(float deltaTime) { }
 
         /// <summary>
         /// Changes the value of <see cref="Current"/> by <paramref name="amount"/>, and clamp values to 0 and <see cref="Max"/> if <paramref name="allowUnderflow"/> and <paramref name="allowOverflow"/> are <see langword="false"/>, respectively.
@@ -142,6 +149,7 @@ namespace FloatPool
         public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
         public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
         public virtual void Initialize() => decorable.Initialize();
+        public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
     }
 
     [System.Serializable]
@@ -216,6 +224,117 @@ namespace FloatPool
         {
             base.Initialize();
             bar?.ManualUpdate(Current, Max);
+        }
+    }
+
+    public class RechargingDecorator : Decorator
+    {
+        private float rechargeRate;
+        private float rechargingDelay;
+        private float _currentRechargingDelay = 0f;
+        private Playlist playlist;
+        private AudioSource audioSource;
+        private System.Action startCallback;
+        private bool _startCalled = false;
+        private System.Action<bool> endCallback;
+        private System.Action<bool> activeCallback;
+
+        /// <summary>
+        /// Configure the object.
+        /// </summary>
+        /// <param name="rechargeRate">Points per second it increases <see cref="Current"/>.</param>
+        /// <param name="rechargingDelay">Amount of time in seconds after call <see cref="Decrease(float, bool)"/> in order to start recharging.</param>
+        /// <param name="playlist">Sound played while recharging.</param>
+        /// <param name="audioSource">Audio Source used to play sound.</param>
+        /// <param name="startCallback">Callback executed when start recharging</param>
+        /// <param name="activeCallback">Callback executed per <see cref="Update(float)"/> call when <see cref="_currentRechargingDelay"/> is 0.
+        /// On <see langword="true"/>, it is recharging.</param>
+        /// <param name="endCallback">Callback executed when end recharging.<br/>
+        /// On <see langword="true"/>, it ended before <see cref="Current"/> reached <see cref="Max"/>, due <see cref="Decrease(float, bool)"/> call.</param>
+        public void SetConfiguration(float rechargeRate, float rechargingDelay, Playlist playlist, AudioSource audioSource, System.Action startCallback, System.Action<bool> activeCallback, System.Action<bool> endCallback)
+        {
+            this.rechargeRate = rechargeRate;
+            this.rechargingDelay = rechargingDelay;
+            this.playlist = playlist;
+            this.audioSource = audioSource;
+            this.startCallback = startCallback;
+            this.activeCallback = activeCallback;
+            this.endCallback = endCallback;
+        }
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            ResetRechargingDelay(true);
+            return base.Decrease(amount, allowUnderflow);
+        }
+
+        /// <summary>
+        /// Reset <see cref="_currentRechargingDelay"/> to 0 and calls <see cref="endCallback"/>.
+        /// </summary>
+        /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
+        private void ResetRechargingDelay(bool isForced)
+        {
+            _currentRechargingDelay = 0;
+            CallEndCallback(isForced);
+        }
+
+        public override void Update(float deltaTime)
+        {
+            Recharge(deltaTime);
+            base.Update(deltaTime);
+        }
+
+        private void Recharge(float deltaTime)
+        {
+            if (_currentRechargingDelay >= rechargingDelay)
+            {
+                if (Current < Max)
+                {
+                    CallStartCallback();
+                    Increase(rechargeRate * deltaTime);
+                    PlayRechargingSound();
+                    activeCallback?.Invoke(true);
+                }
+                else
+                {
+                    activeCallback?.Invoke(false);
+                    CallEndCallback(false);
+                }
+            }
+            else
+                _currentRechargingDelay += deltaTime;
+        }
+
+        /// <summary>
+        /// Calls <see cref="startCallback"/> only if <see cref="_startCalled"/> is <see langword="false"/>.<br/>
+        /// Also sets <see cref="_startCalled"/> to <see langword="true"/>.
+        /// </summary>
+        private void CallStartCallback()
+        {
+            if (!_startCalled)
+            {
+                _startCalled = true;
+                startCallback();
+            }
+        }
+
+        /// <summary>
+        /// Calls <see cref="endCallback"/> only if <see cref="_endCalled"/> is <see langword="true"/>.<br/>
+        /// Also sets <see cref="_startCalled"/> to <see langword="false"/>.
+        /// </summary>
+        /// /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
+        private void CallEndCallback(bool isForced)
+        {
+            if (_startCalled)
+            {
+                _startCalled = false;
+                endCallback(isForced);
+            }
+        }
+
+        private void PlayRechargingSound()
+        {
+            if (audioSource != null && playlist != null && !audioSource.isPlaying)
+                playlist.Play(audioSource, Settings.IsSoundActive);
         }
     }
 }
