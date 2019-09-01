@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -51,7 +52,9 @@ public class Calculator
     {
         if (regex == null)
             MakeRegex();
-        string toCalculate = string.Format(formula, args);
+        if (string.IsNullOrEmpty(formula))
+            formula = string.Join("", args);
+        string toCalculate = string.Format(formula, args.Select(e => e.ToString()).ToArray());
         do
         {
             MatchEvaluator matchEvaluator = new MatchEvaluator(Replace);
