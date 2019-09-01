@@ -7,12 +7,14 @@ public class Creature : MonoBehaviour
 {
     [Header("Configuration")]
     [Tooltip("Health.")]
-    public FloatPoolB health;
+    public FloatPoolC health;
 
     [Serializable]
     public class FloatPoolA : BarDecorator<FloatPool.FloatPool> { }
     [Serializable]
     public class FloatPoolB : CallbackDecorator<FloatPoolA> { }
+    [Serializable]
+    public class FloatPoolC : DecreaseReductionDecorator<FloatPoolB> { }
 
     [Tooltip("Movement speed.")]
     public float speed;
@@ -40,6 +42,7 @@ public class Creature : MonoBehaviour
     {
         health.Initialize();
         LoadComponents();
+        TakeDamage(20);
     }
 
     private void LoadComponents()
