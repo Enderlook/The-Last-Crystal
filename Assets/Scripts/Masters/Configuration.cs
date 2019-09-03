@@ -57,9 +57,9 @@ public class Configuration : MonoBehaviour
     [Tooltip("Pickups parent transform.")]
     public Transform pickupsParent;
 
-    [Header("Menu")]
-    [Tooltip("Money controller script.")]
-    public CoinMeter coinMeter;
+    //[Header("Menu")]
+    //[Tooltip("Money controller script.")]
+    //public CoinMeter coinMeter;
 
     private void Awake() => StoreGlobals();
 
@@ -74,7 +74,7 @@ public class Configuration : MonoBehaviour
             typeof(Global).GetField(field.Name, System.Reflection.BindingFlags.Public)?.SetValue(typeof(Global), field.GetValue(this));
         }
 
-        Global.SetCoinMeter(coinMeter, startingMoney);
+        //Global.SetCoinMeter(coinMeter, startingMoney);
         FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
     }
 }
