@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace FloatPool
@@ -140,6 +142,58 @@ namespace FloatPool
         public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
         public virtual void Initialize() => decorable.Initialize();
         public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
+    }
+
+    public class DecoratorAccessor<T, V> where T : V where V : class
+    {
+        public T decorable;
+        private List<V> layers;
+
+        public U GetLayer<U>() where U : V
+        {
+            if (layers == null)
+                GetLayers();
+            foreach (V layer in layers)
+            {
+                if (typeof(U) == layer.GetType())
+                {
+                    return (U)System.Convert.ChangeType(layer, typeof(U));
+                }
+            }
+            return default;
+        }
+
+        private void GetLayers()
+        {
+            layers = new List<V>
+            {
+                decorable
+            };
+
+            void Layer(V layer)
+            {
+                FieldInfo field = layer.GetType().GetField(nameof(decorable));
+                if (field != null && field.GetValue(layer) is V newLayer)
+                {
+                    layers.Add(newLayer);
+                    Layer(newLayer);
+                }
+            }
+            Layer(decorable);
+        }
+    }
+
+    [System.Serializable]
+    public class DecoratorsManager<T> : DecoratorAccessor<T, IFloatPool>, IFloatPool where T : IFloatPool
+    {
+        public float Current => decorable.Current;
+        public float Max => decorable.Max;
+        public float Ratio => decorable.Ratio;
+
+        public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
+        public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
+        public void Initialize() => decorable.Initialize();
+        public void Update(float deltatime) => decorable.Update(deltatime);
     }
 
     [System.Serializable]

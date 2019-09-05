@@ -76,31 +76,34 @@ MonoBehaviour:
     decorable:
       decorable:
         decorable:
-          startingMax: 100
-          startingCurrent: -1
-        emptyCallback:
-          m_PersistentCalls:
-            m_Calls:
-            - m_Target: {fileID: 4901582744108699570}
-              m_MethodName: Die
-              m_Mode: 6
-              m_Arguments:
-                m_ObjectArgument: {fileID: 0}
-                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-                m_IntArgument: 0
-                m_FloatArgument: 0
-                m_StringArgument: 
-                m_BoolArgument: 0
-              m_CallState: 2
-          m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-        fullCallback:
-          m_PersistentCalls:
-            m_Calls: []
-          m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-      bar: {fileID: 0}
-    reductionPercent: 0
+          decorable:
+            startingMax: 100
+            startingCurrent: -1
+          reductionFormula:
+            formula: 
+            compile: 0
+        bar: {fileID: 0}
+      emptyCallback:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 4901582744108699570}
+            m_MethodName: Die
+            m_Mode: 6
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      fullCallback:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
   speed: 1
   floatingTextController: {fileID: 5042988860275578343}
   stoppableRigidbody: {fileID: 8836964168732201439}
