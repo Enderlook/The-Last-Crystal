@@ -236,12 +236,17 @@ namespace FloatPool
         [Tooltip("Bar used to show values.")]
         public HealthBar bar;
 
-        private void UpdateValues() => bar?.UpdateValues(Current, Max);
+        private void UpdateValues()
+        {
+            if (bar != null)
+                bar.UpdateValues(Current, Max);
+        }
 
         public override void Initialize()
         {
             base.Initialize();
-            bar?.ManualUpdate(Current, Max);
+            if (bar != null)
+                bar.ManualUpdate(Current, Max);
         }
 
         public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
