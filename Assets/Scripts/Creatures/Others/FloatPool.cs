@@ -1,28 +1,59 @@
+using UnityEngine;
+
 namespace FloatPool
 {
-    [System.Serializable]
-    public class FloatPool
+    public interface IFloatPool
     {
-        [Header("Main Configuration")]
-        [Tooltip("Maximum Current.")]
-        public float startingMax = 100;
         /// <summary>
         /// Maximum amount. <see cref="Current"/> can't be greater than this value.<br/>
         /// </summary>
         /// <seealso cref="Current"/>
-        public float Max;
+        float Max { get; }
 
-        [Tooltip("Starting Current. Set -1 to use Max value.")]
-        public float startingCurrent = -1;
         /// <summary>
         /// Current amount. It can't be greater than <see cref="MaxCurrent"/><br/>
         /// </summary>
         /// <seealso cref="Max"/>
-        public float Current;
+        float Current { get; }
 
         /// <summary>
         /// Ration between <see cref="Current"/> and <see cref="Max"/>.
         /// </summary>
+        float Ratio { get; }
+
+        void Initialize();
+
+        /// <summary>
+        /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
+        /// </summary>
+        /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
+        /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
+        /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
+        (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
+
+        /// <summary>
+        /// Increase <see cref="Current"/> by <paramref name="amount"/>.
+        /// </summary>
+        /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
+        /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
+        /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
+        (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
+    }
+
+    [System.Serializable]
+    public class FloatPool : IFloatPool
+    {
+        [Header("Main Configuration")]
+        [Tooltip("Maximum Current.")]
+        public float startingMax = 100;
+        public float Max { get; private set; }
+
+
+        [Tooltip("Starting Current. Set -1 to use Max value.")]
+        public float startingCurrent = -1;
+
+        public float Current { get; private set; }
+
         public float Ratio => Current / Max;
 
         /// <summary>
