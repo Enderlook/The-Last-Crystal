@@ -1,47 +1,61 @@
-﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace FloatPool
 {
-    public abstract class AbstractFloatPool
+    public interface IFloatPool
     {
         /// <summary>
         /// Maximum amount. <see cref="Current"/> can't be greater than this value.<br/>
         /// </summary>
         /// <seealso cref="Current"/>
-        public virtual float Max { get; internal set; }
+        float Current { get; }
         /// <summary>
         /// Current amount. It can't be greater than <see cref="MaxCurrent"/><br/>
         /// </summary>
         /// <seealso cref="Max"/>
-        public virtual float Current { get; internal set; }
+        float Max { get; }
         /// <summary>
         /// Ration between <see cref="Current"/> and <see cref="Max"/>.
         /// </summary>
-        public virtual float Ratio {
-            get => Current / Max;
-            internal set => Current = Max / value;
-        }
+        float Ratio { get; }
 
-        public abstract void Initialize();
-        /// <summary>
-        /// Update values.
-        /// </summary>
-        /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
-        public abstract void Update(float deltatime);
         /// <summary>
         /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
         /// </summary>
         /// <param name="amount">Amount to reduce <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could reach negative values or not.</param>
         /// <returns><c>remaining</c>: Amount clamped below 0. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
-        public abstract (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
+        (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
         /// <summary>
         /// Increase <see cref="Current"/> by <paramref name="amount"/>.
         /// </summary>
         /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
         /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
         /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
+        (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
+        /// <summary>
+        /// Update values.
+        /// </summary>
+        /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
+        void Initialize();
+        void Update(float deltatime);
+    }
+
+    public abstract class AbstractFloatPool : IFloatPool
+    {
+        public virtual float Max { get; internal set; }
+        public virtual float Current { get; internal set; }
+        public virtual float Ratio {
+            get => Current / Max;
+            internal set => Current = Max / value;
+        }
+
+        public abstract void Initialize();
+        public abstract void Update(float deltatime);
+        public abstract (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
         public abstract (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
     }
 
@@ -123,13 +137,13 @@ namespace FloatPool
         }
     }
 
-    public abstract class Decorator<T> : AbstractFloatPool where T : AbstractFloatPool
+    public abstract class Decorator<T> : AbstractFloatPool where T : IFloatPool
     {
         public T decorable;
 
-        public override float Max { get => decorable.Max; internal set => decorable.Max = value; }
-        public override float Current { get => decorable.Current; internal set => decorable.Current = value; }
-        public override float Ratio { get => decorable.Ratio; internal set => decorable.Ratio = value; }
+        public override float Max => decorable.Max;
+        public override float Current => decorable.Current;
+        public override float Ratio => decorable.Ratio;
 
         public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
         public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
@@ -137,8 +151,59 @@ namespace FloatPool
         public override void Update(float deltaTime) => decorable.Update(deltaTime);
     }
 
+    public class DecoratorAccessor<T, V> where T : V where V : class
+    {
+        public T decorable;
+        private List<V> layers;
+
+        public U GetLayer<U>() where U : V
+        {
+            if (layers == null)
+                GetLayers();
+            foreach (V layer in layers)
+            {
+                if (typeof(U) == layer.GetType())
+                {
+                    return (U)System.Convert.ChangeType(layer, typeof(U));
+                }
+            }
+            return default;
+        }
+
+        private void GetLayers()
+        {
+            layers = new List<V>
+            {
+                decorable
+            };
+
+            void Layer(V layer)
+            {
+                FieldInfo field = layer.GetType().GetField(nameof(decorable));
+                if (field != null && field.GetValue(layer) is V newLayer)
+                {
+                    layers.Add(newLayer);
+                    Layer(newLayer);
+                }
+            }
+            Layer(decorable);
+        }
+    }
+
     [System.Serializable]
-    public class CallbackDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    public class DecoratorsManager<T> : DecoratorAccessor<T, IFloatPool>, IFloatPool where T : IFloatPool
+    {
+        public float Current => decorable.Current;
+        public float Max => decorable.Max;
+        public float Ratio => decorable.Ratio;
+
+        public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
+        public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
+        public void Initialize() => decorable.Initialize();
+        public void Update(float deltatime) => decorable.Update(deltatime);
+    }
+
+    public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Callback Configuration")]
         [Tooltip("Event called when Current become 0 or bellow.")]
@@ -164,7 +229,7 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class BarDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    public class BarDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Bar Configuration")]
         [Tooltip("Bar used to show values.")]
@@ -197,7 +262,7 @@ namespace FloatPool
     public class UnityEventBoolean : UnityEvent<bool> { }
 
     [System.Serializable]
-    public class RechargingDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    public class RechargingDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Recharging Configuration")]
         [Tooltip("Value per second increases in Current.")]
@@ -298,7 +363,7 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class ChangeCallbackDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    public class ChangeCallbackDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Tooltip("Event executed each time Max or Current values changes.")]
         public UnityEvent callback;
@@ -317,9 +382,11 @@ namespace FloatPool
             return result;
         }
     }
+    [System.Serializable]
+    public class ChangeCallbackDecorator : ChangeCallbackDecorator<IFloatPool> { }
 
     [System.Serializable]
-    public class DecreaseReductionDecorator<T> : Decorator<T> where T : AbstractFloatPool
+    public class DecreaseReductionDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
         public Calculator reductionFormula;
@@ -331,9 +398,6 @@ namespace FloatPool
             base.Initialize();
         }
 
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
-        {
-            return base.Decrease(reductionFormula.Calculate(amount, Current, Max), allowUnderflow);
-        }
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => base.Decrease(reductionFormula.Calculate(amount, Current, Max), allowUnderflow);
     }
 }
