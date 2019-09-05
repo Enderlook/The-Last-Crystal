@@ -175,4 +175,40 @@ namespace FloatPool
             }
         }
     }
+
+    [System.Serializable]
+    public class BarDecorator : Decorator
+    {
+        [Header("Bar Configuration")]
+        [Tooltip("Bar used to show values.")]
+        public HealthBar bar;
+
+        private void UpdateValues()
+        {
+            if (bar != null)
+                bar.UpdateValues(Current, Max);
+        }
+
+        public override float Max {
+            get => base.Max;
+            set {
+                base.Max = value;
+                UpdateValues();
+            }
+        }
+        public override float Current {
+            get => base.Current;
+            set {
+                base.Current = value;
+                UpdateValues();
+            }
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            if (bar != null)
+                bar.ManualUpdate(Current, Max);
+        }
+    }
 }
