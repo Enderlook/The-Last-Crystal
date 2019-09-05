@@ -18,6 +18,8 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     private int remainingJumps;
     [Tooltip("Jump strength.")]
     public float jumpStrength;
+    [Tooltip("Move force horizontal")]
+    public float moveForce;
 
     [Header("Setup")]
     [Tooltip("Sprite Renderer to flip.")]
@@ -26,8 +28,14 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     public Collider2D baseCollider;
     [Tooltip("Layer of the floor.")]
     public LayerMask floorLayer;
+    [Tooltip("Animator for set animation")]
+    public Animator animator;
 
     private Rigidbody2D thisRigidbody2D;
+
+    //Const key for animation
+    private const string WALK = "Walk"; 
+    private const string JUMP = "Jump"; 
 
     void IAwake.Awake(Creature creature)
     {
@@ -37,26 +45,35 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
 
     void IMove.Move(float deltaTime, float speedMultiplier)
     {
+        animator.SetFloat(WALK, Mathf.Abs(thisRigidbody2D.velocity.x));
+
         if (Input.GetKey(rightKey))
             MoveHorizontal(deltaTime * speedMultiplier);
         if (Input.GetKey(leftKey))
             MoveHorizontal(-deltaTime * speedMultiplier);
+        
         if (Input.GetKeyDown(jumpKey) && remainingJumps > 0)
         {
             thisRigidbody2D.AddForce(thisRigidbody2D.transform.up * jumpStrength * thisRigidbody2D.mass);
             remainingJumps--;
+            animator.SetBool(JUMP, true);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.otherCollider.IsTouchingLayers(floorLayer))
+        {
             remainingJumps = maxJumps;
+            animator.SetBool(JUMP, false);
+        }
     }
 
     private void MoveHorizontal(float distance)
     {
-        thisRigidbody2D.MovePosition(thisRigidbody2D.position + (Vector2)thisRigidbody2D.transform.right * speed * distance);
+        thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
+        if (Mathf.Abs(thisRigidbody2D.velocity.x) > speed)
+            thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, thisRigidbody2D.velocity.y);
         spriteRenderer.flipX = distance < 0;
     }
 }
