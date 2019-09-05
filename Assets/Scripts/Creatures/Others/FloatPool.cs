@@ -203,210 +203,213 @@ namespace FloatPool
         public void Update(float deltatime) => decorable.Update(deltatime);
     }
 
-    [System.Serializable]
-    public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
+    namespace Decorators
     {
-        [Header("Callback Configuration")]
-        [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
-        public UnityEvent emptyCallback;
-        [Tooltip("Event called when Current reaches Max due to Increase method call.")]
-        public UnityEvent fullCallback;
-
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        [System.Serializable]
+        public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
         {
-            (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
-            if (Current == 0)
-                emptyCallback.Invoke();
-            return result;
-        }
+            [Header("Callback Configuration")]
+            [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
+            public UnityEvent emptyCallback;
+            [Tooltip("Event called when Current reaches Max due to Increase method call.")]
+            public UnityEvent fullCallback;
 
-        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
-        {
-            (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
-            if (Current == Max)
-                fullCallback.Invoke();
-            return result;
-        }
-    }
-
-    [System.Serializable]
-    public class BarDecorator<T> : Decorator<T> where T : IFloatPool
-    {
-        [Header("Bar Configuration")]
-        [Tooltip("Bar used to show values.")]
-        public HealthBar bar;
-
-        private void UpdateValues()
-        {
-            if (bar != null)
-                bar.UpdateValues(Current);
-        }
-
-        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
-        {
-            (float remaining, float taken) result = base.Increase(amount, allowOverflow);
-            UpdateValues();
-            return result;
-        }
-
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
-        {
-            (float remaining, float taken) result = base.Increase(amount, allowUnderflow);
-            UpdateValues();
-            return result;
-        }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            if (bar != null)
-                bar.ManualUpdate(Current, Max);
-        }
-    }
-
-    [System.Serializable]
-    public class RechargerDecorator<T> : Decorator<T> where T : IFloatPool
-    {
-        [Header("Recharger Configuration")]
-        [Tooltip("Value per second increases in Current.")]
-        public float rechargeRate;
-
-        [Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
-        public float rechargingDelay;
-        private float _currentRechargingDelay = 0f;
-
-        [Tooltip("Sound played while recharging.")]
-        public Playlist playlist;
-        [Tooltip("Audio Source used to play sound.")]
-        public AudioSource audioSource;
-
-        [Tooltip("Event executed when start recharging.")]
-        public UnityEvent startCallback;
-        private bool _startCalled = false;
-        [Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
-        public UnityEventBoolean endCallback;
-        [Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
-        public UnityEventBoolean activeCallback;
-
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
-        {
-            ResetRechargingDelay(true);
-            return base.Decrease(amount, allowUnderflow);
-        }
-
-        /// <summary>
-        /// Reset <see cref="_currentRechargingDelay"/> to 0 and calls <see cref="endCallback"/>.
-        /// </summary>
-        /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
-        private void ResetRechargingDelay(bool isForced)
-        {
-            _currentRechargingDelay = 0;
-            CallEndCallback(isForced);
-        }
-
-        public override void Update(float deltaTime)
-        {
-            Recharge(deltaTime);
-            base.Update(deltaTime);
-        }
-
-        /// <summary>
-        /// Check whenever <see cref="_currentRechargingDelay"/> is 0 and <see cref="Current"/> should be recharge.<br/>
-        /// Also execute additional functionalities when appropriate.
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        private void Recharge(float deltaTime)
-        {
-            if (_currentRechargingDelay >= rechargingDelay)
+            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
-                if (Current < Max)
+                (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+                if (Current == 0)
+                    emptyCallback.Invoke();
+                return result;
+            }
+
+            public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+            {
+                (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
+                if (Current == Max)
+                    fullCallback.Invoke();
+                return result;
+            }
+        }
+
+        [System.Serializable]
+        public class BarDecorator<T> : Decorator<T> where T : IFloatPool
+        {
+            [Header("Bar Configuration")]
+            [Tooltip("Bar used to show values.")]
+            public HealthBar bar;
+
+            private void UpdateValues()
+            {
+                if (bar != null)
+                    bar.UpdateValues(Current);
+            }
+
+            public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+            {
+                (float remaining, float taken) result = base.Increase(amount, allowOverflow);
+                UpdateValues();
+                return result;
+            }
+
+            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+            {
+                (float remaining, float taken) result = base.Increase(amount, allowUnderflow);
+                UpdateValues();
+                return result;
+            }
+
+            public override void Initialize()
+            {
+                base.Initialize();
+                if (bar != null)
+                    bar.ManualUpdate(Current, Max);
+            }
+        }
+
+        [System.Serializable]
+        public class RechargerDecorator<T> : Decorator<T> where T : IFloatPool
+        {
+            [Header("Recharger Configuration")]
+            [Tooltip("Value per second increases in Current.")]
+            public float rechargeRate;
+
+            [Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
+            public float rechargingDelay;
+            private float _currentRechargingDelay = 0f;
+
+            [Tooltip("Sound played while recharging.")]
+            public Playlist playlist;
+            [Tooltip("Audio Source used to play sound.")]
+            public AudioSource audioSource;
+
+            [Tooltip("Event executed when start recharging.")]
+            public UnityEvent startCallback;
+            private bool _startCalled = false;
+            [Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
+            public UnityEventBoolean endCallback;
+            [Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
+            public UnityEventBoolean activeCallback;
+
+            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+            {
+                ResetRechargingDelay(true);
+                return base.Decrease(amount, allowUnderflow);
+            }
+
+            /// <summary>
+            /// Reset <see cref="_currentRechargingDelay"/> to 0 and calls <see cref="endCallback"/>.
+            /// </summary>
+            /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
+            private void ResetRechargingDelay(bool isForced)
+            {
+                _currentRechargingDelay = 0;
+                CallEndCallback(isForced);
+            }
+
+            public override void Update(float deltaTime)
+            {
+                Recharge(deltaTime);
+                base.Update(deltaTime);
+            }
+
+            /// <summary>
+            /// Check whenever <see cref="_currentRechargingDelay"/> is 0 and <see cref="Current"/> should be recharge.<br/>
+            /// Also execute additional functionalities when appropriate.
+            /// </summary>
+            /// <param name="deltaTime"></param>
+            private void Recharge(float deltaTime)
+            {
+                if (_currentRechargingDelay >= rechargingDelay)
                 {
-                    CallStartCallback();
-                    Increase(rechargeRate * deltaTime);
-                    PlayRechargingSound();
-                    activeCallback.Invoke(true);
+                    if (Current < Max)
+                    {
+                        CallStartCallback();
+                        Increase(rechargeRate * deltaTime);
+                        PlayRechargingSound();
+                        activeCallback.Invoke(true);
+                    }
+                    else
+                    {
+                        activeCallback.Invoke(false);
+                        CallEndCallback(false);
+                    }
                 }
                 else
+                    _currentRechargingDelay += deltaTime;
+            }
+
+            /// <summary>
+            /// Calls <see cref="startCallback"/> only if <see cref="_startCalled"/> is <see langword="false"/>.<br/>
+            /// Also sets <see cref="_startCalled"/> to <see langword="true"/>.
+            /// </summary>
+            private void CallStartCallback()
+            {
+                if (!_startCalled)
                 {
-                    activeCallback.Invoke(false);
-                    CallEndCallback(false);
+                    _startCalled = true;
+                    startCallback.Invoke();
                 }
             }
-            else
-                _currentRechargingDelay += deltaTime;
-        }
 
-        /// <summary>
-        /// Calls <see cref="startCallback"/> only if <see cref="_startCalled"/> is <see langword="false"/>.<br/>
-        /// Also sets <see cref="_startCalled"/> to <see langword="true"/>.
-        /// </summary>
-        private void CallStartCallback()
-        {
-            if (!_startCalled)
+            /// <summary>
+            /// Calls <see cref="endCallback"/> only if <see cref="_endCalled"/> is <see langword="true"/>.<br/>
+            /// Also sets <see cref="_startCalled"/> to <see langword="false"/>.
+            /// </summary>
+            /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
+            private void CallEndCallback(bool isForced)
             {
-                _startCalled = true;
-                startCallback.Invoke();
+                if (_startCalled)
+                {
+                    _startCalled = false;
+                    endCallback.Invoke(isForced);
+                }
+            }
+
+            private void PlayRechargingSound()
+            {
+                if (audioSource != null && playlist != null && !audioSource.isPlaying)
+                    playlist.Play(audioSource, Settings.IsSoundActive);
             }
         }
 
-        /// <summary>
-        /// Calls <see cref="endCallback"/> only if <see cref="_endCalled"/> is <see langword="true"/>.<br/>
-        /// Also sets <see cref="_startCalled"/> to <see langword="false"/>.
-        /// </summary>
-        /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
-        private void CallEndCallback(bool isForced)
+        [System.Serializable]
+        public class ChangeCallbackDecorator<T> : Decorator<T> where T : IFloatPool
         {
-            if (_startCalled)
+            [Tooltip("Event executed each time Current value changes due to Decrease or Increse methods.")]
+            public UnityEvent callback;
+
+            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
-                _startCalled = false;
-                endCallback.Invoke(isForced);
+                (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+                callback.Invoke();
+                return result;
+            }
+
+            public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+            {
+                (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
+                callback.Invoke();
+                return result;
             }
         }
 
-        private void PlayRechargingSound()
+        [System.Serializable]
+        public class DecreaseReductionDecorator<T> : Decorator<T> where T : IFloatPool
         {
-            if (audioSource != null && playlist != null && !audioSource.isPlaying)
-                playlist.Play(audioSource, Settings.IsSoundActive);
-        }
-    }
+            [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
+            public Calculator reductionFormula;
 
-    [System.Serializable]
-    public class ChangeCallbackDecorator<T> : Decorator<T> where T : IFloatPool
-    {
-        [Tooltip("Event executed each time Current value changes due to Decrease or Increse methods.")]
-        public UnityEvent callback;
+            public override void Initialize()
+            {
+                if (string.IsNullOrEmpty(reductionFormula.formula))
+                    reductionFormula.formula = "{0}";
+                base.Initialize();
+            }
 
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
-        {
-            (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
-            callback.Invoke();
-            return result;
-        }
-
-        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
-        {
-            (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
-            callback.Invoke();
-            return result;
-        }
-    }
-
-    [System.Serializable]
-    public class DecreaseReductionDecorator<T> : Decorator<T> where T : IFloatPool
-    {
-        [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
-        public Calculator reductionFormula;
-
-        public override void Initialize()
-        {
-            if (string.IsNullOrEmpty(reductionFormula.formula))
-                reductionFormula.formula = "{0}";
-            base.Initialize();
-        }
-
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
-        {
-            return base.Decrease(reductionFormula.Calculate(amount, Current, Max), allowUnderflow);
+            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+            {
+                return base.Decrease(reductionFormula.Calculate(amount, Current, Max), allowUnderflow);
+            }
         }
     }
 }

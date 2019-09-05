@@ -1,6 +1,7 @@
 using System;
 using CreaturesAddons;
 using FloatPool;
+using FloatPool.Decorators;
 using UnityEngine;
 
 public class Creature : MonoBehaviour
