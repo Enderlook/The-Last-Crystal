@@ -7,12 +7,14 @@ public class Creature : MonoBehaviour
 {
     [Header("Configuration")]
     [Tooltip("Health.")]
-    public BarFloatPool health;
+    public DecreaseReductionPool health;
 
     [Serializable]
     public class CallbackFloatPool : CallbackDecorator<FloatPool.FloatPool> { }
     [Serializable]
     public class BarFloatPool : BarDecorator<CallbackFloatPool> { }
+    [Serializable]
+    public class DecreaseReductionPool : DecreaseReductionDecorator<BarFloatPool> { }
 
     [Tooltip("Movement speed.")]
     public float speed;
