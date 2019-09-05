@@ -343,10 +343,19 @@ namespace FloatPool
     [System.Serializable]
     public class DecreaseReductionDecorator<T> : Decorator<T> where T : IFloatPool
     {
-        [Tooltip("Reduction percent done in Decrease method.")]
-        [Range(0, 1)]
-        public float reductionPercent;
+        [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
+        public Calculator reductionFormula;
 
-        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => base.Decrease(amount * (1 - reductionPercent), allowUnderflow);
+        public override void Initialize()
+        {
+            if (string.IsNullOrEmpty(reductionFormula.formula))
+                reductionFormula.formula = "{0}";
+            base.Initialize();
+        }
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            return base.Decrease(reductionFormula.Calculate(amount, Current, Max), allowUnderflow);
+        }
     }
 }
