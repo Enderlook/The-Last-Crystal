@@ -203,6 +203,7 @@ namespace FloatPool
         public void Update(float deltatime) => decorable.Update(deltatime);
     }
 
+    [System.Serializable]
     public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Callback Configuration")]
