@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace FloatPool
 {
@@ -140,5 +141,38 @@ namespace FloatPool
         public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
         public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
         public virtual void Initialize() => decorable.Initialize();
+    }
+
+    [System.Serializable]
+    public class CallbackDecorator : Decorator
+    {
+        [Header("Callback Configuration")]
+        [Tooltip("Event called when Max or Current become 0 or bellow.")]
+        public UnityEvent emptyCallback;
+        [Tooltip("Event called when Current reaches Max.")]
+        public UnityEvent fullCallback;
+
+        private void CheckEmpty(float value)
+        {
+            if (value == 0)
+                emptyCallback.Invoke();
+        }
+
+        public override float Max {
+            get => base.Max;
+            set {
+                base.Max = value;
+                CheckEmpty(value);
+            }
+        }
+        public override float Current {
+            get => base.Current;
+            set {
+                base.Current = value;
+                CheckEmpty(value);
+                if (value == Max)
+                    fullCallback.Invoke();
+            }
+        }
     }
 }
