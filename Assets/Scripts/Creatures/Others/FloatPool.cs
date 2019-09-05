@@ -317,4 +317,25 @@ namespace FloatPool
                 playlist.Play(audioSource, Settings.IsSoundActive);
         }
     }
+
+    [System.Serializable]
+    public class ChangeCallbackDecorator : Decorator
+    {
+        [Tooltip("Event executed each time Current value changes due to Decrease or Increse methods.")]
+        public UnityEvent callback;
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+            callback.Invoke();
+            return result;
+        }
+
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+        {
+            (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
+            callback.Invoke();
+            return result;
+        }
+    }
 }
