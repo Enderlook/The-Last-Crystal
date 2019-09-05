@@ -165,4 +165,39 @@ namespace FloatPool
             return result;
         }
     }
+
+    [System.Serializable]
+    public class BarDecorator : Decorator
+    {
+        [Header("Bar Configuration")]
+        [Tooltip("Bar used to show values.")]
+        public HealthBar bar;
+
+        private void UpdateValues()
+        {
+            if (bar != null)
+                bar.UpdateValues(Current);
+        }
+
+        public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
+        {
+            (float remaining, float taken) result = base.Increase(amount, allowOverflow);
+            UpdateValues();
+            return result;
+        }
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            (float remaining, float taken) result = base.Increase(amount, allowUnderflow);
+            UpdateValues();
+            return result;
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            if (bar != null)
+                bar.ManualUpdate(Current, Max);
+        }
+    }
 }
