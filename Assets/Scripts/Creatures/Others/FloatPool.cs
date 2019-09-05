@@ -339,4 +339,14 @@ namespace FloatPool
             }
         }
     }
+
+    [System.Serializable]
+    public class DecreaseReductionDecorator<T> : Decorator<T> where T : IFloatPool
+    {
+        [Tooltip("Reduction percent done in Decrease method.")]
+        [Range(0, 1)]
+        public float reductionPercent;
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => base.Decrease(amount * (1 - reductionPercent), allowUnderflow);
+    }
 }
