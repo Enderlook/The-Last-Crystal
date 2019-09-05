@@ -87,6 +87,16 @@ PrefabInstance:
       propertyPath: healthPoints.startingMax
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: health.decorable.startingMax
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: health.decorable.decorable.startingMax
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: maxJumps
