@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection;
+using FloatPool.Internal;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -130,57 +131,63 @@ namespace FloatPool
         }
     }
 
-    public abstract class Decorator<T> : IFloatPool where T : IFloatPool
+    namespace Internal
     {
-        public T decorable;
-
-        public virtual float Max => decorable.Max;
-        public virtual float Current => decorable.Current;
-        public virtual float Ratio => decorable.Ratio;
-
-        public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
-        public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
-        public virtual void Initialize() => decorable.Initialize();
-        public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
-    }
-
-    public class DecoratorAccessor<T, V> where T : V where V : class
-    {
-        public T decorable;
-        private List<V> layers;
-
-        public U GetLayer<U>() where U : V
+        public abstract class Decorator<T> : IFloatPool where T : IFloatPool
         {
-            if (layers == null)
-                GetLayers();
-            foreach (V layer in layers)
-            {
-                if (typeof(U) == layer.GetType())
-                {
-                    return (U)System.Convert.ChangeType(layer, typeof(U));
-                }
-            }
-            return default;
+            public T decorable;
+
+            public virtual float Max => decorable.Max;
+            public virtual float Current => decorable.Current;
+            public virtual float Ratio => decorable.Ratio;
+
+            public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
+            public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
+            public virtual void Initialize() => decorable.Initialize();
+            public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
         }
 
-        private void GetLayers()
+        public class DecoratorAccessor<T, V> where T : V where V : class
         {
-            layers = new List<V>
+            public T decorable;
+            private List<V> layers;
+
+            public U GetLayer<U>() where U : V
+            {
+                if (layers == null)
+                    GetLayers();
+                foreach (V layer in layers)
+                {
+                    if (typeof(U) == layer.GetType())
+                    {
+                        return (U)System.Convert.ChangeType(layer, typeof(U));
+                    }
+                }
+                return default;
+            }
+
+            private void GetLayers()
+            {
+                layers = new List<V>
             {
                 decorable
             };
 
-            void Layer(V layer)
-            {
-                FieldInfo field = layer.GetType().GetField(nameof(decorable));
-                if (field != null && field.GetValue(layer) is V newLayer)
+                void Layer(V layer)
                 {
-                    layers.Add(newLayer);
-                    Layer(newLayer);
+                    FieldInfo field = layer.GetType().GetField(nameof(decorable));
+                    if (field != null && field.GetValue(layer) is V newLayer)
+                    {
+                        layers.Add(newLayer);
+                        Layer(newLayer);
+                    }
                 }
+                Layer(decorable);
             }
-            Layer(decorable);
         }
+
+        [System.Serializable]
+        public class UnityEventBoolean : UnityEvent<bool> { }
     }
 
     [System.Serializable]
@@ -256,9 +263,6 @@ namespace FloatPool
                 bar.ManualUpdate(Current, Max);
         }
     }
-
-    [System.Serializable]
-    public class UnityEventBoolean : UnityEvent<bool> { }
 
     [System.Serializable]
     public class RechargerDecorator<T> : Decorator<T> where T : IFloatPool
