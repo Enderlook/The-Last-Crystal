@@ -323,4 +323,26 @@ namespace FloatPool
                 playlist.Play(audioSource, Settings.IsSoundActive);
         }
     }
+
+    [System.Serializable]
+    public class ChangeCallbackDecorator : Decorator
+    {
+        [Tooltip("Event executed each time Max or Current values changes.")]
+        public UnityEvent callback;
+
+        public override float Max {
+            get => base.Max;
+            set {
+                base.Max = value;
+                callback.Invoke();
+            }
+        }
+        public override float Current {
+            get => base.Current;
+            set {
+                base.Current = value;
+                callback.Invoke();
+            }
+        }
+    }
 }
