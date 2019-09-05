@@ -23,6 +23,11 @@ namespace FloatPool
         float Ratio { get; }
 
         void Initialize();
+        /// <summary>
+        /// Update values.
+        /// </summary>
+        /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
+        void Update(float deltatime);
 
         /// <summary>
         /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
@@ -66,6 +71,8 @@ namespace FloatPool
             Current = startingCurrent == -1 ? startingMax : startingCurrent;
             Max = startingMax;
         }
+
+        public void Update(float deltaTime) { }
 
         /// <summary>
         /// Changes the value of <see cref="Current"/> by <paramref name="amount"/>, and clamp values to 0 and <see cref="Max"/> if <paramref name="allowUnderflow"/> and <paramref name="allowOverflow"/> are <see langword="false"/>, respectively.
@@ -138,6 +145,7 @@ namespace FloatPool
         public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
         public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
         public virtual void Initialize() => decorable.Initialize();
+        public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
     }
 
     [System.Serializable]
@@ -198,6 +206,115 @@ namespace FloatPool
             base.Initialize();
             if (bar != null)
                 bar.ManualUpdate(Current, Max);
+        }
+    }
+
+    [System.Serializable]
+    public class UnityEventBoolean : UnityEvent<bool> { }
+
+    [System.Serializable]
+    public class RechargerDecorator : Decorator
+    {
+        [Header("Recharger Configuration")]
+        [Tooltip("Value per second increases in Current.")]
+        public float rechargeRate;
+
+        [Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
+        public float rechargingDelay;
+        private float _currentRechargingDelay = 0f;
+
+        [Tooltip("Sound played while recharging.")]
+        public Playlist playlist;
+        [Tooltip("Audio Source used to play sound.")]
+        public AudioSource audioSource;
+
+        [Tooltip("Event executed when start recharging.")]
+        public UnityEvent startCallback;
+        private bool _startCalled = false;
+        [Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
+        public UnityEventBoolean endCallback;
+        [Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
+        public UnityEventBoolean activeCallback;
+
+        public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+        {
+            ResetRechargingDelay(true);
+            return base.Decrease(amount, allowUnderflow);
+        }
+
+        /// <summary>
+        /// Reset <see cref="_currentRechargingDelay"/> to 0 and calls <see cref="endCallback"/>.
+        /// </summary>
+        /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
+        private void ResetRechargingDelay(bool isForced)
+        {
+            _currentRechargingDelay = 0;
+            CallEndCallback(isForced);
+        }
+
+        public override void Update(float deltaTime)
+        {
+            Recharge(deltaTime);
+            base.Update(deltaTime);
+        }
+
+        /// <summary>
+        /// Check whenever <see cref="_currentRechargingDelay"/> is 0 and <see cref="Current"/> should be recharge.<br/>
+        /// Also execute additional functionalities when appropriate.
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        private void Recharge(float deltaTime)
+        {
+            if (_currentRechargingDelay >= rechargingDelay)
+            {
+                if (Current < Max)
+                {
+                    CallStartCallback();
+                    Increase(rechargeRate * deltaTime);
+                    PlayRechargingSound();
+                    activeCallback.Invoke(true);
+                }
+                else
+                {
+                    activeCallback.Invoke(false);
+                    CallEndCallback(false);
+                }
+            }
+            else
+                _currentRechargingDelay += deltaTime;
+        }
+
+        /// <summary>
+        /// Calls <see cref="startCallback"/> only if <see cref="_startCalled"/> is <see langword="false"/>.<br/>
+        /// Also sets <see cref="_startCalled"/> to <see langword="true"/>.
+        /// </summary>
+        private void CallStartCallback()
+        {
+            if (!_startCalled)
+            {
+                _startCalled = true;
+                startCallback.Invoke();
+            }
+        }
+
+        /// <summary>
+        /// Calls <see cref="endCallback"/> only if <see cref="_endCalled"/> is <see langword="true"/>.<br/>
+        /// Also sets <see cref="_startCalled"/> to <see langword="false"/>.
+        /// </summary>
+        /// <param name="isForced">Whenever it was forced or it reached <see cref="Current"/> to <see cref="Max"/>.</param>
+        private void CallEndCallback(bool isForced)
+        {
+            if (_startCalled)
+            {
+                _startCalled = false;
+                endCallback.Invoke(isForced);
+            }
+        }
+
+        private void PlayRechargingSound()
+        {
+            if (audioSource != null && playlist != null && !audioSource.isPlaying)
+                playlist.Play(audioSource, Settings.IsSoundActive);
         }
     }
 }
