@@ -128,15 +128,9 @@ namespace FloatPool
         }
     }
 
-    public abstract class Decorator : IFloatPool
+    public abstract class Decorator<T> : IFloatPool where T : IFloatPool
     {
-        protected IFloatPool decorable;
-
-        /// <summary>
-        /// Set decorable. Mandatory.
-        /// </summary>
-        /// <param name="decorable">Decorable.</param>
-        public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
+        public T decorable;
 
         public virtual float Max => decorable.Max;
         public virtual float Current => decorable.Current;
@@ -149,7 +143,7 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class CallbackDecorator : Decorator
+    public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Callback Configuration")]
         [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
@@ -175,7 +169,7 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class BarDecorator : Decorator
+    public class BarDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Bar Configuration")]
         [Tooltip("Bar used to show values.")]
@@ -213,7 +207,7 @@ namespace FloatPool
     public class UnityEventBoolean : UnityEvent<bool> { }
 
     [System.Serializable]
-    public class RechargerDecorator : Decorator
+    public class RechargerDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Header("Recharger Configuration")]
         [Tooltip("Value per second increases in Current.")]
@@ -319,7 +313,7 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class ChangeCallbackDecorator : Decorator
+    public class ChangeCallbackDecorator<T> : Decorator<T> where T : IFloatPool
     {
         [Tooltip("Event executed each time Current value changes due to Decrease or Increse methods.")]
         public UnityEvent callback;
