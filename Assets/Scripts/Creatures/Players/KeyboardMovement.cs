@@ -30,6 +30,8 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     public LayerMask floorLayer;
     [Tooltip("Animator for set animation")]
     public Animator animator;
+    [Tooltip("Position attack")]
+    public Transform attackPosition;
 
     private Rigidbody2D thisRigidbody2D;
 
@@ -74,6 +76,22 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
         thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
         if (Mathf.Abs(thisRigidbody2D.velocity.x) > speed)
             thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, thisRigidbody2D.velocity.y);
+
         spriteRenderer.flipX = distance < 0;
+
+        if (!spriteRenderer.flipX)
+        {
+            Vector3 thePositon = attackPosition.transform.localPosition;
+            if (attackPosition.transform.localPosition.x < 0)
+                thePositon.x = -attackPosition.transform.localPosition.x;
+            attackPosition.transform.localPosition = thePositon;
+        }
+        else if (spriteRenderer.flipX)
+        {
+            Vector3 thePositon = attackPosition.transform.localPosition;
+            if (attackPosition.transform.localPosition.x > 0)
+                thePositon.x = -attackPosition.transform.localPosition.x;
+            attackPosition.transform.localPosition = thePositon;
+        }
     }
 }
