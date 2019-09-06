@@ -1,5 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &9192109570532497889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740122355429531057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2825bd85f44cfab4e91663c521afcd24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decorable:
+    decorable:
+      decorable:
+        decorable:
+          startingMax: 100
+          startingCurrent: -1
+        bar: {fileID: 0}
+      emptyCallback:
+        m_PersistentCalls:
+          m_Calls:
+          - m_Target: {fileID: 2561805456172053409}
+            m_MethodName: 
+            m_Mode: 1
+            m_Arguments:
+              m_ObjectArgument: {fileID: 0}
+              m_ObjectArgumentAssemblyTypeName: 
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      fullCallback:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
 --- !u!1001 &7460415043436444691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,6 +147,11 @@ PrefabInstance:
       propertyPath: health.decorable.decorable.decorable.decorable.startingMax
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 9192109570532497889}
     - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: maxJumps
@@ -740,3 +785,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}
+--- !u!1 &5740122355429531057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7460415043436444691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2561805456172053409 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+    type: 3}
+  m_PrefabInstance: {fileID: 7460415043436444691}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5740122355429531057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dacd0781548837648bd838a6523b2288, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

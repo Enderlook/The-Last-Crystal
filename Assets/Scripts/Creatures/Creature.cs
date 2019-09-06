@@ -8,16 +8,7 @@ public class Creature : MonoBehaviour
 {
     [Header("Configuration")]
     [Tooltip("Health.")]
-    public ManagerPool health;
-
-    [Serializable]
-    public class DecreaseReductionPool : DecreaseReductionDecorator<FloatPool.FloatPool> { }
-    [Serializable]
-    public class BarFloatPool : BarDecorator<DecreaseReductionPool> { }
-    [Serializable]
-    public class CallbackFloatPool : CallbackDecorator<BarFloatPool> { }
-    [Serializable]
-    public class ManagerPool : DecoratorsManager<CallbackFloatPool> { }
+    public Pool health;
 
     [Tooltip("Movement speed.")]
     public float speed;
@@ -57,7 +48,7 @@ public class Creature : MonoBehaviour
 
     protected virtual void Update()
     {
-        health.Update(Time.deltaTime);
+        health.InternalUpdate(Time.deltaTime);
         move?.Move(Time.deltaTime, SpeedMultiplier * speed);
         Array.ForEach(updates, e => e.Update(Time.deltaTime));
     }

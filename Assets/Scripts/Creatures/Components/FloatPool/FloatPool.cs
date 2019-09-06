@@ -30,7 +30,7 @@ namespace FloatPool
         /// Update values.
         /// </summary>
         /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
-        void Update(float deltatime);
+        void InternalUpdate(float deltatime);
 
         /// <summary>
         /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
@@ -75,7 +75,7 @@ namespace FloatPool
             Max = startingMax;
         }
 
-        public void Update(float deltaTime) { }
+        public void InternalUpdate(float deltaTime) { }
 
         /// <summary>
         /// Changes the value of <see cref="Current"/> by <paramref name="amount"/>, and clamp values to 0 and <see cref="Max"/> if <paramref name="allowUnderflow"/> and <paramref name="allowOverflow"/> are <see langword="false"/>, respectively.
@@ -144,7 +144,7 @@ namespace FloatPool
             public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
             public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
             public virtual void Initialize() => decorable.Initialize();
-            public virtual void Update(float deltaTime) => decorable.Update(deltaTime);
+            public virtual void InternalUpdate(float deltaTime) => decorable.InternalUpdate(deltaTime);
         }
 
         public class DecoratorAccessor<T, V> where T : V where V : class
@@ -191,7 +191,7 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public class DecoratorsManager<T> : DecoratorAccessor<T, IFloatPool>, IFloatPool where T : IFloatPool
+    public abstract class DecoratorsManager<T> : DecoratorAccessor<T, IFloatPool>, IFloatPool where T : IFloatPool
     {
         public float Current => decorable.Current;
         public float Max => decorable.Max;
@@ -200,7 +200,63 @@ namespace FloatPool
         public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
         public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
         public void Initialize() => decorable.Initialize();
-        public void Update(float deltatime) => decorable.Update(deltatime);
+        public void InternalUpdate(float deltatime) => decorable.InternalUpdate(deltatime);
+    }
+
+    [System.Serializable]
+    public abstract class Pool : MonoBehaviour, IFloatPool
+    {
+        public abstract float Max { get; }
+        public abstract float Current { get; }
+        public abstract float Ratio { get; }
+
+        public abstract (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
+        public abstract (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
+        public abstract void Initialize();
+        public abstract void InternalUpdate(float deltatime);
+
+        protected List<IFloatPool> layers;
+
+        public U GetLayer<U>() where U : IFloatPool
+        {
+            if (layers == null)
+                GetLayers();
+            foreach (IFloatPool layer in layers)
+            {
+                if (typeof(U) == layer.GetType())
+                {
+                    return (U)System.Convert.ChangeType(layer, typeof(U));
+                }
+            }
+            return default;
+        }
+
+        protected abstract void GetLayers();
+    }
+
+    [System.Serializable]
+    public abstract class Pool<T> : Pool where T : IFloatPool
+    {
+        public T decorable;
+
+        protected override void GetLayers()
+        {
+            layers = new List<IFloatPool>
+            {
+                decorable
+            };
+
+            void Layer(IFloatPool layer)
+            {
+                FieldInfo field = layer.GetType().GetField(nameof(decorable));
+                if (field != null && field.GetValue(layer) is IFloatPool newLayer)
+                {
+                    layers.Add(newLayer);
+                    Layer(newLayer);
+                }
+            }
+            Layer(decorable);
+        }
     }
 
     namespace Decorators
@@ -306,10 +362,10 @@ namespace FloatPool
                 CallEndCallback(isForced);
             }
 
-            public override void Update(float deltaTime)
+            public override void InternalUpdate(float deltaTime)
             {
                 Recharge(deltaTime);
-                base.Update(deltaTime);
+                base.InternalUpdate(deltaTime);
             }
 
             /// <summary>
