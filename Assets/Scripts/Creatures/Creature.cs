@@ -21,6 +21,9 @@ public class Creature : MonoBehaviour
     [Tooltip("Rigidbody Component.")]
     public Rigidbody2D thisRigidbody2D;
 
+    [Tooltip("Animator Component.")]
+    public Animator animator;
+
     private IDie[] dies;
     private IUpdate[] updates;
     private IMove move;
