@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingTextController : MonoBehaviour
@@ -9,29 +9,23 @@ public class FloatingTextController : MonoBehaviour
     [Tooltip("Maximum amount of floating texts at time. New texts will remove old ones. Use 0 for unlimited.")]
     public int maximumAmountFloatingText = 10;
 
-    [HideInInspector]
     public bool overrideTimeBeforeDestroy;
-    [HideInInspector]
+    [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
     public float timeBeforeDestroy;
-    [HideInInspector]
     public bool overrideTextColor;
-    [HideInInspector]
+    [Tooltip("Color used by text")]
     public Color textColor = Color.red;
-    [HideInInspector]
     public bool overrideRandomOffset;
-    [HideInInspector]
+    [Tooltip("Random spawn offset.")]
     public Vector2 randomOffset = Vector2.one;
-    [HideInInspector]
     public bool overrideScaleMultiplier;
-    [HideInInspector]
+    [Tooltip("Multiply the scale of the canvas by this value.")]
     public float scaleMultiplier = 1;
-    [HideInInspector]
     public bool overrideDigitPrecision;
-    [HideInInspector]
+    [Tooltip("Digit precision (decimals) for numbers .Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
     public int digitPrecision = 0;
-    [HideInInspector]
     public bool overrideTypeOfRounding;
-    [HideInInspector]
+    [Tooltip("Determines how decimal digits are rounded.")]
     public FloatingText.TYPE_OF_ROUNDING typeOfRounding = FloatingText.TYPE_OF_ROUNDING.ROUND;
 
     [Header("Setup")]
