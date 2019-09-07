@@ -11,7 +11,7 @@ public class FloatingTextControllerEditor : Editor
         this.PropertyFieldAutoSave(nameof(FloatingTextController.maximumAmountFloatingText));
 
         EditorGUILayout.Space();
-        EditorExtensions.Header("Floating Text Override Configuration");
+        GUIHelper.Header("Floating Text Override Configuration");
 
         this.ToggleableField(nameof(FloatingTextController.scaleMultiplier));
         this.ToggleableField(nameof(FloatingTextController.textColor));
