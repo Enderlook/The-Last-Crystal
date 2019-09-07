@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Reflection;
+using FloatPool.Decorators;
 using FloatPool.Internal;
 using UnityEngine;
 using UnityEngine.Events;
@@ -133,9 +132,9 @@ namespace FloatPool
 
     namespace Internal
     {
-        public abstract class Decorator<T> : IFloatPool where T : IFloatPool
+        public abstract class Decorator : IFloatPool
         {
-            public T decorable;
+            private IFloatPool decorable;
 
             public virtual float Max => decorable.Max;
             public virtual float Current => decorable.Current;
@@ -145,45 +144,8 @@ namespace FloatPool
             public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
             public virtual void Initialize() => decorable.Initialize();
             public virtual void InternalUpdate(float deltaTime) => decorable.InternalUpdate(deltaTime);
-        }
 
-        public class DecoratorAccessor<T, V> where T : V where V : class
-        {
-            public T decorable;
-            private List<V> layers;
-
-            public U GetLayer<U>() where U : V
-            {
-                if (layers == null)
-                    GetLayers();
-                foreach (V layer in layers)
-                {
-                    if (typeof(U) == layer.GetType())
-                    {
-                        return (U)System.Convert.ChangeType(layer, typeof(U));
-                    }
-                }
-                return default;
-            }
-
-            private void GetLayers()
-            {
-                layers = new List<V>
-            {
-                decorable
-            };
-
-                void Layer(V layer)
-                {
-                    FieldInfo field = layer.GetType().GetField(nameof(decorable));
-                    if (field != null && field.GetValue(layer) is V newLayer)
-                    {
-                        layers.Add(newLayer);
-                        Layer(newLayer);
-                    }
-                }
-                Layer(decorable);
-            }
+            public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
         }
 
         [System.Serializable]
@@ -191,78 +153,62 @@ namespace FloatPool
     }
 
     [System.Serializable]
-    public abstract class DecoratorsManager<T> : DecoratorAccessor<T, IFloatPool>, IFloatPool where T : IFloatPool
+    public class Pool : IFloatPool
     {
-        public float Current => decorable.Current;
-        public float Max => decorable.Max;
-        public float Ratio => decorable.Ratio;
+        public FloatPool basePool;
+        public CallbackDecorator callback;
+        public BarDecorator bar;
+        public RechargerDecorator recharger;
+        public ChangeCallbackDecorator changeCallback;
+        public DecreaseReductionDecorator decreaseReduction;
 
-        public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
-        public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
-        public void Initialize() => decorable.Initialize();
-        public void InternalUpdate(float deltatime) => decorable.InternalUpdate(deltatime);
-    }
+        private IFloatPool pool;
+        public IFloatPool FloatPool {
+            get {
+                if (pool == null)
+                    ConstructDecorators();
+                return pool;
+            }
+        }
 
-    [System.Serializable]
-    public abstract class Pool : MonoBehaviour, IFloatPool
-    {
-        public abstract float Max { get; }
-        public abstract float Current { get; }
-        public abstract float Ratio { get; }
+        public float Max => FloatPool.Max;
 
-        public abstract (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false);
-        public abstract (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
-        public abstract void Initialize();
-        public abstract void InternalUpdate(float deltatime);
+        public float Current => FloatPool.Current;
 
-        protected List<IFloatPool> layers;
+        public float Ratio => FloatPool.Ratio;
+
+        public void ConstructDecorators()
+        {
+            Decorator[] decorators = new Decorator[] { callback, bar, recharger, changeCallback, decreaseReduction };
+            pool = basePool;
+            foreach (Decorator decorator in decorators)
+            {
+                decorator.SetDecorable(pool);
+                pool = decorator;
+            }
+        }
 
         public U GetLayer<U>() where U : IFloatPool
         {
-            if (layers == null)
-                GetLayers();
+            IFloatPool[] layers = new IFloatPool[] { basePool, callback, bar, recharger, changeCallback, decreaseReduction };
             foreach (IFloatPool layer in layers)
             {
-                if (typeof(U) == layer.GetType())
-                {
-                    return (U)System.Convert.ChangeType(layer, typeof(U));
-                }
+                if (layer.GetType() == typeof(U))
+                    return (U)layer;
             }
             return default;
         }
 
-        protected abstract void GetLayers();
-    }
-
-    [System.Serializable]
-    public abstract class Pool<T> : Pool where T : IFloatPool
-    {
-        public T decorable;
-
-        protected override void GetLayers()
-        {
-            layers = new List<IFloatPool>
-            {
-                decorable
-            };
-
-            void Layer(IFloatPool layer)
-            {
-                FieldInfo field = layer.GetType().GetField(nameof(decorable));
-                if (field != null && field.GetValue(layer) is IFloatPool newLayer)
-                {
-                    layers.Add(newLayer);
-                    Layer(newLayer);
-                }
-            }
-            Layer(decorable);
-        }
+        public void Initialize() => FloatPool.Initialize();
+        public void InternalUpdate(float deltatime) => FloatPool.InternalUpdate(deltatime);
+        public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => FloatPool.Decrease(amount, allowUnderflow);
+        public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => FloatPool.Increase(amount, allowOverflow);
     }
 
     namespace Decorators
     {
         [System.Serializable]
-        public class CallbackDecorator<T> : Decorator<T> where T : IFloatPool
+        public class CallbackDecorator : Decorator
         {
             [Header("Callback Configuration")]
             [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
@@ -288,7 +234,7 @@ namespace FloatPool
         }
 
         [System.Serializable]
-        public class BarDecorator<T> : Decorator<T> where T : IFloatPool
+        public class BarDecorator : Decorator
         {
             [Header("Bar Configuration")]
             [Tooltip("Bar used to show values.")]
@@ -323,7 +269,7 @@ namespace FloatPool
         }
 
         [System.Serializable]
-        public class RechargerDecorator<T> : Decorator<T> where T : IFloatPool
+        public class RechargerDecorator : Decorator
         {
             [Header("Recharger Configuration")]
             [Tooltip("Value per second increases in Current.")]
@@ -429,7 +375,7 @@ namespace FloatPool
         }
 
         [System.Serializable]
-        public class ChangeCallbackDecorator<T> : Decorator<T> where T : IFloatPool
+        public class ChangeCallbackDecorator : Decorator
         {
             [Tooltip("Event executed each time Current value changes due to Decrease or Increse methods.")]
             public UnityEvent callback;
@@ -450,7 +396,7 @@ namespace FloatPool
         }
 
         [System.Serializable]
-        public class DecreaseReductionDecorator<T> : Decorator<T> where T : IFloatPool
+        public class DecreaseReductionDecorator : Decorator
         {
             [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
             public Calculator reductionFormula;

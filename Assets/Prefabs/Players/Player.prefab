@@ -73,16 +73,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health:
-    decorable:
-      decorable:
-        decorable:
-          decorable:
-            startingMax: 100
-            startingCurrent: -1
-          reductionFormula:
-            formula: 
-            compile: 0
-        bar: {fileID: 0}
+    basePool:
+      startingMax: 100
+      startingCurrent: -1
+    callback:
       emptyCallback:
         m_PersistentCalls:
           m_Calls:
@@ -104,6 +98,38 @@ MonoBehaviour:
           m_Calls: []
         m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
+    bar:
+      bar: {fileID: 0}
+    recharger:
+      rechargeRate: 0
+      rechargingDelay: 0
+      playlist: {fileID: 0}
+      audioSource: {fileID: 0}
+      startCallback:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      endCallback:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      activeCallback:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    changeCallback:
+      callback:
+        m_PersistentCalls:
+          m_Calls: []
+        m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    decreaseReduction:
+      reductionFormula:
+        formula: 
+        compile: 0
   speed: 1
   floatingTextController: {fileID: 5042988860275578343}
   stoppableRigidbody: {fileID: 8836964168732201439}
