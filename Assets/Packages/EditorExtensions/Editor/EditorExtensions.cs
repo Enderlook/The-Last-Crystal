@@ -216,15 +216,7 @@ public static class EditorExtensions
     /// <param name="serializedProperty"><see cref="SerializedProperty"/> to show in the inspector./param>
     /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
     /// <see url="https://docs.unity3d.com/ScriptReference/EditorGUILayout.PropertyField.html"/>
-    public static void PropertyFieldAutoSave(this Editor source, SerializedProperty serializedProperty, bool includeChildren = false)
-    {
-        EditorGUI.BeginChangeCheck();
-        EditorGUILayout.PropertyField(serializedProperty, includeChildren);
-        if (EditorGUI.EndChangeCheck())
-        {
-            source.serializedObject.ApplyModifiedProperties();
-        }
-    }
+    public static void PropertyFieldAutoSave(this Editor source, SerializedProperty serializedProperty, bool includeChildren = false) => source.serializedObject.PropertyFieldAutoSave(serializedProperty, includeChildren);
 
     /// <summary>
     /// Create a Property Field and save it changes.
@@ -232,5 +224,5 @@ public static class EditorExtensions
     /// <param name="source">Instance where its executed this method.</param>
     /// <param name="serializedProperty">Name of the <see cref="SerializedProperty"/> to show in the inspector./param>
     /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
-    public static void PropertyFieldAutoSave(this Editor source, string serializedProperty, bool includeChildren = false) => PropertyFieldAutoSave(source, source.serializedObject.FindProperty(serializedProperty), includeChildren);
+    public static void PropertyFieldAutoSave(this Editor source, string serializedProperty, bool includeChildren = false) => source.serializedObject.PropertyFieldAutoSave(serializedProperty, includeChildren);
 }
