@@ -196,18 +196,7 @@ public static class EditorExtensions
     /// <param name="func">Function to execute in order to get changes.</param>
     /// <param name="field">Variable to store the changes made by <paramref name="func"/>.</param>
     /// <param name="reason">Reason to save.</param>
-    public static void ChangeCheck<T>(this Editor source, Func<T> func, ref T field, string reason)
-    {
-        // https://forum.unity.com/threads/custom-editor-losing-settings-on-play.130889/
-        // https://docs.unity3d.com/ScriptReference/Undo.RecordObject.html
-        EditorGUI.BeginChangeCheck();
-        T value = func();
-        if (EditorGUI.EndChangeCheck())
-        {
-            Undo.RecordObject(source.target, reason);
-            field = value;
-        }
-    }
+    public static void ChangeCheck<T>(this Editor source, Func<T> func, ref T field, string reason) => source.serializedObject.ChangeCheck(func, ref field, reason);
 
     /// <summary>
     /// Create a Property Field and save it changes.
