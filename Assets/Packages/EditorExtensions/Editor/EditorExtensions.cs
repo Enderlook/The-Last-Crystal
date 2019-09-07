@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
-using System.Reflection;
 
 public static class EditorExtensions
 {
@@ -20,7 +19,7 @@ public static class EditorExtensions
     /// To this it's appended " Checkbox." or " Change value." depending which action it was done.</param>
     public static void ToggleableField<T>(this Editor source, ref T field, Func<T> toShowField, ref bool confirmationVariable, string confirmationLabel, string confirmationTooltip = "", string reasonForUndo = null)
     {
-        ToggleableField(source, ref field, toShowField, ref confirmationVariable, new GUIContent(confirmationLabel, confirmationTooltip), reasonForUndo ?? confirmationLabel);
+        source.serializedObject.ToggleableField(ref field, toShowField, ref confirmationVariable, confirmationLabel, confirmationTooltip, reasonForUndo);
     }
 
     /// <summary>
@@ -37,15 +36,7 @@ public static class EditorExtensions
     /// To this it's appended " Checkbox." or " Change value." depending which action it was done.</param>
     public static void ToggleableField<T>(this Editor source, ref T field, Func<T> toShowfield, ref bool confirmationVariable, GUIContent confirmationContent, string reasonForUndo)
     {
-        // https://answers.unity.com/questions/192895/hideshow-properties-dynamically-in-inspector.html
-        // https://www.reddit.com/r/Unity3D/comments/45bjwc/tooltip_on_custom_inspectorproperties/
-
-        reasonForUndo = reasonForUndo ?? confirmationContent.text;
-
-        bool toggleValue = confirmationVariable;
-        ChangeCheck(source, () => GUILayout.Toggle(toggleValue, confirmationContent), ref confirmationVariable, $"{reasonForUndo}. Checkbox.");
-
-        source.serializedObject.DrawFieldIfConfirmed(ref field, toShowfield, confirmationVariable, reasonForUndo);
+        source.serializedObject.ToggleableField(ref field, toShowfield, ref confirmationVariable, confirmationContent, reasonForUndo);
     }
 
     /// <summary>
@@ -60,11 +51,7 @@ public static class EditorExtensions
     /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
     public static void ToggleableField(this Editor source, SerializedProperty serializedProperty, ref bool confirmationVariable, GUIContent confirmationContent, string reasonForUndo, bool includeChildren = false)
     {
-        reasonForUndo = reasonForUndo ?? confirmationContent.text;
-
-        bool toggleValue = confirmationVariable;
-        ChangeCheck(source, () => GUILayout.Toggle(toggleValue, confirmationContent), ref confirmationVariable, $"{reasonForUndo}. Checkbox.");
-        source.serializedObject.DrawFieldIfConfirmed(serializedProperty, includeChildren, confirmationVariable);
+        source.serializedObject.ToggleableField(serializedProperty, ref confirmationVariable, confirmationContent, reasonForUndo);
     }
 
     /// <summary>
@@ -79,11 +66,7 @@ public static class EditorExtensions
     /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
     public static void ToggleableField(this Editor source, string serializedProperty, ref bool confirmationVariable, GUIContent confirmationContent, string reasonForUndo, bool includeChildren = false)
     {
-        reasonForUndo = reasonForUndo ?? confirmationContent.text;
-
-        bool toggleValue = confirmationVariable;
-        ChangeCheck(source, () => GUILayout.Toggle(toggleValue, confirmationContent), ref confirmationVariable, $"{reasonForUndo}. Checkbox.");
-        source.serializedObject.DrawFieldIfConfirmed(serializedProperty, includeChildren, confirmationVariable);
+        source.ToggleableField(serializedProperty, ref confirmationVariable, confirmationContent, reasonForUndo, includeChildren);
     }
 
     /// <summary>
@@ -95,8 +78,7 @@ public static class EditorExtensions
     /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
     public static void ToggleableField(this Editor source, SerializedProperty serializedProperty, SerializedProperty booleanSerializedProperty, bool includeChildren = false)
     {
-        PropertyFieldAutoSave(source, booleanSerializedProperty);
-        source.serializedObject.DrawFieldIfConfirmed(serializedProperty, includeChildren, booleanSerializedProperty.boolValue);
+        source.ToggleableField(serializedProperty, serializedProperty, includeChildren);
     }
 
     /// <summary>
@@ -108,7 +90,7 @@ public static class EditorExtensions
     /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
     public static void ToggleableField(this Editor source, string serializedProperty, string booleanSerializedProperty, bool includeChildren = false)
     {
-        ToggleableField(source, source.serializedObject.FindProperty(serializedProperty), source.serializedObject.FindProperty(booleanSerializedProperty), includeChildren);
+        source.serializedObject.ToggleableField(serializedProperty, booleanSerializedProperty, includeChildren);
     }
 
     /// <summary>
@@ -120,14 +102,7 @@ public static class EditorExtensions
     /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
     public static void ToggleableField(this Editor source, string serializedProperty, bool includeChildren = false)
     {
-        Type type = source.target.GetType();
-        HasConfirmationFieldAttribute attribute = type.GetField(serializedProperty).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) as HasConfirmationFieldAttribute;
-        if (attribute == null)
-            throw new Exception($"The {type}.{serializedProperty} field must have the attribute {nameof(HasConfirmationFieldAttribute)}.");
-        else
-        {
-            ToggleableField(source, serializedProperty, attribute.confirmFieldName, includeChildren);
-        }
+        source.serializedObject.ToggleableField(serializedProperty, includeChildren);
     }
 
     /// <summary>
