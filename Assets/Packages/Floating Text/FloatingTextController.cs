@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FloatingTextController : MonoBehaviour
@@ -8,8 +8,6 @@ public class FloatingTextController : MonoBehaviour
     public Transform[] spawningPoints = new Transform[1];
     [Tooltip("Maximum amount of floating texts at time. New texts will remove old ones. Use 0 for unlimited.")]
     public int maximumAmountFloatingText = 10;
-
-    // https://forum.unity.com/threads/custom-editor-losing-settings-on-play.130889/
 
     [HideInInspector]
     public bool overrideTimeBeforeDestroy;
