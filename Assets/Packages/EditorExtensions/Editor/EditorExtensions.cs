@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using System.Reflection;
 
 public static class EditorExtensions
 {
@@ -166,6 +167,25 @@ public static class EditorExtensions
     public static void ToggleableField(this Editor source, string serializedProperty, string booleanSerializedProperty, bool includeChildren = false)
     {
         ToggleableField(source, source.serializedObject.FindProperty(serializedProperty), source.serializedObject.FindProperty(booleanSerializedProperty), includeChildren);
+    }
+
+    /// <summary>
+    /// Generate a toggleable button to hide or show a certain field, which is also created by this method.
+    /// </summary>
+    /// <param name="source">Instance where its executed this method.</param>
+    /// <param name="serializedProperty"Name of <see cref="SerializedProperty"/> to show in the inspector.<br>
+    /// This field must have a <see cref="HasConfirmationFieldAttribute"/>.</param>
+    /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
+    public static void ToggleableField(this Editor source, string serializedProperty, bool includeChildren = false)
+    {
+        Type type = source.target.GetType();
+        HasConfirmationFieldAttribute attribute = type.GetField(serializedProperty).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) as HasConfirmationFieldAttribute;
+        if (attribute == null)
+            throw new Exception($"The {type}.{serializedProperty} field must have the attribute {nameof(HasConfirmationFieldAttribute)}.");
+        else
+        {
+            ToggleableField(source, serializedProperty, attribute.confirmFieldName, includeChildren);
+        }
     }
 
     /// <summary>

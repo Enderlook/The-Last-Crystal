@@ -10,21 +10,32 @@ public class FloatingTextController : MonoBehaviour
     public int maximumAmountFloatingText = 10;
 
     public bool overrideTimeBeforeDestroy;
+    [HasConfirmationField(nameof(overrideTimeBeforeDestroy))]
     [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
     public float timeBeforeDestroy;
+
     public bool overrideTextColor;
+    [HasConfirmationField(nameof(overrideTextColor))]
     [Tooltip("Color used by text")]
     public Color textColor = Color.red;
+
     public bool overrideRandomOffset;
+    [HasConfirmationField(nameof(overrideRandomOffset))]
     [Tooltip("Random spawn offset.")]
     public Vector2 randomOffset = Vector2.one;
+
     public bool overrideScaleMultiplier;
+    [HasConfirmationField(nameof(overrideScaleMultiplier))]
     [Tooltip("Multiply the scale of the canvas by this value.")]
     public float scaleMultiplier = 1;
+
     public bool overrideDigitPrecision;
+    [HasConfirmationField(nameof(overrideDigitPrecision))]
     [Tooltip("Digit precision (decimals) for numbers .Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
     public int digitPrecision = 0;
+
     public bool overrideTypeOfRounding;
+    [HasConfirmationField(nameof(overrideTypeOfRounding))]
     [Tooltip("Determines how decimal digits are rounded.")]
     public FloatingText.TYPE_OF_ROUNDING typeOfRounding = FloatingText.TYPE_OF_ROUNDING.ROUND;
 
