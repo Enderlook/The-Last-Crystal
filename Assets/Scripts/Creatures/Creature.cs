@@ -27,6 +27,7 @@ public class Creature : MonoBehaviour
     private IDie[] dies;
     private IUpdate[] updates;
     private IMove move;
+    private IAttack attack;
     
     public float SpeedMultiplier {
         get => stoppableRigidbody.SpeedMultiplier;
@@ -45,6 +46,7 @@ public class Creature : MonoBehaviour
         dies = gameObject.GetComponentsInChildren<IDie>();
         updates = gameObject.GetComponentsInChildren<IUpdate>();
         move = gameObject.GetComponentInChildren<IMove>();
+        attack = gameObject.GetComponentInChildren<IAttack>();
         Array.ForEach(gameObject.GetComponents<IAwake>(), e => e.Awake(this));
     }
 
@@ -52,6 +54,7 @@ public class Creature : MonoBehaviour
     {
         healthPoints.Update(Time.deltaTime);
         move?.Move(Time.deltaTime, SpeedMultiplier * speed);
+        attack?.Attack(Time.time);
         Array.ForEach(updates, e => e.Update(Time.deltaTime));
     }
 

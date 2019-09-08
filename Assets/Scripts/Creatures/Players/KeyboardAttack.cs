@@ -1,18 +1,31 @@
 ﻿using CreaturesAddons;
 using UnityEngine;
 
-public class KeyboardAttack : MonoBehaviour, IAttack
+public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
 {
-    [Tooltip("Key attack.")]
+    [Tooltip("Basic attack key.")]
     public KeyCode keyAttack;
-    [Tooltip("Animator.")]
-    public Animator animator;
+    [Tooltip("Cooldown of basic attack.")]
+    public float timeBtwAttack;
+
+    private Animator thisAnimator;
+    private float nextAttack;
 
     // Constants
     private const string BASIC_ATTACK = "Attack";
 
-    void IAttack.Attack(float deltaTime)
+    void IAwake.Awake(Creature creature)
     {
-        if (Input.GetKey(keyAttack)) animator.SetTrigger(BASIC_ATTACK);
+        thisAnimator = creature.animator;
+        Debug.Log(thisAnimator.name);
+    }
+
+    void IAttack.Attack(float time)
+    {
+        if (Input.GetKey(keyAttack) && time >= nextAttack)
+        {
+            thisAnimator.SetTrigger(BASIC_ATTACK);
+            nextAttack = time + timeBtwAttack;
+        }
     }
 }
