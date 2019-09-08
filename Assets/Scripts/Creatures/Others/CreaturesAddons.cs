@@ -27,7 +27,7 @@
         /// Creature attack
         /// </summary>
         /// <param name="deltaTime">Time since last update in seconds.<seealso cref="UnityEngine.Time.deltaTime"/></param>
-        void Attack(float deltaTime);
+        void Attack(float time);
     }
     public interface IUpdate
     {

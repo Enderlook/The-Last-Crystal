@@ -28,12 +28,11 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     public Collider2D baseCollider;
     [Tooltip("Layer of the floor.")]
     public LayerMask floorLayer;
-    [Tooltip("Animator for set animation")]
-    public Animator animator;
     [Tooltip("Position attack")]
     public Transform attackPosition;
 
     private Rigidbody2D thisRigidbody2D;
+    private Animator thisAnimator;
 
     //Const key for animation
     private const string WALK = "Walk"; 
@@ -42,12 +41,13 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     void IAwake.Awake(Creature creature)
     {
         thisRigidbody2D = creature.thisRigidbody2D;
+        thisAnimator = creature.animator;
         remainingJumps = maxJumps;
     }
 
     void IMove.Move(float deltaTime, float speedMultiplier)
     {
-        animator.SetFloat(WALK, Mathf.Abs(thisRigidbody2D.velocity.x));
+        thisAnimator.SetFloat(WALK, Mathf.Abs(thisRigidbody2D.velocity.x));
 
         if (Input.GetKey(rightKey))
             MoveHorizontal(deltaTime * speedMultiplier);
@@ -58,7 +58,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
         {
             thisRigidbody2D.AddForce(thisRigidbody2D.transform.up * jumpStrength * thisRigidbody2D.mass);
             remainingJumps--;
-            animator.SetBool(JUMP, true);
+            thisAnimator.SetBool(JUMP, true);
         }
     }
 
@@ -67,7 +67,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
         if (collision.otherCollider.IsTouchingLayers(floorLayer))
         {
             remainingJumps = maxJumps;
-            animator.SetBool(JUMP, false);
+            thisAnimator.SetBool(JUMP, false);
         }
     }
 

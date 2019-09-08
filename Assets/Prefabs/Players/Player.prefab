@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5042988860275578343}
   - component: {fileID: 8836964168732201439}
   - component: {fileID: 3625034397826583285}
+  - component: {fileID: 3674815832579861797}
   - component: {fileID: 5125575169536085736}
   - component: {fileID: 7526445749177953701}
   - component: {fileID: 6090474626493889086}
@@ -85,6 +86,7 @@ MonoBehaviour:
   floatingTextController: {fileID: 5042988860275578343}
   stoppableRigidbody: {fileID: 8836964168732201439}
   thisRigidbody2D: {fileID: 8157229962283897169}
+  animator: {fileID: 0}
 --- !u!114 &5042988860275578343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,11 +147,26 @@ MonoBehaviour:
   jumpKey: 0
   maxJumps: 0
   jumpStrength: 0
+  moveForce: 0
   spriteRenderer: {fileID: 7526445749177953701}
   baseCollider: {fileID: 6090474626493889086}
   floorLayer:
     serializedVersion: 2
     m_Bits: 256
+  attackPosition: {fileID: 0}
+--- !u!114 &3674815832579861797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb01a3e09c99f74aab7a0c0c27109a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyAttack: 0
 --- !u!114 &5125575169536085736
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -179,12 +179,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &292716895 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3662689934729487387, guid: 442861c165a316e4792b7d326a0610d4,
-    type: 3}
-  m_PrefabInstance: {fileID: 1609910884}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &393106358
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,11 +429,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7823601440180720676, guid: 09b7f3303549141429131ad61f5971e0,
+    - target: {fileID: 7791825612164117492, guid: 09b7f3303549141429131ad61f5971e0,
         type: 3}
-      propertyPath: attackPosition
-      value: 
-      objectReference: {fileID: 830899467}
+      propertyPath: keyAttack
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: 7791825612164117492, guid: 09b7f3303549141429131ad61f5971e0,
+        type: 3}
+      propertyPath: timeBtwAttack
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b7f3303549141429131ad61f5971e0, type: 3}
 --- !u!1 &592686825
@@ -541,36 +540,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &689033796
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 689033797}
-  m_Layer: 9
-  m_Name: ShootPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &689033797
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689033796}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.325, y: 0.455, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 292716895}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &719828671
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,12 +638,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &830899467 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1362607400, guid: 09b7f3303549141429131ad61f5971e0,
-    type: 3}
-  m_PrefabInstance: {fileID: 567213345}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &889401878
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,11 +1271,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6180630151563638502, guid: 442861c165a316e4792b7d326a0610d4,
+    - target: {fileID: 6158433294689308982, guid: 442861c165a316e4792b7d326a0610d4,
         type: 3}
-      propertyPath: attackPosition
-      value: 
-      objectReference: {fileID: 689033797}
+      propertyPath: keyAttack
+      value: 323
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158433294689308982, guid: 442861c165a316e4792b7d326a0610d4,
+        type: 3}
+      propertyPath: timeBtwAttack
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 442861c165a316e4792b7d326a0610d4, type: 3}
 --- !u!1 &1676031644
