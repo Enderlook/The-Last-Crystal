@@ -157,7 +157,6 @@ namespace FloatPool
         [System.Serializable]
         public class CallbackDecorator : Decorator
         {
-            [Header("Callback Configuration")]
             [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
             public UnityEvent emptyCallback;
             [Tooltip("Event called when Current reaches Max due to Increase method call.")]
@@ -183,7 +182,6 @@ namespace FloatPool
         [System.Serializable]
         public class BarDecorator : Decorator
         {
-            [Header("Bar Configuration")]
             [Tooltip("Bar used to show values.")]
             public HealthBar bar;
 
@@ -218,7 +216,6 @@ namespace FloatPool
         [System.Serializable]
         public class RechargerDecorator : Decorator
         {
-            [Header("Recharger Configuration")]
             [Tooltip("Value per second increases in Current.")]
             public float rechargeRate;
 
