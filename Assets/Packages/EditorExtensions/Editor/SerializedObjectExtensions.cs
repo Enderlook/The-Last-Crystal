@@ -60,7 +60,7 @@ public static class SerializedObjectExtensions
     /// <param name="toShowField">Function which creates the field on Unity Inspector.</param>
     /// <param name="confirm">Whenever it should be drawed or not.</param>
     /// <param name="reasonForUndo">Reason used when save undo operation.</param>
-    public static void DrawFieldIfConfirmed<T>(this SerializedObject source, ref T field, Func<T> toShowField, bool confirm, string reasonForUndo)
+    private static void DrawFieldIfConfirmed<T>(this SerializedObject source, ref T field, Func<T> toShowField, bool confirm, string reasonForUndo)
     {
         if (confirm)
         {
@@ -77,7 +77,7 @@ public static class SerializedObjectExtensions
     /// <param name="serializedProperty"><see cref="SerializedProperty"/> to show in the inspector./param>
     /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
     /// <param name="confirm">Whenever it should be drawed or not.</param>
-    public static void DrawFieldIfConfirmed(this SerializedObject source, SerializedProperty serializedProperty, bool includeChildren, bool confirm)
+    private static void DrawFieldIfConfirmed(this SerializedObject source, SerializedProperty serializedProperty, bool includeChildren, bool confirm)
     {
         DrawIdentedIfConfirmed(() => source.PropertyFieldAutoSave(serializedProperty, includeChildren), confirm);
     }
@@ -89,7 +89,7 @@ public static class SerializedObjectExtensions
     /// <param name="serializedProperty">Name of the <see cref="SerializedProperty"/> to show in the inspector./param>
     /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
     /// <param name="confirm">Whenever it should be drawed or not.</param>
-    public static void DrawFieldIfConfirmed(this SerializedObject source, string serializedProperty, bool includeChildren, bool confirm)
+    private static void DrawFieldIfConfirmed(this SerializedObject source, string serializedProperty, bool includeChildren, bool confirm)
     {
         DrawIdentedIfConfirmed(() => source.PropertyFieldAutoSave(serializedProperty, includeChildren), confirm);
     }
