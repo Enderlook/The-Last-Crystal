@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class IVectorRangeTwo
+public abstract class VectorRangeTwo
 {
     /// <summary>
     /// Whenever it should return only the initial vector or a random vector made by two vectors.
@@ -56,7 +56,7 @@ public abstract class IVectorRangeTwo
 
 
 [System.Serializable]
-public class TransformRange : IVectorRangeTwo
+public class TransformRange : VectorRangeTwo
 {
     [Tooltip("Start transform.")]
     public Transform startTransform;
@@ -74,19 +74,19 @@ public class TransformRange : IVectorRangeTwo
     }
 
     /// <summary>
-    /// Return a <seealso cref="Vector3"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// Return a <seealso cref="Vector3"/> position. If <see cref="VectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="TransformRange"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
     public static explicit operator Vector3(TransformRange x) => x.Vector3;
     /// <summary>
-    /// Return a <seealso cref="Vector2"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// Return a <seealso cref="Vector2"/> position. If <see cref="VectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="TransformRange"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
     public static explicit operator Vector2(TransformRange x) => x.Vector2;
 }
 
 [System.Serializable]
-public class Vector2RangeTwo : IVectorRangeTwo
+public class Vector2RangeTwo : VectorRangeTwo
 {
     [Tooltip("Start vector.")]
     public Vector2 startVector;
@@ -104,12 +104,12 @@ public class Vector2RangeTwo : IVectorRangeTwo
     }
 
     /// <summary>
-    /// Return a <seealso cref="Vector3"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// Return a <seealso cref="Vector3"/> position. If <see cref="VectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector3"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
     public static explicit operator Vector3(Vector2RangeTwo x) => x.Vector3;
     /// <summary>
-    /// Return a <seealso cref="Vector2"/> position. If <see cref="IVectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
+    /// Return a <seealso cref="Vector2"/> position. If <see cref="VectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
     /// </summary>
     /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
     public static explicit operator Vector2(Vector2RangeTwo x) => x.Vector2;
