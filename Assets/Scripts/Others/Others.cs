@@ -180,7 +180,7 @@ public static class LayerMaskExtension
         int result = bitMask > 0 ? 0 : 31;
         while (bitMask > 1)
         {
-            bitMask = bitMask >> 1;
+            bitMask >>= 1;
             result++;
         }
         return result;
@@ -223,6 +223,7 @@ public static class LINQExtension
         return false;
     }
 
+
     /// <summary>
     /// Return the element which the highest property returned by <paramref name="selector"/>, using <paramref name="comparer"/>.
     /// </summary>
@@ -232,6 +233,7 @@ public static class LINQExtension
     /// <param name="selector">Function which provides the property to compare.</param>
     /// <param name="comparer">Comparer used to compare the values returned by <paramref name="selector"/>.</param>
     /// <returns>The element with the highest property.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Estilo", "IDE0054:Usar la asignación compuesta", Justification = "Unity no lo soporta.")]
     public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source, System.Func<TSource, TKey> selector, IComparer<TKey> comparer = null)
     {
         if (source is null) throw new System.ArgumentNullException(nameof(source));
@@ -240,6 +242,7 @@ public static class LINQExtension
         comparer = comparer ?? Comparer<TKey>.Default;
         return source.Aggregate((a, c) => comparer.Compare(selector(a), selector(c)) > 0 ? a : c);
     }
+
 
     /// <summary>
     /// Return the element which the lowest property returned by <paramref name="selector"/>, using <paramref name="comparer"/>.
@@ -250,6 +253,7 @@ public static class LINQExtension
     /// <param name="selector">Function which provides the property to compare.</param>
     /// <param name="comparer">Comparer used to compare the values returned by <paramref name="selector"/>.</param>
     /// <returns>The element with the lowest property.</returns>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Estilo", "IDE0054:Usar la asignación compuesta", Justification = "Unity no lo soporta.")]
     public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, System.Func<TSource, TKey> selector, IComparer<TKey> comparer = null)
     {
         if (source is null) throw new System.ArgumentNullException(nameof(source));
@@ -497,11 +501,7 @@ public static class CastExtension
     /// <returns>Return <c>(<typeparamref name="T"/>)<paramref name="obj"/></c>. <c>default(<typeparamref name="T"/>)<c> if it can't cast.</returns>
     public static T CastOrDefault<T>(this object obj)
     {
-        if (obj is T)
-        {
-            return (T)obj;
-        }
-        return default;
+        return obj is T ? (T)obj : (default);
     }
 
     /// <summary>
@@ -528,11 +528,7 @@ public static class CastExtension
     /// <seealso cref="CastOrNull{T}(object, RequireClass{T})"/>
     public static T? CastOrNull<T>(this object obj, RequireStruct<T> ignoreMe = null) where T : struct
     {
-        if (obj is T)
-        {
-            return (T)obj;
-        }
-        return null;
+        return obj is T ? (T?)(T)obj : null;
     }
 
     /// <summary>
@@ -548,10 +544,6 @@ public static class CastExtension
     /// <seealso cref="CastOrNull{T}(object, RequireStruct{T})"/>
     public static T CastOrNull<T>(this object obj, RequireClass<T> ignoreMe = null) where T : class
     {
-        if (obj is T)
-        {
-            return (T)obj;
-        }
-        return null;
+        return obj is T ? (T)obj : null;
     }
 }
