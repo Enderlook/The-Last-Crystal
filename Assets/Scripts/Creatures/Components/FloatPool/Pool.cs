@@ -11,9 +11,19 @@ namespace FloatPool
         public FloatPool basePool;
 
         [SerializeField, HideInInspector]
-        private bool hasCallback;
-        [HasConfirmationField(nameof(hasCallback))]
-        public CallbackDecorator callback;
+        private bool hasEmptyCallback;
+        [HasConfirmationField(nameof(hasEmptyCallback))]
+        public FullCallbackDecorator emptyCallback;
+
+        [SerializeField, HideInInspector]
+        private bool hasFullCallback;
+        [HasConfirmationField(nameof(hasFullCallback))]
+        public FullCallbackDecorator fullCallback;
+
+        [SerializeField, HideInInspector]
+        private bool hasChangeCallback;
+        [HasConfirmationField(nameof(hasChangeCallback))]
+        public ChangeCallbackDecorator changeCallback;
 
         [SerializeField, HideInInspector]
         private bool hasBar;
@@ -24,11 +34,6 @@ namespace FloatPool
         private bool hasRecharger;
         [HasConfirmationField(nameof(hasRecharger))]
         public RechargerDecorator recharger;
-
-        [SerializeField, HideInInspector]
-        private bool hasChangeCallback;
-        [HasConfirmationField(nameof(hasChangeCallback))]
-        public ChangeCallbackDecorator changeCallback;
 
         [SerializeField, HideInInspector]
         private bool hasDecreaseReduction;
@@ -57,10 +62,11 @@ namespace FloatPool
                 {
                     decorators = new Tuple<Decorator, bool>[]
                         {
-                            new Tuple<Decorator, bool>(callback, hasCallback),
+                            new Tuple<Decorator, bool>(emptyCallback, hasEmptyCallback),
+                            new Tuple<Decorator, bool>(fullCallback, hasFullCallback),
+                            new Tuple<Decorator, bool>(changeCallback, hasChangeCallback),
                             new Tuple<Decorator, bool>(bar, hasBar),
                             new Tuple<Decorator, bool>(recharger, hasRecharger),
-                            new Tuple<Decorator, bool>(changeCallback, hasChangeCallback),
                             new Tuple<Decorator, bool>(decreaseReduction, hasDecreaseReduction),
                         };
                 }

@@ -155,26 +155,31 @@ namespace FloatPool
     namespace Decorators
     {
         [System.Serializable]
-        public class CallbackDecorator : Decorator
+        public class FullCallbackDecorator : Decorator
         {
-            [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
-            public UnityEvent emptyCallback;
             [Tooltip("Event called when Current reaches Max due to Increase method call.")]
-            public UnityEvent fullCallback;
-
-            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
-            {
-                (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
-                if (Current == 0)
-                    emptyCallback.Invoke();
-                return result;
-            }
+            public UnityEvent callback;
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
                 (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
                 if (Current == Max)
-                    fullCallback.Invoke();
+                    callback.Invoke();
+                return result;
+            }
+        }
+
+        [System.Serializable]
+        public class EmptyCallbackDecorator : Decorator
+        {
+            [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
+            public UnityEvent callback;
+
+            public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
+            {
+                (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
+                if (Current == 0)
+                    callback.Invoke();
                 return result;
             }
         }

@@ -249,9 +249,9 @@ MonoBehaviour:
   basePool:
     startingMax: 100
     startingCurrent: -1
-  hasCallback: 1
-  callback:
-    emptyCallback:
+  hasEmptyCallback: 1
+  emptyCallback:
+    callback:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 4901582744108699570}
@@ -267,7 +267,16 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
-    fullCallback:
+  hasFullCallback: 0
+  fullCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasChangeCallback: 0
+  changeCallback:
+    callback:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -295,13 +304,6 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
       m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  hasChangeCallback: 0
-  changeCallback:
-    callback:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   hasDecreaseReduction: 0
   decreaseReduction:
