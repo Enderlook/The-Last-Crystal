@@ -723,5 +723,10 @@ PrefabInstance:
       propertyPath: jumpKey
       value: 273
       objectReference: {fileID: 0}
+    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: basePool.startingMax
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}

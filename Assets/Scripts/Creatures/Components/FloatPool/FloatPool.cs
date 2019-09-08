@@ -152,59 +152,6 @@ namespace FloatPool
         public class UnityEventBoolean : UnityEvent<bool> { }
     }
 
-    [System.Serializable]
-    public class Pool : IFloatPool
-    {
-        public FloatPool basePool;
-        public CallbackDecorator callback;
-        public BarDecorator bar;
-        public RechargerDecorator recharger;
-        public ChangeCallbackDecorator changeCallback;
-        public DecreaseReductionDecorator decreaseReduction;
-
-        private IFloatPool pool;
-        public IFloatPool FloatPool {
-            get {
-                if (pool == null)
-                    ConstructDecorators();
-                return pool;
-            }
-        }
-
-        public float Max => FloatPool.Max;
-
-        public float Current => FloatPool.Current;
-
-        public float Ratio => FloatPool.Ratio;
-
-        public void ConstructDecorators()
-        {
-            Decorator[] decorators = new Decorator[] { callback, bar, recharger, changeCallback, decreaseReduction };
-            pool = basePool;
-            foreach (Decorator decorator in decorators)
-            {
-                decorator.SetDecorable(pool);
-                pool = decorator;
-            }
-        }
-
-        public U GetLayer<U>() where U : IFloatPool
-        {
-            IFloatPool[] layers = new IFloatPool[] { basePool, callback, bar, recharger, changeCallback, decreaseReduction };
-            foreach (IFloatPool layer in layers)
-            {
-                if (layer.GetType() == typeof(U))
-                    return (U)layer;
-            }
-            return default;
-        }
-
-        public void Initialize() => FloatPool.Initialize();
-        public void InternalUpdate(float deltatime) => FloatPool.InternalUpdate(deltatime);
-        public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => FloatPool.Decrease(amount, allowUnderflow);
-        public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => FloatPool.Increase(amount, allowOverflow);
-    }
-
     namespace Decorators
     {
         [System.Serializable]
