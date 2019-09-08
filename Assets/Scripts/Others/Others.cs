@@ -165,7 +165,7 @@ public class FloatRangeTwo
     public static int FloatToIntByChance(float number) => (int)number + (Random.value < (number - (int)number) ? 1 : 0);
 }
 
-public static class LayerMaskExtension
+public static class LayerMaskExtensions
 {
     // https://forum.unity.com/threads/get-the-layernumber-from-a-layermask.114553/#post-3021162
     /// <summary>
@@ -187,7 +187,7 @@ public static class LayerMaskExtension
     }
 }
 
-public static class LINQExtension
+public static class LINQExtensions
 {
     /// <summary>
     /// Add a the <paramref name="element"/> at the end of the returned <seealso cref="IEnumerable{T}"/> <paramref name="source"/>.
@@ -294,7 +294,7 @@ public static class LINQExtension
     }
 }
 
-public static class OthersExtension
+public static class OthersExtensions
 {
     /// <summary>
     /// Deconstruction of <seealso cref="KeyValuePair{TKey, TValue}"/>.
@@ -307,7 +307,7 @@ public static class OthersExtension
     }
 }
 
-public static class ArrayExtension
+public static class ArrayExtensions
 {
     /// <summary>
     /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
@@ -343,7 +343,7 @@ public static class ArrayExtension
     }
 }
 
-public static class ListExtension
+public static class ListExtensions
 {
     /// <summary>
     /// Removes an element from a list if matches a criteria determined by <paramref name="selector"/>.
@@ -446,7 +446,7 @@ public static class ListExtension
     }
 }
 
-public static class VectorExtension
+public static class VectorExtensions
 {
     /// <summary>
     /// Returns absolute <seealso cref="Vector2"/> of <paramref name="source"/>.
@@ -468,7 +468,7 @@ public static class VectorExtension
     public static Vector4 Abs(this Vector4 source) => new Vector4(Mathf.Abs(source.x), Mathf.Abs(source.y), Mathf.Abs(source.z), Mathf.Abs(source.w));
 }
 
-public static class CastExtension
+public static class CastExtensions
 {
     /// <summary>
     /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/> in <paramref name="result"/>.<br/>
