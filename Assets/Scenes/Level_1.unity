@@ -1243,6 +1243,9 @@ MonoBehaviour:
   spacePerNode: 0.5
   rows: 20
   columns: 18
+  destroyMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &1609910884
 PrefabInstance:
   m_ObjectHideFlags: 0
