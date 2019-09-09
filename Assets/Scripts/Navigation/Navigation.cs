@@ -23,7 +23,7 @@ public class Navigation : MonoBehaviour
     public LayerMask destroyMask;
 
     private List<Node> grid;
-    private List<Node> Grid {
+    public List<Node> Grid {
         get {
             if (grid == null)
                 GenerateGrid();
@@ -174,7 +174,7 @@ public class Navigation : MonoBehaviour
     {
         foreach (Node node in Grid)
         {
-            node.DrawNode();
+            node.DrawNode(Color.yellow);
             node.DrawConnections();
         }
     }
@@ -193,9 +193,9 @@ public class Node
     }
 
 #if UNITY_EDITOR
-    public void DrawNode()
+    public void DrawNode(Color color)
     {
-        Handles.color = Color.yellow;
+        Handles.color = color;
         Handles.DrawSolidDisc(position, Vector3.forward, 0.05f);
     }
     public void DrawConnections()
