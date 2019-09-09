@@ -19,14 +19,22 @@ public class Navigation : MonoBehaviour
     public int rows;
     [Tooltip("Amount of columns.")]
     public int columns;
+    [Tooltip("Layer used to check for collisions.\nIf a collision is found with a node, the node is destroyed.")]
+    public LayerMask destroyMask;
 
     private List<Node> grid;
     private List<Node> Grid {
         get {
             if (grid == null)
-                FillGrid();
+                GenerateGrid();
             return grid;
         }
+    }
+
+    private void GenerateGrid()
+    {
+        FillGrid();
+        DestroyBadNodes();
     }
 
     private void FillGrid()
@@ -102,6 +110,38 @@ public class Navigation : MonoBehaviour
         }
 
         return index >= 0 && index < grid.Count ? grid[index] : null;
+    }
+
+    private void DestroyBadNodes()
+    {
+        for (int i = Grid.Count - 1; i >= 0; i--)
+        {
+            Node node = Grid[i];
+            // Check if it's overlapping a collider
+            Collider2D hit = Physics2D.OverlapCircle(node.position, .1f, destroyMask);
+            if (hit != null)
+            {
+                // Destroy this node by setting it to null in all its references.
+                // Iterating over each node which has it has a connection.
+                for (int j = 0; j < node.connections.Length; j++)
+                {
+                    Node connection = node.connections[j];
+                    if (connection != null)
+                    {
+                        // Look for this node in all the connections and set it to null
+                        for (int k = 0; k < connection.connections.Length; k++)
+                        {
+                            if(connection.connections[k] == node)
+                            {
+                                connection.connections[k] = null;
+                                break;
+                            }
+                        }
+                    }
+                }
+                Grid.RemoveAt(i);
+            }
+        }
     }
 
 #if UNITY_EDITOR
