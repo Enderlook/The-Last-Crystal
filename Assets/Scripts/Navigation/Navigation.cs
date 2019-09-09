@@ -35,6 +35,7 @@ public class Navigation : MonoBehaviour
     {
         FillGrid();
         DestroyBadNodes();
+        DestroyBadConnections();
     }
 
     private void FillGrid()
@@ -140,6 +141,29 @@ public class Navigation : MonoBehaviour
                     }
                 }
                 Grid.RemoveAt(i);
+            }
+        }
+    }
+
+    private void DestroyBadConnections()
+    {
+        foreach (Node node in Grid)
+        {
+            for (int i = 0; i < node.connections.Length; i++)
+            {
+                Node connection = node.connections[i];
+                if (connection != null && Physics2D.Raycast(node.position, (connection.position - node.position).normalized, spacePerNode, destroyMask))
+                {
+                    node.connections[i] = null;
+                    for (int j = 0; j < connection.connections.Length; j++)
+                    {
+                        if (connection.connections[j] == node)
+                        {
+                            connection.connections[j] = null;
+                            break;
+                        }
+                    }
+                }
             }
         }
     }
