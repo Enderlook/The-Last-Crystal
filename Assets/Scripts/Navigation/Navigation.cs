@@ -62,9 +62,12 @@ public class Navigation : MonoBehaviour
     {
         for (int i = 0; i < grid.Count; i++)
         {
-            for (int direction = 0; direction < grid[i].connections.Length; direction++)
+            Node node = grid[i];
+            for (int direction = 0; direction < node.connections.Length; direction++)
             {
-                grid[i].connections[direction] = GetNodeFromDirection(i, (Directions)direction);
+                Node nodeToConnect = GetNodeFromDirection(i, (Directions)direction);
+                if (nodeToConnect != null)
+                    node.connections[direction] = new Connection(node, nodeToConnect);
             }
         }
     }
@@ -126,15 +129,15 @@ public class Navigation : MonoBehaviour
                 // Iterating over each node which has it has a connection.
                 for (int j = 0; j < node.connections.Length; j++)
                 {
-                    Node connection = node.connections[j];
+                    Connection connection = node.connections[j];
                     if (connection != null)
                     {
                         // Look for this node in all the connections and set it to null
-                        for (int k = 0; k < connection.connections.Length; k++)
+                        for (int k = 0; k < connection.end.connections.Length; k++)
                         {
-                            if(connection.connections[k] == node)
+                            if(connection.end.connections[k] != null && connection.end.connections[k].start == node)
                             {
-                                connection.connections[k] = null;
+                                connection.end.connections[k] = null;
                                 break;
                             }
                         }
@@ -151,17 +154,14 @@ public class Navigation : MonoBehaviour
         {
             for (int i = 0; i < node.connections.Length; i++)
             {
-                Node connection = node.connections[i];
-                if (connection != null && Physics2D.Raycast(node.position, (connection.position - node.position).normalized, spacePerNode, destroyMask))
+                Connection connection = node.connections[i];
+
+                if (connection != null)
                 {
-                    node.connections[i] = null;
-                    for (int j = 0; j < connection.connections.Length; j++)
+                    if (Physics2D.Linecast(connection.start.position, connection.end.position, destroyMask))
                     {
-                        if (connection.connections[j] == node)
-                        {
-                            connection.connections[j] = null;
-                            break;
-                        }
+                        // Destroy this connection
+                        node.connections[i] = null;
                     }
                 }
             }
@@ -175,7 +175,7 @@ public class Navigation : MonoBehaviour
         foreach (Node node in Grid)
         {
             node.DrawNode(Color.yellow);
-            node.DrawConnections();
+            node.DrawConnections(Color.yellow);
         }
     }
 #endif
@@ -184,12 +184,12 @@ public class Navigation : MonoBehaviour
 public class Node
 {
     public Vector2 position;
-    public Node[] connections;
+    public Connection[] connections;
 
     public Node(Vector2 position)
     {
         this.position = position;
-        connections = new Node[8];
+        connections = new Connection[8];
     }
 
 #if UNITY_EDITOR
@@ -198,16 +198,32 @@ public class Node
         Handles.color = color;
         Handles.DrawSolidDisc(position, Vector3.forward, 0.05f);
     }
-    public void DrawConnections()
+    public void DrawConnections(Color color)
     {
-        foreach (Node connection in connections)
+        foreach(Connection connection in connections)
         {
-            if (connection != null)
-            {
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawLine(position, connection.position);
-            }
+            connection?.DrawConnection(color);
         }
+    }
+#endif
+}
+
+public class Connection
+{
+    public Node start;
+    public Node end;
+
+    public Connection(Node start, Node end)
+    {
+        this.start = start;
+        this.end = end;
+    }
+
+#if UNITY_EDITOR
+    public void DrawConnection(Color color)
+    {
+        Gizmos.color = color;
+        Gizmos.DrawLine(start.position, end.position);
     }
 #endif
 }
