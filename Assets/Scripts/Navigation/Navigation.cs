@@ -31,7 +31,7 @@ public class Navigation : MonoBehaviour
         }
     }
 
-    private void GenerateGrid()
+    public void GenerateGrid()
     {
         FillGrid();
         DestroyBadNodes();
