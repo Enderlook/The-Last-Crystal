@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -34,8 +35,10 @@ public class Navigation : MonoBehaviour
     public void GenerateGrid()
     {
         FillGrid();
-        DestroyBadNodes();
-        DestroyBadConnections();
+        DeactivateBadNodes();
+        SetActiveConnections();
+        DeactivateBadConnections();
+        DeactivateUnconnectedNodes();
     }
 
     private void FillGrid()
@@ -116,39 +119,29 @@ public class Navigation : MonoBehaviour
         return index >= 0 && index < grid.Count ? grid[index] : null;
     }
 
-    private void DestroyBadNodes()
+    private void DeactivateBadNodes()
     {
         for (int i = Grid.Count - 1; i >= 0; i--)
         {
             Node node = Grid[i];
             // Check if it's overlapping a collider
             Collider2D hit = Physics2D.OverlapCircle(node.position, .1f, destroyMask);
-            if (hit != null)
+            node.SetActive(hit == null);
+        }
+    }
+
+    private void SetActiveConnections()
+    {
+        foreach (Node node in Grid)
+        {
+            foreach (Connection connection in node.connections)
             {
-                // Destroy this node by setting it to null in all its references.
-                // Iterating over each node which has it has a connection.
-                for (int j = 0; j < node.connections.Length; j++)
-                {
-                    Connection connection = node.connections[j];
-                    if (connection != null)
-                    {
-                        // Look for this node in all the connections and set it to null
-                        for (int k = 0; k < connection.end.connections.Length; k++)
-                        {
-                            if(connection.end.connections[k] != null && connection.end.connections[k].start == node)
-                            {
-                                connection.end.connections[k] = null;
-                                break;
-                            }
-                        }
-                    }
-                }
-                Grid.RemoveAt(i);
+                connection?.SetActive(node.IsActive);
             }
         }
     }
 
-    private void DestroyBadConnections()
+    private void DeactivateBadConnections()
     {
         foreach (Node node in Grid)
         {
@@ -158,24 +151,56 @@ public class Navigation : MonoBehaviour
 
                 if (connection != null)
                 {
-                    if (Physics2D.Linecast(connection.start.position, connection.end.position, destroyMask))
-                    {
-                        // Destroy this connection
-                        node.connections[i] = null;
-                    }
+                    bool hit = Physics2D.Linecast(connection.start.position, connection.end.position, destroyMask);
+                    node.connections[i].SetActive(!hit);
                 }
             }
         }
     }
 
+    private void DeactivateUnconnectedNodes()
+    {
+        foreach (Node node in Grid.Where(e => e.IsActive))
+        {
+            bool shouldBeDisabled = true;
+            foreach (Connection connection in node.connections)
+            {
+                if (connection == null)
+                    continue;
+                if (connection.IsActive)
+                {
+                    shouldBeDisabled = false;
+                    goto End;
+                }
+
+                foreach (Connection endConnection in connection.end.connections)
+                {
+                    if (endConnection != null && endConnection.start == node && endConnection.IsActive)
+                    {
+                        shouldBeDisabled = false;
+                        goto End;
+                    }
+                }
+            }
+
+            End:
+            if (shouldBeDisabled)
+                node.SetActive(false);
+        }
+    }
+
 #if UNITY_EDITOR
+    public bool drawNodes = true;
+    public bool drawConnections = true;
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Usado por Unity.")]
     private void OnDrawGizmos()
     {
         foreach (Node node in Grid)
         {
-            node.DrawNode(Color.yellow);
-            node.DrawConnections(Color.yellow);
+            if (drawNodes)
+                node.DrawNode(Color.green, Color.red);
+            if (drawConnections)
+                node.DrawConnections(Color.green, Color.red);
         }
     }
 #endif
@@ -185,6 +210,7 @@ public class Node
 {
     public Vector2 position;
     public Connection[] connections;
+    public bool IsActive { get; private set; }
 
     public Node(Vector2 position)
     {
@@ -192,15 +218,26 @@ public class Node
         connections = new Connection[8];
     }
 
+    public void SetActive(bool actived) => IsActive = actived;
+
 #if UNITY_EDITOR
+    private float nodeDrawSize = 0.05f;
+    public void DrawNode(Color active, Color inactive) => DrawNode(IsActive ? active : inactive);
     public void DrawNode(Color color)
     {
         Handles.color = color;
-        Handles.DrawSolidDisc(position, Vector3.forward, 0.05f);
+        Handles.DrawSolidDisc(position, Vector3.forward, nodeDrawSize);
+    }
+    public void DrawConnections(Color active, Color inactive)
+    {
+        foreach(Connection connection in connections)
+        {
+            connection?.DrawConnection(active, inactive);
+        }
     }
     public void DrawConnections(Color color)
     {
-        foreach(Connection connection in connections)
+        foreach (Connection connection in connections)
         {
             connection?.DrawConnection(color);
         }
@@ -212,6 +249,7 @@ public class Connection
 {
     public Node start;
     public Node end;
+    public bool IsActive { get; private set; }
 
     public Connection(Node start, Node end)
     {
@@ -219,7 +257,10 @@ public class Connection
         this.end = end;
     }
 
+    public void SetActive(bool active) => IsActive = active;
+
 #if UNITY_EDITOR
+    public void DrawConnection(Color active, Color inactive) => DrawConnection(IsActive ? active : inactive);
     public void DrawConnection(Color color)
     {
         Gizmos.color = color;
