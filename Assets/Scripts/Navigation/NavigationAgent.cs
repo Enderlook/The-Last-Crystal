@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System.Collections.Generic;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -7,6 +8,32 @@ public class NavigationAgent : MonoBehaviour
 {
     [Tooltip("Navigation used to move.")]
     public Navigation navigation;
+
+    private static HashSet<Node> DepthFirstSearch(Node start)
+    {
+        // https://www.koderdojo.com/blog/depth-first-search-algorithm-in-csharp-and-net-core
+        HashSet<Node> visited = new HashSet<Node>();
+
+        Stack<Node> toVisit = new Stack<Node>();
+        toVisit.Push(start);
+
+        while (toVisit.Count > 0)
+        {
+            Node node = toVisit.Pop();
+
+            visited.Add(node);
+
+            foreach (Connection connection in node.connections)
+            {
+                if (connection != null && !visited.Contains(connection.end))
+                {
+                    if (!toVisit.Contains(connection.end))
+                        toVisit.Push(connection.end);
+                }
+            }
+        }
+        return visited;
+    }
 
     private Node FindClosestNode(Vector2 position)
     {
@@ -30,7 +57,7 @@ public class NavigationAgent : MonoBehaviour
     private void OnDrawGizmos()
     {
         DrawClosestNodeToMouse();
-    }
+        }
 
     private void DrawClosestNodeToMouse()
     {
