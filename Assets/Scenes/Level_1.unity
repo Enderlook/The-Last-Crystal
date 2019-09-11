@@ -1246,6 +1246,8 @@ MonoBehaviour:
   destroyMask:
     serializedVersion: 2
     m_Bits: 256
+  drawNodes: 1
+  drawConnections: 1
 --- !u!1001 &1609910884
 PrefabInstance:
   m_ObjectHideFlags: 0

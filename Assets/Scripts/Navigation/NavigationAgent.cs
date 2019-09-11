@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 public class NavigationAgent : MonoBehaviour
@@ -8,38 +8,23 @@ public class NavigationAgent : MonoBehaviour
     [Tooltip("Navigation used to move.")]
     public Navigation navigation;
 
-    private Node FindClosestNode(Vector2 position)
-    {
-        Node closestNode = null;
-        float closest = float.MaxValue;
+    public Node FindClosestNode() => navigation.FindClosestNode(transform.position);
 
-        foreach (Node node in navigation.Grid)
-        {
-            float distance = (node.position - position).sqrMagnitude;
-            if (distance < closest)
-            {
-                closest = distance;
-                closestNode = node;
-            }
-        }
-
-        return closestNode;
-    }
+    public List<Connection> FindPathTo(Node node) => navigation.DijkstraSearch(FindClosestNode(), node);
 
 #if UNITY_EDITOR
+    public bool drawPathToMouse = true;
     private void OnDrawGizmos()
     {
-        DrawClosestNodeToMouse();
-    }
-
-    private void DrawClosestNodeToMouse()
-    {
-        /* Draw closest node to mouse
-         * https://answers.unity.com/questions/1321651/i-need-to-get-a-vector2-of-the-mouse-position-whil.html
-         * http://answers.unity.com/answers/1323496/view.html */
-        Vector2 mousePosition = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).GetPoint(1);
-        Node closestNode = FindClosestNode(mousePosition);
-        closestNode.DrawNode(Color.blue);
+        if (drawPathToMouse)
+        {
+            foreach (Connection connection in FindPathTo(navigation.FindClosestNodeToMouse()))
+            {
+                connection.start.DrawNode(Color.blue);
+                connection.end.DrawNode(Color.blue);
+                connection.DrawConnection(Color.blue);
+            }
+        }
     }
 #endif
 }
