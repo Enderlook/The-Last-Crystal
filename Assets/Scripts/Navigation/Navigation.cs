@@ -202,7 +202,7 @@ public class Node
     {
         foreach(Connection connection in connections)
         {
-            connection?.DrawConnection(color);
+            //connection?.DrawConnection(color);
         }
     }
 #endif
