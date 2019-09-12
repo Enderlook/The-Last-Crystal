@@ -3,28 +3,31 @@ using UnityEngine;
 #if UNITY_EDITOR
 #endif
 
-public class NavigationAgent : MonoBehaviour
+namespace Navigation
 {
-    [Tooltip("Navigation used to move.")]
-    public Navigation navigation;
+    public class NavigationAgent : MonoBehaviour
+    {
+        [Tooltip("Navigation used to move.")]
+        public Navigation navigation;
 
-    public Node FindClosestNode() => navigation.FindClosestNode(transform.position);
+        public Node FindClosestNode() => navigation.FindClosestNode(transform.position);
 
-    public List<Connection> FindPathTo(Node node) => navigation.DijkstraSearchPath(FindClosestNode(), node);
+        public List<Connection> FindPathTo(Node node) => navigation.DijkstraSearchPath(FindClosestNode(), node);
 
 #if UNITY_EDITOR
-    public bool drawPathToMouse = true;
-    private void OnDrawGizmos()
-    {
-        if (drawPathToMouse)
+        public bool drawPathToMouse = true;
+        private void OnDrawGizmos()
         {
-            foreach (Connection connection in FindPathTo(navigation.FindClosestNodeToMouse()))
+            if (drawPathToMouse)
             {
-                connection.start.DrawNode(Color.blue);
-                connection.end.DrawNode(Color.blue);
-                connection.DrawConnection(Color.blue);
+                foreach (Connection connection in FindPathTo(navigation.FindClosestNodeToMouse()))
+                {
+                    connection.start.DrawNode(Color.blue);
+                    connection.end.DrawNode(Color.blue);
+                    connection.DrawConnection(Color.blue);
+                }
             }
         }
-    }
 #endif
+    }
 }

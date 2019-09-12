@@ -1,16 +1,19 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Navigation))]
-public class NavigationEditor : Editor
+namespace Navigation.UnityInspector
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(Navigation))]
+    public class NavigationEditor : Editor
     {
-        DrawDefaultInspector();
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
 
-        Navigation navigation = (Navigation)target;
+            Navigation navigation = (Navigation)target;
 
-        if (GUILayout.Button("Regenerate Grid"))
-            navigation.GenerateGrid();
+            if (GUILayout.Button("Regenerate Grid"))
+                navigation.GenerateGrid();
+        }
     }
 }

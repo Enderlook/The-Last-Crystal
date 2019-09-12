@@ -1,32 +1,35 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-public static class NavigationExtensions
+namespace Navigation
 {
-    public static Node FindClosestNode(this Navigation navigation, Vector2 position)
+    public static class NavigationExtensions
     {
-        Node closestNode = null;
-        float closest = float.MaxValue;
-
-        foreach (Node node in navigation.Grid)
+        public static Node FindClosestNode(this Navigation navigation, Vector2 position)
         {
-            float distance = (node.position - position).sqrMagnitude;
-            if (distance < closest)
+            Node closestNode = null;
+            float closest = float.MaxValue;
+
+            foreach (Node node in navigation.Grid)
             {
-                closest = distance;
-                closestNode = node;
+                float distance = (node.position - position).sqrMagnitude;
+                if (distance < closest)
+                {
+                    closest = distance;
+                    closestNode = node;
+                }
             }
+
+            return closestNode;
         }
 
-        return closestNode;
-    }
-
-    public static Node FindClosestNodeToMouse(this Navigation navigation)
-    {
-        /* Draw closest node to mouse
-         * https://answers.unity.com/questions/1321651/i-need-to-get-a-vector2-of-the-mouse-position-whil.html
-         * http://answers.unity.com/answers/1323496/view.html */
-        Vector2 mousePosition = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).GetPoint(1);
-        return navigation.FindClosestNode(mousePosition);
+        public static Node FindClosestNodeToMouse(this Navigation navigation)
+        {
+            /* Draw closest node to mouse
+             * https://answers.unity.com/questions/1321651/i-need-to-get-a-vector2-of-the-mouse-position-whil.html
+             * http://answers.unity.com/answers/1323496/view.html */
+            Vector2 mousePosition = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).GetPoint(1);
+            return navigation.FindClosestNode(mousePosition);
+        }
     }
 }
