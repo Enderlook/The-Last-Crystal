@@ -10,7 +10,7 @@ public class NavigationAgent : MonoBehaviour
 
     public Node FindClosestNode() => navigation.FindClosestNode(transform.position);
 
-    public List<Connection> FindPathTo(Node node) => navigation.DijkstraSearch(FindClosestNode(), node);
+    public List<Connection> FindPathTo(Node node) => navigation.DijkstraSearchPath(FindClosestNode(), node);
 
 #if UNITY_EDITOR
     public bool drawPathToMouse = true;

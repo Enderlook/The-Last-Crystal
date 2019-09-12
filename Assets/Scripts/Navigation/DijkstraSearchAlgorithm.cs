@@ -8,7 +8,7 @@ public static class DijkstraSearchAlgorithm
      * https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
      */
 
-    public static Dictionary<Node, Connection> DijkstraSearch(this Navigation navigation, Node source)
+    public static Dictionary<Node, Connection> DijkstraSearch(this Navigation navigation, Node source, Node target = null)
     {
         Dictionary<Node, Connection> previous = new Dictionary<Node, Connection>();
 
@@ -38,6 +38,8 @@ public static class DijkstraSearchAlgorithm
                 {
                     toVisit.Enqueue(neighbour);
                     Relax(distances, previous, connection, distanceFromSource);
+                    if (neighbour == target)
+                        return previous;
                 }
             }
         }
@@ -45,9 +47,9 @@ public static class DijkstraSearchAlgorithm
         return previous;
     }
 
-    public static List<Connection> DijkstraSearch(this Navigation navigation, Node source, Node target)
+    public static List<Connection> DijkstraSearchPath(this Navigation navigation, Node source, Node target)
     {
-        Dictionary<Node, Connection> previous = navigation.DijkstraSearch(source);
+        Dictionary<Node, Connection> previous = navigation.DijkstraSearch(source, target);
         return FromPreviousDictionaryToListPath(previous, target);
     }
 
