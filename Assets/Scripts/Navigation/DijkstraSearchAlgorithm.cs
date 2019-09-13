@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,12 +20,12 @@ namespace Navigation
 
             Dictionary<Node, float> distances = InitializeDistances(navigation, source);
             HashSet<Node> visited = new HashSet<Node>();
-            Queue<Node> toVisit = new Queue<Node>();
-            toVisit.Enqueue(source);
+            PriorityQueue<Node> toVisit = new PriorityQueue<Node>();
+            toVisit.Enqueue(source, 0);
 
             while (toVisit.Count > 0)
             {
-                Node node = toVisit.Dequeue();
+                Node node = toVisit.DequeueMin();
                 if (visited.Contains(node))
                     continue;
                 visited.Add(node);
@@ -38,8 +39,8 @@ namespace Navigation
                     Node neighbour = connection.end;
                     if (neighbour.IsActive)
                     {
-                        toVisit.Enqueue(neighbour);
-                        Relax(distances, previous, connection, distanceFromSource);
+                        float distance = Relax(distances, previous, connection, distanceFromSource);
+                        toVisit.Enqueue(neighbour, distance);
                         if (neighbour == target)
                             return previous;
                     }
@@ -78,7 +79,7 @@ namespace Navigation
             return distances;
         }
 
-        private static void Relax(Dictionary<Node, float> distances, Dictionary<Node, Connection> previous, Connection connection, float distanceFromSource)
+        private static float Relax(Dictionary<Node, float> distances, Dictionary<Node, Connection> previous, Connection connection, float distanceFromSource)
         {
             float newDistance = connection.Distance + distanceFromSource;
             if (newDistance < distances[connection.end])
@@ -86,6 +87,7 @@ namespace Navigation
                 distances[connection.end] = newDistance;
                 previous[connection.end] = connection;
             }
+            return newDistance;
         }
         private static void Relax(Dictionary<Node, float> distances, Dictionary<Node, Connection> path, Connection connection) => Relax(distances, path, connection, distances[connection.end]);
     }
