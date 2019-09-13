@@ -9,6 +9,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     [Tooltip("Move left key.")]
     public KeyCode leftKey;
     [Tooltip("Movement speed.")]
+    [Range(0f, 50f)]
     public float speed;
 
     [Tooltip("Jump key.")]
@@ -27,16 +28,17 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     [Tooltip("Collider used to check if it's touching the floor.")]
     public Collider2D baseCollider;
     [Tooltip("Layer of the floor.")]
-    public LayerMask floorLayer;
+    public LayerMask layers;
     [Tooltip("Position attack")]
     public Transform attackPosition;
 
     private Rigidbody2D thisRigidbody2D;
     private Animator thisAnimator;
-
-    //Const key for animation
+    
     private const string WALK = "Walk"; 
-    private const string JUMP = "Jump"; 
+    private const string JUMP = "Jump";
+    private const int FLOOR = 8;
+    private const int ENEMY = 10;
 
     void IAwake.Awake(Creature creature)
     {
@@ -64,10 +66,21 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.otherCollider.IsTouchingLayers(floorLayer))
+        /*if (collision.otherCollider.IsTouchingLayers(layers))
         {
             remainingJumps = maxJumps;
             thisAnimator.SetBool(JUMP, false);
+        }*/
+
+        switch (collision.gameObject.layer)
+        {
+            case FLOOR:
+                remainingJumps = maxJumps;
+                thisAnimator.SetBool(JUMP, false);
+                break;
+            case ENEMY:
+                gameObject.GetComponent<Creature>().TakeDamage(1f);
+                break;
         }
     }
 
