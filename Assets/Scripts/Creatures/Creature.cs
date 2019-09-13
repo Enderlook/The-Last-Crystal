@@ -28,6 +28,8 @@ public class Creature : MonoBehaviour
     private IUpdate[] updates;
     private IMove move;
     private IAttack attack;
+
+    private const string HURT = "Hurt";
     
     public float SpeedMultiplier {
         get => stoppableRigidbody.SpeedMultiplier;
@@ -71,6 +73,7 @@ public class Creature : MonoBehaviour
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
     public virtual void TakeDamage(float amount, bool displayDamage = false)
     {
+        animator.SetTrigger(HURT);
         healthPoints.TakeDamage(amount);
         if (displayDamage)
             SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Ratio));
