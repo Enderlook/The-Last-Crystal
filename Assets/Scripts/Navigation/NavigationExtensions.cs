@@ -12,11 +12,14 @@ namespace Navigation
 
             foreach (Node node in navigation.Grid)
             {
-                float distance = (node.position - position).sqrMagnitude;
-                if (distance < closest)
+                if (node.IsActive)
                 {
-                    closest = distance;
-                    closestNode = node;
+                    float distance = (node.position - position).sqrMagnitude;
+                    if (distance < closest)
+                    {
+                        closest = distance;
+                        closestNode = node;
+                    }
                 }
             }
 
