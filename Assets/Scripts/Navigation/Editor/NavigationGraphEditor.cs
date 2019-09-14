@@ -16,7 +16,7 @@ namespace Navigation.UnityInspector
         private bool drawConnections = true;
         private bool drawDistances = true;
 
-        private bool isEditingEnable = true;
+        private bool isEditingEnable = false;
         private float autoSelectionRange = 0.25f;
         private Node selectedNode;
 
@@ -58,9 +58,12 @@ namespace Navigation.UnityInspector
             }
             EditorGUILayout.Space();
 
-            isEditingEnable = EditorGUILayout.Toggle("Enable Editing", isEditingEnable);
+            isEditingEnable = EditorGUILayout.Toggle(new GUIContent("Enable Editing", "Enable editing tools and lock inspector window.\nTo unlock inspector this must be unchecked."), isEditingEnable);
             if (isEditingEnable)
             {
+                // Lock inspector window so we don't lose focus of it when we click in the scene
+                ActiveEditorTracker.sharedTracker.isLocked = true;
+
                 EditorGUI.indentLevel++;
                 autoSelectionRange = EditorGUILayout.FloatField("Auto Selection Range", autoSelectionRange);
 
