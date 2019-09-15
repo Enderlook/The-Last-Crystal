@@ -11,6 +11,7 @@ namespace Navigation.UnityInspector
         private NavigationGraph navigationGraph;
         private List<Node> Grid => navigationGraph.Grid;
 
+        private bool showDrawingMenu = true;
         private bool drawNodes = true;
         private bool drawConnections = true;
         private bool drawDistances = true;
@@ -19,7 +20,7 @@ namespace Navigation.UnityInspector
         private float autoSelectionRange = 0.25f;
         private Node selectedNode;
 
-        private static bool showColorConfiguration = true;
+        private static bool showColorConfigurationMenu = true;
         private Color addColor = Color.magenta;
         private Color selectedColor = Color.white;
         private Color closestColor = Color.black;
@@ -29,60 +30,114 @@ namespace Navigation.UnityInspector
         private static bool showHelp = true;
         private static bool explainedHelp = false;
 
+        private static bool showGridGenerationConfigurationMenu = false;
+
+        private static GUIStyle BOLDED_FOLDOUT => new GUIStyle(EditorStyles.foldout)
+        {
+            fontStyle = FontStyle.Bold
+        };
+
         public override void OnInspectorGUI()
         {
-            DrawDefaultInspector();
-
+            serializedObject.Update();
             navigationGraph = (NavigationGraph)target;
+
+            // https://answers.unity.com/questions/550829/how-to-add-a-script-field-in-custom-inspector.html
+            GUI.enabled = false;
+            EditorGUILayout.ObjectField("Script:", MonoScript.FromMonoBehaviour(navigationGraph), typeof(MonoScript), false);
+            GUI.enabled = true;
+
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("graph").FindPropertyRelative("reference"));
 
             if (navigationGraph.graph.reference == null)
                 navigationGraph.graph.reference = navigationGraph.transform;
 
-            if (GUILayout.Button("Generate Automated Grid"))
-            {
-                navigationGraph.ResetGrid();
-                navigationGraph.GenerateGrid();
-            }
-
             if (GUILayout.Button("Reset Grid"))
-                navigationGraph.ResetGrid();
-
-            EditorGUILayout.Space();
-
-            serializedObject.Update();
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("graph").FindPropertyRelative("reference"));
-            serializedObject.ApplyModifiedProperties();
-
-            EditorGUILayout.Space();
-
-            drawNodes = EditorGUILayout.Toggle("Draw Nodes", drawNodes);
-            drawConnections = EditorGUILayout.Toggle("Draw Connections", drawConnections);
-
-            if (drawConnections)
             {
-                EditorGUI.indentLevel++;
-                drawDistances = EditorGUILayout.Toggle("Draw Distances", drawDistances);
-                EditorGUI.indentLevel--;
+                navigationGraph.ResetGrid();
+                selectedNode = null;
             }
+
             EditorGUILayout.Space();
 
-            isEditingEnable = EditorGUILayout.Toggle(new GUIContent("Enable Editing", "Enable editing tools and lock inspector window.\nTo unlock inspector this must be unchecked."), isEditingEnable);
+            ShowDrawingMenu();
+
+            EditorGUILayout.Space();
+
+            EditingMenu();
+
+            EditorGUILayout.Space();
+
+            ShowGridGenerationConfigurationMenu();
+
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        public void OnSceneGUI()
+        {
+            if (navigationGraph == null)
+                return;
+            if (drawNodes || drawConnections)
+                DrawNodesAndConnections();
+            if (isEditingEnable)
+                EditingLogic();
+        }
+
+        private void ShowGridGenerationConfigurationMenu()
+        {
+            showGridGenerationConfigurationMenu = EditorGUILayout.Foldout(showGridGenerationConfigurationMenu, "Grid Generation Configuration", true, BOLDED_FOLDOUT);
+            if (showGridGenerationConfigurationMenu)
+            {
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("spacePerNode"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("rows"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("columns"));
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("destroyMask"));
+
+                if (GUILayout.Button("Generate Automated Grid"))
+                {
+                    navigationGraph.ResetGrid();
+                    navigationGraph.GenerateGrid();
+                }
+            }
+        }
+
+        private void ShowDrawingMenu()
+        {
+            showDrawingMenu = EditorGUILayout.Foldout(showDrawingMenu, "Visibility Configuration", true, BOLDED_FOLDOUT);
+            if (showDrawingMenu)
+            {
+                drawNodes = EditorGUILayout.Toggle("Draw Nodes", drawNodes);
+                drawConnections = EditorGUILayout.Toggle("Draw Connections", drawConnections);
+
+                if (drawConnections)
+                {
+                    EditorGUI.indentLevel++;
+                    drawDistances = EditorGUILayout.Toggle("Draw Distances", drawDistances);
+                    EditorGUI.indentLevel--;
+                }
+
+                GUILayout.Label("Colors", EditorStyles.boldLabel);
+                activeColor = EditorGUILayout.ColorField("Active", activeColor);
+                disabledColor = EditorGUILayout.ColorField("Disabled", disabledColor);
+            }
+        }
+
+        private void EditingMenu()
+        {
+            isEditingEnable = EditorGUILayout.Foldout(isEditingEnable, new GUIContent("Editing Tool", "While open, enable editing tools and lock inspector window.\nTo unlock inspector this must be closed."), true, BOLDED_FOLDOUT);
             if (isEditingEnable)
             {
                 // Lock inspector window so we don't lose focus of it when we click in the scene
                 ActiveEditorTracker.sharedTracker.isLocked = true;
 
-                EditorGUI.indentLevel++;
                 autoSelectionRange = EditorGUILayout.FloatField("Auto Selection Range", autoSelectionRange);
 
-                showColorConfiguration = EditorGUILayout.Foldout(showColorConfiguration, "Color Configuration", true);
-                if (showColorConfiguration)
+                showColorConfigurationMenu = EditorGUILayout.Foldout(showColorConfigurationMenu, "Color Configuration", true);
+                if (showColorConfigurationMenu)
                 {
                     addColor = EditorGUILayout.ColorField("Add", addColor);
                     selectedColor = EditorGUILayout.ColorField("Selected", selectedColor);
                     closestColor = EditorGUILayout.ColorField("Closest", closestColor);
-                    activeColor = EditorGUILayout.ColorField("Active", activeColor);
-                    disabledColor = EditorGUILayout.ColorField("Disabled", disabledColor);
                 }
 
                 showHelp = EditorGUILayout.Foldout(showHelp, "Help", true);
@@ -122,18 +177,7 @@ namespace Navigation.UnityInspector
                             + "\nR+C+A+S: Do [R+S] and [R+C+S]."
                         , EditorStyles.helpBox);
                 }
-                EditorGUI.indentLevel--;
             }
-        }
-
-        public void OnSceneGUI()
-        {
-            if (navigationGraph == null)
-                return;
-            if (drawNodes || drawConnections)
-                DrawNodesAndConnections();
-            if (isEditingEnable)
-                EditingLogic();
         }
 
         private void DrawNodesAndConnections()

@@ -12,7 +12,6 @@ namespace Navigation
          */
         private enum Directions { RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT, UP, UP_RIGHT }
 
-        [Header("Automated Grid Configuration")]
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Distance between each node.")]
         private float spacePerNode;
