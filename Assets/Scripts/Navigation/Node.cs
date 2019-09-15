@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace Navigation
 {
+    [System.Serializable]
     public class Node
     {
         public Vector2 position;
         public List<Connection> connections = new List<Connection>();
-        public bool IsActive { get; private set; }
+        [SerializeField]
+        private bool isActive;
+        public bool IsActive { get => isActive; private set => isActive = value; }
 
         public Node(Vector2 position) => this.position = position;
 

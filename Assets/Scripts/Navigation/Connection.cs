@@ -2,12 +2,15 @@
 
 namespace Navigation
 {
+    [System.Serializable]
     public class Connection
     {
         public Node start;
         public Node end;
         public float Distance => Vector2.Distance(start.position, end.position);
-        public bool IsActive { get; private set; }
+        [SerializeField]
+        private bool isActive;
+        public bool IsActive { get => isActive; private set => isActive = value; }
 
         public Connection(Node start, Node end)
         {
