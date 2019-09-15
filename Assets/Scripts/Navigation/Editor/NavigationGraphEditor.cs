@@ -169,10 +169,10 @@ namespace Navigation.UnityInspector
                                         continue;
                                     }
                                     Node node = Grid[i];
-                                    for (int j = 0; i < node.connections.Count; i++)
+                                    for (int j = 0; i < node.Connections.Count; i++)
                                     {
-                                        if (node.connections[j].end == node)
-                                            node.connections[j] = null;
+                                        if (node.Connections[j].end == node)
+                                            node.Connections[j] = null;
                                     }
                                 }
                                 selectedNode = null;
@@ -280,7 +280,7 @@ namespace Navigation.UnityInspector
 
         public static void DrawConnections(this Node node, Color active, Color inactive, int fontSize = 0)
         {
-            foreach (Connection connection in node.connections)
+            foreach (Connection connection in node.Connections)
             {
                 connection?.DrawConnection(active, inactive, fontSize);
             }
@@ -288,7 +288,7 @@ namespace Navigation.UnityInspector
 
         public static void DrawConnections(this Node node, Color color, int fontSize = 0)
         {
-            foreach (Connection connection in node.connections)
+            foreach (Connection connection in node.Connections)
             {
                 connection?.DrawConnection(color, fontSize);
             }

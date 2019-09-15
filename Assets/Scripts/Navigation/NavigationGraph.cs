@@ -27,16 +27,17 @@ namespace Navigation
 #pragma warning restore CS0649
 
         [SerializeField, HideInInspector]
-        private List<Node> grid;
+        private Graph graph = new Graph();
         public List<Node> Grid {
             get {
-                if (grid == null)
+                if (graph == null)
                     ResetGrid();
-                return grid;
+                return graph.Grid;
             }
+            private set => graph.Grid = value;
         }
 
-        public void ResetGrid() => grid = new List<Node>();
+        public void ResetGrid() => graph.Grid = new List<Node>();
 
         public void GenerateGrid()
         {
@@ -50,7 +51,7 @@ namespace Navigation
         private void FillGrid()
         {
             int nodeAmount = rows * columns;
-            grid = new List<Node>(nodeAmount);
+            Grid = new List<Node>(nodeAmount);
 
             for (int r = 0; r < rows; r++)
             {
@@ -61,7 +62,7 @@ namespace Navigation
                         width += spacePerNode;
                     Vector2 position = (Vector2)startPoint.position + new Vector2(width, r * spacePerNode); // Not * 2 as column in order to make diamond shape ♦
                     Node node = new Node(position);
-                    grid.Add(node);
+                    Grid.Add(node);
                 }
             }
             AddConnectionsToNodes();
@@ -69,14 +70,14 @@ namespace Navigation
 
         private void AddConnectionsToNodes()
         {
-            for (int i = 0; i < grid.Count; i++)
+            for (int i = 0; i < Grid.Count; i++)
             {
-                Node node = grid[i];
+                Node node = Grid[i];
                 for (int direction = 0; direction < 8; direction++)
                 {
                     Node nodeToConnect = GetNodeFromDirection(i, (Directions)direction);
                     if (nodeToConnect != null)
-                        node.connections.Add(new Connection(node, nodeToConnect));
+                        node.Connections.Add(new Connection(node, nodeToConnect));
                 }
             }
         }
@@ -122,7 +123,7 @@ namespace Navigation
                     break;
             }
 
-            return index >= 0 && index < grid.Count ? grid[index] : null;
+            return index >= 0 && index < Grid.Count ? Grid[index] : null;
         }
 
         private void DeactivateBadNodes()
@@ -140,7 +141,7 @@ namespace Navigation
         {
             foreach (Node node in Grid)
             {
-                foreach (Connection connection in node.connections)
+                foreach (Connection connection in node.Connections)
                 {
                     connection?.SetActive(node.IsActive);
                 }
@@ -151,14 +152,14 @@ namespace Navigation
         {
             foreach (Node node in Grid)
             {
-                for (int i = 0; i < node.connections.Count; i++)
+                for (int i = 0; i < node.Connections.Count; i++)
                 {
-                    Connection connection = node.connections[i];
+                    Connection connection = node.Connections[i];
 
                     if (connection != null)
                     {
                         bool hit = Physics2D.Linecast(connection.start.position, connection.end.position, destroyMask);
-                        node.connections[i].SetActive(!hit);
+                        node.Connections[i].SetActive(!hit);
                     }
                 }
             }
@@ -169,7 +170,7 @@ namespace Navigation
             foreach (Node node in Grid.Where(e => e.IsActive))
             {
                 bool shouldBeDisabled = true;
-                foreach (Connection connection in node.connections)
+                foreach (Connection connection in node.Connections)
                 {
                     if (connection == null)
                         continue;
@@ -179,7 +180,7 @@ namespace Navigation
                         goto End;
                     }
 
-                    foreach (Connection endConnection in connection.end.connections)
+                    foreach (Connection endConnection in connection.end.Connections)
                     {
                         if (endConnection != null && endConnection.start == node && endConnection.IsActive)
                         {

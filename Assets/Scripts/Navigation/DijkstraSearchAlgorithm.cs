@@ -31,7 +31,7 @@ namespace Navigation
                 visited.Add(node);
 
                 float distanceFromSource = distances[node];
-                foreach (Connection connection in node.connections)
+                foreach (Connection connection in node.Connections)
                 {
                     if (connection == null || !connection.IsActive)
                         continue;

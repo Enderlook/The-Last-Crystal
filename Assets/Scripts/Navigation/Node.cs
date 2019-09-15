@@ -7,7 +7,17 @@ namespace Navigation
     public class Node
     {
         public Vector2 position;
-        public List<Connection> connections = new List<Connection>();
+
+        private List<Connection> connections;
+        public List<Connection> Connections {
+            get {
+                if (connections == null)
+                    connections = new List<Connection>();
+                return connections;
+            }
+            set => connections = value;
+        }
+
         [SerializeField]
         private bool isActive;
         public bool IsActive { get => isActive; private set => isActive = value; }
@@ -24,12 +34,12 @@ namespace Navigation
 
         public void AddConnectionTo(Node end, bool active)
         {
-            foreach (Connection connection in connections)
+            foreach (Connection connection in Connections)
             {
                 if (connection.end == end)
                     return;
             }
-            connections.Add(new Connection(this, end, active));
+            Connections.Add(new Connection(this, end, active));
         }
     }
 }
