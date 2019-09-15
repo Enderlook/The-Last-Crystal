@@ -22,9 +22,7 @@ namespace Navigation
         private bool isActive;
         public bool IsActive { get => isActive; private set => isActive = value; }
 
-        public Node(Vector2 position) => this.position = position;
-
-        public Node(Vector2 position, bool isActive)
+        public Node(Vector2 position, bool isActive = false)
         {
             this.position = position;
             IsActive = isActive;
