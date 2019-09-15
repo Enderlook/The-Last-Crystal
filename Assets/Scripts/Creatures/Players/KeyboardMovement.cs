@@ -79,7 +79,8 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
                 thisAnimator.SetBool(JUMP, false);
                 break;
             case ENEMY:
-                gameObject.GetComponent<Creature>().TakeDamage(1f);
+                Vector2 direction = (transform.position - collision.gameObject.transform.position).normalized;
+                gameObject.GetComponent<Creature>().TakeDamage(1f, direction, 60f);
                 break;
         }
     }
