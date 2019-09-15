@@ -5,17 +5,18 @@ namespace Navigation
 {
     public static class NavigationExtensions
     {
-        public static Node FindClosestNode(this Navigation navigation, Vector2 position)
+        public enum NodeType { ONLY_ACTIVES, ONLY_DEACTIVES, ALL }
+        public static Node FindClosestNode(this NavigationGraph navigation, Vector2 position, float maxDistanceFromPoint = 0, NodeType mode = NodeType.ONLY_ACTIVES)
         {
             Node closestNode = null;
             float closest = float.MaxValue;
 
             foreach (Node node in navigation.Grid)
             {
-                if (node.IsActive)
+                if (mode == NodeType.ALL || (mode == NodeType.ONLY_ACTIVES && node.IsActive) || (mode == NodeType.ONLY_DEACTIVES && !node.IsActive))
                 {
-                    float distance = (node.position - position).sqrMagnitude;
-                    if (distance < closest)
+                    float distance = (node.position - position).magnitude;
+                    if (distance < closest && (maxDistanceFromPoint == 0 || distance < maxDistanceFromPoint))
                     {
                         closest = distance;
                         closestNode = node;
@@ -26,13 +27,17 @@ namespace Navigation
             return closestNode;
         }
 
-        public static Node FindClosestNodeToMouse(this Navigation navigation)
+        public static Node FindClosestNodeToMouse(this NavigationGraph navigation)
+        {
+            return navigation.FindClosestNode(GetMousePosition());
+        }
+
+        public static Vector2 GetMousePosition()
         {
             /* Draw closest node to mouse
              * https://answers.unity.com/questions/1321651/i-need-to-get-a-vector2-of-the-mouse-position-whil.html
              * http://answers.unity.com/answers/1323496/view.html */
-            Vector2 mousePosition = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).GetPoint(1);
-            return navigation.FindClosestNode(mousePosition);
+            return HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).GetPoint(1);
         }
     }
 }

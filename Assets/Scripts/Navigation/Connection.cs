@@ -1,7 +1,4 @@
-﻿using Navigation;
-#if UNITY_EDITOR
-using UnityEngine;
-#endif
+﻿using UnityEngine;
 
 namespace Navigation
 {
@@ -17,16 +14,13 @@ namespace Navigation
             this.start = start;
             this.end = end;
         }
+        public Connection(Node start, Node end, bool isActive)
+        {
+            this.start = start;
+            this.end = end;
+            IsActive = isActive;
+        }
 
         public void SetActive(bool active) => IsActive = active;
-
-#if UNITY_EDITOR
-        public void DrawConnection(Color active, Color inactive) => DrawConnection(IsActive ? active : inactive);
-        public void DrawConnection(Color color)
-        {
-            Gizmos.color = color;
-            Gizmos.DrawLine(start.position, end.position);
-        }
-#endif
     }
 }

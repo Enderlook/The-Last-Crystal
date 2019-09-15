@@ -1,38 +1,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace Navigation
 {
-    public class Navigation : MonoBehaviour
+    public class NavigationGraph : MonoBehaviour
     {
         /* Based on:
          * http://www.jgallant.com/nodal-pathfinding-in-unity-2d-with-a-in-non-grid-based-games/
          * https://github.com/7ark/Unity-Pathfinding/blob/master/AINavMeshGenerator.cs
          */
         private enum Directions { RIGHT, DOWN_RIGHT, DOWN, DOWN_LEFT, LEFT, UP_LEFT, UP, UP_RIGHT }
-        [Tooltip("Initial position of the grid.")]
-        public Transform startPoint;
-        [Tooltip("Distance between each node.")]
-        public float spacePerNode;
-        [Tooltip("Amount of rows.")]
-        public int rows;
-        [Tooltip("Amount of columns.")]
-        public int columns;
-        [Tooltip("Layer used to check for collisions.\nIf a collision is found with a node, the node is destroyed.")]
-        public LayerMask destroyMask;
 
+        [Header("Automated Grid Configuration")]
+#pragma warning disable CS0649
+        [SerializeField, Tooltip("Initial position of the grid.")]
+        private Transform startPoint;
+        [SerializeField, Tooltip("Distance between each node.")]
+        private float spacePerNode;
+        [SerializeField, Tooltip("Amount of rows.")]
+        private int rows;
+        [SerializeField, Tooltip("Amount of columns.")]
+        private int columns;
+        [SerializeField, Tooltip("Layer used to check for collisions.\nIf a collision is found with a node, the node is destroyed.")]
+        private LayerMask destroyMask;
+#pragma warning restore CS0649
+
+        [SerializeField, HideInInspector]
         private List<Node> grid;
         public List<Node> Grid {
             get {
                 if (grid == null)
-                    GenerateGrid();
+                    ResetGrid();
                 return grid;
             }
         }
+
+        public void ResetGrid() => grid = new List<Node>();
 
         public void GenerateGrid()
         {
@@ -68,11 +72,11 @@ namespace Navigation
             for (int i = 0; i < grid.Count; i++)
             {
                 Node node = grid[i];
-                for (int direction = 0; direction < node.connections.Length; direction++)
+                for (int direction = 0; direction < 8; direction++)
                 {
                     Node nodeToConnect = GetNodeFromDirection(i, (Directions)direction);
                     if (nodeToConnect != null)
-                        node.connections[direction] = new Connection(node, nodeToConnect);
+                        node.connections.Add(new Connection(node, nodeToConnect));
                 }
             }
         }
@@ -147,7 +151,7 @@ namespace Navigation
         {
             foreach (Node node in Grid)
             {
-                for (int i = 0; i < node.connections.Length; i++)
+                for (int i = 0; i < node.connections.Count; i++)
                 {
                     Connection connection = node.connections[i];
 
@@ -190,21 +194,5 @@ namespace Navigation
                     node.SetActive(false);
             }
         }
-
-#if UNITY_EDITOR
-        public bool drawNodes = true;
-        public bool drawConnections = true;
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Usado por Unity.")]
-        private void OnDrawGizmos()
-        {
-            foreach (Node node in Grid)
-            {
-                if (drawNodes)
-                    node.DrawNode(Color.green, Color.red);
-                if (drawConnections)
-                    node.DrawConnections(Color.green, Color.red);
-            }
-        }
-#endif
     }
 }

@@ -1,6 +1,4 @@
-﻿#if UNITY_EDITOR
-using UnityEditor;
-#endif
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Navigation
@@ -8,39 +6,27 @@ namespace Navigation
     public class Node
     {
         public Vector2 position;
-        public Connection[] connections;
+        public List<Connection> connections = new List<Connection>();
         public bool IsActive { get; private set; }
 
-        public Node(Vector2 position)
+        public Node(Vector2 position) => this.position = position;
+
+        public Node(Vector2 position, bool isActive)
         {
             this.position = position;
-            connections = new Connection[8];
+            IsActive = isActive;
         }
 
         public void SetActive(bool actived) => IsActive = actived;
 
-#if UNITY_EDITOR
-        private float nodeDrawSize = 0.05f;
-        public void DrawNode(Color active, Color inactive) => DrawNode(IsActive ? active : inactive);
-        public void DrawNode(Color color)
-        {
-            Handles.color = color;
-            Handles.DrawSolidDisc(position, Vector3.forward, nodeDrawSize);
-        }
-        public void DrawConnections(Color active, Color inactive)
+        public void AddConnectionTo(Node end, bool active)
         {
             foreach (Connection connection in connections)
             {
-                connection?.DrawConnection(active, inactive);
+                if (connection.end == end)
+                    return;
             }
+            connections.Add(new Connection(this, end, active));
         }
-        public void DrawConnections(Color color)
-        {
-            foreach (Connection connection in connections)
-            {
-                connection?.DrawConnection(color);
-            }
-        }
-#endif
     }
 }

@@ -11,7 +11,7 @@ namespace Navigation
          * https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
          */
 
-        public static Dictionary<Node, Connection> DijkstraSearch(this Navigation navigation, Node source, Node target = null)
+        public static Dictionary<Node, Connection> DijkstraSearch(this NavigationGraph navigation, Node source, Node target = null)
         {
             Dictionary<Node, Connection> previous = new Dictionary<Node, Connection>();
 
@@ -50,7 +50,7 @@ namespace Navigation
             return previous;
         }
 
-        public static List<Connection> DijkstraSearchPath(this Navigation navigation, Node source, Node target)
+        public static List<Connection> DijkstraSearchPath(this NavigationGraph navigation, Node source, Node target)
         {
             Dictionary<Node, Connection> previous = navigation.DijkstraSearch(source, target);
             return FromPreviousDictionaryToListPath(previous, target);
@@ -59,6 +59,8 @@ namespace Navigation
         private static List<Connection> FromPreviousDictionaryToListPath(Dictionary<Node, Connection> previous, Node target)
         {
             LinkedList<Connection> path = new LinkedList<Connection>();
+            if (previous.Count == 0)
+                return path.ToList();
             Node node = target;
             while (previous.TryGetValue(node, out Connection connection))
             {
@@ -68,7 +70,7 @@ namespace Navigation
             return path.ToList();
         }
 
-        private static Dictionary<Node, float> InitializeDistances(Navigation navigation, Node source)
+        private static Dictionary<Node, float> InitializeDistances(NavigationGraph navigation, Node source)
         {
             Dictionary<Node, float> distances = new Dictionary<Node, float>();
             foreach (Node node in navigation.Grid)
