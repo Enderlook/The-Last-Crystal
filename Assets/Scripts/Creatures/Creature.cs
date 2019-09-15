@@ -71,9 +71,10 @@ public class Creature : MonoBehaviour
     /// </summary>
     /// <param name="amount">Amount of <see cref="Health"/> lost. Must be positive.</param>
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
-    public virtual void TakeDamage(float amount, bool displayDamage = false)
+    public virtual void TakeDamage(float amount, Vector2 dir, float force,bool displayDamage = false)
     {
         animator.SetTrigger(HURT);
+        thisRigidbody2D.AddForce(dir * force);
         healthPoints.TakeDamage(amount);
         if (displayDamage)
             SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), healthPoints.Ratio));

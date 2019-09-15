@@ -41,7 +41,11 @@ public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
         Collider2D isHit = Physics2D.OverlapCircle(attackPosition.position,
             rangeAttack, layers);
 
-        if (isHit) isHit.GetComponent<Creature>().TakeDamage(3f);
+        if (isHit)
+        {
+            Vector2 direction = (isHit.transform.position - transform.position).normalized;
+            isHit.GetComponent<Creature>().TakeDamage(3f, direction, 80f);
+        }
     }
 
     void OnDrawGizmosSelected()
