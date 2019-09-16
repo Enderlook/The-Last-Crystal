@@ -1,22 +1,50 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Navigation
 {
-    public static class DijkstraSearchAlgorithm
+    public static class AStarSearchAlgorithm
     {
         /* https://code.msdn.microsoft.com/windowsdesktop/Dijkstras-Single-Soruce-69faddb3
          * https://www.geeksforgeeks.org/csharp-program-for-dijkstras-shortest-path-algorithm-greedy-algo-7/
          * https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+         * http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html
+         * https://www.redblobgames.com/pathfinding/a-star/introduction.html
          */
 
-        public static Dictionary<Node, Connection> DijkstraSearch(this NavigationGraph navigation, Node source, Node target = null)
+        public enum DistanceFormula
+        {
+            Euclidean, // Squared grids that allow any direction
+            Manhattan, // Squared grids that only allow 4 directions of movement ('+' shape)
+            Chebyshov, // Squared grids that allow 8 directions of movement ('+' and 'x' shapes)
+            None, // Dijkstra without heuristic distance
+        };
+
+        private static Func<Vector2, Vector2, float> ChooseHeuristicFormula(DistanceFormula distanceFormula)
+        {
+            switch (distanceFormula)
+            {
+                case DistanceFormula.Euclidean:
+                    return Distances.CalculateEuclideanDistance;
+                case DistanceFormula.Manhattan:
+                    return Distances.CalculateManhattanDistance;
+                case DistanceFormula.Chebyshov:
+                    return Distances.CalculateChebyshovDistance;
+                default:
+                    return (a, b) => 0; // Not heuristic
+            }
+        }
+
+        public static Dictionary<Node, Connection> AStarSearch(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
         {
             Dictionary<Node, Connection> previous = new Dictionary<Node, Connection>();
 
             if (!navigation.Grid.Contains(source))
                 return previous;
+
+            Func<Vector2, Vector2, float> Heuristic = target == null ? ChooseHeuristicFormula(DistanceFormula.None) : ChooseHeuristicFormula(heuristicFormula);
 
             Dictionary<Node, float> distances = InitializeDistances(navigation, source);
             HashSet<Node> visited = new HashSet<Node>();
@@ -40,7 +68,7 @@ namespace Navigation
                     if (neighbour.IsActive)
                     {
                         float distance = Relax(distances, previous, connection, distanceFromSource);
-                        toVisit.Enqueue(neighbour, distance);
+                        toVisit.Enqueue(neighbour, distance + Heuristic(neighbour.position, target.position));
                         if (neighbour == target)
                             return previous;
                     }
@@ -50,9 +78,9 @@ namespace Navigation
             return previous;
         }
 
-        public static List<Connection> DijkstraSearchPath(this NavigationGraph navigation, Node source, Node target)
+        public static List<Connection> AStarSearchPath(this NavigationGraph navigation, Node source, Node target, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
         {
-            Dictionary<Node, Connection> previous = navigation.DijkstraSearch(source, target);
+            Dictionary<Node, Connection> previous = navigation.AStarSearch(source, target, heuristicFormula);
             return FromPreviousDictionaryToListPath(previous, target);
         }
 
