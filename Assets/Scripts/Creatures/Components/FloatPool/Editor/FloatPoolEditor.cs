@@ -1,11 +1,14 @@
 ﻿using FloatPool;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(Pool))]
 public class FloatPoolEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        this.DrawScriptField();
+
         serializedObject.Update();
 
         serializedObject.PropertyFieldAutoSave(nameof(Pool.basePool), true);

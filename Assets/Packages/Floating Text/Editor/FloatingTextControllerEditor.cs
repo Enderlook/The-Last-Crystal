@@ -5,6 +5,8 @@ public class FloatingTextControllerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
+        this.DrawScriptField();
+
         serializedObject.Update();
 
         serializedObject.PropertyFieldAutoSave(nameof(FloatingTextController.spawningPoints), true);
