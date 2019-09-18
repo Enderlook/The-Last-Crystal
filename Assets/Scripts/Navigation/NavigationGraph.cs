@@ -14,8 +14,6 @@ namespace Navigation
 
         [Header("Automated Grid Configuration")]
 #pragma warning disable CS0649
-        [SerializeField, Tooltip("Initial position of the grid.")]
-        private Transform startPoint;
         [SerializeField, Tooltip("Distance between each node.")]
         private float spacePerNode;
         [SerializeField, Tooltip("Amount of rows.")]
@@ -27,7 +25,7 @@ namespace Navigation
 #pragma warning restore CS0649
 
         [SerializeField, HideInInspector]
-        private Graph graph = new Graph();
+        public Graph graph = new Graph();
         public List<Node> Grid {
             get {
                 if (graph == null)
@@ -60,9 +58,8 @@ namespace Navigation
                     float width = c * spacePerNode * 2;
                     if (r % 2 == 0) // Add diamond shape ♦
                         width += spacePerNode;
-                    Vector2 position = (Vector2)startPoint.position + new Vector2(width, r * spacePerNode); // Not * 2 as column in order to make diamond shape ♦
-                    Node node = new Node(position);
-                    Grid.Add(node);
+                    Vector2 position = new Vector2(width, r * spacePerNode); // Not * 2 as column in order to make diamond shape ♦
+                    graph.AddNode(position, mode: Graph.PositionReference.LOCAL);
                 }
             }
             AddConnectionsToNodes();

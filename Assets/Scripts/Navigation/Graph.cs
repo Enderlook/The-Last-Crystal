@@ -18,6 +18,10 @@ public class NodeConnections : SerializableDictionary<Vector2, Connections> { }
 [Serializable]
 public class Graph : ISerializationCallbackReceiver
 {
+    public enum PositionReference { LOCAL, WORLD }
+
+    public Transform reference;
+
     [SerializeField]
     private List<Node> grid;
     public List<Node> Grid {
@@ -70,5 +74,27 @@ public class Graph : ISerializationCallbackReceiver
             else
                 usedPositions.Add(Grid[i].position);
         }
+    }
+
+    public Vector2 GetWorldPosition(Node node)
+    {
+        if (reference == null)
+            return node.position;
+        return node.position + (Vector2)reference.position;
+    }
+    public Vector2 GetLocalPosition(Vector2 position)
+    {
+        if (reference == null)
+            return position;
+        return position - (Vector2)reference.position;
+    }
+
+    public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD)
+    {
+        if (mode == PositionReference.WORLD)
+            position -= (Vector2)reference.position;
+        Node node = new Node(position, isActive);
+        Grid.Add(node);
+        return node;
     }
 }

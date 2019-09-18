@@ -15,7 +15,7 @@ namespace Navigation
             {
                 if (mode == NodeType.ALL || (mode == NodeType.ONLY_ACTIVES && node.IsActive) || (mode == NodeType.ONLY_DEACTIVES && !node.IsActive))
                 {
-                    float distance = (node.position - position).magnitude;
+                    float distance = (navigation.graph.GetWorldPosition(node) - position).magnitude;
                     if (distance < closest && (maxDistanceFromPoint == 0 || distance < maxDistanceFromPoint))
                     {
                         closest = distance;

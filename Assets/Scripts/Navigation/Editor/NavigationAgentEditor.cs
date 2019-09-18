@@ -31,7 +31,7 @@ namespace Navigation.UnityInspector
                 {
                     connection.start.DrawNode(Color.blue);
                     connection.end.DrawNode(Color.blue);
-                    connection.DrawConnection(Color.blue);
+                    connection.DrawConnection(Color.blue, navigationAgent.navigationGraph.graph);
                 }
             }
         }
