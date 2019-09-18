@@ -39,5 +39,15 @@ namespace Navigation
             }
             Connections.Add(new Connection(this, end, active));
         }
+
+        public Connection GetConnectionTo(Node end)
+        {
+            foreach (Connection connection in connections)
+            {
+                if (connection.end == end)
+                    return connection;
+            }
+            return null;
+        }
     }
 }

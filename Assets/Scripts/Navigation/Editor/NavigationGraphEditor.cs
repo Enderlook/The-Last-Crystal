@@ -156,7 +156,10 @@ namespace Navigation.UnityInspector
                         GUILayout.Label(
                             "L: Select closest node in range. If there is no near node make a new one in position. Used to perform connections."
                             + "\nL+C: Enable or disable closest node in range."
-                            + "\nL+S+C: Remove selected node."
+                            + "\nL+S: Enable or disable connection from selected to closest node."
+                            + "\nL+C: Same as [L+S] but in opposite direction, instead of switch the connection from selected to closes, switch closest to selected."
+                            + "\nL+S+C: Do [L+S] and [L+C] (switch bot connections)."
+                            + "\nL+A: Remove selected node."
                             + "\nR: Connect selected node to closest node in range. If there is no near node make a new one in position and connect to it."
                             + "\nR+C: Same as [R] but in opposite direction, instead of connect selected to closest, connect closest to selected."
                             + "\nR+A: Do [R] and [R+C] (connect in both ways)."
@@ -209,7 +212,34 @@ namespace Navigation.UnityInspector
                     {
                         if (e.control)
                         {
-                            // Remove or Recreate Node
+                            if (e.alt)
+                            {
+                                // Switch Both Connections
+                                if (closestNode != null && selectedNode != null && closestNode != selectedNode)
+                                {
+                                    Connection connection = selectedNode.GetConnectionTo(closestNode);
+                                    if (connection != null)
+                                        connection.SetActive(!connection.IsActive);
+
+                                    connection = closestNode.GetConnectionTo(selectedNode);
+                                    if (connection != null)
+                                        connection.SetActive(!connection.IsActive);
+                                }
+                            }
+                            else
+                            {
+                                // Switch Inverse Connection
+                                if (closestNode != null && selectedNode != null && closestNode != selectedNode)
+                                {
+                                    Connection connection = closestNode.GetConnectionTo(selectedNode);
+                                    if (connection != null)
+                                        connection.SetActive(!connection.IsActive);
+                                }
+                            }
+                        }
+                        else if (e.alt)
+                        {
+                            // Remove Node
                             if (selectedNode != null)
                             {
                                 // If the node already exist in the grid, remove it
@@ -228,6 +258,16 @@ namespace Navigation.UnityInspector
                                     }
                                 }
                                 selectedNode = null;
+                            }
+                        }
+                        else
+                        {
+                            // Switch Connection
+                            if (closestNode != null && selectedNode != null && closestNode != selectedNode)
+                            {
+                                Connection connection = selectedNode.GetConnectionTo(closestNode);
+                                if (connection != null)
+                                    connection.SetActive(!connection.IsActive);
                             }
                         }
                     }
