@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using CreaturesAddons;
 
 public class EnemyAI : MonoBehaviour, IAwake
@@ -93,13 +91,10 @@ public class EnemyAI : MonoBehaviour, IAwake
             if (child.name != t.name)
             {
                 float dist = Vector2.Distance(transform.position, child.position);
-                if (dist > 1)
+                if (dist < closePlatformDist)
                 {
-                    if (dist < closePlatformDist)
-                    {
-                        closePlatformDist = dist;
-                        closePlatform = child;
-                    }
+                    closePlatformDist = dist;
+                    closePlatform = child;
                 }
             }
 

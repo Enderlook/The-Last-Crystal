@@ -11,6 +11,10 @@ public class Creature : MonoBehaviour
     [Tooltip("Movement speed.")]
     public float speed;
 
+    [Tooltip("Damage amount.")]
+    [Range(0f, 25f)]
+    public float damage;
+
     [Header("Setup")]
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
