@@ -80,7 +80,8 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
                 break;
             case ENEMY:
                 Vector2 direction = (transform.position - collision.gameObject.transform.position).normalized;
-                gameObject.GetComponent<Creature>().TakeDamage(1f, direction, 60f);
+                float damage = gameObject.GetComponent<Creature>().damage;
+                gameObject.GetComponent<Creature>().TakeDamage(damage, direction, 60f);
                 break;
         }
     }

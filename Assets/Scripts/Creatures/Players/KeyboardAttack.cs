@@ -18,6 +18,7 @@ public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
 
     private Animator thisAnimator;
     private float nextAttack;
+    private float damage;
 
     // Constants
     private const string BASIC_ATTACK = "Attack";
@@ -25,6 +26,7 @@ public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
     void IAwake.Awake(Creature creature)
     {
         thisAnimator = creature.animator;
+        damage = creature.damage;
     }
 
     void IAttack.Attack(float time)
@@ -44,7 +46,7 @@ public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
         if (isHit)
         {
             Vector2 direction = (isHit.transform.position - transform.position).normalized;
-            isHit.GetComponent<Creature>().TakeDamage(3f, direction, 80f);
+            isHit.GetComponent<Creature>().TakeDamage(damage, direction, 80f);
         }
     }
 
