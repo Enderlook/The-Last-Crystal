@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5125575169536085736}
   - component: {fileID: 7526445749177953701}
   - component: {fileID: 6090474626493889086}
+  - component: {fileID: 4416114078013645945}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -73,15 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dacd0781548837648bd838a6523b2288, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints:
-    startingMax: 100
-    startingCurrent: -1
-    bar: {fileID: 0}
-    canRegenerate: 0
-    regenerateRate: 10
-    regenerationDelay: 3
-    playlist: {fileID: 0}
-    audioSource: {fileID: 0}
+  health: {fileID: 4416114078013645945}
   speed: 1
   floatingTextController: {fileID: 5042988860275578343}
   stoppableRigidbody: {fileID: 8836964168732201439}
@@ -264,6 +257,82 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
+--- !u!114 &4416114078013645945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f045861820d9d094f82f0349a004e437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePool:
+    startingMax: 100
+    startingCurrent: -1
+  hasEmptyCallback: 1
+  emptyCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4901582744108699570}
+          m_MethodName: Die
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasFullCallback: 0
+  fullCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasChangeCallback: 0
+  changeCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasBar: 0
+  bar:
+    bar: {fileID: 0}
+  hasRecharger: 0
+  recharger:
+    rechargeRate: 0
+    rechargingDelay: 0
+    playlist: {fileID: 0}
+    audioSource: {fileID: 0}
+    startCallback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    endCallback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    activeCallback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasDecreaseReduction: 0
+  decreaseReduction:
+    reductionFormula:
+      formula: 
+      compile: 0
 --- !u!1 &3745464996977563344
 GameObject:
   m_ObjectHideFlags: 0

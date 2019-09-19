@@ -9,31 +9,40 @@ public class FloatingTextController : MonoBehaviour
     [Tooltip("Maximum amount of floating texts at time. New texts will remove old ones. Use 0 for unlimited.")]
     public int maximumAmountFloatingText = 10;
 
-    // https://forum.unity.com/threads/custom-editor-losing-settings-on-play.130889/
-
-    [HideInInspector]
-    public bool overrideTimeBeforeDestroy;
-    [HideInInspector]
+    [SerializeField, HideInInspector]
+    private bool overrideTimeBeforeDestroy;
+    [HasConfirmationField(nameof(overrideTimeBeforeDestroy))]
+    [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
     public float timeBeforeDestroy;
-    [HideInInspector]
-    public bool overrideTextColor;
-    [HideInInspector]
+
+    [SerializeField, HideInInspector]
+    private bool overrideTextColor;
+    [HasConfirmationField(nameof(overrideTextColor))]
+    [Tooltip("Color used by text")]
     public Color textColor = Color.red;
-    [HideInInspector]
-    public bool overrideRandomOffset;
-    [HideInInspector]
+
+    [SerializeField, HideInInspector]
+    private bool overrideRandomOffset;
+    [HasConfirmationField(nameof(overrideRandomOffset))]
+    [Tooltip("Random spawn offset.")]
     public Vector2 randomOffset = Vector2.one;
-    [HideInInspector]
-    public bool overrideScaleMultiplier;
-    [HideInInspector]
+
+    [SerializeField, HideInInspector]
+    private bool overrideScaleMultiplier;
+    [HasConfirmationField(nameof(overrideScaleMultiplier))]
+    [Tooltip("Multiply the scale of the canvas by this value.")]
     public float scaleMultiplier = 1;
-    [HideInInspector]
-    public bool overrideDigitPrecision;
-    [HideInInspector]
+
+    [SerializeField, HideInInspector]
+    private bool overrideDigitPrecision;
+    [HasConfirmationField(nameof(overrideDigitPrecision))]
+    [Tooltip("Digit precision (decimals) for numbers .Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
     public int digitPrecision = 0;
-    [HideInInspector]
-    public bool overrideTypeOfRounding;
-    [HideInInspector]
+
+    [SerializeField, HideInInspector]
+    private bool overrideTypeOfRounding;
+    [HasConfirmationField(nameof(overrideTypeOfRounding))]
+    [Tooltip("Determines how decimal digits are rounded.")]
     public FloatingText.TYPE_OF_ROUNDING typeOfRounding = FloatingText.TYPE_OF_ROUNDING.ROUND;
 
     [Header("Setup")]
