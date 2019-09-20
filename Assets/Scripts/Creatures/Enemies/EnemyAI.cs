@@ -14,16 +14,22 @@ public class EnemyAI : MonoBehaviour, IAwake
     [Tooltip("Max speed that enemy can reach.")]
     [Range(0f, 10f)]
     public float maxSpeed;
+
+    [Header("Setup")]
     [Tooltip("Right point to check is no ground.")]
     public Transform rightPoint;
     [Tooltip("Left point to check is no ground.")]
     public Transform leftPoint;
+    [Tooltip("Target to reach")]
+    // False target crystal True target player
+    public bool targetPlayer;
 
     private Rigidbody2D thisRB2D;
     private Animator animator;
-    private Transform target;
+    private Transform crytal;
     private Transform platform;
-    private GameObject player;
+    private Transform target;
+    private GameObject[] player;
     private RaycastHit2D isRightEmpty;
     private RaycastHit2D isLeftEmpty;
 
@@ -36,16 +42,19 @@ public class EnemyAI : MonoBehaviour, IAwake
     {
         thisRB2D = creature.thisRigidbody2D;
         animator = creature.animator;
-        target = GameObject.FindGameObjectWithTag(TARGET).transform;
+        crytal = GameObject.FindGameObjectWithTag(TARGET).transform;
         platform = GameObject.Find("Islands").transform;
-        DistanceFunction(target, transform);
+        player = GameObject.FindGameObjectsWithTag("Player");
+
+        target = targetPlayer ? player[Random.Range(0, player.Length)].transform : crytal;
+        //DistanceFunction(target, transform);
     }
 
-    /*protected virtual void Update()
+    protected virtual void Update()
     {
         if (target != null)
             CheckEdge();
-    }*/
+    }
 
     void CheckEdge()
     {
