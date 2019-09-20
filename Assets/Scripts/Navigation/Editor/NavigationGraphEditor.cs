@@ -39,13 +39,11 @@ namespace Navigation.UnityInspector
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
-            navigationGraph = (NavigationGraph)target;
+            this.DrawScriptField();
 
-            // https://answers.unity.com/questions/550829/how-to-add-a-script-field-in-custom-inspector.html
-            GUI.enabled = false;
-            EditorGUILayout.ObjectField("Script:", MonoScript.FromMonoBehaviour(navigationGraph), typeof(MonoScript), false);
-            GUI.enabled = true;
+            serializedObject.Update();
+
+            navigationGraph = (NavigationGraph)target;
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("graph").FindPropertyRelative("reference"));
 
