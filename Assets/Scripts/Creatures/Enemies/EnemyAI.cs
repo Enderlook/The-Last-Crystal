@@ -38,13 +38,14 @@ public class EnemyAI : MonoBehaviour, IAwake
         animator = creature.animator;
         target = GameObject.FindGameObjectWithTag(TARGET).transform;
         platform = GameObject.Find("Islands").transform;
+        DistanceFunction(target, transform);
     }
 
-    protected virtual void Update()
+    /*protected virtual void Update()
     {
         if (target != null)
             CheckEdge();
-    }
+    }*/
 
     void CheckEdge()
     {
@@ -105,5 +106,21 @@ public class EnemyAI : MonoBehaviour, IAwake
         Vector2 objective = closePlatform.position - transform.position;
         thisRB2D.AddForce(new Vector2(objective.normalized.x * (moveForce * 2), 
             Mathf.Abs(objective.normalized.y) * jumpForce));
+    }
+
+    void DistanceFunction(Transform target, Transform origin)
+    {
+        float pX = Mathf.Pow(target.position.x - origin.position.x, 2);
+        float pY = Mathf.Pow(target.position.y - origin.position.y, 2);
+
+        float sumXY = pX + pY;
+
+        float distF = Mathf.Sqrt(sumXY);
+
+        float direction = Vector2.Angle(target.position, origin.position);
+
+        Debug.Log($"Tan {Mathf.Tan(pY / pX)}, Sin {Mathf.Sin(pY / distF)}, cos {Mathf.Cos(pX / distF)}");
+        Debug.Log($"Direction: {direction}");
+
     }
 }
