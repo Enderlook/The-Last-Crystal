@@ -24,8 +24,11 @@ namespace Navigation.UnityInspector
         private Color addColor = Color.magenta;
         private Color selectedColor = Color.white;
         private Color closestColor = Color.black;
-        private Color activeColor = Color.green;
-        private Color disabledColor = Color.red;
+
+        private static bool showBasicColorConfigurationMenu = true;
+        public static Color activeColor = Color.green;
+        public static Color disabledColor = Color.red;
+        public static Color extremeColor = Color.yellow;
 
         private static bool showHelp = true;
 
@@ -113,9 +116,13 @@ namespace Navigation.UnityInspector
                     EditorGUI.indentLevel--;
                 }
 
-                GUILayout.Label("Colors", EditorStyles.boldLabel);
-                activeColor = EditorGUILayout.ColorField("Active", activeColor);
-                disabledColor = EditorGUILayout.ColorField("Disabled", disabledColor);
+                showBasicColorConfigurationMenu = EditorGUILayout.Foldout(showBasicColorConfigurationMenu, "Color Configuration", true, BOLDED_FOLDOUT);
+                if (showBasicColorConfigurationMenu)
+                {
+                    activeColor = EditorGUILayout.ColorField("Active", activeColor);
+                    disabledColor = EditorGUILayout.ColorField("Disabled", disabledColor);
+                    extremeColor = EditorGUILayout.ColorField(new GUIContent("Extreme", "Color used to show extreme nodes and connections."), extremeColor);
+                }
             }
         }
 
@@ -151,6 +158,7 @@ namespace Navigation.UnityInspector
                             "L: Select Closest / Create Node."
                           + "\nL+C: Enable / Disable Node."
                           + "\nL+S: Remove Selected Node."
+                          + "\nL+A: Switch node to extreme or not."
                           + "\nR+S: Enable / Disable / Add Connection from Selected to Closest (Add)."
                           + "\nR+C: Enable / Disable / Add Connection from Closest to Selected (Add)."
                           + "\nR+C+S: Do [R+S] and [R+C]."
@@ -166,9 +174,9 @@ namespace Navigation.UnityInspector
             foreach (Node node in Grid)
             {
                 if (drawNodes)
-                    node.DrawNode(activeColor, disabledColor, navigationGraph.graph);
+                    node.DrawNode(navigationGraph.graph);
                 if (drawConnections)
-                    node.DrawConnections(activeColor, disabledColor, navigationGraph.graph, drawDistances ? 14 : 0);
+                    node.DrawConnections(navigationGraph.graph, drawDistances ? 14 : 0);
             }
         }
 
@@ -239,6 +247,11 @@ namespace Navigation.UnityInspector
                                 selectedNode = null;
                             closestNode = null;
                         }
+                    }
+                    else if (e.alt)
+                    {
+                        if (closestNode != null)
+                            closestNode.isExtreme = !closestNode.isExtreme;
                     }
                     else if (closestNode == null)
                         // Add Node
@@ -320,6 +333,8 @@ namespace Navigation.UnityInspector
     {
         public const float nodeDrawSize = 0.05f;
 
+        public static void DrawNode(this Node node, Graph reference = null) => node.DrawNode(NavigationGraphEditor.activeColor, NavigationGraphEditor.disabledColor, reference);
+
         public static void DrawNode(this Node node, Color active, Color inactive, Graph reference = null) => node.DrawNode(node.IsActive ? active : inactive, reference);
 
         public static void DrawNode(this Node node, Color color, Graph reference = null)
@@ -327,7 +342,14 @@ namespace Navigation.UnityInspector
             Vector2 position = reference == null ? node.position : reference.GetWorldPosition(node);
             Handles.color = color;
             Handles.DrawSolidDisc(position, Vector3.forward, nodeDrawSize);
+            if (node.isExtreme)
+            {
+                Handles.color = NavigationGraphEditor.extremeColor;
+                Handles.DrawWireDisc(position, Vector3.forward, nodeDrawSize);
+            }
         }
+
+        public static void DrawConnections(this Node node, Graph reference = null, int fontSize = 0) => node.DrawConnections(NavigationGraphEditor.activeColor, NavigationGraphEditor.disabledColor, reference, fontSize);
 
         public static void DrawConnections(this Node node, Color active, Color inactive, Graph reference = null, int fontSize = 0)
         {
@@ -382,6 +404,8 @@ namespace Navigation.UnityInspector
     {
         public const float arrowDrawSize = 0.05f;
 
+        public static void DrawConnection(this Connection connection, Graph reference = null, int fontSize = 0) => connection.DrawConnection(NavigationGraphEditor.activeColor, NavigationGraphEditor.disabledColor, reference, fontSize);
+
         public static void DrawConnection(this Connection connection, Color active, Color inactive, Graph reference = null, int fontSize = 0) => connection.DrawConnection(connection.IsActive ? active : inactive, reference, fontSize);
 
         public static void DrawConnection(this Connection connection, Color color, Graph reference = null, int fontSize = 0)
@@ -399,6 +423,13 @@ namespace Navigation.UnityInspector
             Handles.DrawSolidArc(half, Vector3.forward, (start - end).normalized, -35, arrowDrawSize);
             if (fontSize > 0)
                 DrawDistance(start, end, color, fontSize);
+
+            if (connection.IsExtreme)
+            {
+                Handles.color = NavigationGraphEditor.extremeColor;
+                Handles.DrawWireArc(half, Vector3.forward, (start - end).normalized, 35, arrowDrawSize);
+                Handles.DrawWireArc(half, Vector3.forward, (start - end).normalized, -35, arrowDrawSize);
+            }
         }
 
         public static void DrawDistance(Vector2 a, Vector2 b, Color textColor, int fontSize = 10)

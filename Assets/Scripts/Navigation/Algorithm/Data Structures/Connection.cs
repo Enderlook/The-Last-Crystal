@@ -21,6 +21,9 @@ namespace Navigation
         private bool isActive;
         public bool IsActive { get => isActive; private set => isActive = value; }
 
+        // Whenever this connection is a jumping connection
+        public bool IsExtreme => start.isExtreme && end.isExtreme;
+
         public Connection(Node start, Node end)
         {
             this.start = start;

@@ -22,6 +22,9 @@ namespace Navigation
         private bool isActive;
         public bool IsActive { get => isActive; private set => isActive = value; }
 
+        // Whenever this node is the end of an island or not
+        public bool isExtreme = false;
+
         public Node(Vector2 position, bool isActive = false)
         {
             this.position = position;
