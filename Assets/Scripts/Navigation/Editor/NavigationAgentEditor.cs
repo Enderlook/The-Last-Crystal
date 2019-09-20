@@ -29,8 +29,8 @@ namespace Navigation.UnityInspector
                     return;
                 foreach (Connection connection in path)
                 {
-                    connection.start.DrawNode(Color.blue);
-                    connection.end.DrawNode(Color.blue);
+                    connection.start.DrawNode(Color.blue, navigationAgent.navigationGraph.graph);
+                    connection.end.DrawNode(Color.blue, navigationAgent.navigationGraph.graph);
                     connection.DrawConnection(Color.blue, navigationAgent.navigationGraph.graph);
                 }
             }

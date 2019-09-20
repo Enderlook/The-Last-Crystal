@@ -28,7 +28,6 @@ namespace Navigation.UnityInspector
         private Color disabledColor = Color.red;
 
         private static bool showHelp = true;
-        private static bool explainedHelp = false;
 
         private static bool showGridGenerationConfigurationMenu = false;
 
@@ -148,34 +147,15 @@ namespace Navigation.UnityInspector
                                   + "\nC: Control Key"
                                   + "\nA: Alt Key", EditorStyles.helpBox);
 
-                    explainedHelp = EditorGUILayout.Toggle("Explained Help", explainedHelp);
-                    GUILayout.Label("Commands", EditorStyles.boldLabel);
-                    if (explainedHelp)
-                        GUILayout.Label(
-                            "L: Select closest node in range. If there is no near node make a new one in position. Used to perform connections."
-                            + "\nL+C: Enable or disable closest node in range."
-                            + "\nL+S: Enable or disable connection from selected to closest node."
-                            + "\nL+C: Same as [L+S] but in opposite direction, instead of switch the connection from selected to closes, switch closest to selected."
-                            + "\nL+S+C: Do [L+S] and [L+C] (switch bot connections)."
-                            + "\nL+A: Remove selected node."
-                            + "\nR: Connect selected node to closest node in range. If there is no near node make a new one in position and connect to it."
-                            + "\nR+C: Same as [R] but in opposite direction, instead of connect selected to closest, connect closest to selected."
-                            + "\nR+A: Do [R] and [R+C] (connect in both ways)."
-                            + "\nR+S: Do [R], then select the closest node."
-                            + "\nR+C+S: Do [R+C], then select the closest node."
-                            + "\nR+C+A+S: Do [R+S] and [R+C+S] (connect in both ways, then select closest node)."
-                        , EditorStyles.helpBox);
-                    else
-                        GUILayout.Label(
+                    GUILayout.Label(
                             "L: Select Closest / Create Node."
-                            + "\nL+C: Enable / Disable Node."
-                            + "\nL+S+C: Remove Selected Node."
-                            + "\nR: Connect Selected Node to Closest (Add)."
-                            + "\nR+C: Connect Closest (Add) Node to Selected."
-                            + "\nR+A: Do [R] and [R+C]."
-                            + "\nR+S: Do [R] and select closest."
-                            + "\nR+C+S: Do [R+S] and select closest."
-                            + "\nR+C+A+S: Do [R+S] and [R+C+S]."
+                          + "\nL+C: Enable / Disable Node."
+                          + "\nL+S: Remove Selected Node."
+                          + "\nR+S: Enable / Disable / Add Connection from Selected to Closest (Add)."
+                          + "\nR+C: Enable / Disable / Add Connection from Closest to Selected (Add)."
+                          + "\nR+C+S: Do [R+S] and [R+C]."
+                          + "\nR+A: Remove connection from Selected to Closest."
+                          + "\nR+A+C: Remove connection from Closest to Selected."
                         , EditorStyles.helpBox);
                 }
             }
@@ -192,6 +172,14 @@ namespace Navigation.UnityInspector
             }
         }
 
+        [MenuItem("CONTEXT/" + nameof(NavigationGraph) + "/Reset Grid")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Usado por Unity")]
+        private static void NewMenuOption(MenuCommand menuCommand)
+        {
+            // https://learn.unity.com/tutorial/editor-scripting#5c7f8528edbc2a002053b5fa
+            ((NavigationGraph)menuCommand.context).ResetGrid();
+        }
+
         private void EditingLogic()
         {
             Vector2 mousePosition = GetAndDrawMousePosition();
@@ -204,113 +192,84 @@ namespace Navigation.UnityInspector
             Event e = Event.current;
             if (e.type == EventType.MouseDown)
             {
-                if (e.button == 0)
+                if (e.button == 1) // Right Button
                 {
-                    if (e.shift)
+                    if (e.alt)
                     {
+                        RemoveConnection(selectedNode, closestNode);
                         if (e.control)
-                        {
-                            if (e.alt)
-                            {
-                                // Switch Both Connections
-                                if (closestNode != null && selectedNode != null && closestNode != selectedNode)
-                                {
-                                    Connection connection = selectedNode.GetConnectionTo(closestNode);
-                                    if (connection != null)
-                                        connection.SetActive(!connection.IsActive);
-
-                                    connection = closestNode.GetConnectionTo(selectedNode);
-                                    if (connection != null)
-                                        connection.SetActive(!connection.IsActive);
-                                }
-                            }
-                            else
-                            {
-                                // Switch Inverse Connection
-                                if (closestNode != null && selectedNode != null && closestNode != selectedNode)
-                                {
-                                    Connection connection = closestNode.GetConnectionTo(selectedNode);
-                                    if (connection != null)
-                                        connection.SetActive(!connection.IsActive);
-                                }
-                            }
-                        }
-                        else if (e.alt)
-                        {
-                            // Remove Node
-                            if (selectedNode != null)
-                            {
-                                // If the node already exist in the grid, remove it
-                                for (int i = 0; i < Grid.Count; i++)
-                                {
-                                    if (Grid[i] == selectedNode)
-                                    {
-                                        Grid.RemoveAt(i);
-                                        continue;
-                                    }
-                                    Node node = Grid[i];
-                                    for (int j = 0; i < node.Connections.Count; i++)
-                                    {
-                                        if (node.Connections[j].end == node)
-                                            node.Connections[j] = null;
-                                    }
-                                }
-                                selectedNode = null;
-                            }
-                        }
-                        else
-                        {
-                            // Switch Connection
-                            if (closestNode != null && selectedNode != null && closestNode != selectedNode)
-                            {
-                                Connection connection = selectedNode.GetConnectionTo(closestNode);
-                                if (connection != null)
-                                    connection.SetActive(!connection.IsActive);
-                            }
-                        }
+                            RemoveConnection(closestNode, selectedNode);
                     }
-                    else if (e.control)
+                    else
+                    {
+                        if (e.shift)
+                            // Switch Connection
+                            AlternateOrAddConnection(selectedNode, GetOrAddClosestNode(mousePosition));
+                        if (e.control)
+                            // Switch Inverse Connection
+                            AlternateOrAddConnection(GetOrAddClosestNode(mousePosition), selectedNode);
+                    }
+                }
+                else if (e.button == 0) // Left Button
+                {
+                    if (e.control)
                     {
                         // Switch Node
                         if (closestNode != null)
                             closestNode.SetActive(!closestNode.IsActive);
                     }
-                    else
+                    else if (e.shift)
                     {
-                        if (closestNode == null)
-                            // Add Node
-                            navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
-                        else
-                            // Select Node
-                            selectedNode = closestNode;
-                    }
-                }
-                else if (e.button == 1)
-                {
-                    if (selectedNode != null) {
-                        Node to;
-                        if (closestNode != null && closestNode != selectedNode)
-                            // Connect to closest Node
-                            to = closestNode;
-                        else
+                        // Remove Node
+                        if (closestNode != null)
                         {
-                            // Make new node to connect
-                            to = navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
+                            // If the node already exist in the grid, remove it
+                            for (int i = 0; i < Grid.Count; i++)
+                            {
+                                if (Grid[i] == closestNode)
+                                {
+                                    Grid.RemoveAt(i);
+                                    continue;
+                                }
+                                Node node = Grid[i];
+                                RemoveConnection(node, closestNode);
+                                RemoveConnection(closestNode, closestNode);
+                            }
+                            if (selectedNode == closestNode)
+                                selectedNode = null;
+                            closestNode = null;
                         }
-                        if (e.control || e.alt)
-                            // Connect inverse
-                            to.AddConnectionTo(selectedNode, true);
-                        if (e.alt || !e.control)
-                            // Connect Node
-                            selectedNode.AddConnectionTo(to, true);
-
-
-                        if (e.shift)
-                            // Select target node
-                            selectedNode = to;
                     }
+                    else if (closestNode == null)
+                        // Add Node
+                        navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
+                    else
+                        // Select Closest Node
+                        selectedNode = closestNode;
                 }
+                else if (e.alt)
+                    // Select Closest Node
+                    selectedNode = closestNode;
             }
+        }
+
+        private static void RemoveConnection(Node from, Node to)
+        {
+            for (int i = 0; i < from.Connections.Count; i++)
+            {
+                if (from.Connections[i].end == to)
+                    from.Connections.RemoveAt(i);
+            }
+        }
+        private static void AlternateOrAddConnection(Node from, Node to)
+        {
+            Connection connection = from.GetConnectionTo(to);
+            if (connection == null)
+                // Add connection
+                from.AddConnectionTo(to, true);
+            else
+                // Switch Connection
+                connection.SetActive(!connection.IsActive);
         }
 
         private Vector2 GetAndDrawMousePosition()
@@ -326,9 +285,15 @@ namespace Navigation.UnityInspector
         {
             Node closestNode = navigationGraph.FindClosestNode(mousePosition, autoSelectionRange, NavigationExtensions.NodeType.ALL);
             if (closestNode != null)
-            {
                 closestNode.DrawNode(closestColor, navigationGraph.graph);
-            }
+            return closestNode;
+        }
+
+        private Node GetOrAddClosestNode(Vector2 mousePosition)
+        {
+            Node closestNode = navigationGraph.FindClosestNode(mousePosition, autoSelectionRange, NavigationExtensions.NodeType.ALL);
+            if (closestNode == null)
+                closestNode = navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
             return closestNode;
         }
 
