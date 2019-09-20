@@ -374,6 +374,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 8573732952227708787, guid: 09b7f3303549141429131ad61f5971e0,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8573732952227708787, guid: 09b7f3303549141429131ad61f5971e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 829079563412899545, guid: 09b7f3303549141429131ad61f5971e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -428,11 +438,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7823601440180720676, guid: 09b7f3303549141429131ad61f5971e0,
-        type: 3}
-      propertyPath: floorLayer.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b7f3303549141429131ad61f5971e0, type: 3}
@@ -1273,6 +1278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5740122355429531057, guid: 442861c165a316e4792b7d326a0610d4,
         type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5740122355429531057, guid: 442861c165a316e4792b7d326a0610d4,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1331,11 +1341,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2561805456172053409, guid: 442861c165a316e4792b7d326a0610d4,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 442861c165a316e4792b7d326a0610d4, type: 3}
 --- !u!1 &1671237980 stripped
@@ -1356,12 +1361,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b5268778b30ecc46bd57b6689206cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 120
+  jumpForce: 150
   moveForce: 10
   stopDistance: 0.5
   maxSpeed: 0.2
   rightPoint: {fileID: 842619495}
   leftPoint: {fileID: 919572255}
+  targetPlayer: 0
 --- !u!4 &1671237989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
@@ -1519,15 +1525,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: TinyMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 8848631403374183089, guid: 1d89acb7a9052324291fbb9233650d2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.71
+      value: -7.67
       objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.71
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
@@ -1572,6 +1583,21 @@ PrefabInstance:
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600843026529219345, guid: 1d89acb7a9052324291fbb9233650d2e,
+        type: 3}
+      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6227802417143143986, guid: 1d89acb7a9052324291fbb9233650d2e,
+        type: 3}
+      propertyPath: damage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070507998110305646, guid: 1d89acb7a9052324291fbb9233650d2e,
+        type: 3}
+      propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
