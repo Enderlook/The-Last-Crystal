@@ -379,6 +379,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8573732952227708787, guid: 09b7f3303549141429131ad61f5971e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 829079563412899545, guid: 09b7f3303549141429131ad61f5971e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1276,6 +1281,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5740122355429531057, guid: 442861c165a316e4792b7d326a0610d4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3662689934729487387, guid: 442861c165a316e4792b7d326a0610d4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1357,7 +1367,7 @@ MonoBehaviour:
   maxSpeed: 0.2
   rightPoint: {fileID: 842619495}
   leftPoint: {fileID: 919572255}
-  targetPlayer: 1
+  targetPlayer: 0
 --- !u!4 &1671237989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
@@ -1515,15 +1525,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: TinyMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 8848631403374183089, guid: 1d89acb7a9052324291fbb9233650d2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.71
+      value: -7.67
       objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.71
+      value: 3.21
       objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}

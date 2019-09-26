@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using CreaturesAddons;
+using System;
+using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IAwake
 {
@@ -21,12 +23,12 @@ public class EnemyAI : MonoBehaviour, IAwake
     [Tooltip("Left point to check is no ground.")]
     public Transform leftPoint;
     [Tooltip("Target to reach")]
-    // False target crystal True target player
+    // False == crystal, True == player
     public bool targetPlayer;
 
     private Rigidbody2D thisRB2D;
     private Animator animator;
-    private Transform crytal;
+    private Transform crystal;
     private Transform platform;
     private Transform target;
     private GameObject[] player;
@@ -42,12 +44,11 @@ public class EnemyAI : MonoBehaviour, IAwake
     {
         thisRB2D = creature.thisRigidbody2D;
         animator = creature.animator;
-        crytal = GameObject.FindGameObjectWithTag(TARGET).transform;
+        crystal = GameObject.FindGameObjectWithTag(TARGET).transform;
         platform = GameObject.Find("Islands").transform;
         player = GameObject.FindGameObjectsWithTag("Player");
 
-        target = targetPlayer ? player[Random.Range(0, player.Length)].transform : crytal;
-        //DistanceFunction(target, transform);
+        target = targetPlayer ? player[Random.Range(0, player.Length)].transform : crystal;
     }
 
     protected virtual void Update()
@@ -112,24 +113,47 @@ public class EnemyAI : MonoBehaviour, IAwake
         }
 
         animator.SetBool(JUMP, true);
-        Vector2 objective = closePlatform.position - transform.position;
-        thisRB2D.AddForce(new Vector2(objective.normalized.x * (moveForce * 2), 
-            Mathf.Abs(objective.normalized.y) * jumpForce));
+        Debug.Log($"Angle: {GetAngle(closePlatform, transform)}");
+        Vector2 v0 = ProjectileMotion(closePlatform, transform, 1f);
+        Debug.Log($"Velocidad inicial: {v0}");
+        thisRB2D.velocity = v0;
+        //Vector2 objective = closePlatform.position - transform.position;
+        //var magnitude = objective.magnitude;
+        //Vector2 objectiveNormal = objective / magnitude;
+        //Vector2 move = new Vector2(objectiveNormal.x * (moveForce),
+        //    Mathf.Abs(objectiveNormal.y) * jumpForce);
+        //thisRB2D.AddForce(move);
     }
 
-    void DistanceFunction(Transform target, Transform origin)
+    float GetAngle(Transform target, Transform origin)
     {
-        float pX = Mathf.Pow(target.position.x - origin.position.x, 2);
-        float pY = Mathf.Pow(target.position.y - origin.position.y, 2);
+        Func<float, float> atg = tg => Mathf.Atan(tg) * 180 / Mathf.PI;
 
-        float sumXY = pX + pY;
+        Vector2 tO = target.position - origin.position;
+        float magnitude = tO.magnitude;
 
-        float distF = Mathf.Sqrt(sumXY);
+        float tan = tO.y / tO.x;
 
-        float direction = Vector2.Angle(target.position, origin.position);
+        return atg(tan);
 
-        Debug.Log($"Tan {Mathf.Tan(pY / pX)}, Sin {Mathf.Sin(pY / distF)}, cos {Mathf.Cos(pX / distF)}");
-        Debug.Log($"Direction: {direction}");
+    }
 
+    Vector2 ProjectileMotion(Transform target, Transform origin, float t)
+    {
+        Func<float, float> vX = x => x / t;
+        Func<float, float> vY = y => y / t + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
+
+        Vector2 magnitude = target.position - origin.position;
+        Vector2 distX = magnitude;
+        distX.y = 0;
+
+        float hY = magnitude.y;
+        float wX = distX.magnitude;
+
+        Vector2 v0 = distX.normalized;
+        v0 *= vX(wX);
+        v0.y = vY(hY);
+
+        return v0;
     }
 }
