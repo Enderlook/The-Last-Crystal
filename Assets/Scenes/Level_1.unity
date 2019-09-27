@@ -332,7 +332,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -392,7 +392,7 @@ PrefabInstance:
     - target: {fileID: 829079563412899545, guid: 09b7f3303549141429131ad61f5971e0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7662991
+      value: -0.7187009
       objectReference: {fileID: 0}
     - target: {fileID: 829079563412899545, guid: 09b7f3303549141429131ad61f5971e0,
         type: 3}
@@ -566,7 +566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719828671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.12, y: 1.55, z: -0.0234375}
+  m_LocalPosition: {x: -7.32, y: 1.55, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 267235808}
@@ -754,7 +754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035662638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.024232, y: -1.8538107, z: -0.0234375}
+  m_LocalPosition: {x: 4.37, y: -1.8538107, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 267235808}
@@ -917,7 +917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256990148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.37, y: 0.99, z: -0.0234375}
+  m_LocalPosition: {x: -4.05, y: 0.63, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 267235808}
@@ -1015,7 +1015,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458645042}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.77, y: 0.22, z: -0.0234375}
+  m_LocalPosition: {x: -2.77, y: -0.52, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 267235808}
@@ -1113,7 +1113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1484099648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.52576834, y: -0.50381064, z: -0.0234375}
+  m_LocalPosition: {x: -0.52576834, y: -2.08, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 267235808}
@@ -1258,7 +1258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601040594}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.293, y: 1.131, z: 0}
+  m_LocalPosition: {x: -0.293, y: -0.29, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1294,7 +1294,7 @@ PrefabInstance:
     - target: {fileID: 3662689934729487387, guid: 442861c165a316e4792b7d326a0610d4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.765
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 3662689934729487387, guid: 442861c165a316e4792b7d326a0610d4,
         type: 3}
@@ -1368,6 +1368,13 @@ MonoBehaviour:
   rightPoint: {fileID: 842619495}
   leftPoint: {fileID: 919572255}
   targetPlayer: 0
+  spriteRenderer: {fileID: 1671237985}
+--- !u!212 &1671237985 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1119641748699525593, guid: 1d89acb7a9052324291fbb9233650d2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8042486574568939456}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1671237989 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
@@ -1533,12 +1540,12 @@ PrefabInstance:
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.67
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.21
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: 9192167378950603221, guid: 1d89acb7a9052324291fbb9233650d2e,
         type: 3}
