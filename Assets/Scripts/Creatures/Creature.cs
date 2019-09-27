@@ -12,6 +12,10 @@ public class Creature : MonoBehaviour
     [Tooltip("Movement speed.")]
     public float speed;
 
+    [Tooltip("Damage amount.")]
+    [Range(0f, 25f)]
+    public float damage;
+
     [Header("Setup")]
     [Tooltip("FloatingTextController Script")]
     public FloatingTextController floatingTextController;
@@ -22,9 +26,15 @@ public class Creature : MonoBehaviour
     [Tooltip("Rigidbody Component.")]
     public Rigidbody2D thisRigidbody2D;
 
+    [Tooltip("Animator Component.")]
+    public Animator animator;
+
     private IDie[] dies;
     private IUpdate[] updates;
     private IMove move;
+    private IAttack attack;
+
+    private const string HURT = "Hurt";
 
     public float SpeedMultiplier {
         get => stoppableRigidbody.SpeedMultiplier;
@@ -42,6 +52,7 @@ public class Creature : MonoBehaviour
         dies = gameObject.GetComponentsInChildren<IDie>();
         updates = gameObject.GetComponentsInChildren<IUpdate>();
         move = gameObject.GetComponentInChildren<IMove>();
+        attack = gameObject.GetComponentInChildren<IAttack>();
         Array.ForEach(gameObject.GetComponents<IAwake>(), e => e.Awake(this));
     }
 
@@ -49,6 +60,7 @@ public class Creature : MonoBehaviour
     {
         health.InternalUpdate(Time.deltaTime);
         move?.Move(Time.deltaTime, SpeedMultiplier * speed);
+        attack?.Attack(Time.time);
         Array.ForEach(updates, e => e.Update(Time.deltaTime));
     }
 
@@ -63,9 +75,11 @@ public class Creature : MonoBehaviour
     /// </summary>
     /// <param name="amount">Amount of <see cref="Health"/> lost. Must be positive.</param>
     /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
-    public virtual void TakeDamage(float amount, bool displayDamage = false)
+    public virtual void TakeDamage(float amount, Vector2 dir, float force,bool displayDamage = false)
     {
         health.Decrease(amount);
+        animator.SetTrigger(HURT);
+        thisRigidbody2D.AddForce(dir * force);
         if (displayDamage)
             SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), health.Ratio));
     }

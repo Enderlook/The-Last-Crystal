@@ -21,6 +21,14 @@
         /// <param name="speedMultiplier">Speed multiplier.</param>
         void Move(float deltaTime, float speedMultiplier = 1);
     }
+    public interface IAttack
+    {
+        /// <summary>
+        /// Creature attack
+        /// </summary>
+        /// <param name="deltaTime">Time since last update in seconds.<seealso cref="UnityEngine.Time.deltaTime"/></param>
+        void Attack(float time);
+    }
     public interface IUpdate
     {
         /// <summary>
