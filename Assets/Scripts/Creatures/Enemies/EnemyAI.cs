@@ -25,6 +25,8 @@ public class EnemyAI : MonoBehaviour, IAwake
     [Tooltip("Target to reach")]
     // False == crystal, True == player
     public bool targetPlayer;
+    [Tooltip("Sprite Renderer component.")]
+    public SpriteRenderer spriteRenderer;
 
     private Rigidbody2D thisRB2D;
     private Animator animator;
@@ -81,6 +83,7 @@ public class EnemyAI : MonoBehaviour, IAwake
     {
         animator.SetBool(JUMP, false);
         float dist = Vector2.Distance(transform.position, target.position);
+        spriteRenderer.flipX = target.position.x < transform.position.x;
         if (dist > stopDistance)
         {
             animator.SetBool(WALK, true);
@@ -113,19 +116,11 @@ public class EnemyAI : MonoBehaviour, IAwake
         }
 
         animator.SetBool(JUMP, true);
-        Debug.Log($"Angle: {GetAngle(closePlatform, transform)}");
         Vector2 v0 = ProjectileMotion(closePlatform, transform, 1f);
-        Debug.Log($"Velocidad inicial: {v0}");
         thisRB2D.velocity = v0;
-        //Vector2 objective = closePlatform.position - transform.position;
-        //var magnitude = objective.magnitude;
-        //Vector2 objectiveNormal = objective / magnitude;
-        //Vector2 move = new Vector2(objectiveNormal.x * (moveForce),
-        //    Mathf.Abs(objectiveNormal.y) * jumpForce);
-        //thisRB2D.AddForce(move);
     }
 
-    float GetAngle(Transform target, Transform origin)
+    float GetTg(Transform target, Transform origin)
     {
         Func<float, float> atg = tg => Mathf.Atan(tg) * 180 / Mathf.PI;
 
@@ -134,14 +129,40 @@ public class EnemyAI : MonoBehaviour, IAwake
 
         float tan = tO.y / tO.x;
 
-        return atg(tan);
+        return Mathf.Round(atg(tan));
+
+    }
+
+    float GetSin(Transform target, Transform origin)
+    {
+        Func<float, float> asin = s => Mathf.Asin(s) * 180 / Mathf.PI;
+
+        Vector2 tO = target.position - origin.position;
+        float magnitude = tO.magnitude;
+
+        float sin = tO.y / magnitude;
+
+        return Mathf.Round(asin(sin));
+
+    }
+
+    float GetCos(Transform target, Transform origin)
+    {
+        Func<float, float> acos = c => Mathf.Acos(c) * 180 / Mathf.PI;
+
+        Vector2 tO = target.position - origin.position;
+        float magnitude = tO.magnitude;
+        var dir = tO / magnitude;
+        float cos = tO.x / magnitude;
+        float result = dir.x >= 0 ? Mathf.Round(acos(cos)) : Mathf.Round(acos(-cos));
+        return result;
 
     }
 
     Vector2 ProjectileMotion(Transform target, Transform origin, float t)
     {
-        Func<float, float> vX = x => x / t;
-        Func<float, float> vY = y => y / t + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
+        Func<float, float> vX = x => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI) * t;
+        Func<float, float> vY = y => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) * t + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
 
         Vector2 magnitude = target.position - origin.position;
         Vector2 distX = magnitude;
