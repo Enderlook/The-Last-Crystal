@@ -14,7 +14,7 @@ namespace FloatPool
         [SerializeField, HideInInspector]
         private bool hasEmptyCallback;
         [HasConfirmationField(nameof(hasEmptyCallback))]
-        public FullCallbackDecorator emptyCallback;
+        public EmptyCallbackDecorator emptyCallback;
 
         [SerializeField, HideInInspector]
         private bool hasFullCallback;
