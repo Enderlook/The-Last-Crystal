@@ -38,6 +38,20 @@ public static class Global
     /// Amount of money required to win the game.
     /// </summary>
     public static int moneyToWin;
+
+    /// <summary>
+    /// Crystal transform.
+    /// </summary>
+    public static Transform crystal;
+    /// <summary>
+    /// Player warrior transform.
+    /// </summary>
+    public static Transform warrior;
+
+    /// <summary>
+    /// Player wizard transform.
+    /// </summary>
+    public static Transform wizard;
 }
 
 public class Configuration : MonoBehaviour
@@ -57,9 +71,17 @@ public class Configuration : MonoBehaviour
     [Tooltip("Pickups parent transform.")]
     public Transform pickupsParent;
 
-    [Header("Menu")]
-    [Tooltip("Money controller script.")]
-    public CoinMeter coinMeter;
+    //[Header("Menu")]
+    //[Tooltip("Money controller script.")]
+    //public CoinMeter coinMeter;
+
+    [Header("Goals")]
+    [Tooltip("Crystal")]
+    public Transform crystal;
+    [Tooltip("Warrior")]
+    public Transform warrior;
+    [Tooltip("Wizard")]
+    public Transform wizard;
 
     private void Awake() => StoreGlobals();
 
@@ -74,7 +96,7 @@ public class Configuration : MonoBehaviour
             typeof(Global).GetField(field.Name, System.Reflection.BindingFlags.Public)?.SetValue(typeof(Global), field.GetValue(this));
         }
 
-        Global.SetCoinMeter(coinMeter, startingMoney);
+        //Global.SetCoinMeter(coinMeter, startingMoney);
         FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
     }
 }

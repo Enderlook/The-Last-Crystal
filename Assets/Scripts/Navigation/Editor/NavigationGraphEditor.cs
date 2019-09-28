@@ -17,6 +17,8 @@ namespace Navigation.UnityInspector
         private bool drawDistances = true;
 
         private bool isEditingEnable = false;
+        private bool wasEditingEnable = false;
+        private bool wasLockedBefore = false;
         private float autoSelectionRange = 0.25f;
         private Node selectedNode;
 
@@ -131,8 +133,15 @@ namespace Navigation.UnityInspector
             isEditingEnable = EditorGUILayout.Foldout(isEditingEnable, new GUIContent("Editing Tool", "While open, enable editing tools and lock inspector window.\nTo unlock inspector this must be closed."), true, BOLDED_FOLDOUT);
             if (isEditingEnable)
             {
-                // Lock inspector window so we don't lose focus of it when we click in the scene
-                ActiveEditorTracker.sharedTracker.isLocked = true;
+                // We activate the editing mode
+                if (!wasEditingEnable)
+                {
+                    wasEditingEnable = true;
+                    // Check if it was already locked or not
+                    wasLockedBefore = ActiveEditorTracker.sharedTracker.isLocked;
+                    // Lock inspector window so we don't lose focus of it when we click in the scene
+                    ActiveEditorTracker.sharedTracker.isLocked = true;
+                }
 
                 autoSelectionRange = EditorGUILayout.FloatField("Auto Selection Range", autoSelectionRange);
 
@@ -166,6 +175,12 @@ namespace Navigation.UnityInspector
                           + "\nR+A+C: Remove connection from Closest to Selected."
                         , EditorStyles.helpBox);
                 }
+            }
+            else if (wasEditingEnable)
+            {
+                wasEditingEnable = false;
+                // Return lock to before start editing
+                ActiveEditorTracker.sharedTracker.isLocked = wasLockedBefore;
             }
         }
 
@@ -232,7 +247,7 @@ namespace Navigation.UnityInspector
                         if (closestNode != null)
                         {
                             // If the node already exist in the grid, remove it
-                            for (int i = 0; i < Grid.Count; i++)
+                            for (int i = Grid.Count - 1; i > 0; i++)
                             {
                                 if (Grid[i] == closestNode)
                                 {
@@ -240,8 +255,7 @@ namespace Navigation.UnityInspector
                                     continue;
                                 }
                                 Node node = Grid[i];
-                                RemoveConnection(node, closestNode);
-                                RemoveConnection(closestNode, closestNode);
+                                RemoveConnection(node, closestNode, true);
                             }
                             if (selectedNode == closestNode)
                                 selectedNode = null;
@@ -266,16 +280,26 @@ namespace Navigation.UnityInspector
             }
         }
 
-        private static void RemoveConnection(Node from, Node to)
+        private static void RemoveConnection(Node from, Node to, bool twoWays = false)
         {
-            for (int i = 0; i < from.Connections.Count; i++)
+            if (twoWays)
             {
-                if (from.Connections[i].end == to)
-                    from.Connections.RemoveAt(i);
+                RemoveConnection(from, to);
+                RemoveConnection(to, from);
+            }
+            else
+            {
+                for (int i = 0; i < from.Connections.Count; i++)
+                {
+                    if (from.Connections[i].end == to)
+                        from.Connections.RemoveAt(i);
+                }
             }
         }
         private static void AlternateOrAddConnection(Node from, Node to)
         {
+            if (from == to)
+                return;
             Connection connection = from.GetConnectionTo(to);
             if (connection == null)
                 // Add connection
@@ -287,7 +311,7 @@ namespace Navigation.UnityInspector
 
         private Vector2 GetAndDrawMousePosition()
         {
-            Vector2 mousePosition = NavigationExtensions.GetMousePosition();
+            Vector2 mousePosition = MouseHelper.GetMousePositionInEditor();
             Handles.color = addColor;
             Handles.DrawWireDisc(mousePosition, Vector3.forward, NodeEditorExtensions.nodeDrawSize);
             Handles.DrawWireDisc(mousePosition, Vector3.forward, autoSelectionRange);
