@@ -10,7 +10,7 @@ public class Creature : MonoBehaviour
     public Pool health;
 
     [Tooltip("Movement speed.")]
-    public float speed;
+    public float speed = 1;
 
     [Tooltip("Damage amount.")]
     [Range(0f, 25f)]
