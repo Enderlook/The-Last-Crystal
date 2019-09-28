@@ -1,39 +1,63 @@
-﻿using CreaturesAddons;
+﻿using System.Collections.Generic;
+using CreaturesAddons;
 using Navigation;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class NodeMovement : MonoBehaviour, IAwake
+public class NodeMovement : MonoBehaviour, IAwake, IMove
 {
     [Header("Configuration")]
     [SerializeField, Tooltip("Maximum speed movement.")]
-    private float speed;
-    [SerializeField, Tooltip("Speed acceleration.")]
-    private float acceleration;
+    private float speed = 1;
 
+#pragma warning disable CS0649
     [Header("Setup")]
     [SerializeField, Tooltip("Navigation agent system.")]
     private NavigationAgent navigationAgent;
+
     [SerializeField, Tooltip("Layer to check for ground.")]
     private LayerMask ground;
+    [SerializeField, Tooltip("Used to check if it's touching ground.")]
+    private Transform groundCheck;
+#pragma warning restore CS0649
+
+    private const float CHECK_GROUND_DISTANCE = 0.1f;
+    private const float MARGIN_ERROR_DISTANCE = 0.1f;
 
     private Rigidbody2D thisRigidbody2D;
-    private bool isAirbone = false;
 
-    void IAwake.Awake(Creature creature) => thisRigidbody2D = creature.thisRigidbody2D;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
-    private void Update()
+    private Transform goal;
+
+    private static class ANIMATION_STATES
     {
-        // We are flying...
-        if (isAirbone)
+        public const string
+            WALK = "Walk",
+            JUMP = "Jump";
+    }
+
+    void IAwake.Awake(Creature creature)
+    {
+        thisRigidbody2D = creature.thisRigidbody2D;
+        spriteRenderer = creature.GetComponent<SpriteRenderer>();
+        animator = creature.GetComponent<Animator>();
+        goal = Global.crystal;
+    }
+
+    void IMove.Move(float deltaTime, float speedMultiplier)
+    {
+        // Don't move while airbone
+        if (!IsGrounded())
             return;
 
-        // Find mouse
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Node mouseNode = navigationAgent.navigationGraph.FindClosestNode(mousePosition);
-        
-        List<Connection> path = navigationAgent.FindPathTo(mouseNode);
+        animator.SetBool(ANIMATION_STATES.JUMP, false);
+
+        // Don't move without goal
+        if (goal == null)
+            return;
+
+        List<Connection> path = navigationAgent.FindPathTo(goal.position);
 
         // If we aren't already there
         if (path.Count > 0)
@@ -41,81 +65,75 @@ public class NodeMovement : MonoBehaviour, IAwake
             Connection connection = path[0];
             Vector2 target = connection.end.position;
 
-            if (connection.IsExtreme)
+            float distanceToMove = speed * deltaTime * speedMultiplier;
+            float distanceToTarget = XDistanceToTarget(target);
+
+            if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) && path.Count > 1)
             {
-                isAirbone = true;
-                JumpTo(target);
+                // We are too close to this target, better get a new one in order to not get stuck
+                connection = path[1];
+                target = connection.end.position;
+
+                distanceToTarget = XDistanceToTarget(target);
+                distanceToMove = distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) ? distanceToTarget : distanceToMove * Mathf.Sign(distanceToTarget);
             }
+
+            spriteRenderer.flipX = Mathf.Sign(distanceToTarget) < 0;
+
+            if (connection.IsExtreme)
+                JumpTo(connection.end.position);
             else
-                MoveTo(target);
+                Translate(distanceToMove * Mathf.Sign(distanceToTarget));
         }
-
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        /*Debug.Log(collision.gameObject.layer);
-        Debug.Log(ground.value);
-        Debug.Log(collision.gameObject.layer == ground.ToLayer());*/
-        if (collision.gameObject.layer == ground.ToLayer())
-            isAirbone = false;
-    }
+    private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, ground);
 
-    private void MoveTo(Vector2 target)
+    private float XDistanceToTarget(Vector2 target) => target.x - thisRigidbody2D.position.x;
+
+    private void Translate(float distance)
     {
-        float distance = target.x - thisRigidbody2D.position.x;
-        float toMove = speed * Time.deltaTime;
-        if (Mathf.Abs(distance) > toMove)
-            thisRigidbody2D.MovePosition(new Vector2(thisRigidbody2D.position.x + toMove * Mathf.Sign(distance), thisRigidbody2D.position.y));
-        else
-            thisRigidbody2D.MovePosition(new Vector2(thisRigidbody2D.position.x + distance, thisRigidbody2D.position.y));
+        animator.SetBool(ANIMATION_STATES.WALK, true);
+        thisRigidbody2D.MovePosition(new Vector2(thisRigidbody2D.position.x + distance, thisRigidbody2D.position.y));
     }
 
     private void JumpTo(Vector2 target)
     {
+        animator.SetBool(ANIMATION_STATES.JUMP, true);
         thisRigidbody2D.velocity = ProjectileMotion(target, thisRigidbody2D.position, 1f);
     }
 
-    private float GetTg(Vector2 target, Vector2 origin)
+    private static float GetTg(Vector2 target, Vector2 origin)
     {
         float Atg(float tg) => Mathf.Atan(tg) * 180 / Mathf.PI;
-
         Vector2 tO = target - origin;
-        float magnitude = tO.magnitude;
-
         float tan = tO.y / tO.x;
-
         return Mathf.Round(Atg(tan));
 
     }
 
-    private float GetSin(Vector2 target, Vector2 origin)
+    private static float GetSin(Vector2 target, Vector2 origin)
     {
         float Asin(float s) => Mathf.Asin(s) * 180 / Mathf.PI;
-
         Vector2 tO = target - origin;
         float magnitude = tO.magnitude;
-
         float sin = tO.y / magnitude;
-
         return Mathf.Round(Asin(sin));
 
     }
 
-    private float GetCos(Vector2 target, Vector2 origin)
+    private static float GetCos(Vector2 target, Vector2 origin)
     {
         float Acos(float c) => Mathf.Acos(c) * 180 / Mathf.PI;
-
         Vector2 tO = target - origin;
         float magnitude = tO.magnitude;
-        var dir = tO / magnitude;
+        Vector2 dir = tO / magnitude;
         float cos = tO.x / magnitude;
         float result = dir.x >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
         return result;
-
     }
 
-    private Vector2 ProjectileMotion(Vector2 target, Vector2 origin, float t)
+    private static Vector2 ProjectileMotion(Vector2 target, Vector2 origin, float t)
     {
         float Vx(float x) => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI) * t;
         float Vy(float y) => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) * t + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
