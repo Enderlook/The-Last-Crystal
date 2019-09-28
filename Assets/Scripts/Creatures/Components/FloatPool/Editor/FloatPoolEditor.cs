@@ -15,6 +15,6 @@ public class FloatPoolEditor : Editor
         EditorGUILayout.Space();
         GUIHelper.Header("Additional Configuration");
 
-        serializedObject.ToggleableFields(true);
+        serializedObject.ShowToggleableFields(true);
     }
 }

@@ -242,7 +242,7 @@ public static class SerializedObjectExtensions
     /// <param name="source">Instance where its executed this method.</param>
     /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
     /// <param name="bindingFlags">Binding flags used to find fields.</param>
-    public static void ToggleableFields(this SerializedObject source, bool includeChildren = false, BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+    public static void ShowToggleableFields(this SerializedObject source, bool includeChildren = false, BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
     {
         foreach (string field in HasConfirmationFieldAttribute.GetFieldsWithConfirmationAttribute(source.targetObject, bindingFlags).Select(e => e.field.Name))
         {

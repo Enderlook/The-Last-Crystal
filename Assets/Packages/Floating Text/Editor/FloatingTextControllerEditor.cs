@@ -18,6 +18,6 @@ public class FloatingTextControllerEditor : Editor
         EditorGUILayout.Space();
         GUIHelper.Header("Floating Text Override Configuration");
 
-        serializedObject.ToggleableFields(true);
+        serializedObject.ShowToggleableFields(true);
     }
 }
