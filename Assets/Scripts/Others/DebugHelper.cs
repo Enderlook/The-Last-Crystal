@@ -29,9 +29,10 @@ public static class DebugHelper
     public static void LogWarning(params object[] objects) => Debug.LogWarning(GetStrings(objects));
 
     /// <summary>
-    /// Return an string with all objects as strings separated by ', '.
+    /// Return an string with all objects as strings separated by ', '.<br>
+    /// <see langword="null"/> are turned into "null".
     /// </summary>
     /// <param name="objects">Objects to join as string.</param>
-    public static string GetStrings(params object[] objects) => string.Join(", ", objects.Select(e => e.ToString()));
+    public static string GetStrings(params object[] objects) => string.Join(", ", objects.Select(e => e == null ? "null" : e.ToString()));
 }
 #endif
