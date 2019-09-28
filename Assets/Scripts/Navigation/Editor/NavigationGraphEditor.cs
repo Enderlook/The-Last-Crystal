@@ -17,6 +17,8 @@ namespace Navigation.UnityInspector
         private bool drawDistances = true;
 
         private bool isEditingEnable = false;
+        private bool wasEditingEnable = false;
+        private bool wasLockedBefore = false;
         private float autoSelectionRange = 0.25f;
         private Node selectedNode;
 
@@ -131,8 +133,15 @@ namespace Navigation.UnityInspector
             isEditingEnable = EditorGUILayout.Foldout(isEditingEnable, new GUIContent("Editing Tool", "While open, enable editing tools and lock inspector window.\nTo unlock inspector this must be closed."), true, BOLDED_FOLDOUT);
             if (isEditingEnable)
             {
-                // Lock inspector window so we don't lose focus of it when we click in the scene
-                ActiveEditorTracker.sharedTracker.isLocked = true;
+                // We activate the editing mode
+                if (!wasEditingEnable)
+                {
+                    wasEditingEnable = true;
+                    // Check if it was already locked or not
+                    wasLockedBefore = ActiveEditorTracker.sharedTracker.isLocked;
+                    // Lock inspector window so we don't lose focus of it when we click in the scene
+                    ActiveEditorTracker.sharedTracker.isLocked = true;
+                }
 
                 autoSelectionRange = EditorGUILayout.FloatField("Auto Selection Range", autoSelectionRange);
 
@@ -166,6 +175,12 @@ namespace Navigation.UnityInspector
                           + "\nR+A+C: Remove connection from Closest to Selected."
                         , EditorStyles.helpBox);
                 }
+            }
+            else if (wasEditingEnable)
+            {
+                wasEditingEnable = false;
+                // Return lock to before start editing
+                ActiveEditorTracker.sharedTracker.isLocked = wasLockedBefore;
             }
         }
 
