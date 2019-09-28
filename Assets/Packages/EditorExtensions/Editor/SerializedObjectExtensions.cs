@@ -233,4 +233,17 @@ public static class SerializedObjectExtensions
             source.ToggleableField(serializedProperty, attribute.ConfirmFieldName, includeChildren);
         }
     }
+
+    /// <summary>
+    /// Generate a toggleable button to hide or show all fields with <see cref="HasConfirmationFieldAttribute"/> in <see cref="SerializedObject.targetObject"/> from <paramref name="source"/>, which are also created by this method.
+    /// </summary>
+    /// <param name="source">Instance where its executed this method.</param>
+    /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
+    public static void ToggleableFields(this SerializedObject source, bool includeChildren = false)
+    {
+        foreach (string field in HasConfirmationFieldAttribute.GetFieldsWithConfirmationAttribute(source.targetObject))
+        {
+            source.ToggleableField(field, includeChildren);
+        }
+    }
 }

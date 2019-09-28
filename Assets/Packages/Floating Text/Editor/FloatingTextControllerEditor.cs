@@ -18,11 +18,6 @@ public class FloatingTextControllerEditor : Editor
         EditorGUILayout.Space();
         GUIHelper.Header("Floating Text Override Configuration");
 
-        serializedObject.ToggleableField(nameof(FloatingTextController.scaleMultiplier));
-        serializedObject.ToggleableField(nameof(FloatingTextController.textColor));
-        serializedObject.ToggleableField(nameof(FloatingTextController.timeBeforeDestroy));
-        serializedObject.ToggleableField(nameof(FloatingTextController.randomOffset));
-        serializedObject.ToggleableField(nameof(FloatingTextController.digitPrecision));
-        serializedObject.ToggleableField(nameof(FloatingTextController.typeOfRounding));
+        serializedObject.ToggleableFields(true);
     }
 }
