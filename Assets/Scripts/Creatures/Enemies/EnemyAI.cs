@@ -82,37 +82,22 @@ public class EnemyAI : MonoBehaviour, IAwake
     void ReachTarget()
     {
         animator.SetBool(JUMP, false);
-        if (!targetPlayer)
-        {
-            float distEnemy = Vector2.Distance(transform.position, target.position);
-            if (distEnemy > 1.5f)
-            {
-                MoveToTarget(target);
-            }
-        }
-
         float dist = Vector2.Distance(transform.position, target.position);
         spriteRenderer.flipX = target.position.x < transform.position.x;
         if (dist > stopDistance)
         {
-            MoveToTarget(target);
+            animator.SetBool(WALK, true);
+            Vector2 objective = target.position - transform.position;
+            thisRB2D.AddForce(Vector2.right * objective.normalized * moveForce);
+
+            if (Mathf.Abs(thisRB2D.velocity.x) > maxSpeed)
+                thisRB2D.velocity = new Vector2(Mathf.Sign(thisRB2D.velocity.x) * maxSpeed,
+                    thisRB2D.velocity.y);
         }
-    }
-
-    void MoveToTarget(Transform target)
-    {
-        animator.SetBool(WALK, true);
-        Vector2 objective = target.position - transform.position;
-        thisRB2D.AddForce(Vector2.right * objective.normalized * moveForce);
-
-        if (Mathf.Abs(thisRB2D.velocity.x) > maxSpeed)
-            thisRB2D.velocity = new Vector2(Mathf.Sign(thisRB2D.velocity.x) * maxSpeed,
-                thisRB2D.velocity.y);
     }
     
     void JumpPlatforms(Transform t)
     {
-        thisRB2D.velocity = new Vector2(0f, thisRB2D.velocity.y);
         float closePlatformDist = 999f;
         Transform closePlatform = null;
         foreach (Transform child in platform)
@@ -157,9 +142,7 @@ public class EnemyAI : MonoBehaviour, IAwake
 
         float sin = tO.y / magnitude;
 
-        float result = asin(sin);
-
-        return result;
+        return Mathf.Round(asin(sin));
 
     }
 

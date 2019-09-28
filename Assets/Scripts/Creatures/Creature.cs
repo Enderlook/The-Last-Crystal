@@ -80,6 +80,8 @@ public class Creature : MonoBehaviour
         animator.SetTrigger(HURT);
         thisRigidbody2D.AddForce(dir * force);
         health.Decrease(amount);
+        animator.SetTrigger(HURT);
+        thisRigidbody2D.AddForce(dir * force);
         if (displayDamage)
             SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), health.Ratio));
     }
