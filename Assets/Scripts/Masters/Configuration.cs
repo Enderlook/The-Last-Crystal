@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 
 public static class Global
@@ -89,11 +90,11 @@ public class Configuration : MonoBehaviour
     {
         // https://stackoverflow.com/questions/8151888/c-sharp-iterate-through-class-properties
         // Use Fields instead of Properties fixes a bug
-        foreach (System.Reflection.FieldInfo field in typeof(Configuration).GetFields())
+        foreach (FieldInfo field in typeof(Configuration).GetFields())
         {
             // https://stackoverflow.com/questions/3460745/setting-properties-with-reflection-on-static-classes or typeof(Global), whatever works...
             // https://stackoverflow.com/questions/7334067/how-to-get-fields-and-their-values-from-a-static-class-in-referenced-assembly
-            typeof(Global).GetField(field.Name, System.Reflection.BindingFlags.Public)?.SetValue(typeof(Global), field.GetValue(this));
+            typeof(Global).GetField(field.Name, BindingFlags.Public | BindingFlags.Static)?.SetValue(typeof(Global), field.GetValue(this));
         }
 
         //Global.SetCoinMeter(coinMeter, startingMoney);
