@@ -2,6 +2,7 @@
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 public static class SerializedObjectExtensions
 {
@@ -222,10 +223,11 @@ public static class SerializedObjectExtensions
     /// <param name="serializedProperty"Name of <see cref="SerializedProperty"/> to show in the inspector.<br>
     /// This field must have a <see cref="HasConfirmationFieldAttribute"/>.</param>
     /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
-    public static void ToggleableField(this SerializedObject source, string serializedProperty, bool includeChildren = false)
+    /// <param name="bindingFlags">Binding flags used to find fields.</param>
+    public static void ToggleableField(this SerializedObject source, string serializedProperty, bool includeChildren = false, BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
     {
         Type type = source.targetObject.GetType();
-        HasConfirmationFieldAttribute attribute = type.GetField(serializedProperty).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) as HasConfirmationFieldAttribute;
+        HasConfirmationFieldAttribute attribute = type.GetField(serializedProperty, bindingFlags).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) as HasConfirmationFieldAttribute;
         if (attribute == null)
             throw new Exception($"The {type}.{serializedProperty} field must have the attribute {nameof(HasConfirmationFieldAttribute)}.");
         else
@@ -239,9 +241,10 @@ public static class SerializedObjectExtensions
     /// </summary>
     /// <param name="source">Instance where its executed this method.</param>
     /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
-    public static void ToggleableFields(this SerializedObject source, bool includeChildren = false)
+    /// <param name="bindingFlags">Binding flags used to find fields.</param>
+    public static void ToggleableFields(this SerializedObject source, bool includeChildren = false, BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
     {
-        foreach (string field in HasConfirmationFieldAttribute.GetFieldsWithConfirmationAttribute(source.targetObject))
+        foreach (string field in HasConfirmationFieldAttribute.GetFieldsWithConfirmationAttribute(source.targetObject, bindingFlags).Select(e => e.field.Name))
         {
             source.ToggleableField(field, includeChildren);
         }

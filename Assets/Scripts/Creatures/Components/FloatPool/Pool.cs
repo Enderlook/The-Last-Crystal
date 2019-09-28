@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using FloatPool.Decorators;
 using FloatPool.Internal;
 using UnityEngine;
+using System.Reflection;
 
 namespace FloatPool
 {
@@ -57,44 +59,33 @@ namespace FloatPool
 
         public float Ratio => FloatPool.Ratio;
 
-        private Tuple<Decorator, bool>[] decorators;
-        private Tuple<Decorator, bool>[] Decorators {
-            get {
-                if (decorators == null)
-                {
-                    decorators = new Tuple<Decorator, bool>[]
-                        {
-                            new Tuple<Decorator, bool>(emptyCallback, hasEmptyCallback),
-                            new Tuple<Decorator, bool>(fullCallback, hasFullCallback),
-                            new Tuple<Decorator, bool>(changeCallback, hasChangeCallback),
-                            new Tuple<Decorator, bool>(bar, hasBar),
-                            new Tuple<Decorator, bool>(recharger, hasRecharger),
-                            new Tuple<Decorator, bool>(decreaseReduction, hasDecreaseReduction),
-                        };
-                }
-                return decorators;
+
+
+        private IEnumerable<Decorator> GetAppliedDecorators()
+        {
+            foreach (FieldInfo field in HasConfirmationFieldAttribute.GetConfirmedFields(this))
+            {
+                yield return (Decorator)field.GetValue(this);
             }
         }
 
         public void ConstructDecorators()
         {
             pool = basePool;
-            foreach (Tuple<Decorator, bool> decorator in Decorators)
+            foreach (Decorator decorator in GetAppliedDecorators())
             {
-                if (decorator.Item2)
-                {
-                    decorator.Item1.SetDecorable(pool);
-                    pool = decorator.Item1;
-                }
+                decorator.SetDecorable(pool);
+                pool = decorator;
             }
         }
 
         public U GetLayer<U>() where U : IFloatPool
         {
-            foreach (Tuple<Decorator, bool> layer in Decorators)
+            foreach (Decorator decorator in GetAppliedDecorators())
             {
-                if (layer.Item1.GetType() == typeof(U) && layer.Item2)
-                    return (U)(IFloatPool)layer.Item1;
+                Debug.Log(decorator.GetType());
+                if (decorator.GetType() == typeof(U))
+                    return (U)(IFloatPool)decorator;
             }
             return default;
         }
