@@ -13,35 +13,37 @@ namespace FloatPool
         public FloatPool basePool;
 
 #pragma warning disable CS0649
-        [SerializeField, HideInInspector]
+#pragma warning disable IDE0051
+        [SerializeField]
         private bool hasEmptyCallback;
-        [HasConfirmationField(nameof(hasEmptyCallback))]
-        public EmptyCallbackDecorator emptyCallback;
+        [SerializeField, HasConfirmationField(nameof(hasEmptyCallback))]
+        private EmptyCallbackDecorator emptyCallback;
 
-        [SerializeField, HideInInspector]
+        [SerializeField]
         private bool hasFullCallback;
-        [HasConfirmationField(nameof(hasFullCallback))]
-        public FullCallbackDecorator fullCallback;
+        [SerializeField, HasConfirmationField(nameof(hasFullCallback))]
+        private FullCallbackDecorator fullCallback;
 
-        [SerializeField, HideInInspector]
+        [SerializeField]
         private bool hasChangeCallback;
-        [HasConfirmationField(nameof(hasChangeCallback))]
-        public ChangeCallbackDecorator changeCallback;
+        [SerializeField, HasConfirmationField(nameof(hasChangeCallback))]
+        private ChangeCallbackDecorator changeCallback;
 
-        [SerializeField, HideInInspector]
+        [SerializeField]
         private bool hasBar;
-        [HasConfirmationField(nameof(hasBar))]
-        public BarDecorator bar;
+        [SerializeField, HasConfirmationField(nameof(hasBar))]
+        private BarDecorator bar;
 
-        [SerializeField, HideInInspector]
+        [SerializeField]
         private bool hasRecharger;
-        [HasConfirmationField(nameof(hasRecharger))]
-        public RechargerDecorator recharger;
+        [SerializeField, HasConfirmationField(nameof(hasRecharger))]
+        private RechargerDecorator recharger;
 
-        [SerializeField, HideInInspector]
+        [SerializeField]
         private bool hasDecreaseReduction;
-        [HasConfirmationField(nameof(hasDecreaseReduction))]
-        public DecreaseReductionDecorator decreaseReduction;
+        [SerializeField, HasConfirmationField(nameof(hasDecreaseReduction))]
+        private DecreaseReductionDecorator decreaseReduction;
+#pragma warning restore IDE0051
 #pragma warning restore CS0649
 
         private IFloatPool pool;
