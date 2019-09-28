@@ -7,7 +7,7 @@ namespace Navigation.UnityInspector
     [CustomEditor(typeof(NavigationAgent))]
     public class NavigationAgentEditor : Editor
     {
-        NavigationAgent navigationAgent;
+        private NavigationAgent navigationAgent;
 
         private bool drawPathToMouse = false;
 
@@ -24,7 +24,7 @@ namespace Navigation.UnityInspector
         {
             if (drawPathToMouse)
             {
-                List<Connection> path = navigationAgent.FindPathTo(navigationAgent.navigationGraph.FindClosestNodeToMouse());
+                List<Connection> path = navigationAgent.FindPathTo(navigationAgent.navigationGraph.FindClosestNodeToMouseInEditor());
                 if (path == null)
                     return;
                 foreach (Connection connection in path)

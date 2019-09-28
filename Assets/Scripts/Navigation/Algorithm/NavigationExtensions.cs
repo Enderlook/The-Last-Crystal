@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Navigation
 {
@@ -27,17 +26,8 @@ namespace Navigation
             return closestNode;
         }
 
-        public static Node FindClosestNodeToMouse(this NavigationGraph navigation)
-        {
-            return navigation.FindClosestNode(GetMousePosition());
-        }
-
-        public static Vector2 GetMousePosition()
-        {
-            /* Draw closest node to mouse
-             * https://answers.unity.com/questions/1321651/i-need-to-get-a-vector2-of-the-mouse-position-whil.html
-             * http://answers.unity.com/answers/1323496/view.html */
-            return HandleUtility.GUIPointToWorldRay(Event.current.mousePosition).GetPoint(1);
-        }
+        public static Node FindClosestNodeToMouseInEditor(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInEditor());
+        public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame());
+        public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation, Camera camera) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame(camera));
     }
 }
