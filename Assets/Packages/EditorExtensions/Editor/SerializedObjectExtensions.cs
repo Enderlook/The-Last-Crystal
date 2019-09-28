@@ -227,13 +227,10 @@ public static class SerializedObjectExtensions
     public static void ToggleableField(this SerializedObject source, string serializedProperty, bool includeChildren = false, BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
     {
         Type type = source.targetObject.GetType();
-        HasConfirmationFieldAttribute attribute = type.GetField(serializedProperty, bindingFlags).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) as HasConfirmationFieldAttribute;
-        if (attribute == null)
+        if (!(type.GetField(serializedProperty, bindingFlags).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) is HasConfirmationFieldAttribute attribute))
             throw new Exception($"The {type}.{serializedProperty} field must have the attribute {nameof(HasConfirmationFieldAttribute)}.");
         else
-        {
             source.ToggleableField(serializedProperty, attribute.ConfirmFieldName, includeChildren);
-        }
     }
 
     /// <summary>
