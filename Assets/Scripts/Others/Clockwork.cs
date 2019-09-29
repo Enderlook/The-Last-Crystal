@@ -132,7 +132,7 @@ public class Clockwork : IClockWork
     /// </summary>
     /// <param name="cooldown">Time in seconds to execute <paramref name="Callback"/>.</param>
     /// <param name="Callback">Action to execute.</param>
-    /// <param name="autoExecute">Whenever <see cref="Update(float)"/> must call <see cref="Execute"/> when <see cref="CooldownTime"/> is 0.</param>
+    /// <param name="autoExecute">Whenever <see cref="UpdateBehaviour(float)"/> must call <see cref="Execute"/> when <see cref="CooldownTime"/> is 0.</param>
     public Clockwork(float cooldown, System.Action Callback, bool autoExecute)
     {
         TotalCooldown = cooldown;
@@ -168,7 +168,7 @@ public class Clockwork : IClockWork
     /// Calls <see cref="Recharge(float)"/>. If returns <see langword="true"/> and <see cref="autoExecute"/> is <see langword="true"/> it calls <see cref="Execute"/>.
     /// </summary>
     /// <param name="deltaTime">Time since last increase.</param>
-    public void Update(float deltaTime)
+    public void UpdateBehaviour(float deltaTime)
     {
         if (Recharge(deltaTime) && autoExecute)
             Execute();
@@ -211,5 +211,5 @@ public class BasicClockwork : IBasicClockWork
     /// <summary>
     /// Calls <see cref="Recharge(float)"/>.</summary>
     /// <param name="deltaTime">Time since last increase.</param>
-    public void Update(float deltaTime) => Recharge(deltaTime);
+    public void UpdateBehaviour(float deltaTime) => Recharge(deltaTime);
 }

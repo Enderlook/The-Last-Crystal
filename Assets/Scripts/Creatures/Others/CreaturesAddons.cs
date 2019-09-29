@@ -1,12 +1,12 @@
 ﻿namespace CreaturesAddons
 {
-    public interface IAwake
+    public interface IInit
     {
         /// <summary>
         /// Initialize behaviour.
         /// </summary>
         /// <param name="creature">Instance of the creature who is initializing it.</param>
-        void Awake(Creature creature);
+        void Init(Creature creature);
     }
     public interface IDie
     {
@@ -39,6 +39,6 @@
         /// Updates behaviour.
         /// </summary>
         /// <param name="deltaTime">Time since last update in seconds. <seealso cref="UnityEngine.Time.deltaTime"/></param>
-        void Update(float deltaTime);
+        void UpdateBehaviour(float deltaTime);
     }
 }

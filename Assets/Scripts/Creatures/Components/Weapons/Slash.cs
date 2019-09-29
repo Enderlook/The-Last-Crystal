@@ -21,10 +21,10 @@ namespace CreaturesAddons
         Transform thisTransform;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        public override void Awake(Creature creature)
+        public override void Init(Creature creature)
         {
             thisTransform = creature.Transform;
-            base.Awake(creature);
+            base.Init(creature);
         }
 
         protected override void Attack()

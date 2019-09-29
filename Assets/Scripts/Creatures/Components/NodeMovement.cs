@@ -3,7 +3,7 @@ using CreaturesAddons;
 using Navigation;
 using UnityEngine;
 
-public class NodeMovement : MonoBehaviour, IAwake, IMove
+public class NodeMovement : MonoBehaviour, IInit, IMove
 {
     [Header("Configuration")]
     [SerializeField, Tooltip("Maximum speed movement.")]
@@ -37,7 +37,7 @@ public class NodeMovement : MonoBehaviour, IAwake, IMove
             JUMP = "Jump";
     }
 
-    void IAwake.Awake(Creature creature)
+    void IInit.Init(Creature creature)
     {
         thisRigidbody2D = creature.thisRigidbody2D;
         spriteRenderer = creature.GetComponent<SpriteRenderer>();

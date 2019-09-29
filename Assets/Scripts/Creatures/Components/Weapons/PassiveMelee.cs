@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CreaturesAddons
 {
-    public class PassiveMelee : MonoBehaviour, IAwake, IDamageOnTouch
+    public class PassiveMelee : MonoBehaviour, IInit, IDamageOnTouch
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -16,7 +16,7 @@ namespace CreaturesAddons
         private Transform thisTransform;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        void IAwake.Awake(Creature creature) => thisTransform = creature.Transform;
+        void IInit.Init(Creature creature) => thisTransform = creature.Transform;
 
         void IDamageOnTouch.ProduceDamage(Creature victim)
         {

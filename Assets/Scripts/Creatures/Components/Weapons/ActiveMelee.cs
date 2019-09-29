@@ -2,7 +2,7 @@
 
 namespace CreaturesAddons
 {
-    public class ActiveMelee : MonoBehaviour, IAwake, IBasicClockWork, IDamageOnTouch
+    public class ActiveMelee : MonoBehaviour, IInit, IBasicClockWork, IDamageOnTouch
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -17,7 +17,7 @@ namespace CreaturesAddons
         private Transform thisTransform;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        void IAwake.Awake(Creature creature)
+        void IInit.Init(Creature creature)
         {
             basicClockwork = new BasicClockwork(1 / firerate);
             thisTransform = creature.Transform;
@@ -39,6 +39,6 @@ namespace CreaturesAddons
         public bool Recharge(float deltaTime) => ((IBasicClockWork)basicClockwork).Recharge(deltaTime);
         public void ResetCooldown() => ((IBasicClockWork)basicClockwork).ResetCooldown();
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        public void Update(float deltaTime) => ((IBasicClockWork)basicClockwork).Update(deltaTime);
+        public void UpdateBehaviour(float deltaTime) => ((IBasicClockWork)basicClockwork).UpdateBehaviour(deltaTime);
     }
 }

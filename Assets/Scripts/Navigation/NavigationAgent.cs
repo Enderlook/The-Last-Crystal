@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Navigation
 {
     [Serializable]
-    public class NavigationAgent : MonoBehaviour, IAwake
+    public class NavigationAgent : MonoBehaviour, IInit
     {
         [Tooltip("Navigation used to move.")]
         public NavigationGraph navigationGraph;
@@ -14,7 +14,7 @@ namespace Navigation
         [NonSerialized]
         private Transform thisTransform;
 
-        void IAwake.Awake(Creature creature) => thisTransform = creature.thisRigidbody2D.transform;
+        void IInit.Init(Creature creature) => thisTransform = creature.thisRigidbody2D.transform;
 
         public Node FindClosestNode() => navigationGraph.FindClosestNode(thisTransform.position);
 

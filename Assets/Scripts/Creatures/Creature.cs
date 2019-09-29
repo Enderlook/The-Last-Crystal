@@ -55,7 +55,7 @@ public class Creature : MonoBehaviour
         updates = gameObject.GetComponentsInChildren<IUpdate>();
         move = gameObject.GetComponentInChildren<IMove>();
         attack = gameObject.GetComponentInChildren<IAttack>();
-        Array.ForEach(gameObject.GetComponents<IAwake>(), e => e.Awake(this));
+        Array.ForEach(gameObject.GetComponents<IInit>(), e => e.Init(this));
     }
 
     protected virtual void Update()
@@ -63,7 +63,7 @@ public class Creature : MonoBehaviour
         health.InternalUpdate(Time.deltaTime);
         move?.Move(Time.deltaTime, SpeedMultiplier * speed);
         attack?.Attack(Time.time);
-        Array.ForEach(updates, e => e.Update(Time.deltaTime));
+        Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
     }
 
     /// <summary>
