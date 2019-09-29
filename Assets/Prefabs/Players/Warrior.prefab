@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1362607400
 Transform:
   m_ObjectHideFlags: 0
@@ -49,6 +49,32 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &811027217049249413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573732952227708787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e2d420b2c5839f4e933d96988bdfdca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firerate: 2
+  damage: 5
+  pushStrength: 50
+  rayCasting:
+    source: {x: 0.09489989, y: 0.21299386}
+    direction: {x: 0.5376154, y: -0.84319013}
+    distance: 0.21706389
+    referenceTransform: {fileID: 829079563412899545}
+    draw: 1
+    debug: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+  toHit:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,61 +142,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+    - target: {fileID: 6054398120991035010, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
-      propertyPath: speed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: damage
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 948124293}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: rightKey
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: leftKey
-      value: 97
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: jumpKey
-      value: 119
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: maxJumps
+      propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: jumpStrength
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: moveForce
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: baseCollider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: attackPosition
-      value: 
-      objectReference: {fileID: 1362607400}
     - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Sprite
@@ -192,6 +168,46 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: weapons.Array.data[0].weapon
+      value: 
+      objectReference: {fileID: 811027217049249413}
+    - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: weapons.Array.data[0].key
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: weapons.Array.data[0].button
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: weapons.Array.data[0].canBeHoldDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 948124293}
     - target: {fileID: 6090474626493889086, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.size
@@ -312,6 +328,46 @@ PrefabInstance:
       propertyPath: layers.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: rightKey
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: leftKey
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: jumpKey
+      value: 119
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: maxJumps
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: jumpStrength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: moveForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: baseCollider
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: attackPosition
+      value: 
+      objectReference: {fileID: 1362607400}
     - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: basePool.startingMax
@@ -332,7 +388,8 @@ PrefabInstance:
       propertyPath: hasEmptyCallback
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}
 --- !u!1 &8573732952227708787 stripped
 GameObject:
