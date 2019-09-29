@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(DrawVectorRelativeToTransform)), InitializeOnLoad]
+[CustomPropertyDrawer(typeof(DrawVectorRelativeToTransformAttribute)), InitializeOnLoad]
 public class DrawVectorRelativeToTransformEditor : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -15,7 +15,7 @@ public class DrawVectorRelativeToTransformEditor : PropertyDrawer
 
     private static void RenderSceneGUI(SceneView sceneview)
     {
-        foreach ((SerializedProperty serializedProperty, object field, DrawVectorRelativeToTransform drawVectorRelativeToTransform, Editor editor) in PropertyDrawerHelper.FindAllSerializePropertiesInActiveEditorWithTheAttribute<DrawVectorRelativeToTransform>())
+        foreach ((SerializedProperty serializedProperty, object field, DrawVectorRelativeToTransformAttribute drawVectorRelativeToTransform, Editor editor) in PropertyDrawerHelper.FindAllSerializePropertiesInActiveEditorWithTheAttribute<DrawVectorRelativeToTransformAttribute>())
         {
             serializedProperty.serializedObject.Update();
             Transform transform = ((Component)serializedProperty.serializedObject.targetObject).transform;
@@ -36,7 +36,7 @@ public class DrawVectorRelativeToTransformEditor : PropertyDrawer
                     position = serializedProperty.vector3IntValue = VectorExtensions.ToVector3Int(Handles.PositionHandle(serializedProperty.vector3IntValue + VectorExtensions.ToVector3Int(transform.position), Quaternion.identity)) - VectorExtensions.ToVector3Int(transform.position);
                     break;
                 default:
-                    Debug.LogError($"The attribute {nameof(DrawVectorRelativeToTransform)} is only allowed in types of {nameof(Vector2)}, {nameof(Vector2Int)}, {nameof(Vector3)} and {nameof(Vector3Int)}.");
+                    Debug.LogError($"The attribute {nameof(DrawVectorRelativeToTransformAttribute)} is only allowed in types of {nameof(Vector2)}, {nameof(Vector2Int)}, {nameof(Vector3)} and {nameof(Vector3Int)}.");
                     continue;
             }
             if (!string.IsNullOrEmpty(drawVectorRelativeToTransform.Icon))
