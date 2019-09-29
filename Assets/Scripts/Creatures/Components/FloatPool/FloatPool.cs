@@ -162,7 +162,7 @@ namespace FloatPool
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
-                (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
+                (float remaining, float taken) result = base.Increase(amount, allowOverflow);
                 if (Current == Max)
                     callback.Invoke();
                 return result;
@@ -205,7 +205,7 @@ namespace FloatPool
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
-                (float remaining, float taken) result = base.Increase(amount, allowUnderflow);
+                (float remaining, float taken) result = base.Decrease(amount, allowUnderflow);
                 UpdateValues();
                 return result;
             }
@@ -326,7 +326,7 @@ namespace FloatPool
         [System.Serializable]
         public class ChangeCallbackDecorator : Decorator
         {
-            [Tooltip("Event executed each time Current value changes due to Decrease or Increse methods.")]
+            [Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
             public UnityEvent callback;
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
@@ -338,7 +338,7 @@ namespace FloatPool
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
-                (float remaining, float taken) result = base.Decrease(amount, allowOverflow);
+                (float remaining, float taken) result = base.Increase(amount, allowOverflow);
                 callback.Invoke();
                 return result;
             }
