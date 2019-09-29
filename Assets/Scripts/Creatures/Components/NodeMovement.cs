@@ -14,8 +14,8 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     [SerializeField, Tooltip("Navigation agent system.")]
     private NavigationAgent navigationAgent;
 
-    [SerializeField, Tooltip("Layer to check for ground.")]
-    private LayerMask ground;
+    [SerializeField, Layer, Tooltip("Layer to check for ground.")]
+    private int ground;
     [SerializeField, Tooltip("Used to check if it's touching ground.")]
     private Transform groundCheck;
 #pragma warning restore CS0649
@@ -87,7 +87,7 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         }
     }
 
-    private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, ground);
+    private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, 1 << ground);
 
     private float XDistanceToTarget(Vector2 target) => target.x - thisRigidbody2D.position.x;
 
