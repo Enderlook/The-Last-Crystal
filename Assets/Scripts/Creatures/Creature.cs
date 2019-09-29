@@ -29,6 +29,9 @@ public class Creature : MonoBehaviour
     [Tooltip("Animator Component.")]
     public Animator animator;
 
+    [Tooltip("Sprite Renderer Component.")]
+    public SpriteRenderer sprite;
+
     private IDie[] dies;
     private IUpdate[] updates;
     private IMove move;

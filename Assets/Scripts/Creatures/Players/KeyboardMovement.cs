@@ -23,8 +23,6 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     public float moveForce;
 
     [Header("Setup")]
-    [Tooltip("Sprite Renderer to flip.")]
-    public SpriteRenderer spriteRenderer;
     [Tooltip("Collider used to check if it's touching the floor.")]
     public Collider2D baseCollider;
     [Tooltip("Layer of the floor.")]
@@ -34,6 +32,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
 
     private Rigidbody2D thisRigidbody2D;
     private Animator thisAnimator;
+    private SpriteRenderer spriteRenderer;
     
     private const string WALK = "Walk"; 
     private const string JUMP = "Jump";
@@ -44,6 +43,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
     {
         thisRigidbody2D = creature.thisRigidbody2D;
         thisAnimator = creature.animator;
+        spriteRenderer = creature.sprite;
         remainingJumps = maxJumps;
     }
 
@@ -66,12 +66,6 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        /*if (collision.otherCollider.IsTouchingLayers(layers))
-        {
-            remainingJumps = maxJumps;
-            thisAnimator.SetBool(JUMP, false);
-        }*/
-
         switch (collision.gameObject.layer)
         {
             case FLOOR:
@@ -88,9 +82,10 @@ public class KeyboardMovement : MonoBehaviour, IMove, IAwake
 
     private void MoveHorizontal(float distance)
     {
-        thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
         if (Mathf.Abs(thisRigidbody2D.velocity.x) > speed)
-            thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, thisRigidbody2D.velocity.y);
+            thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, 
+                thisRigidbody2D.velocity.y);
+        thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
 
         spriteRenderer.flipX = distance < 0;
 

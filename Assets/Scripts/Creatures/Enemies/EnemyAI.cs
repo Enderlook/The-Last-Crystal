@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 using CreaturesAddons;
-using System;
-using Random = UnityEngine.Random;
 
 public class EnemyAI : MonoBehaviour, IAwake
 {
     [Header("Enemy Stats")]
-    [Tooltip("Jump force.")]
-    public float jumpForce;
     [Tooltip("Movement force.")]
     public float moveForce;
     [Tooltip("Distance that enemy stop when reach target.")]
@@ -25,8 +21,6 @@ public class EnemyAI : MonoBehaviour, IAwake
     [Tooltip("Target to reach")]
     // False == crystal, True == player
     public bool targetPlayer;
-    [Tooltip("Sprite Renderer component.")]
-    public SpriteRenderer spriteRenderer;
 
     private Rigidbody2D thisRB2D;
     private Animator animator;
@@ -36,6 +30,7 @@ public class EnemyAI : MonoBehaviour, IAwake
     private GameObject[] player;
     private RaycastHit2D isRightEmpty;
     private RaycastHit2D isLeftEmpty;
+    private SpriteRenderer spriteRenderer;
 
     private const string WALK = "Walk";
     private const string JUMP = "Jump";
@@ -46,6 +41,7 @@ public class EnemyAI : MonoBehaviour, IAwake
     {
         thisRB2D = creature.thisRigidbody2D;
         animator = creature.animator;
+        spriteRenderer = creature.sprite;
         crystal = GameObject.FindGameObjectWithTag(TARGET).transform;
         platform = GameObject.Find("Islands").transform;
         player = GameObject.FindGameObjectsWithTag("Player");
@@ -82,14 +78,19 @@ public class EnemyAI : MonoBehaviour, IAwake
     void ReachTarget()
     {
         animator.SetBool(JUMP, false);
-        if (!targetPlayer)
-        {
-            float distEnemy = Vector2.Distance(transform.position, target.position);
-            if (distEnemy > 1.5f)
-            {
-                MoveToTarget(target);
-            }
-        }
+        //if (!targetPlayer)
+        //{
+            
+        //    float distPlayerOne = Vector2.Distance(transform.position, player[0].transform.position);
+        //    float distPlayerTwo = Vector2.Distance(transform.position, player[1].transform.position);
+        //    if (distPlayerOne < 2f)
+        //    {
+        //        MoveToTarget(player[0].transform);
+        //    } else if (distPlayerTwo < 2f)
+        //    {
+        //        MoveToTarget(player[1].transform);
+        //    }
+        //}
 
         float dist = Vector2.Distance(transform.position, target.position);
         spriteRenderer.flipX = target.position.x < transform.position.x;
@@ -102,12 +103,12 @@ public class EnemyAI : MonoBehaviour, IAwake
     void MoveToTarget(Transform target)
     {
         animator.SetBool(WALK, true);
-        Vector2 objective = target.position - transform.position;
-        thisRB2D.AddForce(Vector2.right * objective.normalized * moveForce);
-
         if (Mathf.Abs(thisRB2D.velocity.x) > maxSpeed)
             thisRB2D.velocity = new Vector2(Mathf.Sign(thisRB2D.velocity.x) * maxSpeed,
                 thisRB2D.velocity.y);
+
+        Vector2 objective = target.position - transform.position;
+        thisRB2D.AddForce(Vector2.right * objective.normalized * moveForce);
     }
     
     void JumpPlatforms(Transform t)
@@ -131,33 +132,33 @@ public class EnemyAI : MonoBehaviour, IAwake
         }
 
         animator.SetBool(JUMP, true);
-        Vector2 v0 = ProjectileMotion(closePlatform, transform, 1f);
+        Vector2 v0 = ProjectileMotion(closePlatform, transform);
         thisRB2D.velocity = v0;
     }
 
     float GetTg(Transform target, Transform origin)
     {
-        Func<float, float> atg = tg => Mathf.Atan(tg) * 180 / Mathf.PI;
+        float Atg(float tg) => Mathf.Atan(tg) * 180 / Mathf.PI;
 
         Vector2 tO = target.position - origin.position;
         float magnitude = tO.magnitude;
 
         float tan = tO.y / tO.x;
 
-        return Mathf.Round(atg(tan));
+        return Mathf.Round(Atg(tan));
 
     }
 
     float GetSin(Transform target, Transform origin)
     {
-        Func<float, float> asin = s => Mathf.Asin(s) * 180 / Mathf.PI;
+        float Asin(float s) => Mathf.Asin(s) * 180 / Mathf.PI;
 
         Vector2 tO = target.position - origin.position;
         float magnitude = tO.magnitude;
 
         float sin = tO.y / magnitude;
 
-        float result = asin(sin);
+        float result = Asin(sin);
 
         return result;
 
@@ -165,21 +166,21 @@ public class EnemyAI : MonoBehaviour, IAwake
 
     float GetCos(Transform target, Transform origin)
     {
-        Func<float, float> acos = c => Mathf.Acos(c) * 180 / Mathf.PI;
+        float Acos(float c) => Mathf.Acos(c) * 180 / Mathf.PI;
 
         Vector2 tO = target.position - origin.position;
         float magnitude = tO.magnitude;
         var dir = tO / magnitude;
         float cos = tO.x / magnitude;
-        float result = dir.x >= 0 ? Mathf.Round(acos(cos)) : Mathf.Round(acos(-cos));
+        float result = dir.x >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
         return result;
 
     }
 
-    Vector2 ProjectileMotion(Transform target, Transform origin, float t)
+    Vector2 ProjectileMotion(Transform target, Transform origin)
     {
-        Func<float, float> vX = x => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI) * t;
-        Func<float, float> vY = y => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) * t + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
+        float Vx(float x) => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI);
+        float Vy(float y) => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) + .5f * Mathf.Abs(Physics2D.gravity.y);
 
         Vector2 magnitude = target.position - origin.position;
         Vector2 distX = magnitude;
@@ -189,8 +190,8 @@ public class EnemyAI : MonoBehaviour, IAwake
         float wX = distX.magnitude;
 
         Vector2 v0 = distX.normalized;
-        v0 *= vX(wX);
-        v0.y = vY(hY);
+        v0 *= Vx(wX);
+        v0.y = Vy(hY);
 
         return v0;
     }

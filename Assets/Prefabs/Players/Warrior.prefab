@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1362607399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1362607400}
-  m_Layer: 9
-  m_Name: PosAttack
-  m_TagString: Untagged
-  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1362607400
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362607399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.166, y: 0.116, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 829079563412899545}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &948124293
 Animator:
   serializedVersion: 3
@@ -60,6 +30,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6090474626493889086, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
@@ -221,6 +196,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 948124293}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 3940367181773173620}
     - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Sprite
@@ -242,6 +222,21 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: basePool.startingMax
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: hasDecreaseReduction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: decreaseReduction.reductionFormula.formula
+      value: '{0}*0,85'
+      objectReference: {fileID: 0}
     - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: keyAttack
@@ -257,11 +252,6 @@ PrefabInstance:
       propertyPath: rangeAttack
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: attackPosition
-      value: 
-      objectReference: {fileID: 1362607400}
     - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: layers.m_Bits
@@ -290,7 +280,7 @@ PrefabInstance:
     - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: jumpStrength
-      value: 200
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
@@ -306,22 +296,23 @@ PrefabInstance:
         type: 3}
       propertyPath: attackPosition
       value: 
-      objectReference: {fileID: 1362607400}
-    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+      objectReference: {fileID: 3919372390463256490}
+    - target: {fileID: 7546302307583617403, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
-      propertyPath: basePool.startingMax
-      value: 35
+      propertyPath: m_LocalPosition.x
+      value: 0.166
       objectReference: {fileID: 0}
-    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+    - target: {fileID: 7546302307583617403, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
-      propertyPath: hasDecreaseReduction
-      value: 1
+      propertyPath: m_LocalPosition.y
+      value: 0.116
       objectReference: {fileID: 0}
-    - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
+    - target: {fileID: 933534875716671613, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
-      propertyPath: decreaseReduction.reductionFormula.formula
-      value: '{0}*0,85'
-      objectReference: {fileID: 0}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000,
+        type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}
 --- !u!1 &8573732952227708787 stripped
@@ -330,9 +321,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6835815089219722961}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &829079563412899545 stripped
+--- !u!212 &3940367181773173620 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6835815089219722961}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3919372390463256490 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
+  m_CorrespondingSourceObject: {fileID: 7546302307583617403, guid: 6c61c90b7234d194783c42bdc917bec5,
     type: 3}
   m_PrefabInstance: {fileID: 6835815089219722961}
   m_PrefabAsset: {fileID: 0}
