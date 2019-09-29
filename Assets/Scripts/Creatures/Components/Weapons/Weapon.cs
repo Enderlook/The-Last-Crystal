@@ -5,13 +5,14 @@ namespace CreaturesAddons
     public abstract class Weapon : MonoBehaviour, IAwake, IClockWork
     {
         [Header("Configuration")]
-        [Tooltip("Attacks per second.")]
-        public float firerate;
+        [SerializeField, Tooltip("Attacks per second.")]
+        private float firerate = 1;
 
         private Clockwork clockwork;
 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        void IAwake.Awake(Creature creature) => clockwork = new Clockwork(1 / firerate, Attack, false);
+        public virtual void Awake(Creature creature) => clockwork = new Clockwork(1 / firerate, Attack, false);
 
         protected abstract void Attack();
 
