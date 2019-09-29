@@ -2,6 +2,10 @@
 {
     public interface IAwake
     {
+        /// <summary>
+        /// Initialize behaviour.
+        /// </summary>
+        /// <param name="creature">Instance of the creature who is initializing it.</param>
         void Awake(Creature creature);
     }
     public interface IDie
@@ -24,7 +28,7 @@
     public interface IAttack
     {
         /// <summary>
-        /// Creature attack
+        /// Creature attack.
         /// </summary>
         /// <param name="deltaTime">Time since last update in seconds.<seealso cref="UnityEngine.Time.deltaTime"/></param>
         void Attack(float time);

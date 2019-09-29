@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IClockWork : CreaturesAddons.IUpdate
+public interface IBasicClockWork : CreaturesAddons.IUpdate
 {
     /// <summary>
     /// Current cooldown time.
@@ -23,6 +23,22 @@ public interface IClockWork : CreaturesAddons.IUpdate
     bool IsReady { get; }
 
     /// <summary>
+    /// Reset <see cref="CooldownTime"/> time to maximum.
+    /// </summary>
+    void ResetCooldown();
+
+    /// <summary>
+    /// Reduce <see cref="CooldownTime"/> time and checks if the <see cref="CooldownTime"/> is over.
+    /// </summary>
+    /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
+    /// <returns><see langword="true"/> if the weapon is ready to attack, <see langword="false"/> if it's on cooldown.</returns>
+
+    bool Recharge(float deltaTime);
+}
+
+public interface IClockWork : IBasicClockWork
+{
+    /// <summary>
     /// Execute <see cref="Callback"/> and call <see cref="ResetCooldown"/>.<br/>
     /// It ignores the <see cref="IsReady"/>. Use <seealso cref="TryExecute(float)"/> to use it.
     /// </summary>
@@ -36,19 +52,6 @@ public interface IClockWork : CreaturesAddons.IUpdate
     /// <returns><see langword="true"/> if it was executed, <see langword="false"/> if it's still on cooldown.</returns>
     /// <seealso cref="Execute"/>
     bool TryExecute(float deltaTime = 0);
-
-    /// <summary>
-    /// Reset <see cref="CooldownTime"/> time to maximum.
-    /// </summary>
-    void ResetCooldown();
-
-    /// <summary>
-    /// Reduce <see cref="CooldownTime"/> time and checks if the <see cref="CooldownTime"/> is over.
-    /// </summary>
-    /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
-    /// <returns><see langword="true"/> if the weapon is ready to attack, <see langword="false"/> if it's on cooldown.</returns>
-
-    bool Recharge(float deltaTime);
 }
 
 public interface IClockWork<T> : IClockWork
@@ -164,10 +167,49 @@ public class Clockwork : IClockWork
     /// <summary>
     /// Calls <see cref="Recharge(float)"/>. If returns <see langword="true"/> and <see cref="autoExecute"/> is <see langword="true"/> it calls <see cref="Execute"/>.
     /// </summary>
-    /// <param name="deltaTime"></param>
+    /// <param name="deltaTime">Time since last increase.</param>
     public void Update(float deltaTime)
     {
         if (Recharge(deltaTime) && autoExecute)
             Execute();
     }
+}
+
+public class BasicClockwork : IBasicClockWork
+{
+    public float CooldownTime {
+        get => cooldownTime;
+        private set {
+            cooldownTime = value;
+            if (cooldownTime < 0)
+                cooldownTime = 0;
+        }
+    }
+    protected float cooldownTime = 0f;
+    public float TotalCooldown { get; protected set; }
+    public float CooldownPercent => Mathf.Clamp01(CooldownTime / TotalCooldown);
+    public bool IsReady => CooldownTime <= 0;
+
+    /// <summary>
+    /// Create a timer.<br/>
+    /// Time must be manually updated using <see cref="Recharge(float)"/>.
+    /// </summary>
+    /// <param name="cooldown">Time in seconds to execute <paramref name="Callback"/>.</param>
+    public BasicClockwork(float cooldown)
+    {
+        TotalCooldown = cooldown;
+        ResetCooldown();
+    }
+
+    public void ResetCooldown() => CooldownTime = TotalCooldown;
+    public bool Recharge(float deltaTime)
+    {
+        CooldownTime -= deltaTime;
+        return IsReady;
+    }
+
+    /// <summary>
+    /// Calls <see cref="Recharge(float)"/>.</summary>
+    /// <param name="deltaTime">Time since last increase.</param>
+    public void Update(float deltaTime) => Recharge(deltaTime);
 }
