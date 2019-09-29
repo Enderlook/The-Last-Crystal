@@ -5,8 +5,10 @@ namespace PlayerAddons
 {
     public class WeaponShooter : MonoBehaviour
     {
-        [Tooltip("Weapons configuration")]
-        public WeaponKeyPair[] weapons;
+#pragma warning disable CS0649
+        [SerializeField, Tooltip("Weapons configuration")]
+        private WeaponKeyPair[] weapons;
+#pragma warning restore CS0649
 
         private void Update()
         {
