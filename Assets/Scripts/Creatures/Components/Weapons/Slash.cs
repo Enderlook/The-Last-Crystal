@@ -14,8 +14,8 @@ namespace CreaturesAddons
 #pragma warning disable CS0649
         [SerializeField]
         private RayCasting rayCasting;
-        [SerializeField]
-        private LayerMask toHit;
+        [SerializeField, Layer]
+        private int layerToHit;
 #pragma warning restore CS0649
 
         Transform thisTransform;
@@ -29,7 +29,7 @@ namespace CreaturesAddons
 
         protected override void Attack()
         {
-            RaycastHit2D raycastHit = rayCasting.Raycast(toHit.value);
+            RaycastHit2D raycastHit = rayCasting.Raycast(1 << layerToHit); // Ignore any layer that isn't layerToHit
             if (raycastHit.transform == null)
                 return;
             Creature victim = raycastHit.transform.GetComponent<Creature>();

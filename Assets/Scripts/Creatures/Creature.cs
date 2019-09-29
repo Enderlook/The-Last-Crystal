@@ -135,12 +135,14 @@ public class Creature : MonoBehaviour
     /// <seealso cref="SpawnFloatingText(string, Color?, bool)"/>
     protected void SpawnFloatingText(float text, Color? textColor, bool checkIfPositive = true) => SpawnFloatingText(text.ToString(), textColor, checkIfPositive);
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) => CheckInDamageCollision(collision.gameObject);
+
+    private void OnTriggerEnter2D(Collider2D collision) => CheckInDamageCollision(collision.gameObject);
+
+    private void CheckInDamageCollision(GameObject target)
     {
-        IDamageOnTouch damageOnTouch = collision.gameObject.GetComponent<IDamageOnTouch>();
+        IDamageOnTouch damageOnTouch = target.gameObject.GetComponent<IDamageOnTouch>();
         if (damageOnTouch != null)
-        {
             damageOnTouch.ProduceDamage(this);
-        }
     }
 }
