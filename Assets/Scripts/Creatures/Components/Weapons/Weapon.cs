@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CreaturesAddons
 {
-    public abstract class Weapon : MonoBehaviour, IClockWork
+    public abstract class Weapon : MonoBehaviour, IAwake, IClockWork
     {
         [Header("Configuration")]
         [Tooltip("Attacks per second.")]
@@ -10,10 +10,8 @@ namespace CreaturesAddons
 
         private Clockwork clockwork;
 
-        private void Awake()
-        {
-            clockwork = new Clockwork(1 / firerate, Attack, false);
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
+        void IAwake.Awake(Creature creature) => clockwork = new Clockwork(1 / firerate, Attack, false);
 
         protected abstract void Attack();
 
@@ -25,6 +23,8 @@ namespace CreaturesAddons
         public bool Recharge(float deltaTime) => ((IClockWork)clockwork).Recharge(deltaTime);
         public void ResetCooldown() => ((IClockWork)clockwork).ResetCooldown();
         public bool TryExecute(float deltaTime = 0) => ((IClockWork)clockwork).TryExecute(deltaTime);
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public void Update(float deltaTime) => ((IClockWork)clockwork).Update(deltaTime);
     }
 }
