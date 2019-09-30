@@ -21,6 +21,11 @@ public class EnemyAI : MonoBehaviour, IAwake
     [Tooltip("Target to reach")]
     // False == crystal, True == player
     public bool targetPlayer;
+    [Tooltip("Range for check ground")]
+    [Range(0f, 2f)]
+    public float rangeCheck;
+    [Tooltip("Floor layer")]
+    public LayerMask floorLayer;
 
     private Rigidbody2D thisRB2D;
     private Animator animator;
@@ -57,23 +62,21 @@ public class EnemyAI : MonoBehaviour, IAwake
 
     void CheckEdge()
     {
-        isRightEmpty = Physics2D.Linecast(transform.position, rightPoint.position,
-            1 << LayerMask.NameToLayer("Ground"));
-        isLeftEmpty = Physics2D.Linecast(transform.position, leftPoint.position,
-            1 << LayerMask.NameToLayer("Ground"));
-
-        if (!isRightEmpty && !isLeftEmpty)
+        if (!edgeRight() && !edgeLeft())
             animator.SetBool(WALK, false);
 
-        if (isRightEmpty && isLeftEmpty)
+        if (edgeRight() && edgeLeft())
             ReachTarget();
 
-        if (!isRightEmpty && isLeftEmpty)
-            JumpPlatforms(isLeftEmpty.transform);
+        if (!edgeRight() && edgeLeft())
+            JumpPlatforms(edgeLeft().transform);
 
-        if (isRightEmpty && !isLeftEmpty)
-            JumpPlatforms(isRightEmpty.transform);
+        if (edgeRight() && !edgeLeft())
+            JumpPlatforms(edgeRight().transform);
     }
+
+    Collider2D edgeRight() => Physics2D.OverlapCircle(rightPoint.position, rangeCheck, floorLayer);
+    Collider2D edgeLeft() => Physics2D.OverlapCircle(leftPoint.position, rangeCheck, floorLayer);
 
     void ReachTarget()
     {
@@ -130,10 +133,11 @@ public class EnemyAI : MonoBehaviour, IAwake
 
             
         }
-
+        
         animator.SetBool(JUMP, true);
         Vector2 v0 = ProjectileMotion(closePlatform, transform);
-        thisRB2D.velocity = v0;
+        float mX = v0.x > 0 ? 1 : -1;
+        thisRB2D.velocity = new Vector2(mX, v0.y);
     }
 
     float GetTg(Transform target, Transform origin)
@@ -194,5 +198,12 @@ public class EnemyAI : MonoBehaviour, IAwake
         v0.y = Vy(hY);
 
         return v0;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(leftPoint.position, rangeCheck);
+        Gizmos.DrawWireSphere(rightPoint.position, rangeCheck);
     }
 }
