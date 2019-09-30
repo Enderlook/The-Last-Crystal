@@ -25,8 +25,10 @@ namespace CreaturesAddons
         private int projectileLayer = 0;
 
         [Header("Setup")]
+#pragma warning disable CS0649
         [SerializeField, DrawVectorRelativeToTransform]
         private Vector2 shootingPosition;
+#pragma warning restore CS0649
         [SerializeField, Tooltip("Animation played by projectile.")]
         public RuntimeAnimatorController projectileAnimation;
 
