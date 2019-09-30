@@ -13,8 +13,8 @@ public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
     public float rangeAttack;
     [Tooltip("Position attack")]
     public Transform attackPosition;
-    [Tooltip("Layer mask.")]
-    public LayerMask layers;
+    [Tooltip("Enemy layer.")]
+    public LayerMask enemyLayer;
 
     private Animator thisAnimator;
     private float nextAttack;
@@ -40,13 +40,12 @@ public class KeyboardAttack : MonoBehaviour, IAttack, IAwake
 
     void BasicAttackWarrior()
     {
-        Collider2D isHit = Physics2D.OverlapCircle(attackPosition.position,
-            rangeAttack, layers);
-
-        if (isHit)
+        Collider2D[] toDamage = Physics2D.OverlapCircleAll(attackPosition.position, rangeAttack,
+            enemyLayer);
+        for (int n = 0; n < toDamage.Length; n++)
         {
-            Vector2 direction = (isHit.transform.position - transform.position).normalized;
-            isHit.GetComponent<Creature>().TakeDamage(damage, direction, 80f);
+            Vector2 direction = (toDamage[n].transform.position - transform.position).normalized;
+            toDamage[n].GetComponent<Creature>().TakeDamage(damage, direction, 30f);
         }
     }
 
