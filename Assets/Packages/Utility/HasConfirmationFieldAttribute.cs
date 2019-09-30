@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 
-[AttributeUsage(AttributeTargets.Field)]
-public sealed class HasConfirmationFieldAttribute : Attribute
+public sealed class HasConfirmationFieldAttribute : PropertyAttribute
 {
     public string ConfirmFieldName { get; private set; }
 
@@ -58,5 +58,4 @@ public sealed class HasConfirmationFieldAttribute : Attribute
             }
         }
     }
-
 }
