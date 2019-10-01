@@ -14,14 +14,12 @@ namespace CreaturesAddons
         [Tooltip("FloatingTextController Script")]
         public FloatingTextController floatingTextController;
 
-        public IUpdate[] updates;
-        private IDie[] dies;
+        protected IUpdate[] updates;
 
         protected virtual void Awake()
         {
             health.Initialize();
             updates = new IUpdate[] { health };
-            dies = gameObject.GetComponentsInChildren<IDie>();
         }
 
         protected virtual void Update() => Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
@@ -53,7 +51,7 @@ namespace CreaturesAddons
         /// <param name="suicide"><see langword="true"/> if it was a suicide. <see langword="false"/> if it was murderer.</param>
         public virtual void Die(bool suicide = false)
         {
-            Array.ForEach(dies, e => e.Die(suicide));
+            Array.ForEach(gameObject.GetComponentsInChildren<IDie>(), e => e.Die(suicide));
             Destroy(gameObject);
         }
 
