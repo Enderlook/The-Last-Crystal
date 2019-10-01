@@ -15,11 +15,13 @@ namespace CreaturesAddons
         public FloatingTextController floatingTextController;
 
         public IUpdate[] updates;
+        private IDie[] dies;
 
         protected virtual void Awake()
         {
             health.Initialize();
             updates = new IUpdate[] { health };
+            dies = gameObject.GetComponentsInChildren<IDie>();
         }
 
         protected virtual void Update() => Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
@@ -40,7 +42,19 @@ namespace CreaturesAddons
                     DisplayTakeDamageAnimation();
                 if (displayText)
                     SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), health.Ratio));
+                if (health.Current <= 0)
+                    Die();
             }
+        }
+
+        /// <summary>
+        /// Disables <see cref="gameObject"/> and spawn an explosion prefab instance on current location.
+        /// </summary>
+        /// <param name="suicide"><see langword="true"/> if it was a suicide. <see langword="false"/> if it was murderer.</param>
+        public virtual void Die(bool suicide = false)
+        {
+            Array.ForEach(dies, e => e.Die(suicide));
+            Destroy(gameObject);
         }
 
         protected abstract void DisplayTakeDamageAnimation();

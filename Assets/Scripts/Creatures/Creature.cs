@@ -22,7 +22,6 @@ namespace CreaturesAddons
         [Tooltip("Animator Component.")]
         public Animator animator;
 
-        private IDie[] dies;
         private IMove move;
         private IAttack attack;
 
@@ -43,7 +42,6 @@ namespace CreaturesAddons
 
         private void LoadComponents()
         {
-            dies = gameObject.GetComponentsInChildren<IDie>();
             updates = gameObject.GetComponentsInChildren<IUpdate>();
             move = gameObject.GetComponentInChildren<IMove>();
             attack = gameObject.GetComponentInChildren<IAttack>();
@@ -74,16 +72,6 @@ namespace CreaturesAddons
             if (pushMode == PushMode.Local)
                 direction = ((Vector2)Transform.position - direction).normalized;
             thisRigidbody2D.AddForce(direction * force);
-        }
-
-        /// <summary>
-        /// Disables <see cref="gameObject"/> and spawn an explosion prefab instance on current location.
-        /// </summary>
-        /// <param name="suicide"><see langword="true"/> if it was a suicide. <see langword="false"/> if it was murderer.</param>
-        public virtual void Die(bool suicide = false)
-        {
-            Array.ForEach(dies, e => e.Die(suicide));
-            Destroy(gameObject);
         }
 
         protected override void DisplayTakeDamageAnimation() => animator.SetTrigger(ANIMATION_STATE_HURT);

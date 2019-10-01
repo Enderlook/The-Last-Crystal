@@ -42,9 +42,7 @@ MonoBehaviour:
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
-  toHit:
-    serializedVersion: 2
-    m_Bits: 256
+  layerToHit: 0
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273,31 +271,6 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
       value: 0.085
       objectReference: {fileID: 0}
-    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: keyAttack
-      value: 103
-      objectReference: {fileID: 0}
-    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: timeBtwAttack
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: rangeAttack
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: attackPosition
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: layers.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: rightKey
@@ -356,7 +329,32 @@ PrefabInstance:
     - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: hasEmptyCallback
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: keyAttack
+      value: 103
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: timeBtwAttack
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: rangeAttack
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: attackPosition
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: layers.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}
