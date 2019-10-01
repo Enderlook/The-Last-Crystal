@@ -100,7 +100,7 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     private void JumpTo(Vector2 target)
     {
         animator.SetBool(ANIMATION_STATES.JUMP, true);
-        thisRigidbody2D.velocity = ProjectileMotion(target, thisRigidbody2D.position, 1f);
+        thisRigidbody2D.velocity = ProjectileMotion(target, thisRigidbody2D.position);
     }
 
     private static float GetTg(Vector2 target, Vector2 origin)
@@ -133,10 +133,10 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         return result;
     }
 
-    private static Vector2 ProjectileMotion(Vector2 target, Vector2 origin, float t)
+    private static Vector2 ProjectileMotion(Vector2 target, Vector2 origin)
     {
-        float Vx(float x) => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI) * t;
-        float Vy(float y) => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) * t + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
+        float Vx(float x) => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI);
+        float Vy(float y) => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) + .5f * Mathf.Abs(Physics2D.gravity.y);
 
         Vector2 magnitude = target - origin;
         Vector2 distX = magnitude;
