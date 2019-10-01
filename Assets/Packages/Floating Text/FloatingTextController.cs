@@ -11,6 +11,7 @@ public class FloatingTextController : MonoBehaviour
 
     [SerializeField, HideInInspector]
     private bool overrideTimeBeforeDestroy;
+    [Header("Floating Text Override Configuration")]
     [HasConfirmationField(nameof(overrideTimeBeforeDestroy))]
     [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
     public float timeBeforeDestroy;
