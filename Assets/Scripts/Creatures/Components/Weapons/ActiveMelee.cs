@@ -23,12 +23,14 @@ namespace CreaturesAddons
             thisTransform = creature.Transform;
         }
 
-        void IDamageOnTouch.ProduceDamage(Creature victim)
+        void IDamageOnTouch.ProduceDamage(object victim)
         {
             if (basicClockwork.IsReady)
             {
-                victim.TakeDamage(damage);
-                victim.Push(thisTransform.position, pushStrength, Creature.PushMode.Local);
+                if (victim is ITakeDamage takeDamage)
+                    takeDamage.TakeDamage(damage);
+                if (victim is IPush push)
+                    push.Push(thisTransform.position, pushStrength, PushMode.Local);
             }
         }
 

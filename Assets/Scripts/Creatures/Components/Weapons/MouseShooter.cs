@@ -91,7 +91,7 @@ namespace CreaturesAddons
             this.pushStrength = pushStrength;
         }
 
-        public override void ProduceDamage(Creature victim)
+        public override void ProduceDamage(object victim)
         {
             base.ProduceDamage(victim);
             Destroy(gameObject);

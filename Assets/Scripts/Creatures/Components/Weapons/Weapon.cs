@@ -10,7 +10,6 @@ namespace CreaturesAddons
 
         private Clockwork clockwork;
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public virtual void Init(Creature creature) => clockwork = new Clockwork(1 / firerate, Attack, false);
 
@@ -28,4 +27,15 @@ namespace CreaturesAddons
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public void UpdateBehaviour(float deltaTime) => ((IClockWork)clockwork).UpdateBehaviour(deltaTime);
     }
+
+    public interface ITakeDamage
+    {
+        void TakeDamage(float amount, bool displayText = false, bool displayAnimation = true);
+    }
+
+    public interface IPush
+    {
+        void Push(Vector2 direction, float force = 1, PushMode pushMode = PushMode.Local);
+    }
+    public enum PushMode { Local, Global };
 }

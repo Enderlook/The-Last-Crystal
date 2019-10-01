@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace CreaturesAddons
 {
@@ -18,7 +17,7 @@ namespace CreaturesAddons
         private int layerToHit;
 #pragma warning restore CS0649
 
-        Transform thisTransform;
+        private Transform thisTransform;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public override void Init(Creature creature)
@@ -32,11 +31,10 @@ namespace CreaturesAddons
             RaycastHit2D raycastHit = rayCasting.Raycast(1 << layerToHit); // Ignore any layer that isn't layerToHit
             if (raycastHit.transform == null)
                 return;
-            Creature victim = raycastHit.transform.GetComponent<Creature>();
-            if (victim == null)
-                return;
-            victim.TakeDamage(damage);
-            victim.Push(thisTransform.position, pushStrength);
+
+            Transform victim = raycastHit.transform;
+            victim.GetComponent<ITakeDamage>()?.TakeDamage(damage);
+            victim.GetComponent<IPush>()?.Push(thisTransform.position, pushStrength);
         }
     }
 }

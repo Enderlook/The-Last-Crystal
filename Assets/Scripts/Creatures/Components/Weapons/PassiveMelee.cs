@@ -16,19 +16,21 @@ namespace CreaturesAddons
 
         void IInit.Init(Creature creature) => thisTransform = creature.Transform;
 
-        public virtual void ProduceDamage(Creature victim)
+        public virtual void ProduceDamage(object victim)
         {
-            victim.TakeDamage(damage);
-            victim.Push(thisTransform.position, pushStrength, Creature.PushMode.Local);
+            if (victim is ITakeDamage takeDamage)
+                takeDamage.TakeDamage(damage);
+            if (victim is IPush push)
+                push.Push(thisTransform.position, pushStrength, PushMode.Local);
         }
     }
 
     public interface IDamageOnTouch
     {
         /// <summary>
-        /// Produce damage
+        /// Produce damage. It will try to cast it to <see cref="ITakeDamage"/> and <see cref="IPush"/>.
         /// </summary>
         /// <param name="creature"></param>
-        void ProduceDamage(Creature victim);
+        void ProduceDamage(object victim);
     }
 }
