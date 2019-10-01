@@ -868,6 +868,16 @@ PrefabInstance:
       propertyPath: toHit.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 811027217049249413, guid: 09b7f3303549141429131ad61f5971e0,
+        type: 3}
+      propertyPath: layerToHit
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823601440180720676, guid: 09b7f3303549141429131ad61f5971e0,
+        type: 3}
+      propertyPath: attackPosition
+      value: 
+      objectReference: {fileID: 1590606441}
     m_RemovedComponents:
     - {fileID: 7791825612164117492, guid: 09b7f3303549141429131ad61f5971e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 09b7f3303549141429131ad61f5971e0, type: 3}
