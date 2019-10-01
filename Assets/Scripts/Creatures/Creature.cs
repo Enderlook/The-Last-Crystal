@@ -111,7 +111,7 @@ public class Creature : MonoBehaviour
     public virtual void Die(bool suicide = false)
     {
         Array.ForEach(dies, e => e.Die(suicide));
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     /// <summary>
