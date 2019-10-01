@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using CreaturesAddons;
 
-public class EnemyAI : MonoBehaviour, IAwake
+[System.Serializable]
+public class AIMovement
 {
     [Header("Enemy Stats")]
     [Tooltip("Movement force.")]
@@ -13,14 +13,11 @@ public class EnemyAI : MonoBehaviour, IAwake
     [Range(0f, 10f)]
     public float maxSpeed;
 
-    [Header("Setup")]
+    [Header("Setup Movement")]
     [Tooltip("Right point to check is no ground.")]
     public Transform rightPoint;
     [Tooltip("Left point to check is no ground.")]
     public Transform leftPoint;
-    [Tooltip("Target to reach")]
-    // False == crystal, True == player
-    public bool targetPlayer;
     [Tooltip("Range for check ground")]
     [Range(0f, 2f)]
     public float rangeCheck;
@@ -35,26 +32,29 @@ public class EnemyAI : MonoBehaviour, IAwake
     private GameObject[] player;
     private RaycastHit2D isRightEmpty;
     private RaycastHit2D isLeftEmpty;
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer sprite;
+    private Transform transform;
 
-    private const string WALK = "Walk";
-    private const string JUMP = "Jump";
     private const string TARGET = "Crystal";
     private const string PLAYER = "Player";
 
-    void IAwake.Awake(Creature creature)
-    {
-        thisRB2D = creature.thisRigidbody2D;
-        animator = creature.animator;
-        spriteRenderer = creature.sprite;
-        crystal = GameObject.FindGameObjectWithTag(TARGET).transform;
-        platform = GameObject.Find("Islands").transform;
-        player = GameObject.FindGameObjectsWithTag("Player");
+    Collider2D edgeRight() => Physics2D.OverlapCircle(rightPoint.position, rangeCheck, floorLayer);
+    Collider2D edgeLeft() => Physics2D.OverlapCircle(leftPoint.position, rangeCheck, floorLayer);
 
-        target = targetPlayer ? player[Random.Range(0, player.Length)].transform : crystal;
+    public void Initialize(AIEnemy aiEnemy)
+    {
+        thisRB2D = aiEnemy.thisRB2D;
+        animator = aiEnemy.animator;
+        sprite = aiEnemy.sprite;
+        crystal = aiEnemy.crystal;
+        platform = aiEnemy.platform;
+        player = aiEnemy.player;
+        transform = aiEnemy.transform;
+
+        target = aiEnemy.target;
     }
 
-    protected virtual void Update()
+    public void Move()
     {
         if (target != null)
             CheckEdge();
@@ -63,7 +63,7 @@ public class EnemyAI : MonoBehaviour, IAwake
     void CheckEdge()
     {
         if (!edgeRight() && !edgeLeft())
-            animator.SetBool(WALK, false);
+            animator.SetBool(AIEnemy.WALK, false);
 
         if (edgeRight() && edgeLeft())
             ReachTarget();
@@ -75,15 +75,12 @@ public class EnemyAI : MonoBehaviour, IAwake
             JumpPlatforms(edgeRight().transform);
     }
 
-    Collider2D edgeRight() => Physics2D.OverlapCircle(rightPoint.position, rangeCheck, floorLayer);
-    Collider2D edgeLeft() => Physics2D.OverlapCircle(leftPoint.position, rangeCheck, floorLayer);
-
     void ReachTarget()
     {
-        animator.SetBool(JUMP, false);
+        animator.SetBool(AIEnemy.JUMP, false);
         //if (!targetPlayer)
         //{
-            
+
         //    float distPlayerOne = Vector2.Distance(transform.position, player[0].transform.position);
         //    float distPlayerTwo = Vector2.Distance(transform.position, player[1].transform.position);
         //    if (distPlayerOne < 2f)
@@ -96,7 +93,7 @@ public class EnemyAI : MonoBehaviour, IAwake
         //}
 
         float dist = Vector2.Distance(transform.position, target.position);
-        spriteRenderer.flipX = target.position.x < transform.position.x;
+        sprite.flipX = target.position.x < transform.position.x;
         if (dist > stopDistance)
         {
             MoveToTarget(target);
@@ -105,7 +102,7 @@ public class EnemyAI : MonoBehaviour, IAwake
 
     void MoveToTarget(Transform target)
     {
-        animator.SetBool(WALK, true);
+        animator.SetBool(AIEnemy.WALK, true);
         if (Mathf.Abs(thisRB2D.velocity.x) > maxSpeed)
             thisRB2D.velocity = new Vector2(Mathf.Sign(thisRB2D.velocity.x) * maxSpeed,
                 thisRB2D.velocity.y);
@@ -113,7 +110,7 @@ public class EnemyAI : MonoBehaviour, IAwake
         Vector2 objective = target.position - transform.position;
         thisRB2D.AddForce(Vector2.right * objective.normalized * moveForce);
     }
-    
+
     void JumpPlatforms(Transform t)
     {
         thisRB2D.velocity = new Vector2(0f, thisRB2D.velocity.y);
@@ -131,10 +128,10 @@ public class EnemyAI : MonoBehaviour, IAwake
                 }
             }
 
-            
+
         }
-        
-        animator.SetBool(JUMP, true);
+
+        animator.SetBool(AIEnemy.JUMP, true);
         Vector2 v0 = ProjectileMotion(closePlatform, transform);
         float mX = v0.x > 0 ? 1 : -1;
         thisRB2D.velocity = new Vector2(mX, v0.y);
@@ -198,12 +195,5 @@ public class EnemyAI : MonoBehaviour, IAwake
         v0.y = Vy(hY);
 
         return v0;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(leftPoint.position, rangeCheck);
-        Gizmos.DrawWireSphere(rightPoint.position, rangeCheck);
     }
 }

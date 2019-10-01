@@ -90,7 +90,7 @@ Transform:
   m_Father: {fileID: 755056805893904983}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1071400770
+--- !u!114 &570108933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,37 +99,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1091846710704527667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b5268778b30ecc46bd57b6689206cdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3077d94c6833fd542ac6f1f1288137d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 18
-  stopDistance: 0.3
-  maxSpeed: 0.3
-  rightPoint: {fileID: 837269841}
-  leftPoint: {fileID: 1595611635}
   targetPlayer: 1
-  rangeCheck: 0.02
-  floorLayer:
-    serializedVersion: 2
-    m_Bits: 256
---- !u!114 &1071400771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091846710704527667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e546ae03f3a16be45be106c0d647e15b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPosition: {fileID: 1309780313}
-  rangeAttack: 0.1
-  playerMask:
-    serializedVersion: 2
-    m_Bits: 512
-  timeBtwAttack: 1
+  AIMovement:
+    moveForce: 18
+    stopDistance: 0.3
+    maxSpeed: 0.3
+    rightPoint: {fileID: 837269841}
+    leftPoint: {fileID: 1595611635}
+    rangeCheck: 0.02
+    floorLayer:
+      serializedVersion: 2
+      m_Bits: 256
+  AIAttack:
+    attackPosition: {fileID: 1309780313}
+    rangeAttack: 0.1
+    playerMask:
+      serializedVersion: 2
+      m_Bits: 512
+    timeBtwAttack: 1
+    timeBtwStrongAttack: 0
+  thisRB2D: {fileID: 0}
+  animator: {fileID: 0}
+  crystal: {fileID: 0}
+  platform: {fileID: 0}
+  target: {fileID: 0}
+  player: []
+  sprite: {fileID: 0}
+  damage: 0
 --- !u!1001 &6867324390007404908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,6 +141,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: KnightSkeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: damage
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 8818724890466740827}
     - target: {fileID: 6140415168490267451, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -207,16 +216,32 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.7
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: damage
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: sprite
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8818724890466740827}
+      objectReference: {fileID: 21300000, guid: 920588e55aef07743b61f9848c3ddb14,
+        type: 3}
+    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922834967895029636, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 276970842078b9b44bd801613825b421, type: 2}
     - target: {fileID: 371628961907377835, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
@@ -386,32 +411,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[14].y
       value: 0.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 2922834967895029636, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 276970842078b9b44bd801613825b421, type: 2}
-    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 920588e55aef07743b61f9848c3ddb14,
-        type: 3}
-    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336b20a0e32c641489bb09ab09369d57, type: 3}

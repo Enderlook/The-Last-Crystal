@@ -60,7 +60,7 @@ Transform:
   m_Father: {fileID: 9192167378950603221}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1671237981
+--- !u!114 &9088592221545904926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,19 +69,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 8848631403374183089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b5268778b30ecc46bd57b6689206cdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3077d94c6833fd542ac6f1f1288137d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 10
-  stopDistance: 0.5
-  maxSpeed: 0.2
-  rightPoint: {fileID: 842619495}
-  leftPoint: {fileID: 919572255}
   targetPlayer: 0
-  rangeCheck: 0.02
-  floorLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  AIMovement:
+    moveForce: 10
+    stopDistance: 0.5
+    maxSpeed: 0.2
+    rightPoint: {fileID: 842619495}
+    leftPoint: {fileID: 919572255}
+    rangeCheck: 0.02
+    floorLayer:
+      serializedVersion: 2
+      m_Bits: 256
+  AIAttack:
+    attackPosition: {fileID: 9192167378950603221}
+    rangeAttack: 0
+    playerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    timeBtwAttack: 0
+    timeBtwStrongAttack: 0
+  thisRB2D: {fileID: 0}
+  animator: {fileID: 0}
+  crystal: {fileID: 0}
+  platform: {fileID: 0}
+  target: {fileID: 0}
+  player: []
+  sprite: {fileID: 0}
+  damage: 0
 --- !u!1001 &3073144382275232494
 PrefabInstance:
   m_ObjectHideFlags: 0
