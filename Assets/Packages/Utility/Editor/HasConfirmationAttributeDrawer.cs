@@ -15,8 +15,6 @@ public class HasConfirmationAttributeDrawer : PropertyDrawer
 
         Rect fieldRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight);
 
-        property.serializedObject.Update();
-
         SerializedProperty confirmation = property.serializedObject.FindProperty(hasConfirmationFieldAttribute.ConfirmFieldName);
 
         EditorGUI.PropertyField(position, confirmation);
