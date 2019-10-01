@@ -3,7 +3,7 @@ using CreaturesAddons;
 using FloatPool;
 using UnityEngine;
 
-public class Creature : MonoBehaviour
+public class Creature : MonoBehaviour, ITakeDamage, IPush
 {
     [Header("Configuration")]
     [Tooltip("Health.")]
@@ -101,7 +101,6 @@ public class Creature : MonoBehaviour
             direction = ((Vector2)Transform.position - direction).normalized;
         thisRigidbody2D.AddForce(direction * force);
     }
-    public enum PushMode { Local, Global };
 
     /// <summary>
     /// Disables <see cref="gameObject"/> and spawn an explosion prefab instance on current location.

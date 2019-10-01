@@ -61,8 +61,6 @@ namespace FloatPool
 
         public float Ratio => FloatPool.Ratio;
 
-
-
         private IEnumerable<Decorator> GetAppliedDecorators()
         {
             foreach (FieldInfo field in HasConfirmationFieldAttribute.GetConfirmedFields(this))
