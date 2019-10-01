@@ -60,7 +60,6 @@ public class Creature : MonoBehaviour
 
     protected virtual void Update()
     {
-        health.InternalUpdate(Time.deltaTime);
         move?.Move(Time.deltaTime, SpeedMultiplier * speed);
         attack?.Attack(Time.time);
         Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));

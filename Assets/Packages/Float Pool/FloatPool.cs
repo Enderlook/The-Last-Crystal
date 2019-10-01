@@ -1,11 +1,11 @@
-using FloatPool.Decorators;
+using CreaturesAddons;
 using FloatPool.Internal;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace FloatPool
 {
-    public interface IFloatPool
+    public interface IFloatPool : IUpdate
     {
         /// <summary>
         /// Maximum amount. <see cref="Current"/> can't be greater than this value.<br/>
@@ -25,11 +25,6 @@ namespace FloatPool
         float Ratio { get; }
 
         void Initialize();
-        /// <summary>
-        /// Update values.
-        /// </summary>
-        /// <param name="deltatime">Time in seconds since last update (<see cref="Time.deltaTime"/>).</param>
-        void InternalUpdate(float deltatime);
 
         /// <summary>
         /// Reduce <see cref="Current"/> by <paramref name="amount"/>.
@@ -74,7 +69,7 @@ namespace FloatPool
             Max = startingMax;
         }
 
-        public void InternalUpdate(float deltaTime) { }
+        public void UpdateBehaviour(float deltaTime) { }
 
         /// <summary>
         /// Changes the value of <see cref="Current"/> by <paramref name="amount"/>, and clamp values to 0 and <see cref="Max"/> if <paramref name="allowUnderflow"/> and <paramref name="allowOverflow"/> are <see langword="false"/>, respectively.
@@ -143,7 +138,7 @@ namespace FloatPool
             public virtual (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => decorable.Decrease(amount, allowUnderflow);
             public virtual (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => decorable.Increase(amount, allowOverflow);
             public virtual void Initialize() => decorable.Initialize();
-            public virtual void InternalUpdate(float deltaTime) => decorable.InternalUpdate(deltaTime);
+            public virtual void UpdateBehaviour(float deltaTime) => decorable.UpdateBehaviour(deltaTime);
 
             public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
         }
@@ -257,10 +252,10 @@ namespace FloatPool
                 CallEndCallback(isForced);
             }
 
-            public override void InternalUpdate(float deltaTime)
+            public override void UpdateBehaviour(float deltaTime)
             {
                 Recharge(deltaTime);
-                base.InternalUpdate(deltaTime);
+                base.UpdateBehaviour(deltaTime);
             }
 
             /// <summary>
