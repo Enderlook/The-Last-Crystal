@@ -32,9 +32,6 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
 #pragma warning restore CS0649
     private const float CHECK_GROUND_DISTANCE = 0.1f;
 
-    [Tooltip("Position attack.")]
-    public Transform attackPosition;
-
     private Rigidbody2D thisRigidbody2D;
     private Animator thisAnimator;
 
@@ -82,22 +79,5 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
         thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
         if (Mathf.Abs(thisRigidbody2D.velocity.x) > speed)
             thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, thisRigidbody2D.velocity.y);
-
-        spriteRenderer.flipX = distance < 0;
-
-        if (!spriteRenderer.flipX)
-        {
-            Vector3 thePositon = attackPosition.transform.localPosition;
-            if (attackPosition.transform.localPosition.x < 0)
-                thePositon.x = -attackPosition.transform.localPosition.x;
-            attackPosition.transform.localPosition = thePositon;
-        }
-        else if (spriteRenderer.flipX)
-        {
-            Vector3 thePositon = attackPosition.transform.localPosition;
-            if (attackPosition.transform.localPosition.x > 0)
-                thePositon.x = -attackPosition.transform.localPosition.x;
-            attackPosition.transform.localPosition = thePositon;
-        }
     }
 }
