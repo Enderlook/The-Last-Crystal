@@ -76,13 +76,8 @@ public class Configuration : MonoBehaviour
     //[Tooltip("Money controller script.")]
     //public CoinMeter coinMeter;
 
-    [Header("Goals")]
     [Tooltip("Crystal")]
     public Transform crystal;
-    [Tooltip("Warrior")]
-    public Transform warrior;
-    [Tooltip("Wizard")]
-    public Transform wizard;
 
     private void Awake() => StoreGlobals();
 

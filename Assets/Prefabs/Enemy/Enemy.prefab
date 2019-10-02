@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1549091846290657791}
+  floatingTextController: {fileID: 8948837633536277635}
   speed: 1
   damage: 0
-  floatingTextController: {fileID: 8948837633536277635}
   stoppableRigidbody: {fileID: 843876848762180787}
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
@@ -297,7 +297,7 @@ MonoBehaviour:
   basePool:
     startingMax: 20
     startingCurrent: -1
-  hasEmptyCallback: 1
+  hasEmptyCallback: 0
   emptyCallback:
     callback:
       m_PersistentCalls:
@@ -387,7 +387,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   navigationAgent: {fileID: 1717894949730967846}
-  ground:
-    serializedVersion: 2
-    m_Bits: 256
+  ground: 0
   groundCheck: {fileID: 2426205588667692726}
