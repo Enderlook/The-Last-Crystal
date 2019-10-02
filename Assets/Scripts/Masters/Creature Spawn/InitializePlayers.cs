@@ -1,5 +1,6 @@
 ﻿using CreaturesAddons;
 using FloatPool.Decorators;
+using HealthBarGUI;
 using UnityEngine;
 
 public class InitializePlayers : MonoBehaviour
@@ -25,7 +26,6 @@ public class InitializePlayers : MonoBehaviour
     private static void InitializeCreature(GameObject creature, HealthBar healthBar)
     {
         BarDecorator barDecorator = creature.GetComponent<Creature>().health.GetLayer<BarDecorator>();
-        barDecorator.bar = healthBar;
-        barDecorator.UpdateValues();
+        barDecorator.Bar = healthBar;
     }
 }

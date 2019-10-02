@@ -83,7 +83,6 @@ namespace FloatPool
         {
             foreach (Decorator decorator in GetAppliedDecorators())
             {
-                Debug.Log(decorator.GetType());
                 if (decorator.GetType() == typeof(U))
                     return (U)(IFloatPool)decorator;
             }
