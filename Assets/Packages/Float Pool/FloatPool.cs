@@ -185,10 +185,13 @@ namespace FloatPool
             [Tooltip("Bar used to show values.")]
             public HealthBar bar;
 
-            private void UpdateValues()
+            /// <summary>
+            /// Calls <see cref="HealthBar.UpdateValues(float, float)"/>.
+            /// </summary>
+            public void UpdateValues()
             {
                 if (bar != null)
-                    bar.UpdateValues(Current);
+                    bar.UpdateValues(Current, Max);
             }
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
