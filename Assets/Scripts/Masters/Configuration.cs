@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 
 public static class Global
@@ -38,6 +39,20 @@ public static class Global
     /// Amount of money required to win the game.
     /// </summary>
     public static int moneyToWin;
+
+    /// <summary>
+    /// Crystal transform.
+    /// </summary>
+    public static Transform crystal;
+    /// <summary>
+    /// Player warrior transform.
+    /// </summary>
+    public static Transform warrior;
+
+    /// <summary>
+    /// Player wizard transform.
+    /// </summary>
+    public static Transform wizard;
 }
 
 public class Configuration : MonoBehaviour
@@ -61,17 +76,25 @@ public class Configuration : MonoBehaviour
     //[Tooltip("Money controller script.")]
     //public CoinMeter coinMeter;
 
+    [Header("Goals")]
+    [Tooltip("Crystal")]
+    public Transform crystal;
+    [Tooltip("Warrior")]
+    public Transform warrior;
+    [Tooltip("Wizard")]
+    public Transform wizard;
+
     private void Awake() => StoreGlobals();
 
     private void StoreGlobals()
     {
         // https://stackoverflow.com/questions/8151888/c-sharp-iterate-through-class-properties
         // Use Fields instead of Properties fixes a bug
-        foreach (System.Reflection.FieldInfo field in typeof(Configuration).GetFields())
+        foreach (FieldInfo field in typeof(Configuration).GetFields())
         {
             // https://stackoverflow.com/questions/3460745/setting-properties-with-reflection-on-static-classes or typeof(Global), whatever works...
             // https://stackoverflow.com/questions/7334067/how-to-get-fields-and-their-values-from-a-static-class-in-referenced-assembly
-            typeof(Global).GetField(field.Name, System.Reflection.BindingFlags.Public)?.SetValue(typeof(Global), field.GetValue(this));
+            typeof(Global).GetField(field.Name, BindingFlags.Public | BindingFlags.Static)?.SetValue(typeof(Global), field.GetValue(this));
         }
 
         //Global.SetCoinMeter(coinMeter, startingMoney);
