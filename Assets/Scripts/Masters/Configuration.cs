@@ -3,19 +3,6 @@ using UnityEngine;
 
 public static class Global
 {
-    /// <summary>
-    /// Enemies parent transform. Used to store all the enemies.
-    /// </summary>
-    public static Transform enemiesParent;
-    /// <summary>
-    /// Projectiles parent transform. Used to store all the projectiles.
-    /// </summary>
-    public static Transform projectilesParent;
-    /// <summary>
-    /// Pickups parent transform. Used to store all the pickups.
-    /// </summary>
-    public static Transform pickupsParent;
-
     private static CoinMeter coinMeter;
     /// <summary>
     /// Set the <seealso cref="CoinMeter"/> script that controls how money is displayed on canvas.
@@ -63,17 +50,6 @@ public class Configuration : MonoBehaviour
     [SerializeField, Tooltip("Stating money.")]
     private int startingMoney;
 
-    [Header("Setup")]
-    [Header("Parents")]
-    [SerializeField, Tooltip("Enemies parent transform.")]
-    private Transform enemiesParent;
-    [SerializeField, Tooltip("Projectiles parent transform.")]
-    private Transform projectilesParent;
-    [SerializeField, Tooltip("Floating text parent transform.")]
-    private Transform floatingTextParent;
-    [SerializeField, Tooltip("Pickups parent transform.")]
-    private Transform pickupsParent;
-
     //[Header("Menu")]
     //[SerializeField, Tooltip("Money controller script.")]
     //private CoinMeter coinMeter;
@@ -97,6 +73,5 @@ public class Configuration : MonoBehaviour
         }
 
         //Global.SetCoinMeter(coinMeter, startingMoney);
-        FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
     }
 }
