@@ -57,27 +57,31 @@ public static class Global
 
 public class Configuration : MonoBehaviour
 {
+#pragma warning disable IDE0051
+#pragma warning disable CS0649
     [Header("Configuration")]
-    [Tooltip("Stating money.")]
-    public int startingMoney;
+    [SerializeField, Tooltip("Stating money.")]
+    private int startingMoney;
 
     [Header("Setup")]
     [Header("Parents")]
-    [Tooltip("Enemies parent transform.")]
-    public Transform enemiesParent;
-    [Tooltip("Projectiles parent transform.")]
-    public Transform projectilesParent;
-    [Tooltip("Floating text parent transform.")]
-    public Transform floatingTextParent;
-    [Tooltip("Pickups parent transform.")]
-    public Transform pickupsParent;
+    [SerializeField, Tooltip("Enemies parent transform.")]
+    private Transform enemiesParent;
+    [SerializeField, Tooltip("Projectiles parent transform.")]
+    private Transform projectilesParent;
+    [SerializeField, Tooltip("Floating text parent transform.")]
+    private Transform floatingTextParent;
+    [SerializeField, Tooltip("Pickups parent transform.")]
+    private Transform pickupsParent;
 
     //[Header("Menu")]
-    //[Tooltip("Money controller script.")]
-    //public CoinMeter coinMeter;
+    //[SerializeField, Tooltip("Money controller script.")]
+    //private CoinMeter coinMeter;
 
-    [Tooltip("Crystal")]
-    public Transform crystal;
+    [SerializeField, Tooltip("Crystal")]
+    private Transform crystal;
+#pragma warning restore CS0649
+#pragma warning restore IDE0051
 
     private void Awake() => StoreGlobals();
 
