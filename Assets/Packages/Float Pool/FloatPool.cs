@@ -1,5 +1,6 @@
 using CreaturesAddons;
 using FloatPool.Internal;
+using HealthBarGUI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -180,17 +181,22 @@ namespace FloatPool
         }
 
         [System.Serializable]
-        public class BarDecorator : Decorator
+        public class BarDecorator : Decorator, IHealthBarViewer
         {
-            [Tooltip("Bar used to show values.")]
-            public HealthBar bar;
-
+            [SerializeField, Tooltip("Bar used to show values.")]
+            private HealthBar bar;
+            public HealthBar Bar {
+                get => bar;
+                set {
+                    bar = value;
+                    bar.ManualUpdate(Current, Max);
+                }
+            }
             private void UpdateValues()
             {
-                if (bar != null)
-                    bar.UpdateValues(Current);
+                if (Bar != null)
+                    Bar.UpdateValues(Current, Max);
             }
-
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
                 (float remaining, float taken) result = base.Increase(amount, allowOverflow);
@@ -208,9 +214,17 @@ namespace FloatPool
             public override void Initialize()
             {
                 base.Initialize();
-                if (bar != null)
-                    bar.ManualUpdate(Current, Max);
+                if (Bar != null)
+                    Bar.ManualUpdate(Current, Max);
             }
+
+            public bool IsVisible { get => ((IHealthBarViewer)Bar).IsVisible; set => ((IHealthBarViewer)Bar).IsVisible = value; }
+            public bool IsEnabled { get => ((IHealthBarViewer)Bar).IsEnabled; set => ((IHealthBarViewer)Bar).IsEnabled = value; }
+            public float HealthBarPercentFill => ((IHealthBarViewer)Bar).HealthBarPercentFill;
+            public float? HealingBarPercentFill => ((IHealthBarViewer)Bar).HealingBarPercentFill;
+            public float? DamageBarPercentFill => ((IHealthBarViewer)Bar).DamageBarPercentFill;
+            public bool IsHealingBarPercentHide => ((IHealthBarViewer)Bar).IsHealingBarPercentHide;
+            public bool IsDamageBarPercentHide => ((IHealthBarViewer)Bar).IsDamageBarPercentHide;
         }
 
         [System.Serializable]

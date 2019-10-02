@@ -393,7 +393,7 @@ PrefabInstance:
     - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: hasEmptyCallback
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}

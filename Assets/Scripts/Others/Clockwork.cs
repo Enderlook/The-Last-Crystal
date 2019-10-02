@@ -23,16 +23,20 @@ public interface IBasicClockWork : CreaturesAddons.IUpdate
     bool IsReady { get; }
 
     /// <summary>
-    /// Reset <see cref="CooldownTime"/> time to maximum.
+    /// Reset <see cref="CooldownTime"/> time to <see cref="TotalCooldown"/>.
     /// </summary>
     void ResetCooldown();
+
+    /// <summary>
+    /// Assign a new maximum value <paramref name="newCooldownTime"/> and calls <see cref="ResetCooldown"/>.
+    /// </summary>
+    void ResetCooldown(float newCooldownTime);
 
     /// <summary>
     /// Reduce <see cref="CooldownTime"/> time and checks if the <see cref="CooldownTime"/> is over.
     /// </summary>
     /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
-    /// <returns><see langword="true"/> if the weapon is ready to attack, <see langword="false"/> if it's on cooldown.</returns>
-
+    /// <returns><see cref="IsReady"/>.</returns>
     bool Recharge(float deltaTime);
 }
 
@@ -52,6 +56,36 @@ public interface IClockWork : IBasicClockWork
     /// <returns><see langword="true"/> if it was executed, <see langword="false"/> if it's still on cooldown.</returns>
     /// <seealso cref="Execute"/>
     bool TryExecute(float deltaTime = 0);
+
+    /// <summary>
+    /// Total number of times <see cref="Execute"/> can be called. -1 is unlimited.
+    /// </summary>
+    int TotalCycles { get; }
+
+    /// <summary>
+    /// Remaining number of times <see cref="Execute"/> can be called.
+    /// </summary>
+    int RemainingCycles { get; }
+
+    /// <summary>
+    /// Whenever there is no number of time <see cref="Execute"/> can be called.
+    /// </summary>
+    bool IsEndlessLoop { get; }
+
+    /// <summary>
+    /// Whenever the timer is working or not. If <see cref="RemainingCycles"/> is 0 the timer stop working.
+    /// </summary>
+    bool IsEnabled { get; }
+
+    /// <summary>
+    /// Reset <see cref="RemainingCycles"/> to <see cref="TotalCycles"/>.
+    /// </summary>
+    void ResetCycles();
+
+    /// <summary>
+    /// Assign a new maximum value <paramref name="TotalCycles"/> and <see cref="RemainingCycles"/>.
+    /// </summary>
+    void ResetCycles(int newCycles);
 }
 
 public interface IClockWork<T> : IClockWork
@@ -126,6 +160,11 @@ public class Clockwork : IClockWork
     public float CooldownPercent => Mathf.Clamp01(CooldownTime / TotalCooldown);
     public bool IsReady => CooldownTime <= 0;
 
+    public int TotalCycles { get; private set; }
+    public int RemainingCycles { get; private set; }
+    public bool IsEndlessLoop => TotalCycles == -1;
+    public bool IsEnabled => RemainingCycles > 0 || IsEndlessLoop;
+
     /// <summary>
     /// Create a timer that executes <paramref name="Callback"/> each <paramref name="cooldown"/> seconds.<br/>
     /// Time must be manually updated using <see cref="Recharge(float)"/>, <see cref="TryExecute(float)"/> or <see cref="TryExecute(ref T, float)"/> methods.
@@ -133,23 +172,36 @@ public class Clockwork : IClockWork
     /// <param name="cooldown">Time in seconds to execute <paramref name="Callback"/>.</param>
     /// <param name="Callback">Action to execute.</param>
     /// <param name="autoExecute">Whenever <see cref="UpdateBehaviour(float)"/> must call <see cref="Execute"/> when <see cref="CooldownTime"/> is 0.</param>
-    public Clockwork(float cooldown, System.Action Callback, bool autoExecute)
+    /// <param name="cycle">Number of times <see cref="Execute"/> can be call. Use -1 for unlimited. Use <see cref="ResetCycles"/> to recover their uses. Don't use 0 or the timer will be disabled by default.</param>
+    public Clockwork(float cooldown, System.Action Callback, bool autoExecute = true, int cycles = -1)
     {
-        TotalCooldown = cooldown;
-        ResetCooldown();
+        ResetCycles(cycles);
+        ResetCooldown(cooldown);
         this.Callback = Callback;
         this.autoExecute = autoExecute;
     }
 
     public void Execute()
     {
-        ResetCooldown();
-        Callback();
+        if (ReduceCyclesByOne())
+        {
+            ResetCooldown();
+            Callback();
+        }
+    }
+
+    private bool ReduceCyclesByOne()
+    {
+        if (IsEndlessLoop)
+            return true;
+        bool enabled = IsEnabled;
+        RemainingCycles--;
+        return enabled;
     }
 
     public bool TryExecute(float deltaTime = 0)
     {
-        if (Recharge(deltaTime))
+        if (IsEnabled && Recharge(deltaTime))
         {
             Execute();
             return true;
@@ -158,19 +210,36 @@ public class Clockwork : IClockWork
     }
 
     public void ResetCooldown() => CooldownTime = TotalCooldown;
+    public void ResetCooldown(float newCooldownTime)
+    {
+        TotalCooldown = newCooldownTime;
+        ResetCooldown();
+    }
+
+    public void ResetCycles() => RemainingCycles = TotalCycles;
+    public void ResetCycles(int newCycles)
+    {
+        TotalCycles = newCycles;
+        ResetCycles();
+    }
+
     public bool Recharge(float deltaTime)
     {
-        CooldownTime -= deltaTime;
-        return IsReady;
+        if (IsEnabled)
+        {
+            CooldownTime -= deltaTime;
+            return IsReady;
+        }
+        return false;
     }
 
     /// <summary>
-    /// Calls <see cref="Recharge(float)"/>. If returns <see langword="true"/> and <see cref="autoExecute"/> is <see langword="true"/> it calls <see cref="Execute"/>.
+    /// Calls <see cref="Recharge(float)"/> if <see cref="IsEnabled"/>, and calls <see cref="Execute"/> if <see cref="autoExecute"/> is <see langword="true"/> and <see cref="Recharge(float)"/> returned <see langword="true"/>.
     /// </summary>
     /// <param name="deltaTime">Time since last increase.</param>
     public void UpdateBehaviour(float deltaTime)
     {
-        if (Recharge(deltaTime) && autoExecute)
+        if (IsEnabled && Recharge(deltaTime) && autoExecute)
             Execute();
     }
 }
@@ -202,6 +271,12 @@ public class BasicClockwork : IBasicClockWork
     }
 
     public void ResetCooldown() => CooldownTime = TotalCooldown;
+    public void ResetCooldown(float newCooldownTime)
+    {
+        TotalCooldown = newCooldownTime;
+        ResetCooldown();
+    }
+
     public bool Recharge(float deltaTime)
     {
         CooldownTime -= deltaTime;

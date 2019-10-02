@@ -40,7 +40,7 @@ namespace CreaturesAddons
         public bool IsReady => ((IBasicClockWork)basicClockwork).IsReady;
         public bool Recharge(float deltaTime) => ((IBasicClockWork)basicClockwork).Recharge(deltaTime);
         public void ResetCooldown() => ((IBasicClockWork)basicClockwork).ResetCooldown();
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public void UpdateBehaviour(float deltaTime) => ((IBasicClockWork)basicClockwork).UpdateBehaviour(deltaTime);
+        public void ResetCooldown(float newCooldownTime) => ((IBasicClockWork)basicClockwork).ResetCooldown(newCooldownTime);
     }
 }
