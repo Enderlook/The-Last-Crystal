@@ -82,8 +82,7 @@ public class HealthBar : MonoBehaviour
     /// Take into account that the script is still enabled but it won't be updated on each frame. Also, it's still visible.
     /// </summary>
     /// <seealso cref="IsHidden"/>
-    public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
-    private bool isEnabled = true;
+    public bool IsEnabled { get; set; } = true;
 
     private void Awake() => Setup();
 
@@ -125,10 +124,7 @@ public class HealthBar : MonoBehaviour
     /// Get the <see cref="healthImage"/> color taking into account the percentage of remaining health.
     /// </summary>
     /// <returns>Color of the <see cref="healthImage"/></returns>
-    private Color GetHealthColor()
-    {
-        return Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + (damageBar != null ? damageBar.fillAmount : 0) - (healingBar != null ? healingImage.fillAmount : 0));
-    }
+    private Color GetHealthColor() => Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + (damageBar != null ? damageBar.fillAmount : 0) - (healingBar != null ? healingImage.fillAmount : 0));
 
     private void Update()
     {
@@ -140,14 +136,7 @@ public class HealthBar : MonoBehaviour
             if (healingImage != null && healingImage.fillAmount > 0)
                 healingImage.fillAmount -= Time.deltaTime;
 
-            if (minHealthColor != Color.black)
-            {
-                healthImage.color = GetHealthColor();
-            }
-            else
-            {
-                healthImage.color = maxHealthColor;
-            }
+            healthImage.color = minHealthColor != Color.black ? GetHealthColor() : maxHealthColor;
 
             if (textNumber != null)
             {
@@ -158,20 +147,12 @@ public class HealthBar : MonoBehaviour
                     textNumber.text = string.Format(textShowed, Rounding(dynamicHealth), Rounding(maxHealth), Rounding(dynamicHealth / maxHealth * 100));
                 }
                 else
-                {
                     textNumber.text = string.Format(textShowed, Rounding(health), Rounding(maxHealth), Rounding(health / maxHealth * 100));
-                }
             }
         }
     }
 
-    private float Rounding(float value)
-    {
-        if (ceilValues)
-            return Mathf.Ceil(value);
-        else
-            return Mathf.Round(value);
-    }
+    private float Rounding(float value) => ceilValues ? Mathf.Ceil(value) : Mathf.Round(value);
 
     /// <summary>
     /// Modify the current health and maximum health.
@@ -192,8 +173,6 @@ public class HealthBar : MonoBehaviour
     /// <param name="health"></param>
     public void UpdateValues(float health) => Set(health);
 
-    /*void Heal(float amount) { Change(amount); }
-    void Damage(float amount) { Change(-amount); }*/
     /// <summary>
     /// Set the new health value and updates bars.
     /// </summary>
@@ -261,9 +240,7 @@ public class HealthBar : MonoBehaviour
         }
         // Fix bug, preventing the healing bar overflow from the left side
         if (healingBar != null && healingTransform.rect.width < (healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x))
-        {
             healingImage.fillAmount -= ((healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x) - healingTransform.rect.width) / healingTransform.rect.width;
-        }
     }
 
 #if UNITY_EDITOR
