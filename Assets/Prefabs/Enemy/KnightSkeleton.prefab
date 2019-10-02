@@ -1,96 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &837269840
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 837269841}
-  m_Layer: 10
-  m_Name: rightCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &837269841
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 837269840}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 755056805893904983}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1309780312
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1309780313}
-  m_Layer: 10
-  m_Name: attackPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1309780313
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309780312}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 0.139, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 755056805893904983}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1595611634
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1595611635}
-  m_Layer: 10
-  m_Name: leftCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1595611635
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1595611634}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 755056805893904983}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &570108933
+--- !u!114 &2021772478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,36 +9,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 1091846710704527667}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3077d94c6833fd542ac6f1f1288137d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e2d420b2c5839f4e933d96988bdfdca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPlayer: 1
-  AIMovement:
-    moveForce: 18
-    stopDistance: 0.3
-    maxSpeed: 0.3
-    rightPoint: {fileID: 837269841}
-    leftPoint: {fileID: 1595611635}
-    rangeCheck: 0.02
-    floorLayer:
-      serializedVersion: 2
-      m_Bits: 256
-  AIAttack:
-    attackPosition: {fileID: 1309780313}
-    rangeAttack: 0.1
-    playerMask:
-      serializedVersion: 2
-      m_Bits: 512
-    timeBtwAttack: 1
-    timeBtwStrongAttack: 0
-  thisRB2D: {fileID: 0}
-  animator: {fileID: 0}
-  crystal: {fileID: 0}
-  platform: {fileID: 0}
-  target: {fileID: 0}
-  player: []
-  sprite: {fileID: 0}
-  damage: 0
+  firerate: 2
+  damage: 2
+  pushStrength: 30
+  rayCasting:
+    source: {x: 0.24165249, y: 0.18942142}
+    direction: {x: 0.55204564, y: -0.8338139}
+    distance: 0.23209102
+    referenceTransform: {fileID: 755056805893904983}
+    draw: 1
+    debug: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+  layerToHit: 9
+--- !u!114 &2021772479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1091846710704527667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9731404d35c2c42af12f51763a371c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - weapon: {fileID: 2021772478}
+    slash: {fileID: 2021772478}
 --- !u!1001 &6867324390007404908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,16 +51,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: KnightSkeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: damage
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 8818724890466740827}
     - target: {fileID: 6140415168490267451, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -216,6 +116,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: damage
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 8818724890466740827}
     - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_Sprite
