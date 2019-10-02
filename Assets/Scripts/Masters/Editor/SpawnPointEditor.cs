@@ -24,13 +24,13 @@ public class SpawnPointEditor : Editor
             SceneView.RepaintAll();
     }
 
-    void OnSceneGUI()
+    private void OnSceneGUI()
     {
         Draw();
         Input();
     }
 
-    void Draw()
+    private void Draw()
     {
         Handles.color = Color.red;
         for (int i = 0; i < point.NumPoints; i++)
@@ -45,7 +45,7 @@ public class SpawnPointEditor : Editor
         }
     }
 
-    void Input()
+    private void Input()
     {
         Event guiEvent = Event.current;
         Vector2 mousePos = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition).origin;

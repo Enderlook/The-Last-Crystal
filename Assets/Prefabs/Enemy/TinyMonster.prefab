@@ -27,6 +27,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TinyMonster
       objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 1119641748699525593}
     - target: {fileID: 6140415168490267451, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -223,6 +228,12 @@ PrefabInstance:
 --- !u!1 &8848631403374183089 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5794628492074983519, guid: 336b20a0e32c641489bb09ab09369d57,
+    type: 3}
+  m_PrefabInstance: {fileID: 3073144382275232494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &1119641748699525593 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
     type: 3}
   m_PrefabInstance: {fileID: 3073144382275232494}
   m_PrefabAsset: {fileID: 0}
