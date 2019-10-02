@@ -49,13 +49,13 @@ namespace FloatPool
     public class FloatPool : IFloatPool
     {
         [Header("Main Configuration")]
-        [Tooltip("Maximum Current.")]
-        public float startingMax = 100;
+        [SerializeField, Tooltip("Maximum Current.")]
+        private float startingMax = 100;
         public float Max { get; private set; }
 
 
-        [Tooltip("Starting Current. Set -1 to use Max value.")]
-        public float startingCurrent = -1;
+        [SerializeField, Tooltip("Starting Current. Set -1 to use Max value.")]
+        private float startingCurrent = -1;
 
         public float Current { get; private set; }
 
@@ -151,8 +151,8 @@ namespace FloatPool
         [Serializable]
         public class FullCallbackDecorator : Decorator
         {
-            [Tooltip("Event called when Current reaches Max due to Increase method call.")]
-            public UnityEvent callback;
+            [SerializeField, Tooltip("Event called when Current reaches Max due to Increase method call.")]
+            private UnityEvent callback;
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
@@ -166,8 +166,8 @@ namespace FloatPool
         [Serializable]
         public class EmptyCallbackDecorator : Decorator
         {
-            [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
-            public UnityEvent callback;
+            [SerializeField, Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
+            private UnityEvent callback;
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -228,25 +228,25 @@ namespace FloatPool
         [Serializable]
         public class RechargerDecorator : Decorator
         {
-            [Tooltip("Value per second increases in Current.")]
-            public float rechargeRate;
+            [SerializeField, Tooltip("Value per second increases in Current.")]
+            private float rechargeRate;
 
-            [Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
-            public float rechargingDelay;
+            [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
+            private float rechargingDelay;
             private float _currentRechargingDelay = 0f;
 
-            [Tooltip("Sound played while recharging.")]
-            public Playlist playlist;
-            [Tooltip("Audio Source used to play sound.")]
-            public AudioSource audioSource;
+            [SerializeField, Tooltip("Sound played while recharging.")]
+            private Playlist playlist;
+            [SerializeField, Tooltip("Audio Source used to play sound.")]
+            private AudioSource audioSource;
 
-            [Tooltip("Event executed when start recharging.")]
-            public UnityEvent startCallback;
+            [SerializeField, Tooltip("Event executed when start recharging.")]
+            private UnityEvent startCallback;
             private bool _startCalled = false;
-            [Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
-            public UnityEventBoolean endCallback;
-            [Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
-            public UnityEventBoolean activeCallback;
+            [SerializeField, Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
+            private UnityEventBoolean endCallback;
+            [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
+            private UnityEventBoolean activeCallback;
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -336,8 +336,8 @@ namespace FloatPool
         [Serializable]
         public class ChangeCallbackDecorator : Decorator
         {
-            [Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
-            public UnityEvent callback;
+            [SerializeField, Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
+            private UnityEvent callback;
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -357,8 +357,8 @@ namespace FloatPool
         [Serializable]
         public class DecreaseReductionDecorator : Decorator
         {
-            [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
-            public Calculator reductionFormula;
+            [SerializeField, Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
+            private Calculator reductionFormula;
 
             public override void Initialize()
             {
