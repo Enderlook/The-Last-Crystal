@@ -1473,8 +1473,8 @@ MonoBehaviour:
   startSpawn: 3
   point:
     points:
-    - {x: -6.9598722, y: 3.0191462}
-    - {x: 4.9601793, y: 2.744678}
+    - {x: -6.677654, y: 2.9390206}
+    - {x: 4.6737747, y: 2.7052345}
 --- !u!4 &1172871607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3662689934729487387, guid: 442861c165a316e4792b7d326a0610d4,

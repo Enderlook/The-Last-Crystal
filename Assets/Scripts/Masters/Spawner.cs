@@ -27,6 +27,11 @@ public class Spawner : MonoBehaviour
         point = new Point(transform.position);
     }
 
+    private void Reset()
+    {
+        CreatePoint();
+    }
+
     private void Start()
     {
         points = point.GetPositionsPoints();
@@ -94,5 +99,16 @@ public class Point
     public Vector2[] GetPositionsPoints()
     {
         return points.ToArray();
+    }
+
+    public void AddPoint(Vector2 p)
+    {
+        points.Add(p);
+    }
+
+    // Still in progress...
+    public void DeletePoint(int i)
+    {
+        points.RemoveAt(i);
     }
 }

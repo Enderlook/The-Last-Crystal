@@ -7,9 +7,27 @@ public class SpawnPointEditor : Editor
     Spawner spawner;
     Point point;
 
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+
+        EditorGUI.BeginChangeCheck();
+
+        if (GUILayout.Button("Create New Points"))
+        {
+            Undo.RecordObject(spawner, "Create new points");
+            spawner.CreatePoint();
+            point = spawner.point;
+        }
+
+        if (EditorGUI.EndChangeCheck())
+            SceneView.RepaintAll();
+    }
+
     void OnSceneGUI()
     {
         Draw();
+        Input();
     }
 
     void Draw()
@@ -21,9 +39,21 @@ public class SpawnPointEditor : Editor
                 Handles.CylinderHandleCap);
             if (point[i] != newPos)
             {
-                Undo.RecordObject(spawner, "MovePoint");
+                Undo.RecordObject(spawner, "Move point");
                 point.MovePoints(i, newPos);
             }
+        }
+    }
+
+    void Input()
+    {
+        Event guiEvent = Event.current;
+        Vector2 mousePos = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition).origin;
+
+        if (guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && guiEvent.shift)
+        {
+            Undo.RecordObject(spawner, "Add point");
+            point.AddPoint(mousePos);
         }
     }
 
