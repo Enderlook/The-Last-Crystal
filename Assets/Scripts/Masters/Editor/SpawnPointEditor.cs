@@ -4,8 +4,8 @@ using UnityEngine;
 [CustomEditor(typeof(Spawner))]
 public class SpawnPointEditor : Editor
 {
-    Spawner spawner;
-    Point point;
+    private Spawner spawner;
+    private Point point;
 
     public override void OnInspectorGUI()
     {
