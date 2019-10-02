@@ -330,6 +330,7 @@ namespace FloatPool
             }
 
             [Serializable]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "It's only used by Unity so it doesn't matter if it isn't visible.")]
             public class UnityEventBoolean : UnityEvent<bool> { }
         }
 
