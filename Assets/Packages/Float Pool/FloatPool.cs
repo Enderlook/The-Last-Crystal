@@ -1,3 +1,4 @@
+using System;
 using CreaturesAddons;
 using FloatPool.Internal;
 using HealthBarGUI;
@@ -44,7 +45,7 @@ namespace FloatPool
         (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
     }
 
-    [System.Serializable]
+    [Serializable]
     public class FloatPool : IFloatPool
     {
         [Header("Main Configuration")]
@@ -143,14 +144,11 @@ namespace FloatPool
 
             public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
         }
-
-        [System.Serializable]
-        public class UnityEventBoolean : UnityEvent<bool> { }
     }
 
     namespace Decorators
     {
-        [System.Serializable]
+        [Serializable]
         public class FullCallbackDecorator : Decorator
         {
             [Tooltip("Event called when Current reaches Max due to Increase method call.")]
@@ -165,7 +163,7 @@ namespace FloatPool
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class EmptyCallbackDecorator : Decorator
         {
             [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
@@ -180,7 +178,7 @@ namespace FloatPool
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class BarDecorator : Decorator, IHealthBarViewer
         {
             [SerializeField, Tooltip("Bar used to show values.")]
@@ -227,7 +225,7 @@ namespace FloatPool
             public bool IsDamageBarPercentHide => ((IHealthBarViewer)Bar).IsDamageBarPercentHide;
         }
 
-        [System.Serializable]
+        [Serializable]
         public class RechargerDecorator : Decorator
         {
             [Tooltip("Value per second increases in Current.")]
@@ -330,9 +328,12 @@ namespace FloatPool
                 if (audioSource != null && playlist != null && !audioSource.isPlaying)
                     playlist.Play(audioSource, Settings.IsSoundActive);
             }
+
+            [Serializable]
+            public class UnityEventBoolean : UnityEvent<bool> { }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class ChangeCallbackDecorator : Decorator
         {
             [Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
@@ -353,7 +354,7 @@ namespace FloatPool
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class DecreaseReductionDecorator : Decorator
         {
             [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
