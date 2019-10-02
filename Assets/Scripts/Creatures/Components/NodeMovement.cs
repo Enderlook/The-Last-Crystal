@@ -40,8 +40,8 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     void IInit.Init(Creature creature)
     {
         thisRigidbody2D = creature.thisRigidbody2D;
-        spriteRenderer = creature.GetComponent<SpriteRenderer>();
-        animator = creature.GetComponent<Animator>();
+        spriteRenderer = creature.sprite;
+        animator = creature.animator;
         goal = Global.crystal;
     }
 

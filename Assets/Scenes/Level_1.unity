@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 267235809}
   m_Layer: 8
   m_Name: Islands
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1431,7 +1431,7 @@ MonoBehaviour:
   projectilesParent: {fileID: 103097900}
   floatingTextParent: {fileID: 1868032683}
   pickupsParent: {fileID: 1901414236}
-  crystal: {fileID: 0}
+  crystal: {fileID: 1601040596}
   warrior: {fileID: 1590606441}
   wizard: {fileID: 1172871607}
 --- !u!4 &1160684985

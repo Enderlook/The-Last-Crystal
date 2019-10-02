@@ -51,6 +51,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: KnightSkeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: damage
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 8818724890466740827}
     - target: {fileID: 6140415168490267451, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116,16 +126,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.7
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+    - target: {fileID: 5381365898832506502, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: damage
-      value: 1.2
+      propertyPath: ground
+      value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 8818724890466740827}
     - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_Sprite
