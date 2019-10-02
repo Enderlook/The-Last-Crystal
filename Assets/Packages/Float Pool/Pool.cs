@@ -74,7 +74,7 @@ namespace FloatPool
             pool = basePool;
             foreach (Decorator decorator in GetAppliedDecorators())
             {
-                decorator.SetDecorable(pool);
+                ((IDecorator)decorator).SetDecorable(pool);
                 pool = decorator;
             }
         }

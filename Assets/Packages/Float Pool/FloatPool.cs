@@ -129,7 +129,11 @@ namespace FloatPool
 
     namespace Internal
     {
-        public abstract class Decorator : IFloatPool
+        public interface IDecorator
+        {
+            void SetDecorable(IFloatPool decorable);
+        }
+        public abstract class Decorator : IFloatPool, IDecorator
         {
             private IFloatPool decorable;
 
@@ -142,7 +146,7 @@ namespace FloatPool
             public virtual void Initialize() => decorable.Initialize();
             public virtual void UpdateBehaviour(float deltaTime) => decorable.UpdateBehaviour(deltaTime);
 
-            public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
+            void IDecorator.SetDecorable(IFloatPool decorable) => this.decorable = decorable;
         }
     }
 
@@ -151,8 +155,10 @@ namespace FloatPool
         [Serializable]
         public class FullCallbackDecorator : Decorator
         {
+#pragma warning disable CS0649
             [SerializeField, Tooltip("Event called when Current reaches Max due to Increase method call.")]
             private UnityEvent callback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
@@ -166,8 +172,10 @@ namespace FloatPool
         [Serializable]
         public class EmptyCallbackDecorator : Decorator
         {
+#pragma warning disable CS0649
             [SerializeField, Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
             private UnityEvent callback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -228,6 +236,7 @@ namespace FloatPool
         [Serializable]
         public class RechargerDecorator : Decorator
         {
+#pragma warning disable CS0649
             [SerializeField, Tooltip("Value per second increases in Current.")]
             private float rechargeRate;
 
@@ -247,6 +256,7 @@ namespace FloatPool
             private UnityEventBoolean endCallback;
             [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
             private UnityEventBoolean activeCallback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -337,8 +347,10 @@ namespace FloatPool
         [Serializable]
         public class ChangeCallbackDecorator : Decorator
         {
+#pragma warning disable CS0649
             [SerializeField, Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
             private UnityEvent callback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -358,8 +370,10 @@ namespace FloatPool
         [Serializable]
         public class DecreaseReductionDecorator : Decorator
         {
+#pragma warning disable CS0649
             [SerializeField, Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
             private Calculator reductionFormula;
+#pragma warning restore CS0649
 
             public override void Initialize()
             {
