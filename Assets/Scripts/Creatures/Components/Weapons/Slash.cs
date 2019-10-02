@@ -37,13 +37,6 @@ namespace CreaturesAddons
         protected override void Attack()
         {
             thisAnimator.SetTrigger(ANIMATION_STATES.ATTACK);
-            //RaycastHit2D raycastHit = rayCasting.Raycast(1 << layerToHit); // Ignore any layer that isn't layerToHit
-            //if (raycastHit.transform == null)
-            //    return;
-
-            //Transform victim = raycastHit.transform;
-            //victim.GetComponent<ITakeDamage>()?.TakeDamage(damage);
-            //victim.GetComponent<IPush>()?.Push(thisTransform.position, pushStrength);
         }
 
         void HitTarget()
