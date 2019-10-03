@@ -9,6 +9,8 @@ namespace CreaturesAddons
         private float damage = 1;
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
+        [SerializeField, Tooltip("Animation attack name.")]
+        private string animationName;
 
         [Header("Projectile Configuration")]
         [SerializeField, Tooltip("Projectile force.")]
@@ -35,17 +37,22 @@ namespace CreaturesAddons
 
         private Transform shootingTransform;
         private SpriteRenderer creatureSpriteRenderer;
+        private Animator thisAnimator;
 
         private Vector2 ShootingPoint => new Vector3(creatureSpriteRenderer.flipX ? -shootingPosition.x : shootingPosition.x, shootingPosition.y) + shootingTransform.position;
 
         public override void Init(Creature creature)
         {
             shootingTransform = creature.Transform;
+            thisAnimator = creature.animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
             base.Init(creature);
         }
 
-        protected override void Attack()
+        protected override void Attack() => thisAnimator.SetTrigger(animationName);
+
+        // Shoot() is called through animation event 'Attack' and create the prefab 'Projectile'
+        void Shoot()
         {
             GameObject go = new GameObject($"{nameof(MouseShooter)} Projectile");
             go.transform.position = ShootingPoint;

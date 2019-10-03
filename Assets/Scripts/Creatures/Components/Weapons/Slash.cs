@@ -45,10 +45,7 @@ namespace CreaturesAddons
             base.Init(creature);
         }
 
-        protected override void Attack()
-        {
-            thisAnimator.SetTrigger(animationName);
-        }
+        protected override void Attack() => thisAnimator.SetTrigger(animationName);
 
         // HitTarget() is called through animation event "Attack" for a specific frame
         private void HitTarget()
