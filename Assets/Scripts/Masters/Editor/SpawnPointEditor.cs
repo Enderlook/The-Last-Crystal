@@ -1,69 +1,48 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(Spawner))]
 public class SpawnPointEditor : Editor
 {
-    private Spawner spawner;
-    private Point point;
+    private static List<Vector2> points;
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
+        DrawDefaultInspector();
 
-        EditorGUI.BeginChangeCheck();
-
-        if (GUILayout.Button("Create New Points"))
-        {
-            Undo.RecordObject(spawner, "Create new points");
-            spawner.CreatePoint();
-            point = spawner.point;
-        }
-
-        if (EditorGUI.EndChangeCheck())
-            SceneView.RepaintAll();
+        EditorGUILayout.HelpBox("Use Ctrl + Right Click to add points.\n" +
+                                "Use Alt + Right Click to remove closest point to mouse.", MessageType.Info);
     }
 
-    private void OnSceneGUI()
-    {
-        Draw();
-        Input();
-    }
+    private void OnEnable() => points = ((Spawner)target).points;
 
-    private void Draw()
+    public void OnSceneGUI()
     {
-        Handles.color = Color.red;
-        for (int i = 0; i < point.NumPoints; i++)
+        if (Event.current.type == EventType.MouseDown)
         {
-            Vector2 newPos = Handles.FreeMoveHandle(point[i], Quaternion.identity, .1f, Vector2.zero,
-                Handles.CylinderHandleCap);
-            if (point[i] != newPos)
+            if (Event.current.button == 1)
             {
-                Undo.RecordObject(spawner, "Move point");
-                point.MovePoints(i, newPos);
+                Vector2 mousePosition = MouseHelper.GetMousePositionInEditor();
+                if (Event.current.control)
+                    points.Add(mousePosition);
+                else if (Event.current.alt)
+                {
+                    float closestDistance = Mathf.Infinity;
+                    int? closestPoint = null;
+                    for (int i = 0; i < points.Count; i++)
+                    {
+                        float newDistance = Vector2.Distance(points[i], mousePosition);
+                        if (newDistance < closestDistance)
+                        {
+                            closestDistance = newDistance;
+                            closestPoint = i;
+                        }
+                    }
+                    if (closestPoint != null)
+                        points.RemoveAt((int)closestPoint);
+                }
             }
         }
-    }
-
-    private void Input()
-    {
-        Event guiEvent = Event.current;
-        Vector2 mousePos = HandleUtility.GUIPointToWorldRay(guiEvent.mousePosition).origin;
-
-        if (guiEvent.type == EventType.MouseDown && guiEvent.button == 0 && guiEvent.shift)
-        {
-            Undo.RecordObject(spawner, "Add point");
-            point.AddPoint(mousePos);
-        }
-    }
-
-    private void OnEnable()
-    {
-        spawner = (Spawner)target;
-
-        if (spawner.point == null)
-            spawner.CreatePoint();
-
-        point = spawner.point;
     }
 }
