@@ -42,7 +42,7 @@ public class DrawVectorRelativeToTransformEditor : PropertyDrawer
             case SerializedPropertyType.Vector2Int:
                 return (Vector2)serializedProperty.vector2IntValue;
             case SerializedPropertyType.Vector4:
-                return (Vector3)serializedProperty.vector4Value;
+                return serializedProperty.vector4Value;
             case SerializedPropertyType.ObjectReference:
                 if (serializedProperty.objectReferenceValue is Transform transform)
                     return transform.position;
