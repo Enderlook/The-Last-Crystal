@@ -21,26 +21,25 @@ namespace CreaturesAddons
 
         private Transform thisTransform;
         private Animator thisAnimator;
+        private SpriteRenderer thisSpriteRenderer;
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
         public bool AutoAttack { get; set; }
 
         public bool AttackIfIsReadyAndIfTargetInRange(float deltaTime = 0) => TargetInRange ? TryExecute(deltaTime) : Recharge(deltaTime);
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public override void Init(Creature creature)
         {
             thisTransform = creature.Transform;
             thisAnimator = creature.animator;
+            thisSpriteRenderer = creature.sprite;
+            rayCasting.SetReference(thisTransform, thisSpriteRenderer);
             base.Init(creature);
         }
 
-        protected override void Attack()
-        {
-            thisAnimator.SetTrigger(animationName);
-            HitTarget();
-        }
+        protected override void Attack() => thisAnimator.SetTrigger(animationName);
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         private void HitTarget()
         {
             RaycastHit2D[] raycastHits = rayCasting.RaycastAll(1 << layerToHit); // Ignore any layer that isn't layerToHit

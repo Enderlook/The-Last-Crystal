@@ -26,25 +26,23 @@ public class RayCastingDrawer : PropertyDrawer
             {
                 Color color = serializedProperty.FindPropertyRelative("color").colorValue;
 
-                SerializedProperty sourceProperty = serializedProperty.FindPropertyRelative("source");
-                Vector2 source = sourceProperty.vector2Value;
+                Vector2 source = rayCasting.Source;
 
                 Vector2 reference = (Vector2)typeof(RayCasting).GetProperty("Reference", bindingFlags).GetValue(rayCasting);
 
                 serializedProperty.serializedObject.Update();
 
-                sourceProperty.vector2Value = (Vector2)Handles.PositionHandle(source + reference, Quaternion.identity) - reference;
+                rayCasting.Source = (Vector2)Handles.PositionHandle(source + reference, Quaternion.identity) - reference;
 
                 Handles.color = color;
                 if (serializedProperty.FindPropertyRelative("distance").floatValue == Mathf.Infinity)
-                {
-                    SerializedProperty directionProperty = serializedProperty.FindPropertyRelative("direction");
-                    Vector2 direction = directionProperty.vector2Value;
+                {;
+                    Vector2 direction = rayCasting.direction;
 
                     // We can't use the WorldEnd property because that will give infinity
                     Vector2 worldEndPosition = source + reference + direction;
 
-                    directionProperty.vector2Value = ((Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity) - source - reference).normalized;
+                    rayCasting.direction = ((Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity) - source - reference).normalized;
 
                     Vector2 sourcePositionWorld = source + reference;
 

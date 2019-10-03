@@ -40,10 +40,13 @@ MonoBehaviour:
     direction: {x: 0.77603835, y: -0.6306857}
     distance: 0.2733842
     referenceTransform: {fileID: 829079563412899545}
+    spriteRenderer: {fileID: 3940367181773173620}
+    flipX: 0
+    flipY: 0
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
-  layerToHit: 0
+  layerToHit: 10
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,6 +397,12 @@ GameObject:
 --- !u!4 &829079563412899545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6835815089219722961}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &3940367181773173620 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
     type: 3}
   m_PrefabInstance: {fileID: 6835815089219722961}
   m_PrefabAsset: {fileID: 0}

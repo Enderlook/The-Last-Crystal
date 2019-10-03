@@ -1218,10 +1218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingMoney: 0
-  enemiesParent: {fileID: 0}
-  projectilesParent: {fileID: 0}
-  floatingTextParent: {fileID: 0}
-  pickupsParent: {fileID: 0}
   crystal: {fileID: 1601040596}
 --- !u!4 &1160684985
 Transform:

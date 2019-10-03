@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bat
       objectReference: {fileID: 0}
+    - target: {fileID: 5794628492074983519, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: sprite
@@ -236,7 +241,7 @@ PrefabInstance:
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.1272
+      value: 0.109
       objectReference: {fileID: 0}
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
@@ -251,7 +256,7 @@ PrefabInstance:
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.0131
+      value: -0.0113
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336b20a0e32c641489bb09ab09369d57, type: 3}

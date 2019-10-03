@@ -21,6 +21,9 @@ MonoBehaviour:
     direction: {x: 0.87737095, y: -0.47981274}
     distance: 0.375491
     referenceTransform: {fileID: 5706950539925151309}
+    spriteRenderer: {fileID: 4551959438341189185}
+    flipX: 0
+    flipY: 0
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
@@ -48,6 +51,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: General
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794628492074983519, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: 
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}

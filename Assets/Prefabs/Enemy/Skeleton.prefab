@@ -17,10 +17,13 @@ MonoBehaviour:
   pushStrength: 30
   animationName: Attack
   rayCasting:
-    source: {x: 0.05300474, y: 0.05189097}
-    direction: {x: 0.99540365, y: -0.095768094}
-    distance: 0.22856723
+    source: {x: 0.044743583, y: 0.1146758}
+    direction: {x: 0.9694798, y: -0.24517126}
+    distance: 0.19036873
     referenceTransform: {fileID: 2328381347471122695}
+    spriteRenderer: {fileID: 5785143950583992587}
+    flipX: 0
+    flipY: 0
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
@@ -63,6 +66,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 5794628492074983519, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: 
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
