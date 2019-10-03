@@ -33,8 +33,8 @@ namespace CreaturesAddons
                 return;
 
             Transform victim = raycastHit.transform;
-            victim.GetComponent<ITakeDamage>()?.TakeDamage(damage);
             victim.GetComponent<IPush>()?.Push(thisTransform.position, pushStrength);
+            victim.GetComponent<ITakeDamage>()?.TakeDamage(damage);
         }
     }
 }

@@ -89,6 +89,7 @@ namespace CreaturesAddons
         {
             this.damage = damage;
             this.pushStrength = pushStrength;
+            thisTransform = transform;
         }
 
         public override void ProduceDamage(object victim)

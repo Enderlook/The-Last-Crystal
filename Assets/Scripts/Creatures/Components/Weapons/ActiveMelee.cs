@@ -27,10 +27,10 @@ namespace CreaturesAddons
         {
             if (basicClockwork.IsReady)
             {
-                if (victim is ITakeDamage takeDamage)
-                    takeDamage.TakeDamage(damage);
                 if (victim is IPush push)
                     push.Push(thisTransform.position, pushStrength, PushMode.Local);
+                if (victim is ITakeDamage takeDamage)
+                    takeDamage.TakeDamage(damage);
             }
         }
 
