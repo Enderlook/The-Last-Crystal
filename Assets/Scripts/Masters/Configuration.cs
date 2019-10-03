@@ -65,7 +65,7 @@ public class Configuration : MonoBehaviour
     {
         // https://stackoverflow.com/questions/8151888/c-sharp-iterate-through-class-properties
         // Use Fields instead of Properties fixes a bug
-        foreach (FieldInfo field in typeof(Configuration).GetFields())
+        foreach (FieldInfo field in typeof(Configuration).GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
         {
             // https://stackoverflow.com/questions/3460745/setting-properties-with-reflection-on-static-classes or typeof(Global), whatever works...
             // https://stackoverflow.com/questions/7334067/how-to-get-fields-and-their-values-from-a-static-class-in-referenced-assembly
