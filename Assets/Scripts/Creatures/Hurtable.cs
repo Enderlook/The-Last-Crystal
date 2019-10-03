@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using FloatPool;
 using UnityEngine;
 
@@ -52,6 +53,12 @@ namespace CreaturesAddons
         public virtual void Die(bool suicide = false)
         {
             Array.ForEach(gameObject.GetComponentsInChildren<IDie>(), e => e.Die(suicide));
+            StartCoroutine(DestroyOnNextFrame());
+        }
+
+        IEnumerator DestroyOnNextFrame()
+        {
+            yield return null;
             Destroy(gameObject);
         }
 
