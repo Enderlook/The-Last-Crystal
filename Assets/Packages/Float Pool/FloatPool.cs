@@ -1,3 +1,4 @@
+using System;
 using CreaturesAddons;
 using FloatPool.Internal;
 using HealthBarGUI;
@@ -44,17 +45,17 @@ namespace FloatPool
         (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
     }
 
-    [System.Serializable]
+    [Serializable]
     public class FloatPool : IFloatPool
     {
         [Header("Main Configuration")]
-        [Tooltip("Maximum Current.")]
-        public float startingMax = 100;
+        [SerializeField, Tooltip("Maximum Current.")]
+        private float startingMax = 100;
         public float Max { get; private set; }
 
 
-        [Tooltip("Starting Current. Set -1 to use Max value.")]
-        public float startingCurrent = -1;
+        [SerializeField, Tooltip("Starting Current. Set -1 to use Max value.")]
+        private float startingCurrent = -1;
 
         public float Current { get; private set; }
 
@@ -128,7 +129,11 @@ namespace FloatPool
 
     namespace Internal
     {
-        public abstract class Decorator : IFloatPool
+        public interface IDecorator
+        {
+            void SetDecorable(IFloatPool decorable);
+        }
+        public abstract class Decorator : IFloatPool, IDecorator
         {
             private IFloatPool decorable;
 
@@ -141,20 +146,19 @@ namespace FloatPool
             public virtual void Initialize() => decorable.Initialize();
             public virtual void UpdateBehaviour(float deltaTime) => decorable.UpdateBehaviour(deltaTime);
 
-            public void SetDecorable(IFloatPool decorable) => this.decorable = decorable;
+            void IDecorator.SetDecorable(IFloatPool decorable) => this.decorable = decorable;
         }
-
-        [System.Serializable]
-        public class UnityEventBoolean : UnityEvent<bool> { }
     }
 
     namespace Decorators
     {
-        [System.Serializable]
+        [Serializable]
         public class FullCallbackDecorator : Decorator
         {
-            [Tooltip("Event called when Current reaches Max due to Increase method call.")]
-            public UnityEvent callback;
+#pragma warning disable CS0649
+            [SerializeField, Tooltip("Event called when Current reaches Max due to Increase method call.")]
+            private UnityEvent callback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
             {
@@ -165,11 +169,13 @@ namespace FloatPool
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class EmptyCallbackDecorator : Decorator
         {
-            [Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
-            public UnityEvent callback;
+#pragma warning disable CS0649
+            [SerializeField, Tooltip("Event called when Current become 0 or bellow due to Decrease method call.")]
+            private UnityEvent callback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -180,7 +186,7 @@ namespace FloatPool
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class BarDecorator : Decorator, IHealthBarViewer
         {
             [SerializeField, Tooltip("Bar used to show values.")]
@@ -227,28 +233,30 @@ namespace FloatPool
             public bool IsDamageBarPercentHide => ((IHealthBarViewer)Bar).IsDamageBarPercentHide;
         }
 
-        [System.Serializable]
+        [Serializable]
         public class RechargerDecorator : Decorator
         {
-            [Tooltip("Value per second increases in Current.")]
-            public float rechargeRate;
+#pragma warning disable CS0649
+            [SerializeField, Tooltip("Value per second increases in Current.")]
+            private float rechargeRate;
 
-            [Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
-            public float rechargingDelay;
+            [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
+            private float rechargingDelay;
             private float _currentRechargingDelay = 0f;
 
-            [Tooltip("Sound played while recharging.")]
-            public Playlist playlist;
-            [Tooltip("Audio Source used to play sound.")]
-            public AudioSource audioSource;
+            [SerializeField, Tooltip("Sound played while recharging.")]
+            private Playlist playlist;
+            [SerializeField, Tooltip("Audio Source used to play sound.")]
+            private AudioSource audioSource;
 
-            [Tooltip("Event executed when start recharging.")]
-            public UnityEvent startCallback;
+            [SerializeField, Tooltip("Event executed when start recharging.")]
+            private UnityEvent startCallback;
             private bool _startCalled = false;
-            [Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
-            public UnityEventBoolean endCallback;
-            [Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
-            public UnityEventBoolean activeCallback;
+            [SerializeField, Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
+            private UnityEventBoolean endCallback;
+            [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
+            private UnityEventBoolean activeCallback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -330,13 +338,19 @@ namespace FloatPool
                 if (audioSource != null && playlist != null && !audioSource.isPlaying)
                     playlist.Play(audioSource, Settings.IsSoundActive);
             }
+
+            [Serializable]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "It's only used by Unity so it doesn't matter if it isn't visible.")]
+            public class UnityEventBoolean : UnityEvent<bool> { }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class ChangeCallbackDecorator : Decorator
         {
-            [Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
-            public UnityEvent callback;
+#pragma warning disable CS0649
+            [SerializeField, Tooltip("Event executed each time Current value changes due to Decrease or Increase methods.")]
+            private UnityEvent callback;
+#pragma warning restore CS0649
 
             public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
             {
@@ -353,11 +367,13 @@ namespace FloatPool
             }
         }
 
-        [System.Serializable]
+        [Serializable]
         public class DecreaseReductionDecorator : Decorator
         {
-            [Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
-            public Calculator reductionFormula;
+#pragma warning disable CS0649
+            [SerializeField, Tooltip("Reduction formula done in Decrease method.\n{0} is amount to reduce.\n{1} is current value.\n{2} is max value.")]
+            private Calculator reductionFormula;
+#pragma warning restore CS0649
 
             public override void Initialize()
             {

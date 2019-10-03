@@ -12,10 +12,6 @@ namespace CreaturesAddons
         [Tooltip("Sprite Renderer Component.")]
         public SpriteRenderer sprite;
 
-        [Tooltip("Damage amount.")]
-        [Range(0f, 25f)]
-        public float damage;
-
         [Tooltip("StoppableRigidbody Script")]
         public StoppableRigidbody stoppableRigidbody;
 

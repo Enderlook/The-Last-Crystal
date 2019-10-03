@@ -3,19 +3,6 @@ using UnityEngine;
 
 public static class Global
 {
-    /// <summary>
-    /// Enemies parent transform. Used to store all the enemies.
-    /// </summary>
-    public static Transform enemiesParent;
-    /// <summary>
-    /// Projectiles parent transform. Used to store all the projectiles.
-    /// </summary>
-    public static Transform projectilesParent;
-    /// <summary>
-    /// Pickups parent transform. Used to store all the pickups.
-    /// </summary>
-    public static Transform pickupsParent;
-
     private static CoinMeter coinMeter;
     /// <summary>
     /// Set the <seealso cref="CoinMeter"/> script that controls how money is displayed on canvas.
@@ -57,27 +44,20 @@ public static class Global
 
 public class Configuration : MonoBehaviour
 {
+#pragma warning disable IDE0051
+#pragma warning disable CS0649
     [Header("Configuration")]
-    [Tooltip("Stating money.")]
-    public int startingMoney;
-
-    [Header("Setup")]
-    [Header("Parents")]
-    [Tooltip("Enemies parent transform.")]
-    public Transform enemiesParent;
-    [Tooltip("Projectiles parent transform.")]
-    public Transform projectilesParent;
-    [Tooltip("Floating text parent transform.")]
-    public Transform floatingTextParent;
-    [Tooltip("Pickups parent transform.")]
-    public Transform pickupsParent;
+    [SerializeField, Tooltip("Stating money.")]
+    private int startingMoney;
 
     //[Header("Menu")]
-    //[Tooltip("Money controller script.")]
-    //public CoinMeter coinMeter;
+    //[SerializeField, Tooltip("Money controller script.")]
+    //private CoinMeter coinMeter;
 
-    [Tooltip("Crystal")]
-    public Transform crystal;
+    [SerializeField, Tooltip("Crystal")]
+    private Transform crystal;
+#pragma warning restore CS0649
+#pragma warning restore IDE0051
 
     private void Awake() => StoreGlobals();
 
@@ -93,6 +73,5 @@ public class Configuration : MonoBehaviour
         }
 
         //Global.SetCoinMeter(coinMeter, startingMoney);
-        FloatingTextController.SetFloatingTextParentStatic(floatingTextParent);
     }
 }
