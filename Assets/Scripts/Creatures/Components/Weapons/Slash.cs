@@ -2,7 +2,7 @@
 
 namespace CreaturesAddons
 {
-    public class Slash : Weapon
+    public class Slash : Weapon, IAutomatedAttack
     {
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
@@ -21,6 +21,11 @@ namespace CreaturesAddons
 
         private Transform thisTransform;
         private Animator thisAnimator;
+
+        public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
+        public bool AutoAttack { get; set; }
+
+        public bool AttackIfIsReadyAndIfTargetInRange(float deltaTime = 0) => TargetInRange ? TryExecute(deltaTime) : Recharge(deltaTime);
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public override void Init(Creature creature)
@@ -45,6 +50,25 @@ namespace CreaturesAddons
                 victim.transform.GetComponent<IPush>()?.Push(thisTransform.position, pushStrength);
                 victim.transform.GetComponent<ITakeDamage>()?.TakeDamage(damage);
             }
+        }
+
+        private void AttackIfAutomated()
+        {
+            if (AutoAttack)
+                AttackIfIsReadyAndIfTargetInRange();
+        }
+
+        public override bool Recharge(float deltaTime)
+        {
+            bool value = base.Recharge(deltaTime);
+            AttackIfAutomated();
+            return value;
+        }
+
+        public override void UpdateBehaviour(float deltaTime)
+        {
+            base.UpdateBehaviour(deltaTime);
+            AttackIfAutomated();
         }
     }
 }

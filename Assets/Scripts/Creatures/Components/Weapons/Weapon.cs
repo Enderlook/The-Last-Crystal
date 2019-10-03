@@ -24,10 +24,10 @@ namespace CreaturesAddons
         public bool IsEndlessLoop => ((IClockWork)clockwork).IsEndlessLoop;
         public bool IsEnabled => ((IClockWork)clockwork).IsEnabled;
         public void Execute() => ((IClockWork)clockwork).Execute();
-        public bool Recharge(float deltaTime) => ((IClockWork)clockwork).Recharge(deltaTime);
+        public virtual bool Recharge(float deltaTime) => ((IClockWork)clockwork).Recharge(deltaTime);
         public void ResetCooldown() => ((IClockWork)clockwork).ResetCooldown();
         public bool TryExecute(float deltaTime = 0) => ((IClockWork)clockwork).TryExecute(deltaTime);
-        public void UpdateBehaviour(float deltaTime) => ((IClockWork)clockwork).UpdateBehaviour(deltaTime);
+        public virtual void UpdateBehaviour(float deltaTime) => ((IClockWork)clockwork).UpdateBehaviour(deltaTime);
         public void ResetCycles() => ((IClockWork)clockwork).ResetCycles();
         public void ResetCycles(int newCycles) => ((IClockWork)clockwork).ResetCycles(newCycles);
         public void ResetCooldown(float newCooldownTime) => ((IClockWork)clockwork).ResetCooldown(newCooldownTime);
@@ -43,4 +43,25 @@ namespace CreaturesAddons
         void Push(Vector2 direction, float force = 1, PushMode pushMode = PushMode.Local);
     }
     public enum PushMode { Local, Global };
+
+    public interface IAutomatedAttack
+    {
+        /// <summary>
+        /// Whenever the weapon has any target in range or not.
+        /// </summary>
+        bool TargetInRange { get; }
+
+        /// <summary>
+        /// Check if <see cref="TargetInRange"/>.<br>
+        /// If <see langword="true"/> calls <see cref="Weapon.TryExecute(float)"/> using <paramref name="deltaTime"/> as parameter.<br>
+        /// If <see langword="false"/> calls <see cref="Weapon.Recharge(float)"/> using <paramref name="deltaTime"/>.
+        /// </summary>
+        /// <returns>Whenever an attack was made or not.</returns>
+        bool AttackIfIsReadyAndIfTargetInRange(float deltaTime = 0);
+
+        /// <summary>
+        /// Whenever should automatically attack or not when <see cref="TargetInRange"/> and <see cref="Weapon.IsReady"/> are <see langword="true"/> on each <see cref="Weapon.UpdateBehaviour(float)"/> or <see cref="Weapon.Recharge(float)"/> call.
+        /// </summary>
+        bool AutoAttack { get; set; }
+    }
 }
