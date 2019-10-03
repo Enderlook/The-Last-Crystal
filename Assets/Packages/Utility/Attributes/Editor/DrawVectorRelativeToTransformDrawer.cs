@@ -108,6 +108,33 @@ public class DrawVectorRelativeToTransformEditor : PropertyDrawer
             return GetVector3ValueOf(referenceProperty);
     }
 
+    private static void RenderSingleSerializedProperty(SerializedProperty serializedProperty, DrawVectorRelativeToTransformAttribute drawVectorRelativeToTransform, Vector3 reference)
+    {
+        Vector3 position;
+        switch (serializedProperty.propertyType)
+        {
+            case SerializedPropertyType.Vector2:
+                position = serializedProperty.vector2Value = DrawHandle(serializedProperty.vector2Value + (Vector2)reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
+                break;
+            case SerializedPropertyType.Vector2Int:
+                serializedProperty.vector2IntValue = VectorExtensions.ToVector2Int(DrawHandle((Vector2)(serializedProperty.vector2IntValue + VectorExtensions.ToVector2Int(reference)), drawVectorRelativeToTransform.UsePositionHandler)) - VectorExtensions.ToVector2Int(reference);
+                position = (Vector2)serializedProperty.vector2IntValue;
+                break;
+            case SerializedPropertyType.Vector3:
+                position = serializedProperty.vector3Value = DrawHandle(serializedProperty.vector3Value + reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
+                break;
+            case SerializedPropertyType.Vector3Int:
+                position = serializedProperty.vector3IntValue = VectorExtensions.ToVector3Int(DrawHandle(serializedProperty.vector3IntValue + VectorExtensions.ToVector3Int(reference), drawVectorRelativeToTransform.UsePositionHandler)) - VectorExtensions.ToVector3Int(reference);
+                break;
+            default:
+                Debug.LogError($"The attribute {nameof(DrawVectorRelativeToTransformAttribute)} is only allowed in types of {nameof(Vector2)}, {nameof(Vector2Int)}, {nameof(Vector3)} and {nameof(Vector3Int)}.");
+                return;
+        }
+        if (!string.IsNullOrEmpty(drawVectorRelativeToTransform.Icon))
+            Handles.Label(position, (Texture2D)EditorGUIUtility.Load(drawVectorRelativeToTransform.Icon));
+
+    }
+
     private static void RenderSceneGUI(SceneView sceneview)
     {
         foreach ((SerializedProperty serializedProperty, object field, DrawVectorRelativeToTransformAttribute drawVectorRelativeToTransform, Editor editor) in PropertyDrawerHelper.FindAllSerializePropertiesInActiveEditorWithTheAttribute<DrawVectorRelativeToTransformAttribute>())
@@ -115,28 +142,17 @@ public class DrawVectorRelativeToTransformEditor : PropertyDrawer
             serializedProperty.serializedObject.Update();
             Vector3 reference = GetReference(serializedProperty.serializedObject, drawVectorRelativeToTransform.Reference);
 
-            Vector3 position;
-            switch (serializedProperty.propertyType)
+            if (serializedProperty.isArray)
             {
-                case SerializedPropertyType.Vector2:
-                    position = serializedProperty.vector2Value = DrawHandle(serializedProperty.vector2Value + (Vector2)reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
-                    break;
-                case SerializedPropertyType.Vector2Int:
-                    serializedProperty.vector2IntValue = VectorExtensions.ToVector2Int(DrawHandle((Vector2)(serializedProperty.vector2IntValue + VectorExtensions.ToVector2Int(reference)), drawVectorRelativeToTransform.UsePositionHandler)) - VectorExtensions.ToVector2Int(reference);
-                    position = (Vector2)serializedProperty.vector2IntValue;
-                    break;
-                case SerializedPropertyType.Vector3:
-                    position = serializedProperty.vector3Value = DrawHandle(serializedProperty.vector3Value + reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
-                    break;
-                case SerializedPropertyType.Vector3Int:
-                    position = serializedProperty.vector3IntValue = VectorExtensions.ToVector3Int(DrawHandle(serializedProperty.vector3IntValue + VectorExtensions.ToVector3Int(reference), drawVectorRelativeToTransform.UsePositionHandler)) - VectorExtensions.ToVector3Int(reference);
-                    break;
-                default:
-                    Debug.LogError($"The attribute {nameof(DrawVectorRelativeToTransformAttribute)} is only allowed in types of {nameof(Vector2)}, {nameof(Vector2Int)}, {nameof(Vector3)} and {nameof(Vector3Int)}.");
-                    continue;
+                for (int i = 0; i < serializedProperty.arraySize; i++)
+                {
+                    SerializedProperty item = serializedProperty.GetArrayElementAtIndex(i);
+                    RenderSingleSerializedProperty(item, drawVectorRelativeToTransform, reference);
+                }
             }
-            if (!string.IsNullOrEmpty(drawVectorRelativeToTransform.Icon))
-                Handles.Label(position, (Texture2D)EditorGUIUtility.Load(drawVectorRelativeToTransform.Icon));
+            else
+                RenderSingleSerializedProperty(serializedProperty, drawVectorRelativeToTransform, reference);
+
             serializedProperty.serializedObject.ApplyModifiedProperties();
         }
     }
