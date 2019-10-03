@@ -51,8 +51,8 @@ namespace CreaturesAddons
 
         protected override void Attack() => thisAnimator.SetTrigger(animationName);
 
-        // Shoot() is called through animation event 'Attack' and create the prefab 'Projectile'
-        void Shoot()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
+        private void Shoot()
         {
             GameObject go = new GameObject($"{nameof(MouseShooter)} Projectile");
             go.transform.position = ShootingPoint;
