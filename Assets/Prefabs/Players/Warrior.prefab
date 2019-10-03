@@ -34,6 +34,7 @@ MonoBehaviour:
   firerate: 2
   damage: 5
   pushStrength: 50
+  animationName: Attack
   rayCasting:
     source: {x: 0.09489989, y: 0.21299386}
     direction: {x: 0.5376154, y: -0.84319013}
@@ -365,6 +366,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Offset.x

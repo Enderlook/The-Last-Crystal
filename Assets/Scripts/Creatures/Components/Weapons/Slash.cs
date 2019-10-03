@@ -8,6 +8,8 @@ namespace CreaturesAddons
         private float damage = 1;
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
+        [SerializeField, Tooltip("Animation attack name.")]
+        private string animationName;
 
         [Header("Setup")]
 #pragma warning disable CS0649
@@ -20,12 +22,6 @@ namespace CreaturesAddons
         private Transform thisTransform;
         private Animator thisAnimator;
 
-        private static class ANIMATION_STATES
-        {
-            public const string
-                ATTACK = "Attack";
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         public override void Init(Creature creature)
         {
@@ -36,7 +32,7 @@ namespace CreaturesAddons
 
         protected override void Attack()
         {
-            thisAnimator.SetTrigger(ANIMATION_STATES.ATTACK);
+            thisAnimator.SetTrigger(animationName);
             HitTarget();
         }
 
