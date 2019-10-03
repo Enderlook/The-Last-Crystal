@@ -13,10 +13,21 @@ public sealed class DrawVectorRelativeToTransformAttribute : Attribute
     /// </summary>
     public string Icon { get; private set; }
 
-    public DrawVectorRelativeToTransformAttribute(bool usePositionHandler = false) => UsePositionHandler = usePositionHandler;
-    public DrawVectorRelativeToTransformAttribute(string icon, bool usePositionHandler = false)
+    /// <summary>
+    /// Reference used to show handler. If empty, transform the gameobject will be used.
+    /// </summary>
+    public string Reference { get; private set; }
+
+    public DrawVectorRelativeToTransformAttribute(bool usePositionHandler = false, string reference = "")
+    {
+        UsePositionHandler = usePositionHandler;
+        Reference = reference;
+    }
+
+    public DrawVectorRelativeToTransformAttribute(string icon, bool usePositionHandler = false, string reference = "")
     {
         UsePositionHandler = usePositionHandler;
         Icon = icon;
+        Reference = reference;
     }
 }
