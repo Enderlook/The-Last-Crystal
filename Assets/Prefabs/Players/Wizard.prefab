@@ -33,7 +33,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firerate: 1
   damage: 5
-  pushStrength: 25
+  pushStrength: 30
   projectileForce: 150
   projectileGravity: 0.3
   projectileColliderIsTrigger: 1

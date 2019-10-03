@@ -31,14 +31,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e2d420b2c5839f4e933d96988bdfdca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firerate: 2
-  damage: 5
-  pushStrength: 50
+  firerate: 2.2
+  damage: 8
+  pushStrength: 65
   animationName: Attack
   rayCasting:
-    source: {x: 0.09489989, y: 0.21299386}
-    direction: {x: 0.5376154, y: -0.84319013}
-    distance: 0.21706389
+    source: {x: 0.089596555, y: 0.22094885}
+    direction: {x: 0.77603835, y: -0.6306857}
+    distance: 0.2733842
     referenceTransform: {fileID: 829079563412899545}
     draw: 1
     debug: 0
