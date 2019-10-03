@@ -16,10 +16,12 @@ public class Menu : MonoBehaviour
     [Tooltip("Name of the playlist to play when menu is hide")]
     public string playlistMenuHide;
 
-    private bool isActive;
+    public bool IsPause { get; private set; }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Start() => DisplayMenuPause(false);
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -27,7 +29,7 @@ public class Menu : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggle visibility of the <see cref="menu"/> using the opposite value of <seealso cref="isActive"/>. <seealso cref="isActive"/> is set as its opposite value.<br/>
+    /// Toggle visibility of the <see cref="menu"/> using the opposite value of <seealso cref="IsPause"/>. <seealso cref="IsPause"/> is set as its opposite value.<br/>
     /// If <paramref name="active"/> isn't null this value will override the toggle.<br/>
     /// Panels inside <seealso cref="panels"/> will be hidden first, one by one. If all of them are hidden, menu will hide.
     /// </summary>
@@ -44,14 +46,14 @@ public class Menu : MonoBehaviour
         }
         if (menuNoToggleable)
             return;
-        isActive = active != null ? (bool)active : !isActive;
-        Time.timeScale = isActive ? 0 : 1;
-        menu.SetActive(isActive);
-        PlayMusic(isActive, true);
+        IsPause = active != null ? (bool)active : !IsPause;
+        Time.timeScale = IsPause ? 0 : 1;
+        menu.SetActive(IsPause);
+        PlayMusic(IsPause, true);
     }
 
     /// <summary>
-    /// Hide the menu and set to <see langword="false"/> <seealso cref="isActive"/>.
+    /// Hide the menu and set to <see langword="false"/> <seealso cref="IsPause"/>.
     /// </summary>
     public void HideMenu() => DisplayMenuPause(false);
 
@@ -66,6 +68,6 @@ public class Menu : MonoBehaviour
             playlistManager.SetPlaylist(playlistMenuShow);
         else
             playlistManager.SetPlaylist(playlistMenuHide);
-        playlistManager.Reset();
+        playlistManager.ResetPlaylist(resetCurrentMusic);
     }
 }
