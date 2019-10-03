@@ -22,8 +22,8 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
     public float moveForce;
 
     [Header("Setup")]
-    [Tooltip("Sprite Renderer to flip.")]
-    public SpriteRenderer spriteRenderer;
+    //[Tooltip("Sprite Renderer to flip.")]
+    //public SpriteRenderer spriteRenderer;
 #pragma warning disable CS0649
     [SerializeField, Tooltip("Layer to check for ground.")]
     private LayerMask ground;
@@ -34,6 +34,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
 
     private Rigidbody2D thisRigidbody2D;
     private Animator thisAnimator;
+    private SpriteRenderer thisSprite;
 
     private static class ANIMATION_STATES
     {
@@ -46,6 +47,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
     {
         thisRigidbody2D = creature.thisRigidbody2D;
         thisAnimator = creature.animator;
+        thisSprite = creature.sprite;
         remainingJumps = maxJumps;
     }
 
@@ -76,6 +78,7 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
 
     private void MoveHorizontal(float distance)
     {
+        thisSprite.flipX = distance < 0;
         thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
         if (Mathf.Abs(thisRigidbody2D.velocity.x) > speed)
             thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, thisRigidbody2D.velocity.y);

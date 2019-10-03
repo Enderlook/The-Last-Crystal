@@ -142,6 +142,7 @@ MonoBehaviour:
   stoppableRigidbody: {fileID: 843876848762180787}
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
+  sprite: {fileID: 0}
 --- !u!114 &8948837633536277635
 MonoBehaviour:
   m_ObjectHideFlags: 0

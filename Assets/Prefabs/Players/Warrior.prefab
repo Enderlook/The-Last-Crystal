@@ -365,6 +365,25 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 9
+    - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.015000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0.145
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.29
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3674815832579861797, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}

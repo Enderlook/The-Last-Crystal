@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 267235809}
   m_Layer: 8
   m_Name: Islands
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1245,6 +1245,7 @@ GameObject:
   - component: {fileID: 1160684983}
   - component: {fileID: 1160684986}
   - component: {fileID: 1160684987}
+  - component: {fileID: 1160684988}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1321,7 +1322,7 @@ MonoBehaviour:
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1160684987}
+        - m_Target: {fileID: 1160684988}
           m_MethodName: InitializeWarrior
           m_Mode: 0
           m_Arguments:
@@ -1342,7 +1343,7 @@ MonoBehaviour:
     action:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1160684987}
+        - m_Target: {fileID: 1160684988}
           m_MethodName: InitializeWizard
           m_Mode: 0
           m_Arguments:
@@ -1356,6 +1357,29 @@ MonoBehaviour:
       m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &1160684987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160684982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b75f49ddb863184dabddb1b62853434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 2669955741155959395, guid: f25a54120d757724087626040c499bf1, type: 3}
+  - {fileID: 8848631403374183089, guid: 1d89acb7a9052324291fbb9233650d2e, type: 3}
+  - {fileID: 1091846710704527667, guid: b87a0287fc4bb504a908bff1217f33b1, type: 3}
+  count: 6
+  timeBtwSpawn: 2
+  startSpawn: 3
+  point:
+    points:
+    - {x: -6.677654, y: 2.9390206}
+    - {x: 4.6737747, y: 2.6922987}
+--- !u!114 &1160684988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

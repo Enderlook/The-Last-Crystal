@@ -9,6 +9,9 @@ namespace CreaturesAddons
         [Tooltip("Movement speed.")]
         public float speed = 1;
 
+        [Tooltip("Sprite Renderer Component.")]
+        public SpriteRenderer sprite;
+
         [Tooltip("Damage amount.")]
         [Range(0f, 25f)]
         public float damage;

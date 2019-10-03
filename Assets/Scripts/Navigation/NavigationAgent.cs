@@ -8,13 +8,17 @@ namespace Navigation
     [Serializable]
     public class NavigationAgent : MonoBehaviour, IInit
     {
-        [Tooltip("Navigation used to move.")]
+        [HideInInspector]
         public NavigationGraph navigationGraph;
 
         [NonSerialized]
         private Transform thisTransform;
 
-        void IInit.Init(Creature creature) => thisTransform = creature.thisRigidbody2D.transform;
+        void IInit.Init(Creature creature)
+        {
+            thisTransform = creature.thisRigidbody2D.transform;
+            navigationGraph = GameObject.FindGameObjectWithTag("Ground").GetComponent<NavigationGraph>();
+        }
 
         public Node FindClosestNode() => navigationGraph.FindClosestNode(thisTransform.position);
 
