@@ -9,8 +9,10 @@ namespace CreaturesAddons
         private float damage = 1;
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Animation attack name.")]
         private string animationName;
+#pragma warning restore CS0649;
 
         [Header("Projectile Configuration")]
         [SerializeField, Tooltip("Projectile force.")]
@@ -30,10 +32,9 @@ namespace CreaturesAddons
 #pragma warning disable CS0649
         [SerializeField, DrawVectorRelativeToTransform]
         private Vector2 shootingPosition;
-#pragma warning restore CS0649
         [SerializeField, Tooltip("Animation played by projectile.")]
         public RuntimeAnimatorController projectileAnimation;
-
+#pragma warning restore CS0649
 
         private Transform shootingTransform;
         private SpriteRenderer creatureSpriteRenderer;
@@ -49,7 +50,13 @@ namespace CreaturesAddons
             base.Init(creature);
         }
 
-        protected override void Attack() => thisAnimator.SetTrigger(animationName);
+        protected override void Attack()
+        {
+            if (thisAnimator == null || string.IsNullOrEmpty(animationName))
+                Shoot();
+            else
+                thisAnimator.SetTrigger(animationName);
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         private void Shoot()

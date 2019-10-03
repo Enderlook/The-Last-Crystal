@@ -37,7 +37,13 @@ namespace CreaturesAddons
             base.Init(creature);
         }
 
-        protected override void Attack() => thisAnimator.SetTrigger(animationName);
+        protected override void Attack()
+        {
+            if (thisAnimator == null || string.IsNullOrEmpty(animationName))
+                HitTarget();
+            else
+                thisAnimator.SetTrigger(animationName);
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         private void HitTarget()
