@@ -37,9 +37,11 @@ MonoBehaviour:
   animationName: Attack
   rayCasting:
     source: {x: 0.09489989, y: 0.21299386}
-    direction: {x: 0.5376154, y: -0.84319013}
-    distance: 0.21706389
+    direction: {x: 0.8511476, y: -0.5249264}
+    distance: 0.21027824
     referenceTransform: {fileID: 829079563412899545}
+    flipX: 0
+    flipY: 0
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}

@@ -19,21 +19,52 @@ public class RayCasting
 
     private Vector2 Reference => referenceTransform == null ? referenceVector : (Vector2)referenceTransform.position;
     private Vector2 WorldOrigin {
-        get => source + Reference;
+        get => Source + Reference;
 #if UNITY_EDITOR
-        set => source = value - Reference;
+        set => Source = value - Reference;
 #endif
     }
 
-    public void SetReference(Transform reference)
-    {
-        referenceTransform = reference;
-        referenceVector = Vector2.zero;
+    [SerializeField, Tooltip("Sprite used to check X and Y flip.\nIt's accumulative with Flip X and Flip Y.")]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField, Tooltip("Whenever the ray source and direction should be X flipped.\nThis is accumulative with the Sprite Renderer flip.")]
+    private bool flipX = false;
+    public bool FlipX {
+        get => spriteRenderer == null ? flipX : Invert(flipX, spriteRenderer.flipX);
+        set => flipX = spriteRenderer == null ? flipX : Invert(value, spriteRenderer.flipX);
     }
-    public void SetReference(Vector2 reference)
+    [SerializeField, Tooltip("Whenever the ray source and direction should be Y flipped.\nThis is accumulative with the Sprite Renderer flip.")]
+    private bool flipY = false;
+    public bool FlipY {
+        get => spriteRenderer == null ? flipY : Invert(flipY, spriteRenderer.flipY);
+        set => flipY = spriteRenderer == null ? flipY : Invert(value, spriteRenderer.flipY);
+    }
+
+    private static bool Invert(bool a, bool b) => a != b;
+
+    public Vector2 Source {
+        get => FlipIfNecessary(source);
+        set => source = FlipIfNecessary(value);
+    }
+    public Vector2 Direction {
+        get => FlipIfNecessary(direction);
+        set => direction = FlipIfNecessary(value);
+    }
+
+    private static float Flip(float value, bool invert) => invert ? -value : value;
+    private Vector2 FlipIfNecessary(Vector2 value) => new Vector2(Flip(value.x, flipX), Flip(value.y, flipY));
+
+    public void SetReference(Transform referencePosition, SpriteRenderer referenceSprite = null)
     {
-        referenceVector = reference;
+        referenceTransform = referencePosition;
+        spriteRenderer = referenceSprite;
+    }
+    public void SetReference(Vector2 referencePosition, SpriteRenderer referenceSprite = null)
+    {
+        referenceVector = referencePosition;
         referenceTransform = null;
+        spriteRenderer = referenceSprite;
     }
 
     public RaycastHit2D Raycast()
@@ -41,7 +72,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.Raycast(WorldOrigin, direction, distance);
+        return Physics2D.Raycast(WorldOrigin, Direction, distance);
     }
 
     public RaycastHit2D Raycast(int layerMask)
@@ -49,7 +80,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.Raycast(WorldOrigin, direction, distance, layerMask);
+        return Physics2D.Raycast(WorldOrigin, Direction, distance, layerMask);
     }
 
     public RaycastHit2D Raycast(int layerMask, int minDepth)
@@ -57,7 +88,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.Raycast(WorldOrigin, direction, distance, layerMask, minDepth);
+        return Physics2D.Raycast(WorldOrigin, Direction, distance, layerMask, minDepth);
     }
 
     public RaycastHit2D Raycast(int layerMask, int minDepth, int maxDepth)
@@ -65,7 +96,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.Raycast(WorldOrigin, direction, distance, layerMask, minDepth, maxDepth);
+        return Physics2D.Raycast(WorldOrigin, Direction, distance, layerMask, minDepth, maxDepth);
     }
 
     public int Raycast(ContactFilter2D contactFilter, RaycastHit2D[] results)
@@ -73,7 +104,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.Raycast(WorldOrigin, direction, contactFilter, results, distance);
+        return Physics2D.Raycast(WorldOrigin, Direction, contactFilter, results, distance);
     }
 
     public RaycastHit2D[] RaycastAll()
@@ -81,7 +112,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastAll(WorldOrigin, direction, distance);
+        return Physics2D.RaycastAll(WorldOrigin, Direction, distance);
     }
 
     public RaycastHit2D[] RaycastAll(int layerMask)
@@ -89,7 +120,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastAll(WorldOrigin, direction, distance, layerMask);
+        return Physics2D.RaycastAll(WorldOrigin, Direction, distance, layerMask);
     }
 
     public RaycastHit2D[] RaycastAll(int layerMask, int minDepth)
@@ -97,7 +128,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastAll(WorldOrigin, direction, distance, layerMask, minDepth);
+        return Physics2D.RaycastAll(WorldOrigin, Direction, distance, layerMask, minDepth);
     }
 
     public RaycastHit2D[] RaycastAll(int layerMask, int minDepth, int maxDepth)
@@ -105,7 +136,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastAll(WorldOrigin, direction, distance, layerMask, minDepth, maxDepth);
+        return Physics2D.RaycastAll(WorldOrigin, Direction, distance, layerMask, minDepth, maxDepth);
     }
 
     public int RaycastNonAlloc(RaycastHit2D[] results)
@@ -113,7 +144,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastNonAlloc(WorldOrigin, direction, results, distance);
+        return Physics2D.RaycastNonAlloc(WorldOrigin, Direction, results, distance);
     }
 
     public int RaycastNonAlloc(RaycastHit2D[] results, int layerMask)
@@ -121,7 +152,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastNonAlloc(WorldOrigin, direction, results, distance, layerMask);
+        return Physics2D.RaycastNonAlloc(WorldOrigin, Direction, results, distance, layerMask);
     }
 
     public int RaycastNonAlloc(RaycastHit2D[] results, int layerMask, int minDepth)
@@ -129,7 +160,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastNonAlloc(WorldOrigin, direction, results, distance, layerMask, minDepth);
+        return Physics2D.RaycastNonAlloc(WorldOrigin, Direction, results, distance, layerMask, minDepth);
     }
 
     public int RaycastNonAlloc(RaycastHit2D[] results, int layerMask, int minDepth, int maxDepth)
@@ -137,7 +168,7 @@ public class RayCasting
 #if UNITY_EDITOR
         DebugLine();
 #endif
-        return Physics2D.RaycastNonAlloc(WorldOrigin, direction, results, distance, layerMask, minDepth, maxDepth);
+        return Physics2D.RaycastNonAlloc(WorldOrigin, Direction, results, distance, layerMask, minDepth, maxDepth);
     }
 
 #if UNITY_EDITOR
@@ -153,10 +184,10 @@ public class RayCasting
     private Color color = Color.red;
 
     private Vector2 End {
-        get => source + direction * distance;
+        get => Source + Direction * distance;
         set {
-            Vector2 end = value - source;
-            direction = end.normalized;
+            Vector2 end = value - Source;
+            Direction = end.normalized;
             distance = end.magnitude;
         }
     }
