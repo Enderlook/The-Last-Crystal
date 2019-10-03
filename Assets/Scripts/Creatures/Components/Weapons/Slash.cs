@@ -21,6 +21,11 @@ namespace CreaturesAddons
 
         private Transform thisTransform;
         private Animator thisAnimator;
+        private SpriteRenderer thisSprite;
+        private Vector2 fliptSource;
+        private Vector2 fliptDirection;
+        private Vector2 startSource;
+        private Vector2 startDirection;
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
         public bool AutoAttack { get; set; }
@@ -32,17 +37,23 @@ namespace CreaturesAddons
         {
             thisTransform = creature.Transform;
             thisAnimator = creature.animator;
+            thisSprite = creature.sprite;
+            startSource = rayCasting.source; // Save position of source
+            startDirection = rayCasting.direction; // Save position of direction
+            fliptSource = new Vector2(rayCasting.source.x * (-1), rayCasting.source.y); // Flip value x in source
+            fliptDirection = new Vector2(rayCasting.direction.x * (-1), rayCasting.direction.y); // Flip value y in direction
             base.Init(creature);
         }
 
         protected override void Attack()
         {
             thisAnimator.SetTrigger(animationName);
-            HitTarget();
         }
 
+        // HitTarget() is called through animation event "Attack" for a specific frame
         private void HitTarget()
         {
+            Debug.Log("Invoke via event");
             RaycastHit2D[] raycastHits = rayCasting.RaycastAll(1 << layerToHit); // Ignore any layer that isn't layerToHit
             for (int n = 0; n < raycastHits.Length; n++)
             {
@@ -67,8 +78,23 @@ namespace CreaturesAddons
 
         public override void UpdateBehaviour(float deltaTime)
         {
+            FlipRayCast();
             base.UpdateBehaviour(deltaTime);
             AttackIfAutomated();
+        }
+
+        private void FlipRayCast()
+        {
+            if (thisSprite.flipX)
+            {
+                rayCasting.source = fliptSource;
+                rayCasting.direction = fliptDirection;
+            }
+            else
+            {
+                rayCasting.source = startSource;
+                rayCasting.direction = startDirection;
+            }
         }
     }
 }

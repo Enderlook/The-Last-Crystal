@@ -5,10 +5,10 @@ using UnityEngine;
 public class RayCasting
 {
 #pragma warning disable CS0649
-    [SerializeField, Tooltip("The starting point of the ray in local coordinates.")]
-    private Vector2 source;
-    [SerializeField, Tooltip("The direction of the ray.")]
-    private Vector2 direction;
+    [Tooltip("The starting point of the ray in local coordinates.")]
+    public Vector2 source;
+    [Tooltip("The direction of the ray.")]
+    public Vector2 direction;
     [SerializeField, Tooltip("The max distance the ray should check for collisions.")]
     private float distance = Mathf.Infinity;
     [SerializeField, Tooltip("If nor null, it's position will be used in addition with Source to perform Raycasting")]
