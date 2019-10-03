@@ -166,7 +166,7 @@ namespace HealthBarGUI
             healthImage.fillAmount = this.health / this.maxHealth;
             if (damageBar != null)
                 damageBar.fillAmount = 0;
-            if (healingBar != null)
+            if (healingImage != null)
                 healingImage.fillAmount = 0;
         }
         public void ManualUpdate(float maxHealth) => ManualUpdate(maxHealth, maxHealth);
