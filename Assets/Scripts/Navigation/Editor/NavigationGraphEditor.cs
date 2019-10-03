@@ -157,13 +157,13 @@ namespace Navigation.UnityInspector
                 if (showHelp)
                 {
                     GUILayout.Label("Controls", EditorStyles.boldLabel);
-                    GUILayout.Label("L: Left Mouse Button"
+                    EditorGUILayout.HelpBox("L: Left Mouse Button"
                                   + "\nR: Right Mouse Button"
                                   + "\nS: Shift Key"
                                   + "\nC: Control Key"
-                                  + "\nA: Alt Key", EditorStyles.helpBox);
+                                  + "\nA: Alt Key", MessageType.Info);
 
-                    GUILayout.Label(
+                    EditorGUILayout.HelpBox(
                             "L: Select Closest / Create Node."
                           + "\nL+C: Enable / Disable Node."
                           + "\nL+S: Remove Selected Node."
@@ -173,7 +173,7 @@ namespace Navigation.UnityInspector
                           + "\nR+C+S: Do [R+S] and [R+C]."
                           + "\nR+A: Remove connection from Selected to Closest."
                           + "\nR+A+C: Remove connection from Closest to Selected."
-                        , EditorStyles.helpBox);
+                        , MessageType.Info);
                 }
             }
             else if (wasEditingEnable)
