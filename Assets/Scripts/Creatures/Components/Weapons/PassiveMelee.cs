@@ -10,6 +10,8 @@ namespace CreaturesAddons
         protected float damage = 1;
         [SerializeField, Tooltip("Push strength on hit.")]
         protected float pushStrength = 0;
+        [SerializeField, Tooltip("Whenever it should or not display damage floating text and animation.")]
+        private bool showHurt = true;
 
         protected Transform thisTransform;
 
@@ -20,7 +22,7 @@ namespace CreaturesAddons
             if (thisTransform != null && victim is IPush push)
                 push.Push(thisTransform.position, pushStrength, PushMode.Local);
             if (victim is ITakeDamage takeDamage)
-                takeDamage.TakeDamage(damage);
+                takeDamage.TakeDamage(damage, showHurt, showHurt);
         }
     }
 
