@@ -1,26 +1,27 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+#pragma warning disable CS0649
     [Header("Setup")]
-    [Tooltip("Menu to display on escape key press.")]
-    public GameObject menu;
-    [Tooltip("Others panels. Used to hide them when press escape.")]
-    public GameObject[] panels;
-    [Tooltip("Force menu to be untoggleable.")]
-    public bool menuNoToggleable = false;
-    [Tooltip("Playlist Manager.")]
-    public PlaylistManager playlistManager;
-    [Tooltip("Name of the playlist to play when menu is shown.")]
-    public string playlistMenuShow;
-    [Tooltip("Name of the playlist to play when menu is hide.")]
-    public string playlistMenuHide;
+    [SerializeField, Tooltip("Menu to display on escape key press.")]
+    private GameObject menu;
+    [SerializeField, Tooltip("Others panels. Used to hide them when press escape.")]
+    private GameObject[] panels;
+    [SerializeField, Tooltip("Force menu to be untoggleable.")]
+    private bool menuNoToggleable = false;
+    [SerializeField, Tooltip("Playlist Manager.")]
+    private PlaylistManager playlistManager;
+    [SerializeField, Tooltip("Name of the playlist to play when menu is shown.")]
+    private string playlistMenuShow;
+    [SerializeField, Tooltip("Name of the playlist to play when menu is hide.")]
+    private string playlistMenuHide;
+#pragma warning disable CS0649
 
-    private static List<Animator> animationsToRenable = new List<Animator>();
-    private static Dictionary<StoppableRigidbody, float> stoppableRigidbodySpeeds = new Dictionary<StoppableRigidbody, float>();
+    private static readonly List<Animator> animationsToRenable = new List<Animator>();
+    private static readonly Dictionary<StoppableRigidbody, float> stoppableRigidbodySpeeds = new Dictionary<StoppableRigidbody, float>();
 
     public static bool IsPlaying => !isPause;
     private static bool isPause = false;
