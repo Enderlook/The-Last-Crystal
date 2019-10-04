@@ -123,10 +123,10 @@ public class FloatingTextController : MonoBehaviour
         FloatingText floatingTextScript = SpawnFloatingTextBase();
 
         floatingTextScript.SetConfiguration(text,
-            textColor != null ? textColor : this.textColor,
-            scaleMultiplier != null ? scaleMultiplier : this.scaleMultiplier,
-            timeBeforeDestroy != null ? timeBeforeDestroy : this.timeBeforeDestroy,
-            randomOffset != null ? randomOffset : this.randomOffset
+            textColor != null ? textColor : (overrideTextColor ? (Color?)this.textColor : null),
+            scaleMultiplier != null ? scaleMultiplier : (overrideScaleMultiplier ? (float?)this.scaleMultiplier : null),
+            timeBeforeDestroy != null ? timeBeforeDestroy : (overrideTimeBeforeDestroy ? (float?)this.timeBeforeDestroy : null),
+            randomOffset != null ? randomOffset : (overrideRandomOffset ? (Vector2?)this.randomOffset : null)
         );
     }
 
