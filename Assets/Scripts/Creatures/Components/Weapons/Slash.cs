@@ -4,12 +4,12 @@ namespace CreaturesAddons
 {
     public class Slash : Weapon, IAutomatedAttack
     {
+        [SerializeField, Tooltip("Enemy pattern attack")]
+        private bool activePattern;
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
-        [SerializeField, Tooltip("Animation attack name.")]
-        private string animationName;
 
         [Header("Setup")]
 #pragma warning disable CS0649
@@ -22,6 +22,14 @@ namespace CreaturesAddons
         private Transform thisTransform;
         private Animator thisAnimator;
         private SpriteRenderer thisSpriteRenderer;
+        private int probStrongAttack = 1;
+
+        private static class ANIMATION_STATES
+        {
+            public const string
+                ATTACK = "Attack",
+                STRONG_ATTACK = "StrongAttack";
+        }
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
         public bool AutoAttack { get; set; }
@@ -39,10 +47,17 @@ namespace CreaturesAddons
 
         protected override void Attack()
         {
-            if (thisAnimator == null || string.IsNullOrEmpty(animationName))
+            if (activePattern)
+            {
+                if (probStrongAttack == Random.Range(0, 6))
+                    thisAnimator.SetTrigger(ANIMATION_STATES.STRONG_ATTACK);
+                else
+                    thisAnimator.SetTrigger(ANIMATION_STATES.ATTACK);
+            }
+            else if (thisAnimator == null || string.IsNullOrEmpty(ANIMATION_STATES.ATTACK))
                 HitTarget();
             else
-                thisAnimator.SetTrigger(animationName);
+                thisAnimator.SetTrigger(ANIMATION_STATES.ATTACK);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
