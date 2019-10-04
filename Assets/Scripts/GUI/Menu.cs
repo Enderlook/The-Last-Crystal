@@ -66,6 +66,13 @@ public class Menu : MonoBehaviour
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
+    private void Awake()
+    {
+        animationsToRenable.Clear();
+        stoppableRigidbodySpeeds.Clear();
+    }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Start() => DisplayMenuPause(false);
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
