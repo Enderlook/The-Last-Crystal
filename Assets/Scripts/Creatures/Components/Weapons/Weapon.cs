@@ -35,7 +35,7 @@ namespace CreaturesAddons
 
     public interface ITakeDamage
     {
-        void TakeDamage(float amount, bool displayText = false, bool displayAnimation = true);
+        void TakeDamage(float amount, bool displayText = true, bool displayAnimation = true);
     }
 
     public interface IPush

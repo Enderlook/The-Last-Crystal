@@ -75,7 +75,7 @@ public class FloatingTextController : MonoBehaviour
     /// List of all Floating Text game objects spawned by this <see cref="FloatingTextController"/>.<br/>
     /// The list will only store a number of items equal to <see cref="maximumAmountFloatingText"/>. More items will override old ones.
     /// </summary>
-    private List<GameObject> floatingTextList = new List<GameObject>();
+    private readonly List<GameObject> floatingTextList = new List<GameObject>();
 
     /// <summary>
     /// Spawns a floating text and return its <see cref="FloatingText"/> script.<br/>
@@ -83,11 +83,7 @@ public class FloatingTextController : MonoBehaviour
     /// <returns></returns>
     private FloatingText SpawnFloatingTextBase()
     {
-        GameObject floatingText;
-        if (floatingTextParent != null)
-            floatingText = Instantiate(floatingTextPrefab, FloatingTextParent);
-        else
-            floatingText = Instantiate(floatingTextPrefab);
+        GameObject floatingText = floatingTextParent != null ? Instantiate(floatingTextPrefab, FloatingTextParent) : Instantiate(floatingTextPrefab);
         floatingText.transform.position = spawningPoints[Mathf.RoundToInt(Random.Range(0, spawningPoints.Length))].position;
 
         AddToFloatingTextList(floatingText);
@@ -123,10 +119,10 @@ public class FloatingTextController : MonoBehaviour
         FloatingText floatingTextScript = SpawnFloatingTextBase();
 
         floatingTextScript.SetConfiguration(text,
-            textColor != null ? textColor : this.textColor,
-            scaleMultiplier != null ? scaleMultiplier : this.scaleMultiplier,
-            timeBeforeDestroy != null ? timeBeforeDestroy : this.timeBeforeDestroy,
-            randomOffset != null ? randomOffset : this.randomOffset
+            textColor != null ? textColor : (overrideTextColor ? (Color?)this.textColor : null),
+            scaleMultiplier != null ? scaleMultiplier : (overrideScaleMultiplier ? (float?)this.scaleMultiplier : null),
+            timeBeforeDestroy != null ? timeBeforeDestroy : (overrideTimeBeforeDestroy ? (float?)this.timeBeforeDestroy : null),
+            randomOffset != null ? randomOffset : (overrideRandomOffset ? (Vector2?)this.randomOffset : null)
         );
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CreaturesAddons
 {
-    public abstract class Hurtable : MonoBehaviour, ITakeDamage
+    public class Hurtable : MonoBehaviour, ITakeDamage
     {
         [Header("Configuration")]
         [Tooltip("Health.")]
@@ -32,7 +32,7 @@ namespace CreaturesAddons
         /// <param name="amount">Amount of <see cref="Health"/> lost. Must be positive.</param>
         /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
         /// <param name="displayAnimation">Whenever it should display <see cref="ANIMATION_STATE_HURT"/> animation.</param>
-        public virtual void TakeDamage(float amount, bool displayText = false, bool displayAnimation = true)
+        public virtual void TakeDamage(float amount, bool displayText = true, bool displayAnimation = true)
         {
             (float remaining, float taken) = health.Decrease(amount);
             if (taken > 0)
@@ -64,29 +64,32 @@ namespace CreaturesAddons
             Destroy(gameObject);
         }
 
-        protected abstract void DisplayTakeDamageAnimation();
+        protected virtual void DisplayTakeDamageAnimation() { }
 
         /// <summary>
         /// Spawn a floating text above the creature.
         /// </summary>
         /// <param name="text">Text to display.</param>
         /// <param name="textColor">Color of the text.</param>
-        /// <param name="checkIfPositive">Only display if the number is positive.</param>
         /// <seealso cref="SpawnFloatingText(float, Color?, bool)"/>
-        protected void SpawnFloatingText(string text, Color? textColor, bool checkIfPositive = true)
+        protected void SpawnFloatingText(string text, Color? textColor)
         {
-            if (floatingTextController != null && !checkIfPositive)
+            if (floatingTextController != null)
                 floatingTextController.SpawnFloatingText(text, textColor);
         }
 
         /// <summary>
         /// Spawn a floating text above the creature.
         /// </summary>
-        /// <param name="text">Text to display.</param>
+        /// <param name="value">Text to display.</param>
         /// <param name="textColor">Color of the text.</param>
         /// <param name="checkIfPositive">Only display if the number is positive.</param>
         /// <seealso cref="SpawnFloatingText(string, Color?, bool)"/>
-        protected void SpawnFloatingText(float text, Color? textColor, bool checkIfPositive = true) => SpawnFloatingText(text.ToString(), textColor, checkIfPositive);
+        protected void SpawnFloatingText(float value, Color? textColor, bool checkIfPositive = true)
+        {
+            if (!checkIfPositive || value > 0)
+                SpawnFloatingText(value.ToString(), textColor);
+        }
 
         protected virtual void OnCollisionEnter2D(Collision2D collision) => CheckInDamageCollision(collision.gameObject);
 

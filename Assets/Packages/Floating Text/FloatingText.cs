@@ -28,6 +28,7 @@ public class FloatingText : MonoBehaviour
     [Tooltip("Animator component of text.")]
     public Animator animator;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
     private void Start()
     {
         text.color = textColor;
