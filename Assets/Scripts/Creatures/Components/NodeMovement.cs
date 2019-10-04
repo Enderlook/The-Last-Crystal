@@ -9,6 +9,9 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     [SerializeField, Tooltip("Maximum speed movement.")]
     private float speed = 1;
 
+    [SerializeField, Tooltip("Follow player")]
+    private bool targetPlayer;
+
 #pragma warning disable CS0649
     [Header("Setup")]
     [SerializeField, Tooltip("Navigation agent system.")]
@@ -29,6 +32,7 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     private Animator animator;
 
     private Transform goal;
+    List<Transform> players;
 
     private static class ANIMATION_STATES
     {
@@ -39,10 +43,11 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
     void IInit.Init(Creature creature)
     {
+        players = Global.players;
         thisRigidbody2D = creature.thisRigidbody2D;
         spriteRenderer = creature.sprite;
         animator = creature.animator;
-        goal = Global.crystal;
+        goal = targetPlayer ? players.RandomElement() : Global.crystal;
     }
 
     void IMove.Move(float deltaTime, float speedMultiplier)
@@ -54,8 +59,11 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         animator.SetBool(ANIMATION_STATES.JUMP, false);
 
         // Don't move without goal
-        if (goal == null)
+        if (goal == null && !targetPlayer)
             return;
+
+        // Verify his current goal
+        CheckForPlayer();
 
         List<Connection> path = navigationAgent.FindPathTo(goal.position);
 
@@ -85,6 +93,21 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
             else
                 Translate(distanceToMove * Mathf.Sign(distanceToTarget));
         }
+    }
+
+    private void CheckForPlayer()
+    {
+        // If all players death. Assign crystal
+        if (targetPlayer && players.Count == 0)
+            goal = Global.crystal;
+
+        // If a player revive and the actual goal is crystal. Then assign player
+        if (targetPlayer && goal == Global.crystal && players.Count != 0)
+            goal = players.RandomElement();
+
+        // If the current player died. Assign like goal another player that's still alive
+        if (targetPlayer && goal == null)
+            goal = players.RandomElement();
     }
 
     private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, 1 << ground);

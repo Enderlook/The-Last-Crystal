@@ -59,6 +59,8 @@ namespace CreaturesAddons
         IEnumerator DestroyOnNextFrame()
         {
             yield return null;
+            if (Global.players.Contains(gameObject.transform))
+                Global.players.Remove(gameObject.transform);
             Destroy(gameObject);
         }
 

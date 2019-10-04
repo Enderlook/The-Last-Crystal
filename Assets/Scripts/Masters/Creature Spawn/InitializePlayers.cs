@@ -15,12 +15,14 @@ public class InitializePlayers : MonoBehaviour
     {
         InitializeCreature(warrior, warriorHealthBar);
         Global.warrior = warrior.transform;
+        Global.players.Add(Global.warrior);
     }
 
     public void InitializeWizard(GameObject wizard)
     {
         InitializeCreature(wizard, wizardHealthBar);
         Global.wizard = wizard.transform;
+        Global.players.Add(Global.wizard);
     }
 
     private static void InitializeCreature(GameObject creature, HealthBar healthBar)

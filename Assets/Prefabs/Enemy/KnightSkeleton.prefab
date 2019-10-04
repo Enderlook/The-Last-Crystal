@@ -52,21 +52,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: KnightSkeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 5794628492074983519, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: 
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: damage
-      value: 1.2
-      objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: sprite
@@ -136,6 +121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5381365898832506502, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: targetPlayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5381365898832506502, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
@@ -340,13 +330,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.676
+      propertyPath: m_AnchoredPosition.x
+      value: -0.024
       objectReference: {fileID: 0}
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.024
+      propertyPath: m_AnchoredPosition.y
+      value: 0.676
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336b20a0e32c641489bb09ab09369d57, type: 3}

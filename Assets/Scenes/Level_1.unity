@@ -1307,10 +1307,9 @@ MonoBehaviour:
   count: 6
   timeBtwSpawn: 2
   startSpawn: 3
-  point:
-    points:
-    - {x: -6.677654, y: 2.9390206}
-    - {x: 4.6737747, y: 2.6922987}
+  points:
+  - {x: -6.988565, y: 3.0715172}
+  - {x: 4.896396, y: 2.6594825}
 --- !u!114 &1160684988
 MonoBehaviour:
   m_ObjectHideFlags: 0

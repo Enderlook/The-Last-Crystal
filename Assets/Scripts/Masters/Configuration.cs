@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -40,6 +41,11 @@ public static class Global
     /// Player wizard transform.
     /// </summary>
     public static Transform wizard;
+
+    /// <summary>
+    /// List of all players
+    /// </summary>
+    public static List<Transform> players = new List<Transform> ();
 }
 
 public class Configuration : MonoBehaviour
