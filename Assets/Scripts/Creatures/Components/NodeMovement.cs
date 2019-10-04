@@ -79,14 +79,13 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
         animator.SetBool(ANIMATION_STATES.JUMP, false);
 
+        // Get his current goal
+        goal = SetGoal();
+
         // Don't move without goal
         if (goal == null && !targetPlayer)
             return;
 
-        // Verify his current goal
-        CheckForPlayer();
-        if (goal == null)
-            return;
         List<Connection> path = navigationAgent.FindPathTo(goal.position);
 
         float distanceToMove = speed * deltaTime * speedMultiplier;
@@ -127,19 +126,21 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         }
     }
 
-    private void CheckForPlayer()
+    private Transform SetGoal()
     {
         // If all players death. Assign crystal
         if (targetPlayer && players.Count == 0)
-            goal = Global.crystal;
+            return Global.crystal;
 
         // If a player revive and the actual goal is crystal. Then assign player
         if (targetPlayer && goal == Global.crystal && players.Count != 0)
-            goal = players.RandomElement();
+            return players.RandomElement();
 
         // If the current player died. Assign like goal another player that's still alive
         if (targetPlayer && goal == null)
-            goal = players.RandomElement();
+            return players.RandomElement();
+
+        return null;
     }
 
     private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, 1 << ground);
