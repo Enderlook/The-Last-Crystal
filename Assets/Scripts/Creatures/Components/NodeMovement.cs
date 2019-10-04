@@ -88,8 +88,6 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
                 distanceToMove = distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) ? distanceToTarget : distanceToMove * Mathf.Sign(distanceToTarget);
             }
 
-            spriteRenderer.flipX = Mathf.Sign(distanceToTarget) < 0;
-
             if (connection.IsExtreme)
                 JumpTo(connection.end.position);
             else
@@ -100,7 +98,6 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
             float distanceToTarget = XDistanceToTarget(goal.position);
             if (Mathf.Abs(distanceToTarget) > MARGIN_CLOSE_DISTANCE)
             {
-                spriteRenderer.flipX = Mathf.Sign(distanceToTarget) < 0;
                 if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget))
                     Translate(distanceToTarget);
                 else
@@ -130,6 +127,7 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
     private void Translate(float distance)
     {
+        spriteRenderer.flipX = Mathf.Sign(distance) < 0;
         animator.SetBool(ANIMATION_STATES.WALK, true);
         thisRigidbody2D.MovePosition(new Vector2(thisRigidbody2D.position.x + distance, thisRigidbody2D.position.y));
     }
