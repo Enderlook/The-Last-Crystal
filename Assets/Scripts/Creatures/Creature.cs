@@ -49,6 +49,8 @@ namespace CreaturesAddons
 
         protected override void Update()
         {
+            if (Menu.IsPause)
+                return;
             move?.Move(Time.deltaTime, SpeedMultiplier * speed);
             attack?.Attack(Time.time);
             // We don't call base.Update() because that is made in the line below
