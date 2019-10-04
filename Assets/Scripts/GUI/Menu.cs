@@ -18,6 +18,10 @@ public class Menu : MonoBehaviour
     private string playlistMenuShow;
     [SerializeField, Tooltip("Name of the playlist to play when menu is hide.")]
     private string playlistMenuHide;
+    [SerializeField, Tooltip("Panel displayed on win.")]
+    private GameObject win;
+    [SerializeField, Tooltip("Panel displayed on defeat.")]
+    private GameObject lose;
 #pragma warning disable CS0649
 
     private static readonly List<Animator> animationsToRenable = new List<Animator>();
@@ -139,5 +143,19 @@ public class Menu : MonoBehaviour
     /// <seealso cref="SceneManager.LoadScene(string)"/>
     /// <param name="scene">Scene name to load.</param>
     public void LoadScene(string scene) => SceneManager.LoadScene(scene, LoadSceneMode.Single);
+
+    /// <summary>
+    /// End game.
+    /// </summary>
+    /// <param name="hasWon">Whenever players has won or loose.</param>
+    public void GameOver(bool hasWon)
+    {
+        IsPause = true;
+        menuNoToggleable = true;
+        if (hasWon)
+            win.SetActive(true);
+        else
+            lose.SetActive(false);
+    }
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }

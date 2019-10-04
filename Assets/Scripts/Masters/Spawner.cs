@@ -8,15 +8,17 @@ public class Spawner : MonoBehaviour
     [Header("Setup")]
     [SerializeField, Tooltip("Enemies to spawn.")]
     private GameObject[] enemies;
-    [SerializeField, Tooltip("Count of enemies to spawn.")]
-    private int count;
+    [SerializeField, Tooltip("Maximum amount of enemies at the same time")]
+    private int simultaneousEnemies;
+    [SerializeField, Tooltip("Total enemies to spawn.")]
+    private int enemiesToSpawn;
     [SerializeField, Tooltip("Time between spawn enemies.")]
     private float timeBtwSpawn;
     [SerializeField, Tooltip("Start time spawn")]
     private float startSpawn;
 #pragma warning restore CS0649
 
-    private int enemiesInGame = 0;
+    private int enemiesAlive = 0;
 
     [DrawVectorRelativeToTransform]
     public List<Vector2> points;
@@ -25,19 +27,21 @@ public class Spawner : MonoBehaviour
 
     IEnumerator SpawnEnemies()
     {
-        if (enemiesInGame == count) yield break;
-
         yield return new WaitForSeconds(startSpawn);
-        for (int n = 0; n < count; n++)
+        for (; enemiesToSpawn > 0; enemiesToSpawn--, enemiesAlive++)
         {
-            yield return new WaitUntil(() => Menu.IsPause);
+            yield return new WaitUntil(() => enemiesAlive < simultaneousEnemies);
+            yield return new WaitWhile(() => Menu.IsPause);
 
             int p = Random.Range(0, points.Count);
             int x = Random.Range(0, enemies.Length);
 
-            Instantiate(enemies[x], points[p] + (Vector2)transform.position, Quaternion.identity);
-            enemiesInGame++;
+            GameObject enemy = Instantiate(enemies[x], points[p] + (Vector2)transform.position, Quaternion.identity);
+
+            enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
+
             yield return new WaitForSeconds(timeBtwSpawn);
         }
+        Global.menu.GameOver(true);
     }
 }

@@ -13,6 +13,7 @@ public class CreatureSpawn : MonoBehaviour
     private void Update() => Array.ForEach(creatures, e => e.Update(Time.deltaTime));
 
     [Serializable]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "Used by Unity Editor, it doesn't matter if it isn't visible.")]
     public class CreatureSpawnToken
     {
 #pragma warning disable CS0649
@@ -39,7 +40,7 @@ public class CreatureSpawn : MonoBehaviour
         public void SpawnInstantly()
         {
             GameObject gameObject = Instantiate(prefab, spawningPoint.position, spawningPoint.rotation);
-            gameObject.AddComponent<RespawnTracker>().SetSpawner(this);
+            gameObject.AddComponent<DestroyNotifier>().SetCallback(SpawnWithDelay);
             action.Invoke(gameObject);
         }
         public void SpawnWithDelay() => timer.ResetCycles(1);
