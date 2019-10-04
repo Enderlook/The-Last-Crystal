@@ -3,19 +3,19 @@ using UnityEngine;
 
 namespace PlayerAddons
 {
-    public class WeaponShooter : MonoBehaviour
+    public class WeaponShooter : MonoBehaviour, IUpdate
     {
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Weapons configuration")]
         private WeaponKeyPair[] weapons;
 #pragma warning restore CS0649
 
-        private void Update()
+        void IUpdate.UpdateBehaviour(float deltaTime)
         {
             foreach (WeaponKeyPair weapon in weapons)
             {
                 if (weapon.ShouldShoot)
-                    weapon.weapon.TryExecute();
+                    weapon.weapon.TryExecute(deltaTime);
             }
         }
 

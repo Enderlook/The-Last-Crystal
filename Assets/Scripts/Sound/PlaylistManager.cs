@@ -20,7 +20,7 @@ public class PlaylistManager : MonoBehaviour
 
     private bool isPlaying = false;
 
-    public int playlistsAmount => playlists.Length;
+    public int PlaylistsAmount => playlists.Length;
 
     private void Start()
     {
@@ -164,14 +164,22 @@ public class PlaylistManager : MonoBehaviour
         audioSource.Stop();
     }
 
+
     /// <summary>
     /// Reset the playlist to the first sound.
+    /// <paramref name="stopCurrentSound"/>If <see langword="true"/>, <see cref="StopCurrentSound"/> will be called.<paramref name="stopCurrentSound"/>
     /// </summary>
-    public void Reset()
+    public void ResetPlaylist(bool stopCurrentSound)
     {
         playlists[playlistsIndex].ResetIndex();
-        audioSource.Stop();
+        if (stopCurrentSound)
+            StopCurrentSound();
     }
+
+    /// <summary>
+    /// Stop current sound.
+    /// </summary>
+    public void StopCurrentSound() => audioSource.Stop();
 
 #if UNITY_EDITOR
     private void OnValidate()

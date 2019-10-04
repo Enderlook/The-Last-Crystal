@@ -28,6 +28,8 @@ public class CoinMeter : MonoBehaviour
 
     private void Update()
     {
+        if (Menu.IsPause)
+            return;
         if (showedMoney != realMoney)
         {
             showedMoney = Mathf.Clamp(showedMoney + (realMoney - oldMoney) * Time.deltaTime, Mathf.Min(realMoney, oldMoney), Mathf.Max(realMoney, oldMoney));
