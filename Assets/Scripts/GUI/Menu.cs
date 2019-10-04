@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -7,16 +10,55 @@ public class Menu : MonoBehaviour
     public GameObject menu;
     [Tooltip("Others panels. Used to hide them when press escape.")]
     public GameObject[] panels;
-    [Tooltip("Force menu to not be toggleable.")]
+    [Tooltip("Force menu to be untoggleable.")]
     public bool menuNoToggleable = false;
     [Tooltip("Playlist Manager.")]
     public PlaylistManager playlistManager;
-    [Tooltip("Name of the playlist to play when menu is shown")]
+    [Tooltip("Name of the playlist to play when menu is shown.")]
     public string playlistMenuShow;
-    [Tooltip("Name of the playlist to play when menu is hide")]
+    [Tooltip("Name of the playlist to play when menu is hide.")]
     public string playlistMenuHide;
 
-    public bool IsPause { get; private set; }
+    private static List<Animator> animationsToRenable = new List<Animator>();
+    private static Dictionary<StoppableRigidbody, float> stoppableRigidbodySpeeds = new Dictionary<StoppableRigidbody, float>();
+
+    public static bool IsPlaying => !isPause;
+    private static bool isPause = false;
+    public static bool IsPause {
+        get => isPause;
+        private set {
+            if (isPause == value)
+                return;
+            isPause = value;
+            if (value)
+            {
+                foreach (Animator animator in FindObjectsOfType<Animator>())
+                {
+                    if (animator.enabled == true)
+                    {
+                        animator.enabled = false;
+                        animationsToRenable.Add(animator);
+                    }
+                }
+
+                foreach (StoppableRigidbody stoppableRigidbody in FindObjectsOfType<StoppableRigidbody>())
+                {
+                    stoppableRigidbodySpeeds.Add(stoppableRigidbody, stoppableRigidbody.SpeedMultiplier);
+                    stoppableRigidbody.SpeedMultiplier = 0;
+                }
+            }
+            else
+            {
+                animationsToRenable.ForEach(e => e.enabled = true);
+                animationsToRenable.Clear();
+                foreach (KeyValuePair<StoppableRigidbody, float> keyValuePair in stoppableRigidbodySpeeds)
+                {
+                    keyValuePair.Key.SpeedMultiplier = keyValuePair.Value;
+                }
+                stoppableRigidbodySpeeds.Clear();
+            }
+        }
+    }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Start() => DisplayMenuPause(false);
@@ -64,10 +106,37 @@ public class Menu : MonoBehaviour
     /// <param name="resetCurrentMusic">Whenever it should reset the current music (not playlist) or wait until it ends.</param>
     public void PlayMusic(bool menuMusic, bool resetCurrentMusic)
     {
+        if (playlistManager == null)
+            return;
         if (menuMusic)
             playlistManager.SetPlaylist(playlistMenuShow);
         else
             playlistManager.SetPlaylist(playlistMenuHide);
         playlistManager.ResetPlaylist(resetCurrentMusic);
     }
+
+#pragma warning disable CA1822 // Unity Editor can't assign static methods to buttons
+    /// <summary>
+    /// Close game.
+    /// </summary>
+    public void Exit() => Application.Quit();
+
+    /// <summary>
+    /// Reload the current scene.
+    /// </summary>
+    public void Restart() => LoadScene(SceneManager.GetActiveScene().name);
+
+    /// <summary>
+    /// Load the main menu scene.
+    /// </summary>
+    public void MainMenu() => LoadScene("Main_Menu");
+
+    /// <summary>
+    /// Load an scene.<br>
+    /// Equivalent to <c><seealso cref="SceneManager.LoadScene"/>(<paramref name="scene"/>, <seealso cref="LoadSceneMode.Single"/>);</c>
+    /// </summary>
+    /// <seealso cref="SceneManager.LoadScene(string)"/>
+    /// <param name="scene">Scene name to load.</param>
+    public void LoadScene(string scene) => SceneManager.LoadScene(scene, LoadSceneMode.Single);
+#pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }

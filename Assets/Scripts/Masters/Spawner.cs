@@ -32,6 +32,8 @@ public class Spawner : MonoBehaviour
         yield return new WaitForSeconds(startSpawn);
         for (int n = 0; n < count; n++)
         {
+            yield return new WaitUntil(() => Menu.IsPause);
+
             int p = Random.Range(0, points.Count);
             int x = Random.Range(0, enemies.Length);
 
