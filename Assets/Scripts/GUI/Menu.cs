@@ -162,7 +162,7 @@ public class Menu : MonoBehaviour
         if (hasWon)
             win.SetActive(true);
         else
-            lose.SetActive(false);
+            lose.SetActive(true);
     }
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }
