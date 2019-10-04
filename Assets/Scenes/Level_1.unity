@@ -2881,6 +2881,7 @@ MonoBehaviour:
   enemiesToSpawn: 14
   timeBtwSpawn: 2
   startSpawn: 3
+  boss: {fileID: 5363415117319019817, guid: 68bf06f97f8991f4584e3e4ce3ed5305, type: 3}
   points:
   - {x: 5.228639, y: -0.83387804}
   - {x: -8.316242, y: 2.5692453}

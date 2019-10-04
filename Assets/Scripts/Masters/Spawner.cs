@@ -16,6 +16,8 @@ public class Spawner : MonoBehaviour
     private float timeBtwSpawn;
     [SerializeField, Tooltip("Start time spawn")]
     private float startSpawn;
+    [SerializeField, Tooltip("Boss spawned after all enemies die.")]
+    private GameObject boss;
 #pragma warning restore CS0649
 
     private int enemiesAlive = 0;
@@ -39,9 +41,19 @@ public class Spawner : MonoBehaviour
             GameObject enemy = Instantiate(enemies[x], points[p] + (Vector2)transform.position, Quaternion.identity);
 
             enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
+            SpawnEnemy(enemies[x], points[p]);
 
             yield return new WaitForSeconds(timeBtwSpawn);
         }
+
+        SpawnEnemy(boss, points[Random.Range(0, points.Count)]);
+        yield return new WaitWhile(() => enemiesAlive > 0);
         Global.menu.GameOver(true);
+    }
+
+    private void SpawnEnemy(GameObject gameObject, Vector2 position)
+    {
+        GameObject enemy = Instantiate(gameObject, position + (Vector2)transform.position, Quaternion.identity);
+        enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
     }
 }
