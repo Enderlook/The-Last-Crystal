@@ -17,7 +17,6 @@ namespace CreaturesAddons
 
         public virtual void ProduceDamage(object victim)
         {
-
             if (thisTransform != null && victim is IPush push)
                 push.Push(thisTransform.position, pushStrength, PushMode.Local);
             if (victim is ITakeDamage takeDamage)
