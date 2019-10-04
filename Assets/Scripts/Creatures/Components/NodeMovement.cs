@@ -32,6 +32,10 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    private bool isAirbone = false;
+    private BasicClockwork clockWork;
+    private const float LANDING_STUN_TIME = 0.4f;
+
     private Transform goal;
     List<Transform> players;
 
@@ -53,9 +57,25 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
     void IMove.Move(float deltaTime, float speedMultiplier)
     {
+        // Don't move while stunned
+        if (clockWork != null)
+        {
+            if (clockWork.Recharge(deltaTime))
+                clockWork = null;
+            else
+                return;
+        }
         // Don't move while airbone
         if (!IsGrounded())
+        {
+            isAirbone = true;
             return;
+        }
+        else if (isAirbone)
+        {
+            isAirbone = false;
+            clockWork = new BasicClockwork(LANDING_STUN_TIME);
+        }
 
         animator.SetBool(ANIMATION_STATES.JUMP, false);
 
