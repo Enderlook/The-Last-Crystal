@@ -25,6 +25,7 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
     private const float CHECK_GROUND_DISTANCE = 0.1f;
     private const float MARGIN_ERROR_DISTANCE = 0.1f;
+    private const float MARGIN_CLOSE_DISTANCE = 0.25f;
 
     private Rigidbody2D thisRigidbody2D;
 
@@ -67,6 +68,8 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
         List<Connection> path = navigationAgent.FindPathTo(goal.position);
 
+        float distanceToMove = speed * deltaTime * speedMultiplier;
+
         // If we aren't already there
         if (path.Count > 0)
         {
@@ -74,7 +77,6 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
             Vector2 target = connection.end.position;
 
             float distanceToTarget = XDistanceToTarget(target);
-            float distanceToMove = speed * deltaTime * speedMultiplier;
 
             if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) && path.Count > 1)
             {
@@ -92,6 +94,18 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
                 JumpTo(connection.end.position);
             else
                 Translate(distanceToMove * Mathf.Sign(distanceToTarget));
+        }
+        else
+        {
+            float distanceToTarget = XDistanceToTarget(goal.position);
+            if (Mathf.Abs(distanceToTarget) > MARGIN_CLOSE_DISTANCE)
+            {
+                spriteRenderer.flipX = Mathf.Sign(distanceToTarget) < 0;
+                if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget))
+                    Translate(distanceToTarget);
+                else
+                    Translate(distanceToMove * Mathf.Sign(distanceToTarget));
+            }
         }
     }
 
