@@ -85,7 +85,8 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
 
         // Verify his current goal
         CheckForPlayer();
-
+        if (goal == null)
+            return;
         List<Connection> path = navigationAgent.FindPathTo(goal.position);
 
         float distanceToMove = speed * deltaTime * speedMultiplier;
