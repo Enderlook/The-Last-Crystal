@@ -4764,7 +4764,11 @@ MonoBehaviour:
 
     The screen health bars are: Warrior, Crystal and Wizard.
 
-    Players respawn after die. The Crystal doesn''t.'
+    Players respawn after die. The Crystal doesn''t.
+
+    Warrior WAD. Attack Q.
+
+    Wizard Arrows. Attack Mouse Click.'
 --- !u!222 &2012905968
 CanvasRenderer:
   m_ObjectHideFlags: 0
