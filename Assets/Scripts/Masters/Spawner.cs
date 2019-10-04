@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
     IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(startSpawn);
-        for (; enemiesToSpawn > 0; enemiesToSpawn--, enemiesAlive++)
+        for (; enemiesToSpawn > 0; enemiesToSpawn--)
         {
             yield return new WaitUntil(() => enemiesAlive < simultaneousEnemies);
             yield return new WaitWhile(() => Menu.IsPause);
@@ -38,14 +38,10 @@ public class Spawner : MonoBehaviour
             int p = Random.Range(0, points.Count);
             int x = Random.Range(0, enemies.Length);
 
-            GameObject enemy = Instantiate(enemies[x], points[p] + (Vector2)transform.position, Quaternion.identity);
-
-            enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
             SpawnEnemy(enemies[x], points[p]);
 
             yield return new WaitForSeconds(timeBtwSpawn);
         }
-
         SpawnEnemy(boss, points[Random.Range(0, points.Count)]);
         yield return new WaitWhile(() => enemiesAlive > 0);
         Global.menu.GameOver(true);
@@ -53,6 +49,7 @@ public class Spawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject gameObject, Vector2 position)
     {
+        enemiesAlive++;
         GameObject enemy = Instantiate(gameObject, position + (Vector2)transform.position, Quaternion.identity);
         enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
     }
