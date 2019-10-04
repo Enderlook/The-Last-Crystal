@@ -108,7 +108,6 @@ MonoBehaviour:
   floatingTextController: {fileID: 5042988860275578343}
   speed: 1
   sprite: {fileID: 7526445749177953701}
-  damage: 0
   stoppableRigidbody: {fileID: 8836964168732201439}
   thisRigidbody2D: {fileID: 8157229962283897169}
   animator: {fileID: 0}
@@ -139,7 +138,7 @@ MonoBehaviour:
   digitPrecision: 0
   overrideTypeOfRounding: 0
   typeOfRounding: 0
-  floatingTextPrefab: {fileID: 8150760654224925313, guid: 2464453f149ba994292ee710d0ceaab7,
+  floatingTextPrefab: {fileID: 1259971843042013121, guid: 76062395ae1642d4f86d51ed39ddd26e,
     type: 3}
   floatingTextParent: {fileID: 0}
 --- !u!114 &8836964168732201439
@@ -302,13 +301,13 @@ MonoBehaviour:
     endCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     activeCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Internal.UnityEventBoolean, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   hasDecreaseReduction: 0
   decreaseReduction:
     reductionFormula:
