@@ -46,6 +46,11 @@ public static class Global
     /// List of all players
     /// </summary>
     public static List<Transform> players = new List<Transform> ();
+    
+    /// <summary>
+    /// Menu instance.
+    /// </summary>
+    public static Menu menu;
 }
 
 public class Configuration : MonoBehaviour
@@ -60,8 +65,11 @@ public class Configuration : MonoBehaviour
     //[SerializeField, Tooltip("Money controller script.")]
     //private CoinMeter coinMeter;
 
-    [SerializeField, Tooltip("Crystal")]
+    [Header("Setup")]
+    [SerializeField, Tooltip("Crystal.")]
     private Transform crystal;
+    [SerializeField, Tooltip("Menu.")]
+    private Menu menu;
 #pragma warning restore CS0649
 #pragma warning restore IDE0051
 

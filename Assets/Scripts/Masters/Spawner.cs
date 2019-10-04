@@ -4,40 +4,44 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-
+#pragma warning disable CS0649
     [Header("Setup")]
-    [Tooltip("Enemies to spawn.")]
-    public GameObject[] enemies;
-    [Tooltip("Count of enemies to spawn.")]
-    public int count;
-    [Tooltip("Time between spawn enemies.")]
-    public float timeBtwSpawn;
-    [Tooltip("Start time spawn")]
-    public float startSpawn;
+    [SerializeField, Tooltip("Enemies to spawn.")]
+    private GameObject[] enemies;
+    [SerializeField, Tooltip("Maximum amount of enemies at the same time")]
+    private int simultaneousEnemies;
+    [SerializeField, Tooltip("Total enemies to spawn.")]
+    private int enemiesToSpawn;
+    [SerializeField, Tooltip("Time between spawn enemies.")]
+    private float timeBtwSpawn;
+    [SerializeField, Tooltip("Start time spawn")]
+    private float startSpawn;
+#pragma warning restore CS0649
 
-    private int enemiesInGame = 0;
+    private int enemiesAlive = 0;
 
     [DrawVectorRelativeToTransform]
     public List<Vector2> points;
 
-    private void Start()
-    {
-        StartCoroutine(SpawnEnemies());
-    }
+    private void Start() => StartCoroutine(SpawnEnemies());
 
     IEnumerator SpawnEnemies()
     {
-        if (enemiesInGame == count) yield break;
-
         yield return new WaitForSeconds(startSpawn);
-        for (int n = 0; n < count; n++)
+        for (; enemiesToSpawn > 0; enemiesToSpawn--, enemiesAlive++)
         {
+            yield return new WaitUntil(() => enemiesAlive < simultaneousEnemies);
+            yield return new WaitWhile(() => Menu.IsPause);
+
             int p = Random.Range(0, points.Count);
             int x = Random.Range(0, enemies.Length);
 
-            Instantiate(enemies[x], points[p] + (Vector2)transform.position, Quaternion.identity);
-            enemiesInGame++;
+            GameObject enemy = Instantiate(enemies[x], points[p] + (Vector2)transform.position, Quaternion.identity);
+
+            enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
+
             yield return new WaitForSeconds(timeBtwSpawn);
         }
+        Global.menu.GameOver(true);
     }
 }
