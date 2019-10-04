@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class NodeMovement : MonoBehaviour, IInit, IMove
 {
+#pragma warning disable CS0649
     [Header("Configuration")]
     [SerializeField, Tooltip("Maximum speed movement.")]
     private float speed = 1;
@@ -12,7 +13,6 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
     [SerializeField, Tooltip("Follow player")]
     private bool targetPlayer;
 
-#pragma warning disable CS0649
     [Header("Setup")]
     [SerializeField, Tooltip("Navigation agent system.")]
     private NavigationAgent navigationAgent;
@@ -73,8 +73,8 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
             Connection connection = path[0];
             Vector2 target = connection.end.position;
 
-            float distanceToMove = speed * deltaTime * speedMultiplier;
             float distanceToTarget = XDistanceToTarget(target);
+            float distanceToMove = speed * deltaTime * speedMultiplier;
 
             if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) && path.Count > 1)
             {
@@ -132,7 +132,6 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         Vector2 tO = target - origin;
         float tan = tO.y / tO.x;
         return Mathf.Round(Atg(tan));
-
     }
 
     private static float GetSin(Vector2 target, Vector2 origin)
@@ -142,7 +141,6 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         float magnitude = tO.magnitude;
         float sin = tO.y / magnitude;
         return Mathf.Round(Asin(sin));
-
     }
 
     private static float GetCos(Vector2 target, Vector2 origin)
