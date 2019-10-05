@@ -6,7 +6,6 @@ using UnityEditor;
 public static class PropertyDrawerHelper
 {
     private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
-
     public static IEnumerable<(SerializedProperty serializedProperty, T field, Editor editor)> FindAllSerializePropertiesInActiveEditorOf<T>()
     {
         foreach (Editor editor in ActiveEditorTracker.sharedTracker.activeEditors)
@@ -19,7 +18,7 @@ public static class PropertyDrawerHelper
                 if (targetObject == null)
                     continue;
                 Type targetObjectClassType = targetObject.GetType();
-                FieldInfo field = targetObjectClassType.GetField(serializedProperty.propertyPath, bindingFlags);
+                FieldInfo field = targetObjectClassType.GetInheritedField(serializedProperty.propertyPath, bindingFlags);
                 // If the field exist, it's the class type we want
                 if (field != null && field.FieldType == typeof(T))
                     yield return (serializedProperty, (T)field.GetValue(targetObject), editor);
@@ -39,7 +38,7 @@ public static class PropertyDrawerHelper
                 if (targetObject == null)
                     continue;
                 Type targetObjectClassType = targetObject.GetType();
-                FieldInfo field = targetObjectClassType.GetField(serializedProperty.propertyPath, bindingFlags);
+                FieldInfo field = targetObjectClassType.GetInheritedField(serializedProperty.propertyPath, bindingFlags);
                 if (field == null)
                     continue;
                 Attribute attribute = field.GetCustomAttribute(typeof(T), inherit);

@@ -4,8 +4,6 @@ namespace CreaturesAddons
 {
     public class Slash : Weapon, IAutomatedAttack
     {
-        [SerializeField, Tooltip("Enemy pattern attack")]
-        private bool activePattern;
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
         [SerializeField, Tooltip("Push strength on hit.")]
@@ -13,23 +11,17 @@ namespace CreaturesAddons
 
         [Header("Setup")]
 #pragma warning disable CS0649
-        //[SerializeField]
-        public RayCasting rayCasting;
+        [SerializeField]
+        private RayCasting rayCasting;
         [Layer]
-        public int layerToHit;
+        private int layerToHit;
+        [SerializeField, Tooltip("Animation played on attack.")]
+        protected string animationState;
 #pragma warning restore CS0649
 
         private Transform thisTransform;
-        private Animator thisAnimator;
+        protected Animator thisAnimator;
         private SpriteRenderer thisSpriteRenderer;
-        private int probStrongAttack = 1;
-
-        private static class ANIMATION_STATES
-        {
-            public const string
-                ATTACK = "Attack",
-                STRONG_ATTACK = "StrongAttack";
-        }
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
         public bool AutoAttack { get; set; }
@@ -47,21 +39,14 @@ namespace CreaturesAddons
 
         protected override void Attack()
         {
-            if (activePattern)
-            {
-                if (probStrongAttack == Random.Range(0, 6))
-                    thisAnimator.SetTrigger(ANIMATION_STATES.STRONG_ATTACK);
-                else
-                    thisAnimator.SetTrigger(ANIMATION_STATES.ATTACK);
-            }
-            else if (thisAnimator == null || string.IsNullOrEmpty(ANIMATION_STATES.ATTACK))
+            if (thisAnimator == null || string.IsNullOrEmpty(animationState))
                 HitTarget();
             else
-                thisAnimator.SetTrigger(ANIMATION_STATES.ATTACK);
+                thisAnimator.SetTrigger(animationState);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
-        private void HitTarget()
+        protected void HitTarget()
         {
             RaycastHit2D[] raycastHits = rayCasting.RaycastAll(1 << layerToHit); // Ignore any layer that isn't layerToHit
             for (int n = 0; n < raycastHits.Length; n++)

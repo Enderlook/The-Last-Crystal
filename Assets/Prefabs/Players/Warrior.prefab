@@ -34,7 +34,6 @@ MonoBehaviour:
   firerate: 2.2
   damage: 8
   pushStrength: 65
-  animationName: Attack
   rayCasting:
     source: {x: 0.089596555, y: 0.22094885}
     direction: {x: 0.77603835, y: -0.6306857}
@@ -46,7 +45,7 @@ MonoBehaviour:
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
-  layerToHit: 10
+  animationState: Attack
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
