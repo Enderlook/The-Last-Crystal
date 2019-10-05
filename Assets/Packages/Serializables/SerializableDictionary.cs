@@ -17,9 +17,9 @@ public class SerializableDictionary<TKey, TValue> : ICollection<KeyValuePair<TKe
         set => dictionary = value;
     }
 
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private TKey[] keys;
-    [SerializeField]
+    [SerializeField, HideInInspector]
     private TValue[] values;
 
     public SerializableDictionary() => Dictionary = new Dictionary<TKey, TValue>();
