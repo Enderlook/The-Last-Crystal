@@ -4,53 +4,55 @@ using UnityEngine;
 public class FloatingTextController : MonoBehaviour
 {
     [Header("Configuration")]
-    [Tooltip("Spawning point of prefab. If there are several, a random point will be used.")]
-    public Transform[] spawningPoints = new Transform[1];
-    [Tooltip("Maximum amount of floating texts at time. New texts will remove old ones. Use 0 for unlimited.")]
-    public int maximumAmountFloatingText = 10;
+    [SerializeField, Tooltip("Spawning point of prefab. If there are several, a random point will be used.")]
+    private Transform[] spawningPoints = new Transform[1];
+    [SerializeField, Tooltip("Maximum amount of floating texts at time. New texts will remove old ones. Use 0 for unlimited.")]
+    private int maximumAmountFloatingText = 10;
 
+#pragma warning disable CS0649
     [SerializeField, HideInInspector]
     private bool overrideTimeBeforeDestroy;
     [Header("Floating Text Override Configuration")]
     [HasConfirmationField(nameof(overrideTimeBeforeDestroy))]
-    [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
-    public float timeBeforeDestroy;
+    [SerializeField, Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
+    private float timeBeforeDestroy;
 
     [SerializeField, HideInInspector]
     private bool overrideTextColor;
     [HasConfirmationField(nameof(overrideTextColor))]
-    [Tooltip("Color used by text")]
-    public Color textColor = Color.red;
+    [SerializeField, Tooltip("Color used by text")]
+    private Color textColor = Color.red;
 
     [SerializeField, HideInInspector]
     private bool overrideRandomOffset;
     [HasConfirmationField(nameof(overrideRandomOffset))]
-    [Tooltip("Random spawn offset.")]
-    public Vector2 randomOffset = Vector2.one;
+    [SerializeField, Tooltip("Random spawn offset.")]
+    private Vector2 randomOffset = Vector2.one;
 
     [SerializeField, HideInInspector]
     private bool overrideScaleMultiplier;
     [HasConfirmationField(nameof(overrideScaleMultiplier))]
-    [Tooltip("Multiply the scale of the canvas by this value.")]
-    public float scaleMultiplier = 1;
+    [SerializeField, Tooltip("Multiply the scale of the canvas by this value.")]
+    private float scaleMultiplier = 1;
 
     [SerializeField, HideInInspector]
     private bool overrideDigitPrecision;
     [HasConfirmationField(nameof(overrideDigitPrecision))]
-    [Tooltip("Digit precision (decimals) for numbers .Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
-    public int digitPrecision = 0;
+    [SerializeField, Tooltip("Digit precision (decimals) for numbers .Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
+    private int digitPrecision = 0;
 
     [SerializeField, HideInInspector]
     private bool overrideTypeOfRounding;
     [HasConfirmationField(nameof(overrideTypeOfRounding))]
-    [Tooltip("Determines how decimal digits are rounded.")]
-    public FloatingText.TYPE_OF_ROUNDING typeOfRounding = FloatingText.TYPE_OF_ROUNDING.ROUND;
+    [SerializeField, Tooltip("Determines how decimal digits are rounded.")]
+    private FloatingText.TYPE_OF_ROUNDING typeOfRounding = FloatingText.TYPE_OF_ROUNDING.ROUND;
 
     [Header("Setup")]
     [Tooltip("Floating Text prefab.")]
-    public GameObject floatingTextPrefab;
-    [Tooltip("Parent transform of all floating texts. Just for organization of scene.\nOptional.\nDO NOT USE A MOVING TRANSFORM!")]
-    public Transform floatingTextParent;
+    private GameObject floatingTextPrefab;
+    [SerializeField, Tooltip("Parent transform of all floating texts. Just for organization of scene.\nOptional.\nDO NOT USE A MOVING TRANSFORM!")]
+    private Transform floatingTextParent;
+#pragma warning restore CS0649
 
     private static Transform floatingTextParentStatic;
     /// <summary>
