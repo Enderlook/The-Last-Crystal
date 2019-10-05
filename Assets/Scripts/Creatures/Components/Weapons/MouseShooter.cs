@@ -12,7 +12,7 @@ namespace CreaturesAddons
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Animation attack name.")]
         private string animationName;
-#pragma warning restore CS0649;
+#pragma warning restore CS0649
 
         [Header("Projectile Configuration")]
         [SerializeField, Tooltip("Projectile force.")]
