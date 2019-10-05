@@ -8,55 +8,63 @@ using UnityEngine;
 public class SerializableList<T> : ICollection<T>, IEnumerable<T>, IEnumerable, IList<T>, IReadOnlyCollection<T>, IReadOnlyList<T>, ICollection, IList, ISerializationCallbackReceiver
 {
     private List<T> list;
+    private List<T> List {
+        get {
+            if (list == null)
+                list = new List<T>();
+            return list;
+        }
+        set => list = value;
+    }
     [SerializeField, HideInInspector]
     private T[] array;
 
-    public SerializableList() => list = new List<T>();
-    public SerializableList(IEnumerable<T> enumerable) => list = new List<T>(enumerable);
-    public SerializableList(int capacity) => list = new List<T>(capacity);
-    public SerializableList(List<T> list) => this.list = list;
+    public SerializableList() => List = new List<T>();
+    public SerializableList(IEnumerable<T> enumerable) => List = new List<T>(enumerable);
+    public SerializableList(int capacity) => List = new List<T>(capacity);
+    public SerializableList(List<T> list) => List = list;
 
     void ISerializationCallbackReceiver.OnBeforeSerialize()
     {
-        array = list.ToArray();
+        array = List.ToArray();
     }
 
     void ISerializationCallbackReceiver.OnAfterDeserialize()
     {
-        list = array.ToList();
+        List = array.ToList();
         array = null;
     }
 
-    public List<T> GetList() => list;
+    public List<T> GetList() => List;
 
-    public T this[int index] { get => ((IList<T>)list)[index]; set => ((IList<T>)list)[index] = value; }
+    public T this[int index] { get => ((IList<T>)List)[index]; set => ((IList<T>)List)[index] = value; }
 
-    public int Count => ((IList<T>)list).Count;
+    public int Count => ((IList<T>)List).Count;
 
-    public bool IsReadOnly => ((IList<T>)list).IsReadOnly;
+    public bool IsReadOnly => ((IList<T>)List).IsReadOnly;
 
-    public bool IsSynchronized => ((ICollection)list).IsSynchronized;
+    public bool IsSynchronized => ((ICollection)List).IsSynchronized;
 
-    public object SyncRoot => ((ICollection)list).SyncRoot;
+    public object SyncRoot => ((ICollection)List).SyncRoot;
 
-    public bool IsFixedSize => ((IList)list).IsFixedSize;
+    public bool IsFixedSize => ((IList)List).IsFixedSize;
 
-    object IList.this[int index] { get => ((IList)list)[index]; set => ((IList)list)[index] = value; }
+    object IList.this[int index] { get => ((IList)List)[index]; set => ((IList)List)[index] = value; }
 
-    public void Add(T item) => ((IList<T>)list).Add(item);
-    public void Clear() => ((IList<T>)list).Clear();
-    public bool Contains(T item) => ((IList<T>)list).Contains(item);
-    public void CopyTo(T[] array, int arrayIndex) => ((IList<T>)list).CopyTo(array, arrayIndex);
-    public IEnumerator<T> GetEnumerator() => ((IList<T>)list).GetEnumerator();
-    public int IndexOf(T item) => ((IList<T>)list).IndexOf(item);
-    public void Insert(int index, T item) => ((IList<T>)list).Insert(index, item);
-    public bool Remove(T item) => ((IList<T>)list).Remove(item);
-    public void RemoveAt(int index) => ((IList<T>)list).RemoveAt(index);
-    IEnumerator IEnumerable.GetEnumerator() => ((IList<T>)list).GetEnumerator();
-    public void CopyTo(Array array, int index) => ((ICollection)list).CopyTo(array, index);
-    public int Add(object value) => ((IList)list).Add(value);
-    public bool Contains(object value) => ((IList)list).Contains(value);
-    public int IndexOf(object value) => ((IList)list).IndexOf(value);
-    public void Insert(int index, object value) => ((IList)list).Insert(index, value);
-    public void Remove(object value) => ((IList)list).Remove(value);
+    public void Add(T item) => ((IList<T>)List).Add(item);
+    public void Clear() => ((IList<T>)List).Clear();
+    public bool Contains(T item) => ((IList<T>)List).Contains(item);
+    public void CopyTo(T[] array, int arrayIndex) => ((IList<T>)List).CopyTo(array, arrayIndex);
+    public IEnumerator<T> GetEnumerator() => ((IList<T>)List).GetEnumerator();
+    public int IndexOf(T item) => ((IList<T>)List).IndexOf(item);
+    public void Insert(int index, T item) => ((IList<T>)List).Insert(index, item);
+    public bool Remove(T item) => ((IList<T>)List).Remove(item);
+    public void RemoveAt(int index) => ((IList<T>)List).RemoveAt(index);
+    IEnumerator IEnumerable.GetEnumerator() => ((IList<T>)List).GetEnumerator();
+    public void CopyTo(Array array, int index) => ((ICollection)List).CopyTo(array, index);
+    public int Add(object value) => ((IList)List).Add(value);
+    public bool Contains(object value) => ((IList)List).Contains(value);
+    public int IndexOf(object value) => ((IList)List).IndexOf(value);
+    public void Insert(int index, object value) => ((IList)List).Insert(index, value);
+    public void Remove(object value) => ((IList)List).Remove(value);
 }
