@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CreaturesAddons
+namespace CreaturesAddons.Weapons
 {
     public abstract class Weapon : MonoBehaviour, IInit, IClockWork
     {

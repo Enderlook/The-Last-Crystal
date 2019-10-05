@@ -1,4 +1,5 @@
 ﻿using CreaturesAddons;
+using CreaturesAddons.Weapons;
 using UnityEngine;
 
 namespace PlayerAddons

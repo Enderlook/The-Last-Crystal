@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CreaturesAddons.Weapons;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class WeaponCooldownDisplay : MonoBehaviour
@@ -13,7 +14,7 @@ public class WeaponCooldownDisplay : MonoBehaviour
 
     [Header("Setup")]
     [Tooltip("Weapon to track cooldown")]
-    public CreaturesAddons.Weapon weapon;
+    public Weapon weapon;
     [Tooltip("Audio Source to play sounds.")]
     public AudioSource audioSource;
 

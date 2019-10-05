@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CreaturesAddons
+namespace CreaturesAddons.Weapons
 {
     public class PassiveMelee : MonoBehaviour, IInit, IDamageOnTouch
     {

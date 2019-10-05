@@ -1,8 +1,8 @@
 ﻿using System;
-using CreaturesAddons;
+using CreaturesAddons.Weapons;
 using UnityEngine;
 
-namespace EnemyAddons
+namespace CreaturesAddons
 {
     public class AutomatedAttack : MonoBehaviour, IInit, IUpdate
     {

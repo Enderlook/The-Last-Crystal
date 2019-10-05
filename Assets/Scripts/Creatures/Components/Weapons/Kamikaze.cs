@@ -1,4 +1,4 @@
-﻿namespace CreaturesAddons
+﻿namespace CreaturesAddons.Weapons
 {
     public class Kamikaze : PassiveMelee
     {
