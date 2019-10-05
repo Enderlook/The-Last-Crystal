@@ -9,6 +9,9 @@ public class SerializableList<T> : IList<T>, ISerializationCallbackReceiver
     private List<T> list;
     [SerializeField, HideInInspector]
     private T[] array;
+
+    public SerializableList() => list = new List<T>();
+    public SerializableList(IEnumerable<T> enumerable) => list = new List<T>(enumerable);
     public SerializableList(int capacity) => list = new List<T>(capacity);
     public SerializableList(List<T> list) => this.list = list;
 
