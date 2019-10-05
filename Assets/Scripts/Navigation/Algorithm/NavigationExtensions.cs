@@ -25,8 +25,9 @@ namespace Navigation
 
             return closestNode;
         }
-
+#if UNITY_EDITOR
         public static Node FindClosestNodeToMouseInEditor(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInEditor());
+#endif
         public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame());
         public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation, Camera camera) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame(camera));
     }
