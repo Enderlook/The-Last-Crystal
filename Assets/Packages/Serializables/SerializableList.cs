@@ -68,3 +68,5 @@ public class SerializableList<T> : ICollection<T>, IEnumerable<T>, IEnumerable, 
     public void Insert(int index, object value) => ((IList)List).Insert(index, value);
     public void Remove(object value) => ((IList)List).Remove(value);
 }
+
+public sealed class ShowListAttribute : PropertyAttribute { }
