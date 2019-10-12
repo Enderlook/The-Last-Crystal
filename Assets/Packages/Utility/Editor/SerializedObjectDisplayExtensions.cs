@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Linq;
 
-public static class SerializedObjectExtensions
+public static class SerializedObjectDisplayExtensions
 {
     /// <summary>
     /// Create a Property Field and save it changes.
