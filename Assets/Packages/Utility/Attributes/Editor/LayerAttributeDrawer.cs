@@ -1,29 +1,32 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(LayerAttribute))]
-internal class LayerAttributeEditor : PropertyDrawer
+namespace AdditionalAttributes
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(LayerAttribute))]
+    internal class LayerAttributeEditor : PropertyDrawer
     {
-        EditorGUI.BeginProperty(position, label, property);
-        EditorGUI.BeginChangeCheck();
-        int layer = EditorGUI.LayerField(position, label, property.intValue);
-        if (EditorGUI.EndChangeCheck())
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            switch (property.propertyType)
+            EditorGUI.BeginProperty(position, label, property);
+            EditorGUI.BeginChangeCheck();
+            int layer = EditorGUI.LayerField(position, label, property.intValue);
+            if (EditorGUI.EndChangeCheck())
             {
-                case SerializedPropertyType.Integer:
-                    property.intValue = layer;
-                    break;
-                case SerializedPropertyType.Float:
-                    property.floatValue = layer;
-                    break;
-                case SerializedPropertyType.LayerMask:
-                    property.intValue = layer;
-                    break;
+                switch (property.propertyType)
+                {
+                    case SerializedPropertyType.Integer:
+                        property.intValue = layer;
+                        break;
+                    case SerializedPropertyType.Float:
+                        property.floatValue = layer;
+                        break;
+                    case SerializedPropertyType.LayerMask:
+                        property.intValue = layer;
+                        break;
+                }
             }
+            EditorGUI.EndProperty();
         }
-        EditorGUI.EndProperty();
     }
 }

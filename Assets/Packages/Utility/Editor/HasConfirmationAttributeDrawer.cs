@@ -2,45 +2,48 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(HasConfirmationFieldAttribute))]
-public class HasConfirmationAttributeDrawer : PropertyDrawer
+namespace AdditionalAttributes
 {
-    private bool confirm;
-
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(HasConfirmationFieldAttribute))]
+    public class HasConfirmationAttributeDrawer : PropertyDrawer
     {
-        EditorGUI.BeginProperty(position, label, property);
+        private bool confirm;
 
-        HasConfirmationFieldAttribute hasConfirmationFieldAttribute = (HasConfirmationFieldAttribute)attribute;
-
-        Rect fieldRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight);
-
-        SerializedProperty confirmation = property.serializedObject.FindProperty(hasConfirmationFieldAttribute.ConfirmFieldName);
-
-        EditorGUI.PropertyField(position, confirmation);
-
-        confirm = confirmation.boolValue;
-        if (confirm)
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.indentLevel++;
-            EditorGUI.PropertyField(fieldRect, property, label, true);
-            EditorGUI.indentLevel--;
+            EditorGUI.BeginProperty(position, label, property);
+
+            HasConfirmationFieldAttribute hasConfirmationFieldAttribute = (HasConfirmationFieldAttribute)attribute;
+
+            Rect fieldRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight);
+
+            SerializedProperty confirmation = property.serializedObject.FindProperty(hasConfirmationFieldAttribute.ConfirmFieldName);
+
+            EditorGUI.PropertyField(position, confirmation);
+
+            confirm = confirmation.boolValue;
+            if (confirm)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUI.PropertyField(fieldRect, property, label, true);
+                EditorGUI.indentLevel--;
+            }
+
+            property.serializedObject.ApplyModifiedProperties();
+
+            EditorGUI.EndProperty();
         }
 
-        property.serializedObject.ApplyModifiedProperties();
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            SerializedObject serializedObject = property.serializedObject;
 
-        EditorGUI.EndProperty();
-    }
+            FieldInfo fieldInfo = serializedObject.targetObject.GetType().GetField(property.name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+            HasConfirmationFieldAttribute hasConfirmationFieldAttribute = (HasConfirmationFieldAttribute)fieldInfo.GetCustomAttribute(typeof(HasConfirmationFieldAttribute), true);
 
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        SerializedObject serializedObject = property.serializedObject;
+            confirm = serializedObject.FindProperty(hasConfirmationFieldAttribute.ConfirmFieldName).boolValue;
 
-        FieldInfo fieldInfo = serializedObject.targetObject.GetType().GetField(property.name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
-        HasConfirmationFieldAttribute hasConfirmationFieldAttribute = (HasConfirmationFieldAttribute)fieldInfo.GetCustomAttribute(typeof(HasConfirmationFieldAttribute), true);
-
-        confirm = serializedObject.FindProperty(hasConfirmationFieldAttribute.ConfirmFieldName).boolValue;
-
-        return confirm ? EditorGUI.GetPropertyHeight(property) + EditorGUIUtility.singleLineHeight : EditorGUIUtility.singleLineHeight;
+            return confirm ? EditorGUI.GetPropertyHeight(property) + EditorGUIUtility.singleLineHeight : EditorGUIUtility.singleLineHeight;
+        }
     }
 }

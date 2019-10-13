@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public sealed class LayerAttribute : PropertyAttribute
+namespace AdditionalAttributes
 {
-    public static int InvertLayer(int layer) => 1 << layer;
+    public sealed class LayerAttribute : PropertyAttribute
+    {
+        public static int InvertLayer(int layer) => 1 << layer;
+    }
 }

@@ -3,6 +3,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using AdditionalAttributes;
 
 public static class SerializedObjectDisplayExtensions
 {

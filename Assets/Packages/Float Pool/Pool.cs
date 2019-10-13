@@ -4,6 +4,7 @@ using FloatPool.Decorators;
 using FloatPool.Internal;
 using UnityEngine;
 using System.Reflection;
+using AdditionalAttributes;
 
 namespace FloatPool
 {

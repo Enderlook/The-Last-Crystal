@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AdditionalAttributes;
 using UnityEngine;
 
 namespace FloatingText
