@@ -3,6 +3,7 @@ using Navigation;
 using UnityEngine;
 using System.Linq;
 using System;
+using Serializables;
 
 [Serializable]
 public class Connections : SerializableList<Connection>
