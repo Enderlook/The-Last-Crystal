@@ -61,7 +61,6 @@ namespace HealthBarGUI
         /// Both current health and maximum health will be assigned by maxHealth.
         /// Designed to initialize the health bar by first time.
         /// </summary>
-        /// <param name="maxHealth"></param>
         void ManualUpdate(float health);
 
         /// <summary>
@@ -153,7 +152,9 @@ namespace HealthBarGUI
         private bool isVisible = false;
         public bool IsEnabled { get; set; } = true;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void Awake() => Setup();
+
         public void ManualUpdate(float health, float maxHealth)
         {
             this.health = health;
@@ -177,6 +178,7 @@ namespace HealthBarGUI
         /// <returns>Color of the <see cref="healthImage"/></returns>
         private Color GetHealthColor() => Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + (damageBar != null ? damageBar.fillAmount : 0) - (healingBar != null ? healingImage.fillAmount : 0));
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void Update()
         {
             if (IsEnabled)
@@ -285,6 +287,7 @@ namespace HealthBarGUI
         /// <summary>
         /// Update color of health bar.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void OnValidate()
         {
             Setup();
