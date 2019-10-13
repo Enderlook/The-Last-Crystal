@@ -57,6 +57,7 @@ public class FloatRange
 public class FloatRangeStep : FloatRange
 {
     [SerializeField, Tooltip("Step values used when producing random numbers.")]
+    // Used in FloatRangeStepDrawer as string name. Don't forget to change string if this is renamed.
     private float step;
 
     /// <summary>
