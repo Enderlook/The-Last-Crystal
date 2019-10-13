@@ -1,71 +1,77 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(RangeFloat)), CustomPropertyDrawer(typeof(RangeInt))]
-public class FloatRangeDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(RangeFloat)), CustomPropertyDrawer(typeof(RangeInt)), CustomPropertyDrawer(typeof(RangeFloatStep)), CustomPropertyDrawer(typeof(RangeIntStep))]
+public class RangeDrawer : PropertyDrawer
 {
-    private const string MIN_FIELD_NAME = "min";
-    private const string MAX_FIELD_NAME = "max";
+    // Field display name must be a single letter
+    private const string MIN_FIELD_NAME = "min", MIN_FIELD_DISPLAY_NAME = "L";
+    private const string MAX_FIELD_NAME = "max", MAX_FIELD_DISPLAY_NAME = "U";
+    private const string STEP_FIELD_NAME = "step", STEP_FIELD_DISPLAY_NAME = "S";
 
-    protected List<string> errors = new List<string>();
-    protected SerializedProperty minProperty, maxProperty;
-    protected HorizontalRectBuilder rectBuilder;
+    protected readonly string SERIALIZED_PROPERTY_TYPE_ERROR = $"Serialized properties shown in {typeof(RangeDrawer)} must be either {nameof(SerializedPropertyType.Float)} or {nameof(SerializedPropertyType.Integer)}";
+
     private float errorHeight;
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        minProperty = property.FindPropertyRelative(MIN_FIELD_NAME);
-        maxProperty = property.FindPropertyRelative(MAX_FIELD_NAME);
-        rectBuilder = new HorizontalRectBuilder(position.position, position.width, position.height - errorHeight);
+        // Initialize properties
+        SerializedProperty minProperty = property.FindPropertyRelative(MIN_FIELD_NAME);
+        SerializedProperty maxProperty = property.FindPropertyRelative(MAX_FIELD_NAME);
 
-        Rect mainLabelRect = rectBuilder.GetRect(EditorGUIUtility.labelWidth);
+        List<SerializedProperty> serializedProperties = new List<SerializedProperty>() {
+            minProperty,
+            maxProperty,
+        };
 
-        EditorGUI.BeginProperty(position, label, property);
-        EditorGUI.LabelField(mainLabelRect, label);
-
-        foreach ((SerializedProperty serializedProperty, Rect fieldRect) in GetFields())
+        List<GUIContent> guiContents = new List<GUIContent>()
         {
-            GUIContent guiContent = new GUIContent(serializedProperty.displayName, property.tooltip);
-            EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(guiContent).x; // Reduce size of label to only contain the necessary space to display the name
-            EditorGUI.PropertyField(fieldRect, serializedProperty);
-            EditorGUIUtility.labelWidth = 0; // Using 0 return it value to default
+            new GUIContent(MIN_FIELD_DISPLAY_NAME, minProperty.tooltip),
+            new GUIContent(MAX_FIELD_DISPLAY_NAME, maxProperty.tooltip),
+        };
+
+        SerializedProperty stepProperty = property.FindPropertyRelative(STEP_FIELD_NAME);
+        if (stepProperty != null)
+        {
+            serializedProperties.Add(stepProperty);
+            guiContents.Add(new GUIContent(STEP_FIELD_DISPLAY_NAME, stepProperty.tooltip));
         }
 
-        Validate(position);
+        EditorGUI.BeginProperty(position, label, property);
 
-        EditorGUI.EndProperty();
-    }
+        // This magically iterate over all sibling of the serialized property and show them in-line in the inspector
+        // The serialized property is the first in being shown
+        EditorGUI.MultiPropertyField(position, guiContents.ToArray(), property.FindPropertyRelative(MIN_FIELD_NAME), label);
 
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        Debug.Log(errors.Count);
-        return EditorGUI.GetPropertyHeight(property, label) + errorHeight;
-    }
-
-    protected virtual (SerializedProperty serializedProperty, Rect fieldRect)[] GetFields()
-    {
-        Rect minRect = rectBuilder.GetRect(rectBuilder.RemainingWidth / 2);
-        Rect maxRect = rectBuilder.GetRect(rectBuilder.RemainingWidth);
-
-        return new (SerializedProperty serializedProperty, Rect fieldRect)[]
+        // Validate fields
+        float min, max;
+        float? step = null;
+        // All properties has the same type, so check the first one
+        switch (minProperty.propertyType)
         {
-            (minProperty, minRect),
-            (maxProperty, maxRect)
-        };
-    }
-
-    protected void Validate(Rect position)
-    {
-        errors.Clear();
-        FindErrors(position);
-    }
-
-    protected virtual void FindErrors(Rect position)
-    {
-        if (minProperty.floatValue >= maxProperty.floatValue)
+            case SerializedPropertyType.Float:
+                min = minProperty.floatValue;
+                max = maxProperty.floatValue;
+                if (stepProperty != null)
+                    step = stepProperty.floatValue;
+                break;
+            case SerializedPropertyType.Integer:
+                min = minProperty.intValue;
+                max = maxProperty.intValue;
+                if (stepProperty != null)
+                    step = stepProperty.intValue;
+                break;
+            default:
+                throw new ArgumentException(SERIALIZED_PROPERTY_TYPE_ERROR);
+        }
+        List<string> errors = new List<string>();
+        if (min >= max)
             errors.Add($"Value of {minProperty.displayName} can't be higher or equal to {maxProperty.displayName}.");
-        if (errors.Count <= 0)
+        if (step != null && step > (max - min))
+            errors.Add($"Value of {stepProperty.displayName} can't be higher than the difference between {minProperty.displayName} and {maxProperty.displayName}.");
+        if (errors.Count == 0)
             return;
         foreach (string error in errors)
         {
@@ -73,40 +79,13 @@ public class FloatRangeDrawer : PropertyDrawer
         }
         string message = string.Join("\n", errors);
         errorHeight = GUI.skin.box.CalcHeight(new GUIContent(message), position.width);
-        EditorGUI.HelpBox(new Rect(position.x, position.y + rectBuilder.BaseSize.y, position.width, errorHeight), message, MessageType.Error);
-    }
-}
+        EditorGUI.HelpBox(new Rect(position.x, position.y + position.height - errorHeight, position.width, errorHeight), message, MessageType.Error);
 
-[CustomPropertyDrawer(typeof(RangeFloatStep)), CustomPropertyDrawer(typeof(RangeIntStep))]
-public class FloatRangeStepDrawer : FloatRangeDrawer
-{
-    private const string STEP_FIELD_NAME = "step";
-    private SerializedProperty stepProperty;
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-        stepProperty = property.FindPropertyRelative(STEP_FIELD_NAME);
-        base.OnGUI(position, property, label);
+        EditorGUI.EndProperty();
     }
 
-    protected override (SerializedProperty serializedProperty, Rect fieldRect)[] GetFields()
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        float fieldWidth = rectBuilder.RemainingWidth / 3;
-        Rect minRect = rectBuilder.GetRect(fieldWidth);
-        Rect maxRect = rectBuilder.GetRect(fieldWidth);
-        Rect stepRect = rectBuilder.GetRect(fieldWidth);
-
-        return new (SerializedProperty serializedProperty, Rect fieldRect)[]
-        {
-            (minProperty, minRect),
-            (maxProperty, maxRect),
-            (stepProperty, stepRect)
-        };
-    }
-
-    protected override void FindErrors(Rect position)
-    {
-        if (stepProperty.floatValue > (maxProperty.floatValue - minProperty.floatValue))
-            errors.Add($"Value of {stepProperty.displayName} can't be higher than the difference between {minProperty.displayName} and {maxProperty.displayName}.");
-        base.FindErrors(position);
+        return EditorGUI.GetPropertyHeight(property, label) + errorHeight + (EditorGUIUtility.wideMode ? 0 : EditorGUIUtility.singleLineHeight);
     }
 }
