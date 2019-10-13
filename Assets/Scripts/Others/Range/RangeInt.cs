@@ -2,35 +2,46 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public interface IRangeInt
+public interface IRangeInt<T> : IRange<T>
 {
+    /// <summary>
+    /// Return a random integer value between <see cref="Min"/> and <see cref="Max"/>.
+    /// The result is always an integer. Decimal numbers are used as chance to increment by one.
+    /// </summary>
     int ValueInt { get; }
 }
 
-public interface IRangeStepInt
+public interface IRangeStepInt<T> : IRangeStep<T>, IRangeInt<T>
 {
+    /// <summary>
+    /// Return a random integer value between <see cref="IRangeStep{T}.Min"/> and <see cref="IRangeStep{T}.Max"/> without using interval <see cref="IRangeStep{T}.Step"/>.
+    /// The result is always an integer. Decimal numbers are used as chance to increment by one.
+    /// </summary>
     int ValueIntWithoutStep { get; }
+
+    /// <summary>
+    /// Return a random integer value between <see cref="IRangeStep{T}.Min"/> and <see cref="IRangeStep{T}.Max"/> using interval <see cref="IRangeStep{T}.Step"/>.
+    /// The result is always an integer. Decimal numbers are used as chance to increment by one.
+    /// </summary>
+    new int ValueInt { get; }
 }
 
 [Serializable]
-public class RangeInt : Range<int>, IRangeInt
+public class RangeInt : Range<int>, IRangeInt<int>
 {
-    /// <summary>
-    /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
-    /// </summary>
     public override int Value => Random.Range(Min, Max);
 
-    int IRangeInt.ValueInt => Value;
+    int IRangeInt<int>.ValueInt => Value;
 
     /// <summary>
-    /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
+    /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
     /// </summary>
     /// <param name="source"><see cref="RangeInt"/> instance used to determine the random int.</param>
     public static explicit operator int(RangeInt source) => source.Value;
 }
 
 [Serializable]
-public class RangeIntStep : RangeInt, IRangeStep<int>, IRangeStepInt
+public class RangeIntStep : RangeInt, IRangeStep<int>, IRangeStepInt<int>
 {
     [SerializeField, Tooltip("Step values used when producing random numbers.")]
     // Used in RangeStepDrawer as string name. Don't forget to change string if this is renamed.
@@ -38,25 +49,20 @@ public class RangeIntStep : RangeInt, IRangeStep<int>, IRangeStepInt
     private int step;
 #pragma warning restore CS0649
 
-    /// <summary>
-    /// Step values used when producing random numbers.
-    /// </summary>
     public int Step => step;
 
-    /// <summary>
-    /// Return a random number between <see cref="Min"/> and <see cref="Max"/> in intervals of <see cref="step"/>.
-    /// </summary>
     public override int Value => base.Value / step * step;
 
-    /// <summary>
-    /// Return a random number between <see cref="Min"/> and <see cref="Max"/> without using <see cref="step"/>.
-    /// </summary>
-    public int ValueWithoutStep => Value;
+    public int ValueWithoutStep => base.Value;
 
-    int IRangeStepInt.ValueIntWithoutStep => ValueWithoutStep;
+    int IRangeStepInt<int>.ValueIntWithoutStep => ValueWithoutStep;
+
+    int IRangeStepInt<int>.ValueInt => Value;
+
+    int IRangeStep<int>.ValueWithoutStep => ValueWithoutStep;
 
     /// <summary>
-    /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
+    /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
     /// </summary>
     /// <param name="source"><see cref="RangeIntStep"/> instance used to determine the random float.</param>
     public static explicit operator int(RangeIntStep source) => source.Value;
