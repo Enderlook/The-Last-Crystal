@@ -23,9 +23,9 @@ public class FloatRangeDrawer : PropertyDrawer
         EditorGUI.BeginProperty(position, label, property);
         EditorGUI.LabelField(mainLabelRect, label);
 
-        foreach ((SerializedProperty serializedProperty, Rect fieldRect, Rect labelRect) in GetFields())
+        foreach ((SerializedProperty serializedProperty, Rect fieldRect) in GetFields())
         {
-            ShowField(serializedProperty, fieldRect, labelRect);
+            ShowField(serializedProperty, fieldRect);
         }
 
         Validate(position);
@@ -39,19 +39,15 @@ public class FloatRangeDrawer : PropertyDrawer
         return EditorGUI.GetPropertyHeight(property, label) + errorHeight;
     }
 
-    protected virtual (SerializedProperty serializedProperty, Rect fieldRect, Rect labelRect)[] GetFields()
+    protected virtual (SerializedProperty serializedProperty, Rect fieldRect)[] GetFields()
     {
-        float minRectLabelWidth = GetWidth(minProperty);
-        float maxRectLabelWidth = GetWidth(maxProperty);
-        Rect minRectLabel = rectBuilder.GetRect(minRectLabelWidth);
-        Rect minRect = rectBuilder.GetRect((rectBuilder.RemainingWidth - maxRectLabelWidth) / 2);
-        Rect maxRectLabel = rectBuilder.GetRect(maxRectLabelWidth);
+        Rect minRect = rectBuilder.GetRect(rectBuilder.RemainingWidth / 2);
         Rect maxRect = rectBuilder.GetRect(rectBuilder.RemainingWidth);
 
-        return new (SerializedProperty serializedProperty, Rect fieldRect, Rect labelRect)[]
+        return new (SerializedProperty serializedProperty, Rect fieldRect)[]
         {
-            (minProperty, minRect, minRectLabel),
-            (maxProperty, maxRect, maxRectLabel)
+            (minProperty, minRect),
+            (maxProperty, maxRect)
         };
     }
 
@@ -84,19 +80,18 @@ public class FloatRangeDrawer : PropertyDrawer
         EditorGUI.HelpBox(new Rect(position.x, position.y + rectBuilder.BaseSize.y, position.width, errorHeight), message, MessageType.Error);
     }
 
-    protected float GetWidth(SerializedProperty property)
+    protected static float GetWidth(SerializedProperty property)
     {
         GUIContent guiContent = new GUIContent(property.displayName, property.tooltip);
         float width = GUI.skin.label.CalcSize(guiContent).x;
         return width;
     }
 
-    protected static void ShowField(SerializedProperty property, Rect field, Rect label)
+    protected static void ShowField(SerializedProperty property, Rect field)
     {
-        EditorGUI.LabelField(label, new GUIContent(property.displayName, property.tooltip));
-
-        GUIContent guiContent = new GUIContent("", property.tooltip);
-        EditorGUI.PropertyField(field, property, guiContent);
+        EditorGUIUtility.labelWidth = GetWidth(property); // Reduce size of label
+        EditorGUI.PropertyField(field, property);
+        EditorGUIUtility.labelWidth = 0; // Using 0 return it value to default
     }
 }
 
@@ -111,24 +106,18 @@ public class FloatRangeStepDrawer : FloatRangeDrawer
         base.OnGUI(position, property, label);
     }
 
-    protected override (SerializedProperty serializedProperty, Rect fieldRect, Rect labelRect)[] GetFields()
+    protected override (SerializedProperty serializedProperty, Rect fieldRect)[] GetFields()
     {
-        float minRectLabelWidth = GetWidth(minProperty);
-        float maxRectLabelWidth = GetWidth(maxProperty);
-        float stepRectLabelWidth = GetWidth(stepProperty);
-        Rect minRectLabel = rectBuilder.GetRect(minRectLabelWidth);
-        float fieldWidth = (rectBuilder.RemainingWidth - maxRectLabelWidth - stepRectLabelWidth) / 3;
+        float fieldWidth = rectBuilder.RemainingWidth / 3;
         Rect minRect = rectBuilder.GetRect(fieldWidth);
-        Rect maxRectLabel = rectBuilder.GetRect(maxRectLabelWidth);
         Rect maxRect = rectBuilder.GetRect(fieldWidth);
-        Rect stepRectLabel = rectBuilder.GetRect(stepRectLabelWidth);
         Rect stepRect = rectBuilder.GetRect(fieldWidth);
 
-        return new (SerializedProperty serializedProperty, Rect fieldRect, Rect labelRect)[]
+        return new (SerializedProperty serializedProperty, Rect fieldRect)[]
         {
-            (minProperty, minRect, minRectLabel),
-            (maxProperty, maxRect, maxRectLabel),
-            (stepProperty, stepRect, stepRectLabel)
+            (minProperty, minRect),
+            (maxProperty, maxRect),
+            (stepProperty, stepRect)
         };
     }
 
