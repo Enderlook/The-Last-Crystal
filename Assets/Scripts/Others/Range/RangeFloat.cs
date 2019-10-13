@@ -3,7 +3,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [Serializable]
-public class RangeFloat : Range<float>
+public class RangeFloat : Range<float>, IRangeInt
 {
     /// <summary>
     /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
@@ -37,7 +37,7 @@ public class RangeFloat : Range<float>
 }
 
 [Serializable]
-public class RangeFloatStep : RangeFloat, IRangeStep<float>
+public class RangeFloatStep : RangeFloat, IRangeStep<float>, IRangeStepInt
 {
     [SerializeField, Tooltip("Step values used when producing random numbers.")]
     // Used in RangeStepDrawer as string name. Don't forget to change string if this is renamed.

@@ -2,13 +2,25 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public interface IRangeInt
+{
+    int ValueInt { get; }
+}
+
+public interface IRangeStepInt
+{
+    int ValueIntWithoutStep { get; }
+}
+
 [Serializable]
-public class RangeInt : Range<int>
+public class RangeInt : Range<int>, IRangeInt
 {
     /// <summary>
     /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
     /// </summary>
     public override int Value => Random.Range(Min, Max);
+
+    int IRangeInt.ValueInt => Value;
 
     /// <summary>
     /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
@@ -18,7 +30,7 @@ public class RangeInt : Range<int>
 }
 
 [Serializable]
-public class RangeIntStep : RangeInt, IRangeStep<int>
+public class RangeIntStep : RangeInt, IRangeStep<int>, IRangeStepInt
 {
     [SerializeField, Tooltip("Step values used when producing random numbers.")]
     // Used in RangeStepDrawer as string name. Don't forget to change string if this is renamed.
@@ -40,6 +52,8 @@ public class RangeIntStep : RangeInt, IRangeStep<int>
     /// Return a random number between <see cref="Min"/> and <see cref="Max"/> without using <see cref="step"/>.
     /// </summary>
     public int ValueWithoutStep => Value;
+
+    int IRangeStepInt.ValueIntWithoutStep => ValueWithoutStep;
 
     /// <summary>
     /// Return a random number between <see cref="Min"/> and <see cref="Max"/>.
