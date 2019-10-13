@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 
 public static class SerializedObjectExtensions
 {
@@ -72,4 +73,11 @@ public static class SerializedObjectExtensions
 
         return targetObject;
     }
+
+    /// <summary>
+    /// Produce a <see cref="GUIContent"/> with the <see cref="SerializedProperty.displayName"/> as <see cref="GUIContent.text"/> and <see cref="SerializedProperty.tooltip"/> as <see cref="GUIContent.tooltip"/>.
+    /// </summary>
+    /// <param name="source">><see cref="SerializedProperty"/> to get <see cref="GUIContent"/>.</param>
+    /// <returns><see cref="GUIContent"/> of <paramref name="source"/>.</returns>
+    public static GUIContent GetGUIContent(this SerializedProperty source) => new GUIContent(source.displayName, source.tooltip);
 }
