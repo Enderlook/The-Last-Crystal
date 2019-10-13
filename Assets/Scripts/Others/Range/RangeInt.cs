@@ -18,7 +18,7 @@ public class RangeInt : Range<int>
 }
 
 [Serializable]
-public class RangeIntStep : RangeInt
+public class RangeIntStep : RangeInt, IRangeStep<int>
 {
     [SerializeField, Tooltip("Step values used when producing random numbers.")]
     // Used in RangeStepDrawer as string name. Don't forget to change string if this is renamed.

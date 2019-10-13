@@ -28,3 +28,8 @@ public abstract class Range<T>
     /// </summary>
     public abstract T Value { get; }
 }
+public interface IRangeStep<T>
+{
+    T ValueWithoutStep { get; }
+    T Step { get; }
+}
