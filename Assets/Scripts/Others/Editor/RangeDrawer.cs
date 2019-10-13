@@ -96,16 +96,7 @@ public class FloatRangeDrawer : PropertyDrawer
         EditorGUI.LabelField(label, new GUIContent(property.displayName, property.tooltip));
 
         GUIContent guiContent = new GUIContent("", property.tooltip);
-
-        switch (property.propertyType)
-        {
-            case SerializedPropertyType.Float:
-                property.floatValue = EditorGUI.FloatField(field, guiContent, property.floatValue);
-                break;
-            case SerializedPropertyType.Integer:
-                property.intValue = EditorGUI.IntField(field, guiContent, property.intValue);
-                break;
-        }
+        EditorGUI.PropertyField(field, property, guiContent);
     }
 }
 
