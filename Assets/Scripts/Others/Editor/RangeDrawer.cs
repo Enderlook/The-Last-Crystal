@@ -15,8 +15,9 @@ public class FloatRangeDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        FindSerializedProperties(property);
-        MakeHorizontalRectBuilder(position);
+        minProperty = property.FindPropertyRelative(MIN_FIELD_NAME);
+        maxProperty = property.FindPropertyRelative(MAX_FIELD_NAME);
+        rectBuilder = new HorizontalRectBuilder(position.position, position.width, position.height - errorHeight);
 
         Rect mainLabelRect = rectBuilder.GetRect(EditorGUIUtility.labelWidth);
 
@@ -25,7 +26,10 @@ public class FloatRangeDrawer : PropertyDrawer
 
         foreach ((SerializedProperty serializedProperty, Rect fieldRect) in GetFields())
         {
-            ShowField(serializedProperty, fieldRect);
+            GUIContent guiContent = new GUIContent(serializedProperty.displayName, property.tooltip);
+            EditorGUIUtility.labelWidth = GUI.skin.label.CalcSize(guiContent).x; // Reduce size of label to only contain the necessary space to display the name
+            EditorGUI.PropertyField(fieldRect, serializedProperty);
+            EditorGUIUtility.labelWidth = 0; // Using 0 return it value to default
         }
 
         Validate(position);
@@ -51,14 +55,6 @@ public class FloatRangeDrawer : PropertyDrawer
         };
     }
 
-    protected void FindSerializedProperties(SerializedProperty property)
-    {
-        minProperty = property.FindPropertyRelative(MIN_FIELD_NAME);
-        maxProperty = property.FindPropertyRelative(MAX_FIELD_NAME);
-    }
-
-    protected void MakeHorizontalRectBuilder(Rect position) => rectBuilder = new HorizontalRectBuilder(position.position, position.width, position.height - errorHeight);
-
     protected void Validate(Rect position)
     {
         errors.Clear();
@@ -78,20 +74,6 @@ public class FloatRangeDrawer : PropertyDrawer
         string message = string.Join("\n", errors);
         errorHeight = GUI.skin.box.CalcHeight(new GUIContent(message), position.width);
         EditorGUI.HelpBox(new Rect(position.x, position.y + rectBuilder.BaseSize.y, position.width, errorHeight), message, MessageType.Error);
-    }
-
-    protected static float GetWidth(SerializedProperty property)
-    {
-        GUIContent guiContent = new GUIContent(property.displayName, property.tooltip);
-        float width = GUI.skin.label.CalcSize(guiContent).x;
-        return width;
-    }
-
-    protected static void ShowField(SerializedProperty property, Rect field)
-    {
-        EditorGUIUtility.labelWidth = GetWidth(property); // Reduce size of label
-        EditorGUI.PropertyField(field, property);
-        EditorGUIUtility.labelWidth = 0; // Using 0 return it value to default
     }
 }
 
