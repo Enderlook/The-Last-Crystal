@@ -118,14 +118,14 @@ public class DrawVectorRelativeToTransformEditor : PropertyDrawer
                 position = serializedProperty.vector2Value = DrawHandle(serializedProperty.vector2Value + (Vector2)reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
                 break;
             case SerializedPropertyType.Vector2Int:
-                serializedProperty.vector2IntValue = VectorExtensions.ToVector2Int(DrawHandle((Vector2)(serializedProperty.vector2IntValue + VectorExtensions.ToVector2Int(reference)), drawVectorRelativeToTransform.UsePositionHandler)) - VectorExtensions.ToVector2Int(reference);
+                serializedProperty.vector2IntValue = DrawHandle((Vector2)(serializedProperty.vector2IntValue + reference.ToVector2Int()), drawVectorRelativeToTransform.UsePositionHandler).ToVector2Int() - reference.ToVector2Int();
                 position = (Vector2)serializedProperty.vector2IntValue;
                 break;
             case SerializedPropertyType.Vector3:
                 position = serializedProperty.vector3Value = DrawHandle(serializedProperty.vector3Value + reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
                 break;
             case SerializedPropertyType.Vector3Int:
-                position = serializedProperty.vector3IntValue = VectorExtensions.ToVector3Int(DrawHandle(serializedProperty.vector3IntValue + VectorExtensions.ToVector3Int(reference), drawVectorRelativeToTransform.UsePositionHandler)) - VectorExtensions.ToVector3Int(reference);
+                position = serializedProperty.vector3IntValue = DrawHandle(serializedProperty.vector3IntValue + reference.ToVector3Int(), drawVectorRelativeToTransform.UsePositionHandler).ToVector3Int() - reference.ToVector3Int();
                 break;
             default:
                 Debug.LogError($"The attribute {nameof(DrawVectorRelativeToTransformAttribute)} is only allowed in types of {nameof(Vector2)}, {nameof(Vector2Int)}, {nameof(Vector3)} and {nameof(Vector3Int)}.");

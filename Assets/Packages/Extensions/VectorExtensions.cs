@@ -23,8 +23,9 @@ namespace AdditionalExtensions
         /// <returns>Absolute <seealso cref="Vector4"/>.</returns>
         public static Vector4 Abs(this Vector4 source) => new Vector4(Mathf.Abs(source.x), Mathf.Abs(source.y), Mathf.Abs(source.z), Mathf.Abs(source.w));
 
-        public static Vector2Int ToVector2Int(Vector2 source) => new Vector2Int((int)source.x, (int)source.y);
-        public static Vector3Int ToVector3Int(Vector3 source) => new Vector3Int((int)source.x, (int)source.y, (int)source.z);
-
+        public static Vector2Int ToVector2Int(this Vector2 source) => new Vector2Int((int)source.x, (int)source.y);
+        public static Vector2Int ToVector2Int(this Vector3 source) => ToVector2Int(source);
+        public static Vector3Int ToVector3Int(this Vector3 source) => new Vector3Int((int)source.x, (int)source.y, (int)source.z);
+        public static Vector3Int ToVector3Int(this Vector2 source) => ToVector3Int(source);
     }
 }
