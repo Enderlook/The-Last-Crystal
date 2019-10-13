@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -6,6 +7,8 @@ namespace AdditionalAttributes
     [CustomPropertyDrawer(typeof(LayerAttribute))]
     internal class LayerAttributeEditor : PropertyDrawer
     {
+        private static readonly string ERROR_SERIALIZED_PROPERTY_TYPE = $"{typeof(LayerAttribute)} only support serialized properties of type {nameof(SerializedPropertyType.Integer)} ({typeof(int)}), {nameof(SerializedPropertyType.Float)} ({typeof(float)}), {nameof(SerializedPropertyType.String)} ({typeof(string)}) or {nameof(SerializedPropertyType.LayerMask)} ({typeof(LayerMask)})";
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
@@ -24,6 +27,11 @@ namespace AdditionalAttributes
                     case SerializedPropertyType.LayerMask:
                         property.intValue = layer;
                         break;
+                    case SerializedPropertyType.String:
+                        property.stringValue = LayerMask.LayerToName(layer);
+                        break;
+                    default:
+                        throw new ArgumentException(ERROR_SERIALIZED_PROPERTY_TYPE);
                 }
             }
             EditorGUI.EndProperty();
