@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +9,7 @@ using UnityEngine;
 /// <summary>
 /// Used to calculate formulas. It can be either serialized in Unity inspector or construct using new.
 /// </summary>
-[System.Serializable]
+[Serializable]
 public class Calculator
 {
     [Tooltip("Formula to calculate.\nIt doesn't support operator precedence, instead use brackets.\nSupports string formating.")]
@@ -26,7 +27,7 @@ public class Calculator
             if (compile != value)
             {
                 compile = value;
-                if (compile == true)
+                if (compile)
                     MakeRegex(compile);
             }
         }
@@ -38,7 +39,7 @@ public class Calculator
         { "-", (float l, float r) => l - r },
         { "*", (float l, float r) => l * r },
         { "/", (float l, float r) => l / r },
-        { "^", (float l, float r) => Mathf.Pow(l, r) },
+        { "^", Mathf.Pow },
     };
 
     /// <summary>
@@ -66,8 +67,8 @@ public class Calculator
                 return parameters == 1 || parameters == 2;
             }).Select(e => e.Name.ToLower());
         string operatorsPattern = string.Join("|", operators.Keys.Select(e => @"\" + e).Concat(mathfMethods));
-        string numberPattern = @"(\d+(?>\.?\,?\d+)?)";
-        string pattern = @"\(?" + numberPattern + @"(" + operatorsPattern + @")" + numberPattern + @"\)?";
+        const string numberPattern = @"(\d+(?>\.?\,?\d+)?)";
+        string pattern = @"\(?" + numberPattern + "(" + operatorsPattern + ")" + numberPattern + @"\)?";
 
         RegexOptions regexOptions = RegexOptions.IgnorePatternWhitespace | RegexOptions.IgnoreCase;
         if (compile)
@@ -79,7 +80,7 @@ public class Calculator
     /// Calculate <seealso cref="formula"/> and using the given <paramref name="args"/> in the string formating.
     /// </summary>
     /// <param name="args">Arguments to use in the string formating <c>string.Format(<seealso cref="formula"/>, <paramref name="args"/>)</c></param>
-    /// <returns></returns>
+    /// <returns>Final value, result of the formula.</returns>
     public float Calculate(params float[] args)
     {
         if (regex == null)
@@ -98,7 +99,7 @@ public class Calculator
     /// <summary>
     /// Performs a math operation with the captured groups of the regex, using the <seealso cref="operators"/>.
     /// </summary>
-    /// <param name="match">Match from the regex.</param>
+    /// <param name="m">Match from the regex.</param>
     /// <returns></returns>
     private string Replace(Match m)
     {
@@ -139,8 +140,8 @@ public class Calculator
 
             if (method.GetParameters().Length == parameters.Length)
                 return Invoke(parameters);
-            throw new System.Exception("The method found doesn't have a correct amount of arguments.");
+            throw new ArgumentException("The method found doesn't have a correct amount of arguments.");
         }
-        throw new System.Exception($"No method found in {nameof(Mathf)} class called {key}.");
+        throw new ArgumentException($"No method found in {nameof(Mathf)} class called {key}.");
     }
 }

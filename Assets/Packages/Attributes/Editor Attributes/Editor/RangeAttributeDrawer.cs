@@ -3,13 +3,12 @@ using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace AdditionalAttributes
+namespace AdditionalAttributes.Drawer
 {
     [CustomPropertyDrawer(typeof(RangeAttribute))]
     public class RangeAttributeDrawer : PropertyDrawer
     {
-        private readonly string error = $"{nameof(RangeAttributeDrawer)} only supports {typeof(int)} and {typeof(float)}) values.";
-        private readonly string errorLabel = $"Use {nameof(RangeAttributeDrawer)} with {typeof(int)} or {typeof(float)} fields.";
+        private readonly string error = $"{nameof(RangeAttributeDrawer)} only supports serialized properties of {nameof(SerializedPropertyType.Integer)} ({typeof(int)}) and {nameof(SerializedPropertyType.Float)} ({typeof(float)})).";
 
         private bool foldout;
 
@@ -71,13 +70,13 @@ namespace AdditionalAttributes
                         Random.Range, EditorGUI.IntSlider, EditorGUI.IntSlider,
                         out int resultInt,
                         rangeAttribute.step > 0 // If there is step use special rounding
-                        ? (Func<int, int, int, int, int>)((value, min, max, step) => value / step * (int)step)
+                        ? (Func<int, int, int, int, int>)((value, _, __, step) => value / step * step)
                         : null))
                         property.intValue = resultInt;
                     break;
                 default:
                     string tooltip = error + $" Property {property.name} is {property.propertyType}.";
-                    EditorGUI.LabelField(position, new GUIContent($"{property.name}: errorLabel", tooltip));
+                    EditorGUI.HelpBox(position, tooltip, MessageType.Error);
                     Debug.LogException(new ArgumentException(tooltip));
                     break;
             }

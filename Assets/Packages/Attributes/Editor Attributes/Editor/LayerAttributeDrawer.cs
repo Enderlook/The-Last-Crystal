@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace AdditionalAttributes.Drawer
 {
     [CustomPropertyDrawer(typeof(LayerAttribute))]
     internal class LayerAttributeEditor : PropertyDrawer
