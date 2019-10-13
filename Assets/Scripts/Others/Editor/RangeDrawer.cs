@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(FloatRange))]
+[CustomPropertyDrawer(typeof(RangeFloat)), CustomPropertyDrawer(typeof(RangeInt))]
 public class FloatRangeDrawer : PropertyDrawer
 {
     private const string MIN_FIELD_NAME = "min";
@@ -94,11 +94,22 @@ public class FloatRangeDrawer : PropertyDrawer
     protected static void ShowField(SerializedProperty property, Rect field, Rect label)
     {
         EditorGUI.LabelField(label, new GUIContent(property.displayName, property.tooltip));
-        property.floatValue = EditorGUI.FloatField(field, new GUIContent("", property.tooltip), property.floatValue);
+
+        GUIContent guiContent = new GUIContent("", property.tooltip);
+
+        switch (property.propertyType)
+        {
+            case SerializedPropertyType.Float:
+                property.floatValue = EditorGUI.FloatField(field, guiContent, property.floatValue);
+                break;
+            case SerializedPropertyType.Integer:
+                property.intValue = EditorGUI.IntField(field, guiContent, property.intValue);
+                break;
+        }
     }
 }
 
-[CustomPropertyDrawer(typeof(FloatRangeStep))]
+[CustomPropertyDrawer(typeof(RangeFloatStep)), CustomPropertyDrawer(typeof(RangeIntStep))]
 public class FloatRangeStepDrawer : FloatRangeDrawer
 {
     private const string STEP_FIELD_NAME = "step";
