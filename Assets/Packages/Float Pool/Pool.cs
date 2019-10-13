@@ -12,8 +12,7 @@ namespace FloatPool
     {
         public FloatPool basePool;
 
-#pragma warning disable CS0649
-#pragma warning disable IDE0051
+#pragma warning disable CS0649, IDE0051
         [SerializeField, HideInInspector]
         private bool hasEmptyCallback;
         [SerializeField, HasConfirmationField(nameof(hasEmptyCallback))]
@@ -43,8 +42,7 @@ namespace FloatPool
         private bool hasDecreaseReduction;
         [SerializeField, HasConfirmationField(nameof(hasDecreaseReduction))]
         private DecreaseReductionDecorator decreaseReduction;
-#pragma warning restore IDE0051
-#pragma warning restore CS0649
+#pragma warning restore IDE0051, CS0649
 
         private IFloatPool pool;
         public IFloatPool FloatPool {

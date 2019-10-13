@@ -40,7 +40,7 @@ namespace FloatPool
         /// Increase <see cref="Current"/> by <paramref name="amount"/>.
         /// </summary>
         /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
-        /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
+        /// <param name="allowOverflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
         /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
         (float remaining, float taken) Increase(float amount, bool allowOverflow = false);
     }
@@ -116,7 +116,7 @@ namespace FloatPool
         /// Increase <see cref="Current"/> by <paramref name="amount"/>.
         /// </summary>
         /// <param name="amount">Amount to increase <see cref="Current"/>.</param>
-        /// <param name="allowUnderflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
+        /// <param name="allowOverflow">Whenever <see cref="Current"/> could be higher than <see cref="Max"/> or not.</param>
         /// <returns><c>remaining</c>: Amount clamped above <see cref="Max"/>. <c>taken</c>: difference between <paramref name="amount"/> and <c>remaining</c>.</returns>
         public (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
         {
