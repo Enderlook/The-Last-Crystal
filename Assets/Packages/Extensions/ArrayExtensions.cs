@@ -1,36 +1,39 @@
 ﻿using System;
 
-public static class ArrayExtensions
+namespace AdditionalExtensions
 {
-    /// <summary>
-    /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
-    /// </summary>
-    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
-    /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
-    /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
-    /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
-    public static void ForEach<T>(this T[] source, Action<T> action) => Array.ForEach(source, action);
-
-    /// <summary>
-    /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
-    /// </summary>
-    /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
-    /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
-    /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
-    /// <returns>Updated <paramref name="source"/>.</returns>
-    /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
-    public static T[] ChangeEach<T>(this T[] source, Func<T, T> function)
+    public static class ArrayExtensions
     {
-        if (source is null) throw new ArgumentNullException(nameof(source));
-        if (function is null) throw new ArgumentNullException(nameof(function));
-        if (source.Length == 0)
-            return Array.Empty<T>();
+        /// <summary>
+        /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+        /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+        /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+        /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
+        public static void ForEach<T>(this T[] source, Action<T> action) => Array.ForEach(source, action);
 
-        for (int i = 0; i < source.Length; i++)
+        /// <summary>
+        /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+        /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+        /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+        /// <returns>Updated <paramref name="source"/>.</returns>
+        /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
+        public static T[] ChangeEach<T>(this T[] source, Func<T, T> function)
         {
-            source[i] = function(source[i]);
-        }
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (function is null) throw new ArgumentNullException(nameof(function));
+            if (source.Length == 0)
+                return Array.Empty<T>();
 
-        return source;
+            for (int i = 0; i < source.Length; i++)
+            {
+                source[i] = function(source[i]);
+            }
+
+            return source;
+        }
     }
 }

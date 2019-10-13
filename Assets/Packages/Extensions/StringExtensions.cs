@@ -1,14 +1,17 @@
-﻿public static class StringExtensions
+﻿namespace AdditionalExtensions
 {
-    /// <summary>
-    /// Return an string which first character is to upper case.
-    /// </summary>
-    /// <param name="source"></param>
-    /// <returns></returns>
-    public static string FirstCharToUpper(this string source)
+    public static class StringExtensions
     {
-        if (source == null) throw new System.ArgumentNullException(nameof(source));
+        /// <summary>
+        /// Return an string which first character is to upper case.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string FirstCharToUpper(this string source)
+        {
+            if (source == null) throw new System.ArgumentNullException(nameof(source));
 
-        return source.Length > 1 ? char.ToUpper(source[0]) + source.Substring(1) : source.ToUpper();
+            return source.Length > 1 ? char.ToUpper(source[0]) + source.Substring(1) : source.ToUpper();
+        }
     }
 }
