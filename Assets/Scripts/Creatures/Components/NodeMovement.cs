@@ -80,7 +80,7 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         animator.SetBool(ANIMATION_STATES.JUMP, false);
 
         // Get his current goal
-        goal = SetGoal();
+        SetGoal();
 
         // Don't move without goal
         if (goal == null && !targetPlayer)
@@ -126,21 +126,20 @@ public class NodeMovement : MonoBehaviour, IInit, IMove
         }
     }
 
-    private Transform SetGoal()
+    // The Transform function. It always returns null. Check later
+    private void SetGoal()
     {
         // If all players death. Assign crystal
         if (targetPlayer && players.Count == 0)
-            return Global.crystal;
+            goal =  Global.crystal;
 
         // If a player revive and the actual goal is crystal. Then assign player
         if (targetPlayer && goal == Global.crystal && players.Count != 0)
-            return players.RandomElement();
+            goal = players.RandomElement();
 
         // If the current player died. Assign like goal another player that's still alive
         if (targetPlayer && goal == null)
-            return players.RandomElement();
-
-        return null;
+            goal = players.RandomElement();
     }
 
     private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, 1 << ground);

@@ -48,8 +48,8 @@ public class FloatingTextController : MonoBehaviour
     private FloatingText.TYPE_OF_ROUNDING typeOfRounding = FloatingText.TYPE_OF_ROUNDING.ROUND;
 
     [Header("Setup")]
-    [Tooltip("Floating Text prefab.")]
-    private GameObject floatingTextPrefab;
+    [SerializeField, Tooltip("Floating Text prefab.")]
+    private GameObject floatingTextPrefab; // Does this not need to be serialized?
     [SerializeField, Tooltip("Parent transform of all floating texts. Just for organization of scene.\nOptional.\nDO NOT USE A MOVING TRANSFORM!")]
     private Transform floatingTextParent;
 #pragma warning restore CS0649

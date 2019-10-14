@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  targetPlayer: 0
   navigationAgent: {fileID: 1717894949730967846}
   ground: 0
   groundCheck: {fileID: 2426205588667692726}
