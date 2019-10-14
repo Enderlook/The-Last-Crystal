@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace UnityEditorHelper
 {
@@ -9,6 +10,8 @@ namespace UnityEditorHelper
 
         public Vector2 BasePosition { get; private set; }
         public Vector2 BaseSize { get; private set; }
+
+        protected float LastValue { get; set; }
 
         private void Construct(Vector2 position, Vector2 size)
         {
@@ -24,8 +27,20 @@ namespace UnityEditorHelper
         protected RectBuilder(float x, float y, Vector2 size) => Construct(new Vector2(x, y), size);
         protected RectBuilder(float x, float y, float width, float height) => Construct(new Vector2(x, y), new Vector2(width, height));
 
-        public abstract Rect GetRect(float value);
+        public virtual Rect GetRect(float value)
+        {
+            LastValue = value;
+            throw new NotImplementedException("This method must be overriden by the class child");
+        }
         public abstract Rect GetRect();
+
+        /// <summary>
+        /// Produces a rect using the last size configuration.
+        /// </summary>
+        /// <returns>A rect with the last size configuration.</returns>
+        public Rect GetRectWithLastConfiguration() => GetRect(LastValue);
+
+        public abstract void AddSpace(float value);
     }
     public class HorizontalRectBuilder : RectBuilder
     {
@@ -53,7 +68,17 @@ namespace UnityEditorHelper
         /// Produce a <see cref="Rect"/> next to the last <see cref="Rect"/> made with this object.<br>
         /// </summary>
         /// <returns>New <see cref="Rect"/>.</returns>
-        public override Rect GetRect() => GetRect(BaseSize.x);
+        public override Rect GetRect()
+        {
+            LastValue = BaseSize.x;
+            return GetRect(BaseSize.x);
+        }
+
+        /// <summary>
+        /// Increase <see cref="RectBuilder.CurrentX"/> in order to produce an horizontal space.
+        /// </summary>
+        /// <param name="value">Space size.</param>
+        public override void AddSpace(float value) => CurrentX += value;
 
         /// <summary>
         /// Produce a <see cref="Rect"/> next to the last <see cref="Rect"/> made with this object, using all the <see cref="RemainingWidth"/> as width.
@@ -98,6 +123,16 @@ namespace UnityEditorHelper
         /// Produce a <see cref="Rect"/> next to the last <see cref="Rect"/> made with this object.
         /// </summary>
         /// <returns>New <see cref="Rect"/>./returns>
-        public override Rect GetRect() => GetRect(BaseSize.y);
+        public override Rect GetRect()
+        {
+            LastValue = BaseSize.y;
+            return GetRect(BaseSize.y);
+        }
+
+        /// <summary>
+        /// Increase <see cref="RectBuilder.CurrentY"/> in order to produce a vertical space.
+        /// </summary>
+        /// <param name="value">Space size.</param>
+        public override void AddSpace(float value) => CurrentY += value;
     }
 }

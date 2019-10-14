@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AdditionalAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public sealed class RangeAttribute : PropertyAttribute
+    public class RangeAttribute : PropertyAttribute
     {
         public readonly float min;
         public readonly float max;
