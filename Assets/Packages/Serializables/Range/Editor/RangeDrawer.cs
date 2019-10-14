@@ -23,16 +23,17 @@ namespace Range
             SerializedProperty minProperty = property.FindPropertyRelative(MIN_FIELD_NAME);
             SerializedProperty maxProperty = property.FindPropertyRelative(MAX_FIELD_NAME);
 
-            List<SerializedProperty> serializedProperties = new List<SerializedProperty>() {
-            minProperty,
-            maxProperty,
-        };
+            List<SerializedProperty> serializedProperties = new List<SerializedProperty>()
+            {
+                minProperty,
+                maxProperty,
+            };
 
             List<GUIContent> guiContents = new List<GUIContent>()
-        {
-            new GUIContent(MIN_FIELD_DISPLAY_NAME, minProperty.tooltip),
-            new GUIContent(MAX_FIELD_DISPLAY_NAME, maxProperty.tooltip),
-        };
+            {
+                new GUIContent(MIN_FIELD_DISPLAY_NAME, minProperty.tooltip),
+                new GUIContent(MAX_FIELD_DISPLAY_NAME, maxProperty.tooltip),
+            };
 
             SerializedProperty stepProperty = property.FindPropertyRelative(STEP_FIELD_NAME);
             if (stepProperty != null)
