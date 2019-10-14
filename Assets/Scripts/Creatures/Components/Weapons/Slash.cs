@@ -14,8 +14,8 @@ namespace CreaturesAddons.Weapons
 #pragma warning disable CS0649
         [SerializeField]
         private RayCasting rayCasting;
-        [Layer]
-        private int layerToHit;
+        [SerializeField, Layer, Tooltip("The target to hit")]
+        private int layerToHit; // Does this not need to be serialized?
         [SerializeField, Tooltip("Animation played on attack.")]
         protected string animationState;
 #pragma warning restore CS0649

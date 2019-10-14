@@ -26,6 +26,7 @@ MonoBehaviour:
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
+  layerToHit: 9
   animationState: Attack
 --- !u!114 &2021772479
 MonoBehaviour:
@@ -50,6 +51,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: KnightSkeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948837633536277635, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: floatingTextParent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
@@ -329,13 +335,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060001654395986259, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.741
+      propertyPath: m_LocalPosition.x
+      value: 0.037
       objectReference: {fileID: 0}
     - target: {fileID: 7060001654395986259, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.037
+      propertyPath: m_LocalPosition.y
+      value: 0.741
       objectReference: {fileID: 0}
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
