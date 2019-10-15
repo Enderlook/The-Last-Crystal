@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using CreaturesAddons.Weapons;
+using FloatingText;
 using FloatPool;
 using UnityEngine;
 
