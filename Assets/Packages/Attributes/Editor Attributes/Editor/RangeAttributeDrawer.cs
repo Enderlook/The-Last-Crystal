@@ -38,13 +38,13 @@ namespace AdditionalAttributes.Drawer
                 case SerializedPropertyType.Float:
                     ShowSlider(
                         e => e.floatValue, (e, v) => e.floatValue = v, EditorGUI.Slider, EditorGUI.Slider,
-                        (l, u) => Random.Range(l, u), (v, s) => (float)Math.Round(v / s, MidpointRounding.AwayFromZero) * s
+                        Random.Range, (v, s) => (float)Math.Round(v / s, MidpointRounding.AwayFromZero) * s
                     );
                     break;
                 case SerializedPropertyType.Integer:
                     ShowSlider(
                         e => e.intValue, (e, v) => e.intValue = v, EditorGUI.IntSlider, EditorGUI.IntSlider,
-                        (l, u) => Random.Range(l, u), (v, s) => v / s * s
+                        Random.Range, (v, s) => v / s * s
                     );
                     break;
                 default:
@@ -73,10 +73,7 @@ namespace AdditionalAttributes.Drawer
 
             bool hasStep = !Equals(step, default(U));
 
-            if (rangeAttribute.showRandomButton == false)
-                // Show normal slider
-                field(position, property, min, max);
-            else
+            if (rangeAttribute.showRandomButton)
             {
                 // Show slider without label. Using " " instead of "" forces the slider to set space for the label
                 // We take advantage of that in order to aling it with the foldout.
@@ -88,6 +85,9 @@ namespace AdditionalAttributes.Drawer
                     ))
                     Set(random(min, max));
             }
+            else
+                // Show normal slider
+                field(position, property, min, max);
 
             // Only round if necessary
             T value = Get();

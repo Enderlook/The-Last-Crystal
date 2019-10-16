@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography;
 using UnityEditor;
 using UnityEditorHelper;
 using UnityEngine;
@@ -53,7 +52,7 @@ namespace AdditionalAttributes.Drawer
 
                         // Slider
                         EditorGUI.MinMaxSlider(rectBuilder.GetRect(blockWidth * 3), new GUIContent("", guiContent.tooltip), ref min, ref max, lower, upper);
-                        
+
                         // Max field
                         rectBuilder.AddSpace(FIELDS_SPACE);
                         max = EditorGUI.FloatField(rectBuilder.GetRect(blockWidth), max);
