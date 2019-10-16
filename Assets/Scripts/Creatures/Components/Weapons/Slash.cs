@@ -15,7 +15,7 @@ namespace CreaturesAddons.Weapons
         [SerializeField]
         private RayCasting rayCasting;
         [SerializeField, Layer, Tooltip("The target to hit")]
-        private int layerToHit; // Does this not need to be serialized?
+        private int layerToHit;
         [SerializeField, Tooltip("Animation played on attack.")]
         protected string animationState;
 #pragma warning restore CS0649

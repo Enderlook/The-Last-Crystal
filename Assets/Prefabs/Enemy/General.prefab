@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  pushStrength: 10
+  pushStrength: 60
   firerate: 0.5
 --- !u!1001 &1874634651289402742
 PrefabInstance:
