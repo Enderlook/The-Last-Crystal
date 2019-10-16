@@ -65,9 +65,19 @@ namespace AdditionalAttributes.Drawer
             T Get() => getter(property);
             void Set(T v) => setter(property, v);
 
-            U min = (U)(object)rangeAttribute.min;
-            U max = (U)(object)rangeAttribute.max;
-            U step = (U)(object)rangeAttribute.step;
+            U Cast(float v) => (U)Convert.ChangeType(v, typeof(U));
+
+            U min, max, step;
+            try
+            {
+                min = Cast(rangeAttribute.min);
+                max = Cast(rangeAttribute.max);
+                step = Cast(rangeAttribute.step);
+            }
+            catch (InvalidCastException)
+            {
+                throw new ArgumentException($"Generic parameter {nameof(T)} {typeof(T)} must be casteable from {typeof(float)}");
+            }
 
             T oldValue = Get();
 
@@ -76,7 +86,7 @@ namespace AdditionalAttributes.Drawer
             if (rangeAttribute.showRandomButton)
             {
                 // Show slider without label. Using " " instead of "" forces the slider to set space for the label
-                // We take advantage of that in order to aling it with the foldout.
+                // We take advantage of that in order to align it with the foldout.
                 field2(position, property, min, max, new GUIContent(" ", property.tooltip));
                 if ((foldout = EditorGUI.Foldout(position, foldout, property.GetGUIContent(), true)) &&
                     GUI.Button(
