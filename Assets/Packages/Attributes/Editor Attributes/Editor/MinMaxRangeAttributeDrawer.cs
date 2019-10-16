@@ -80,13 +80,38 @@ namespace AdditionalAttributes.Drawer
                     break;
                 case SerializedPropertyType.Integer:
                     void DrawFieldInt(Rect rect, SerializedProperty property, int lower, int upper, GUIContent guiContent)
+                case SerializedPropertyType.Vector2Int:
                     {
+                        const int FIELDS_SPACE = 2;
                         Vector2Int v = property.vector2IntValue;
                         float min = v.x;
                         float max = v.y;
-                        EditorGUI.MinMaxSlider(rect, guiContent, ref min, ref max, lower, upper);
+                        HorizontalRectBuilder rectBuilder = new HorizontalRectBuilder(rect);
+
+                        // Make label. We must do this because we have a min field at the left
+                        // But only do this is we really need, since we add fake whitespace to have the proper slider offset in the RangeAttributeDrawer
+                        if (!string.IsNullOrWhiteSpace(guiContent.text))
+                            EditorGUI.LabelField(position, guiContent);
+
+                        // Add the space used by the label or foldout
+                        rectBuilder.AddSpace(EditorGUIUtility.labelWidth);
+
+                        float blockWidth = rectBuilder.RemainingWidth / 5;
+
+                        // Min field
+                        min = EditorGUI.IntField(rectBuilder.GetRect(blockWidth), (int)min);
+                        rectBuilder.AddSpace(FIELDS_SPACE);
+
+                        // Slider
+                        EditorGUI.MinMaxSlider(rectBuilder.GetRect(blockWidth * 3), new GUIContent("", guiContent.tooltip), ref min, ref max, lower, upper);
+
+                        // Max field
+                        rectBuilder.AddSpace(FIELDS_SPACE);
+                        max = EditorGUI.IntField(rectBuilder.GetRect(blockWidth), (int)max);
+
+                        // Only save if there was a change
                         if (min != v.x || max != v.y)
-                            property.vector2IntValue = new Vector2Int((int)min, (int)max);
+                            property.vector2Value = new Vector2(min, max);
                     }
                     ShowSlider<Vector2Int, int>(
                         e => e.vector2IntValue, (e, v) => e.vector2IntValue = v,
