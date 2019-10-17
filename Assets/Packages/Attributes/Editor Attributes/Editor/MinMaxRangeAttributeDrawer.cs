@@ -16,32 +16,32 @@ namespace AdditionalAttributes.Drawer
         {
             void ShowSlider<T, U>(
                 Func<SerializedProperty, T> getter, Action<SerializedProperty, T> setter,
-                Action<Rect, SerializedProperty, U, U> field, Action<Rect, SerializedProperty, U, U, GUIContent> field2,
+                Action<Rect, SerializedProperty, U, U, GUIContent> field,
                 Func<U, U, T> random, Func<T, U, T> stepper
             )
             {
                 ShowField<T, U>(
                     position, serializedProperty, attribute as RangeMinMaxAttribute,
-                    getter, setter, field, field2, random, stepper
+                    getter, setter,
+                    (rect, property, lower, upper) => field(rect, property, lower, upper, property.GetGUIContent()),
+                    field, random, stepper
                 );
             }
 
             switch (serializedProperty.propertyType)
             {
                 case SerializedPropertyType.Vector2:
-                    Action<Rect, SerializedProperty, float, float, GUIContent> floatField = GetFieldDrawer(
-                        position, (property) =>
-                        {
-                            Vector2 vector2 = property.vector2Value;
-                            return (vector2.x, vector2.y);
-                        },
-                        (property, minF, maxF) => property.vector2Value = new Vector2(minF, maxF),
-                        EditorGUI.FloatField
-                        );
                     ShowSlider(
                         e => e.vector2Value, (e, v) => e.vector2Value = v,
-                        (rect, property, lower, upper) => floatField(rect, property, lower, upper, property.GetGUIContent()),
-                        floatField,
+                        GetFieldDrawer(
+                            position, (property) =>
+                            {
+                                Vector2 vector2 = property.vector2Value;
+                                return (vector2.x, vector2.y);
+                            },
+                            (property, minF, maxF) => property.vector2Value = new Vector2(minF, maxF),
+                            EditorGUI.FloatField
+                        ),
                         (lower, upper) =>
                         {
                             float Rnd() => Random.Range(lower, upper);
@@ -56,19 +56,17 @@ namespace AdditionalAttributes.Drawer
                     );
                     break;
                 case SerializedPropertyType.Vector2Int:
-                    Action<Rect, SerializedProperty, int, int, GUIContent> intField = GetFieldDrawer(
-                        position, (property) =>
-                        {
-                            Vector2Int vector2Int = property.vector2IntValue;
-                            return (vector2Int.x, vector2Int.y);
-                        },
-                        (property, minI, maxI) => property.vector2IntValue = new Vector2Int(minI, maxI),
-                        EditorGUI.IntField
-                        );
                     ShowSlider(
                         e => e.vector2IntValue, (e, v) => e.vector2IntValue = v,
-                        (rect, property, lower, upper) => intField(rect, property, lower, upper, property.GetGUIContent()),
-                        intField,
+                        GetFieldDrawer(
+                            position, (property) =>
+                            {
+                                Vector2Int vector2Int = property.vector2IntValue;
+                                return (vector2Int.x, vector2Int.y);
+                            },
+                            (property, minI, maxI) => property.vector2IntValue = new Vector2Int(minI, maxI),
+                            EditorGUI.IntField
+                        ),
                         (lower, upper) =>
                         {
                             int Rnd() => Random.Range(lower, upper);
@@ -107,15 +105,13 @@ namespace AdditionalAttributes.Drawer
                                 min.floatValue = minValue;
                                 max.floatValue = maxValue;
                             }
-                            Action<Rect, SerializedProperty, float, float, GUIContent> genericFloatField = GetFieldDrawer(
-                                position, GenericFloatGetter,
-                                GenericFloatSetter,
-                                EditorGUI.FloatField
-                            );
                             ShowSlider<(float min, float max), float>(
                                 GenericFloatGetter, (_, value) => GenericFloatSetter(_, value.min, value.max),
-                                (rect, property, lower, upper) => genericFloatField(rect, property, lower, upper, property.GetGUIContent()),
-                                genericFloatField,
+                                GetFieldDrawer(
+                                    position, GenericFloatGetter,
+                                    GenericFloatSetter,
+                                    EditorGUI.FloatField
+                                ),
                                 (lower, upper) =>
                                 {
                                     float Rnd() => Random.Range(lower, upper);
@@ -136,15 +132,13 @@ namespace AdditionalAttributes.Drawer
                                 min.intValue = minValue;
                                 max.intValue = maxValue;
                             }
-                            Action<Rect, SerializedProperty, int, int, GUIContent> genericintField = GetFieldDrawer(
-                                position, GenericIntGetter,
-                                GenericIntSetter,
-                                EditorGUI.IntField
-                            );
                             ShowSlider<(int min, int max), int>(
                                 GenericIntGetter, (_, value) => GenericIntSetter(_, value.min, value.max),
-                                (rect, property, lower, upper) => genericintField(rect, property, lower, upper, property.GetGUIContent()),
-                                genericintField,
+                                GetFieldDrawer(
+                                    position, GenericIntGetter,
+                                    GenericIntSetter,
+                                    EditorGUI.IntField
+                                ),
                                 (lower, upper) =>
                                 {
                                     int Rnd() => Random.Range(lower, upper);
