@@ -1,4 +1,5 @@
 ﻿using System;
+using Range;
 using UnityEditor;
 using UnityEditorHelper;
 using UnityEngine;
@@ -11,19 +12,21 @@ namespace AdditionalAttributes.Drawer
     {
         private readonly string error = $"{nameof(MinMaxRangeAttributeDrawer)} only supports serialized properties of {nameof(SerializedPropertyType.Vector2Int)} ({typeof(Vector2Int)}) and {nameof(SerializedPropertyType.Vector2)} ({typeof(Vector2)})).";
         private const int FIELDS_SPACE = 2;
+        private const string MIN_FIELD_NAME = "min";
+        private const string MAX_FIELD_NAME = "max";
 
         protected override void DrawProperty(Rect position, SerializedProperty serializedProperty)
         {
             void ShowSlider<T, U>(
                 Func<SerializedProperty, T> getter, Action<SerializedProperty, T> setter,
                 Action<Rect, SerializedProperty, U, U, GUIContent> field,
-                Func<U, U, T> random, Func<T, U, T> stepper
+                Func<U, U, T> random, Func<T, U, T> stepper, Rect? rect = null
             )
             {
                 ShowField<T, U>(
-                    position, serializedProperty, attribute as RangeMinMaxAttribute,
+                    rect ?? position, serializedProperty, attribute as RangeMinMaxAttribute,
                     getter, setter,
-                    (rect, property, lower, upper) => field(rect, property, lower, upper, property.GetGUIContent()),
+                    (r, property, lower, upper) => field(r, property, lower, upper, property.GetGUIContent()),
                     field, random, stepper
                 );
             }
@@ -81,8 +84,19 @@ namespace AdditionalAttributes.Drawer
                     );
                     break;
                 case SerializedPropertyType.Generic:
-                    const string MIN = "min";
-                    const string MAX = "max";
+                    string MIN = MIN_FIELD_NAME, MAX = MAX_FIELD_NAME;
+
+                    object objectProperty = serializedProperty.GetTargetObjectOfProperty();
+                    Type objectType = objectProperty.GetType();
+
+                    // Replace names
+                    bool isRangeObject = false;
+                    if (objectType == typeof(RangeIntStep) || objectType == typeof(RangeFloatStep))
+                    {
+                        MIN = RangeDrawer.MIN_FIELD_NAME;
+                        MAX = RangeDrawer.MAX_FIELD_NAME;
+                        isRangeObject = true;
+                    }
 
                     SerializedProperty min = serializedProperty.FindPropertyRelative(MIN);
                     if (min == null)
@@ -91,72 +105,113 @@ namespace AdditionalAttributes.Drawer
                     if (max == null)
                         break;
 
-                    // Only if both properties exist allow it
+                    // Only if both properties are the same type allow it
                     if (min.propertyType != max.propertyType)
-                        throw new ArgumentException($"Serialized properties {MIN} and {MAX} of Property {serializedProperty.name} must have the same property type.");
+                        throw new ArgumentException($"Serialized properties {MIN_FIELD_NAME} and {MAX_FIELD_NAME} of Property {serializedProperty.name} must have the same property type.");
 
-                    // Only check one of them since both are the same type
-                    switch (min.propertyType)
+                    void FloatSlider(Rect? rect = null)
                     {
-                        case SerializedPropertyType.Float:
-                            (float min, float max) GenericFloatGetter(SerializedProperty _) => (min.floatValue, max.floatValue);
-                            void GenericFloatSetter(SerializedProperty _, float minValue, float maxValue)
+                        (float min, float max) GenericFloatGetter(SerializedProperty _) => (min.floatValue, max.floatValue);
+                        void GenericFloatSetter(SerializedProperty _, float minValue, float maxValue)
+                        {
+                            min.floatValue = minValue;
+                            max.floatValue = maxValue;
+                        }
+                        ShowSlider<(float min, float max), float>(
+                            GenericFloatGetter, (_, value) => GenericFloatSetter(_, value.min, value.max),
+                            GetFieldDrawer(
+                                rect ?? position, GenericFloatGetter,
+                                GenericFloatSetter,
+                                EditorGUI.FloatField
+                            ),
+                            (lower, upper) =>
                             {
-                                min.floatValue = minValue;
-                                max.floatValue = maxValue;
-                            }
-                            ShowSlider<(float min, float max), float>(
-                                GenericFloatGetter, (_, value) => GenericFloatSetter(_, value.min, value.max),
-                                GetFieldDrawer(
-                                    position, GenericFloatGetter,
-                                    GenericFloatSetter,
-                                    EditorGUI.FloatField
-                                ),
-                                (lower, upper) =>
-                                {
-                                    float Rnd() => Random.Range(lower, upper);
-                                    float a = Rnd(), b = Rnd();
-                                    return (Mathf.Min(a, b), Mathf.Max(a, b));
-                                },
-                                (value, step) =>
-                                {
-                                    Func<float, float> Stp = FloatStep(step);
-                                    return (Stp(value.min), Stp(value.max));
-                                }
-                            );
-                            break;
-                        case SerializedPropertyType.Integer:
-                            (int min, int max) GenericIntGetter(SerializedProperty _) => (min.intValue, max.intValue);
-                            void GenericIntSetter(SerializedProperty _, int minValue, int maxValue)
+                                float Rnd() => Random.Range(lower, upper);
+                                float a = Rnd(), b = Rnd();
+                                return (Mathf.Min(a, b), Mathf.Max(a, b));
+                            },
+                            (value, step) =>
                             {
-                                min.intValue = minValue;
-                                max.intValue = maxValue;
-                            }
-                            ShowSlider<(int min, int max), int>(
-                                GenericIntGetter, (_, value) => GenericIntSetter(_, value.min, value.max),
-                                GetFieldDrawer(
-                                    position, GenericIntGetter,
-                                    GenericIntSetter,
-                                    EditorGUI.IntField
-                                ),
-                                (lower, upper) =>
-                                {
-                                    int Rnd() => Random.Range(lower, upper);
-                                    int a = Rnd(), b = Rnd();
-                                    return (Mathf.Min(a, b), Mathf.Max(a, b));
-                                },
-                                (value, step) =>
-                                {
-                                    Func<int, int> Stp = IntStep(step);
-                                    return (Stp(value.min), Stp(value.max));
-                                }
-                            );
-                            break;
-                        default:
-                            ShowError(position, error + $" Property {MIN} and {MAX} of {serializedProperty.name} are {serializedProperty.propertyType}.");
-                            break;
+                                Func<float, float> Stp = FloatStep(step);
+                                return (Stp(value.min), Stp(value.max));
+                            }, rect
+                        );
                     }
 
+                    void IntSlider(Rect? rect = null)
+                    {
+                        (int min, int max) GenericIntGetter(SerializedProperty _) => (min.intValue, max.intValue);
+                        void GenericIntSetter(SerializedProperty _, int minValue, int maxValue)
+                        {
+                            min.intValue = minValue;
+                            max.intValue = maxValue;
+                        }
+                        ShowSlider<(int min, int max), int>(
+                            GenericIntGetter, (_, value) => GenericIntSetter(_, value.min, value.max),
+                            GetFieldDrawer(
+                                rect ?? position, GenericIntGetter,
+                                GenericIntSetter,
+                                EditorGUI.IntField
+                            ),
+                            (lower, upper) =>
+                            {
+                                int Rnd() => Random.Range(lower, upper);
+                                int a = Rnd(), b = Rnd();
+                                return (Mathf.Min(a, b), Mathf.Max(a, b));
+                            },
+                            (value, step) =>
+                            {
+                                Func<int, int> Stp = IntStep(step);
+                                return (Stp(value.min), Stp(value.max));
+                            }, rect
+                        );
+                    }
+
+                    if (isRangeObject)
+                    {
+                        SerializedProperty stepProperty = serializedProperty.FindPropertyRelative(RangeDrawer.STEP_FIELD_NAME);
+
+                        void DrawFieldWithStep(Action<Rect?> slider)
+                        {
+                            HorizontalRectBuilder horizontalRectBuilder = new HorizontalRectBuilder(position);
+                            const float labelWidth = 15; // GUI.skin.label.CalcSize(new GUIContent(stepProperty.displayName)).x;
+                            float block = (horizontalRectBuilder.RemainingWidth - labelWidth) / 10;
+                            slider(horizontalRectBuilder.GetRect(block * 9));
+                            horizontalRectBuilder.AddSpace(5);
+                            GUI.Label(horizontalRectBuilder.GetRect(labelWidth), new GUIContent(RangeDrawer.STEP_FIELD_DISPLAY_NAME, stepProperty.tooltip));
+                            EditorGUI.PropertyField(horizontalRectBuilder.GetRemainingRect(), stepProperty, new GUIContent("", stepProperty.tooltip));
+                        }
+
+                        // Check a property to get type
+                        switch (min.propertyType)
+                        {
+                            case SerializedPropertyType.Float:
+                                DrawFieldWithStep(FloatSlider);
+                                break;
+                            case SerializedPropertyType.Integer:
+                                DrawFieldWithStep(IntSlider);
+                                break;
+                            default:
+                                ShowError(position, error + $" Property {MIN_FIELD_NAME}, {MAX_FIELD_NAME}, and {RangeDrawer.STEP_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        // Only check one of them since both are the same type
+                        switch (min.propertyType)
+                        {
+                            case SerializedPropertyType.Float:
+                                FloatSlider();
+                                break;
+                            case SerializedPropertyType.Integer:
+                                IntSlider();
+                                break;
+                            default:
+                                ShowError(position, error + $" Property {MIN_FIELD_NAME} and {MAX_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
+                                break;
+                        }
+                    }
                     break;
                 default:
                     ShowError(position, error + $" Property {serializedProperty.name} is {serializedProperty.propertyType}.");
