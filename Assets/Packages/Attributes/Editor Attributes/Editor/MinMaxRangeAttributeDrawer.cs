@@ -35,7 +35,7 @@ namespace AdditionalAttributes.Drawer
                             Vector2 vector2 = property.vector2Value;
                             return (vector2.x, vector2.y);
                         },
-                        (property, min, max) => property.vector2Value = new Vector2(min, max),
+                        (property, minF, maxF) => property.vector2Value = new Vector2(minF, maxF),
                         EditorGUI.FloatField
                         );
                     ShowSlider(
@@ -50,7 +50,7 @@ namespace AdditionalAttributes.Drawer
                         },
                         (value, step) =>
                         {
-                            float Stp(float v) => (float)Math.Round(v / step, MidpointRounding.AwayFromZero) * step;
+                            Func<float, float> Stp = FloatStep(step);
                             return new Vector2(Stp(value.x), Stp(value.y));
                         }
                     );
@@ -62,7 +62,7 @@ namespace AdditionalAttributes.Drawer
                             Vector2Int vector2Int = property.vector2IntValue;
                             return (vector2Int.x, vector2Int.y);
                         },
-                        (property, min, max) => property.vector2IntValue = new Vector2Int(min, max),
+                        (property, minI, maxI) => property.vector2IntValue = new Vector2Int(minI, maxI),
                         EditorGUI.IntField
                         );
                     ShowSlider(
@@ -77,23 +77,103 @@ namespace AdditionalAttributes.Drawer
                         },
                         (value, step) =>
                         {
-                            int Stp(int v) => v / step * step;
+                            Func<int, int> Stp = IntStep(step);
                             return new Vector2Int(Stp(value.x), Stp(value.y));
                         }
                     );
                     break;
+                case SerializedPropertyType.Generic:
+                    const string MIN = "min";
+                    const string MAX = "max";
+
+                    SerializedProperty min = serializedProperty.FindPropertyRelative(MIN);
+                    if (min == null)
+                        break;
+                    SerializedProperty max = serializedProperty.FindPropertyRelative(MAX);
+                    if (max == null)
+                        break;
+
+                    // Only if both properties exist allow it
+                    if (min.propertyType != max.propertyType)
+                        throw new ArgumentException($"Serialized properties {MIN} and {MAX} of Property {serializedProperty.name} must have the same property type.");
+
+                    // Only check one of them since both are the same type
+                    switch (min.propertyType)
+                    {
+                        case SerializedPropertyType.Float:
+                            (float min, float max) GenericFloatGetter(SerializedProperty _) => (min.floatValue, max.floatValue);
+                            void GenericFloatSetter(SerializedProperty _, float minValue, float maxValue)
+                            {
+                                min.floatValue = minValue;
+                                max.floatValue = maxValue;
+                            }
+                            Action<Rect, SerializedProperty, float, float, GUIContent> genericFloatField = GetFieldDrawer(
+                                position, GenericFloatGetter,
+                                GenericFloatSetter,
+                                EditorGUI.FloatField
+                            );
+                            ShowSlider<(float min, float max), float>(
+                                GenericFloatGetter, (_, value) => GenericFloatSetter(_, value.min, value.max),
+                                (rect, property, lower, upper) => genericFloatField(rect, property, lower, upper, property.GetGUIContent()),
+                                genericFloatField,
+                                (lower, upper) =>
+                                {
+                                    float Rnd() => Random.Range(lower, upper);
+                                    float a = Rnd(), b = Rnd();
+                                    return (Mathf.Min(a, b), Mathf.Max(a, b));
+                                },
+                                (value, step) =>
+                                {
+                                    Func<float, float> Stp = FloatStep(step);
+                                    return (Stp(value.min), Stp(value.max));
+                                }
+                            );
+                            break;
+                        case SerializedPropertyType.Integer:
+                            (int min, int max) GenericIntGetter(SerializedProperty _) => (min.intValue, max.intValue);
+                            void GenericIntSetter(SerializedProperty _, int minValue, int maxValue)
+                            {
+                                min.intValue = minValue;
+                                max.intValue = maxValue;
+                            }
+                            Action<Rect, SerializedProperty, int, int, GUIContent> genericintField = GetFieldDrawer(
+                                position, GenericIntGetter,
+                                GenericIntSetter,
+                                EditorGUI.IntField
+                            );
+                            ShowSlider<(int min, int max), int>(
+                                GenericIntGetter, (_, value) => GenericIntSetter(_, value.min, value.max),
+                                (rect, property, lower, upper) => genericintField(rect, property, lower, upper, property.GetGUIContent()),
+                                genericintField,
+                                (lower, upper) =>
+                                {
+                                    int Rnd() => Random.Range(lower, upper);
+                                    int a = Rnd(), b = Rnd();
+                                    return (Mathf.Min(a, b), Mathf.Max(a, b));
+                                },
+                                (value, step) =>
+                                {
+                                    Func<int, int> Stp = IntStep(step);
+                                    return (Stp(value.min), Stp(value.max));
+                                }
+                            );
+                            break;
+                        default:
+                            ShowError(position, error + $" Property {MIN} and {MAX} of {serializedProperty.name} are {serializedProperty.propertyType}.");
+                            break;
+                    }
+
+                    break;
                 default:
-                    string tooltip = error + $" Property {serializedProperty.name} is {serializedProperty.propertyType}.";
-                    EditorGUI.HelpBox(position, tooltip, MessageType.Error);
-                    Debug.LogException(new ArgumentException(tooltip));
+                    ShowError(position, error + $" Property {serializedProperty.name} is {serializedProperty.propertyType}.");
                     break;
             }
         }
 
         public Action<Rect, SerializedProperty, T, T, GUIContent> GetFieldDrawer<T>(
-            Rect position,
-            Func<SerializedProperty, (T min, T max)> getter, Action<SerializedProperty, T, T> setter,
-            Func<Rect, T, T> field)
+                Rect position,
+                Func<SerializedProperty, (T min, T max)> getter, Action<SerializedProperty, T, T> setter,
+                Func<Rect, T, T> field)
         {
             float Cast(T v) => (float)Convert.ChangeType(v, typeof(float));
             T UnCast(float v) => (T)Convert.ChangeType(v, typeof(T));
@@ -152,7 +232,16 @@ namespace AdditionalAttributes.Drawer
                 // Only save if there was a change
                 if (min.Equals(oldMin) || max.Equals(oldMax))
                     setter(property, min, max);
-                };
+            };
+        }
+
+        private Func<float, float> FloatStep(float step) => value => (float)Math.Round(value / step, MidpointRounding.AwayFromZero) * step;
+        private Func<int, int> IntStep(int step) => value => value / step * step;
+
+        private void ShowError(Rect position, string tooltip)
+        {
+            EditorGUI.HelpBox(position, tooltip, MessageType.Error);
+            Debug.LogException(new ArgumentException(tooltip));
         }
     }
 }
