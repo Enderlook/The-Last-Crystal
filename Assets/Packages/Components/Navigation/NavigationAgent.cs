@@ -8,10 +8,14 @@ namespace Navigation
     [Serializable]
     public class NavigationAgent : MonoBehaviour, IInit
     {
-        [HideInInspector]
-        public NavigationGraph navigationGraph;
+        [Tooltip("Navigation Graph used to find paths.")]
+        private NavigationGraph navigationGraph;
+        public NavigationGraph NavigationGraph
+        {
+            get => navigationGraph;
+            set => navigationGraph = value;
+        }
 
-        [NonSerialized]
         private Transform thisTransform;
 
         void IInit.Init(Creature creature)
@@ -20,18 +24,18 @@ namespace Navigation
             navigationGraph = GameObject.FindGameObjectWithTag("Ground").GetComponent<NavigationGraph>();
         }
 
-        public Node FindClosestNode() => navigationGraph.FindClosestNode(thisTransform.position);
+        public Node FindClosestNode() => NavigationGraph.FindClosestNode(thisTransform.position);
 
         public List<Connection> FindPathTo(Node node)
         {
 #if !UNITY_EDITOR
             List<Connection>
 #endif
-            lastPath = navigationGraph.AStarSearchPath(FindClosestNode(), node);
+            lastPath = NavigationGraph.AStarSearchPath(FindClosestNode(), node);
             return lastPath;
         }
 
-        public List<Connection> FindPathTo(Vector2 target) => FindPathTo(navigationGraph.FindClosestNode(target));
+        public List<Connection> FindPathTo(Vector2 target) => FindPathTo(NavigationGraph.FindClosestNode(target));
 
 #if UNITY_EDITOR
         [SerializeField, Tooltip("Draw last path calculated on play.")]
