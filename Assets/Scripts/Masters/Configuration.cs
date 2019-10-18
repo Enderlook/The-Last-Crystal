@@ -77,6 +77,7 @@ public class Configuration : MonoBehaviour
 
     private void StoreGlobals()
     {
+        if (Global.players.Count > 2) Global.players = new List<Transform>(); // Reset the list of players
         // https://stackoverflow.com/questions/8151888/c-sharp-iterate-through-class-properties
         // Use Fields instead of Properties fixes a bug
         foreach (FieldInfo field in typeof(Configuration).GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
