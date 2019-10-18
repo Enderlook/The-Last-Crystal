@@ -18,8 +18,6 @@ namespace CreaturesAddons.Weapons
         private int layerToHit;
         [SerializeField, Tooltip("Animation played on attack.")]
         protected string animationState;
-        [SerializeField, Tooltip("Sound effect of the weapon.")]
-        private AudioSource audioSource;
 #pragma warning restore CS0649
 
         private Transform thisTransform;
@@ -51,7 +49,7 @@ namespace CreaturesAddons.Weapons
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         protected void HitTarget()
         {
-            audioSource.Play();
+            Global.audioSystem.SlashSoundEffect();
             RaycastHit2D[] raycastHits = rayCasting.RaycastAll(1 << layerToHit); // Ignore any layer that isn't layerToHit
             for (int n = 0; n < raycastHits.Length; n++)
             {

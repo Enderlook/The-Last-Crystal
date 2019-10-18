@@ -62,6 +62,7 @@ namespace CreaturesAddons.Weapons
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         private void Shoot()
         {
+            Global.audioSystem.ShootSoundEffect();
             GameObject go = new GameObject($"{nameof(MouseShooter)} Projectile");
             go.transform.position = ShootingPoint;
             go.transform.localScale *= projectileScaleMultiplier;

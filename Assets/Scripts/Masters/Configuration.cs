@@ -51,6 +51,11 @@ public static class Global
     /// Menu instance.
     /// </summary>
     public static Menu menu;
+
+    /// <summary>
+    /// Audio instance.
+    /// </summary>
+    public static AudioSystem audioSystem;
 }
 
 public class Configuration : MonoBehaviour
@@ -70,6 +75,9 @@ public class Configuration : MonoBehaviour
     private Transform crystal;
     [SerializeField, Tooltip("Menu.")]
     private Menu menu;
+
+    [SerializeField, Tooltip("Audio")]
+    private AudioSystem audioSystem;
 #pragma warning restore CS0649
 #pragma warning restore IDE0051
 
