@@ -1,4 +1,6 @@
 ﻿using AdditionalAttributes;
+using Master;
+using Serializables.Physics;
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons

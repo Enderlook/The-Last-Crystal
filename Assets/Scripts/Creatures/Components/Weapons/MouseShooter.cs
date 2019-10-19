@@ -1,4 +1,5 @@
 ﻿using AdditionalAttributes;
+using Master;
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons

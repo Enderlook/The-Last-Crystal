@@ -1,6 +1,7 @@
 ﻿using CreaturesAddons;
 using FloatPool.Decorators;
 using HealthBarGUI;
+using Master;
 using UnityEngine;
 
 public class InitializePlayers : MonoBehaviour
@@ -14,15 +15,15 @@ public class InitializePlayers : MonoBehaviour
     public void InitializeWarrior(GameObject warrior)
     {
         InitializeCreature(warrior, warriorHealthBar);
-        Global.warrior = warrior.transform;
-        Global.players.Add(Global.warrior);
+        Global.TransformCreature.Warrior.SetTransform(warrior.transform);
+        DestroyNotifier.ExecuteOnDeath(warrior, () => Global.TransformCreature.Warrior.ResetTransform());
     }
 
     public void InitializeWizard(GameObject wizard)
     {
         InitializeCreature(wizard, wizardHealthBar);
-        Global.wizard = wizard.transform;
-        Global.players.Add(Global.wizard);
+        Global.TransformCreature.Wizard.SetTransform(wizard.transform);
+        DestroyNotifier.ExecuteOnDeath(wizard, () => Global.TransformCreature.Wizard.ResetTransform());
     }
 
     private static void InitializeCreature(GameObject creature, HealthBar healthBar)

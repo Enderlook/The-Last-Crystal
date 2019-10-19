@@ -24,14 +24,14 @@ namespace Navigation.UnityInspector
         {
             if (drawPathToMouse)
             {
-                List<Connection> path = navigationAgent.FindPathTo(navigationAgent.navigationGraph.FindClosestNodeToMouseInEditor());
+                List<Connection> path = navigationAgent.FindPathTo(navigationAgent.NavigationGraph.FindClosestNodeToMouseInEditor());
                 if (path == null)
                     return;
                 foreach (Connection connection in path)
                 {
-                    connection.start.DrawNode(Color.blue, navigationAgent.navigationGraph.graph);
-                    connection.end.DrawNode(Color.blue, navigationAgent.navigationGraph.graph);
-                    connection.DrawConnection(Color.blue, navigationAgent.navigationGraph.graph);
+                    connection.start.DrawNode(Color.blue, navigationAgent.NavigationGraph.graph);
+                    connection.end.DrawNode(Color.blue, navigationAgent.NavigationGraph.graph);
+                    connection.DrawConnection(Color.blue, navigationAgent.NavigationGraph.graph);
                 }
             }
         }

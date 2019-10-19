@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AdditionalAttributes;
+using Master;
+using Navigation;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
 #pragma warning disable CS0649
-    [Header("Setup")]
+    [Header("Configuration")]
     [SerializeField, Tooltip("Enemies to spawn.")]
     private GameObject[] enemies;
     [SerializeField, Tooltip("Maximum amount of enemies at the same time")]
@@ -19,6 +21,10 @@ public class Spawner : MonoBehaviour
     private float startSpawn;
     [SerializeField, Tooltip("Boss spawned after all enemies die.")]
     private GameObject boss;
+
+    [Header("Setup")]
+    [SerializeField, Tooltip("Navigation Graph used to produce enemy movement.")]
+    private NavigationGraph navigationGraph;
 #pragma warning restore CS0649
 
     private int enemiesAlive = 0;
@@ -50,8 +56,15 @@ public class Spawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject gameObject, Vector2 position)
     {
-        enemiesAlive++;
         GameObject enemy = Instantiate(gameObject, position + (Vector2)transform.position, Quaternion.identity);
-        enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
+
+        // Enemy counter
+        enemiesAlive++;
+        DestroyNotifier.ExecuteOnDeath(enemy, () => enemiesAlive--);
+
+        // Enemy movement
+        NavigationAgent navigationAgent = enemy.GetComponent<NavigationAgent>();
+        if (navigationAgent != null)
+            navigationAgent.NavigationGraph = navigationGraph;
     }
 }
