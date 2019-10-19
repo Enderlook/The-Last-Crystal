@@ -45,8 +45,8 @@ MonoBehaviour:
   pushStrength: 20
   rayCasting:
     source: {x: 0.2576389, y: 0.3670487}
-    direction: {x: 0.915429, y: -0.4024795}
-    distance: 0.4476385
+    direction: {x: 0.915429, y: -0.40247953}
+    distance: 0.44763848
     referenceTransform: {fileID: 5706950539925151309}
     spriteRenderer: {fileID: 4551959438341189185}
     flipX: 0
@@ -54,6 +54,7 @@ MonoBehaviour:
     draw: 1
     debug: 1
     color: {r: 1, g: 0, b: 0, a: 1}
+  layerToHit: 9
   animationState: Attack
   animationStateStrong: StrongAttack
   probabilityStrongAttack: 18
@@ -70,7 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  pushStrength: 10
+  pushStrength: 60
   firerate: 0.5
 --- !u!1001 &1874634651289402742
 PrefabInstance:
@@ -83,6 +84,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: General
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948837633536277635, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: floatingTextParent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
@@ -174,11 +180,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2922834967895029636, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
@@ -367,13 +368,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060001654395986259, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.579
+      propertyPath: m_LocalPosition.x
+      value: 0.043
       objectReference: {fileID: 0}
     - target: {fileID: 7060001654395986259, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.043
+      propertyPath: m_LocalPosition.y
+      value: 0.579
       objectReference: {fileID: 0}
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}

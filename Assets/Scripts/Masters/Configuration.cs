@@ -51,6 +51,11 @@ public static class Global
     /// Menu instance.
     /// </summary>
     public static Menu menu;
+
+    /// <summary>
+    /// Audio instance.
+    /// </summary>
+    public static AudioSystem audioSystem;
 }
 
 public class Configuration : MonoBehaviour
@@ -70,6 +75,9 @@ public class Configuration : MonoBehaviour
     private Transform crystal;
     [SerializeField, Tooltip("Menu.")]
     private Menu menu;
+
+    [SerializeField, Tooltip("Audio")]
+    private AudioSystem audioSystem;
 #pragma warning restore CS0649
 #pragma warning restore IDE0051
 
@@ -77,6 +85,7 @@ public class Configuration : MonoBehaviour
 
     private void StoreGlobals()
     {
+        Global.players = new List<Transform>(); // Reset players list.
         // https://stackoverflow.com/questions/8151888/c-sharp-iterate-through-class-properties
         // Use Fields instead of Properties fixes a bug
         foreach (FieldInfo field in typeof(Configuration).GetFields(BindingFlags.NonPublic | BindingFlags.Instance))
