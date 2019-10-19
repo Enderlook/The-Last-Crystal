@@ -2862,6 +2862,7 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  navigationGraph: {fileID: 0}
 --- !u!114 &1160684987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2883,6 +2884,7 @@ MonoBehaviour:
   timeBtwSpawn: 2
   startSpawn: 3
   boss: {fileID: 5363415117319019817, guid: 68bf06f97f8991f4584e3e4ce3ed5305, type: 3}
+  navigationGraph: {fileID: 267235809}
   points:
   - {x: 5.228639, y: -0.83387804}
   - {x: -8.316242, y: 2.5692453}
@@ -4203,8 +4205,6 @@ MonoBehaviour:
   digitPrecision: 0
   overrideTypeOfRounding: 0
   typeOfRounding: 0
-  floatingTextPrefab: {fileID: 8150760654224925313, guid: 2464453f149ba994292ee710d0ceaab7,
-    type: 3}
   floatingTextParent: {fileID: 1239927095}
 --- !u!114 &1601040599
 MonoBehaviour:

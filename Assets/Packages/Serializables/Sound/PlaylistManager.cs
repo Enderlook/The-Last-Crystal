@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Master;
+using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class PlaylistManager : MonoBehaviour

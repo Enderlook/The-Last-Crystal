@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using AdditionalAttributes;
+using Master;
 using Navigation;
 using UnityEngine;
 
@@ -59,7 +60,7 @@ public class Spawner : MonoBehaviour
 
         // Enemy counter
         enemiesAlive++;
-        enemy.AddComponent<DestroyNotifier>().SetCallback(() => enemiesAlive--);
+        DestroyNotifier.ExecuteOnDeath(enemy, () => enemiesAlive--);
 
         // Enemy movement
         NavigationAgent navigationAgent = enemy.GetComponent<NavigationAgent>();
