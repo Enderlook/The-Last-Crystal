@@ -2,7 +2,7 @@
 using AdditionalExtensions;
 using Master;
 using Navigation;
-using UnityEditorHelper;
+using Serializables;
 using UnityEngine;
 
 namespace CreaturesAddons.Movement.NodeMovement

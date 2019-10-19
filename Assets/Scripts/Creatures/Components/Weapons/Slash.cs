@@ -1,4 +1,5 @@
 ﻿using AdditionalAttributes;
+using Serializables.Physics;
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons

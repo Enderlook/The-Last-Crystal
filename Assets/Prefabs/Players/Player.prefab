@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 7526445749177953701}
   - component: {fileID: 4416114078013645945}
   - component: {fileID: 3430087774838448887}
+  - component: {fileID: 2865848467112834137}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -111,6 +112,7 @@ MonoBehaviour:
   stoppableRigidbody: {fileID: 8836964168732201439}
   thisRigidbody2D: {fileID: 8157229962283897169}
   animator: {fileID: 0}
+  groundChecker: {fileID: 2865848467112834137}
 --- !u!114 &5042988860275578343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,8 +140,6 @@ MonoBehaviour:
   digitPrecision: 0
   overrideTypeOfRounding: 0
   typeOfRounding: 0
-  floatingTextPrefab: {fileID: 1259971843042013121, guid: 76062395ae1642d4f86d51ed39ddd26e,
-    type: 3}
   floatingTextParent: {fileID: 0}
 --- !u!114 &8836964168732201439
 MonoBehaviour:
@@ -172,10 +172,6 @@ MonoBehaviour:
   maxJumps: 0
   jumpStrength: 0
   moveForce: 0
-  ground:
-    serializedVersion: 2
-    m_Bits: 256
-  groundCheck: {fileID: 6054398120991035010}
 --- !u!114 &5125575169536085736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +325,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &2865848467112834137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checker:
+    source: {x: 0, y: 0}
+    direction: {x: 0, y: -1}
+    distance: 0.1
+    referenceTransform: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    flipX: 0
+    flipY: 0
+    draw: 1
+    debug: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+  groundLayer: 8
 --- !u!1 &3745464996977563344
 GameObject:
   m_ObjectHideFlags: 0

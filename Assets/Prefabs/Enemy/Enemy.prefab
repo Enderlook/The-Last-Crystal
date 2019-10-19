@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 1717894949730967846}
   - component: {fileID: 3490750178117718918}
   - component: {fileID: 5381365898832506502}
+  - component: {fileID: 8597921017496991690}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -144,6 +145,7 @@ MonoBehaviour:
   stoppableRigidbody: {fileID: 843876848762180787}
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
+  groundChecker: {fileID: 8597921017496991690}
 --- !u!114 &8948837633536277635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffb9316b425a2440993b91af82dccc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navigationGraph: {fileID: 0}
   drawPath: 0
   pathColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &3490750178117718918
@@ -402,8 +405,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  ground: 0
-  groundCheck: {fileID: 2426205588667692726}
+--- !u!114 &8597921017496991690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794628492074983519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checker:
+    source: {x: 0, y: 0}
+    direction: {x: 0, y: -1}
+    distance: 0.1
+    referenceTransform: {fileID: 0}
+    spriteRenderer: {fileID: 0}
+    flipX: 0
+    flipY: 0
+    draw: 1
+    debug: 0
+    color: {r: 1, g: 0, b: 0, a: 1}
+  groundLayer: 8
 --- !u!1001 &2914788185493605554
 PrefabInstance:
   m_ObjectHideFlags: 0

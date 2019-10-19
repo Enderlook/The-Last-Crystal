@@ -5,22 +5,15 @@ using UnityEngine;
 
 namespace CreaturesAddons.Movement.NodeMovement
 {
-    [RequireComponent(typeof(TargetAndPathGetter))]
+    [RequireComponent(typeof(TargetAndPathGetter)), RequireComponent(typeof(NavigationAgent))]
     public class NodeMovement : MonoBehaviour, IInit, IMove
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
         [SerializeField, Tooltip("Maximum speed movement.")]
         private float speed = 1;
-
-        [Header("Setup")]
-        [SerializeField, Layer, Tooltip("Layer to check for ground.")]
-        private int ground;
-        [SerializeField, Tooltip("Used to check if it's touching ground.")]
-        private Transform groundCheck;
 #pragma warning restore CS0649
 
-        private const float CHECK_GROUND_DISTANCE = 0.1f;
         private const float MARGIN_ERROR_DISTANCE = 0.1f;
         private const float MARGIN_CLOSE_DISTANCE = 0.25f;
 
@@ -34,6 +27,9 @@ namespace CreaturesAddons.Movement.NodeMovement
         private const float LANDING_STUN_TIME = 0.4f;
 
         private TargetAndPathGetter targetAndPathGetter;
+        private NavigationAgent navigationAgent;
+
+        private GroundChecker groundChecker;
 
         private static class ANIMATION_STATES
         {
@@ -47,7 +43,9 @@ namespace CreaturesAddons.Movement.NodeMovement
             thisRigidbody2D = creature.thisRigidbody2D;
             spriteRenderer = creature.sprite;
             animator = creature.animator;
+            groundChecker = creature.groundChecker;
             targetAndPathGetter = GetComponent<TargetAndPathGetter>();
+            navigationAgent = GetComponent<NavigationAgent>();
         }
 
         void IMove.Move(float deltaTime, float speedMultiplier)
@@ -61,7 +59,7 @@ namespace CreaturesAddons.Movement.NodeMovement
                     return;
             }
             // Don't move while airbone
-            if (!IsGrounded())
+            if (!groundChecker.IsGrounded())
             {
                 isAirbone = true;
                 return;
@@ -82,9 +80,9 @@ namespace CreaturesAddons.Movement.NodeMovement
 
             float distanceToMove = speed * deltaTime * speedMultiplier;
 
-            // If we aren't already there
             if (path.Count > 0)
             {
+                // If we aren't already there
                 Connection connection = path[0];
                 Vector2 target = connection.end.position;
 
@@ -106,6 +104,7 @@ namespace CreaturesAddons.Movement.NodeMovement
                     Translate(distanceToMove * Mathf.Sign(distanceToTarget));
             }
             else
+            // If we are less than one node of distance from it
             {
                 float distanceToTarget = XDistanceToTarget(targetTransform.position);
                 if (Mathf.Abs(distanceToTarget) > MARGIN_CLOSE_DISTANCE)
@@ -118,15 +117,17 @@ namespace CreaturesAddons.Movement.NodeMovement
             }
         }
 
-        private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, 1 << ground);
-
         private float XDistanceToTarget(Vector2 target) => target.x - thisRigidbody2D.position.x;
 
         private void Translate(float distance)
         {
             spriteRenderer.flipX = Mathf.Sign(distance) < 0;
-            animator.SetBool(ANIMATION_STATES.WALK, true);
-            thisRigidbody2D.MovePosition(new Vector2(thisRigidbody2D.position.x + distance, thisRigidbody2D.position.y));
+            // Is our next position still on ground?
+            if (groundChecker.IsGrounded(Vector2.right * distance))
+            {
+                animator.SetBool(ANIMATION_STATES.WALK, true);
+                thisRigidbody2D.MovePosition(new Vector2(thisRigidbody2D.position.x + distance, thisRigidbody2D.position.y));
+            }
         }
 
         private void JumpTo(Vector2 target)

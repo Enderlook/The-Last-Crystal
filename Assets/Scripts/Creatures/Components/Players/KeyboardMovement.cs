@@ -21,20 +21,13 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
     [Tooltip("Move force horizontal.")]
     public float moveForce;
 
-    [Header("Setup")]
-    //[Tooltip("Sprite Renderer to flip.")]
-    //public SpriteRenderer spriteRenderer;
-#pragma warning disable CS0649
-    [SerializeField, Tooltip("Layer to check for ground.")]
-    private LayerMask ground;
-    [SerializeField, Tooltip("Used to check if it's touching ground.")]
-    private Transform groundCheck;
-#pragma warning restore CS0649
     private const float CHECK_GROUND_DISTANCE = 0.1f;
 
     private Rigidbody2D thisRigidbody2D;
     private Animator thisAnimator;
     private SpriteRenderer thisSprite;
+
+    private GroundChecker groundChecker;
 
     private static class ANIMATION_STATES
     {
@@ -48,12 +41,13 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
         thisRigidbody2D = creature.thisRigidbody2D;
         thisAnimator = creature.animator;
         thisSprite = creature.sprite;
+        groundChecker = creature.groundChecker;
         remainingJumps = maxJumps;
     }
 
     void IMove.Move(float deltaTime, float speedMultiplier)
     {
-        if (IsGrounded())
+        if (groundChecker.IsGrounded())
         {
             remainingJumps = maxJumps;
             thisAnimator.SetBool(ANIMATION_STATES.JUMP, false);
@@ -73,8 +67,6 @@ public class KeyboardMovement : MonoBehaviour, IMove, IInit
             thisAnimator.SetBool(ANIMATION_STATES.JUMP, true);
         }
     }
-
-    private bool IsGrounded() => Physics2D.OverlapCircle(groundCheck.position, CHECK_GROUND_DISTANCE, ground);
 
     private void MoveHorizontal(float distance)
     {

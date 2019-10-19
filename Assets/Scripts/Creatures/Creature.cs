@@ -22,6 +22,9 @@ namespace CreaturesAddons
         [Tooltip("Animator Component.")]
         public Animator animator;
 
+        [Tooltip("Ground checker.")]
+        public GroundChecker groundChecker;
+
         private IMove move;
         private IAttack attack;
 
