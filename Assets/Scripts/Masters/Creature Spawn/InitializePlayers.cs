@@ -1,4 +1,5 @@
 ﻿using CreaturesAddons;
+﻿using AdditionalComponents;
 using FloatPool.Decorators;
 using HealthBarGUI;
 using Master;

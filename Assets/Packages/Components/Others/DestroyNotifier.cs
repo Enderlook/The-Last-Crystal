@@ -1,13 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-public class DestroyNotifier : MonoBehaviour
+namespace AdditionalComponents
 {
-    private Action callback;
+    public class DestroyNotifier : MonoBehaviour
+    {
+        private Action callback;
 
-    public void AddCallback(Action onDeath) => callback += onDeath;
+        public void AddCallback(Action onDeath) => callback += onDeath;
 
-    private void OnDestroy() => callback();
+        private void OnDestroy() => callback();
 
-    public static void ExecuteOnDeath(GameObject gameObject, Action onDeath) => (gameObject.GetComponent<DestroyNotifier>() ?? gameObject.AddComponent<DestroyNotifier>()).AddCallback(onDeath);
+        public static void ExecuteOnDeath(GameObject gameObject, Action onDeath) => (gameObject.GetComponent<DestroyNotifier>() ?? gameObject.AddComponent<DestroyNotifier>()).AddCallback(onDeath);
+    }
 }
