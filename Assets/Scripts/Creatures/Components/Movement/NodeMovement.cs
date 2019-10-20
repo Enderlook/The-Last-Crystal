@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Navigation;
 using UnityEngine;
+using Utils;
 
 namespace CreaturesAddons.Movement.NodeMovement
 {
