@@ -14,7 +14,7 @@ namespace Serializables.Drawer
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             //RectangleFactory rectangleFactory = new RectangleFactory(position, true);
-            verticalRectBuilder = new VerticalRectBuilder(position.position, new Vector2(EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight));
+            verticalRectBuilder = new VerticalRectBuilder(position.position, new Vector2(position.width, EditorGUIUtility.singleLineHeight));
             EditorGUI.BeginProperty(position, label, property);
             SerializedProperty array = property.FindPropertyRelative("array");
 
@@ -35,7 +35,7 @@ namespace Serializables.Drawer
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             SerializedProperty array = property.FindPropertyRelative("array");
-            return EditorGUI.GetPropertyHeight(array, true) + (foldout ? verticalRectBuilder.TotalHeight : 0); //+ (foldout ? (array.arraySize + 1) * EditorGUIUtility.singleLineHeight : 0);
+            return EditorGUI.GetPropertyHeight(array, true) + (foldout ? verticalRectBuilder.TotalHeight : 0);
         }
     }
 }
