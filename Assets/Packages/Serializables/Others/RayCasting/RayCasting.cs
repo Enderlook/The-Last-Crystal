@@ -1,4 +1,5 @@
 ﻿using System;
+using AdditionalAttributes;
 using UnityEngine;
 
 namespace Serializables.Physics
@@ -181,12 +182,14 @@ namespace Serializables.Physics
         }
 
 #if UNITY_EDITOR
-#pragma warning disable IDE0051, CS0414
-        [SerializeField, Tooltip("Draw line in editor.")]
+#pragma warning disable IDE0051, CS0414, CS0649
+        [SerializeField, Tooltip("Draw line in editor."), HideInInspector]
         private bool draw;
+        [SerializeField, Tooltip("Edit raycast in editor."), HasConfirmationField(nameof(draw))]
+        private bool edit;
         [SerializeField, Tooltip("Whenever a raycast is call, it will display it in scene.")]
         private bool debug;
-#pragma warning restore CS0414
+#pragma warning restore CS0414, CS0649
         [SerializeField]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "It's used by RayCastingDrawer.")]
 #pragma warning disable CA2235

@@ -27,6 +27,8 @@ namespace Serializables.Physics.Drawer
             {
                 if (serializedProperty.FindPropertyRelative("draw").boolValue)
                 {
+                    bool edit = serializedProperty.FindPropertyRelative("edit").boolValue;
+
                     Color color = serializedProperty.FindPropertyRelative("color").colorValue;
 
                     Vector2 source = rayCasting.Source;
@@ -35,7 +37,8 @@ namespace Serializables.Physics.Drawer
 
                     serializedProperty.serializedObject.Update();
 
-                    rayCasting.Source = (Vector2)Handles.PositionHandle(source + reference, Quaternion.identity) - reference;
+                    if (edit)
+                        rayCasting.Source = (Vector2)Handles.PositionHandle(source + reference, Quaternion.identity) - reference;
 
                     Handles.color = color;
                     if (serializedProperty.FindPropertyRelative("distance").floatValue == Mathf.Infinity)
@@ -45,7 +48,8 @@ namespace Serializables.Physics.Drawer
                         // We can't use the WorldEnd property because that will give infinity
                         Vector2 worldEndPosition = source + reference + direction;
 
-                        rayCasting.direction = ((Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity) - source - reference).normalized;
+                        if (edit)
+                            rayCasting.direction = ((Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity) - source - reference).normalized;
 
                         Vector2 sourcePositionWorld = source + reference;
 
@@ -56,7 +60,8 @@ namespace Serializables.Physics.Drawer
                     {
                         PropertyInfo worldEndProperty = typeof(RayCasting).GetProperty("WorldEnd", bindingFlags);
                         Vector2 worldEndPosition = (Vector2)worldEndProperty.GetValue(rayCasting);
-                        worldEndProperty.SetValue(rayCasting, (Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity));
+                        if (edit)
+                            worldEndProperty.SetValue(rayCasting, (Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity));
                         Handles.DrawLine(reference + source, worldEndPosition);
                     }
 

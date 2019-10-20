@@ -173,6 +173,7 @@ MonoBehaviour:
   digitPrecision: 0
   overrideTypeOfRounding: 0
   typeOfRounding: 0
+  floatingTextPrefab: {fileID: 0}
   floatingTextParent: {fileID: 0}
 --- !u!114 &843876848762180787
 MonoBehaviour:
@@ -405,10 +406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  targetPlayer: 0
-  navigationAgent: {fileID: 1717894949730967846}
-  ground: 0
-  groundCheck: {fileID: 2426205588667692726}
 --- !u!114 &8597921017496991690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +427,7 @@ MonoBehaviour:
     flipX: 0
     flipY: 0
     draw: 1
+    edit: 0
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
   groundLayer: 8
