@@ -11,7 +11,7 @@ public class CoinMeter : MonoBehaviour
     private int oldMoney;
     private int realMoney;
 
-    public int money {
+    public int Money {
         get => realMoney;
         set {
             oldMoney = (int)showedMoney;

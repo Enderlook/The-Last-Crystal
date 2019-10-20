@@ -30,8 +30,8 @@ namespace Range
         /// <summary>
         /// The result is always an integer. Decimal numbers are used as chance to increment by one.
         /// </summary>
-        /// <param name="number"></param>
-        /// <returns></returns>
+        /// <param name="number">Number to round by chance.</param>
+        /// <returns>Rounded number by chance.</returns>
         public static int FloatToIntByChance(float number) => (int)number + (Random.value < (number - (int)number) ? 1 : 0);
     }
 

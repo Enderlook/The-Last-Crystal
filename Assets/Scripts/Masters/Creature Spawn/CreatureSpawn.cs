@@ -1,7 +1,9 @@
 ﻿using System;
+using AdditionalComponents;
 using Navigation;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
 public class CreatureSpawn : MonoBehaviour
 {
@@ -21,11 +23,12 @@ public class CreatureSpawn : MonoBehaviour
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "Used by Unity Editor, it doesn't matter if it isn't visible.")]
     public class CreatureSpawnToken
     {
-#pragma warning disable CS0649
+#pragma warning disable CS0649, CA2235
         [SerializeField, Tooltip("Prefab to spawn.")]
         private GameObject prefab;
         [SerializeField, Tooltip("Spawning point.")]
         private Transform spawningPoint;
+#pragma warning restore CA2235
         [SerializeField, Tooltip("Respawning time in seconds.")]
         private float respawningTime;
         [SerializeField, Tooltip("Should be instantly spawn on Start.")]

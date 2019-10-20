@@ -1,6 +1,7 @@
 ﻿using AdditionalAttributes;
 using Master;
 using UnityEngine;
+using Utils;
 
 namespace CreaturesAddons.Weapons
 {
@@ -9,9 +10,9 @@ namespace CreaturesAddons.Weapons
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
-        [SerializeField, Tooltip("Push strength on hit.")]
-        private float pushStrength = 0;
 #pragma warning disable CS0649
+        [SerializeField, Tooltip("Push strength on hit.")]
+        private float pushStrength;
         [SerializeField, Tooltip("Animation attack name.")]
         private string animationName;
 #pragma warning restore CS0649
@@ -21,17 +22,20 @@ namespace CreaturesAddons.Weapons
         private float projectileForce = 10;
         [SerializeField, Tooltip("Gravity scale of projectile.")]
         private float projectileGravity = 1;
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Whenever if projectile collider is trigger.")]
-        private bool projectileColliderIsTrigger = false;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "Unity Editor can't handle readonly.")]
+        private bool projectileColliderIsTrigger;
+#pragma warning restore CS0649
         [SerializeField, Tooltip("Projectile scale multiplier.")]
         private float projectileScaleMultiplier = 1;
         [SerializeField, Tooltip("Projectile duration in seconds.")]
         private float projectileDuration = 1;
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Projectile layer."), Layer]
-        private int projectileLayer = 0;
+        private int projectileLayer;
 
         [Header("Setup")]
-#pragma warning disable CS0649
         [SerializeField, DrawVectorRelativeToTransform]
         private Vector2 shootingPosition;
         [SerializeField, Tooltip("Animation played by projectile.")]
@@ -60,7 +64,6 @@ namespace CreaturesAddons.Weapons
                 thisAnimator.SetTrigger(animationName);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         private void Shoot()
         {
             Global.audioSystem.ShootSoundEffect();
@@ -115,7 +118,9 @@ namespace CreaturesAddons.Weapons
             Destroy(gameObject);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Unity's method.")]
         private void OnCollisionEnter(Collision collision) => Destroy(gameObject);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Unity's method.")]
         private void OnTriggerEnter(Collider other) => Destroy(gameObject);
     }
 }

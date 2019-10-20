@@ -26,12 +26,7 @@ namespace Master
                 return transform;
         }
 
-        public static Transform GetTranform(this TransformCreature key)
-        {
-            if (transforms.TryGetValue(key, out Transform value))
-                return key.CheckDestroyedTransform(value);
-            return null;
-        }
+        public static Transform GetTranform(this TransformCreature key) => transforms.TryGetValue(key, out Transform value) ? key.CheckDestroyedTransform(value) : null;
 
         public static bool TryGetTransform(this TransformCreature key, out Transform transform)
         {

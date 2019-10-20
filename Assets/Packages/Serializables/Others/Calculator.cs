@@ -15,11 +15,13 @@ namespace Serializables
     [Serializable]
     public class Calculator
     {
+#pragma warning disable CA2235
         [Tooltip("Formula to calculate.\nIt doesn't support operator precedence, instead use brackets.\nSupports string formating.")]
         public string formula;
         [Tooltip("Should Regex be compiled.\nIncreases constructor time but decreases matching time. It's only worth with very heavy loads (~1M matches).")]
-        public bool compile = false;
+        public bool compile;
         private Regex regex;
+#pragma warning restore CA2235
 
         /// <summary>
         /// Whenever the regex object is compiled or not.
@@ -36,7 +38,7 @@ namespace Serializables
             }
         }
 
-        private static readonly Dictionary<string, System.Func<float, float, float>> operators = new Dictionary<string, System.Func<float, float, float>>()
+        private static readonly Dictionary<string, Func<float, float, float>> operators = new Dictionary<string, Func<float, float, float>>()
     {
         { "+", (float l, float r) => l + r },
         { "-", (float l, float r) => l - r },
@@ -48,7 +50,9 @@ namespace Serializables
         /// <summary>
         /// Construct a <see cref="Calculator"/> class.
         /// </summary>
-        /// <param name="formula">Formula to calculate.<br/>It doesn't support operator precedence, instead use brackets.<br/>Supports string formating.</param>
+        /// <param name="formula">Formula to calculate.<br/>
+        /// It doesn't support operator precedence, instead use brackets.<br/>
+        /// Supports string formating.</param>
         /// <param name="compile">Increases constructor time but decreases matching time. It's only worth with very heavy loads (~1M matches).</param>
         public Calculator(string formula, bool compile = false)
         {
@@ -103,7 +107,7 @@ namespace Serializables
         /// Performs a math operation with the captured groups of the regex, using the <seealso cref="operators"/>.
         /// </summary>
         /// <param name="m">Match from the regex.</param>
-        /// <returns></returns>
+        /// <returns>One step replaced string. You should call this method several times to replace all.</returns>
         private string Replace(Match m)
         {
             GroupCollection groups = m.Groups;
@@ -114,7 +118,7 @@ namespace Serializables
             else
             {
                 float left = float.Parse(groups[1].Value);
-                return operators.TryGetValue(operation, out System.Func<float, float, float> func)
+                return operators.TryGetValue(operation, out Func<float, float, float> func)
                     ? func(left, right).ToString() : Compute(operation, left, right);
             }
         }

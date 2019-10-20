@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Navigation;
 using UnityEngine;
+using Utils;
 
 namespace CreaturesAddons.Movement.NodeMovement
 {
@@ -26,7 +27,6 @@ namespace CreaturesAddons.Movement.NodeMovement
         private const float LANDING_STUN_TIME = 0.4f;
 
         private TargetAndPathGetter targetAndPathGetter;
-        private NavigationAgent navigationAgent;
 
         private GroundChecker groundChecker;
 
@@ -44,7 +44,6 @@ namespace CreaturesAddons.Movement.NodeMovement
             animator = creature.animator;
             groundChecker = creature.groundChecker;
             targetAndPathGetter = GetComponent<TargetAndPathGetter>();
-            navigationAgent = GetComponent<NavigationAgent>();
         }
 
         void IMove.Move(float deltaTime, float speedMultiplier)

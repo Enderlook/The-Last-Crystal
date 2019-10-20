@@ -42,6 +42,7 @@ namespace UnityEditorHelper
 
         public abstract void AddSpace(float value);
     }
+
     public class HorizontalRectBuilder : RectBuilder
     {
         public float RemainingWidth => BaseSize.x - (CurrentX - BasePosition.x);
@@ -99,7 +100,7 @@ namespace UnityEditorHelper
 
     public class VerticalRectBuilder : RectBuilder
     {
-        public float TotalHeight => CurrentY - BaseSize.y;
+        public float TotalHeight => CurrentY - BasePosition.y;
 
         public VerticalRectBuilder(Rect rect) : base(rect) { }
         public VerticalRectBuilder(Vector2 position, Vector2 size) : base(position, size) { }
@@ -114,7 +115,7 @@ namespace UnityEditorHelper
         /// <returns>New <see cref="Rect"/>./returns>
         public override Rect GetRect(float height)
         {
-            Rect rect = new Rect(CurrentX, CurrentY, height, BaseSize.y);
+            Rect rect = new Rect(CurrentX, CurrentY, BaseSize.x, height);
             CurrentY += height;
             return rect;
         }

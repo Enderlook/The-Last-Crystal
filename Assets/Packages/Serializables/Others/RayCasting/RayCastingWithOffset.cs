@@ -5,7 +5,7 @@ namespace Serializables.Physics
 {
     /// <summary>
     /// Used to perform raycasting with predefined parameters.<br>
-    /// It allow sadding offset to the <see cref="RayCasting.Source"/> on runtime without using <see cref="RayCasting.SetReference(Transform, SpriteRenderer)"/> or <see cref="RayCasting.SetReference(Vector2, SpriteRenderer)"/>.<br>
+    /// It allows adding offset to the <see cref="RayCasting.Source"/> on runtime without using <see cref="RayCasting.SetReference(Transform, SpriteRenderer)"/> or <see cref="RayCasting.SetReference(Vector2, SpriteRenderer)"/>.<br>
     /// It can be either serialized in Unity inspector or construct using new.
     /// </summary>
     [Serializable]
