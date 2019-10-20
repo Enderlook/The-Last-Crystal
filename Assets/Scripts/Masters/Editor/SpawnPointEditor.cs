@@ -20,29 +20,26 @@ public class SpawnPointEditor : Editor
 
     public void OnSceneGUI()
     {
-        if (Event.current.type == EventType.MouseDown)
+        if (Event.current.type == EventType.MouseDown && Event.current.button == 1)
         {
-            if (Event.current.button == 1)
+            Vector2 mousePosition = MouseHelper.GetMousePositionInEditor();
+            if (Event.current.control)
+                points.Add(mousePosition);
+            else if (Event.current.alt)
             {
-                Vector2 mousePosition = MouseHelper.GetMousePositionInEditor();
-                if (Event.current.control)
-                    points.Add(mousePosition);
-                else if (Event.current.alt)
+                float closestDistance = Mathf.Infinity;
+                int? closestPoint = null;
+                for (int i = 0; i < points.Count; i++)
                 {
-                    float closestDistance = Mathf.Infinity;
-                    int? closestPoint = null;
-                    for (int i = 0; i < points.Count; i++)
+                    float newDistance = Vector2.Distance(points[i], mousePosition);
+                    if (newDistance < closestDistance)
                     {
-                        float newDistance = Vector2.Distance(points[i], mousePosition);
-                        if (newDistance < closestDistance)
-                        {
-                            closestDistance = newDistance;
-                            closestPoint = i;
-                        }
+                        closestDistance = newDistance;
+                        closestPoint = i;
                     }
-                    if (closestPoint != null)
-                        points.RemoveAt((int)closestPoint);
                 }
+                if (closestPoint != null)
+                    points.RemoveAt((int)closestPoint);
             }
         }
     }

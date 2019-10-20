@@ -29,7 +29,13 @@ namespace UnityEditorHelper
             }
         }
 
-        public static IEnumerable<(SerializedProperty serializedProperty, object field, T attribute, Editor editor)> FindAllSerializePropertiesInActiveEditorWithTheAttribute<T>(bool inherit = true) where T : Attribute
+        /// <summary>
+        /// Get all <see cref="SerializedProperty"/> that have the <typeparamref name="T"/> attribute and are in one of the <see cref="MonoBehaviour"/> of the current(s) active(s) editor(s).
+        /// </summary>
+        /// <typeparam name="T">Attribute type to look for.</typeparam>
+        /// <param name="inherit">Whenever it should look for inherited attributes.</param>
+        /// <returns>An enumerable with all the properties, fields, attributes and the editor where they were taken.</returns>
+        public static IEnumerable<(SerializedProperty serializedProperty, FieldInfo field, T attribute, Editor editor)> FindAllSerializePropertiesInActiveEditorWithTheAttribute<T>(bool inherit = true) where T : Attribute
         {
             foreach (Editor editor in ActiveEditorTracker.sharedTracker.activeEditors)
             {

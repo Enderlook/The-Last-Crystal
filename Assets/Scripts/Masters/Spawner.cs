@@ -28,14 +28,14 @@ public class Spawner : MonoBehaviour
     private NavigationGraph navigationGraph;
 #pragma warning restore CS0649
 
-    private int enemiesAlive = 0;
+    private int enemiesAlive;
 
     [DrawVectorRelativeToTransform]
     public List<Vector2> points;
 
     private void Start() => StartCoroutine(SpawnEnemies());
 
-    IEnumerator SpawnEnemies()
+    private IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(startSpawn);
         for (; enemiesToSpawn > 0; enemiesToSpawn--)

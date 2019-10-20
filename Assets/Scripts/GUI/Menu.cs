@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Others panels. Used to hide them when press escape.")]
     private GameObject[] panels;
     [SerializeField, Tooltip("Force menu to be untoggleable.")]
-    private bool menuNoToggleable = false;
+    private bool menuNoToggleable;
     [SerializeField, Tooltip("Playlist Manager.")]
     private PlaylistManager playlistManager;
     [SerializeField, Tooltip("Name of the playlist to play when menu is shown.")]
@@ -29,7 +29,7 @@ public class Menu : MonoBehaviour
     private static readonly Dictionary<StoppableRigidbody, float> stoppableRigidbodySpeeds = new Dictionary<StoppableRigidbody, float>();
 
     public static bool IsPlaying => !isPause;
-    private static bool isPause = false;
+    private static bool isPause;
     public static bool IsPause {
         get => isPause;
         private set {
@@ -40,7 +40,7 @@ public class Menu : MonoBehaviour
             {
                 foreach (Animator animator in FindObjectsOfType<Animator>())
                 {
-                    if (animator.enabled == true)
+                    if (animator.enabled)
                     {
                         animator.enabled = false;
                         animationsToRenable.Add(animator);
@@ -66,17 +66,14 @@ public class Menu : MonoBehaviour
         }
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Awake()
     {
         animationsToRenable.Clear();
         stoppableRigidbodySpeeds.Clear();
     }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Start() => DisplayMenuPause(false);
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity.")]
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

@@ -17,8 +17,8 @@
         /// Current money of the player.
         /// </summary>
         public static int money {
-            get => coinMeter.money;
-            set => coinMeter.money = value;
+            get => coinMeter.Money;
+            set => coinMeter.Money = value;
         }
 
         /// <summary>

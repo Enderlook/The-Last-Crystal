@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons
@@ -29,9 +28,9 @@ namespace CreaturesAddons.Weapons
     public interface IDamageOnTouch
     {
         /// <summary>
-        /// Produce damage. It will try to cast it to <see cref="ITakeDamage"/> and <see cref="IPush"/>.
+        /// Produce damage. It will try to cast <paramref name="victim"/> to <see cref="ITakeDamage"/> and <see cref="IPush"/>.
         /// </summary>
-        /// <param name="creature"></param>
+        /// <param name="victim">Victim who will receive damage and possibly be pushed back.</param>
         void ProduceDamage(object victim);
     }
 }
