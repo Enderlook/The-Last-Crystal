@@ -1,4 +1,6 @@
-﻿using CreaturesAddons.Weapons;
+﻿using System;
+using CreaturesAddons.Weapons;
+using Master;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,8 +24,7 @@ public class WeaponCooldownDisplay : MonoBehaviour
 
     private void Update()
     {
-        float charge = reverseFill ? 1 - weapon.CooldownPercent : weapon.CooldownPercent;
-        image.fillAmount = charge;
+        image.fillAmount = reverseFill ? 1 - weapon.CooldownPercent : weapon.CooldownPercent;
         if (modes.Length > 0)
         {
             ModePercent mode = GetMode(1 - weapon.CooldownPercent);
@@ -68,11 +69,14 @@ public class WeaponCooldownDisplay : MonoBehaviour
     }
 #endif
 
-    [System.Serializable]
+    [Serializable]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "It's only public for Unity Editor, so there is no problem in having it nested.")]
     public class ModePercent
     {
         [Tooltip("Color to show.")]
+#pragma warning disable CA2235
         public Color color;
+#pragma warning restore CA2235
         [Tooltip("Sound to play")]
         public Sound sound;
         [Range(0, 1)]

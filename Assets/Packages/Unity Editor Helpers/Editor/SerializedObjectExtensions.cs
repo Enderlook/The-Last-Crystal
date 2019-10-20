@@ -175,6 +175,7 @@ namespace UnityEditorHelper
             source.DrawFieldIfConfirmed(serializedProperty, includeChildren, confirmationVariable);
         }
 
+
         /// <summary>
         /// Generate a toggleable button to hide or show a certain field, which is also created by this method.
         /// </summary>
@@ -185,6 +186,7 @@ namespace UnityEditorHelper
         /// <param name="reasonForUndo">Reason used when save undo operation. To this it's appended " Checkbox.".</br>
         /// If <see langword="null"/>, <c><paramref name="confirmationContent"/>.text</c> will be used instead.</param>
         /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0054:Use compound assignment", Justification = "Unity doesn't support it.")]
         public static void ToggleableField(this SerializedObject source, string serializedProperty, ref bool confirmationVariable, GUIContent confirmationContent, string reasonForUndo, bool includeChildren = false)
         {
             reasonForUndo = reasonForUndo ?? confirmationContent.text;

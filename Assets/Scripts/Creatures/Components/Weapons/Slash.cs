@@ -1,4 +1,6 @@
 ﻿using AdditionalAttributes;
+using Master;
+using Serializables.Physics;
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons
@@ -14,7 +16,7 @@ namespace CreaturesAddons.Weapons
 #pragma warning disable CS0649
         [SerializeField]
         private RayCasting rayCasting;
-        [Layer]
+        [SerializeField, Layer, Tooltip("The target to hit")]
         private int layerToHit;
         [SerializeField, Tooltip("Animation played on attack.")]
         protected string animationState;
@@ -49,6 +51,7 @@ namespace CreaturesAddons.Weapons
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         protected void HitTarget()
         {
+            Global.audioSystem.SlashSoundEffect();
             RaycastHit2D[] raycastHits = rayCasting.RaycastAll(1 << layerToHit); // Ignore any layer that isn't layerToHit
             for (int n = 0; n < raycastHits.Length; n++)
             {

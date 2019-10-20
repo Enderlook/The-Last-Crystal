@@ -26,6 +26,7 @@ MonoBehaviour:
     draw: 1
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
+  layerToHit: 9
   animationState: Attack
 --- !u!114 &789338178
 MonoBehaviour:
@@ -52,7 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  pushStrength: 25
+  pushStrength: 60
   firerate: 0.5
 --- !u!1001 &8459784783065580092
 PrefabInstance:
@@ -65,6 +66,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948837633536277635, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: floatingTextParent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
@@ -269,13 +275,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7060001654395986259, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.432
+      propertyPath: m_LocalPosition.x
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 7060001654395986259, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.06
+      propertyPath: m_LocalPosition.y
+      value: 0.432
       objectReference: {fileID: 0}
     - target: {fileID: 1551185467352808922, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}

@@ -51,7 +51,7 @@ namespace FloatingText
         private FloatingTextItem.TYPE_OF_ROUNDING typeOfRounding = FloatingTextItem.TYPE_OF_ROUNDING.ROUND;
 
         [Header("Setup")]
-        [Tooltip("Floating Text prefab.")]
+        [SerializeField, Tooltip("Floating Text prefab.")]
         private GameObject floatingTextPrefab;
         [SerializeField, Tooltip("Parent transform of all floating texts. Just for organization of scene.\nOptional.\nDO NOT USE A MOVING TRANSFORM!")]
         private Transform floatingTextParent;

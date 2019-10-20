@@ -37,12 +37,12 @@ namespace Navigation
             }
         }
 
-        public static Dictionary<Node, Connection> AStarSearch(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        private static float AStarSearchPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> previous, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
         {
-            Dictionary<Node, Connection> previous = new Dictionary<Node, Connection>();
+            previous = new Dictionary<Node, Connection>();
 
-            if (!navigation.Grid.Contains(source))
-                return previous;
+            if (!navigation.Grid.Contains(source)) // Path will never find a way
+                return -1;
 
             Func<Vector2, Vector2, float> Heuristic = target == null ? ChooseHeuristicFormula(DistanceFormula.None) : ChooseHeuristicFormula(heuristicFormula);
 
@@ -70,18 +70,42 @@ namespace Navigation
                         float distance = Relax(distances, previous, connection, distanceFromSource);
                         toVisit.Enqueue(neighbour, distance + Heuristic(neighbour.position, target.position));
                         if (neighbour == target)
-                            return previous;
+                            return distance;
                     }
                 }
             }
 
-            return previous;
+            // Not found path
+            return -1;
         }
 
-        public static List<Connection> AStarSearchPath(this NavigationGraph navigation, Node source, Node target, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        public static Dictionary<Node, Connection> SearchRawPath(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
         {
-            Dictionary<Node, Connection> previous = navigation.AStarSearch(source, target, heuristicFormula);
-            return FromPreviousDictionaryToListPath(previous, target);
+            navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
+            return connections;
+        }
+
+        public static float SearchRawPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> connections, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        {
+            return navigation.AStarSearchPath(source, out connections, target, heuristicFormula);
+        }
+
+        public static float CalculatePathDistance(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        {
+            return navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
+        }
+
+        public static List<Connection> SearchPath(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        {
+            navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
+            return FromPreviousDictionaryToListPath(connections, target);
+        }
+
+        public static float SearchPath(this NavigationGraph navigation, Node source, out List<Connection> path, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        {
+            float distance = navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
+            path = FromPreviousDictionaryToListPath(connections, target);
+            return distance;
         }
 
         private static List<Connection> FromPreviousDictionaryToListPath(Dictionary<Node, Connection> previous, Node target)

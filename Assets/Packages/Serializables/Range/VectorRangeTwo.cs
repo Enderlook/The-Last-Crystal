@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Range
 {
@@ -55,13 +57,15 @@ namespace Range
     }
 
 
-    [System.Serializable]
+    [Serializable]
     public class TransformRange : VectorRangeTwo
     {
+#pragma warning disable CA2235
         [Tooltip("Start transform.")]
         public Transform startTransform;
         [Tooltip("End transform.")]
         public Transform endTransform;
+#pragma warning restore CA2235
 
         protected override Vector3 StartVector3 {
             get => startTransform.position;
@@ -88,10 +92,12 @@ namespace Range
     [System.Serializable]
     public class Vector2RangeTwo : VectorRangeTwo
     {
+#pragma warning disable CA2235
         [Tooltip("Start vector.")]
         public Vector2 startVector;
         [Tooltip("End vector.")]
         public Vector2 endVector;
+#pragma warning restore CA2235
 
         protected override Vector3 StartVector3 {
             get => startVector;

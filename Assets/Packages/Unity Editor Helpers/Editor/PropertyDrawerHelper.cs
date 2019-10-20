@@ -23,13 +23,19 @@ namespace UnityEditorHelper
                     Type targetObjectClassType = targetObject.GetType();
                     FieldInfo field = targetObjectClassType.GetInheritedField(serializedProperty.propertyPath, bindingFlags);
                     // If the field exist, it's the class type we want
-                    if (field != null && field.FieldType == typeof(T))
-                        yield return (serializedProperty, (T)field.GetValue(targetObject), editor);
+                    if (field != null && field.GetValue(targetObject) is T value)
+                        yield return (serializedProperty, value, editor);
                 }
             }
         }
 
-        public static IEnumerable<(SerializedProperty serializedProperty, object field, T attribute, Editor editor)> FindAllSerializePropertiesInActiveEditorWithTheAttribute<T>(bool inherit = true) where T : Attribute
+        /// <summary>
+        /// Get all <see cref="SerializedProperty"/> that have the <typeparamref name="T"/> attribute and are in one of the <see cref="MonoBehaviour"/> of the current(s) active(s) editor(s).
+        /// </summary>
+        /// <typeparam name="T">Attribute type to look for.</typeparam>
+        /// <param name="inherit">Whenever it should look for inherited attributes.</param>
+        /// <returns>An enumerable with all the properties, fields, attributes and the editor where they were taken.</returns>
+        public static IEnumerable<(SerializedProperty serializedProperty, FieldInfo field, T attribute, Editor editor)> FindAllSerializePropertiesInActiveEditorWithTheAttribute<T>(bool inherit = true) where T : Attribute
         {
             foreach (Editor editor in ActiveEditorTracker.sharedTracker.activeEditors)
             {

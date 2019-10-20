@@ -1,5 +1,6 @@
 ﻿using System;
 using FloatPool.Internal;
+using Serializables;
 using UnityEngine;
 
 namespace FloatPool.Decorators
