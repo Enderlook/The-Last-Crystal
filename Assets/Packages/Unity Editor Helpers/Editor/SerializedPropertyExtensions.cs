@@ -51,29 +51,37 @@ namespace UnityEditorHelper
         /// Gets the target object of <paramref name="source"/>. It does work for nested serialized properties.
         /// </summary>
         /// <param name="source"><see cref="SerializedProperty"/> whose value will be get.</param>
+        /// <param name="getParent">Whenever it should get the parent of the <see cref="SerializedProperty"/> or the <see cref="SerializedProperty"/> itself.<br>
+        /// If it doesn't have parent it will return itself.</param>
         /// <returns>Value of the <paramref name="source"/> as <see cref="object"/>.</returns>
-        public static object GetTargetObjectOfProperty(this SerializedProperty source)
+        public static object GetTargetObjectOfProperty(this SerializedProperty source, bool getParent = false)
         {
             if (source == null)
                 return null;
 
             string path = source.propertyPath.Replace(".Array.data[", "[");
             object targetObject = source.serializedObject.targetObject;
+            object lastParent = null;
 
-            string[] elements = path.Split('.');
-            foreach (string element in elements)
+            void SetTargetObject(object t)
+            {
+                lastParent = targetObject;
+                targetObject = t;
+            }
+
+            foreach (string element in path.Split('.'))
             {
                 if (element.Contains("["))
                 {
                     string elementName = element.Substring(0, element.IndexOf("["));
                     int index = int.Parse(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
-                    targetObject = targetObject.GetValue(elementName, index);
+                    SetTargetObject(targetObject.GetValue(elementName, index));
                 }
                 else
-                    targetObject = targetObject.GetValue(element);
+                    SetTargetObject(targetObject.GetValue(element));
             }
 
-            return targetObject;
+            return getParent ? lastParent ?? targetObject : targetObject;
         }
 
         /// <summary>
