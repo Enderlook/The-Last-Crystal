@@ -1,4 +1,5 @@
 using System;
+using AdditionalComponents;
 using CreaturesAddons.Weapons;
 using UnityEngine;
 
