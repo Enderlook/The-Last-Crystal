@@ -1,7 +1,9 @@
 ﻿using System;
+using UnityEngine;
 
 namespace AdditionalAttributes
 {
+    [AttributeUsageDataType(typeof(Vector2), typeof(Vector2Int), typeof(Vector3), typeof(Vector3), typeof(Vector4), typeof(Transform))]
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class DrawVectorRelativeToTransformAttribute : Attribute
     {

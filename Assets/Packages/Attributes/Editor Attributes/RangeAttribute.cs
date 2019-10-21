@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
+    [AttributeUsageDataType(typeof(int), typeof(float))]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class RangeAttribute : PropertyAttribute
     {

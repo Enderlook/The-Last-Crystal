@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
+    [AttributeUsageDataType(typeof(int), typeof(float), typeof(LayerMask), typeof(string))]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class LayerAttribute : PropertyAttribute
     {
