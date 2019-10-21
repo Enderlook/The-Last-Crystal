@@ -19,16 +19,13 @@ namespace AdditionalAttributes.Internal
             }
         }
 
-        public static IEnumerable<(FieldInfo fieldInfo, Type type, Attribute attribute)> GetAllAttributesOfFieldsOfTypesInCurrentDomainAssemblies()
+        public static IEnumerable<(FieldInfo fieldInfo, Type type, Attribute attribute)> GettAllAttributesOfFieldsOf(Type type)
         {
-            foreach (Type type in AssemblyHelper.GetAllTypesOfCurrentDomainAssemblies())
+            foreach (FieldInfo fieldInfo in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
-                foreach (FieldInfo fieldInfo in type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                foreach (Attribute attribute in fieldInfo.GetCustomAttributes())
                 {
-                    foreach (Attribute attribute in fieldInfo.GetCustomAttributes())
-                    {
-                        yield return (fieldInfo, type, attribute);
-                    }
+                    yield return (fieldInfo, type, attribute);
                 }
             }
         }

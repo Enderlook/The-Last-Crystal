@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 
 namespace AdditionalAttributes
 {
+    [AttributeUsageDataType(typeof(Attribute), checkingFlags = CheckingFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageDataTypeAttribute : Attribute
     {
@@ -21,38 +21,38 @@ namespace AdditionalAttributes
             /// If used, <see cref="Types"/> will be forbidden types (blacklist).<br>
             /// If not used, they will be the only allowed types (white list).<br>
             /// </summary>
-            IsBlackList = 2,
+            IsBlackList = 1 << 1,
 
             /// <summary>
             /// If used, it will also check for array o list versions of types.<br>
             /// Useful because Unity <see cref="PropertyDrawer"/> are draw on each element of an array or list <see cref="SerializedProperty"/>.<br>
             /// </summary>
-            IncludeEnumerableTypes = 4,
+            IncludeEnumerableTypes = 1 << 2,
 
             /// <summary>
             /// Whenever it should check if the type is a subclass of one of the listed types.
             /// </summary>
-            CheckSubclassTypes = 8,
+            CheckSubclassTypes = 1 << 3,
 
             /// <summary>
             /// Whenever it should check if the type is  superclass of one of the listed types.
             /// </summary>
-            CheckSuperclassTypes = 16,
+            CheckSuperclassTypes = 1 << 4,
 
             /// <summary>
             /// Whenever it should check for assignable from type to one of the listed types.
             /// </summary>
-            CheckIsAssignableTypes = 32,
-
-            /// <summary>
-            /// Whenever it should check if type can be assigned to one of the listed types.
-            /// </summary>
-            CheckCanBeAssignedTypes = 64,
+            CheckIsAssignableTypes = 1 << 5,
 
             /// <summary>
             /// <see cref="CheckSubclassTypes"/> or <see cref="CheckIsAssignableTypes"/>.
             /// </summary>
             CheckSubclassOrAssignable = CheckSubclassTypes | CheckIsAssignableTypes,
+
+            /// <summary>
+            /// Whenever it should check if type can be assigned to one of the listed types.
+            /// </summary>
+            CheckCanBeAssignedTypes = 1 << 6,
 
             /// <summary>
             /// <see cref="CheckIsAssignableTypes"/> or <see cref="CheckCanBeAssignedTypes"/>.
@@ -104,10 +104,9 @@ namespace AdditionalAttributes
         private string errorMessage;
         private string ErrorMessage => errorMessage ?? (errorMessage = $"{(checkingFlags.HasFlag(CheckingFlags.IsBlackList) ? "doesn't accept" : "only accept")} types of {string.Join(", ", Types.Select(e => e.Name))}");
 
-        public void CheckAllowance(Type attribute, FieldInfo fieldInfo, Type classType)
+        public void CheckAllowance(Type toCheckType, string toCheckName, string attributeName)
         {
-            Type fieldType = fieldInfo.FieldType;
-            bool contains = Types.Contains(fieldType);
+            bool contains = Types.Contains(toCheckType);
 
             if (!contains)
             {
@@ -115,7 +114,7 @@ namespace AdditionalAttributes
                 {
                     foreach (Type type in Types)
                     {
-                        bool result = test(fieldType, type);
+                        bool result = test(toCheckType, type);
                         if (result)
                         {
                             contains = result;
@@ -124,20 +123,22 @@ namespace AdditionalAttributes
                     }
                 }
 
-                if (checkingFlags.HasFlag(CheckingFlags.CheckSubclassTypes))
+                // Check if checkingFlags has the following flags
+                // We could use checkingFlags.HasaFlag(flag), but it's ~10 times slower
+                if ((checkingFlags & CheckingFlags.CheckSubclassTypes) != 0)
                     Check((f, t) => f.IsSubclassOf(t));
-                if (checkingFlags.HasFlag(CheckingFlags.CheckSuperclassTypes) && !contains)
+                if ((checkingFlags & CheckingFlags.CheckSuperclassTypes) != 0 && !contains)
                     Check((f, t) => f.IsSubclassOf(t));
-                if (checkingFlags.HasFlag(CheckingFlags.CheckSuperclassTypes) && !contains)
+                if ((checkingFlags & CheckingFlags.CheckSuperclassTypes) != 0 && !contains)
                     Check((f, t) => t.IsSubclassOf(f));
-                if (checkingFlags.HasFlag(CheckingFlags.CheckSuperclassTypes) && !contains)
+                if ((checkingFlags & CheckingFlags.CheckSuperclassTypes) != 0 && !contains)
                     Check((f, t) => f.IsAssignableFrom(t));
-                if (checkingFlags.HasFlag(CheckingFlags.CheckCanBeAssignedTypes) && !contains)
+                if ((checkingFlags & CheckingFlags.CheckCanBeAssignedTypes) != 0 && !contains)
                     Check((f, t) => t.IsAssignableFrom(f));
             }
 
-            if (contains == checkingFlags.HasFlag(CheckingFlags.IsBlackList))
-                Debug.LogException(new ArgumentException($"{attribute.Name} {ErrorMessage}. Field {fieldInfo.Name} of {classType.Name} is {fieldType.Name} type."));
+            if (contains == ((checkingFlags & CheckingFlags.IsBlackList) != 0))
+                Debug.LogException(new ArgumentException($"{attributeName} {ErrorMessage}. {toCheckName} is {toCheckType.Name} type."));
         }
 #endif
     }
