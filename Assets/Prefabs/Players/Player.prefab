@@ -140,6 +140,8 @@ MonoBehaviour:
   digitPrecision: 0
   overrideTypeOfRounding: 0
   typeOfRounding: 0
+  floatingTextPrefab: {fileID: 1259971843042013121, guid: 76062395ae1642d4f86d51ed39ddd26e,
+    type: 3}
   floatingTextParent: {fileID: 0}
 --- !u!114 &8836964168732201439
 MonoBehaviour:
