@@ -14,14 +14,13 @@ namespace AdditionalAttributes.Internal
         {
             Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)> checkers = new Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)>();
 
-            foreach ((Type type, AttributeUsageDataTypeAttribute attribute) in AttributeUsageHelper.GetAllAttributesWithCustomAttributeInCurrentDomainAssemblies<AttributeUsageDataTypeAttribute>())
+            foreach ((Type type, AttributeUsageDataTypeAttribute attribute) in AttributeUsageHelper.GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<AttributeUsageDataTypeAttribute>())
             {
                 AttributeUsageAttribute attributeUsageAttribute = type.GetCustomAttribute<AttributeUsageAttribute>();
                 checkers.Add(type, (attributeUsageAttribute?.ValidOn ?? AttributeTargets.All, (checkType, checkName) => attribute.CheckAllowance(checkType, checkName, type.Name)));
             }
 
-
-            foreach (Type classType in AssemblyHelper.GetAllTypesOfCurrentDomainAssemblies())
+            foreach (Type classType in AssemblyHelper.GetAllTypesOfPlayerAndEditorAssemblies())
             {
                 foreach (Attribute attribute in classType.GetCustomAttributes())
                 {
@@ -33,13 +32,25 @@ namespace AdditionalAttributes.Internal
                     }
                 }
 
-                foreach ((FieldInfo fieldInfo, Type type, Attribute attribute) in AttributeUsageHelper.GettAllAttributesOfFieldsOf(classType))
+                foreach ((MemberInfo memberInfo, Type type, Attribute attribute) in AttributeUsageHelper.GettAllAttributesOfMembersOf(classType))
                 {
                     if (checkers.TryGetValue(attribute.GetType(), out (AttributeTargets targets, Action<Type, string> checker) value))
                     {
-                        // Check if has the proper flag
-                        if ((value.targets & AttributeTargets.Field) != 0)
-                            value.checker(fieldInfo.FieldType, $"Field {fieldInfo.Name} in {type.Name} class");
+                        switch (memberInfo.MemberType)
+                        {
+                            case MemberTypes.Field:
+                                if ((value.targets & AttributeTargets.Field) != 0)
+                                    value.checker(((FieldInfo)memberInfo).FieldType, $"Field {memberInfo.Name} in {type.Name} class");
+                                break;
+                            case MemberTypes.Property:
+                                if ((value.targets & AttributeTargets.Property) != 0)
+                                    value.checker(((PropertyInfo)memberInfo).PropertyType, $"Property {memberInfo.Name} in {type.Name} class");
+                                break;
+                            case MemberTypes.Method:
+                                if ((value.targets & AttributeTargets.Method) != 0)
+                                    value.checker(((MethodInfo)memberInfo).ReturnType, $"Method {memberInfo.Name} in {type.Name} class");
+                                break;
+                        }
                     }
                 }
             }
