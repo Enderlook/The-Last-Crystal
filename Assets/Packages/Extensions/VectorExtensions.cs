@@ -104,7 +104,7 @@ namespace AdditionalExtensions
         public static Vector2 ProjectileMotion(this Vector2 origin, Vector2 target, float t)
         {
             float Vx(float x) => x / (Mathf.Cos(origin.AngleByCos(target) / 180 * Mathf.PI) * t);
-            float Vy(float y) => y / (Mathf.Abs(Mathf.Sin(origin.AngleBySin(target) / 180 * Mathf.PI)) * t) + .5f * Mathf.Abs(Physics2D.gravity.y);
+            float Vy(float y) => y / Mathf.Abs(Mathf.Sin(origin.AngleBySin(target) / 180 * Mathf.PI)) + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
 
             Vector2 magnitude = target - origin;
             Vector2 distX = magnitude;
