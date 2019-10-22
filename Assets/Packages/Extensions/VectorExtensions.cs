@@ -32,7 +32,7 @@ namespace AdditionalExtensions
         public static float AngleByTg(this Vector2 origin, Vector2 target)
         {
             float Atg(float tg) => Mathf.Atan(tg) * 180 / Mathf.PI;
-            Vector2 tO = target - origin;
+            Vector2 tO = origin.XYDistance(target);
             float tan = tO.y / tO.x;
             return Mathf.Round(Atg(tan));
         }
@@ -46,7 +46,7 @@ namespace AdditionalExtensions
         public static float AngleBySin(this Vector2 origin, Vector2 target)
         {
             float Asin(float s) => Mathf.Asin(s) * 180 / Mathf.PI;
-            Vector2 tO = target - origin;
+            Vector2 tO = origin.XYDistance(target);
             float magnitude = tO.magnitude;
             float sin = tO.y / magnitude;
             return Mathf.Round(Asin(sin));
@@ -61,7 +61,7 @@ namespace AdditionalExtensions
         public static float AngleByCos(this Vector2 origin, Vector2 target)
         {
             float Acos(float c) => Mathf.Acos(c) * 180 / Mathf.PI;
-            Vector2 tO = target - origin;
+            Vector2 tO = origin.XYDistance(target);
             float magnitude = tO.magnitude;
             float cos = tO.x / magnitude;
             float result = cos >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
