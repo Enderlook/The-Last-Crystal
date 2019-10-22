@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor.Callbacks;
 using UnityEditorHelper;
 
-namespace AdditionalAttributes.Internal
+namespace AdditionalAttributes.Internal.Testing
 {
     public static class AttributeUsageDataTypeAttributeTesting
     {

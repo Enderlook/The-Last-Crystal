@@ -4,7 +4,7 @@ using UnityEditorHelper;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace AdditionalAttributes.Drawer
+namespace AdditionalAttributes.Internal.Drawer
 {
     [CustomPropertyDrawer(typeof(RangeAttribute))]
     public class RangeAttributeDrawer : PropertyDrawer

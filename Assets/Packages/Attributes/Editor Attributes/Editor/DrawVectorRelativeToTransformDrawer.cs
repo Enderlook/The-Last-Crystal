@@ -5,7 +5,7 @@ using System;
 using AdditionalExtensions;
 using UnityEditorHelper;
 
-namespace AdditionalAttributes.Drawer
+namespace AdditionalAttributes.Internal.Drawer
 {
     [CustomPropertyDrawer(typeof(DrawVectorRelativeToTransformAttribute)), InitializeOnLoad]
     public class DrawVectorRelativeToTransformEditor : PropertyDrawer

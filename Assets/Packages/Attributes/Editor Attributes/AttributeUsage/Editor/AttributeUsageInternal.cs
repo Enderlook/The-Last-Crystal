@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEditorHelper;
 
-namespace AdditionalAttributes.Internal
+namespace AdditionalAttributes.Internal.Testing
 {
     public static class AttributeUsageHelper
     {

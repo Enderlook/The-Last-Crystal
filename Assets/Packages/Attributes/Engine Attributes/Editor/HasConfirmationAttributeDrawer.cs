@@ -1,11 +1,10 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
+using AdditionalExtensions;
 using UnityEditor;
 using UnityEditorHelper;
 using UnityEngine;
-using AdditionalExtensions;
 
-namespace AdditionalAttributes
+namespace AdditionalAttributes.Internal.Drawer
 {
     [CustomPropertyDrawer(typeof(HasConfirmationFieldAttribute))]
     public class HasConfirmationAttributeDrawer : PropertyDrawer
