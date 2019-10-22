@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditorHelper;
+using UnityEngine;
+using System.Linq;
 
 namespace AdditionalAttributes.Internal.Testing
 {
@@ -58,5 +60,44 @@ namespace AdditionalAttributes.Internal.Testing
         {
             return GettAllAttributesOfMembersOf(type, (e, b) => e.GetMethods(b));
         }
+
+        private static readonly Type[] unityDefaultNonPrimitiveSerilizables = new Type[]
+        {
+            typeof(Vector2), typeof(Vector3), typeof(Vector4),
+            typeof(Rect), typeof(Quaternion), typeof(Matrix4x4),
+            typeof(Color), typeof(Color32), typeof(LayerMask),
+            typeof(AnimationCurve), typeof(Gradient), typeof(RectOffset), typeof(GUIStyle)
+        };
+
+        public static bool CanBeSerializedByUnity(this FieldInfo fieldInfo)
+        {
+            if (fieldInfo.IsPublic || fieldInfo.GetCustomAttribute<SerializeField>() != null)
+            {
+                if (fieldInfo.IsStatic || fieldInfo.IsInitOnly || fieldInfo.IsLiteral)
+                    return false;
+
+                Type type = fieldInfo.FieldType;
+
+                if (type.IsArray)
+                    type = type.GetElementType();
+
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+                    type = type.GetGenericArguments()[0];
+
+                if (type.IsAbstract || type.IsGenericType)
+                    return false;
+
+                if (type.IsPrimitive || type.IsEnum || type.IsValueType || unityDefaultNonPrimitiveSerilizables.Contains(type))
+                    return true;
+
+                if (type.IsSubclassOf(typeof(UnityEngine.Object)))
+                    return true;
+
+                if (type.GetCustomAttributes<SerializableAttribute>() != null)
+                    return true;
+            }
+            return false;
+        }
+
     }
 }
