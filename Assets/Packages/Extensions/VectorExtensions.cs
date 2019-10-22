@@ -63,9 +63,8 @@ namespace AdditionalExtensions
             float Acos(float c) => Mathf.Acos(c) * 180 / Mathf.PI;
             Vector2 tO = target - origin;
             float magnitude = tO.magnitude;
-            Vector2 dir = tO / magnitude;
             float cos = tO.x / magnitude;
-            float result = dir.x >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
+            float result = cos >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
             return result;
         }
 
@@ -80,15 +79,11 @@ namespace AdditionalExtensions
             float Vx(float x) => x / Mathf.Cos(origin.AngleByCos(target) / 180 * Mathf.PI);
             float Vy(float y) => y / Mathf.Abs(Mathf.Sin(origin.AngleBySin(target) / 180 * Mathf.PI)) + .5f * Mathf.Abs(Physics2D.gravity.y);
 
-            Vector2 magnitude = target - origin;
-            Vector2 distX = magnitude;
-            distX.y = 0;
-
-            float hY = magnitude.y;
-            float wX = distX.magnitude;
-
-            Vector2 v0 = distX.normalized;
-            v0 *= Vx(wX);
+            float hY = origin.YDistance(target);
+            float dX = origin.XDistance(target);
+            
+            Vector2 v0 = new Vector2(dX, 0).normalized;
+            v0 *= Vx(Mathf.Abs(dX));
             v0.y = Vy(hY);
 
             return v0;
@@ -104,17 +99,13 @@ namespace AdditionalExtensions
         public static Vector2 ProjectileMotion(this Vector2 origin, Vector2 target, float t)
         {
             float Vx(float x) => x / (Mathf.Cos(origin.AngleByCos(target) / 180 * Mathf.PI) * t);
-            float Vy(float y) => y / Mathf.Abs(Mathf.Sin(origin.AngleBySin(target) / 180 * Mathf.PI)) + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
+            float Vy(float y) => y / (Mathf.Abs(Mathf.Sin(origin.AngleBySin(target) / 180 * Mathf.PI)) * t) + .5f * Mathf.Abs(Physics2D.gravity.y) * t;
 
-            Vector2 magnitude = target - origin;
-            Vector2 distX = magnitude;
-            distX.y = 0;
+            float hY = origin.YDistance(target);
+            float dX = origin.XDistance(target);
 
-            float hY = magnitude.y;
-            float wX = distX.magnitude;
-
-            Vector2 v0 = distX.normalized;
-            v0 *= Vx(wX);
+            Vector2 v0 = new Vector2(dX, 0).normalized;
+            v0 *= Vx(Mathf.Abs(dX));
             v0.y = Vy(hY);
 
             return v0;
