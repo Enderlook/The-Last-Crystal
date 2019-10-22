@@ -135,6 +135,22 @@ namespace AdditionalExtensions
         /// <returns><seealso cref="float"/> value.</returns>
         public static float ZDistance(this Vector3 source, Vector3 target) => target.z - source.z;
 
+        /// <summary>
+        /// Returns the distance between a and b on the X - Y axis.
+        /// </summary>
+        /// <param name="source">Start point.</param>
+        /// <param name="target">End point.</param>
+        /// <returns><seealso cref="Vector2"/> with the distance.</returns>
+        public static Vector2 XYDistance(this Vector2 source, Vector2 target) => target - source;
+
+        /// <summary>
+        /// Returns the distance between a and b on the X - Y - Z axis.
+        /// </summary>
+        /// <param name="source">Start point.</param>
+        /// <param name="target">End point.</param>
+        /// <returns><seealso cref="Vector3"/> with the distance.</returns>
+        public static Vector3 XYZDistance(this Vector3 source, Vector3 target) => target - source;
+
         public static Vector2Int ToVector2Int(this Vector2 source) => new Vector2Int((int)source.x, (int)source.y);
         public static Vector2Int ToVector2Int(this Vector3 source) => ToVector2Int(source);
         public static Vector3Int ToVector3Int(this Vector3 source) => new Vector3Int((int)source.x, (int)source.y, (int)source.z);
