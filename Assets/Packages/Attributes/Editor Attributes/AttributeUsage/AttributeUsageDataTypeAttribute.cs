@@ -80,7 +80,7 @@ namespace AdditionalAttributes
                 if (types == null)
                 {
                     // Check
-                    if (checkingFlags.HasFlag(CheckingFlags.IncludeEnumerableTypes))
+                    if ((checkingFlags & CheckingFlags.IncludeEnumerableTypes) != 0)
                     {
                         int length = basicTypes.Length;
                         types = new Type[length * 3];
