@@ -156,18 +156,34 @@ namespace AdditionalExtensions
         /// <summary>
         /// Returns the distance between a and b on the X axis.
         /// </summary>
-        /// <param name="source">Start point.</param>
-        /// <param name="target">End point.</param>
+        /// <param name="source"><seealso cref="Vector2"/>Start point.</param>
+        /// <param name="target"><seealso cref="Vector2"/>End point.</param>
         /// <returns><seealso cref="float"/> value.</returns>
         public static float XDistance(this Vector2 source, Vector2 target) => target.x - source.x;
 
         /// <summary>
+        /// Returns the distance between a and b on the X axis.
+        /// </summary>
+        /// <param name="source"><seealso cref="Vector3"/>Start point.</param>
+        /// <param name="target"><seealso cref="Vector3"/>End point.</param>
+        /// <returns><seealso cref="float"/> value.</returns>
+        public static float XDistance(this Vector3 source, Vector3 target) => target.x - source.x;
+
+        /// <summary>
         /// Returns the distance between a and b on the Y axis.
         /// </summary>
-        /// <param name="source">Start point.</param>
-        /// <param name="target">End point.</param>
+        /// <param name="source"><seealso cref="Vector2"/>Start point.</param>
+        /// <param name="target"><seealso cref="Vector2"/>End point.</param>
         /// <returns><seealso cref="float"/> value.</returns>
         public static float YDistance(this Vector2 source, Vector2 target) => target.y - source.y;
+
+        /// <summary>
+        /// Returns the distance between a and b on the Y axis.
+        /// </summary>
+        /// <param name="source"><seealso cref="Vector3"/>Start point.</param>
+        /// <param name="target"><seealso cref="Vector3"/>End point.</param>
+        /// <returns><seealso cref="float"/> value.</returns>
+        public static float YDistance(this Vector3 source, Vector3 target) => target.y - source.y;
 
         /// <summary>
         /// Returns the distance between a and b on the Z axis.
