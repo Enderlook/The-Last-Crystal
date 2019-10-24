@@ -1,7 +1,7 @@
 ﻿using AdditionalAttributes.AttributeUsage;
-using AdditionalAttributes.PostCompiling.Execute.Internal;
+using AdditionalAttributes.PostCompiling.Internal;
 
-namespace AdditionalAttributes.PostCompiling.Execute
+namespace AdditionalAttributes.PostCompiling
 {
     /// <summary>
     /// Executes the method decorated by this attribute each time Unity compiles code.<br>

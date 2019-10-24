@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using AdditionalAttributes.AttributeUsage;
-using AdditionalAttributes.PostCompiling.Execute.Internal;
+using AdditionalAttributes.PostCompiling.Internal;
 
-namespace AdditionalAttributes.PostCompiling.Execute
+namespace AdditionalAttributes.PostCompiling
 {
 
     /// <summary>

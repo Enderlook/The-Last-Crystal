@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdditionalAttributes.PostCompiling.Execute.Internal
+namespace AdditionalAttributes.PostCompiling.Internal
 {
     public abstract class ExecuteOnEachWhenScriptsReloads : Attribute
     {
