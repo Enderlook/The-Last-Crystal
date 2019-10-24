@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes.AttributeUsage
 {
-    [AttributeUsageRequireDataType(typeof(Attribute), checkingFlags = AttributeUsageHelper.CheckingFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = AttributeUsageHelper.TypeFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageMethodAttribute : Attribute
     {
@@ -59,7 +59,7 @@ namespace AdditionalAttributes.AttributeUsage
         /// <summary>
         /// Additional checking rules.
         /// </summary>
-        public AttributeUsageHelper.CheckingFlags checkingFlags;
+        public AttributeUsageHelper.TypeFlags checkingFlags;
 
         private readonly Type[] basicTypes;
 
@@ -82,11 +82,11 @@ namespace AdditionalAttributes.AttributeUsage
         }
 
 #if UNITY_EDITOR
-        private HashSet<Type> Types => types ?? (types = AttributeUsageHelper.GetHashsetTypes(basicTypes, checkingFlags));
+        private HashSet<Type> Types => types ?? (types = AttributeUsageHelper.GetHashsetTypes(basicTypes, false));
         private HashSet<Type> types;
 
         private string allowedTypes;
-        private string AllowedTypes => allowedTypes ?? (allowedTypes = AttributeUsageHelper.GetTextTypes(types, checkingFlags));
+        private string AllowedTypes => allowedTypes ?? (allowedTypes = AttributeUsageHelper.GetTextTypes(types, checkingFlags, false));
 
         private readonly string messageBase = $"According to {nameof(AttributeUsageMethodAttribute)},";
 
@@ -106,7 +106,7 @@ namespace AdditionalAttributes.AttributeUsage
                         Debug.LogException(new ArgumentException($"{GetMessageInit()} a return type must be {typeof(void).Name}. {methodInfo.Name} is {type} type."));
                 }
                 else if (parameterType == ParameterMode.Common)
-                    AttributeUsageHelper.CheckContains(nameof(AttributeUsageMethodAttribute), Types, checkingFlags, AllowedTypes, type, attributeName, "Return Type");
+                    AttributeUsageHelper.CheckContains(nameof(AttributeUsageMethodAttribute), Types, checkingFlags, false, AllowedTypes, type, attributeName, "Return Type");
                 else
                     Debug.LogException(new ArgumentException($"{nameof(AttributeUsageMethodAttribute)} can only have as {nameof(parameterType)} {nameof(ParameterMode.Common)} or {nameof(ParameterMode.VoidOrNone)} if used with {nameof(parameterNumber)} 0. Attribute in {attributeName} has a {nameof(parameterNumber)} 0 but {nameof(parameterType)} {parameterType}."));
             }
@@ -181,7 +181,7 @@ namespace AdditionalAttributes.AttributeUsage
                 }
 
                 if (Types.Count != 0) // It 0, any type is allowed
-                    AttributeUsageHelper.CheckContains(nameof(AttributeUsageMethodAttribute), Types, checkingFlags, AllowedTypes, parameterInfo.ParameterType, $"{attributeName} parameter {parameterInfo.Name} in position {parameterInfo.Position}", $"Parameter");
+                    AttributeUsageHelper.CheckContains(nameof(AttributeUsageMethodAttribute), Types, checkingFlags, false, AllowedTypes, parameterInfo.ParameterType, $"{attributeName} parameter {parameterInfo.Name} in position {parameterInfo.Position}", $"Parameter");
             }
         }
     }

@@ -4,7 +4,7 @@ using AdditionalAttributes.AttributeUsage.Internal;
 
 namespace AdditionalAttributes.AttributeUsage
 {
-    [AttributeUsageRequireDataType(typeof(Attribute), checkingFlags = AttributeUsageHelper.CheckingFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = AttributeUsageHelper.TypeFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageRequireDataTypeAttribute : Attribute
     {
@@ -13,24 +13,36 @@ namespace AdditionalAttributes.AttributeUsage
         /// <summary>
         /// Additional checking rules.
         /// </summary>
-        public AttributeUsageHelper.CheckingFlags checkingFlags = AttributeUsageHelper.CheckingFlags.IncludeEnumerableTypes;
+        public AttributeUsageHelper.TypeFlags typeFlags;
+
+        /// <summary>
+        /// If <see langword="true"/>, <see cref="Types"/> will be forbidden types (blacklist).<br>
+        /// If <see langword="false"/>, they will be the only allowed types (white list).<br>
+        /// </summary>
+        public bool isBlackList;
+
+        /// <summary>
+        /// If <see langword="true"/>, it will also check for array o list versions of types.<br>
+        /// Useful because Unity <see cref="PropertyDrawer"/> are draw on each element of an array or list <see cref="SerializedProperty"/>.
+        /// </summary>
+        public bool includeEnumerableTypes;
 
         /// <summary>
         /// Each time Unity compile script, they will be analyzed to check if the attribute is being used in proper DataTypes.
         /// </summary>
-        /// <param name="types">Data types allowed. Use <see cref="CheckingFlags.IsBlackList"/> in <see cref="checkingFlags"/> to become it forbidden data types.</param>
+        /// <param name="types">Data types allowed. Use <see cref="CheckingFlags.IsBlackList"/> in <see cref="typeFlags"/> to become it forbidden data types.</param>
         public AttributeUsageRequireDataTypeAttribute(params Type[] types) => basicTypes = types;
 
 #if UNITY_EDITOR
-        private HashSet<Type> Types => types ?? (types = AttributeUsageHelper.GetHashsetTypes(basicTypes, checkingFlags));
+        private HashSet<Type> Types => types ?? (types = AttributeUsageHelper.GetHashsetTypes(basicTypes, includeEnumerableTypes));
         private HashSet<Type> types;
 
         private string allowedTypes;
-        private string AllowedTypes => allowedTypes ?? (allowedTypes = AttributeUsageHelper.GetTextTypes(types, checkingFlags));
+        private string AllowedTypes => allowedTypes ?? (allowedTypes = AttributeUsageHelper.GetTextTypes(Types, typeFlags, isBlackList));
 
         public void CheckAllowance(Type toCheckType, string toCheckName, string attributeName)
         {
-            AttributeUsageHelper.CheckContains(nameof(AttributeUsageRequireDataTypeAttribute), Types, checkingFlags, AllowedTypes, toCheckType, attributeName, toCheckName);
+            AttributeUsageHelper.CheckContains(nameof(AttributeUsageRequireDataTypeAttribute), Types, typeFlags, isBlackList, AllowedTypes, toCheckType, attributeName, toCheckName);
         }
     }
 #endif

@@ -8,40 +8,31 @@ namespace AdditionalAttributes.AttributeUsage.Internal
 {
     public static class AttributeUsageHelper
     {
+        /// <summary>
+        /// Determine relation of types to look for.
+        /// </summary>
         [Flags]
-        public enum CheckingFlags
+        public enum TypeFlags
         {
             /// <summary>
-            /// Nothing.
+            /// It must check for the same exact type.
             /// </summary>
-            None = 0,
-
-            /// <summary>
-            /// If used, <see cref="Types"/> will be forbidden types (blacklist).<br>
-            /// If not used, they will be the only allowed types (white list).<br>
-            /// </summary>
-            IsBlackList = 1 << 1,
-
-            /// <summary>
-            /// If used, it will also check for array o list versions of types.<br>
-            /// Useful because Unity <see cref="PropertyDrawer"/> are draw on each element of an array or list <see cref="SerializedProperty"/>.<br>
-            /// </summary>
-            IncludeEnumerableTypes = 1 << 2,
+            ExactMatch = 0,
 
             /// <summary>
             /// Whenever it should check if the type is a subclass of one of the listed types.
             /// </summary>
-            CheckSubclassTypes = 1 << 3,
+            CheckSubclassTypes = 1 << 0,
 
             /// <summary>
-            /// Whenever it should check if the type is  superclass of one of the listed types.
+            /// Whenever it should check if the type is superclass of one of the listed types.
             /// </summary>
-            CheckSuperclassTypes = 1 << 4,
+            CheckSuperclassTypes = 1 << 1,
 
             /// <summary>
             /// Whenever it should check for assignable from type to one of the listed types.
             /// </summary>
-            CheckIsAssignableTypes = 1 << 5,
+            CheckIsAssignableTypes = 1 << 2,
 
             /// <summary>
             /// <see cref="CheckSubclassTypes"/> or <see cref="CheckIsAssignableTypes"/>.
@@ -51,18 +42,24 @@ namespace AdditionalAttributes.AttributeUsage.Internal
             /// <summary>
             /// Whenever it should check if type can be assigned to one of the listed types.
             /// </summary>
-            CheckCanBeAssignedTypes = 1 << 6,
+            CheckCanBeAssignedTypes = 1 << 3,
 
             /// <summary>
             /// <see cref="CheckIsAssignableTypes"/> or <see cref="CheckCanBeAssignedTypes"/>.
             /// </summary>
-
             CheckSuperClassOrCanBeAssigned = CheckIsAssignableTypes | CheckCanBeAssignedTypes,
         };
 
-        public static HashSet<Type> GetHashsetTypes(Type[] types, CheckingFlags checkingFlags)
+        /// <summary>
+        /// Produces a <see cref="HashSet{T}"/> with <paramref name="types"/>.
+        /// </summary>
+        /// <param name="types">Array of <see cref="Type"/> to use.</param>
+        /// <param name="includeEnumerableTypes">If <see langword="true"/>, it will also check for array o list versions of types.<br>
+        /// Useful because Unity <see cref="PropertyDrawer"/> are draw on each element of an array or list <see cref="SerializedProperty"/></param>
+        /// <returns><see cref="HashSet{T}"/> with all types to check.</returns>
+        public static HashSet<Type> GetHashsetTypes(Type[] types, bool includeEnumerableTypes = false)
         {
-            if ((checkingFlags & CheckingFlags.IncludeEnumerableTypes) != 0)
+            if (includeEnumerableTypes)
             {
                 HashSet<Type> hashSet = new HashSet<Type>();
                 for (int i = 0; i < types.Length; i++)
@@ -79,25 +76,44 @@ namespace AdditionalAttributes.AttributeUsage.Internal
                 return new HashSet<Type>(types);
         }
 
-        public static string GetTextTypes(HashSet<Type> types, CheckingFlags checkingFlags)
+        /// <summary>
+        /// Produce a <see cref="string"/> with all elements of <paramref name="types"/> and include specific text from <paramref name="checkingFlags"/>.
+        /// </summary>
+        /// <param name="types">Elements to include in the result.</param>
+        /// <param name="checkingFlags">Additional phrases.</param>
+        /// <param name="isBlackList">Whener the result forbbid instead of require the <paramref name="types"/>.</param>
+        /// <returns>A <see cref="string"/> with all elements.</returns>
+        public static string GetTextTypes(IEnumerable<Type> types, TypeFlags checkingFlags, bool isBlackList = false)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder
-                .Append((checkingFlags & CheckingFlags.IsBlackList) != 0 ? "doesn't" : "only")
+                .Append(isBlackList ? "doesn't" : "only")
                 .Append(" accept types of ")
                 .Append(string.Join(", ", types.Select(e => e.Name)));
-            if ((checkingFlags & CheckingFlags.CheckSubclassTypes) != 0)
+            if ((checkingFlags & TypeFlags.CheckSubclassTypes) != 0)
                 stringBuilder.Append(", their subclasses");
-            if ((checkingFlags & CheckingFlags.CheckSuperclassTypes) != 0)
+            if ((checkingFlags & TypeFlags.CheckSuperclassTypes) != 0)
                 stringBuilder.Append(", their superclasses");
-            if ((checkingFlags & CheckingFlags.CheckSuperclassTypes) != 0)
+            if ((checkingFlags & TypeFlags.CheckSuperclassTypes) != 0)
                 stringBuilder.Append(", types assignable to them");
-            if ((checkingFlags & CheckingFlags.CheckCanBeAssignedTypes) != 0)
+            if ((checkingFlags & TypeFlags.CheckCanBeAssignedTypes) != 0)
                 stringBuilder.Append(", types assignable from them");
             return stringBuilder.ToString();
         }
 
-        public static void CheckContains(string attributeCheckerName, HashSet<Type> types, CheckingFlags checkingFlags, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
+        /// <summary>
+        /// Check if <paramref name="toCheckType"/> is in <paramref name="types"/> according to <paramref name="typeFlags"/> and <paramref name="isBlackList"/>.
+        /// If not found, it will log an exception in Unity.
+        /// </summary>
+        /// <param name="attributeCheckerName">Name of the attribute checker.</param>
+        /// <param name="types"><see cref="Type"/>s target.</param>
+        /// <param name="typeFlags">Additional rules to between <paramref name="types"/> and <paramref name="toCheckType"/>.</param>
+        /// <param name="isBlackList">If <see langword="true"/> <paramref name="toCheckType"/> must not be related with <paramref name="types"/>.</param>
+        /// <param name="allowedTypes">String version of <paramref name="types"/>.</param>
+        /// <param name="toCheckType"><see cref="Type"/> to be checked.</param>
+        /// <param name="attributeName">Name of the current attribute which is being checked.</param>
+        /// <param name="toCheckName">Name of what is <paramref name="toCheckType"/> or where it was taken from (e.g: <c><see cref="System.Reflection.FieldInfo"/>.Name</c>.</param>
+        public static void CheckContains(string attributeCheckerName, HashSet<Type> types, TypeFlags typeFlags, bool isBlackList, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
         {
             bool contains = types.Contains(toCheckType);
 
@@ -118,17 +134,17 @@ namespace AdditionalAttributes.AttributeUsage.Internal
 
                 // Check if checkingFlags has the following flags
                 // We could use checkingFlags.HasFlag(flag), but it's ~10 times slower
-                if ((checkingFlags & CheckingFlags.CheckSubclassTypes) != 0)
+                if ((typeFlags & TypeFlags.CheckSubclassTypes) != 0)
                     Check((f, t) => f.IsSubclassOf(t));
-                if ((checkingFlags & CheckingFlags.CheckSuperclassTypes) != 0 && !contains)
+                if ((typeFlags & TypeFlags.CheckSuperclassTypes) != 0 && !contains)
                     Check((f, t) => t.IsSubclassOf(f));
-                if ((checkingFlags & CheckingFlags.CheckCanBeAssignedTypes) != 0 && !contains)
+                if ((typeFlags & TypeFlags.CheckCanBeAssignedTypes) != 0 && !contains)
                     Check((f, t) => f.IsAssignableFrom(t));
-                if ((checkingFlags & CheckingFlags.CheckIsAssignableTypes) != 0 && !contains)
+                if ((typeFlags & TypeFlags.CheckIsAssignableTypes) != 0 && !contains)
                     Check((f, t) => t.IsAssignableFrom(f));
             }
 
-            if (contains == ((checkingFlags & CheckingFlags.IsBlackList) != 0))
+            if (contains == isBlackList)
                 Debug.LogException(new ArgumentException($"According to {attributeCheckerName}, {attributeName} {allowedTypes}. {toCheckName} is {toCheckType.Name} type."));
         }
     }
