@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using UnityEditor.Callbacks;
-using UnityEditorHelper;
 
 namespace AdditionalAttributes.Internal.Testing
 {
@@ -10,17 +8,8 @@ namespace AdditionalAttributes.Internal.Testing
     {
         private static Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)> checkers = new Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)>();
 
-        [DidReloadScripts(1)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
-        private static void SetRules()
-        {
-            AssemblyHelper.SubscribeOnEachTypeLessEnums(GetAttributesAndTypes, 0);
-            AssemblyHelper.SubscribeOnEachTypeLessEnums(CheckClasses, 1);
-            AssemblyHelper.SubscribeOnEachFieldOfTypes(CheckFields, 1);
-            AssemblyHelper.SubscribeOnEachPropertyOfTypes(CheckProperties, 1);
-            AssemblyHelper.SubscribeOnEachMethodOfTypes(CheckMethodReturns, 1);
-        }
-
+        [ExecuteOnEachTypeWhenScriptsReloads(ExecuteOnEachTypeWhenScriptsReloads.TypeFlags.IsNonEnum, 0)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by AssemblyHelper.")]
         private static void GetAttributesAndTypes(Type type)
         {
             if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(AttributeUsageDataTypeAttribute), true) is AttributeUsageDataTypeAttribute attribute)
@@ -30,6 +19,8 @@ namespace AdditionalAttributes.Internal.Testing
             }
         }
 
+        [ExecuteOnEachTypeWhenScriptsReloads(ExecuteOnEachTypeWhenScriptsReloads.TypeFlags.IsNonEnum, 1)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by AssemblyHelper.")]
         private static void CheckClasses(Type type)
         {
             foreach (Attribute attribute in type.GetCustomAttributes())
@@ -54,8 +45,16 @@ namespace AdditionalAttributes.Internal.Testing
             }
         }
 
+        [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.EitherSerializableOrNotByUnity, 1)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by AssemblyHelper.")]
         private static void CheckFields(FieldInfo fieldInfo) => CheckSomething(fieldInfo, fieldInfo.FieldType, "Field");
+
+        [ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads(1)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by AssemblyHelper.")]
         private static void CheckProperties(PropertyInfo propertyInfo) => CheckSomething(propertyInfo, propertyInfo.PropertyType, "Property");
+
+        [ExecuteOnEachMethodOfEachTypeWhenScriptsReloads(1)]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by AssemblyHelper.")]
         private static void CheckMethodReturns(MethodInfo methodInfo) => CheckSomething(methodInfo, methodInfo.ReturnType, "Method return");
     }
 }

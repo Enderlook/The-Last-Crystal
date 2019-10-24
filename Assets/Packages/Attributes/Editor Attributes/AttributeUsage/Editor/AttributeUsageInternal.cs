@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using UnityEditorHelper;
-using UnityEngine;
 using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace AdditionalAttributes.Internal.Testing
 {
@@ -11,7 +10,7 @@ namespace AdditionalAttributes.Internal.Testing
     {
         public static IEnumerable<(Type type, T attribute)> GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<T>()
         {
-            foreach (Type type in AssemblyHelper.GetAllTypesOfPlayerAndEditorAssemblies(true))
+            foreach (Type type in AssemblyHelper.GetAllTypesOfPlayerAndEditorAssemblies())
             {
                 // Check if a class came from Attribute before using reflection because otherwise it would be a waste of performance
                 if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(T), true) is T attribute)

@@ -11,10 +11,8 @@ namespace AdditionalAttributes.Internal.Testing
     {
         private static readonly Dictionary<Type, List<HasConfirmationFieldAttribute>> typesAndAttributes = new Dictionary<Type, List<HasConfirmationFieldAttribute>>();
 
-        [DidReloadScripts(1)]
+        [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.SerializableByUnity, 0)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
-        private static void SetRules() => AssemblyHelper.SubscribeOnEachFieldOfTypes(GetFields, 0);
-
         private static void GetFields(FieldInfo fieldInfo)
         {
             if (fieldInfo.GetCustomAttribute<HasConfirmationFieldAttribute>() is HasConfirmationFieldAttribute attribute)
