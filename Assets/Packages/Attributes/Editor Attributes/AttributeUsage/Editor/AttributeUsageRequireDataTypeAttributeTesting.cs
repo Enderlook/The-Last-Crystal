@@ -5,7 +5,7 @@ using AdditionalAttributes.PostCompiling.Execute;
 
 namespace AdditionalAttributes.Internal.PostCompile
 {
-    public static class AttributeUsageDataTypeAttributeTesting
+    public static class AttributeUsageRequireDataTypeAttributeTesting
     {
         private static Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)> checkers = new Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)>();
 
@@ -13,7 +13,7 @@ namespace AdditionalAttributes.Internal.PostCompile
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by AssemblyHelper.")]
         private static void GetAttributesAndTypes(Type type)
         {
-            if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(AttributeUsageDataTypeAttribute), true) is AttributeUsageDataTypeAttribute attribute)
+            if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(AttributeUsageRequireDataTypeAttribute), true) is AttributeUsageRequireDataTypeAttribute attribute)
             {
                 AttributeUsageAttribute attributeUsageAttribute = type.GetCustomAttribute<AttributeUsageAttribute>();
                 checkers.Add(type, (attributeUsageAttribute?.ValidOn ?? AttributeTargets.All, (checkType, checkName) => attribute.CheckAllowance(checkType, checkName, type.Name)));

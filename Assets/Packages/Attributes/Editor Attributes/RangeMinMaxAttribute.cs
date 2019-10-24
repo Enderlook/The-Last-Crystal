@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
-    [AttributeUsageDataType(typeof(Vector2), typeof(Vector2Int), typeof(Range.RangeInt), typeof(RangeIntStep), typeof(RangeFloat), typeof(RangeFloatStep))]
+    [AttributeUsageRequireDataType(typeof(Vector2), typeof(Vector2Int), typeof(Range.RangeInt), typeof(RangeIntStep), typeof(RangeFloat), typeof(RangeFloatStep))]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class RangeMinMaxAttribute : RangeAttribute
     {

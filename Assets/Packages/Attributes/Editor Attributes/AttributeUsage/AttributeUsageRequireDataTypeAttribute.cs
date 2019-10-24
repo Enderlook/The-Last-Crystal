@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
-    [AttributeUsageDataType(typeof(Attribute), checkingFlags = CheckingFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), checkingFlags = CheckingFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
-    public sealed class AttributeUsageDataTypeAttribute : Attribute
+    public sealed class AttributeUsageRequireDataTypeAttribute : Attribute
     {
         [Flags]
         public enum CheckingFlags
@@ -68,7 +68,7 @@ namespace AdditionalAttributes
         /// Each time Unity compile script, they will be analyzed to check if the attribute is being used in proper DataTypes.
         /// </summary>
         /// <param name="types">Data types allowed. Use <see cref="CheckingFlags.IsBlackList"/> in <see cref="checkingFlags"/> to become it forbidden data types.</param>
-        public AttributeUsageDataTypeAttribute(params Type[] types) => basicTypes = types;
+        public AttributeUsageRequireDataTypeAttribute(params Type[] types) => basicTypes = types;
 
 #if UNITY_EDITOR
         /// <summary>
