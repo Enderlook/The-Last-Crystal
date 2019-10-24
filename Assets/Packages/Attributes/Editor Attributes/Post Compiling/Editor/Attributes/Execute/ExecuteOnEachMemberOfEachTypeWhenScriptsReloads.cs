@@ -5,11 +5,11 @@ using AdditionalAttributes.PostCompiling.Internal;
 
 namespace AdditionalAttributes.PostCompiling
 {
-
     /// <summary>
     /// Executes the method decorated by this attribute for each member on each <see cref="Type"/> compiled by Unity each time Unity compiles code.<br>
     /// The method to decorate must have the signature DoSomething(<see cref="Sytem.Reflection.MemberInfo"/>).
     /// </summary>
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, typeof(MemberInfo))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class ExecuteOnEachMemberOfEachTypeWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads

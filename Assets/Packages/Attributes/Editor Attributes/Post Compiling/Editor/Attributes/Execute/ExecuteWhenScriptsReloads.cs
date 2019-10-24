@@ -1,4 +1,5 @@
-﻿using AdditionalAttributes.AttributeUsage;
+﻿using System.Reflection;
+using AdditionalAttributes.AttributeUsage;
 using AdditionalAttributes.PostCompiling.Internal;
 
 namespace AdditionalAttributes.PostCompiling
@@ -7,6 +8,7 @@ namespace AdditionalAttributes.PostCompiling
     /// Executes the method decorated by this attribute each time Unity compiles code.<br>
     /// The method to decorate must have the signature DoSomething().
     /// </summary>
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, parameterType = AttributeUsageMethodAttribute.ParameterMode.VoidOrNone)]
     public sealed class ExecuteWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads
     {

@@ -1,14 +1,15 @@
 ﻿using System;
+using System.Reflection;
 using AdditionalAttributes.AttributeUsage;
 using AdditionalAttributes.PostCompiling.Internal;
 
 namespace AdditionalAttributes.PostCompiling
 {
-
     /// <summary>
     /// Executes the method decorated by this attribute for each <see cref="Type"/> compiled by Unity each time Unity compiles code.<br>
     /// The method to decorate must have the signature DoSomething(<see cref="Type"/>).
     /// </summary>
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, typeof(Type))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class ExecuteOnEachTypeWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads

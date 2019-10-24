@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Reflection;
+using AdditionalAttributes.AttributeUsage;
 
 namespace AdditionalAttributes.PostCompiling.Internal
 {
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     public abstract class ExecuteOnEachWhenScriptsReloads : Attribute
     {
         /// <summary>
