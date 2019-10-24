@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using AdditionalAttributes.PostCompiling.Execute;
 
-namespace AdditionalAttributes.Internal.PostCompile
+namespace AdditionalAttributes.AttributeUsage.Internal
 {
     public static class AttributeUsageMethodAttributeTesting
     {

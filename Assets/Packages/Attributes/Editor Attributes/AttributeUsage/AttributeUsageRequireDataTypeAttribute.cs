@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AdditionalAttributes.Internal;
+using AdditionalAttributes.AttributeUsage.Internal;
 
-namespace AdditionalAttributes
+namespace AdditionalAttributes.AttributeUsage
 {
     [AttributeUsageRequireDataType(typeof(Attribute), checkingFlags = AttributeUsageHelper.CheckingFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]

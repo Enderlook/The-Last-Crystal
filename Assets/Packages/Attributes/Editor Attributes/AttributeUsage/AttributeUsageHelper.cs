@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace AdditionalAttributes.Internal
+namespace AdditionalAttributes.AttributeUsage.Internal
 {
     public static class AttributeUsageHelper
     {

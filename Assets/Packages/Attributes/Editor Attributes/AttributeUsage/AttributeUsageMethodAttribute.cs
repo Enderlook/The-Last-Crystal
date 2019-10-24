@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AdditionalAttributes.Internal;
+using AdditionalAttributes.AttributeUsage.Internal;
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace AdditionalAttributes.AttributeUsage
 {
     [AttributeUsageRequireDataType(typeof(Attribute), checkingFlags = AttributeUsageHelper.CheckingFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
