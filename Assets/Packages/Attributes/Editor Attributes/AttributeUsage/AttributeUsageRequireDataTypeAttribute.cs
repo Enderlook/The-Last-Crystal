@@ -62,6 +62,10 @@ namespace AdditionalAttributes
         };
 
         private readonly Type[] basicTypes;
+
+        /// <summary>
+        /// On <see langword="true"/>, to it will also check for the Array and List version of <see cref="basicTypes"/> types.
+        /// </summary>
         public CheckingFlags checkingFlags = CheckingFlags.IncludeEnumerableTypes;
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace AdditionalAttributes
         /// Data types to check.<br>
         /// Only available in Unity Editor.
         /// </summary>
-        public Type[] Types {
+        public HashSet<Type> Types {
             get {
                 if (types == null)
                 {
@@ -83,23 +87,23 @@ namespace AdditionalAttributes
                     if ((checkingFlags & CheckingFlags.IncludeEnumerableTypes) != 0)
                     {
                         int length = basicTypes.Length;
-                        types = new Type[length * 3];
+                        types = new HashSet<Type>();
                         for (int i = 0; i < length; i++)
                         {
                             Type type = basicTypes[i];
-                            types[i] = type;
-                            types[i + length] = typeof(List<>).MakeGenericType(type);
-                            types[i + length * 2] = type.MakeArrayType();
+                            Types.Add(type);
+                            Types.Add(typeof(List<>).MakeGenericType(type));
+                            Types.Add(type.MakeArrayType());
                         }
 
                     }
                     else
-                        types = basicTypes;
+                        types = new HashSet<Type>(basicTypes);
                 }
                 return types;
             }
         }
-        private Type[] types;
+        private HashSet<Type> types;
 
         private string errorMessage;
         private string ErrorMessage => errorMessage ?? (errorMessage = $"{(checkingFlags.HasFlag(CheckingFlags.IsBlackList) ? "doesn't accept" : "only accept")} types of {string.Join(", ", Types.Select(e => e.Name))}");
