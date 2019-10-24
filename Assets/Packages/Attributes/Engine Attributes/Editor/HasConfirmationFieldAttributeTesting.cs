@@ -29,7 +29,7 @@ namespace AdditionalAttributes.Internal.PostCompile
 
         private static readonly string errorMissingFieldMessage = $"{{0}} does not have a field of type {typeof(bool)} named {{1}} necessary for attribute {nameof(HasConfirmationFieldAttribute)}.";
 
-        [DidReloadScripts(3)]
+        [ExecuteWhenScriptsReloads(1)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
         private static void CheckFields()
         {

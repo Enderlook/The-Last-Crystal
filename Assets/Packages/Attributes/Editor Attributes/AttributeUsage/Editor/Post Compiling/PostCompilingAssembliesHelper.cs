@@ -78,9 +78,21 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachMethodOfTypes(Action<MethodInfo> action, int order) => SubscribeCallback(executeOnEachMethodOfTypes, action, order);
+        // Once
+        private static readonly Dictionary<int, Action> executeOnce = new Dictionary<int, Action>();
+        public static void SubscribeToExecuteOnce(Action action, int order) => SubscribeCallback(executeOnce, action, order);
+
 
 #pragma warning restore CS0649
         private static void SubscribeCallback<T>(Dictionary<int, Action<T>> dictionary, Action<T> action, int order)
+        {
+            if (dictionary.ContainsKey(order))
+                dictionary[order] += action;
+            else
+                dictionary.Add(order, action);
+        }
+
+        private static void SubscribeCallback(Dictionary<int, Action> dictionary, Action action, int order)
         {
             if (dictionary.ContainsKey(order))
                 dictionary[order] += action;
@@ -189,6 +201,13 @@ namespace AdditionalAttributes.PostCompiling.Internal
                     if (TryGetDelegate(methodInfo, out Action<MethodInfo> action))
                         SubscribeOnEachMethodOfTypes(action, loop);
                 }
+                else if (attribute is ExecuteWhenScriptsReloads executeWhenScriptsReloads)
+                {
+                    if (TryGetDelegate(methodInfo, out Action action))
+                    {
+                        SubscribeToExecuteOnce(action, loop);
+                    }
+                }
             }
         }
 
@@ -196,20 +215,31 @@ namespace AdditionalAttributes.PostCompiling.Internal
 
         private static bool TryGetDelegate<T>(MethodInfo methodInfo, out Action<T> action)
         {
+            action = (Action<T>)TryGetDelegate<Action<T>>(methodInfo);
+            return action != null;
+        }
+
+        private static bool TryGetDelegate(MethodInfo methodInfo, out Action action)
+        {
+            action = (Action)TryGetDelegate<Action>(methodInfo);
+            return action != null;
+        }
+
+        private static Delegate TryGetDelegate<T>(MethodInfo methodInfo)
+        {
             try
             {
-                /* At first sight `e => methodInfo.Invoke(null, new object[1] { e });` might seem faster
+                /* At first sight `e => methodInfo.Invoke(null, Array.Empty<object>());` might seem faster
                    But actually, CreateDelegate does amortize if called through MulticastDelegate multiple times, like we are going to do.*/
-                action = (Action<T>)methodInfo.CreateDelegate(typeof(Action<T>));
-                return true;
+                return methodInfo.CreateDelegate(typeof(T));
             }
             catch (ArgumentException e)
             {
-                Debug.Log(string.Format(ATTRIBUTE_METHOD_ERROR, methodInfo.Name, methodInfo.DeclaringType, typeof(T).Name));
-                Debug.LogException(new ArgumentException(string.Format(ATTRIBUTE_METHOD_ERROR, methodInfo.Name, methodInfo.DeclaringType, typeof(T).Name), e));
+                Type[] genericArguments = typeof(T).GetGenericArguments();
+                string signature = genericArguments.Length == 0 ? "nothing" : string.Join(", ", genericArguments.Select(a => a.Name));
+                Debug.LogException(new ArgumentException(string.Format(ATTRIBUTE_METHOD_ERROR, methodInfo.Name, methodInfo.DeclaringType, signature), e));
             }
-            action = null;
-            return false;
+            return null;
         }
 
         private static void ExecuteCallbacks()
@@ -232,6 +262,8 @@ namespace AdditionalAttributes.PostCompiling.Internal
                 ExecuteList(executeOnEachNonSerializableByUnityFieldOfTypes, fieldInfosNonSerializableByUnity);
                 ExecuteList(executeOnEachPropertyOfTypes, propertyInfos);
                 ExecuteList(executeOnEachMethodOfTypes, methodInfos);
+                if (executeOnce.TryGetValue(loop, out Action action))
+                    action();
             }
         }
 
