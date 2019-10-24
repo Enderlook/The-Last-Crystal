@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using AdditionalAttributes.PostCompiling.Execute;
 using AdditionalAttributes.PostCompiling.Internal;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 namespace AdditionalAttributes.Internal.PostCompile
@@ -14,7 +13,7 @@ namespace AdditionalAttributes.Internal.PostCompile
         private static readonly Dictionary<Type, List<HasConfirmationFieldAttribute>> typesAndAttributes = new Dictionary<Type, List<HasConfirmationFieldAttribute>>();
 
         [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.SerializableByUnity, 0)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper")]
         private static void GetFields(FieldInfo fieldInfo)
         {
             if (fieldInfo.GetCustomAttribute<HasConfirmationFieldAttribute>() is HasConfirmationFieldAttribute attribute)
@@ -30,7 +29,7 @@ namespace AdditionalAttributes.Internal.PostCompile
         private static readonly string errorMissingFieldMessage = $"{{0}} does not have a field of type {typeof(bool)} named {{1}} necessary for attribute {nameof(HasConfirmationFieldAttribute)}.";
 
         [ExecuteWhenScriptsReloads(1)]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper")]
         private static void CheckFields()
         {
             foreach (KeyValuePair<Type, List<HasConfirmationFieldAttribute>> classToCheck in typesAndAttributes)
