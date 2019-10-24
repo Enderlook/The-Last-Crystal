@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using AdditionalAttributes.PostCompiling.Execute.Internal;
 
 namespace AdditionalAttributes.PostCompiling.Execute
@@ -7,6 +8,7 @@ namespace AdditionalAttributes.PostCompiling.Execute
     /// Executes the method decorated by this attribute for each field on each <see cref="Type"/> compiled by Unity each time Unity compiles code.<br>
     /// The method to decorate must have the signature DoSomething(<see cref="Sytem.Reflection.FieldInfo"/>).
     /// </summary>
+    [AttributeUsageMethod(1, typeof(FieldInfo))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class ExecuteOnEachFieldOfEachTypeWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads
     {
