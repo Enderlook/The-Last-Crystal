@@ -122,33 +122,36 @@ namespace AdditionalAttributes.PostCompiling.Internal
         {
             foreach (Type classType in GetAllTypesOfPlayerAndEditorAssemblies())
             {
-                if (classType.IsEnum)
-                    enumTypes.Add(classType);
-                else
+                if (classType.GetCustomAttribute<DoNotInspectAttribute>() == null)
                 {
-                    nonEnumTypes.Add(classType);
-
-                    foreach (MemberInfo memberInfo in classType.GetMembers(bindingFlags))
+                    if (classType.IsEnum)
+                        enumTypes.Add(classType);
+                    else
                     {
-                        memberInfos.Add(memberInfo);
+                        nonEnumTypes.Add(classType);
 
-                        switch (memberInfo.MemberType)
+                        foreach (MemberInfo memberInfo in classType.GetMembers(bindingFlags))
                         {
-                            case MemberTypes.Field:
-                                FieldInfo fieldInfo = (FieldInfo)memberInfo;
-                                if (fieldInfo.CanBeSerializedByUnity())
-                                    fieldInfosSerializableByUnity.Add((FieldInfo)memberInfo);
-                                else
-                                    fieldInfosNonSerializableByUnity.Add((FieldInfo)memberInfo);
-                                break;
-                            case MemberTypes.Property:
-                                propertyInfos.Add((PropertyInfo)memberInfo);
-                                break;
-                            case MemberTypes.Method:
-                                MethodInfo methodInfo = (MethodInfo)memberInfo;
-                                methodInfos.Add(methodInfo);
-                                GetExecuteAttributes(methodInfo);
-                                break;
+                            memberInfos.Add(memberInfo);
+
+                            switch (memberInfo.MemberType)
+                            {
+                                case MemberTypes.Field:
+                                    FieldInfo fieldInfo = (FieldInfo)memberInfo;
+                                    if (fieldInfo.CanBeSerializedByUnity())
+                                        fieldInfosSerializableByUnity.Add((FieldInfo)memberInfo);
+                                    else
+                                        fieldInfosNonSerializableByUnity.Add((FieldInfo)memberInfo);
+                                    break;
+                                case MemberTypes.Property:
+                                    propertyInfos.Add((PropertyInfo)memberInfo);
+                                    break;
+                                case MemberTypes.Method:
+                                    MethodInfo methodInfo = (MethodInfo)memberInfo;
+                                    methodInfos.Add(methodInfo);
+                                    GetExecuteAttributes(methodInfo);
+                                    break;
+                            }
                         }
                     }
                 }
@@ -168,7 +171,6 @@ namespace AdditionalAttributes.PostCompiling.Internal
 
                     if (TryGetDelegate(methodInfo, out Action<Type> action))
                     {
-
                         if ((typeFlags & ExecuteOnEachTypeWhenScriptsReloads.TypeFlags.IsEnum) != 0)
                             SubscribeOnEachTypeEnum(action, loop);
                         if ((typeFlags & ExecuteOnEachTypeWhenScriptsReloads.TypeFlags.IsNonEnum) != 0)
@@ -289,9 +291,14 @@ namespace AdditionalAttributes.PostCompiling.Internal
             {
                 if (unityAssemblies.ContainsBy(e => e.name == assembly.GetName().Name))
                 {
-                    foreach (Type type in assembly.GetTypes())
+                    // This is much more expensive that ContainsBy so we put this bellow
+                    // Check if we should not read it
+                    if (assembly.GetCustomAttribute<DoNotInspectAttribute>() == null)
                     {
-                        yield return type;
+                        foreach (Type type in assembly.GetTypes())
+                        {
+                            yield return type;
+                        }
                     }
                 }
             }
