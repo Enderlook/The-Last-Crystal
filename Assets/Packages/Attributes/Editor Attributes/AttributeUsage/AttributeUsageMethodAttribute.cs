@@ -17,22 +17,22 @@ namespace AdditionalAttributes.AttributeUsage
         {
             /// <summary>
             /// Specifies an common parameter.<br>
-            /// If <see cref="ParameterNumber"/> is 0, this will be ignored.
+            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
             /// </summary>
             Common,
             /// <summary>
             /// Specifies an in parameter.<br>
-            /// If <see cref="ParameterNumber"/> is 0, this will be ignored.
+            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
             /// </summary>
             In,
             /// <summary>
             /// Specifies an out parameter.
-            /// If <see cref="ParameterNumber"/> is 0, this will be ignored.
+            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
             /// </summary>
             Out,
             /// <summary>
             /// Specifies a reference parameter.
-            /// If <see cref="ParameterNumber"/> is 0, this will be ignored.
+            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
             /// </summary>
             Ref,
             /// <summary>
@@ -49,7 +49,7 @@ namespace AdditionalAttributes.AttributeUsage
         ///     • 2 -> Second method parameter<br>
         ///     • 3 -> Third method parameter...
         /// </summary>
-        public int ParameterNumber { get; private set; }
+        private readonly int parameterNumber;
 
         /// <summary>
         /// Determine the type of parameter. Use <see cref="ParameterMode.VoidOrNone"/> to specify that it should not exist.
@@ -77,7 +77,7 @@ namespace AdditionalAttributes.AttributeUsage
         /// To specify that a parameter should not exist, use <see cref="ParameterMode.VoidOrNone"/> in <see cref="parameterType"/>.</param>
         public AttributeUsageMethodAttribute(int parameterNumber, params Type[] types)
         {
-            ParameterNumber = parameterNumber;
+            this.parameterNumber = parameterNumber;
             basicTypes = types;
         }
 
@@ -94,9 +94,9 @@ namespace AdditionalAttributes.AttributeUsage
         {
             string GetMessageInit() => $"{messageBase} {attributeName} require a method with";
 
-            if (ParameterNumber == 0)
+            if (parameterNumber == 0)
             {
-                Debug.Log(ParameterNumber);
+                Debug.Log(parameterNumber);
                 // Check return type
                 Type type = methodInfo.ReturnType;
 
@@ -108,7 +108,7 @@ namespace AdditionalAttributes.AttributeUsage
                 else if (parameterType == ParameterMode.Common)
                     AttributeUsageHelper.CheckContains(nameof(AttributeUsageMethodAttribute), Types, checkingFlags, AllowedTypes, type, attributeName, "Return Type");
                 else
-                    Debug.LogException(new ArgumentException($"{nameof(AttributeUsageMethodAttribute)} can only have as {nameof(parameterType)} {nameof(ParameterMode.Common)} or {nameof(ParameterMode.VoidOrNone)} if used with {nameof(ParameterNumber)} 0. Attribute in {attributeName} has a {nameof(ParameterNumber)} 0 but {nameof(parameterType)} {parameterType}."));
+                    Debug.LogException(new ArgumentException($"{nameof(AttributeUsageMethodAttribute)} can only have as {nameof(parameterType)} {nameof(ParameterMode.Common)} or {nameof(ParameterMode.VoidOrNone)} if used with {nameof(parameterNumber)} 0. Attribute in {attributeName} has a {nameof(parameterNumber)} 0 but {nameof(parameterType)} {parameterType}."));
             }
             else
             {
@@ -118,20 +118,20 @@ namespace AdditionalAttributes.AttributeUsage
                 ParameterInfo parameterInfo;
                 try
                 {
-                    parameterInfo = parameterInfos[ParameterNumber - 1];
+                    parameterInfo = parameterInfos[parameterNumber - 1];
                 }
                 catch (IndexOutOfRangeException e)
                 {
                     // Parameter doesn't exist, check if was on purpose
                     if (parameterType != ParameterMode.VoidOrNone)
-                        Debug.LogException(new ArgumentOutOfRangeException($"{GetMessageInit()} a {ParameterNumber}º parameter. {methodInfo.Name} only have {parameterInfos.Length} parameter{(parameterInfos.Length > 0 ? "s" : "")}.", e));
+                        Debug.LogException(new ArgumentOutOfRangeException($"{GetMessageInit()} a {parameterNumber}º parameter. {methodInfo.Name} only have {parameterInfos.Length} parameter{(parameterInfos.Length > 0 ? "s" : "")}.", e));
                     return;
                 }
 
                 // Check if should exist
                 if (parameterType == ParameterMode.VoidOrNone)
                 {
-                    Debug.LogException(new ArgumentException($"{GetMessageInit()} only {ParameterNumber - 1} parameter{(ParameterNumber - 1 > 0 ? "s" : "")}.")); // - 1 because the last parameter is ParameterMode.VoidOrNone
+                    Debug.LogException(new ArgumentException($"{GetMessageInit()} only {parameterNumber - 1} parameter{(parameterNumber - 1 > 0 ? "s" : "")}.")); // - 1 because the last parameter is ParameterMode.VoidOrNone
                     return;
                 }
 
