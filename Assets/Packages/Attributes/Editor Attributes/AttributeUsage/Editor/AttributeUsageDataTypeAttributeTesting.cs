@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using AdditionalAttributes.PostCompiling.Execute;
 
-namespace AdditionalAttributes.Internal.Testing
+namespace AdditionalAttributes.Internal.PostCompile
 {
     public static class AttributeUsageDataTypeAttributeTesting
     {

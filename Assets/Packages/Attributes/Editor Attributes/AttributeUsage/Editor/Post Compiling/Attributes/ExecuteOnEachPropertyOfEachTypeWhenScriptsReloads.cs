@@ -1,8 +1,7 @@
 ﻿using System;
-using AdditionalAttributes.Internal;
-using AdditionalAttributes.Internal.Testing;
+using AdditionalAttributes.PostCompiling.Execute.Internal;
 
-namespace AdditionalAttributes
+namespace AdditionalAttributes.PostCompiling.Execute
 {
 
     /// <summary>

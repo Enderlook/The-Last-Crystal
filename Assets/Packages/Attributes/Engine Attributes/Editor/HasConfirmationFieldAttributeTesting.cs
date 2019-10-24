@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AdditionalAttributes.PostCompiling.Execute;
+using AdditionalAttributes.PostCompiling.Internal;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace AdditionalAttributes.Internal.Testing
+namespace AdditionalAttributes.Internal.PostCompile
 {
     public static class HasConfirmationFieldAttributeTesting
     {

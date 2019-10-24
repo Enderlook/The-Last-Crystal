@@ -4,13 +4,13 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace AdditionalAttributes.Internal.Testing
+namespace AdditionalAttributes.PostCompiling.Internal
 {
-    public static class AttributeUsageHelper
+    public static class ReflectionHelper
     {
         public static IEnumerable<(Type type, T attribute)> GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<T>()
         {
-            foreach (Type type in AssemblyHelper.GetAllTypesOfPlayerAndEditorAssemblies())
+            foreach (Type type in PostCompilingAssembliesHelper.GetAllTypesOfPlayerAndEditorAssemblies())
             {
                 // Check if a class came from Attribute before using reflection because otherwise it would be a waste of performance
                 if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(T), true) is T attribute)

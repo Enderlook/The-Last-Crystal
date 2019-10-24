@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AdditionalAttributes.Internal.Testing;
+using AdditionalAttributes.PostCompiling.Execute;
+using AdditionalAttributes.PostCompiling.Execute.Internal;
 using AdditionalExtensions;
 using UnityEditor.Callbacks;
 using UnityEditor.Compilation;
-using Debug = UnityEngine.Debug;
+using UnityEngine;
 using UnityAssembly = UnityEditor.Compilation.Assembly;
 
-namespace AdditionalAttributes.Internal
+namespace AdditionalAttributes.PostCompiling.Internal
 {
-    public static class AssemblyHelper
+    public static class PostCompilingAssembliesHelper
     {
 #pragma warning disable CS0649
         // Type Less Enum
@@ -44,7 +45,7 @@ namespace AdditionalAttributes.Internal
         // Serializable By Unity Field
         private static readonly Dictionary<int, Action<FieldInfo>> executeOnEachSerializableByUnityFieldOfTypes = new Dictionary<int, Action<FieldInfo>>();
         /// <summary>
-        /// Subscribes <paramref name="action"/> to be executed on each field of each <see cref="Type"/> in the assemblies compiled by Unity which can be serialized by Unity (<seealso cref="AttributeUsageHelper.CanBeSerializedByUnity(FieldInfo)"/>).<br>
+        /// Subscribes <paramref name="action"/> to be executed on each field of each <see cref="Type"/> in the assemblies compiled by Unity which can be serialized by Unity (<seealso cref="ReflectionHelper.CanBeSerializedByUnity(FieldInfo)"/>).<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
@@ -53,7 +54,7 @@ namespace AdditionalAttributes.Internal
         // Non Serializable By Unity Field
         private static readonly Dictionary<int, Action<FieldInfo>> executeOnEachNonSerializableByUnityFieldOfTypes = new Dictionary<int, Action<FieldInfo>>();
         /// <summary>
-        /// Subscribes <paramref name="action"/> to be executed on each member of each <see cref="Type"/> in the assemblies compiled by Unity which can be serialized by Unity (<seealso cref="AttributeUsageHelper.CanBeSerializedByUnity(FieldInfo)"/>).<br>
+        /// Subscribes <paramref name="action"/> to be executed on each member of each <see cref="Type"/> in the assemblies compiled by Unity which can be serialized by Unity (<seealso cref="ReflectionHelper.CanBeSerializedByUnity(FieldInfo)"/>).<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
