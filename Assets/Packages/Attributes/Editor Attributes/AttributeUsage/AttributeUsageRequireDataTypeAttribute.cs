@@ -40,6 +40,12 @@ namespace AdditionalAttributes.AttributeUsage
         private string allowedTypes;
         private string AllowedTypes => allowedTypes ?? (allowedTypes = AttributeUsageHelper.GetTextTypes(Types, typeFlags, isBlackList));
 
+        /// <summary>
+        /// Unity Editor only.
+        /// </summary>
+        /// <param name="toCheckType"></param>
+        /// <param name="toCheckName"></param>
+        /// <param name="attributeName"></param>
         public void CheckAllowance(Type toCheckType, string toCheckName, string attributeName)
         {
             AttributeUsageHelper.CheckContains(nameof(AttributeUsageRequireDataTypeAttribute), Types, typeFlags, isBlackList, AllowedTypes, toCheckType, attributeName, toCheckName);

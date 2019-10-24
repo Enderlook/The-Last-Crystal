@@ -3,10 +3,10 @@ using UnityEditor;
 using UnityEditorHelper;
 using UnityEngine;
 
-namespace Serializables.Physics.Drawer
+namespace Serializables.Physics
 {
     [CustomPropertyDrawer(typeof(RayCasting), true), InitializeOnLoad]
-    public class RayCastingDrawer : PropertyDrawer
+    internal class RayCastingDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

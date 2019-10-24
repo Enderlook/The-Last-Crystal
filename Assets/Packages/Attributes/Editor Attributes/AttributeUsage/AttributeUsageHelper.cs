@@ -50,6 +50,7 @@ namespace AdditionalAttributes.AttributeUsage.Internal
             CheckSuperClassOrCanBeAssigned = CheckIsAssignableTypes | CheckCanBeAssignedTypes,
         };
 
+#if UNITY_EDITOR
         /// <summary>
         /// Produces a <see cref="HashSet{T}"/> with <paramref name="types"/>.
         /// </summary>
@@ -57,7 +58,7 @@ namespace AdditionalAttributes.AttributeUsage.Internal
         /// <param name="includeEnumerableTypes">If <see langword="true"/>, it will also check for array o list versions of types.<br>
         /// Useful because Unity <see cref="PropertyDrawer"/> are draw on each element of an array or list <see cref="SerializedProperty"/></param>
         /// <returns><see cref="HashSet{T}"/> with all types to check.</returns>
-        public static HashSet<Type> GetHashsetTypes(Type[] types, bool includeEnumerableTypes = false)
+        internal static HashSet<Type> GetHashsetTypes(Type[] types, bool includeEnumerableTypes = false)
         {
             if (includeEnumerableTypes)
             {
@@ -83,7 +84,7 @@ namespace AdditionalAttributes.AttributeUsage.Internal
         /// <param name="checkingFlags">Additional phrases.</param>
         /// <param name="isBlackList">Whener the result forbbid instead of require the <paramref name="types"/>.</param>
         /// <returns>A <see cref="string"/> with all elements.</returns>
-        public static string GetTextTypes(IEnumerable<Type> types, TypeFlags checkingFlags, bool isBlackList = false)
+        internal static string GetTextTypes(IEnumerable<Type> types, TypeFlags checkingFlags, bool isBlackList = false)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder
@@ -113,7 +114,7 @@ namespace AdditionalAttributes.AttributeUsage.Internal
         /// <param name="toCheckType"><see cref="Type"/> to be checked.</param>
         /// <param name="attributeName">Name of the current attribute which is being checked.</param>
         /// <param name="toCheckName">Name of what is <paramref name="toCheckType"/> or where it was taken from (e.g: <c><see cref="System.Reflection.FieldInfo"/>.Name</c>.</param>
-        public static void CheckContains(string attributeCheckerName, HashSet<Type> types, TypeFlags typeFlags, bool isBlackList, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
+        internal static void CheckContains(string attributeCheckerName, HashSet<Type> types, TypeFlags typeFlags, bool isBlackList, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
         {
             bool contains = types.Contains(toCheckType);
 
@@ -147,5 +148,6 @@ namespace AdditionalAttributes.AttributeUsage.Internal
             if (contains == isBlackList)
                 Debug.LogException(new ArgumentException($"According to {attributeCheckerName}, {attributeName} {allowedTypes}. {toCheckName} is {toCheckType.Name} type."));
         }
+#endif
     }
 }

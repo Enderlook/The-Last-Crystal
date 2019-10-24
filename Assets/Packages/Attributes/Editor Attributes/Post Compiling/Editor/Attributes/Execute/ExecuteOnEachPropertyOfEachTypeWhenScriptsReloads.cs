@@ -12,7 +12,7 @@ namespace AdditionalAttributes.PostCompiling
     [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, typeof(PropertyInfo))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public sealed class ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads
+    public sealed class ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads : BaseExecuteWhenScriptsReloads
     {
         /// <summary>
         /// Executes the method decorated by this attribute for each property on each <see cref="Type"/> compiled by Unity.<br>

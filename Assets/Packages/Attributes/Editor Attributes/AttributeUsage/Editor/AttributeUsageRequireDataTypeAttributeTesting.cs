@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using AdditionalAttributes.PostCompiling;
 
-namespace AdditionalAttributes.AttributeUsage.Internal
+namespace AdditionalAttributes.AttributeUsage
 {
-    public static class AttributeUsageRequireDataTypeAttributeTesting
+    internal static class AttributeUsageRequireDataTypeAttributeTesting
     {
         private static Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)> checkers = new Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)>();
 

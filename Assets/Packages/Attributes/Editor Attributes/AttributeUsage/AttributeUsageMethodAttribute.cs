@@ -90,6 +90,11 @@ namespace AdditionalAttributes.AttributeUsage
 
         private readonly string messageBase = $"According to {nameof(AttributeUsageMethodAttribute)},";
 
+        /// <summary>
+        /// Unity Editor only.
+        /// </summary>
+        /// <param name="methodInfo"></param>
+        /// <param name="attributeName"></param>
         public void CheckAllowance(MethodInfo methodInfo, string attributeName)
         {
             string GetMessageInit() => $"{messageBase} {attributeName} require a method with";

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace AdditionalAttributes.PostCompiling.Internal
+namespace AdditionalAttributes.PostCompiling
 {
-    public static class ReflectionHelper
+    internal static class ReflectionHelper
     {
         public static IEnumerable<(Type type, T attribute)> GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<T>()
         {

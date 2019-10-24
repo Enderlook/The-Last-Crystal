@@ -16,6 +16,11 @@ namespace AdditionalAttributes.AttributeUsage
         public AttributeUsageAccessibilityAttribute(BindingFlags bindingFlags) => this.bindingFlags = bindingFlags;
 
 #if UNITY_EDITOR
+        /// <summary>
+        /// Unity Editor only.
+        /// </summary>
+        /// <param name="memberInfo"></param>
+        /// <param name="attributeName"></param>
         public void CheckAllowance(MemberInfo memberInfo, string attributeName)
         {
             if (memberInfo.ReflectedType.GetMember(memberInfo.Name, bindingFlags).Length == 0)

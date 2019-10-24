@@ -4,10 +4,10 @@ using UnityEditor;
 using UnityEditorHelper;
 using UnityEngine;
 
-namespace AdditionalAttributes.Internal.Drawer
+namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(HasConfirmationFieldAttribute))]
-    public class HasConfirmationAttributeDrawer : PropertyDrawer
+    internal class HasConfirmationAttributeDrawer : PropertyDrawer
     {
         private bool confirm;
 

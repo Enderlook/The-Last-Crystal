@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AdditionalAttributes.PostCompiling.Internal;
 using AdditionalExtensions;
 using UnityEditor.Callbacks;
 using UnityEditor.Compilation;
 using UnityEngine;
 using UnityAssembly = UnityEditor.Compilation.Assembly;
 
-namespace AdditionalAttributes.PostCompiling.Internal
+namespace AdditionalAttributes.PostCompiling
 {
     public static class PostCompilingAssembliesHelper
     {
@@ -20,7 +21,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachTypeLessEnums(Action<Type> action, int order) => SubscribeCallback(executeOnEachTypeLessEnums, action, order);
         // Type Enum
         private static readonly Dictionary<int, Action<Type>> executeOnEachTypeEnum = new Dictionary<int, Action<Type>>();
@@ -29,7 +30,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachTypeEnum(Action<Type> action, int order) => SubscribeCallback(executeOnEachTypeEnum, action, order);
         // Member
         private static readonly Dictionary<int, Action<MemberInfo>> executeOnEachMemberOfTypes = new Dictionary<int, Action<MemberInfo>>();
@@ -38,7 +39,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachMemberOfTypes(Action<MemberInfo> action, int order) => SubscribeCallback(executeOnEachMemberOfTypes, action, order);
         // Serializable By Unity Field
         private static readonly Dictionary<int, Action<FieldInfo>> executeOnEachSerializableByUnityFieldOfTypes = new Dictionary<int, Action<FieldInfo>>();
@@ -47,7 +48,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachSerializableByUnityFieldOfTypes(Action<FieldInfo> action, int order) => SubscribeCallback(executeOnEachSerializableByUnityFieldOfTypes, action, order);
         // Non Serializable By Unity Field
         private static readonly Dictionary<int, Action<FieldInfo>> executeOnEachNonSerializableByUnityFieldOfTypes = new Dictionary<int, Action<FieldInfo>>();
@@ -56,7 +57,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachNonSerializableByUnityFieldOfTypes(Action<FieldInfo> action, int order) => SubscribeCallback(executeOnEachNonSerializableByUnityFieldOfTypes, action, order);
         // Property
         private static readonly Dictionary<int, Action<PropertyInfo>> executeOnEachPropertyOfTypes = new Dictionary<int, Action<PropertyInfo>>();
@@ -65,7 +66,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachPropertyOfTypes(Action<PropertyInfo> action, int order) => SubscribeCallback(executeOnEachPropertyOfTypes, action, order);
         // Method
         private static readonly Dictionary<int, Action<MethodInfo>> executeOnEachMethodOfTypes = new Dictionary<int, Action<MethodInfo>>();
@@ -74,14 +75,18 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
         /// </summary>
         /// <param name="action">Action to subscribe.</param>
-        /// <param name="order">Priority of this method to execute. After all other callbacks or lower order are executed on all targets this will be executed.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachMethodOfTypes(Action<MethodInfo> action, int order) => SubscribeCallback(executeOnEachMethodOfTypes, action, order);
         // Once
         private static readonly Dictionary<int, Action> executeOnce = new Dictionary<int, Action>();
+        /// <summary>
+        /// Subscribes <paramref name="action"/> to be executed once wen Unity ompiles assemblies.<br>
+        /// If possible, it's strongly advisable to use <see cref="ExecuteWhenScriptsReloads"/> attribute instead of this method.
+        /// </summary>
+        /// <param name="action">Action to subscribe.</param>
+        /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeToExecuteOnce(Action action, int order) => SubscribeCallback(executeOnce, action, order);
 
-
-#pragma warning restore CS0649
         private static void SubscribeCallback<T>(Dictionary<int, Action<T>> dictionary, Action<T> action, int order)
         {
             if (dictionary.ContainsKey(order))
@@ -110,7 +115,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
 
         [DidReloadScripts(2)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
-        private static void WalkThroughtPlayerAndEditorAssemblies()
+        private static void ExecuteAnalysis()
         {
             ScanAssemblies();
             ExecuteCallbacks();
@@ -160,7 +165,7 @@ namespace AdditionalAttributes.PostCompiling.Internal
         {
             if (!methodInfo.IsStatic)
                 return;
-            foreach (ExecuteOnEachWhenScriptsReloads attribute in methodInfo.GetCustomAttributes<ExecuteOnEachWhenScriptsReloads>())
+            foreach (BaseExecuteWhenScriptsReloads attribute in methodInfo.GetCustomAttributes<BaseExecuteWhenScriptsReloads>())
             {
                 int loop = attribute.Loop;
                 if (attribute is ExecuteOnEachTypeWhenScriptsReloads executeOnEachTypeWhenScriptsReloads)

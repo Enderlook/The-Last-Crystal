@@ -12,7 +12,7 @@ namespace AdditionalAttributes.PostCompiling
     [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, typeof(Type))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public sealed class ExecuteOnEachTypeWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads
+    public sealed class ExecuteOnEachTypeWhenScriptsReloads : BaseExecuteWhenScriptsReloads
     {
         /// <summary>
         /// Rules that should be match by the type.

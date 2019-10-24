@@ -5,7 +5,7 @@ using AdditionalAttributes.AttributeUsage;
 namespace AdditionalAttributes.PostCompiling.Internal
 {
     [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
-    public abstract class ExecuteOnEachWhenScriptsReloads : Attribute
+    public abstract class BaseExecuteWhenScriptsReloads : Attribute
     {
         /// <summary>
         /// In which loop of the execution will this script executed.<br>
@@ -13,6 +13,6 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// </summary>
         public int Loop { get; private set; }
 
-        protected ExecuteOnEachWhenScriptsReloads(int loop = 0) => Loop = loop;
+        protected BaseExecuteWhenScriptsReloads(int loop = 0) => Loop = loop;
     }
 }

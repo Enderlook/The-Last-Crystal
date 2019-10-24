@@ -5,10 +5,10 @@ using UnityEditorHelper;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace AdditionalAttributes.Internal.Drawer
+namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(RangeMinMaxAttribute))]
-    public class MinMaxRangeAttributeDrawer : RangeAttributeDrawer
+    internal class MinMaxRangeAttributeDrawer : RangeAttributeDrawer
     {
         private readonly string error = $"{nameof(MinMaxRangeAttributeDrawer)} only supports serialized properties of {nameof(SerializedPropertyType.Vector2Int)} ({typeof(Vector2Int)}) and {nameof(SerializedPropertyType.Vector2)} ({typeof(Vector2)})).";
         private const int FIELDS_SPACE = 2;

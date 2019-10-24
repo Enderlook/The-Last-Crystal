@@ -10,7 +10,7 @@ namespace AdditionalAttributes.PostCompiling
     /// </summary>
     [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, parameterType = AttributeUsageMethodAttribute.ParameterMode.VoidOrNone)]
-    public sealed class ExecuteWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads
+    public sealed class ExecuteWhenScriptsReloads : BaseExecuteWhenScriptsReloads
     {
         /// <summary>
         /// Executes the method decorated by this attribute.<br>

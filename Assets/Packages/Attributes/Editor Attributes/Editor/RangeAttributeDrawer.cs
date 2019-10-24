@@ -4,10 +4,10 @@ using UnityEditorHelper;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace AdditionalAttributes.Internal.Drawer
+namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(RangeAttribute))]
-    public class RangeAttributeDrawer : PropertyDrawer
+    internal class RangeAttributeDrawer : PropertyDrawer
     {
         private readonly string error = $"{nameof(RangeAttributeDrawer)} only supports serialized properties of {nameof(SerializedPropertyType.Integer)} ({typeof(int)}) and {nameof(SerializedPropertyType.Float)} ({typeof(float)})).";
 

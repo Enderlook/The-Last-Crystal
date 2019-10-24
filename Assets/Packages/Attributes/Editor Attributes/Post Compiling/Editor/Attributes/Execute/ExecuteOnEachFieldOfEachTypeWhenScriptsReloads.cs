@@ -12,7 +12,7 @@ namespace AdditionalAttributes.PostCompiling
     [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
     [AttributeUsageMethod(1, typeof(FieldInfo))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
-    public sealed class ExecuteOnEachFieldOfEachTypeWhenScriptsReloads : ExecuteOnEachWhenScriptsReloads
+    public sealed class ExecuteOnEachFieldOfEachTypeWhenScriptsReloads : BaseExecuteWhenScriptsReloads
     {
         /// <summary>
         /// Rules that should be match by the field.

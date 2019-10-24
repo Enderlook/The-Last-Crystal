@@ -2,10 +2,10 @@
 using UnityEngine;
 using UnityEditorHelper;
 
-namespace Serializables.Drawer
+namespace Serializables
 {
     [CustomPropertyDrawer(typeof(ShowListAttribute), true)]
-    public class SerializableListDrawer : PropertyDrawer
+    internal class SerializableListDrawer : PropertyDrawer
     {
         private bool foldout;
 

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AdditionalAttributes.PostCompiling;
-using AdditionalAttributes.PostCompiling.Internal;
 using UnityEngine;
 
-namespace AdditionalAttributes.Internal.PostCompile
+namespace AdditionalAttributes
 {
-    public static class HasConfirmationFieldAttributeTesting
+    internal static class HasConfirmationFieldAttributeTesting
     {
         private static readonly Dictionary<Type, List<HasConfirmationFieldAttribute>> typesAndAttributes = new Dictionary<Type, List<HasConfirmationFieldAttribute>>();
 
