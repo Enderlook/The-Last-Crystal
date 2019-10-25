@@ -53,9 +53,7 @@ public class CreatureSpawn : MonoBehaviour
         {
             GameObject gameObject = Instantiate(prefab, spawningPoint.position, spawningPoint.rotation);
             gameObject.AddComponent<DestroyNotifier>().AddCallback(SpawnWithDelay);
-            NavigationAgent navigationAgent = gameObject.GetComponent<NavigationAgent>();
-            if (navigationAgent != null)
-                navigationAgent.NavigationGraph = navigationGraph;
+            NavigationAgent.InjectNavigationGraph(gameObject, navigationGraph);
             action.Invoke(gameObject);
         }
         public void SpawnWithDelay() => timer.ResetCycles(1);
