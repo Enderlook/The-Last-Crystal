@@ -64,8 +64,6 @@ public class Spawner : MonoBehaviour
         DestroyNotifier.ExecuteOnDeath(enemy, () => enemiesAlive--);
 
         // Enemy movement
-        NavigationAgent navigationAgent = enemy.GetComponent<NavigationAgent>();
-        if (navigationAgent != null)
-            navigationAgent.NavigationGraph = navigationGraph;
+        NavigationAgent.InjectNavigationGraph(enemy, navigationGraph);
     }
 }

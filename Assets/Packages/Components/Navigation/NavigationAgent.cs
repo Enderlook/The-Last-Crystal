@@ -57,6 +57,13 @@ namespace Navigation
 
         public float FindDistanceTo(Transform target) => FindDistanceTo(target.position);
 
+        public static void InjectNavigationGraph(GameObject gameObject, NavigationGraph navigationGraph)
+        {
+            NavigationAgent navigationAgent = gameObject.GetComponent<NavigationAgent>();
+            if (navigationAgent != null)
+                navigationAgent.NavigationGraph = navigationGraph;
+        }
+
 #if UNITY_EDITOR
         [Header("Editor Only")]
         [SerializeField, Tooltip("Draw last path calculated on play.")]
@@ -71,7 +78,6 @@ namespace Navigation
 #pragma warning restore CS0649
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
-
         private void OnDrawGizmos()
         {
             if (drawPath && lastPath != null)

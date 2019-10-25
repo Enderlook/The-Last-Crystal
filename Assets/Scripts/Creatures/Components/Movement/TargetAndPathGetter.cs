@@ -30,26 +30,26 @@ namespace CreaturesAddons.Movement.NodeMovement
             AddTargetIfNotNull(Global.TransformCreature.Crystal.GetTranform(), crystalCalculator);
             AddTargetIfNotNull(Global.TransformCreature.Warrior.GetTranform(), playerCalculator);
             AddTargetIfNotNull(Global.TransformCreature.Wizard.GetTranform(), playerCalculator);
-
+            
             // Technically, this should never happen, but to be sure...
             if (targets.Count == 0)
             {
                 target = null;
                 return null;
             }
-
+            
             (Transform t, float distancePriority, List<Connection> path) = targets.MinBy(e => e.distancePriority);
             target = t;
             return path;
         }
 
-        private void AddTargetIfNotNull(Transform transform, Calculator calculator = null)
+        private void AddTargetIfNotNull(Transform transform, Calculator calculator)
         {
             if (transform != null)
                 targets.Add((transform, CalculateDistancePriorityTo(transform, out List<Connection> connections, calculator), connections));
         }
 
-        private float CalculateDistancePriorityTo(Transform transform, out List<Connection> connections, Calculator calculator = null)
+        private float CalculateDistancePriorityTo(Transform transform, out List<Connection> connections, Calculator calculator)
         {
             if (transform)
             {
