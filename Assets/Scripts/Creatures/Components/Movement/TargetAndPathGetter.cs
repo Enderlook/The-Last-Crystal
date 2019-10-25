@@ -53,7 +53,7 @@ namespace CreaturesAddons.Movement.NodeMovement
         {
             if (transform)
             {
-                connections = navigationAgent.FindPathTo(Global.TransformCreature.Wizard.GetTranform(), out float distance);
+                connections = navigationAgent.FindPathTo(transform, out float distance);
                 return calculator == null ? distance : calculator.Calculate(distance);
             }
             connections = default;
