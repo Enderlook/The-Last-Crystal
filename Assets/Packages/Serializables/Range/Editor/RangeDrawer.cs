@@ -9,9 +9,10 @@ namespace Range
     public class RangeDrawer : PropertyDrawer
     {
         // Field display name must be a single letter
-        private const string MIN_FIELD_NAME = "min", MIN_FIELD_DISPLAY_NAME = "L";
-        private const string MAX_FIELD_NAME = "max", MAX_FIELD_DISPLAY_NAME = "U";
-        private const string STEP_FIELD_NAME = "step", STEP_FIELD_DISPLAY_NAME = "S";
+        // Public consts are used in MinMaxRangeAttributeDrawer
+        public const string MIN_FIELD_NAME = "min", MAX_FIELD_NAME = "max", STEP_FIELD_NAME = "step";
+        public const string STEP_FIELD_DISPLAY_NAME = "S";
+        private const string MIN_FIELD_DISPLAY_NAME = "L", MAX_FIELD_DISPLAY_NAME = "U";
 
         protected readonly string SERIALIZED_PROPERTY_TYPE_ERROR = $"Serialized properties shown in {typeof(RangeDrawer)} must be either {nameof(SerializedPropertyType.Float)} or {nameof(SerializedPropertyType.Integer)}";
 

@@ -140,6 +140,7 @@ MonoBehaviour:
   digitPrecision: 0
   overrideTypeOfRounding: 0
   typeOfRounding: 0
+  floatingTextPrefab: {fileID: 0}
   floatingTextParent: {fileID: 0}
 --- !u!114 &8836964168732201439
 MonoBehaviour:
@@ -346,6 +347,7 @@ MonoBehaviour:
     flipX: 0
     flipY: 0
     draw: 1
+    edit: 0
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
   groundLayer: 8

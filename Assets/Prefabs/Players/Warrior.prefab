@@ -43,6 +43,7 @@ MonoBehaviour:
     flipX: 0
     flipY: 0
     draw: 1
+    edit: 0
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
   layerToHit: 10
@@ -58,6 +59,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}

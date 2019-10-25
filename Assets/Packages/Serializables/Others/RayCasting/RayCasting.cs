@@ -1,4 +1,5 @@
 ﻿using System;
+using AdditionalAttributes;
 using UnityEngine;
 
 namespace Serializables.Physics
@@ -38,13 +39,13 @@ namespace Serializables.Physics
 #pragma warning restore CA2235
 
         [SerializeField, Tooltip("Whenever the ray source and direction should be X flipped.\nThis is accumulative with the Sprite Renderer flip.")]
-        private bool flipX = false;
+        private bool flipX;
         public bool FlipX {
             get => spriteRenderer == null ? flipX : Invert(flipX, spriteRenderer.flipX);
             set => flipX = spriteRenderer == null ? flipX : Invert(value, spriteRenderer.flipX);
         }
         [SerializeField, Tooltip("Whenever the ray source and direction should be Y flipped.\nThis is accumulative with the Sprite Renderer flip.")]
-        private bool flipY = false;
+        private bool flipY;
         public bool FlipY {
             get => spriteRenderer == null ? flipY : Invert(flipY, spriteRenderer.flipY);
             set => flipY = spriteRenderer == null ? flipY : Invert(value, spriteRenderer.flipY);
@@ -181,12 +182,14 @@ namespace Serializables.Physics
         }
 
 #if UNITY_EDITOR
-#pragma warning disable IDE0051, CS0414
-        [SerializeField]
-        private bool draw = false;
-#pragma warning restore CS0414
+#pragma warning disable IDE0051, CS0414, CS0649
+        [SerializeField, Tooltip("Draw line in editor."), HideInInspector]
+        private bool draw;
+        [SerializeField, Tooltip("Edit raycast in editor."), HasConfirmationField(nameof(draw))]
+        private bool edit;
         [SerializeField, Tooltip("Whenever a raycast is call, it will display it in scene.")]
-        private bool debug = false;
+        private bool debug;
+#pragma warning restore CS0414, CS0649
         [SerializeField]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "It's used by RayCastingDrawer.")]
 #pragma warning disable CA2235
