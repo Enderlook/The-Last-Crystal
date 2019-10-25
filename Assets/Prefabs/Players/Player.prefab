@@ -113,6 +113,7 @@ MonoBehaviour:
   thisRigidbody2D: {fileID: 8157229962283897169}
   animator: {fileID: 0}
   groundChecker: {fileID: 2865848467112834137}
+  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
 --- !u!114 &5042988860275578343
 MonoBehaviour:
   m_ObjectHideFlags: 0

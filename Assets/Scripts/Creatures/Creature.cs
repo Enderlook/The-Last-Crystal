@@ -26,8 +26,13 @@ namespace CreaturesAddons
         [Tooltip("Ground checker.")]
         public GroundChecker groundChecker;
 
+        [SerializeField, Tooltip("Material for effect hurt.")]
+        private Material redFlash;
+
         private IMove move;
         private IAttack attack;
+
+        private Material defMaterial;
 
         private const string ANIMATION_STATE_HURT = "Hurt";
 
@@ -40,6 +45,7 @@ namespace CreaturesAddons
 
         protected override void Awake()
         {
+            defMaterial = sprite.material;
             base.Awake();
             LoadComponents();
         }
@@ -87,6 +93,12 @@ namespace CreaturesAddons
             thisRigidbody2D.AddForce(direction * force);
         }
 
-        protected override void DisplayTakeDamageAnimation() => animator.SetTrigger(ANIMATION_STATE_HURT);
+        protected override void DisplayTakeDamageAnimation()
+        {
+            sprite.material = redFlash;
+            Invoke("ResetMaterial", .1f);
+        }
+
+        void ResetMaterial() => sprite.material = defMaterial;
     }
 }

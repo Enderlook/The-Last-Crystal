@@ -146,6 +146,7 @@ MonoBehaviour:
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
   groundChecker: {fileID: 8597921017496991690}
+  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
 --- !u!114 &8948837633536277635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +440,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6140415168490267451}
     m_Modifications:
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar with Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -543,11 +549,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar with Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6969e2527261f0045bc3f1b1a0c7b153, type: 3}
