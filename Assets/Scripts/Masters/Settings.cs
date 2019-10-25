@@ -48,5 +48,22 @@ namespace Master
         /// <seealso cref="SceneManager.LoadScene(string)"/>
         /// <param name="scene">Scene name to load.</param>
         private void LoadScene(string scene) => SceneManager.LoadScene(scene, LoadSceneMode.Single);
+
+        /// <summary>
+        /// Whenever the game is playing or not.<br>
+        /// If possible, use <seealso cref="IsPause"/>.
+        /// </summary>
+        public static bool IsPlaying => !isPause;
+        private static bool isPause;
+        /// <summary>
+        /// Whenever the game is paused or not.
+        /// </summary>
+        public static bool IsPause {
+            get => isPause;
+            set {
+                isPause = value;
+                Time.timeScale = isPause ? 0 : 1;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Master;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CoinMeter : MonoBehaviour
@@ -28,7 +29,7 @@ public class CoinMeter : MonoBehaviour
 
     private void Update()
     {
-        if (Menu.IsPause)
+        if (Settings.IsPause)
             return;
         if (showedMoney != realMoney)
         {
