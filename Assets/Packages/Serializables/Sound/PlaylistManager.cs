@@ -44,7 +44,7 @@ public class PlaylistManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play a <paramref name="audioClip"/>.
+    /// Play an <paramref name="audioClip"/>.
     /// </summary>
     /// <param name="audioClip"><see cref="AudioClip"/> to play.</param>
     /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
@@ -139,7 +139,7 @@ public class PlaylistManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play or unpause the sound.
+    /// Play or resume the sound.
     /// </summary>
     public void Play()
     {
