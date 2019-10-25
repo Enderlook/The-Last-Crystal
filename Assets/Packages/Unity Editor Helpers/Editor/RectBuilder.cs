@@ -86,7 +86,7 @@ namespace UnityEditorHelper
         /// </summary>
         /// <param name="amount">Amount of <see cref="Rect"/> to make. The width will be equally splitted among them.</param>
         /// <returns>New <see cref="Rect"/>./returns>
-        public Rect[] GetRemainingRect(int amount = 1)
+        public Rect[] GetRemainingRect(int amount)
         {
             float width = RemainingWidth / amount;
             Rect[] rects = new Rect[amount];
@@ -96,6 +96,8 @@ namespace UnityEditorHelper
             }
             return rects;
         }
+
+        public Rect GetRemainingRect() => GetRect(RemainingWidth);
     }
 
     public class VerticalRectBuilder : RectBuilder

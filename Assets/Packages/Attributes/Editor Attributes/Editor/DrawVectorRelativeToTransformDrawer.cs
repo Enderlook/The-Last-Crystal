@@ -5,10 +5,10 @@ using System;
 using AdditionalExtensions;
 using UnityEditorHelper;
 
-namespace AdditionalAttributes.Drawer
+namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(DrawVectorRelativeToTransformAttribute)), InitializeOnLoad]
-    public class DrawVectorRelativeToTransformEditor : PropertyDrawer
+    internal class DrawVectorRelativeToTransformEditor : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

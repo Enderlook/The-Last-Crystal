@@ -175,6 +175,8 @@ MonoBehaviour:
   typeOfRounding: 0
   floatingTextPrefab: {fileID: 1259971843042013121, guid: 76062395ae1642d4f86d51ed39ddd26e,
     type: 3}
+  floatingTextPrefab: {fileID: 0}
+>>>>>>> master
   floatingTextParent: {fileID: 0}
 --- !u!114 &843876848762180787
 MonoBehaviour:
