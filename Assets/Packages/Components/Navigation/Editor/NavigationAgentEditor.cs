@@ -2,10 +2,10 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Navigation.UnityInspector
+namespace Navigation
 {
     [CustomEditor(typeof(NavigationAgent))]
-    public class NavigationAgentEditor : Editor
+    internal class NavigationAgentEditor : Editor
     {
         private NavigationAgent navigationAgent;
 
