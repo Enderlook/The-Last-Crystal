@@ -5,7 +5,7 @@ using AdditionalAttributes.PostCompiling;
 
 namespace AdditionalAttributes.AttributeUsage
 {
-    internal static class AttributeUsageMethodAttributeTesting
+    internal static class AttributeUsageMethodTesting
     {
         private static Dictionary<Type, Action<MethodInfo, string>> checkers = new Dictionary<Type, Action<MethodInfo, string>>();
 

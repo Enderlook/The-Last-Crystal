@@ -5,7 +5,7 @@ using AdditionalAttributes.PostCompiling;
 
 namespace AdditionalAttributes.AttributeUsage
 {
-    internal static class AttributeUsageRequireDataTypeAttributeTesting
+    internal static class AttributeUsageRequireDataTypeTesting
     {
         private static Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)> checkers = new Dictionary<Type, (AttributeTargets targets, Action<Type, string> checker)>();
 
