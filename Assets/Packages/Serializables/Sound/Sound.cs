@@ -1,6 +1,6 @@
 ﻿using System;
+using Range;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [Serializable]
 public class Sound
@@ -9,39 +9,24 @@ public class Sound
     public AudioClip audioClip;
 
     [Tooltip("Volume. Use range size 1 to avoid random volume. Use range size 0 to use 1.")]
-    public float[] volume = new float[1] { 1 };
+    public RangeFloatSwitchable volume;
 
     [Tooltip("Pitch. Use range size 1 to avoid random volume. Use range size 0 to use 1.")]
-    public float[] pitch = new float[1] { 1 };
+    public RangeFloatSwitchable pitch;
 
     /// <summary>
     /// Calculates a random volume between the given by the two first elements of <see cref="volume"/>.
     /// </summary>
     /// <returns>Random volume. If <c><see cref="volume"/>.lenght <= 1</c> it <see langword="return"/> the <c><see cref="volume"/>[1]</c>.</returns>
     /// <seealso cref="GetRandom(float[])"/>
-    public float Volume => GetRandom(volume);
+    public float Volume => volume.Value;
 
     /// <summary>
     /// Calculates a random pitch between the given by the two first elements of <see cref="pitch"/>.
     /// </summary>
     /// <returns>Random volume. If <c><see cref="pitch"/>.lenght <= 1</c> it <see langword="return"/> the <c><see cref="pitch"/>[1]</c>.</returns>
     /// <seealso cref="GetRandom(float[] array)"/>
-    public float Pitch => GetRandom(pitch);
-
-    /// <summary>
-    /// Calculates a random value between the given by the two first elements of <paramref name="array"/>.
-    /// </summary>
-    /// <param name="array"></param>
-    /// <returns>Random volume. If <c><paramref name="array"/>.lenght <= 1</c> it <see langword="return"/> the <c><paramref name="array"/>[1]</c>.</returns>
-    private float GetRandom(float[] array)
-    {
-        if (array.Length > 1)
-            return Random.Range(array[0], array[1]);
-        else if (array.Length == 0)
-            return 1;
-        else
-            return array[0];
-    }
+    public float Pitch => pitch.Value;
 
     /// <summary>
     /// Play the sound on the specified <paramref name="audioSource"/>.
@@ -89,4 +74,3 @@ public class Sound
             AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier);
     }
 }
-
