@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Navigation
 {
-    [System.Serializable]
-    public class Node
+    [Serializable]
+    public class Node : ScriptableObject
     {
         public Vector2 position;
 
+        [SerializeField]
         private List<Connection> connections;
         public List<Connection> Connections {
             get {
@@ -33,14 +35,14 @@ namespace Navigation
 
         public void SetActive(bool actived) => IsActive = actived;
 
-        public void AddConnectionTo(Node end, bool active)
+        public void AddConnectionTo(Node end, bool active = true)
         {
             foreach (Connection connection in Connections)
             {
                 if (connection.end == end)
                     return;
             }
-            Connections.Add(new Connection(this, end, active));
+            Connections.Add(Connection.CreateConnection(this, end, isActive));
         }
 
         public Connection GetConnectionTo(Node end)
@@ -51,6 +53,14 @@ namespace Navigation
                     return connection;
             }
             return null;
+        }
+
+        public static Node CreateNode(Vector2 position, bool isActive)
+        {
+            Node node = CreateInstance<Node>();
+            node.position = position;
+            node.isActive = isActive;
+            return node;
         }
     }
 }

@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Navigation
 {
     [Serializable]
-    public class Connection : ISerializationCallbackReceiver
+    public class Connection : ScriptableObject
     {
-        [NonSerialized]
         public Node start;
-        [SerializeField]
-        private Vector2 startPosition;
-        [NonSerialized]
         public Node end;
-        [SerializeField]
-        private Vector2 endPosition;
         public float Distance => Vector2.Distance(start.position, end.position);
 
         [SerializeField]
@@ -24,31 +17,15 @@ namespace Navigation
         // Whenever this connection is a jumping connection
         public bool IsExtreme => start.isExtreme && end.isExtreme;
 
-        public Connection(Node start, Node end)
+        public static Connection CreateConnection(Node start, Node end, bool isActive)
         {
-            this.start = start;
-            this.end = end;
-        }
-        public Connection(Node start, Node end, bool isActive)
-        {
-            this.start = start;
-            this.end = end;
-            IsActive = isActive;
+            Connection connection = CreateInstance<Connection>();
+            connection.start = start;
+            connection.end = end;
+            connection.isActive = isActive;
+            return connection;
         }
 
         public void SetActive(bool active) => IsActive = active;
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-            startPosition = start.position;
-            endPosition = end.position;
-        }
-
-        void ISerializationCallbackReceiver.OnAfterDeserialize() { }
-
-        public void Deserialize(Dictionary<Vector2, Node> nodesByPosition)
-        {
-            start = nodesByPosition[startPosition];
-            end = nodesByPosition[endPosition];
-        }
     }
 }
