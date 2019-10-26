@@ -13,6 +13,7 @@ namespace AdditionalAttributes
         private const string attributeName = nameof(ShowIfAttribute);
         private readonly string requireAttribute = $"required by {attributeName} attribute";
 
+
         /// <summary>
         /// If <see langword="true"/>, the property field is either disabled or hidden.
         /// </summary>
@@ -37,7 +38,7 @@ namespace AdditionalAttributes
                 return;
             }
 
-            bool isActive = false;
+            active = false;
             foreach (MemberInfo memberInfo in memberInfos)
             {
                 string castingErrorMessage = $"{{0}} in {conditionName} {sign} can't be casted to {typeof(bool)} {sign}. It is {{1}}.";
@@ -47,7 +48,7 @@ namespace AdditionalAttributes
                         FieldInfo fieldInfo = (FieldInfo)memberInfo;
                         if (fieldInfo.GetValue(parent) is bool fieldValue)
                         {
-                            isActive = fieldValue;
+                            active = fieldValue;
                             goto outsideForeach;
                         }
                         else
@@ -61,7 +62,7 @@ namespace AdditionalAttributes
                         {
                             if (propertyInfo.GetValue(parent) is bool propertyValue)
                             {
-                                isActive = propertyValue;
+                                active = propertyValue;
                                 goto outsideForeach;
                             }
                             else
@@ -83,7 +84,7 @@ namespace AdditionalAttributes
                         {
                             if (methodInfo.Invoke(parent, parameterInfos.Where(e => e.IsOptional == true).Select(e => Type.Missing).ToArray()) is bool methodValue)
                             {
-                                isActive = methodValue;
+                                active = methodValue;
                                 goto outsideForeach;
                             }
                             else
@@ -113,12 +114,12 @@ namespace AdditionalAttributes
 
             if (mode == ShowIfAttribute.ActionMode.ShowHide)
             {
-                if (isActive)
+                if (active)
                     DrawField();
             }
             else
             {
-                EditorGUI.BeginDisabledGroup(isActive);
+                EditorGUI.BeginDisabledGroup(active);
                 DrawField();
                 EditorGUI.EndDisabledGroup();
             }
