@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditorHelper;
@@ -76,8 +77,8 @@ namespace Navigation
 
             serializedObject.ApplyModifiedProperties();
         }
-
-        public void OnSceneGUI()
+        
+        private void OnSceneGUI()
         {
             if (navigationGraph == null)
                 return;
@@ -221,9 +222,12 @@ namespace Navigation
                 {
                     if (e.alt)
                     {
-                        RemoveConnection(selectedNode, closestNode);
-                        if (e.control)
-                            RemoveConnection(closestNode, selectedNode);
+                        if (selectedNode != null && closestNode != null && selectedNode != closestNode)
+                        {
+                            selectedNode.TryRemoveConnectionTo(closestNode);
+                            if (e.control)
+                                closestNode.TryRemoveConnectionTo(selectedNode);
+                        }
                     }
                     else
                     {
@@ -248,17 +252,7 @@ namespace Navigation
                         // Remove Node
                         if (closestNode != null)
                         {
-                            // If the node already exist in the grid, remove it
-                            for (int i = Grid.Count - 1; i > 0; i++)
-                            {
-                                if (Grid[i] == closestNode)
-                                {
-                                    Grid.RemoveAt(i);
-                                    continue;
-                                }
-                                Node node = Grid[i];
-                                RemoveConnection(node, closestNode, true);
-                            }
+                            navigationGraph.graph.RemoveNodeAndConnections(closestNode);
                             if (selectedNode == closestNode)
                                 selectedNode = null;
                             closestNode = null;
@@ -282,33 +276,17 @@ namespace Navigation
             }
         }
 
-        private static void RemoveConnection(Node from, Node to, bool twoWays = false)
-        {
-            if (twoWays)
-            {
-                RemoveConnection(from, to);
-                RemoveConnection(to, from);
-            }
-            else
-            {
-                for (int i = 0; i < from.Connections.Count; i++)
-                {
-                    if (from.Connections[i].end == to)
-                        from.Connections.RemoveAt(i);
-                }
-            }
-        }
         private static void AlternateOrAddConnection(Node from, Node to)
         {
-            if (from == to)
+            if (from == to || from == null || to == null)
                 return;
-            Connection connection = from.GetConnectionTo(to);
-            if (connection == null)
-                // Add connection
-                from.AddConnectionTo(to, true);
-            else
+
+            if (from.TryGetConnectionTo(to, out Connection connection))
                 // Switch Connection
                 connection.SetActive(!connection.IsActive);
+            else
+                // Add connection
+                from.AddConnectionTo(to, true);
         }
 
         private Vector2 GetAndDrawMousePosition()
@@ -381,7 +359,8 @@ namespace Navigation
         {
             foreach (Connection connection in node.Connections)
             {
-                connection?.DrawConnection(active, inactive, reference, fontSize);
+                if (connection != null) // Why this?
+                    connection.DrawConnection(active, inactive, reference, fontSize);
             }
         }
 
@@ -389,7 +368,8 @@ namespace Navigation
         {
             foreach (Connection connection in node.Connections)
             {
-                connection?.DrawConnection(color, reference, fontSize);
+                if (connection != null) // Why this?
+                    connection.DrawConnection(color, reference, fontSize);
             }
         }
 

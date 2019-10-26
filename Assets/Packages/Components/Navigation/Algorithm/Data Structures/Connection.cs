@@ -53,5 +53,10 @@ namespace Navigation
             connection.isActive = isActive;
             return connection;
         }
+
+        /// <summary>
+        /// Remove this <see cref="Connection"/> from <see cref="start"/>
+        /// </summary>
+        public void DisconnectFromNode() => start.RemoveConnection(this);
     }
 }
