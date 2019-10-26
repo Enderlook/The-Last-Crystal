@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -51,13 +52,21 @@ namespace UnityEditorHelper
         /// Gets the target object of <paramref name="source"/>. It does work for nested serialized properties.
         /// </summary>
         /// <param name="source"><see cref="SerializedProperty"/> whose value will be get.</param>
+        /// If it doesn't have parent it will return itself.</param>
+        /// <returns>Value of the <paramref name="source"/> as <see cref="object"/>.</returns>
+        public static object GetTargetObjectOfProperty(this SerializedProperty source) => source.GetTargetObjectOfProperty(false);
+
+        /// <summary>
+        /// Gets the target object of <paramref name="source"/>. It does work for nested serialized properties.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> whose value will be get.</param>
         /// <param name="getParent">Whenever it should get the parent of the <see cref="SerializedProperty"/> or the <see cref="SerializedProperty"/> itself.<br>
         /// If it doesn't have parent it will return itself.</param>
         /// <returns>Value of the <paramref name="source"/> as <see cref="object"/>.</returns>
-        public static object GetTargetObjectOfProperty(this SerializedProperty source, bool getParent = false)
+        private static object GetTargetObjectOfProperty(this SerializedProperty source, bool getParent = false, bool storePath = false)
         {
             if (source == null)
-                return null;
+                throw new ArgumentNullException(nameof(source));
 
             string path = source.propertyPath.Replace(".Array.data[", "[");
             object targetObject = source.serializedObject.targetObject;
@@ -83,6 +92,15 @@ namespace UnityEditorHelper
 
             return getParent ? lastParent ?? targetObject : targetObject;
         }
+
+        /// <summary>
+        /// Gets the parent target object of <paramref name="source"/>. It does work for nested serialized properties.<br>
+        /// If it doesn't have parent it will return itself.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> whose value will be get.</param>
+        /// If it doesn't have parent it will return itself.</param>
+        /// <returns>Value of the <paramref name="source"/> as <see cref="object"/>.</returns>
+        public static object GetParentTargetObjectOfProperty(this SerializedProperty source) => source.GetTargetObjectOfProperty(true);
 
         /// <summary>
         /// Produce a <see cref="GUIContent"/> with the <see cref="SerializedProperty.displayName"/> as <see cref="GUIContent.text"/> and <see cref="SerializedProperty.tooltip"/> as <see cref="GUIContent.tooltip"/>.
