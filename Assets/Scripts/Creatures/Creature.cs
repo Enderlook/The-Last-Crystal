@@ -86,7 +86,7 @@ namespace CreaturesAddons
                 direction = ((Vector2)Transform.position - direction).normalized;
                 // The conditionals verify if the player / enemy is above the object.
                 if (direction.x < 1 && direction.x > 0) direction.x = 1;
-                if (direction.x > 1 && direction.x < 0) direction.x = -1;
+                if (direction.x > -1 && direction.x < 0) direction.x = -1;
                 direction.y = 1; // Assign this value on the Y axis, because the actual value is 0 or less than 1.
             }
 
