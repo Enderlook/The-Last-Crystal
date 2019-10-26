@@ -48,6 +48,22 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0, a: 1}
   layerToHit: 10
   animationState: Attack
+--- !u!114 &5462179105382871835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573732952227708787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8728ec6d0ad86204f87c1c9090b65587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashKey: 103
+  dashTime: 1
+  forceDash: 2
+  dashState: 0
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,16 +71,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_Name
-      value: Warrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -120,6 +126,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1a822341e6719542916beaf6ebbde0e,
+        type: 3}
+    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_Name
+      value: Warrior
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: weapons.Array.size
@@ -161,27 +198,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1259971843042013121, guid: 76062395ae1642d4f86d51ed39ddd26e,
         type: 3}
-    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b1a822341e6719542916beaf6ebbde0e,
-        type: 3}
-    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: basePool.startingMax
