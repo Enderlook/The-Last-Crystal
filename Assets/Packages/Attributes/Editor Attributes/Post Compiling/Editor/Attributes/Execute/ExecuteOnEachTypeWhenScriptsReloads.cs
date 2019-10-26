@@ -9,7 +9,7 @@ namespace AdditionalAttributes.PostCompiling
     /// Executes the method decorated by this attribute for each <see cref="Type"/> compiled by Unity each time Unity compiles code.<br>
     /// The method to decorate must have the signature DoSomething(<see cref="Type"/>).
     /// </summary>
-    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)]
     [AttributeUsageMethod(1, typeof(Type))]
     [AttributeUsage(AttributeTargets.Method, Inherited = true)]
     public sealed class ExecuteOnEachTypeWhenScriptsReloads : BaseExecuteWhenScriptsReloads

@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(RangeMinMaxAttribute))]
-    internal class MinMaxRangeAttributeDrawer : RangeAttributeDrawer
+    internal class MinMaxRangeDrawer : RangeDrawer
     {
-        private readonly string error = $"{nameof(MinMaxRangeAttributeDrawer)} only supports serialized properties of {nameof(SerializedPropertyType.Vector2Int)} ({typeof(Vector2Int)}) and {nameof(SerializedPropertyType.Vector2)} ({typeof(Vector2)})).";
+        private readonly string error = $"{nameof(RangeMinMaxAttribute)} only supports serialized properties of {nameof(SerializedPropertyType.Vector2Int)} ({typeof(Vector2Int)}) and {nameof(SerializedPropertyType.Vector2)} ({typeof(Vector2)})).";
         private const int FIELDS_SPACE = 2;
         private const string MIN_FIELD_NAME = "min";
         private const string MAX_FIELD_NAME = "max";
@@ -93,8 +93,8 @@ namespace AdditionalAttributes
                     bool isRangeObject = false;
                     if (objectType == typeof(RangeIntStep) || objectType == typeof(RangeFloatStep))
                     {
-                        MIN = RangeDrawer.MIN_FIELD_NAME;
-                        MAX = RangeDrawer.MAX_FIELD_NAME;
+                        MIN = Range.RangeDrawer.MIN_FIELD_NAME;
+                        MAX = Range.RangeDrawer.MAX_FIELD_NAME;
                         isRangeObject = true;
                     }
 
@@ -169,7 +169,7 @@ namespace AdditionalAttributes
 
                     if (isRangeObject)
                     {
-                        SerializedProperty stepProperty = serializedProperty.FindPropertyRelative(RangeDrawer.STEP_FIELD_NAME);
+                        SerializedProperty stepProperty = serializedProperty.FindPropertyRelative(Range.RangeDrawer.STEP_FIELD_NAME);
 
                         void DrawFieldWithStep(Action<Rect?> slider)
                         {
@@ -178,7 +178,7 @@ namespace AdditionalAttributes
                             float block = (horizontalRectBuilder.RemainingWidth - labelWidth) / 10;
                             slider(horizontalRectBuilder.GetRect(block * 9));
                             horizontalRectBuilder.AddSpace(5);
-                            GUI.Label(horizontalRectBuilder.GetRect(labelWidth), new GUIContent(RangeDrawer.STEP_FIELD_DISPLAY_NAME, stepProperty.tooltip));
+                            GUI.Label(horizontalRectBuilder.GetRect(labelWidth), new GUIContent(Range.RangeDrawer.STEP_FIELD_DISPLAY_NAME, stepProperty.tooltip));
                             EditorGUI.PropertyField(horizontalRectBuilder.GetRemainingRect(), stepProperty, new GUIContent("", stepProperty.tooltip));
                         }
 
@@ -192,7 +192,7 @@ namespace AdditionalAttributes
                                 DrawFieldWithStep(IntSlider);
                                 break;
                             default:
-                                ShowError(position, error + $" Property {MIN_FIELD_NAME}, {MAX_FIELD_NAME}, and {RangeDrawer.STEP_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
+                                ShowError(position, error + $" Property {MIN_FIELD_NAME}, {MAX_FIELD_NAME}, and {Range.RangeDrawer.STEP_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
                                 break;
                         }
                     }

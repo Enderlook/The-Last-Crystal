@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace Range
 {
-    public interface IRangeInt<T> : IRange<T>
+    public interface IBasicRangeInt<T> : IBasicRange<T>
     {
         /// <summary>
         /// Return a random integer value between <see cref="Min"/> and <see cref="Max"/>.
@@ -12,6 +12,8 @@ namespace Range
         /// </summary>
         int ValueInt { get; }
     }
+
+    public interface IRangeInt<T> : IRange<T>, IBasicRangeInt<T> { }
 
     public interface IRangeStepInt<T> : IRangeStep<T>, IRangeInt<T>
     {
@@ -33,7 +35,7 @@ namespace Range
     {
         public override int Value => Random.Range(Min, Max);
 
-        int IRangeInt<int>.ValueInt => Value;
+        int IBasicRangeInt<int>.ValueInt => Value;
 
         /// <summary>
         /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.

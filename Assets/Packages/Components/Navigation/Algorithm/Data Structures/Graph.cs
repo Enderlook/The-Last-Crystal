@@ -1,101 +1,90 @@
-﻿using System.Collections.Generic;
-using Navigation;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System;
 using Serializables;
+using UnityEngine;
 
-[Serializable]
-public class Connections : SerializableList<Connection>
+namespace Navigation
 {
-    public Connections(int capacity) : base(capacity) { }
+    [Serializable]
+    internal class Connections : SerializableList<Connection>
+    {
+        public Connections(int capacity) : base(capacity) { }
 
-    public Connections(List<Connection> list) : base(list) { }
-}
-
-[Serializable]
-public class NodeConnections : SerializableDictionary<Vector2, Connections> { }
-
-[Serializable]
-public class Graph : ISerializationCallbackReceiver
-{
-    public enum PositionReference { LOCAL, WORLD }
-
-    public Transform reference;
-
-    [SerializeField]
-    private List<Node> grid;
-    public List<Node> Grid {
-        get {
-            if (grid == null)
-                grid = new List<Node>();
-            return grid;
-        }
-        set => grid = value;
+        public Connections(List<Connection> list) : base(list) { }
     }
 
-    [SerializeField]
-    private NodeConnections connections;
+    [Serializable]
+    internal class NodeConnections : SerializableDictionary<Vector2, Connections> { }
 
-    void ISerializationCallbackReceiver.OnBeforeSerialize()
+    [Serializable]
+    public class Graph : ISerializationCallbackReceiver
     {
-        RemoveDuplicatedPositionsFromGrid();
-        connections = new NodeConnections();
-        foreach (Node node in Grid)
-        {
-            connections.Add(node.position, new Connections(node.Connections));
+        public enum PositionReference { LOCAL, WORLD }
+
+        public Transform reference;
+
+        [SerializeField]
+        private List<Node> grid;
+        public List<Node> Grid {
+            get => grid ?? (grid = new List<Node>());
+            set => grid = value;
         }
-    }
 
-    void ISerializationCallbackReceiver.OnAfterDeserialize()
-    {
-        Dictionary<Vector2, Node> nodesByPosition = grid.ToDictionary(e => e.position);
+        [SerializeField]
+        private NodeConnections connections;
 
-        foreach (Node node in Grid)
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (connections.TryGetValue(node.position, out Connections nodeConnections))
+            RemoveDuplicatedPositionsFromGrid();
+            connections = new NodeConnections();
+            foreach (Node node in Grid)
             {
-                node.Connections = nodeConnections.GetList();
-                foreach (Connection connection in node.Connections)
-                {
-                    connection.Deserialize(nodesByPosition);
-                }
+                connections.Add(node.position, new Connections(node.Connections));
             }
         }
-        connections = null;
-    }
 
-    public void RemoveDuplicatedPositionsFromGrid()
-    {
-        HashSet<Vector2> usedPositions = new HashSet<Vector2>();
-        for (int i = Grid.Count - 1; i >= 0; i--)
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            if (usedPositions.Contains(Grid[i].position))
-                Grid.RemoveAt(i);
-            else
-                usedPositions.Add(Grid[i].position);
+            Dictionary<Vector2, Node> nodesByPosition = grid.ToDictionary(e => e.position);
+
+            foreach (Node node in Grid)
+            {
+                if (connections.TryGetValue(node.position, out Connections nodeConnections))
+                {
+                    node.Connections = nodeConnections.GetList();
+                    foreach (Connection connection in node.Connections)
+                    {
+                        connection.Deserialize(nodesByPosition);
+                    }
+                }
+            }
+            connections = null;
         }
-    }
 
-    public Vector2 GetWorldPosition(Node node)
-    {
-        if (reference == null)
-            return node.position;
-        return node.position + (Vector2)reference.position;
-    }
-    public Vector2 GetLocalPosition(Vector2 position)
-    {
-        if (reference == null)
-            return position;
-        return position - (Vector2)reference.position;
-    }
+        public void RemoveDuplicatedPositionsFromGrid()
+        {
+            HashSet<Vector2> usedPositions = new HashSet<Vector2>();
+            for (int i = Grid.Count - 1; i >= 0; i--)
+            {
+                if (usedPositions.Contains(Grid[i].position))
+                    Grid.RemoveAt(i);
+                else
+                    usedPositions.Add(Grid[i].position);
+            }
+        }
 
-    public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD)
-    {
-        if (mode == PositionReference.WORLD)
-            position -= (Vector2)reference.position;
-        Node node = new Node(position, isActive);
-        Grid.Add(node);
-        return node;
+        public Vector2 GetWorldPosition(Node node) => reference == null ? node.position : node.position + (Vector2)reference.position;
+
+        public Vector2 GetLocalPosition(Vector2 position) => reference == null ? position : position - (Vector2)reference.position;
+
+        public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD)
+        {
+            if (mode == PositionReference.WORLD)
+                position -= (Vector2)reference.position;
+            Node node = new Node(position, isActive);
+            Grid.Add(node);
+            return node;
+        }
     }
 }

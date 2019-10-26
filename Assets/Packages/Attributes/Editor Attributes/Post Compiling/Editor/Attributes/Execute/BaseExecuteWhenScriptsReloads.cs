@@ -4,7 +4,7 @@ using AdditionalAttributes.AttributeUsage;
 
 namespace AdditionalAttributes.PostCompiling.Internal
 {
-    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)]
     public abstract class BaseExecuteWhenScriptsReloads : Attribute
     {
         /// <summary>
