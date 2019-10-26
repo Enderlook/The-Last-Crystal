@@ -7,12 +7,14 @@ namespace Serializables
     [Serializable]
     public class Switch<T1, T2>
     {
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Whenever it should use Item2, instead of Item1.")]
         private bool useAlternative;
         [SerializeField, ShowIf(nameof(useAlternative)), Tooltip("Value used if Use Alternative is false.")]
         private T1 item1;
         [SerializeField, ShowIf(nameof(useAlternative)), Tooltip("Value used if Use Alternative is true.")]
         private T2 item2;
+#pragma warning restore CS0649
 
         private readonly string invalidOperationError = $"Can't read property {{0}} because {nameof(useAlternative)} is {{1}}";
 
