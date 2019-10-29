@@ -22,7 +22,7 @@ namespace PlayerAddons
         private Rigidbody2D rb2D;
         private SpriteRenderer sprite;
         private Vector2 savedVelocity;
-        private float maxDash = 20f;
+        private float maxDash = 2f;
 
         void IInit.Init(Creature creature)
         {
@@ -38,7 +38,7 @@ namespace PlayerAddons
                     if (Input.GetKey(dashKey))
                     {
                         savedVelocity = rb2D.velocity;
-                        float vel = sprite.flipX ? forceDash : -forceDash;
+                        float vel = sprite.flipX ? -forceDash : forceDash;
                         rb2D.velocity = Vector2.right * vel;
                         dashState = DashState.Dashing;
                     }
