@@ -13,21 +13,22 @@ namespace PlayerAddons
         [SerializeField, Tooltip("Input for dash.")]
         private KeyCode dashKey;
         [SerializeField, Tooltip("Duration of effect.")]
-        private float dashTime = 1;
+        private float startDashTime = 1;
         [SerializeField, Tooltip("Velocity dash.")]
-        private float forceDash;
+        private float forceDash = 1;
 
         public DashState dashState;
 
         private Rigidbody2D rb2D;
         private SpriteRenderer sprite;
         private Vector2 savedVelocity;
-        private float maxDash = 2f;
+        private float dashTime;
 
         void IInit.Init(Creature creature)
         {
             rb2D = creature.thisRigidbody2D;
             sprite = creature.sprite;
+            dashTime = startDashTime;
         }
 
         void IUpdate.UpdateBehaviour(float deltaTime)
@@ -44,19 +45,19 @@ namespace PlayerAddons
                     }
                     break;
                 case DashState.Dashing:
-                    dashTime += deltaTime * 3;
-                    if (dashTime >= maxDash)
-                    {
-                        dashTime = maxDash;
-                        rb2D.velocity = savedVelocity;
-                        dashState = DashState.Cooldown;
-                    }
-                    break;
-                case DashState.Cooldown:
-                    dashTime -= deltaTime;
                     if (dashTime <= 0)
                     {
                         dashTime = 0;
+                        rb2D.velocity = savedVelocity;
+                        dashState = DashState.Cooldown;
+                    }
+                    else dashTime -= deltaTime;
+                    break;
+                case DashState.Cooldown:
+                    dashTime += deltaTime;
+                    if (dashTime >= startDashTime)
+                    {
+                        dashTime = startDashTime;
                         dashState = DashState.Start;
                     }
                     break;

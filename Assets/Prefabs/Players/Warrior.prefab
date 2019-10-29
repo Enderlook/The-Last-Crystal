@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashKey: 103
-  dashTime: 1
+  startDashTime: 0.6
   forceDash: 2
   dashState: 0
 --- !u!1001 &6835815089219722961
