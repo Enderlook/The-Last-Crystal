@@ -1,0 +1,668 @@
+fileFormatVersion: 2
+guid: f8653c20d9a56024496e8c5319b7e053
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BASICATTACK_WIZARD_0
+    21300002: BASICATTACK_WIZARD_1
+    21300004: BASICATTACK_WIZARD_2
+    21300006: BASICATTACK_WIZARD_3
+    21300008: BASICATTACK_WIZARD_4
+    21300010: BASICATTACK_WIZARD_5
+    21300012: BASICATTACK_WIZARD_6
+    21300014: BASICATTACK_WIZARD_7
+    21300016: BASICATTACK_WIZARD_8
+    21300018: BASICATTACK_WIZARD_9
+    21300020: BASICATTACK_WIZARD_10
+    21300022: BASICATTACK_WIZARD_11
+    21300024: BASICATTACK_WIZARD_12
+    21300026: BASICATTACK_WIZARD_13
+    21300028: BASICATTACK_WIZARD_14
+    21300030: BASICATTACK_WIZARD_15
+    21300032: BASICATTACK_WIZARD_16
+    21300034: BASICATTACK_WIZARD_17
+    21300036: BASICATTACK_WIZARD_18
+    21300038: BASICATTACK_WIZARD_19
+    21300040: BASICATTACK_WIZARD_20
+    21300042: BASICATTACK_WIZARD_21
+    21300044: BASICATTACK_WIZARD_22
+    21300046: BASICATTACK_WIZARD_23
+    21300048: BASICATTACK_WIZARD_24
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_0
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 2061
+        width: 183
+        height: 378
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfa02143ca8d0e849835ac0482f2f227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_1
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 2061
+        width: 182
+        height: 377
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71695d620d9be284daf313b8401a6fc7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_2
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 2061
+        width: 183
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4973d8ed11c344f4dad1cd1e181f9052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_3
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 2061
+        width: 182
+        height: 376
+      alignment: 9
+      pivot: {x: 0.4945055, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b77d67d2532a934cb4ea01456ecc88a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_4
+      rect:
+        serializedVersion: 2
+        x: 2168
+        y: 2061
+        width: 182
+        height: 376
+      alignment: 9
+      pivot: {x: 0.489011, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9219c5cb3f8378448032d49ae2a0543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_5
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 1558
+        width: 183
+        height: 376
+      alignment: 9
+      pivot: {x: 0.49180326, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91d4ba0981961a04f9a473fa57d149dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_6
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 1558
+        width: 182
+        height: 376
+      alignment: 9
+      pivot: {x: 0.489011, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a25a390aa8477942874c2c2dbec8cc3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_7
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 1558
+        width: 182
+        height: 376
+      alignment: 9
+      pivot: {x: 0.4945055, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a839b58ac9728b24ba375513528cf4e3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_8
+      rect:
+        serializedVersion: 2
+        x: 1669
+        y: 1558
+        width: 180
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12a60b0a2b3b60044b769926853b2bc0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_9
+      rect:
+        serializedVersion: 2
+        x: 2168
+        y: 1558
+        width: 182
+        height: 376
+      alignment: 9
+      pivot: {x: 0.489011, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9ad13cdf33270b4b8df97dae4f78c04
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_10
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 1060
+        width: 183
+        height: 376
+      alignment: 9
+      pivot: {x: 0.49180326, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02835f36eb03c9c4594ddb44844e08a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_11
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 1060
+        width: 182
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68206e22c9e480a498cab9fc5d9ccc8a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_12
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 1060
+        width: 189
+        height: 377
+      alignment: 9
+      pivot: {x: 0.5079365, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aa8ac8626e943e41a5d3c3de0385117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_13
+      rect:
+        serializedVersion: 2
+        x: 1660
+        y: 1060
+        width: 189
+        height: 378
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60a3fd0d97688e34cb67c6ae26f9b03c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_14
+      rect:
+        serializedVersion: 2
+        x: 2163
+        y: 1060
+        width: 187
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e24d6bd4c888398499265f3febbec1c2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_15
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 560
+        width: 185
+        height: 379
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf60d3517b613164cb396498d765ecb6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_16
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 560
+        width: 182
+        height: 380
+      alignment: 9
+      pivot: {x: 0.489011, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a9a7b848d612514cbaa3c6aaaa90609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_17
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 560
+        width: 183
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b0ff0933e691643815f8daadd543b0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_18
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 560
+        width: 182
+        height: 378
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c8a15e31db44740a9caea8d21c701a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_19
+      rect:
+        serializedVersion: 2
+        x: 2168
+        y: 560
+        width: 182
+        height: 378
+      alignment: 9
+      pivot: {x: 0.4945055, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7da0eb3eedd042145962123a228bc726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_20
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 59
+        width: 181
+        height: 377
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa8348a3b21f0404db4b34e92efeff33
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_21
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 59
+        width: 182
+        height: 378
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4d9e6d621401ff4f94a8b6d86135ec1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_22
+      rect:
+        serializedVersion: 2
+        x: 1168
+        y: 59
+        width: 182
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fe092e6899fda94cafe5118ab5265a5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_23
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 59
+        width: 184
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c702f260ab36b84d9e262abe841b434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BASICATTACK_WIZARD_24
+      rect:
+        serializedVersion: 2
+        x: 2167
+        y: 59
+        width: 183
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdd45e0b82557a349aeeec1881f4be03
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 6406f13b8ceb15245b0f912b68397999
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

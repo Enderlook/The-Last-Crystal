@@ -1,0 +1,668 @@
+fileFormatVersion: 2
+guid: ce43f9c9f8a3258478b2c1b344a1b0a0
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JUMP_WIZARD_0
+    21300002: JUMP_WIZARD_1
+    21300004: JUMP_WIZARD_2
+    21300006: JUMP_WIZARD_3
+    21300008: JUMP_WIZARD_5
+    21300010: JUMP_WIZARD_6
+    21300012: JUMP_WIZARD_7
+    21300014: JUMP_WIZARD_9
+    21300016: JUMP_WIZARD_10
+    21300018: JUMP_WIZARD_11
+    21300020: JUMP_WIZARD_12
+    21300022: JUMP_WIZARD_13
+    21300024: JUMP_WIZARD_15
+    21300026: JUMP_WIZARD_16
+    21300028: JUMP_WIZARD_17
+    21300030: JUMP_WIZARD_18
+    21300032: JUMP_WIZARD_19
+    21300034: JUMP_WIZARD_20
+    21300036: JUMP_WIZARD_21
+    21300038: JUMP_WIZARD_22
+    21300040: JUMP_WIZARD_23
+    21300042: JUMP_WIZARD_24
+    21300044: JUMP_WIZARD_25
+    21300046: JUMP_WIZARD_26
+    21300048: JUMP_WIZARD_27
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: JUMP_WIZARD_0
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 2061
+        width: 183
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db95461d6fa149440a5af3524f5acbcd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_1
+      rect:
+        serializedVersion: 2
+        x: 674
+        y: 2059
+        width: 185
+        height: 363
+      alignment: 9
+      pivot: {x: 0.44324327, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a7ff856100b7564bb527a189283dc4e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_2
+      rect:
+        serializedVersion: 2
+        x: 1167
+        y: 2056
+        width: 200
+        height: 348
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d90774025103b264fa9bdd6a299c71a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_3
+      rect:
+        serializedVersion: 2
+        x: 1660
+        y: 2056
+        width: 217
+        height: 333
+      alignment: 9
+      pivot: {x: 0.44700462, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 898c38ed263d81b4f848b2ae5bd0eda4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_5
+      rect:
+        serializedVersion: 2
+        x: 2164
+        y: 2056
+        width: 219
+        height: 343
+      alignment: 9
+      pivot: {x: 0.4200913, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac4fb741713bad847b2a83a5ecf4ada1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_6
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 1553
+        width: 223
+        height: 366
+      alignment: 9
+      pivot: {x: 0.38565025, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57365e715c1ad7f45a2a8bacc68d4f82
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_7
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 1553
+        width: 228
+        height: 382
+      alignment: 9
+      pivot: {x: 0.3622807, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff6ad20c18e302c47827cd7594d87db1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_9
+      rect:
+        serializedVersion: 2
+        x: 1182
+        y: 1561
+        width: 222
+        height: 377
+      alignment: 9
+      pivot: {x: 0.3873874, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cedb7e4201c18642a5cc50ee46d15e8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_10
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 1567
+        width: 210
+        height: 373
+      alignment: 9
+      pivot: {x: 0.3904762, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 217a170966413d649ba82ee8a884c823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_11
+      rect:
+        serializedVersion: 2
+        x: 2197
+        y: 1575
+        width: 202
+        height: 365
+      alignment: 9
+      pivot: {x: 0.4009901, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1034edd53afe9fc4c89c959dfe9f6c40
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_12
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1079
+        width: 191
+        height: 361
+      alignment: 9
+      pivot: {x: 0.41884816, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e809a7dd9e4a0cd41974df9b7ceccd3b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_13
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 1089
+        width: 179
+        height: 352
+      alignment: 9
+      pivot: {x: 0.4301676, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5dbc4acadd46d64d82ead5028889060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_15
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 1094
+        width: 178
+        height: 344
+      alignment: 9
+      pivot: {x: 0.46629214, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b782ddcfd2474c4ab5eecaf439d36d5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_16
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 1091
+        width: 176
+        height: 345
+      alignment: 9
+      pivot: {x: 0.4659091, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fdf31746a0a9724da1b82ba48d7cf4e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_17
+      rect:
+        serializedVersion: 2
+        x: 2202
+        y: 1088
+        width: 181
+        height: 348
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76f13f967319c484f87aecfcd1e91987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_18
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 581
+        width: 179
+        height: 353
+      alignment: 9
+      pivot: {x: 0.5642458, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24659e3929c724b48ace95094d1f3316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_19
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 576
+        width: 182
+        height: 357
+      alignment: 9
+      pivot: {x: 0.5879121, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d295bbaa1ecb06e4da263008c1355651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_20
+      rect:
+        serializedVersion: 2
+        x: 1187
+        y: 570
+        width: 183
+        height: 363
+      alignment: 9
+      pivot: {x: 0.6229508, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11660bd5de7e3ee4bbcc581dec41ac30
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_21
+      rect:
+        serializedVersion: 2
+        x: 1685
+        y: 562
+        width: 185
+        height: 366
+      alignment: 9
+      pivot: {x: 0.65405405, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb9cd3ebdf5cca74e94660469eea3472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_22
+      rect:
+        serializedVersion: 2
+        x: 2202
+        y: 562
+        width: 181
+        height: 356
+      alignment: 9
+      pivot: {x: 0.53038675, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50cff6aa02268c641965a24d2afbdea3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_23
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 59
+        width: 203
+        height: 346
+      alignment: 9
+      pivot: {x: 0.4729064, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35d49323be486654dafd5356502db92b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_24
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 56
+        width: 227
+        height: 335
+      alignment: 9
+      pivot: {x: 0.45814976, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fcfef5ce03aff54aa9ee5768d297553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_25
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 59
+        width: 206
+        height: 346
+      alignment: 9
+      pivot: {x: 0.4514563, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60ba964b2f9042c469f12a4cc1f8ba80
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_26
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 59
+        width: 187
+        height: 361
+      alignment: 9
+      pivot: {x: 0.44385028, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27ba7152b4bb8714fb88cc111dba86bd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_WIZARD_27
+      rect:
+        serializedVersion: 2
+        x: 2201
+        y: 59
+        width: 182
+        height: 380
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6500dcec01d9d6641915452dc0821c6a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 1c2cd96e0b5cc0d41ad7b522c7e07a9e
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
