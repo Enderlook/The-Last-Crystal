@@ -1,101 +1,91 @@
-﻿using System.Collections.Generic;
-using Navigation;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System;
-using Serializables;
+using UnityEngine;
 
-[Serializable]
-public class Connections : SerializableList<Connection>
+namespace Navigation
 {
-    public Connections(int capacity) : base(capacity) { }
-
-    public Connections(List<Connection> list) : base(list) { }
-}
-
-[Serializable]
-public class NodeConnections : SerializableDictionary<Vector2, Connections> { }
-
-[Serializable]
-public class Graph : ISerializationCallbackReceiver
-{
-    public enum PositionReference { LOCAL, WORLD }
-
-    public Transform reference;
-
-    [SerializeField]
-    private List<Node> grid;
-    public List<Node> Grid {
-        get {
-            if (grid == null)
-                grid = new List<Node>();
-            return grid;
-        }
-        set => grid = value;
-    }
-
-    [SerializeField]
-    private NodeConnections connections;
-
-    void ISerializationCallbackReceiver.OnBeforeSerialize()
+    [Serializable]
+    public class Graph
     {
-        RemoveDuplicatedPositionsFromGrid();
-        connections = new NodeConnections();
-        foreach (Node node in Grid)
+        /// <summary>
+        /// How position of <see cref="Node"/>s is calculated.
+        /// </summary>
+        public enum PositionReference
         {
-            connections.Add(node.position, new Connections(node.Connections));
+            /// <summary>
+            /// Position is calculated by local coordinates from <see cref="reference"/>.
+            /// </summary>
+            LOCAL,
+            /// <summary>
+            /// Position is calculated without <see cref="reference"/>.
+            /// </summary>
+            WORLD
         }
-    }
 
-    void ISerializationCallbackReceiver.OnAfterDeserialize()
-    {
-        Dictionary<Vector2, Node> nodesByPosition = grid.ToDictionary(e => e.position);
+        /// <summary>
+        /// Reference point of all <see cref="Node"/>s positions.
+        /// </summary>
+        public Transform reference;
 
-        foreach (Node node in Grid)
+        [SerializeField]
+        private List<Node> grid;
+        /// <summary>
+        /// All nodes of this graph.
+        /// </summary>
+        public List<Node> Grid {
+            get => grid ?? (grid = new List<Node>());
+            set => grid = value;
+        }
+
+        /// <summary>
+        /// Remove all duplicated <see cref="Node"/>s in <see cref="Grid"/>;
+        /// </summary>
+        public void RemoveDuplicatedPositionsFromGrid() => Grid = Grid.Distinct().ToList();
+
+        /// <summary>
+        /// Get the world position of <paramref name="node"/>.
+        /// </summary>
+        /// <param name="node"><see cref="Node"/> to get world position.</param>
+        /// <returns>World position of <paramref name="node"/>.</returns>
+        public Vector2 GetWorldPosition(Node node) => reference == null ? node.position : node.position + (Vector2)reference.position;
+
+        /// <summary>
+        /// Get the local position of <paramref name="node"/> in respect to <see cref="reference"/>.
+        /// </summary>
+        /// <param name="node"><see cref="Node"/> to get local position.</param>
+        /// <returns>Local position of <paramref name="node"/>.</returns>
+        public Vector2 GetLocalPosition(Vector2 position) => reference == null ? position : position - (Vector2)reference.position;
+
+        /// <summary>
+        /// Add <see cref="Node"/>.
+        /// </summary>
+        /// <param name="position">It's position.</param>
+        /// <param name="isActive">Whenever it's enabled or not.</param>
+        /// <param name="mode">Whenever <paramref name="position"/> is applied globally or locally in respect to <see cref="reference"/>.</param>
+        /// <returns>New <see cref="Node"/>.</returns>
+        public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD)
         {
-            if (connections.TryGetValue(node.position, out Connections nodeConnections))
+            if (mode == PositionReference.WORLD)
+                position -= (Vector2)reference.position;
+            Node node = Node.CreateNode(position, isActive);
+            Grid.Add(node);
+            return node;
+        }
+
+        /// <summary>
+        /// Remove <paramref name="node"/> from <see cref="Grid"/> and all its <see cref="Connection"/>s from and to it.
+        /// </summary>
+        /// <param name="node"><see cref="Node"/> to remove.</param>
+        public void RemoveNodeAndConnections(Node node)
+        {
+            for (int i = Grid.Count - 1; i >= 0; i--)
             {
-                node.Connections = nodeConnections.GetList();
-                foreach (Connection connection in node.Connections)
-                {
-                    connection.Deserialize(nodesByPosition);
-                }
+                Node n = Grid[i];
+                if (n == node)
+                    Grid.RemoveAt(i);
+                n.TryRemoveConnectionTo(node);
             }
         }
-        connections = null;
-    }
-
-    public void RemoveDuplicatedPositionsFromGrid()
-    {
-        HashSet<Vector2> usedPositions = new HashSet<Vector2>();
-        for (int i = Grid.Count - 1; i >= 0; i--)
-        {
-            if (usedPositions.Contains(Grid[i].position))
-                Grid.RemoveAt(i);
-            else
-                usedPositions.Add(Grid[i].position);
-        }
-    }
-
-    public Vector2 GetWorldPosition(Node node)
-    {
-        if (reference == null)
-            return node.position;
-        return node.position + (Vector2)reference.position;
-    }
-    public Vector2 GetLocalPosition(Vector2 position)
-    {
-        if (reference == null)
-            return position;
-        return position - (Vector2)reference.position;
-    }
-
-    public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD)
-    {
-        if (mode == PositionReference.WORLD)
-            position -= (Vector2)reference.position;
-        Node node = new Node(position, isActive);
-        Grid.Add(node);
-        return node;
     }
 }

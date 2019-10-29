@@ -8,7 +8,7 @@ namespace AdditionalAttributes.PostCompiling
     /// Executes the method decorated by this attribute each time Unity compiles code.<br>
     /// The method to decorate must have the signature DoSomething().
     /// </summary>
-    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic)]
+    [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)]
     [AttributeUsageMethod(1, parameterType = AttributeUsageMethodAttribute.ParameterMode.VoidOrNone)]
     public sealed class ExecuteWhenScriptsReloads : BaseExecuteWhenScriptsReloads
     {

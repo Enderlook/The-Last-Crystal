@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using AdditionalComponents;
+using Master;
+using SoundSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,53 +24,6 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
 #pragma warning disable CS0649
-
-    private static readonly List<Animator> animationsToRenable = new List<Animator>();
-    private static readonly Dictionary<StoppableRigidbody, float> stoppableRigidbodySpeeds = new Dictionary<StoppableRigidbody, float>();
-
-    public static bool IsPlaying => !isPause;
-    private static bool isPause;
-    public static bool IsPause {
-        get => isPause;
-        private set {
-            if (isPause == value)
-                return;
-            isPause = value;
-            if (value)
-            {
-                foreach (Animator animator in FindObjectsOfType<Animator>())
-                {
-                    if (animator.enabled)
-                    {
-                        animator.enabled = false;
-                        animationsToRenable.Add(animator);
-                    }
-                }
-
-                foreach (StoppableRigidbody stoppableRigidbody in FindObjectsOfType<StoppableRigidbody>())
-                {
-                    stoppableRigidbodySpeeds.Add(stoppableRigidbody, stoppableRigidbody.SpeedMultiplier);
-                    stoppableRigidbody.SpeedMultiplier = 0;
-                }
-            }
-            else
-            {
-                animationsToRenable.ForEach(e => e.enabled = true);
-                animationsToRenable.Clear();
-                foreach (KeyValuePair<StoppableRigidbody, float> keyValuePair in stoppableRigidbodySpeeds)
-                {
-                    keyValuePair.Key.SpeedMultiplier = keyValuePair.Value;
-                }
-                stoppableRigidbodySpeeds.Clear();
-            }
-        }
-    }
-
-    private void Awake()
-    {
-        animationsToRenable.Clear();
-        stoppableRigidbodySpeeds.Clear();
-    }
 
     private void Start() => DisplayMenuPause(false);
 
@@ -98,10 +51,9 @@ public class Menu : MonoBehaviour
         }
         if (menuNoToggleable)
             return;
-        IsPause = active != null ? (bool)active : !IsPause;
-        Time.timeScale = IsPause ? 0 : 1;
-        menu.SetActive(IsPause);
-        PlayMusic(IsPause, true);
+        Settings.IsPause = active != null ? (bool)active : !Settings.IsPause;
+        menu.SetActive(Settings.IsPause);
+        PlayMusic(Settings.IsPause, true);
     }
 
     /// <summary>
@@ -155,7 +107,7 @@ public class Menu : MonoBehaviour
     /// <param name="hasWon">Whenever players has won or loose.</param>
     public void GameOver(bool hasWon)
     {
-        IsPause = true;
+        Settings.IsPause = true;
         menuNoToggleable = true;
         if (hasWon)
             win.SetActive(true);

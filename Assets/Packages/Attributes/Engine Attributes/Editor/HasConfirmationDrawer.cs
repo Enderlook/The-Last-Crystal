@@ -7,7 +7,7 @@ using UnityEngine;
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(HasConfirmationFieldAttribute))]
-    internal class HasConfirmationAttributeDrawer : PropertyDrawer
+    internal class HasConfirmationDrawer : PropertyDrawer
     {
         private bool confirm;
 
@@ -19,7 +19,7 @@ namespace AdditionalAttributes
 
             VerticalRectBuilder verticalRectBuilder = new VerticalRectBuilder(position.x, position.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight);
 
-            object targetObject = property.GetTargetObjectOfProperty(true);
+            object targetObject = property.GetParentTargetObjectOfProperty();
 
             FieldInfo confirmationField = targetObject.GetType().GetField(hasConfirmationFieldAttribute.ConfirmFieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 

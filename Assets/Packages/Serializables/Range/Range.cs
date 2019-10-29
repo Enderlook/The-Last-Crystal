@@ -3,7 +3,15 @@ using UnityEngine;
 
 namespace Range
 {
-    public interface IRange<T>
+    public interface IBasicRange<T>
+    {
+        /// <summary>
+        /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
+        /// </summary>
+        T Value { get; }
+    }
+
+    public interface IRange<T> : IBasicRange<T>
     {
         /// <summary>
         /// Return the highest bound of the range.<br/>
@@ -14,11 +22,6 @@ namespace Range
         /// Return the lowest bound of the range.<br/>
         /// </summary>
         T Min { get; }
-
-        /// <summary>
-        /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
-        /// </summary>
-        T Value { get; }
     }
 
     [Serializable]

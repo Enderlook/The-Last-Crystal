@@ -1,6 +1,7 @@
 using System;
 using AdditionalComponents;
 using CreaturesAddons.Weapons;
+using Master;
 using UnityEngine;
 
 namespace CreaturesAddons
@@ -60,7 +61,7 @@ namespace CreaturesAddons
 
         protected override void Update()
         {
-            if (Menu.IsPause)
+            if (Settings.IsPause)
                 return;
             move?.Move(Time.deltaTime, SpeedMultiplier * speed);
             attack?.Attack(Time.time);

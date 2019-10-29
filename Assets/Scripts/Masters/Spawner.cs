@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
         for (; enemiesToSpawn > 0; enemiesToSpawn--)
         {
             yield return new WaitUntil(() => enemiesAlive < simultaneousEnemies);
-            yield return new WaitWhile(() => Menu.IsPause);
+            yield return new WaitWhile(() => Settings.IsPause);
 
             int p = Random.Range(0, points.Count);
             int x = Random.Range(0, enemies.Length);

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
-    internal static class HasConfirmationFieldAttributeTesting
+    internal static class HasConfirmationFieldTesting
     {
         private static readonly Dictionary<Type, List<HasConfirmationFieldAttribute>> typesAndAttributes = new Dictionary<Type, List<HasConfirmationFieldAttribute>>();
 

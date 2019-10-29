@@ -7,9 +7,9 @@ using Random = UnityEngine.Random;
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(RangeAttribute))]
-    internal class RangeAttributeDrawer : PropertyDrawer
+    internal class RangeDrawer : PropertyDrawer
     {
-        private readonly string error = $"{nameof(RangeAttributeDrawer)} only supports serialized properties of {nameof(SerializedPropertyType.Integer)} ({typeof(int)}) and {nameof(SerializedPropertyType.Float)} ({typeof(float)})).";
+        private readonly string error = $"{nameof(RangeAttribute)} only supports serialized properties of {nameof(SerializedPropertyType.Integer)} ({typeof(int)}) and {nameof(SerializedPropertyType.Float)} ({typeof(float)})).";
 
         private bool foldout;
 

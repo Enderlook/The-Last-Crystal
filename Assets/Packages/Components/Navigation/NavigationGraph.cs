@@ -73,7 +73,7 @@ namespace Navigation
                 {
                     Node nodeToConnect = GetNodeFromDirection(i, (Directions)direction);
                     if (nodeToConnect != null)
-                        node.Connections.Add(new Connection(node, nodeToConnect));
+                        node.AddConnectionTo(nodeToConnect);
                 }
             }
         }

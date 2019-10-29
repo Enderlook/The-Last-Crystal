@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditorHelper;
 using UnityEngine;
 using Utils;
 
-namespace Navigation.UnityInspector
+namespace Navigation
 {
     [CustomEditor(typeof(NavigationGraph))]
-    public class NavigationGraphEditor : Editor
+    internal class NavigationGraphEditor : Editor
     {
         private NavigationGraph navigationGraph;
         private List<Node> Grid => navigationGraph.Grid;
@@ -76,8 +77,8 @@ namespace Navigation.UnityInspector
 
             serializedObject.ApplyModifiedProperties();
         }
-
-        public void OnSceneGUI()
+        
+        private void OnSceneGUI()
         {
             if (navigationGraph == null)
                 return;
@@ -221,9 +222,12 @@ namespace Navigation.UnityInspector
                 {
                     if (e.alt)
                     {
-                        RemoveConnection(selectedNode, closestNode);
-                        if (e.control)
-                            RemoveConnection(closestNode, selectedNode);
+                        if (selectedNode != null && closestNode != null && selectedNode != closestNode)
+                        {
+                            selectedNode.TryRemoveConnectionTo(closestNode);
+                            if (e.control)
+                                closestNode.TryRemoveConnectionTo(selectedNode);
+                        }
                     }
                     else
                     {
@@ -248,17 +252,7 @@ namespace Navigation.UnityInspector
                         // Remove Node
                         if (closestNode != null)
                         {
-                            // If the node already exist in the grid, remove it
-                            for (int i = Grid.Count - 1; i > 0; i++)
-                            {
-                                if (Grid[i] == closestNode)
-                                {
-                                    Grid.RemoveAt(i);
-                                    continue;
-                                }
-                                Node node = Grid[i];
-                                RemoveConnection(node, closestNode, true);
-                            }
+                            navigationGraph.graph.RemoveNodeAndConnections(closestNode);
                             if (selectedNode == closestNode)
                                 selectedNode = null;
                             closestNode = null;
@@ -282,33 +276,17 @@ namespace Navigation.UnityInspector
             }
         }
 
-        private static void RemoveConnection(Node from, Node to, bool twoWays = false)
-        {
-            if (twoWays)
-            {
-                RemoveConnection(from, to);
-                RemoveConnection(to, from);
-            }
-            else
-            {
-                for (int i = 0; i < from.Connections.Count; i++)
-                {
-                    if (from.Connections[i].end == to)
-                        from.Connections.RemoveAt(i);
-                }
-            }
-        }
         private static void AlternateOrAddConnection(Node from, Node to)
         {
-            if (from == to)
+            if (from == to || from == null || to == null)
                 return;
-            Connection connection = from.GetConnectionTo(to);
-            if (connection == null)
-                // Add connection
-                from.AddConnectionTo(to, true);
-            else
+
+            if (from.TryGetConnectionTo(to, out Connection connection))
                 // Switch Connection
                 connection.SetActive(!connection.IsActive);
+            else
+                // Add connection
+                from.AddConnectionTo(to, true);
         }
 
         private Vector2 GetAndDrawMousePosition()
@@ -381,7 +359,8 @@ namespace Navigation.UnityInspector
         {
             foreach (Connection connection in node.Connections)
             {
-                connection?.DrawConnection(active, inactive, reference, fontSize);
+                if (connection != null) // Why this?
+                    connection.DrawConnection(active, inactive, reference, fontSize);
             }
         }
 
@@ -389,7 +368,8 @@ namespace Navigation.UnityInspector
         {
             foreach (Connection connection in node.Connections)
             {
-                connection?.DrawConnection(color, reference, fontSize);
+                if (connection != null) // Why this?
+                    connection.DrawConnection(color, reference, fontSize);
             }
         }
 
@@ -404,13 +384,13 @@ namespace Navigation.UnityInspector
 
         public static void DrawLineTo(this Node source, Vector2 target, Color color, Graph reference = null, float? screenSpaceSize = null)
         {
-            Vector2 start = ConnectionEditorExtensions.GetWorldPosition(reference, source);
+            Vector2 start = reference.GetWorldPosition(source);
             DrawLineTo(start, target, color, screenSpaceSize);
         }
 
         public static void DrawLineTo(this Node source, Node target, Color color, Graph reference = null, float? screenSpaceSize = null)
         {
-            Vector2[] positions = ConnectionEditorExtensions.GetWorldPosition(reference, source, target);
+            Vector2[] positions = reference.GetWorldPosition(source, target);
             Vector2 start = positions[0];
             Vector2 end = positions[1];
 
@@ -419,8 +399,8 @@ namespace Navigation.UnityInspector
 
         public static Vector2 DrawPositionHandler(this Node source, Graph reference = null)
         {
-            Vector2 position = ConnectionEditorExtensions.GetWorldPosition(reference, source);
-            position = ConnectionEditorExtensions.GetLocalPosition(reference, Handles.PositionHandle(position, Quaternion.identity));
+            Vector2 position = reference.GetWorldPosition(source);
+            position = reference.GetLocalPosition(Handles.PositionHandle(position, Quaternion.identity));
             source.position = position;
             return position;
         }
@@ -436,7 +416,7 @@ namespace Navigation.UnityInspector
 
         public static void DrawConnection(this Connection connection, Color color, Graph reference = null, int fontSize = 0)
         {
-            Vector2[] positions = GetWorldPosition(reference, connection.start, connection.end);
+            Vector2[] positions = reference.GetWorldPosition(connection.start, connection.end);
             Vector2 start = positions[0];
             Vector2 end = positions[1];
 
@@ -458,7 +438,7 @@ namespace Navigation.UnityInspector
             }
         }
 
-        public static void DrawDistance(Vector2 a, Vector2 b, Color textColor, int fontSize = 10)
+        public static void DrawDistance(this Vector2 a, Vector2 b, Color textColor, int fontSize = 10)
         {
             GUIStyle style = new GUIStyle
             {
@@ -471,29 +451,19 @@ namespace Navigation.UnityInspector
 
         public static void DrawDistance(this Node source, Node target, Color textColor, Graph reference = null, int fontSize = 10)
         {
-            Vector2[] positions = GetWorldPosition(reference, source, target);
+            Vector2[] positions = reference.GetWorldPosition(source, target);
             DrawDistance(positions[0], positions[1], textColor, fontSize);
         }
 
         public static void DrawDistance(this Node source, Vector2 target, Color textColor, Graph reference = null, int fontSize = 10)
         {
-            Vector2 start = GetWorldPosition(reference, source);
+            Vector2 start = reference.GetWorldPosition(source);
             DrawDistance(start, target, textColor, fontSize);
         }
 
-        public static Vector2[] GetWorldPosition(Graph reference, params Node[] nodes)
+        public static Vector2[] GetWorldPosition(this Graph reference, params Node[] nodes)
         {
             return reference == null ? nodes.Select(e => e.position).ToArray() : nodes.Select(e => reference.GetWorldPosition(e)).ToArray();
-        }
-
-        public static Vector2 GetWorldPosition(Graph reference, Node node)
-        {
-            return reference == null ? node.position : reference.GetWorldPosition(node);
-        }
-
-        public static Vector2 GetLocalPosition(Graph reference, Vector2 position)
-        {
-            return reference == null ? position : reference.GetLocalPosition(position);
         }
     }
 }
