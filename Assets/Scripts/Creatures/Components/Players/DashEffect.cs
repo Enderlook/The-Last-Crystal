@@ -62,12 +62,5 @@ namespace PlayerAddons
                     break;
             }
         }
-
-        IEnumerator DashMove()
-        {
-            if (sprite.flipX) rb2D.AddForce(rb2D.transform.right * forceDash);
-            else rb2D.AddForce(-rb2D.transform.right * forceDash);
-            yield return new WaitForSeconds(.3f);
-        }
     }
 }
