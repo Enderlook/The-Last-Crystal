@@ -16,6 +16,8 @@ namespace PlayerAddons
         private float startDashTime = 1;
         [SerializeField, Tooltip("Velocity dash.")]
         private float forceDash = 1;
+        [SerializeField, Tooltip("Effect.")]
+        private GameObject effect;
 
         public DashState dashState;
 
@@ -23,6 +25,7 @@ namespace PlayerAddons
         private SpriteRenderer sprite;
         private Vector2 savedVelocity;
         private float dashTime;
+        private GameObject dash;
 
         void IInit.Init(Creature creature)
         {
@@ -39,6 +42,8 @@ namespace PlayerAddons
                     if (Input.GetKey(dashKey))
                     {
                         savedVelocity = rb2D.velocity;
+                        dash = Instantiate(effect, new Vector2(rb2D.position.x, rb2D.position.y + 0.15f), 
+                            transform.rotation);
                         float vel = sprite.flipX ? -forceDash : forceDash;
                         rb2D.velocity = Vector2.right * vel;
                         dashState = DashState.Dashing;
@@ -47,6 +52,7 @@ namespace PlayerAddons
                 case DashState.Dashing:
                     if (dashTime <= 0)
                     {
+                        Destroy(dash);
                         dashTime = 0;
                         rb2D.velocity = savedVelocity;
                         dashState = DashState.Cooldown;

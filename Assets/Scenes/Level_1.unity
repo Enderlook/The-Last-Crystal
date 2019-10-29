@@ -3392,6 +3392,8 @@ MonoBehaviour:
   timeBtwSpawn: 2
   startSpawn: 3
   boss: {fileID: 5363415117319019817, guid: 68bf06f97f8991f4584e3e4ce3ed5305, type: 3}
+  particle: {fileID: 6477713787646980818, guid: b40b703b9eaf73a409911f45eaf0db3b,
+    type: 3}
   navigationGraph: {fileID: 267235809}
   points:
   - {x: 5.228639, y: -0.83387804}

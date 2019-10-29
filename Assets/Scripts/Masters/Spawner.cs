@@ -22,6 +22,8 @@ public class Spawner : MonoBehaviour
     private float startSpawn;
     [SerializeField, Tooltip("Boss spawned after all enemies die.")]
     private GameObject boss;
+    [SerializeField, Tooltip("Particle effect.")]
+    private GameObject particle;
 
     [Header("Setup")]
     [SerializeField, Tooltip("Navigation Graph used to produce enemy movement.")]
@@ -29,6 +31,7 @@ public class Spawner : MonoBehaviour
 #pragma warning restore CS0649
 
     private int enemiesAlive;
+    private GameObject particleInstantiated;
 
     [DrawVectorRelativeToTransform]
     public List<Vector2> points;
@@ -46,6 +49,8 @@ public class Spawner : MonoBehaviour
             int p = Random.Range(0, points.Count);
             int x = Random.Range(0, enemies.Length);
 
+            particleInstantiated = Instantiate(particle, new Vector2(points[p].x, points[p].y), 
+                Quaternion.identity);
             SpawnEnemy(enemies[x], points[p]);
 
             yield return new WaitForSeconds(timeBtwSpawn);
