@@ -3384,9 +3384,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 2669955741155959395, guid: f25a54120d757724087626040c499bf1, type: 3}
-  - {fileID: 8848631403374183089, guid: 1d89acb7a9052324291fbb9233650d2e, type: 3}
-  - {fileID: 1091846710704527667, guid: b87a0287fc4bb504a908bff1217f33b1, type: 3}
+  - prefabEnemy: {fileID: 8848631403374183089, guid: 1d89acb7a9052324291fbb9233650d2e,
+      type: 3}
+    probability: 5
+  - prefabEnemy: {fileID: 1091846710704527667, guid: b87a0287fc4bb504a908bff1217f33b1,
+      type: 3}
+    probability: 50
+  - prefabEnemy: {fileID: 2669955741155959395, guid: f25a54120d757724087626040c499bf1,
+      type: 3}
+    probability: 80
   simultaneousEnemies: 4
   enemiesToSpawn: 14
   timeBtwSpawn: 2
