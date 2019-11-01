@@ -1,36 +1,32 @@
 fileFormatVersion: 2
-guid: ae12d55fb51d4eb46a3e3baf15231c6b
+guid: 8756468767f61934ea35393967471890
 TextureImporter:
   fileIDToRecycleName:
-    21300000: RUN_WIZARD_0
-    21300002: RUN_WIZARD_1
-    21300004: RUN_WIZARD_2
-    21300006: RUN_WIZARD_3
-    21300008: RUN_WIZARD_4
-    21300010: RUN_WIZARD_5
-    21300012: RUN_WIZARD_6
-    21300014: RUN_WIZARD_7
-    21300016: RUN_WIZARD_9
-    21300018: RUN_WIZARD_11
-    21300020: RUN_WIZARD_13
-    21300022: RUN_WIZARD_14
-    21300024: RUN_WIZARD_15
-    21300026: RUN_WIZARD_16
-    21300028: RUN_WIZARD_17
-    21300030: RUN_WIZARD_18
-    21300032: RUN_WIZARD_19
-    21300034: RUN_WIZARD_20
-    21300036: RUN_WIZARD_21
-    21300038: RUN_WIZARD_22
-    21300040: RUN_WIZARD_23
-    21300042: RUN_WIZARD_24
-    21300044: RUN_WIZARD_25
-    21300046: RUN_WIZARD_26
-    21300048: RUN_WIZARD_27
-    21300050: RUN_WIZARD_28
-    21300052: RUN_WIZARD_29
-    21300054: RUN_WIZARD_30
-    21300056: RUN_WIZARD_31
+    21300000: IDLE_WIZARD_V2_0
+    21300002: IDLE_WIZARD_V2_1
+    21300004: IDLE_WIZARD_V2_2
+    21300006: IDLE_WIZARD_V2_3
+    21300008: IDLE_WIZARD_V2_4
+    21300010: IDLE_WIZARD_V2_5
+    21300012: IDLE_WIZARD_V2_6
+    21300014: IDLE_WIZARD_V2_7
+    21300016: IDLE_WIZARD_V2_8
+    21300018: IDLE_WIZARD_V2_9
+    21300020: IDLE_WIZARD_V2_10
+    21300022: IDLE_WIZARD_V2_11
+    21300024: IDLE_WIZARD_V2_11
+    21300026: IDLE_WIZARD_V2_12
+    21300028: IDLE_WIZARD_V2_13
+    21300030: IDLE_WIZARD_V2_14
+    21300032: IDLE_WIZARD_V2_15
+    21300034: IDLE_WIZARD_V2_16
+    21300036: IDLE_WIZARD_V2_17
+    21300038: IDLE_WIZARD_V2_18
+    21300040: IDLE_WIZARD_V2_19
+    21300042: IDLE_WIZARD_V2_20
+    21300044: IDLE_WIZARD_V2_21
+    21300046: IDLE_WIZARD_V2_22
+    21300048: IDLE_WIZARD_V2_23
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -157,113 +153,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RUN_WIZARD_0
+      name: IDLE_WIZARD_V2_0
       rect:
         serializedVersion: 2
-        x: 122
-        y: 2056
-        width: 225
+        x: 166
+        y: 2561
+        width: 181
         height: 377
-      alignment: 9
-      pivot: {x: 0.5466667, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7f14247433859c644b05e6b9175588e8
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_1
-      rect:
-        serializedVersion: 2
-        x: 625
-        y: 2056
-        width: 222
-        height: 376
-      alignment: 9
-      pivot: {x: 0.5360361, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 01e2da86f0d47354b96fd17710911f2e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_2
-      rect:
-        serializedVersion: 2
-        x: 1132
-        y: 2054
-        width: 214
-        height: 378
-      alignment: 9
-      pivot: {x: 0.52803737, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: daf144c2d4e59834487f605478b09acf
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_3
-      rect:
-        serializedVersion: 2
-        x: 1636
-        y: 2051
-        width: 211
-        height: 376
-      alignment: 9
-      pivot: {x: 0.51184833, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 64f35bfa9ddbd804da795f1226464048
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_4
-      rect:
-        serializedVersion: 2
-        x: 2141
-        y: 2054
-        width: 208
-        height: 378
-      alignment: 9
-      pivot: {x: 0.5048077, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0065233027661074884243734ea29b50
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_5
-      rect:
-        serializedVersion: 2
-        x: 140
-        y: 1555
-        width: 207
-        height: 380
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,19 +167,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea56b659f7d29e74aaaf53fb00ae5867
+      spriteID: 11ece2d50c63d864cbd910278e192a86
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_6
+      name: IDLE_WIZARD_V2_1
       rect:
         serializedVersion: 2
-        x: 640
-        y: 1556
-        width: 206
-        height: 384
+        x: 665
+        y: 2561
+        width: 183
+        height: 377
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,159 +187,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f5703070744bc240aa53e62a259fe65
+      spriteID: 7922069374a88e14f9baa764976065e4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_7
+      name: IDLE_WIZARD_V2_2
       rect:
         serializedVersion: 2
-        x: 1141
-        y: 1556
-        width: 207
-        height: 387
-      alignment: 9
-      pivot: {x: 0.49275362, y: 0.015503876}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cce82e10c74f6024699c9cda78c9862c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_9
-      rect:
-        serializedVersion: 2
-        x: 1641
-        y: 1558
-        width: 206
-        height: 387
-      alignment: 9
-      pivot: {x: 0.49514565, y: 0.015503876}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b22d49829fba6f4181952b30415bb73
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_11
-      rect:
-        serializedVersion: 2
-        x: 2140
-        y: 1567
-        width: 209
-        height: 378
-      alignment: 9
-      pivot: {x: 0.5119617, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4904e99f119c6cb49b13952e52401e20
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_14
-      rect:
-        serializedVersion: 2
-        x: 635
-        y: 1064
-        width: 215
+        x: 1165
+        y: 2561
+        width: 183
         height: 376
-      alignment: 9
-      pivot: {x: 0.52093023, y: -0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b4add755a11a6745b6eec556b10f7a7
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_15
-      rect:
-        serializedVersion: 2
-        x: 1133
-        y: 1060
-        width: 215
-        height: 376
-      alignment: 9
-      pivot: {x: 0.53023255, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 919bb8e097a9c4943b2f30be86ff3e7f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_16
-      rect:
-        serializedVersion: 2
-        x: 1638
-        y: 1057
-        width: 209
-        height: 379
-      alignment: 9
-      pivot: {x: 0.507177, y: -0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e855bf7250bf54439ade78261ae8d7b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_17
-      rect:
-        serializedVersion: 2
-        x: 2139
-        y: 1055
-        width: 207
-        height: 376
-      alignment: 9
-      pivot: {x: 0.5120773, y: -0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc61be1ea4dcdf34b937ac097c7d6f6f
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_18
-      rect:
-        serializedVersion: 2
-        x: 137
-        y: 1068
-        width: 213
-        height: 382
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -451,39 +207,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5237e034fea22449bc08994ac1740ff
+      spriteID: 89947e065fb00f84e91c9bf769e9511b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_19
+      name: IDLE_WIZARD_V2_3
       rect:
         serializedVersion: 2
-        x: 145
-        y: 552
-        width: 202
+        x: 1666
+        y: 2561
+        width: 182
         height: 376
-      alignment: 9
-      pivot: {x: 0.4752475, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d4e65e9935f514248a8c8c929ed4d19e
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RUN_WIZARD_20
-      rect:
-        serializedVersion: 2
-        x: 645
-        y: 552
-        width: 201
-        height: 381
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -491,167 +227,407 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c8122a66e15ec948806d5d8955f0ee3
+      spriteID: 0f5d61fbcaa5a6a479ad98d5cde72941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_21
+      name: IDLE_WIZARD_V2_4
       rect:
         serializedVersion: 2
-        x: 1146
-        y: 554
-        width: 200
-        height: 381
-      alignment: 9
-      pivot: {x: 0.48499998, y: 0}
+        x: 166
+        y: 2061
+        width: 183
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1253c8fdab86a54a96d8caac05c7e76
+      spriteID: c0f5446c154d5fc4e932dfe2aaf90846
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_22
+      name: IDLE_WIZARD_V2_5
       rect:
         serializedVersion: 2
-        x: 1647
-        y: 555
-        width: 199
-        height: 387
-      alignment: 9
-      pivot: {x: 0.5125628, y: 0}
+        x: 665
+        y: 2061
+        width: 183
+        height: 372
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8053f3f03f4442f4f92239bd8bb079e7
+      spriteID: 3bfb67ca678fcf24f801a3f35a77bc3e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_23
+      name: IDLE_WIZARD_V2_6
       rect:
         serializedVersion: 2
-        x: 2147
-        y: 556
-        width: 199
-        height: 386
-      alignment: 9
-      pivot: {x: 0.4874372, y: 0.012953367}
+        x: 1166
+        y: 2061
+        width: 182
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3b76170ae2177547aededea59479b76
+      spriteID: 7dcbbc719f44ad540bbbd94e8c11a272
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_25
+      name: IDLE_WIZARD_V2_7
       rect:
         serializedVersion: 2
-        x: 149
-        y: 57
-        width: 198
-        height: 389
-      alignment: 9
-      pivot: {x: 0.45454547, y: 0.012853471}
+        x: 1666
+        y: 2061
+        width: 182
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 38d4bd9959ad68540a4b33e37ef44ccf
+      spriteID: b65fe66bd7f148c41bc0ea4a01e90c0c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_27
+      name: IDLE_WIZARD_V2_8
       rect:
         serializedVersion: 2
-        x: 645
-        y: 65
-        width: 201
-        height: 381
-      alignment: 9
-      pivot: {x: 0.47263682, y: 0.005249344}
+        x: 166
+        y: 1562
+        width: 181
+        height: 373
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5b8a40401abf5804d9587b7d606aab97
+      spriteID: ba75dd613726d8b449a1713f46a5aeef
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_29
+      name: IDLE_WIZARD_V2_9
       rect:
         serializedVersion: 2
-        x: 1143
-        y: 68
-        width: 203
-        height: 378
-      alignment: 9
-      pivot: {x: 0.5221675, y: -0}
+        x: 665
+        y: 1562
+        width: 183
+        height: 375
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84bcadc0aba0d4b4a9f658dbe37f897f
+      spriteID: 6e2e0a0ee1c7a0e43841a9e49f058166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_30
+      name: IDLE_WIZARD_V2_10
       rect:
         serializedVersion: 2
-        x: 1631
-        y: 63
-        width: 216
+        x: 1166
+        y: 1562
+        width: 182
         height: 376
-      alignment: 9
-      pivot: {x: 0.5185185, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1cb4fe873a08b840b9c326d1aa4aefc
+      spriteID: 5f5406bd0df5660488f101336f1c2cc1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RUN_WIZARD_31
+      name: IDLE_WIZARD_V2_11
       rect:
         serializedVersion: 2
-        x: 2122
-        y: 57
-        width: 225
+        x: 1665
+        y: 1562
+        width: 185
         height: 378
-      alignment: 9
-      pivot: {x: 0.5511111, y: -0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 478b069768f960443b418077766c8c82
+      spriteID: 2a98af2a065782d469711fcbfccfc5a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_12
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 1061
+        width: 183
+        height: 377
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09be7a3f678f644892f78695c94c787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_13
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 1061
+        width: 183
+        height: 377
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad1a12577eb730e41abf45d937f2858e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_14
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 1061
+        width: 183
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c660582faec5a249924a514e55b8120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_15
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 1061
+        width: 182
+        height: 375
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f9f740d71c3deb4cbd607aac1fb5da6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_16
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 561
+        width: 183
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebc2590fa67ef8142b1f90e46c9dd3bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_17
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 561
+        width: 183
+        height: 372
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb0d8cb4adc2a88479fcfc91f8bbe379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_18
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 561
+        width: 182
+        height: 372
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea1d47fc33b3b2242b94b406c35445eb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_19
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 558
+        width: 182
+        height: 372
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a250dc6498dd864e87115d81325bc08
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_20
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 62
+        width: 183
+        height: 373
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dffacc30daafbdd46aae0d743500b80a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_21
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 62
+        width: 183
+        height: 373
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 557a20597ef85e54dac1e715dad6808a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_22
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 62
+        width: 183
+        height: 375
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65750bcfa8a5020439fe9671e6fee10e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IDLE_WIZARD_V2_23
+      rect:
+        serializedVersion: 2
+        x: 1666
+        y: 62
+        width: 182
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e97fb4db234783848ad2ee057e29f7ed
       vertices: []
       indices: 
       edges: []
@@ -659,7 +635,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 2aa7618a27990ff4b84da29436ff56bb
+    spriteID: 0f19c4d6a56776f4c8dec62c314a357b
     vertices: []
     indices: 
     edges: []
