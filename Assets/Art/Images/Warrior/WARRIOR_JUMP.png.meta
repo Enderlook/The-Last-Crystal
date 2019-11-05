@@ -1,0 +1,652 @@
+fileFormatVersion: 2
+guid: efd9af4b503052d49a88c99eb04554c6
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: WARRIOR_JUMP_0
+    21300002: WARRIOR_JUMP_1
+    21300004: WARRIOR_JUMP_2
+    21300006: WARRIOR_JUMP_3
+    21300008: WARRIOR_JUMP_4
+    21300010: WARRIOR_JUMP_5
+    21300012: WARRIOR_JUMP_6
+    21300014: WARRIOR_JUMP_6
+    21300016: WARRIOR_JUMP_8
+    21300018: WARRIOR_JUMP_7
+    21300020: WARRIOR_JUMP_8
+    21300022: WARRIOR_JUMP_9
+    21300024: WARRIOR_JUMP_10
+    21300026: WARRIOR_JUMP_11
+    21300028: WARRIOR_JUMP_12
+    21300030: WARRIOR_JUMP_13
+    21300032: WARRIOR_JUMP_14
+    21300034: WARRIOR_JUMP_15
+    21300036: WARRIOR_JUMP_16
+    21300038: WARRIOR_JUMP_19
+    21300040: WARRIOR_JUMP_17
+    21300042: WARRIOR_JUMP_21
+    21300044: WARRIOR_JUMP_18
+    21300046: WARRIOR_JUMP_23
+    21300048: WARRIOR_JUMP_19
+    21300050: WARRIOR_JUMP_20
+    21300052: WARRIOR_JUMP_21
+    21300054: WARRIOR_JUMP_22
+    21300056: WARRIOR_JUMP_23
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_0
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 2599
+        width: 164
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c513ee95f1f32664bbf08884c43fa29b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_1
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 2599
+        width: 181
+        height: 278
+      alignment: 9
+      pivot: {x: 0.38121548, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc2893785050164b85eb8cbca41a2c1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_2
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 2599
+        width: 183
+        height: 260
+      alignment: 9
+      pivot: {x: 0.37704918, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05498d7877924c54fae7b490d73419a8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_3
+      rect:
+        serializedVersion: 2
+        x: 1678
+        y: 2596
+        width: 175
+        height: 247
+      alignment: 9
+      pivot: {x: 0.3942857, y: 0.016194332}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0daa86234f67e04793c97341d37bfec
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_4
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 2099
+        width: 155
+        height: 264
+      alignment: 9
+      pivot: {x: 0.38709676, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db3a7fea6665c58459fb408b840761d9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_5
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 2087
+        width: 158
+        height: 295
+      alignment: 9
+      pivot: {x: 0.39240506, y: 0.030508474}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c763ab0ee826d14293a3376490a2912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_6
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 2068
+        width: 173
+        height: 334
+      alignment: 9
+      pivot: {x: 0.38150287, y: 0.077844314}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0814317029744c42aec64259871cf32
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_7
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 2095
+        width: 162
+        height: 307
+      alignment: 9
+      pivot: {x: 0.3888889, y: 0.02931596}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a767f5a4b56544144b3ccaa71c63f707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_8
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 1614
+        width: 161
+        height: 289
+      alignment: 9
+      pivot: {x: 0.38509318, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd04799320927ef438a04d1a33b7f229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_9
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 1622
+        width: 180
+        height: 281
+      alignment: 9
+      pivot: {x: 0.36666667, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573fbe7b7d54887488e0eb1d1bd350b4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_10
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 1629
+        width: 189
+        height: 274
+      alignment: 9
+      pivot: {x: 0.38624337, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7b02d55f01cae94d830b9f0df46ba19
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_11
+      rect:
+        serializedVersion: 2
+        x: 1707
+        y: 1638
+        width: 190
+        height: 265
+      alignment: 9
+      pivot: {x: 0.4052632, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1775947913e68dd43902df4ca83e5a87
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_12
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 1146
+        width: 181
+        height: 257
+      alignment: 9
+      pivot: {x: 0.44751382, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7428185dfb65da43afdbbcea9002cfa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_13
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 1143
+        width: 176
+        height: 260
+      alignment: 9
+      pivot: {x: 0.4943182, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d997e213930107c41a4ef6dc7f5cc3de
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_14
+      rect:
+        serializedVersion: 2
+        x: 1206
+        y: 1140
+        width: 170
+        height: 263
+      alignment: 9
+      pivot: {x: 0.5294118, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27df9ab0798dc17439d666a864261654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_15
+      rect:
+        serializedVersion: 2
+        x: 1704
+        y: 1137
+        width: 163
+        height: 266
+      alignment: 9
+      pivot: {x: 0.595092, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a800d7f22408d1c45b4d6c32cb2f493d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_16
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 631
+        width: 155
+        height: 273
+      alignment: 9
+      pivot: {x: 0.6645161, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17802a5d766461f43abfe4e3c122eae5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_17
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 621
+        width: 166
+        height: 283
+      alignment: 9
+      pivot: {x: 0.68674695, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e999b9aedb712074d9ab238645450313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_18
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 616
+        width: 174
+        height: 288
+      alignment: 9
+      pivot: {x: 0.6954023, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddd60b779f6abdb48885f10c3c31e302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_19
+      rect:
+        serializedVersion: 2
+        x: 1700
+        y: 611
+        width: 174
+        height: 272
+      alignment: 9
+      pivot: {x: 0.6034483, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f115606196eca4f872615ebe38c23c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_20
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 105
+        width: 188
+        height: 258
+      alignment: 9
+      pivot: {x: 0.46808508, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd2872344d9e6240b342daa35877b48
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_21
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 97
+        width: 180
+        height: 246
+      alignment: 9
+      pivot: {x: 0.4166667, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b98943ef5d6b2d49b00064b50d42e11
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_22
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 100
+        width: 183
+        height: 260
+      alignment: 9
+      pivot: {x: 0.3934426, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b265ae6009824dd44b4b9acf673339d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_JUMP_23
+      rect:
+        serializedVersion: 2
+        x: 1711
+        y: 100
+        width: 181
+        height: 276
+      alignment: 9
+      pivot: {x: 0.41436467, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46598ec45b20648498f804c9f5aa6487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: e4c3345675af9074899eab0505f873f1
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
