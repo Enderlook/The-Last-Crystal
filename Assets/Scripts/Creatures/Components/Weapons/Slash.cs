@@ -25,6 +25,14 @@ namespace CreaturesAddons.Weapons
         private Transform thisTransform;
         protected Animator thisAnimator;
         private SpriteRenderer thisSpriteRenderer;
+        private int countOfClicks;
+
+        private static class ANIMATION_STATES
+        {
+            public const string
+                SECOND_COMBO = "Attack2",
+                THIRD_COMBO = "Attack3";
+        }
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
         public bool AutoAttack { get; set; }
@@ -42,10 +50,12 @@ namespace CreaturesAddons.Weapons
 
         protected override void Attack()
         {
+            countOfClicks++;
             if (thisAnimator == null || string.IsNullOrEmpty(animationState))
                 HitTarget();
-            else
-                thisAnimator.SetTrigger(animationState);
+            else if (countOfClicks == 1)
+                thisAnimator.SetBool(animationState, true);
+            countOfClicks = Mathf.Clamp(countOfClicks, 0, 3);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
@@ -59,6 +69,42 @@ namespace CreaturesAddons.Weapons
                 victim.transform.GetComponent<IPush>()?.Push(thisTransform.position, pushStrength);
                 victim.transform.GetComponent<ITakeDamage>()?.TakeDamage(damage);
             }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
+        protected void ComboHitA()
+        {
+            if (countOfClicks >= 2)
+                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, true);
+            else
+            {
+                thisAnimator.SetBool(animationState, false);
+                countOfClicks = 0;
+            }
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack2'")]
+        protected void ComboHitB()
+        {
+            if (countOfClicks >= 3)
+                thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, true);
+            else
+            {
+                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
+                countOfClicks = 0;
+            }
+        }
+
+        protected void ResetAnimation(int isCombo = 0)
+        {
+            if (isCombo == 1)
+            {
+                thisAnimator.SetBool(animationState, false);
+                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
+                thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, false);
+            } else if (isCombo == 0)
+                thisAnimator.SetBool(animationState, false);
+            countOfClicks = 0;
         }
 
         private void AttackIfAutomated()
