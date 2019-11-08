@@ -1,0 +1,647 @@
+fileFormatVersion: 2
+guid: 578524d43caffd543b1df4973c08ba98
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: RUN_WIZARD_V2_0
+    21300002: RUN_WIZARD_V2_1
+    21300004: RUN_WIZARD_V2_2
+    21300006: RUN_WIZARD_V2_3
+    21300008: RUN_WIZARD_V2_4
+    21300010: RUN_WIZARD_V2_5
+    21300012: RUN_WIZARD_V2_6
+    21300014: RUN_WIZARD_V2_7
+    21300016: RUN_WIZARD_V2_11
+    21300018: RUN_WIZARD_V2_8
+    21300020: RUN_WIZARD_V2_9
+    21300022: RUN_WIZARD_V2_10
+    21300024: RUN_WIZARD_V2_12
+    21300026: RUN_WIZARD_V2_13
+    21300028: RUN_WIZARD_V2_14
+    21300030: RUN_WIZARD_V2_15
+    21300032: RUN_WIZARD_V2_16
+    21300034: RUN_WIZARD_V2_17
+    21300036: RUN_WIZARD_V2_18
+    21300038: RUN_WIZARD_V2_19
+    21300040: RUN_WIZARD_V2_20
+    21300042: RUN_WIZARD_V2_21
+    21300044: RUN_WIZARD_V2_22
+    21300046: RUN_WIZARD_V2_23
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_0
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 2558
+        width: 203
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ba6f73045f6ca24bb2240a5386456f9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_1
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 2556
+        width: 205
+        height: 376
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b2873bcb12ff1147bbaacff167e0090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_2
+      rect:
+        serializedVersion: 2
+        x: 1144
+        y: 2555
+        width: 206
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abcdd97d55f3a1448bf4e1d036caae22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_3
+      rect:
+        serializedVersion: 2
+        x: 1644
+        y: 2553
+        width: 205
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77775697fc8dfe42a50124f709481a3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_4
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 2054
+        width: 203
+        height: 375
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbbc93d3ea0a8be429045afbe58a9188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_5
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 2055
+        width: 205
+        height: 378
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc262b7bc8d086444a7cc03f509b1325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_6
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 2055
+        width: 207
+        height: 381
+      alignment: 9
+      pivot: {x: 0.5024155, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5a75781b7cc7584d833a27c13f64c6e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_7
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 2057
+        width: 208
+        height: 382
+      alignment: 9
+      pivot: {x: 0.5048077, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c5f9caa9a44084418ef8fb4dff6ebfc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_11
+      rect:
+        serializedVersion: 2
+        x: 1641
+        y: 1564
+        width: 210
+        height: 374
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8451d80f9091214ba2ea2241f8550f6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_8
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 1557
+        width: 209
+        height: 387
+      alignment: 9
+      pivot: {x: 0.50239235, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1f56b93bffe8cc4ca229b4993498ea8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_9
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 1567
+        width: 212
+        height: 378
+      alignment: 9
+      pivot: {x: 0.504717, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7212109cede8f5246ace9428419d0954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_10
+      rect:
+        serializedVersion: 2
+        x: 1138
+        y: 1569
+        width: 213
+        height: 375
+      alignment: 9
+      pivot: {x: 0.5023474, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a8c50d881572574092cee3b5b239ab0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_12
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 1061
+        width: 205
+        height: 372
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d50d1c39c5724e745885f29025a690ea
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_13
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 1058
+        width: 202
+        height: 372
+      alignment: 9
+      pivot: {x: 0.50495046, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33aed5b33c4998346bdcb3b214aad62e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_14
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 1055
+        width: 199
+        height: 373
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 697039d7353539540907910defc4d599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_15
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 1052
+        width: 194
+        height: 375
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57e866f54b193a3459460738e42d9be1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_16
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 554
+        width: 190
+        height: 378
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d6845862a1bf7d4aa85c52c6d27d175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_17
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 554
+        width: 188
+        height: 382
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e07bbb64bb799146a344dc3cf1aac59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_18
+      rect:
+        serializedVersion: 2
+        x: 1163
+        y: 555
+        width: 185
+        height: 385
+      alignment: 9
+      pivot: {x: 0.4918919, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c51433d9556d9b14784cfc81f9deae58
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_19
+      rect:
+        serializedVersion: 2
+        x: 1660
+        y: 555
+        width: 188
+        height: 388
+      alignment: 9
+      pivot: {x: 0.49468082, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55e300f5f1823c942956f0d06fc5871b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_20
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 57
+        width: 192
+        height: 389
+      alignment: 9
+      pivot: {x: 0.48958334, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ad60d3154f2625478f46620c43fe2fc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_21
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 64
+        width: 194
+        height: 381
+      alignment: 9
+      pivot: {x: 0.48969072, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad2bda8c6039fd746abca04a32351b05
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_22
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 69
+        width: 197
+        height: 378
+      alignment: 9
+      pivot: {x: 0.49746192, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3602db47ce16484468c50dcb684a7fa1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_WIZARD_V2_23
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 63
+        width: 202
+        height: 377
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba928429fc4789d4da56c5a59d53efc4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 92d029f3c38e89e41aa1f6e040c10009
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -31,4 +31,6 @@ sysinfo.txt
 *.unitypackage
 # Ignore all .orig files
 *.orig
-/Assets/Scripts/Masters/Configuration.cs.orig.meta
+*.cs.orig.meta
+*.db
+*.db.meta

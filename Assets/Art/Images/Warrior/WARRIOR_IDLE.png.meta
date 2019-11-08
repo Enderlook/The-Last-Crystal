@@ -1,0 +1,647 @@
+fileFormatVersion: 2
+guid: d2757549a4510104da33d784b4149028
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: WARRIOR_IDLE_0
+    21300002: WARRIOR_IDLE_1
+    21300004: WARRIOR_IDLE_2
+    21300006: WARRIOR_IDLE_3
+    21300008: WARRIOR_IDLE_4
+    21300010: WARRIOR_IDLE_5
+    21300012: WARRIOR_IDLE_6
+    21300014: WARRIOR_IDLE_7
+    21300016: WARRIOR_IDLE_8
+    21300018: WARRIOR_IDLE_9
+    21300020: WARRIOR_IDLE_10
+    21300022: WARRIOR_IDLE_11
+    21300024: WARRIOR_IDLE_12
+    21300026: WARRIOR_IDLE_13
+    21300028: WARRIOR_IDLE_14
+    21300030: WARRIOR_IDLE_15
+    21300032: WARRIOR_IDLE_16
+    21300034: WARRIOR_IDLE_17
+    21300036: WARRIOR_IDLE_18
+    21300038: WARRIOR_IDLE_19
+    21300040: WARRIOR_IDLE_20
+    21300042: WARRIOR_IDLE_21
+    21300044: WARRIOR_IDLE_22
+    21300046: WARRIOR_IDLE_23
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_0
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 2599
+        width: 164
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5042c4664d261944980514a303a327d0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_1
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 2599
+        width: 164
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fde67411896544f438e9fe1d0d943d0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_2
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 2599
+        width: 165
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c33d98f0cf973f445a9f62fdb44f7eb6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_3
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 2599
+        width: 164
+        height: 293
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e949011263ebb140bf57ce0457d954f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_4
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 2099
+        width: 165
+        height: 292
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13df2a0759a95d94e84231bede82d060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_5
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 2099
+        width: 166
+        height: 292
+      alignment: 9
+      pivot: {x: 0.41566265, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 324ca08fa8de5094bac16b2a682c51eb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_6
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 2099
+        width: 165
+        height: 292
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2738130772bb7b8488c126312ccc05f4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_7
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 2099
+        width: 164
+        height: 290
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 962a1d1b5d24d944aa0d87bdf3123299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_8
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 1600
+        width: 165
+        height: 290
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddb3d74e0a6054248a4c242e4baa8368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_9
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 1600
+        width: 166
+        height: 291
+      alignment: 9
+      pivot: {x: 0.41566265, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d290577f7e88d845a10c8220a0475f7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_10
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 1600
+        width: 165
+        height: 291
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d711bd84f9f2ae34cbdce8898e827710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_11
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 1600
+        width: 164
+        height: 293
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab7c990147e55db4a908ac8c52544afc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_12
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 1099
+        width: 164
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f34e1c768a4e044d80942a32167a5a0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_13
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1099
+        width: 164
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd1eeff909ae2b94a8dcca74a3526a47
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_14
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 1099
+        width: 165
+        height: 294
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3eb069a09d56f34581703a5b329b6db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_15
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 1097
+        width: 164
+        height: 293
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d77fc20a0455aa34da1fd7a4fd7d4136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_16
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 599
+        width: 165
+        height: 293
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61c70f2d57d0ed8498a0b8ff6c9fe35f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_17
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 599
+        width: 166
+        height: 292
+      alignment: 9
+      pivot: {x: 0.41566265, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a92dda741d58b74cbc5ab8b96dae18f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_18
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 599
+        width: 165
+        height: 292
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2bd70da85d6f5042ad06045ce7666bf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_19
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 599
+        width: 164
+        height: 290
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ea1214c219ed14faf4a32a6d2db5c3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_20
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 100
+        width: 165
+        height: 290
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4186c9f6971a3d438dabf9aa9abdd01
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_21
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 100
+        width: 166
+        height: 291
+      alignment: 9
+      pivot: {x: 0.41566265, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9194f33cf17dc4244bd241d79da84aaf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_22
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 100
+        width: 165
+        height: 293
+      alignment: 9
+      pivot: {x: 0.4181818, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77023034ac5bda34c91e6f7148cdb86a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_IDLE_23
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 100
+        width: 164
+        height: 293
+      alignment: 9
+      pivot: {x: 0.4207317, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2f2569c3b832c24b8c3b6163838d54f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 710679a848f073949b87e8d28878557c
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -27,8 +27,13 @@ namespace CreaturesAddons
         [Tooltip("Ground checker.")]
         public GroundChecker groundChecker;
 
+        [SerializeField, Tooltip("Material for effect hurt.")]
+        private Material redFlash;
+
         private IMove move;
         private IAttack attack;
+
+        private Material defMaterial;
 
         private const string ANIMATION_STATE_HURT = "Hurt";
 
@@ -41,6 +46,7 @@ namespace CreaturesAddons
 
         protected override void Awake()
         {
+            defMaterial = sprite.material;
             base.Awake();
             LoadComponents();
         }
@@ -81,13 +87,19 @@ namespace CreaturesAddons
                 direction = ((Vector2)Transform.position - direction).normalized;
                 // The conditionals verify if the player / enemy is above the object.
                 if (direction.x < 1 && direction.x > 0) direction.x = 1;
-                if (direction.x > 1 && direction.x < 0) direction.x = -1;
+                if (direction.x > -1 && direction.x < 0) direction.x = -1;
                 direction.y = 1; // Assign this value on the Y axis, because the actual value is 0 or less than 1.
             }
 
             thisRigidbody2D.AddForce(direction * force);
         }
 
-        protected override void DisplayTakeDamageAnimation() => animator.SetTrigger(ANIMATION_STATE_HURT);
+        protected override void DisplayTakeDamageAnimation()
+        {
+            sprite.material = redFlash;
+            Invoke("ResetMaterial", .1f);
+        }
+
+        void ResetMaterial() => sprite.material = defMaterial;
     }
 }

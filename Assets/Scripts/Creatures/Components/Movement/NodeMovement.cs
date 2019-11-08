@@ -2,6 +2,7 @@
 using Navigation;
 using UnityEngine;
 using Utils;
+using AdditionalExtensions;
 
 namespace CreaturesAddons.Movement.NodeMovement
 {
@@ -84,7 +85,7 @@ namespace CreaturesAddons.Movement.NodeMovement
                 Connection connection = path[0];
                 Vector2 target = connection.end.position;
 
-                float distanceToTarget = XDistanceToTarget(target);
+                float distanceToTarget = thisRigidbody2D.position.XDistance(target);
 
                 if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) && path.Count > 1)
                 {
@@ -92,7 +93,7 @@ namespace CreaturesAddons.Movement.NodeMovement
                     connection = path[1];
                     target = connection.end.position;
 
-                    distanceToTarget = XDistanceToTarget(target);
+                    distanceToTarget = thisRigidbody2D.position.XDistance(target);
                     distanceToMove = distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget) ? distanceToTarget : distanceToMove * Mathf.Sign(distanceToTarget);
                 }
 
@@ -104,7 +105,7 @@ namespace CreaturesAddons.Movement.NodeMovement
             else
             // If we are less than one node of distance from it
             {
-                float distanceToTarget = XDistanceToTarget(targetTransform.position);
+                float distanceToTarget = thisRigidbody2D.position.XDistance(targetTransform.position);
                 if (Mathf.Abs(distanceToTarget) > MARGIN_CLOSE_DISTANCE)
                 {
                     if (distanceToMove + MARGIN_ERROR_DISTANCE > Mathf.Abs(distanceToTarget))
@@ -114,8 +115,6 @@ namespace CreaturesAddons.Movement.NodeMovement
                 }
             }
         }
-
-        private float XDistanceToTarget(Vector2 target) => target.x - thisRigidbody2D.position.x;
 
         private void Translate(float distance)
         {
@@ -131,54 +130,7 @@ namespace CreaturesAddons.Movement.NodeMovement
         private void JumpTo(Vector2 target)
         {
             animator.SetBool(ANIMATION_STATES.JUMP, true);
-            thisRigidbody2D.velocity = ProjectileMotion(target, thisRigidbody2D.position);
-        }
-
-        private static float GetTg(Vector2 target, Vector2 origin)
-        {
-            float Atg(float tg) => Mathf.Atan(tg) * 180 / Mathf.PI;
-            Vector2 tO = target - origin;
-            float tan = tO.y / tO.x;
-            return Mathf.Round(Atg(tan));
-        }
-
-        private static float GetSin(Vector2 target, Vector2 origin)
-        {
-            float Asin(float s) => Mathf.Asin(s) * 180 / Mathf.PI;
-            Vector2 tO = target - origin;
-            float magnitude = tO.magnitude;
-            float sin = tO.y / magnitude;
-            return Mathf.Round(Asin(sin));
-        }
-
-        private static float GetCos(Vector2 target, Vector2 origin)
-        {
-            float Acos(float c) => Mathf.Acos(c) * 180 / Mathf.PI;
-            Vector2 tO = target - origin;
-            float magnitude = tO.magnitude;
-            Vector2 dir = tO / magnitude;
-            float cos = tO.x / magnitude;
-            float result = dir.x >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
-            return result;
-        }
-
-        private static Vector2 ProjectileMotion(Vector2 target, Vector2 origin)
-        {
-            float Vx(float x) => x / Mathf.Cos(GetCos(target, origin) / 180 * Mathf.PI);
-            float Vy(float y) => y / Mathf.Abs(Mathf.Sin(GetSin(target, origin) / 180 * Mathf.PI)) + .5f * Mathf.Abs(Physics2D.gravity.y);
-
-            Vector2 magnitude = target - origin;
-            Vector2 distX = magnitude;
-            distX.y = 0;
-
-            float hY = magnitude.y;
-            float wX = distX.magnitude;
-
-            Vector2 v0 = distX.normalized;
-            v0 *= Vx(wX);
-            v0.y = Vy(hY);
-
-            return v0;
+            thisRigidbody2D.velocity = thisRigidbody2D.position.ProjectileMotion(target);
         }
     }
 }

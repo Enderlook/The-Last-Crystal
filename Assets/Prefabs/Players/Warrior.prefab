@@ -35,7 +35,7 @@ MonoBehaviour:
   damage: 8
   pushStrength: 65
   rayCasting:
-    source: {x: 0.089596555, y: 0.22094885}
+    source: {x: 0.03, y: 0.22094885}
     direction: {x: 0.77603835, y: -0.6306857}
     distance: 0.2733842
     referenceTransform: {fileID: 829079563412899545}
@@ -48,6 +48,23 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0, a: 1}
   layerToHit: 10
   animationState: Attack
+--- !u!114 &5900227787012066578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573732952227708787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8728ec6d0ad86204f87c1c9090b65587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashKey: 103
+  startDashTime: 0.6
+  forceDash: 2
+  effect: {fileID: 7028745611146491222, guid: e7eb454633c0d9c4c912fb8a6a09f921, type: 3}
+  dashState: 0
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59,11 +76,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Warrior
-      objectReference: {fileID: 0}
-    - target: {fileID: 2891791631359779234, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
@@ -120,6 +132,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6151014269483833352, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: weapons.Array.size
@@ -155,17 +177,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 948124293}
-    - target: {fileID: 5042988860275578343, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: floatingTextPrefab
-      value: 
-      objectReference: {fileID: 1259971843042013121, guid: 76062395ae1642d4f86d51ed39ddd26e,
-        type: 3}
     - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b1a822341e6719542916beaf6ebbde0e,
+      objectReference: {fileID: 21300000, guid: d2757549a4510104da33d784b4149028,
         type: 3}
     - target: {fileID: 7526445749177953701, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
@@ -230,22 +246,22 @@ PrefabInstance:
     - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Offset.x
-      value: -0.015000001
+      value: -0.08911677
       objectReference: {fileID: 0}
     - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Offset.y
-      value: 0.145
+      value: 1.4700003
       objectReference: {fileID: 0}
     - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.19
+      value: 1.2017667
       objectReference: {fileID: 0}
     - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.29
+      value: 2.94
       objectReference: {fileID: 0}
     - target: {fileID: 1025597032033015137, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}

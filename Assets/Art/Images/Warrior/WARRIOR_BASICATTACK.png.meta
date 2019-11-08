@@ -1,0 +1,815 @@
+fileFormatVersion: 2
+guid: 2ed0365e11c90054e87fdca5c8bd33fb
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: WARRIOR_BASICATTACK_0
+    21300002: WARRIOR_BASICATTACK_1
+    21300004: WARRIOR_BASICATTACK_2
+    21300006: WARRIOR_BASICATTACK_3
+    21300008: WARRIOR_BASICATTACK_4
+    21300010: WARRIOR_BASICATTACK_5
+    21300012: WARRIOR_BASICATTACK_6
+    21300014: WARRIOR_BASICATTACK_7
+    21300016: WARRIOR_BASICATTACK_8
+    21300018: WARRIOR_BASICATTACK_9
+    21300020: WARRIOR_BASICATTACK_10
+    21300022: WARRIOR_BASICATTACK_11
+    21300024: WARRIOR_BASICATTACK_12
+    21300026: WARRIOR_BASICATTACK_13
+    21300028: WARRIOR_BASICATTACK_14
+    21300030: WARRIOR_BASICATTACK_15
+    21300032: WARRIOR_BASICATTACK_16
+    21300034: WARRIOR_BASICATTACK_17
+    21300036: WARRIOR_BASICATTACK_18
+    21300038: WARRIOR_BASICATTACK_19
+    21300040: WARRIOR_BASICATTACK_20
+    21300042: WARRIOR_BASICATTACK_21
+    21300044: WARRIOR_BASICATTACK_22
+    21300046: WARRIOR_BASICATTACK_23
+    21300048: WARRIOR_BASICATTACK_24
+    21300050: WARRIOR_BASICATTACK_25
+    21300052: WARRIOR_BASICATTACK_26
+    21300054: WARRIOR_BASICATTACK_27
+    21300056: WARRIOR_BASICATTACK_28
+    21300058: WARRIOR_BASICATTACK_29
+    21300060: WARRIOR_BASICATTACK_30
+    21300062: WARRIOR_BASICATTACK_31
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_0
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 3098
+        width: 164
+        height: 296
+      alignment: 9
+      pivot: {x: 0.40853658, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79ac99fabb644be43a40a3525cdfe462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_1
+      rect:
+        serializedVersion: 2
+        x: 684
+        y: 3100
+        width: 176
+        height: 291
+      alignment: 9
+      pivot: {x: 0.39772728, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0673b9c79efe3418ecc0a37d04990c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_2
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 3100
+        width: 183
+        height: 287
+      alignment: 9
+      pivot: {x: 0.40983605, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 899707fc89c2eca4ca543df4419c8265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_3
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 3100
+        width: 183
+        height: 282
+      alignment: 9
+      pivot: {x: 0.40983605, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a362086085bd074281c3627761cd1e1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_4
+      rect:
+        serializedVersion: 2
+        x: 2172
+        y: 3098
+        width: 179
+        height: 281
+      alignment: 9
+      pivot: {x: 0.424581, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3267de6a5e89d4e4fbaf78f92dca92c2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_5
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 2572
+        width: 135
+        height: 304
+      alignment: 9
+      pivot: {x: 0.5703704, y: 0.078947365}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9048d907f2e8a5c4f87ec64736c915ef
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_6
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 2548
+        width: 155
+        height: 323
+      alignment: 9
+      pivot: {x: 0.63870966, y: 0.15170278}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21981a0b7523613459598b080f7cd5b3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_7
+      rect:
+        serializedVersion: 2
+        x: 1021
+        y: 2599
+        width: 281
+        height: 269
+      alignment: 9
+      pivot: {x: 0.80071175, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e205df838713e2b48ad72b1e3c689666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_8
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 2599
+        width: 248
+        height: 265
+      alignment: 9
+      pivot: {x: 0.7741935, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 040fb3aa6882fb54b83226d8e8508e18
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_9
+      rect:
+        serializedVersion: 2
+        x: 2022
+        y: 2599
+        width: 281
+        height: 272
+      alignment: 9
+      pivot: {x: 0.80427045, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af3286c8674388d4e91617d1bc17d757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_10
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 2099
+        width: 247
+        height: 280
+      alignment: 9
+      pivot: {x: 0.77327937, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf4993c32cb363e42ac7b8f4db08f6e5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_11
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 2046
+        width: 154
+        height: 335
+      alignment: 9
+      pivot: {x: 0.6298701, y: 0.1522388}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a56aa930e28f8f42b76b1ef27417e2c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_12
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 2085
+        width: 173
+        height: 297
+      alignment: 9
+      pivot: {x: 0.4739884, y: 0.047138046}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a34897f8ba670da4a80e591a909f7c9c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_13
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 2097
+        width: 258
+        height: 285
+      alignment: 9
+      pivot: {x: 0.3255814, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90b71f26acad46439e5e4ce09c900e0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_14
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 2099
+        width: 227
+        height: 323
+      alignment: 9
+      pivot: {x: 0.3788546, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 000c47b9685d6a54e80e296d32cd0021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_15
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1600
+        width: 253
+        height: 335
+      alignment: 9
+      pivot: {x: 0.4901186, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8770484fb7c01a74d9de8090e8e45f7a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_16
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 1600
+        width: 284
+        height: 288
+      alignment: 9
+      pivot: {x: 0.60915494, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6db4df88e3ae664eb1d13449ca44190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_17
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 1600
+        width: 251
+        height: 288
+      alignment: 9
+      pivot: {x: 0.76892436, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e61b6b6537707bd47888088b1ad742ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_18
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 1600
+        width: 243
+        height: 285
+      alignment: 9
+      pivot: {x: 0.7736625, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf3b1fa39208b149a6819b47a32e895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_19
+      rect:
+        serializedVersion: 2
+        x: 2174
+        y: 1600
+        width: 129
+        height: 328
+      alignment: 9
+      pivot: {x: 0.5736434, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efaa12fdd40d8f1408a3bf172fa819cd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_20
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 1099
+        width: 256
+        height: 275
+      alignment: 9
+      pivot: {x: 0.28125, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba32d7fc49384484a82be5dc6cc2c40e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_21
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 1077
+        width: 234
+        height: 292
+      alignment: 9
+      pivot: {x: 0.30769232, y: 0.07534246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a4ac82e8f18f44380a306e918d606c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_22
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 1048
+        width: 255
+        height: 316
+      alignment: 9
+      pivot: {x: 0.43137258, y: 0.15822785}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea6a59d0e1b3dcf47b45984200278852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_23
+      rect:
+        serializedVersion: 2
+        x: 1635
+        y: 1053
+        width: 223
+        height: 316
+      alignment: 9
+      pivot: {x: 0.5067265, y: 0.14240506}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4261b65ddfbe90428353202b21c8f95
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_24
+      rect:
+        serializedVersion: 2
+        x: 2177
+        y: 1039
+        width: 126
+        height: 333
+      alignment: 9
+      pivot: {x: 0.5476191, y: 0.17717718}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f402aee35d186942928599c33698c84
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_25
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 573
+        width: 133
+        height: 302
+      alignment: 9
+      pivot: {x: 0.5488722, y: 0.08609272}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 119331678a951dc4ea74e419cea15476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_26
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 600
+        width: 239
+        height: 278
+      alignment: 9
+      pivot: {x: 0.32635984, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ae71772a1add334190e8e7718fb35fe
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_27
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 600
+        width: 284
+        height: 284
+      alignment: 9
+      pivot: {x: 0.28521127, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cba4ddc7169c82545af0e268ffa419a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_28
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 600
+        width: 294
+        height: 284
+      alignment: 9
+      pivot: {x: 0.28571427, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff087aecb20dea44db0545cf76279c62
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_29
+      rect:
+        serializedVersion: 2
+        x: 2162
+        y: 600
+        width: 306
+        height: 284
+      alignment: 9
+      pivot: {x: 0.27450982, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63991e93cc68f7746af3c07c61f45f98
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_30
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 99
+        width: 305
+        height: 284
+      alignment: 9
+      pivot: {x: 0.27540985, y: -0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d58393c5c12189469a8a8fc71f4cea8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_BASICATTACK_31
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 99
+        width: 306
+        height: 284
+      alignment: 9
+      pivot: {x: 0.2777778, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 938ca078947f2bd4e861a5a2aeb866ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 9bc7212cf07b6a24a9e50f9351809e56
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
