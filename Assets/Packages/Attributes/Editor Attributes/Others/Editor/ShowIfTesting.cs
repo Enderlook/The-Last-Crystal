@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
-    internal class ShowfIfTesting
+    internal static class ShowfIfTesting
     {
         private static readonly Dictionary<Type, List<ShowIfAttribute>> typesAndAttributes = new Dictionary<Type, List<ShowIfAttribute>>();
 

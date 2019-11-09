@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Range
 {
-    [CustomPropertyDrawer(typeof(RangeFloat)), CustomPropertyDrawer(typeof(RangeInt)), CustomPropertyDrawer(typeof(RangeFloatStep)), CustomPropertyDrawer(typeof(RangeIntStep))]
+    [CustomPropertyDrawer(typeof(RangeFloat), true), CustomPropertyDrawer(typeof(RangeInt), true), CustomPropertyDrawer(typeof(RangeFloatStep), true), CustomPropertyDrawer(typeof(RangeIntStep), true)]
     public class RangeDrawer : PropertyDrawer
     {
         // Field display name must be a single letter

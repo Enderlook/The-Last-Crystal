@@ -48,6 +48,7 @@ namespace Range
 
         public abstract T Value { get; }
     }
+
     public interface IRangeStep<T> : IRange<T>
     {
         /// <summary>

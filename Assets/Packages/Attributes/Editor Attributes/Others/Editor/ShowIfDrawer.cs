@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -13,12 +14,13 @@ namespace AdditionalAttributes
         private const string attributeName = nameof(ShowIfAttribute);
         private readonly string requireAttribute = $"required by {attributeName} attribute";
 
-
         /// <summary>
         /// If <see langword="true"/>, the property field is either disabled or hidden.
         /// </summary>
         private bool active;
         private ShowIfAttribute.ActionMode mode;
+
+        private bool persistentError;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -28,10 +30,24 @@ namespace AdditionalAttributes
             string conditionName = showIfAttribute.NameOfConditional;
             mode = showIfAttribute.Mode;
 
-            object parent = property.GetParentTargetObjectOfProperty();
+            object parent;
+            /* Sometimes when an array is resized, the property drawer is renderer before the actual array is resized.
+             * That is why it we may get error from our custom method GetParentTargetObjectOfProperty.*/
+            try
+            {
+                parent = property.GetParentTargetObjectOfProperty();
+            }
+            catch (KeyNotFoundException) when (!persistentError)
+            {
+                persistentError = true;
+                return;
+            }
+            persistentError = false;
             string parentType = parent.GetType().Name;
+
             string sign = $"in {parentType} for serialized property {propertyName}, {requireAttribute}";
-            MemberInfo[] memberInfos = parent.GetType().GetMember(conditionName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.NonPublic);
+
+            MemberInfo[] memberInfos = parent.GetType().GetMember(conditionName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
             if (memberInfos.Length == 0)
             {
                 Debug.LogError($"No member named {conditionName} found in {parentType} for serialized property {propertyName}, {requireAttribute}.");
@@ -80,9 +96,9 @@ namespace AdditionalAttributes
                         MethodInfo methodInfo = (MethodInfo)memberInfo;
                         // Check if the method don't require any mandatory parameter
                         ParameterInfo[] parameterInfos = methodInfo.GetParameters();
-                        if (parameterInfos.Count(e => e.IsOptional == false) == 0)
+                        if (parameterInfos.Count(e => !e.IsOptional) == 0)
                         {
-                            if (methodInfo.Invoke(parent, parameterInfos.Where(e => e.IsOptional == true).Select(e => Type.Missing).ToArray()) is bool methodValue)
+                            if (methodInfo.Invoke(parent, parameterInfos.Where(e => e.IsOptional).Select(e => Type.Missing).ToArray()) is bool methodValue)
                             {
                                 active = methodValue;
                                 goto outsideForeach;
@@ -107,11 +123,12 @@ namespace AdditionalAttributes
                 bool idented = showIfAttribute.indented;
                 if (idented)
                     EditorGUI.indentLevel++;
-                EditorGUI.PropertyField(position, property, label);
+                EditorGUI.PropertyField(position, property, label, true);
                 if (idented)
                     EditorGUI.indentLevel--;
             }
 
+            active = active == showIfAttribute.Goal;
             if (mode == ShowIfAttribute.ActionMode.ShowHide)
             {
                 if (active)
@@ -126,6 +143,9 @@ namespace AdditionalAttributes
             EditorGUI.EndProperty();
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => mode == ShowIfAttribute.ActionMode.ShowHide && active ? 0 : EditorGUI.GetPropertyHeight(property, label);
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return mode == ShowIfAttribute.ActionMode.ShowHide && active ? EditorGUI.GetPropertyHeight(property, label, true) : 0;
+        }
     }
 }
