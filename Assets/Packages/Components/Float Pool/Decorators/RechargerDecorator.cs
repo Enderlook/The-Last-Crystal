@@ -20,7 +20,7 @@ namespace FloatPool.Decorators
 
         [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
         private float rechargingDelay;
-        private float _currentRechargingDelay = 0f;
+        private float _currentRechargingDelay;
 
         [SerializeField, Tooltip("Sound played while recharging.")]
         private Playlist playlist;
@@ -29,7 +29,7 @@ namespace FloatPool.Decorators
 
         [SerializeField, Tooltip("Event executed when start recharging.")]
         private UnityEvent startCallback;
-        private bool _startCalled = false;
+        private bool _startCalled;
         [SerializeField, Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
         private UnityEventBoolean endCallback;
         [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
@@ -115,8 +115,18 @@ namespace FloatPool.Decorators
 
         private void PlayRechargingSound()
         {
-            if (audioSource != null && playlist != null && !audioSource.isPlaying)
-                playlist.Play(audioSource, Settings.IsSoundActive);
+            if (audioSource != null)
+            {
+                if (playlist != null)
+                {
+                    if (!audioSource.isPlaying && Settings.IsSoundActive)
+                        playlist.Play(audioSource);
+                }
+                else
+                    Debug.LogWarning($"{nameof(RechargerDecorator)} doesn't have an {nameof(playlist)}.");
+            }
+            else
+                Debug.LogWarning($"{nameof(RechargerDecorator)} doesn't have an {nameof(audioSource)}.");
         }
 
         [Serializable]

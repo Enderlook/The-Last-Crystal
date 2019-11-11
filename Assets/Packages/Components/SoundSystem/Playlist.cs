@@ -1,48 +1,124 @@
-﻿using UnityEngine;
+﻿using System;
+using AdditionalExceptions;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace SoundSystem
 {
     [CreateAssetMenu(fileName = "Playlist", menuName = "Playlist")]
     public class Playlist : ScriptableObject
     {
-        [Tooltip("Name of the playlist, used to be access by other scripts.")]
-        public string playlistName;
+        [SerializeField, Tooltip("Name of the playlist, used to be access by other scripts.")]
+#pragma warning disable CS0649
+        private string playlistName;
+#pragma warning restore CS0649
+        public string PlayListName => playlistName;
 
-        [Tooltip("Playlist. It will be looped.")]
-        public Sound[] playlist;
+        [SerializeField, Tooltip("Playlist.")]
+#pragma warning disable CS0649
+        private Sound[] playlist;
+#pragma warning restore CS0649
+        private int playlistIndex;
+        private bool foward = true;
+        public int PlaylistLength => playlist.Length;
 
-        private int playlistIndex = 0;
+        [SerializeField, Range(0f, 1f), Tooltip("Playlist master volume.")]
+        private float volume = 1;
+        public float Volume => volume;
 
-        [Tooltip("Playlist master volume.")]
-        public float volume = 1;
-
-        [Tooltip("Is the playlist random.")]
-        public bool isRandom = false;
+        [SerializeField, Tooltip("Playmode.")]
+#pragma warning disable CS0649
+        private PlayMode playingMode;
+#pragma warning restore CS0649
+        public PlayMode PlayingMode => playingMode;
 
         /// <summary>
         /// Use <see cref="Random"/> to play sound by <seealso cref="GetRandomSound"/>.<br/>
         /// Use <see cref="Next"/> to play a sound by <seealso cref="GetNextSound"/>.<br/>
         /// Use <see cref="Configured"/> to play sound using <see cref="isRandom"/> to determine if use <seealso cref="GetRandomSound"/> or <seealso cref="GetNextSound"/>.
+        /// Playmodes.
         /// </summary>
         public enum Mode { Random, Next, Configured }
+        public enum PlayMode
+        {
+            /// <summary>
+            /// Display form first to last and them go back to beginning.
+            /// </summary>
+            Next,
+
+            /// <summary>
+            /// Display form first to last and from last to first.
+            /// </summary>
+            PingPong,
+
+            /// <summary>
+            /// Display randomly.
+            /// </summary>
+            Random
+        };
 
         /// <summary>
-        /// Get random sound from <see cref="playlist"/>.
+        /// Get random sound from <see cref="playlist"/>.<br/>
+        /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
         /// </summary>
-        /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
-        public (Sound sound, float volume) GetRandomSound() => (playlist[playlistIndex = Random.Range(0, playlist.Length)], volume);
+        /// <returns>Sound to play.</returns>
+        public Sound GetRandomSound() => playlist[playlistIndex = Random.Range(0, playlist.Length)];
 
         /// <summary>
-        /// Get the next sound from <see cref="playlist"/>. It loops to beginning when reach the end of the <see cref="playlist"/>.
+        /// Get the next sound from <see cref="playlist"/>.<br/>
+        /// It loops to beginning when reach the end of the <see cref="playlist"/>.<br/>
+        /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
         /// </summary>
         /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
-        public (Sound sound, float volume) GetNextSound() => (playlist[playlistIndex = (playlistIndex + 1) % playlist.Length], volume);
+        public Sound GetNextSound() => playlist[playlistIndex = (playlistIndex + 1) % playlist.Length];
 
         /// <summary>
-        /// Get a sound from <see cref="playlist"/>. It can be random or not depending of <see cref="isRandom"/>.
+        /// Get the next sound from <see cref="playlist"/>.<br/>
+        /// It plays in reverse order when reach the end of the <see cref="playlist"/>.
+        /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
         /// </summary>
         /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
-        public (Sound sound, float volume) GetSound() => isRandom ? GetRandomSound() : GetNextSound();
+        public Sound GetPingPongSound()
+        {
+            if (foward)
+            {
+                playlistIndex++;
+                if (playlistIndex == playlist.Length - 1)
+                    foward = false;
+            }
+            else
+            {
+                playlistIndex--;
+                if (playlistIndex == 0)
+                    foward = true;
+            }
+            return playlist[playlistIndex];
+        }
+
+        /// <summary>
+        /// Get a sound from <see cref="playlist"/>.<br/>
+        /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
+        /// </summary>
+        /// <param name="mode">Playing mode. If <see langword="null"/>, default configured value in <see cref="playingMode"/> will be used.</param>
+        /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "Not supported by Unity.")]
+        public Sound GetSound(PlayMode? mode = null)
+        {
+            if (playlist.Length == 0)
+                throw new IndexOutOfRangeException($"Does not have any sound in {playlist}.");
+
+            switch (mode ?? playingMode)
+            {
+                case PlayMode.Next:
+                    return GetNextSound();
+                case PlayMode.PingPong:
+                    return GetPingPongSound();
+                case PlayMode.Random:
+                    return GetRandomSound();
+                default:
+                    throw new ImpossibleStateException();
+            }
+        }
 
         /// <summary>
         /// Reset the <see cref="playlistIndex"/> to 0.
@@ -50,54 +126,26 @@ namespace SoundSystem
         public void ResetIndex() => playlistIndex = 0;
 
         /// <summary>
-        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="Mode"/>.
+        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="PlayMode"/>.<br/>
         /// </summary>
         /// <param name="audioSource"><see cref="AudioSource"/> to play the sonud.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
-        /// <param name="mode">Mode to get the sound form the <seealso cref="playlist"/>.</param>
+        /// <param name="playMode">Mode to get the sound form the <seealso cref="playlist"/>.<br/>
+        /// If <see langword="null"/>, default configured value in <see cref="playingMode"/> will be used.</param>
         /// <param name="volumeMultiplier">Multiplier of the volume.</param>
-        public void Play(AudioSource audioSource, bool isSoundActive, Mode mode = Mode.Configured, float volumeMultiplier = 1) => Play(audioSource, isSoundActive, IsRandomFromMode(mode), volumeMultiplier);
-
-        /// <summary>
-        /// Play a sound from the <seealso cref="playlist"/>
-        /// </summary>
-        /// <param name="audioSource"><see cref="AudioSource"/> to play the sound.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
-        /// <param name="isRandom">If <see langword="true"/> a random sound from <see cref="playlist"/> will be played. On <see langword="false"/> the next sound from the <see cref="playlist"/> will be played.</param>
-        /// <param name="volumeMultiplier">Multiplier of the volume.</param>
-        public void Play(AudioSource audioSource, bool isSoundActive, bool isRandom, float volumeMultiplier = 1)
+        public void Play(AudioSource audioSource, PlayMode? playMode = null, float volumeMultiplier = 1)
         {
-            (Sound sound, float volume) = GetSound(isRandom);
-            sound.Play(audioSource, isSoundActive, volume * volumeMultiplier);
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            GetSound(playMode).Play(audioSource, Volume * volumeMultiplier);
         }
 
         /// <summary>
-        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="Mode"/> on the specified <paramref name="position"/>.
+        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="PlayMode"/> on the specified <paramref name="position"/>.
         /// </summary>
         /// <param name="position">Position to play the sound.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
-        /// <param name="mode">Mode to get the sound form the <seealso cref="playlist"/>.</param>
+        /// <param name="playMode">Mode to get the sound form the <seealso cref="playlist"/>.<br/>
+        /// If <see langword="null"/>, default configured value in <see cref="playingMode"/> will be used.</param>
         /// <param name="volumeMultiplier">Multiplier of the volume.</param>
-        public void PlayAtPoint(Vector3 position, bool isSoundActive, Mode mode = Mode.Configured, float volumeMultiplier = 1) => PlayAtPoint(position, isSoundActive, IsRandomFromMode(mode), volumeMultiplier);
-
-        /// <summary>
-        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="Mode"/> on the specified <paramref name="position"/>.
-        /// </summary>
-        /// <param name="position">Position to play the sound.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
-        /// <param name="isRandom">If <see langword="true"/> a random sound from <see cref="playlist"/> will be played. On <see langword="false"/> the next sound from the <see cref="playlist"/> will be played.</param>
-        /// <param name="volumeMultiplier">Multiplier of the volume.</param>
-        public void PlayAtPoint(Vector3 position, bool isSoundActive, bool isRandom, float volumeMultiplier = 1)
-        {
-            if (isSoundActive)
-            {
-                (Sound sound, float volume) = GetSound(isRandom);
-                AudioSource.PlayClipAtPoint(sound.audioClip, position, sound.Volume * volume * volumeMultiplier);
-            }
-        }
-
-        private (Sound sound, float volume) GetSound(bool isRandom) => isRandom ? GetRandomSound() : GetNextSound();
-
-        private bool IsRandomFromMode(Mode mode = Mode.Configured) => (mode == Mode.Configured && isRandom) || mode == Mode.Random;
+        public void PlayAtPoint(Vector3 position, PlayMode? playMode = null, float volumeMultiplier = 1) => GetSound(playMode).PlayAtPoint(position, Volume * volumeMultiplier);
     }
 }

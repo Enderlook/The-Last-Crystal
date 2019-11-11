@@ -1,5 +1,6 @@
-﻿using Master;
-
+﻿using System;
+using AdditionalExceptions;
+using Master;
 using UnityEngine;
 
 namespace SoundSystem
@@ -8,113 +9,142 @@ namespace SoundSystem
     public class PlaylistManager : MonoBehaviour
     {
         [Header("Configuration")]
-        [Tooltip("Playlists.")]
-        public Playlist[] playlists;
-        [Tooltip("Default playlist set at start.")]
-        public int startingPlaylistIndex;
-        private int playlistsIndex = 0;
-        [Tooltip("Master volume.")]
-        public float masterVolume = 1;
-        [Tooltip("Play on start.")]
-        public bool playOnStart;
+        [SerializeField, Tooltip("Playlists.")]
+#pragma warning disable CS0649
+        private Playlist[] playlists;
+#pragma warning restore CS0649
+
+        [SerializeField, Tooltip("Default playlist set at start.")]
+#pragma warning disable CS0649
+        private int startingPlaylistIndex;
+#pragma warning restore CS0649
+        private int playlistsIndex;
+
+        [SerializeField, Range(0f, 1f), Tooltip("Master volume.")]
+        private float masterVolume = 1;
+
+#pragma warning disable CS0649
+        [SerializeField, Tooltip("Play on start.")]
+        private bool playOnStart;
 
         [Header("Setup")]
         [Tooltip("Audio Source used to play music.")]
-        public AudioSource audioSource;
+#pragma warning disable IDE0044
+        private AudioSource audioSource;
+        [Tooltip("How is this considered.")]
+        private Type type;
+#pragma warning restore IDE0044
+#pragma warning restore CS0649
 
-        private bool isPlaying = false;
+        /// <summary>
+        /// Determines how it will be treated.
+        /// </summary>
+        public enum Type
+        {
+            /// <summary>
+            /// It will use <see cref="Settings.IsMusicActive"/> to check if should play.
+            /// </summary>
+            Music,
 
-        public int PlaylistsAmount => playlists.Length;
+            /// <summary>
+            /// It will use <see cref="Settings.IsSoundActive"/> to check if should play.
+            /// </summary>
+            Sound
+        }
 
-        private void Start()        {
-            if (audioSource == null)
-            {
-                Debug.LogWarning($"Gameobject {gameObject.name} has not assigned {nameof(AudioSource)} in {nameof(audioSource)} field of {nameof(PlaylistManager)}. Trying to get {nameof(Component)}.");
-                audioSource = GetComponent<AudioSource>();
-                if (audioSource == null)
-                    Debug.LogError($"Gameobject {gameObject.name} has not assigned {nameof(AudioSource)} in {nameof(audioSource)} field of {nameof(PlaylistManager)} and no one could be got.");
-            }
+        private bool isPlaying;
 
+        private Func<bool> shouldPlay;
+        private bool ShouldPlay => shouldPlay != null ? shouldPlay() : throw new InvalidOperationException("Start method must be call first.");
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "Not supported by Unity.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
+        private void Start()
+        {
             audioSource.loop = false;
             isPlaying = playOnStart;
             playlistsIndex = startingPlaylistIndex;
+
+            switch (type)
+            {
+                case Type.Music:
+                    shouldPlay = () => Settings.IsMusicActive;
+                    break;
+                case Type.Sound:
+                    shouldPlay = () => Settings.IsSoundActive;
+                    break;
+                default:
+                    throw new ImpossibleStateException();
+            }
         }
 
         public void Update()
         {
-            if (!Settings.IsMusicActive)
-            {
+            if (!ShouldPlay)
                 audioSource.Stop();
-                return;
-            }
-            else if (isPlaying && !audioSource.isPlaying && playlists.Length > 0 && playlists[playlistsIndex].playlist.Length > 0)
-            {
-                playlists[playlistsIndex].Play(audioSource, volumeMultiplier: masterVolume, isSoundActive: Settings.IsMusicActive);
-            }
+            else if (isPlaying // We should play
+                && !audioSource.isPlaying // But we aren't currently playing
+                && playlists.Length > 0 // And we have playlists to play
+                && playlists[playlistsIndex].PlaylistLength > 0) // And the current playlist has sounds inside
+                playlists[playlistsIndex].Play(audioSource, volumeMultiplier: masterVolume);
         }
 
         /// <summary>
-        /// Play an <paramref name="audioClip"/>.
+        /// Stop current play and play an <paramref name="audioClip"/>.
         /// </summary>
         /// <param name="audioClip"><see cref="AudioClip"/> to play.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
         /// <param name="volume">Volume of sound.</param>
         /// <param name="pitch">Pitch of sound.</param>
         /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
-        /// <seealso cref="PlaySound(Sound, bool)"/>
-        /// <seealso cref="PlaySound(Sound, bool, bool)"/>
-        /// <seealso cref="PlaySound(Sound, bool, float, bool)"/>
-        public void PlaySound(AudioClip audioClip, bool isSoundActive, float volume, float pitch, bool useMasterVolumeMultplier = false)
+        public void PlaySound(AudioClip audioClip, float volume = 1, float pitch = 1, bool useMasterVolumeMultplier = false)
         {
-            if (isSoundActive)
-            {
-                audioSource.Stop();
-                audioSource.clip = audioClip;
-                audioSource.volume = useMasterVolumeMultplier ? volume * masterVolume : volume;
-                audioSource.pitch = pitch;
-                audioSource.Play();
-            }
-        }
+            if (audioClip)
+                throw new ArgumentNullException(nameof(audioClip));
 
-        /// <summary>
-        /// Play a <paramref name="audioClip"/>.
-        /// </summary>
-        /// <param name="sound">Sound to play.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
-        /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
-        /// <seealso cref="PlaySound(Sound, bool)"/>
-        /// <seealso cref="PlaySound(Sound, bool, float, bool)"/>
-        /// <seealso cref="PlaySound(AudioClip, bool, float, float, bool)"/>
-        public void PlaySound(Sound sound, bool isSoundActive, bool useMasterVolumeMultplier = false)
-        {
             audioSource.Stop();
-            sound.Play(audioSource, isSoundActive, useMasterVolumeMultplier ? masterVolume : 1);
+            audioSource.clip = audioClip;
+            audioSource.volume = useMasterVolumeMultplier ? volume * masterVolume : volume;
+            audioSource.pitch = pitch;
+            audioSource.Play();
+        }
+
+        /// <summary>
+        /// Stop current play and play an <paramref name="audioClip"/>.
+        /// </summary>
+        /// <param name="audioClip"><see cref="AudioClip"/> to play.</param>
+        /// <param name="useMasterVolumeMultplier">If <see langword="true"/> it will use <see cref="masterVolume"/>.</param>
+        public void PlaySound(AudioClip audioClip, bool useMasterVolumeMultplier = false)
+        {
+            if (audioClip)
+                throw new ArgumentNullException(nameof(audioClip));
+
+            PlaySound(audioClip, 1, 1, useMasterVolumeMultplier);
+        }
+
+        /// <summary>
+        /// Stop current play and play a <paramref name="sound"/>.
+        /// </summary>
+        /// <param name="sound">Sound to play.</param>
+        /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
+        public void PlaySound(Sound sound, bool useMasterVolumeMultplier = false)
+        {
+            if (sound == null)
+                throw new ArgumentNullException(nameof(sound));
+
+            audioSource.Stop();
+            sound.Play(audioSource, useMasterVolumeMultplier ? masterVolume : 1);
         }
 
         /// <summary>
         /// Play a <paramref name="audioClip"/>.
         /// </summary>
         /// <param name="sound">Sound to play.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
-        /// <seealso cref="PlaySound(Sound, bool, bool)"/>
-        /// <seealso cref="PlaySound(Sound, bool, float, bool)"/>
-        /// <seealso cref="PlaySound(AudioClip, bool, float, float, bool)"/>
-        public void PlaySound(Sound sound, bool isSoundActive) => PlaySound(sound, isSoundActive, false);
-
-        /// <summary>
-        /// Play a <paramref name="audioClip"/>.
-        /// </summary>
-        /// <param name="sound">Sound to play.</param>
-        /// <param name="isSoundActive">Whenever sound is active or not. On <see langword="false"/> no sound will be played.</param>
         /// <param name="volumeMultiplier">Additional volume multiplier.</param>
         /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
-        /// <seealso cref="PlaySound(Sound, bool)"/>
-        /// <seealso cref="PlaySound(Sound, bool, bool)"/>
-        /// <seealso cref="PlaySound(AudioClip, bool, float, float, bool)"/>
-        public void PlaySound(Sound sound, bool isSoundActive, float volumeMultiplier = 1, bool useMasterVolumeMultplier = false)
+        public void PlaySound(Sound sound, float volumeMultiplier = 1, bool useMasterVolumeMultplier = false)
         {
             audioSource.Stop();
-            sound.Play(audioSource, isSoundActive, useMasterVolumeMultplier ? volumeMultiplier * masterVolume : volumeMultiplier);
+            sound.Play(audioSource, useMasterVolumeMultplier ? volumeMultiplier * masterVolume : volumeMultiplier);
         }
 
         /// <summary>
@@ -139,7 +169,7 @@ namespace SoundSystem
         {
             for (int i = 0; i < playlists.Length; i++)
             {
-                if (playlists[i].playlistName == name)
+                if (playlists[i].PlayListName == name)
                 {
                     playlistsIndex = i;
                     return true;
@@ -175,10 +205,9 @@ namespace SoundSystem
             audioSource.Stop();
         }
 
-
         /// <summary>
         /// Reset the playlist to the first sound.
-        /// <paramref name="stopCurrentSound"/>If <see langword="true"/>, <see cref="StopCurrentSound"/> will be called.<paramref name="stopCurrentSound"/>
+        /// <paramref name="stopCurrentSound"/>If <see langword="true"/>, execute <see cref="StopCurrentSound"/> will be called.<paramref name="stopCurrentSound"/>
         /// </summary>
         public void ResetPlaylist(bool stopCurrentSound)
         {
@@ -193,10 +222,20 @@ namespace SoundSystem
         public void StopCurrentSound() => audioSource.Stop();
 
 #if UNITY_EDITOR
+        private readonly string STARTING_PLAYLIST_INDEX_ERROR = $"{nameof(startingPlaylistIndex)} must be an index of {nameof(playlists)}. So it must be greater than 0 and lower than {nameof(playlists)}.length";
+
         private void OnValidate()
         {
-            if (audioSource == null)
-                Debug.LogWarning($"GameObject {gameObject.name} requires an AudioSource component assigned in {nameof(audioSource)} field.");
+            if (startingPlaylistIndex >= playlists.Length)
+            {
+                Debug.LogError(STARTING_PLAYLIST_INDEX_ERROR);
+                startingPlaylistIndex = playlists.Length - 1;
+            }
+            else if (startingPlaylistIndex < 0)
+            {
+                Debug.LogError(STARTING_PLAYLIST_INDEX_ERROR);
+                startingPlaylistIndex = 0;
+            }
         }
 #endif
     }
