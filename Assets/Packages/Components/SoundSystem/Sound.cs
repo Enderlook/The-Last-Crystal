@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SoundSystem
 {
     [Serializable]
-    public class Sound
+    public class Sound : ISound
     {
         [SerializeField, Tooltip("Name of sound, used to be access by other scripts.")]
 #pragma warning disable CS0649
@@ -27,11 +27,6 @@ namespace SoundSystem
         public float Pitch => pitch.Value;
 #pragma warning restore CS0649
 
-        /// <summary>
-        /// Play the sound on the specified <paramref name="audioSource"/>.
-        /// </summary>
-        /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
-        /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
         public void PlayOneShoot(AudioSource audioSource, float volumeMultiplier = 1)
         {
             if (audioSource == null)
@@ -43,12 +38,6 @@ namespace SoundSystem
             audioSource.PlayOneShot(audioClip, Volume * volumeMultiplier);
         }
 
-        /// <summary>
-        /// Play the sound on the specified <paramref name="audioSource"/> if it is not already playing a sound.
-        /// </summary>
-        /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
-        /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-        /// <returns>Whenever it could play or there was already a sound being played.</returns>
         public bool PlayOneShootIfNotPlaying(AudioSource audioSource, float volumeMultiplier = 1)
         {
             if (audioSource == null)
@@ -63,12 +52,7 @@ namespace SoundSystem
             return true;
         }
 
-        /// <summary>
-        /// Play the sound on the specified <paramref name="audioSource"/>.
-        /// </summary>
-        /// <param name="audioSource"><see cref="AudioSource"/> where the sound will be played.</param>
-        /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
-        public void Play(AudioSource audioSource, float volumeMultiplier = 1)
+       public void Play(AudioSource audioSource, float volumeMultiplier = 1)
         {
             if (audioSource == null)
                 throw new ArgumentNullException(nameof(audioSource));
@@ -82,11 +66,6 @@ namespace SoundSystem
             audioSource.Play();
         }
 
-        /// <summary>
-        /// Play the sound on the specified <paramref name="position"/>.
-        /// </summary>
-        /// <param name="position">Position to play the sound.</param>
-        /// <param name="volumeMultiplier">Volume of the sound, from 0 to 1.</param>
         public void PlayAtPoint(Vector3 position, float volumeMultiplier = 1)
         {
             if (volumeMultiplier < 0 && volumeMultiplier > 1)
