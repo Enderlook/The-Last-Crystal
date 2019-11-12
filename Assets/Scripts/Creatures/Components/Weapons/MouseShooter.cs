@@ -1,7 +1,5 @@
 ﻿using AdditionalAttributes;
-
-using Master;
-
+using SoundSystem;
 using UnityEngine;
 
 using Utils;
@@ -43,8 +41,8 @@ namespace CreaturesAddons.Weapons
         private Vector2 shootingPosition;
         [SerializeField, Tooltip("Animation played by projectile.")]
         private RuntimeAnimatorController projectileAnimation;
-        [SerializeField, Tooltip("Projectile collider scale.")]
-        private float projectileColliderScale;
+        [SerializeField, Tooltip("Shooting sound.")]
+        private SoundWithAudioSource shootingSound;
 #pragma warning restore CS0649
 
         private Transform shootingTransform;
@@ -71,7 +69,7 @@ namespace CreaturesAddons.Weapons
 
         private void Shoot()
         {
-            Global.audioSystem.ShootSoundEffect();
+            shootingSound.PlayOneShootIfNotPlaying();
             GameObject go = new GameObject($"{nameof(MouseShooter)} Projectile");
             go.transform.position = ShootingPoint;
             go.transform.localScale *= projectileScaleMultiplier;

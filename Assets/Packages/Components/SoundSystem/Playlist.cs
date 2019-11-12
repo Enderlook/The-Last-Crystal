@@ -1,6 +1,6 @@
 ﻿using System;
-using AdditionalExceptions;
 using UnityEngine;
+using AdditionalExceptions;
 using Random = UnityEngine.Random;
 
 namespace SoundSystem

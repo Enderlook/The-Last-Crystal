@@ -30,10 +30,5 @@
         /// Menu instance.
         /// </summary>
         public static Menu menu;
-
-        /// <summary>
-        /// Audio instance.
-        /// </summary>
-        public static AudioSystem audioSystem;
     }
 }
