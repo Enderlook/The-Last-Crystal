@@ -21,8 +21,6 @@ namespace Master
         private Transform crystal;
         [SerializeField, Tooltip("Menu.")]
         private Menu menu;
-        [SerializeField, Tooltip("Audio")]
-        private AudioSystem audioSystem;
 #pragma warning restore CS0649
 #pragma warning restore IDE0051
 
