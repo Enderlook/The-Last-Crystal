@@ -93,13 +93,16 @@ namespace SoundSystem
         /// Stop current play and play an <paramref name="audioClip"/>.
         /// </summary>
         /// <param name="audioClip"><see cref="AudioClip"/> to play.</param>
-        /// <param name="volume">Volume of sound.</param>
+        /// <param name="volume">Volume of sound, from 0 to 1.</param>
         /// <param name="pitch">Pitch of sound.</param>
         /// <param name="useMasterVolumeMultplier">If <see langword="true"/> <paramref name="volume"/> will be multiplied by <see cref="masterVolume"/>.</param>
         public void PlaySound(AudioClip audioClip, float volume = 1, float pitch = 1, bool useMasterVolumeMultplier = false)
         {
             if (audioClip)
                 throw new ArgumentNullException(nameof(audioClip));
+            if (volume < 0 && volume > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volume));
+
 
             audioSource.Stop();
             audioSource.clip = audioClip;
