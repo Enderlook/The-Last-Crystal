@@ -4,7 +4,7 @@ using UnityEngine;
 namespace SoundSystem
 {
     [Serializable]
-    public class SoundWithAudioSource
+    public class SoundWithAudioSource : ISound
     {
         [SerializeField, Tooltip("Sound to play.")]
 #pragma warning disable CS0649
@@ -67,5 +67,9 @@ namespace SoundSystem
 
             AudioSource.PlayClipAtPoint(sound.AudioClip, position, volumeMultiplier);
         }
+
+        public void PlayOneShoot(AudioSource audioSource, float volumeMultiplier = 1) => ((ISound)sound).PlayOneShoot(audioSource, volumeMultiplier);
+        public bool PlayOneShootIfNotPlaying(AudioSource audioSource, float volumeMultiplier = 1) => ((ISound)sound).PlayOneShootIfNotPlaying(audioSource, volumeMultiplier);
+        public void Play(AudioSource audioSource, float volumeMultiplier = 1) => ((ISound)sound).Play(audioSource, volumeMultiplier);
     }
 }

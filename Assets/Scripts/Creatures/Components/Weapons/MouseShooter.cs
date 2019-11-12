@@ -85,7 +85,7 @@ namespace CreaturesAddons.Weapons
             collider.isTrigger = projectileColliderIsTrigger;
 
             go.AddComponent<Animator>().runtimeAnimatorController = projectileAnimation;
-            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength, projectileColliderScale);
+            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength);
 
             Destroy(go, projectileDuration);
         }
