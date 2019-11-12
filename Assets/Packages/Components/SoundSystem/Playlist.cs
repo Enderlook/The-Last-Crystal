@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 namespace SoundSystem
 {
     [CreateAssetMenu(fileName = "Playlist", menuName = "Playlist")]
-    public class Playlist : ScriptableObject
+    public class Playlist : ScriptableObject, IPlaylist, ISound
     {
         [SerializeField, Tooltip("Name of playlist, used to be access by other scripts.")]
 #pragma warning disable CS0649
@@ -32,12 +32,25 @@ namespace SoundSystem
         public PlayMode PlayingMode => playingMode;
 
         /// <summary>
-        /// Use <see cref="Random"/> to play sound by <seealso cref="GetRandomSound"/>.<br/>
-        /// Use <see cref="Next"/> to play a sound by <seealso cref="GetNextSound"/>.<br/>
-        /// Use <see cref="Configured"/> to play sound using <see cref="isRandom"/> to determine if use <seealso cref="GetRandomSound"/> or <seealso cref="GetNextSound"/>.
         /// Playmodes.
         /// </summary>
-        public enum Mode { Random, Next, Configured }
+        public enum Mode {
+            /// <summary>
+            /// Play sound by <seealso cref="GetRandomSound"/>.
+            /// </summary>
+            Random,
+
+            /// <summary>
+            /// Play a sound by <seealso cref="GetNextSound"/>.<br/>
+            /// </summary>
+            Next,
+
+            /// <summary>
+            /// Play sound using <see cref="isRandom"/> to determine if use <seealso cref="GetRandomSound"/> or <seealso cref="GetNextSound"/>.
+            /// </summary>
+            Configured
+        }
+
         public enum PlayMode
         {
             /// <summary>
@@ -98,15 +111,15 @@ namespace SoundSystem
         /// Get a sound from <see cref="playlist"/>.<br/>
         /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
         /// </summary>
-        /// <param name="mode">Playing mode. If <see langword="null"/>, default configured value in <see cref="playingMode"/> will be used.</param>
-        /// <returns>Sound to play and its playlist <see cref="volume"/>.</returns>
+        /// <param name="mode">Playing mode.</param>
+        /// <returns>Sound to play.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0066:Convert switch statement to expression", Justification = "Not supported by Unity.")]
-        public Sound GetSound(PlayMode? mode = null)
+        public Sound GetSound(PlayMode mode)
         {
             if (playlist.Length == 0)
                 throw new IndexOutOfRangeException($"Does not have any sound in {playlist}.");
 
-            switch (mode ?? playingMode)
+            switch (mode)
             {
                 case PlayMode.Next:
                     return GetNextSound();
@@ -120,18 +133,32 @@ namespace SoundSystem
         }
 
         /// <summary>
+        /// Get a sound from <see cref="playlist"/> by name.<br/>
+        /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
+        /// </summary>
+        /// <param name="name">Name of the sound.</param>
+        /// <returns>Sound to play.</returns>
+        public Sound GetSound(string name) => Array.Find(playlist, e => e.Name == name);
+
+        /// <summary>
+        /// Get a sound from <see cref="playlist"/> by name.<br/>
+        /// Don't forget to use <see cref="Volume"/> for this <see cref="Playlist"/> master volume.
+        /// </summary>
+        /// <param name="name">Name of the sound.</param>
+        /// <param name="sound">Sound to play.</param>
+        /// <returns>Whenever the sound by the given <paramref name="name"/> was found or not.</returns>
+        public bool GetSound(string name, out Sound sound)
+        {
+            sound = GetSound(name);
+            return sound != null;
+        }
+
+        /// <summary>
         /// Reset the <see cref="playlistIndex"/> to 0.
         /// </summary>
         public void ResetIndex() => playlistIndex = 0;
 
-        /// <summary>
-        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="PlayMode"/>.<br/>
-        /// </summary>
-        /// <param name="audioSource"><see cref="AudioSource"/> to play the sound.</param>
-        /// <param name="playMode">Mode to get the sound form the <seealso cref="playlist"/>.<br/>
-        /// If <see langword="null"/>, default configured value in <see cref="playingMode"/> will be used.</param>
-        /// <param name="volumeMultiplier">Multiplier of the volume, from 0 to 1.</param>
-        public void Play(AudioSource audioSource, PlayMode? playMode = null, float volumeMultiplier = 1)
+        public void Play(AudioSource audioSource, PlayMode playMode, float volumeMultiplier = 1)
         {
             if (audioSource == null)
                 throw new ArgumentNullException(nameof(audioSource));
@@ -141,37 +168,50 @@ namespace SoundSystem
             GetSound(playMode).Play(audioSource, Volume * volumeMultiplier);
         }
 
-        /// <summary>
-        /// Play a sound from <see cref="playlist"/> given its name.
-        /// </summary>
-        /// <param name="audioSource"><see cref="AudioSource"/> to play the sound.</param>
-        /// <param name="name">Name of the sound to look for in <see cref="playlist"/>.</param>
-        /// <param name="volumeMultiplier">Multiplier of the volume, from 0 to 1.</param>
-        /// <returns>Whenever the sound was found (and played) or not.</returns>
-        public bool Play(AudioSource audioSource, string name, float volumeMultiplier = 1)
+        public void PlayOneShoot(AudioSource audioSource, PlayMode playMode, float volumeMultiplier = 1)
         {
             if (audioSource == null)
                 throw new ArgumentNullException(nameof(audioSource));
             if (volumeMultiplier < 0 && volumeMultiplier > 1)
                 throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
 
-            Sound sound = Array.Find(playlist, e => e.Name == name);
+            GetSound(playMode).PlayOneShoot(audioSource, Volume * volumeMultiplier);
+        }
 
-            if (sound == null)
+        public bool PlayOneShootIfNotPlaying(AudioSource audioSource, PlayMode playMode, float volumeMultiplier = 1)
+        {
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            if (audioSource.isPlaying)
                 return false;
 
-            sound.Play(audioSource, Volume * volumeMultiplier);
+            GetSound(playMode).PlayOneShootIfNotPlaying(audioSource, Volume * volumeMultiplier);
             return true;
         }
 
-        /// <summary>
-        /// Play a sound from the <seealso cref="playlist"/> using a method described by <seealso cref="PlayMode"/> on the specified <paramref name="position"/>.
-        /// </summary>
-        /// <param name="position">Position to play the sound.</param>
-        /// <param name="playMode">Mode to get the sound form the <seealso cref="playlist"/>.<br/>
-        /// If <see langword="null"/>, default configured value in <see cref="playingMode"/> will be used.</param>
-        /// <param name="volumeMultiplier">Multiplier of the volume, from 0 to 1.</param>
-        public void PlayAtPoint(Vector3 position, PlayMode? playMode = null, float volumeMultiplier = 1)
+        public bool Play(AudioSource audioSource, string name, float volumeMultiplier = 1)
+        {
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0)
+                throw new ArgumentException("Can't be empty", nameof(name));
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            if (GetSound(name, out Sound sound))
+            {
+                sound.Play(audioSource, Volume * volumeMultiplier);
+                return true;
+            }
+            return false;
+        }
+
+        public void PlayAtPoint(Vector3 position, PlayMode playMode, float volumeMultiplier = 1)
         {
             if (volumeMultiplier < 0 && volumeMultiplier > 1)
                 throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
@@ -179,25 +219,97 @@ namespace SoundSystem
             GetSound(playMode).PlayAtPoint(position, Volume * volumeMultiplier);
         }
 
-        /// <summary>
-        /// Play a sound from <see cref="playlist"/> given its name on the specified <paramref name="position"/>.
-        /// </summary>
-        /// <param name="position">Position to play the sound.</param>
-        /// <param name="name">Name of the sound to look for in <see cref="playlist"/>.</param>
-        /// <param name="volumeMultiplier">Multiplier of the volume, from 0 to 1.</param>
-        /// <returns>Whenever the sound was found (and played) or not.</returns>
         public bool PlayAtPoint(Vector3 position, string name, float volumeMultiplier = 1)
+        {
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0)
+                throw new ArgumentException("Can't be empty", nameof(name));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            if (GetSound(name, out Sound sound))
+            {
+                sound.PlayAtPoint(position, Volume * volumeMultiplier);
+                return true;
+            }
+            return false;
+        }
+
+        public void PlayOneShoot(AudioSource audioSource, float volumeMultiplier = 1)
+        {
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            PlayOneShoot(audioSource, PlayingMode, volumeMultiplier);
+        }
+
+        public bool PlayOneShoot(AudioSource audioSource, string name, float volumeMultiplier = 1)
+        {
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0)
+                throw new ArgumentException("Can't be empty", nameof(name));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            if (GetSound(name, out Sound sound))
+            {
+                sound.PlayOneShoot(audioSource, Volume * volumeMultiplier);
+                return true;
+            }
+            return false;
+        }
+
+        public bool PlayOneShootIfNotPlaying(AudioSource audioSource, float volumeMultiplier = 1)
+        {
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            return PlayOneShootIfNotPlaying(audioSource, PlayingMode, volumeMultiplier);
+        }
+
+        public bool PlayOneShootIfNotPlaying(AudioSource audioSource, string name, float volumeMultiplier = 1)
+        {
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (name == null)
+                throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0)
+                throw new ArgumentException("Can't be empty", nameof(name));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            if (!audioSource.isPlaying && GetSound(name, out Sound sound))
+            {
+                sound.PlayOneShootIfNotPlaying(audioSource, Volume * volumeMultiplier);
+                return true;
+            }
+            return false;
+        }
+
+        public void Play(AudioSource audioSource, float volumeMultiplier = 1)
+        {
+            if (audioSource == null)
+                throw new ArgumentNullException(nameof(audioSource));
+            if (volumeMultiplier < 0 && volumeMultiplier > 1)
+                throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
+
+            Play(audioSource, PlayingMode, volumeMultiplier);
+        }
+
+        public void PlayAtPoint(Vector3 position, float volumeMultiplier = 1)
         {
             if (volumeMultiplier < 0 && volumeMultiplier > 1)
                 throw new ArgumentException("Must be a number between 0 and 1", nameof(volumeMultiplier));
 
-            Sound sound = Array.Find(playlist, e => e.Name == name);
-
-            if (sound == null)
-                return false;
-
-            sound.PlayAtPoint(position, Volume * volumeMultiplier);
-            return true;
+            PlayAtPoint(position, PlayingMode, volumeMultiplier);
         }
     }
 }
