@@ -3118,7 +3118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - prefabEnemy: {fileID: 8848631403374183089, guid: 1d89acb7a9052324291fbb9233650d2e,
+  - prefabEnemy: {fileID: 5673377872746260060, guid: bea028410e0631d41a252eb07dfa7085,
       type: 3}
     probability: 5
   - prefabEnemy: {fileID: 1091846710704527667, guid: b87a0287fc4bb504a908bff1217f33b1,
