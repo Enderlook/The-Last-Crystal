@@ -200,5 +200,6 @@ namespace Navigation
         public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD) => ((IGraphEditing)graph).AddNode(position, isActive, mode);
         public void RemoveNodeAndConnections(Node node) => ((IGraphEditing)graph).RemoveNodeAndConnections(node);
         public void RemoveConnectionsToNothing() => ((IGraphEditing)graph).RemoveConnectionsToNothing();
+        public void AddMissingNodesFromConnections() => ((IGraphEditing)graph).AddMissingNodesFromConnections();
     }
 }

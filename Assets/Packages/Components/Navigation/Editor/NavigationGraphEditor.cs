@@ -139,6 +139,9 @@ namespace Navigation
                 if (GUILayout.Button("Remove Connections to nothing"))
                     navigationGraph.RemoveConnectionsToNothing();
 
+                if (GUILayout.Button("Add Missing Nodes from Connections"))
+                    navigationGraph.AddMissingNodesFromConnections();
+
                 // We activate the editing mode
                 if (!wasEditingEnable)
                 {

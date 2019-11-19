@@ -29,5 +29,10 @@ namespace Navigation
         /// Remove connections to missing nodes.
         /// </summary>
         void RemoveConnectionsToNothing();
+
+        /// <summary>
+        /// Add missing nodes from connections.
+        /// </summary>
+        void AddMissingNodesFromConnections();
     }
 }

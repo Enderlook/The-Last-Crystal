@@ -61,5 +61,23 @@ namespace Navigation
                 node.Connections = node.Connections.Where(e => nodes.Contains(e.end)).ToList();
             }
         }
+
+        public void AddMissingNodesFromConnections()
+        {
+            // Generate a temporal hashset to reduce search complexity from O(n) to O(1)
+            HashSet<Node> nodes = new HashSet<Node>(grid);
+
+            foreach (Node node in nodes)
+            {
+                foreach (Connection connection in node.Connections)
+                {
+                    if (!nodes.Contains(connection.end))
+                    {
+                        grid.Add(connection.end);
+                        nodes.Add(connection.end);
+                    }
+                }
+            }
+        }
     }
 }
