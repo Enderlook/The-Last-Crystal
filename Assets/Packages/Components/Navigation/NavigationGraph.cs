@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Navigation
 {
-    public class NavigationGraph : MonoBehaviour
+    public class NavigationGraph : MonoBehaviour, IGraphReader, IGraphEditing
     {
         /* Based on:
          * http://www.jgallant.com/nodal-pathfinding-in-unity-2d-with-a-in-non-grid-based-games/
@@ -34,6 +34,8 @@ namespace Navigation
             private set => graph.Grid = value;
         }
 
+        public Transform Reference => ((IGraphReader)graph).Reference;
+
         public void ResetGrid() => graph.Grid = new List<Node>();
 
         public void GenerateGrid()
@@ -58,7 +60,7 @@ namespace Navigation
                     if (r % 2 == 0) // Add diamond shape ♦
                         width += spacePerNode;
                     Vector2 position = new Vector2(width, r * spacePerNode); // Not * 2 as column in order to make diamond shape ♦
-                    graph.AddNode(position, mode: Graph.PositionReference.LOCAL);
+                    graph.AddNode(position, mode: PositionReference.LOCAL);
                 }
             }
             AddConnectionsToNodes();
@@ -191,5 +193,12 @@ namespace Navigation
                     node.SetActive(false);
             }
         }
+
+        public Vector2 GetWorldPosition(Node node) => ((IGraphReader)graph).GetWorldPosition(node);
+        public Vector2 GetLocalPosition(Vector2 position) => ((IGraphReader)graph).GetLocalPosition(position);
+        public void RemoveDuplicatedPositionsFromGrid() => ((IGraphEditing)graph).RemoveDuplicatedPositionsFromGrid();
+        public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD) => ((IGraphEditing)graph).AddNode(position, isActive, mode);
+        public void RemoveNodeAndConnections(Node node) => ((IGraphEditing)graph).RemoveNodeAndConnections(node);
+        public void RemoveConnectionsToNothing() => ((IGraphEditing)graph).RemoveConnectionsToNothing();
     }
 }

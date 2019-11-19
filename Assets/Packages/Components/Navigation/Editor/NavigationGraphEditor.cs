@@ -54,14 +54,8 @@ namespace Navigation
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("graph").FindPropertyRelative("reference"));
 
-            if (navigationGraph.graph.reference == null)
-                navigationGraph.graph.reference = navigationGraph.transform;
-
-            if (GUILayout.Button("Reset Grid"))
-            {
-                navigationGraph.ResetGrid();
-                selectedNode = null;
-            }
+            if (navigationGraph.graph.Reference == null)
+                navigationGraph.graph.Reference = navigationGraph.transform;
 
             EditorGUILayout.Space();
 
@@ -77,7 +71,7 @@ namespace Navigation
 
             serializedObject.ApplyModifiedProperties();
         }
-        
+
         private void OnSceneGUI()
         {
             if (navigationGraph == null)
@@ -136,6 +130,15 @@ namespace Navigation
             isEditingEnable = EditorGUILayout.Foldout(isEditingEnable, new GUIContent("Editing Tool", "While open, enable editing tools and lock inspector window.\nTo unlock inspector this must be closed."), true, BOLDED_FOLDOUT);
             if (isEditingEnable)
             {
+                if (GUILayout.Button("Reset Grid"))
+                {
+                    navigationGraph.ResetGrid();
+                    selectedNode = null;
+                }
+
+                if (GUILayout.Button("Remove Connections to nothing"))
+                    navigationGraph.RemoveConnectionsToNothing();
+
                 // We activate the editing mode
                 if (!wasEditingEnable)
                 {
@@ -265,7 +268,7 @@ namespace Navigation
                     }
                     else if (closestNode == null)
                         // Add Node
-                        navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
+                        navigationGraph.graph.AddNode(mousePosition, true, PositionReference.WORLD);
                     else
                         // Select Closest Node
                         selectedNode = closestNode;
@@ -310,7 +313,7 @@ namespace Navigation
         {
             Node closestNode = navigationGraph.FindClosestNode(mousePosition, autoSelectionRange, NavigationExtensions.NodeType.ALL);
             if (closestNode == null)
-                closestNode = navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
+                closestNode = navigationGraph.graph.AddNode(mousePosition, true, PositionReference.WORLD);
             return closestNode;
         }
 
