@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditorHelper;
@@ -130,18 +129,6 @@ namespace Navigation
             isEditingEnable = EditorGUILayout.Foldout(isEditingEnable, new GUIContent("Editing Tool", "While open, enable editing tools and lock inspector window.\nTo unlock inspector this must be closed."), true, BOLDED_FOLDOUT);
             if (isEditingEnable)
             {
-                if (GUILayout.Button("Reset Grid"))
-                {
-                    navigationGraph.ResetGrid();
-                    selectedNode = null;
-                }
-
-                if (GUILayout.Button("Remove Connections to nothing"))
-                    navigationGraph.RemoveConnectionsToNothing();
-
-                if (GUILayout.Button("Add Missing Nodes from Connections"))
-                    navigationGraph.AddMissingNodesFromConnections();
-
                 // We activate the editing mode
                 if (!wasEditingEnable)
                 {
@@ -191,6 +178,21 @@ namespace Navigation
                 // Return lock to before start editing
                 ActiveEditorTracker.sharedTracker.isLocked = wasLockedBefore;
             }
+
+            if (GUILayout.Button("Reset Grid"))
+            {
+                navigationGraph.ResetGrid();
+                selectedNode = null;
+            }
+
+            if (GUILayout.Button("Remove Connections to nothing"))
+                navigationGraph.RemoveConnectionsToNothing();
+
+            if (GUILayout.Button("Add Missing Nodes from Connections"))
+                navigationGraph.AddMissingNodesFromConnections();
+
+            if (GUILayout.Button(new GUIContent("Remove Isolated Nodes", "Remove nodes which doesn't have connection to any other node or no node is connected to them.")))
+                navigationGraph.RemoveNodesWithoutToOrFromConnection();
         }
 
         private void DrawNodesAndConnections()

@@ -34,5 +34,10 @@ namespace Navigation
         /// Add missing nodes from connections.
         /// </summary>
         void AddMissingNodesFromConnections();
+
+        /// <summary>
+        /// Remove nodes which doesn't have connection to any other node or no node is connected to them.
+        /// </summary>
+        void RemoveNodesWithoutToOrFromConnection();
     }
 }

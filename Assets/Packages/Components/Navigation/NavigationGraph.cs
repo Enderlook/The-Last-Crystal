@@ -201,5 +201,6 @@ namespace Navigation
         public void RemoveNodeAndConnections(Node node) => ((IGraphEditing)graph).RemoveNodeAndConnections(node);
         public void RemoveConnectionsToNothing() => ((IGraphEditing)graph).RemoveConnectionsToNothing();
         public void AddMissingNodesFromConnections() => ((IGraphEditing)graph).AddMissingNodesFromConnections();
+        public void RemoveNodesWithoutToOrFromConnection() => ((IGraphEditing)graph).RemoveNodesWithoutToOrFromConnection();
     }
 }

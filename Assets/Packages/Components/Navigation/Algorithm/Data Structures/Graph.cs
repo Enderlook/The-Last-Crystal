@@ -79,5 +79,13 @@ namespace Navigation
                 }
             }
         }
+
+        public void RemoveNodesWithoutToOrFromConnection()
+        {
+            // Generate a temporal hashset to reduce search complexity from O(n) to O(1)
+            HashSet<Node> nodes = new HashSet<Node>(grid);
+
+            grid = grid.Where(e => e.Connections.Count > 0 || grid.Any(e2 => e2.Connections.Any(e3 => e3.end == e))).ToList();
+        }
     }
 }
