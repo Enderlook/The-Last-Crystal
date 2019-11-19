@@ -239,10 +239,10 @@ namespace Navigation
                     {
                         if (e.shift)
                             // Switch Connection
-                            AlternateOrAddConnection(selectedNode, GetOrAddClosestNode(mousePosition));
+                            AlternateAddOrRemoveConnection(selectedNode, GetOrAddClosestNode(mousePosition));
                         if (e.control)
                             // Switch Inverse Connection
-                            AlternateOrAddConnection(GetOrAddClosestNode(mousePosition), selectedNode);
+                            AlternateAddOrRemoveConnection(GetOrAddClosestNode(mousePosition), selectedNode);
                     }
                 }
                 else if (e.button == 0) // Left Button
@@ -282,14 +282,19 @@ namespace Navigation
             }
         }
 
-        private static void AlternateOrAddConnection(Node from, Node to)
+        private static void AlternateAddOrRemoveConnection(Node from, Node to)
         {
             if (from == to || from == null || to == null)
                 return;
 
             if (from.TryGetConnectionTo(to, out Connection connection))
+            {
                 // Switch Connection
-                connection.SetActive(!connection.IsActive);
+                if (connection.IsActive)
+                    connection.SetActive(false);
+                else
+                    from.RemoveConnection(connection);
+            }
             else
                 // Add connection
                 from.AddConnectionTo(to, true);
