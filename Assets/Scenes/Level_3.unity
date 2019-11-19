@@ -182,7 +182,8 @@ GameObject:
   m_Component:
   - component: {fileID: 43494837}
   - component: {fileID: 43494838}
-  m_Layer: 0
+  - component: {fileID: 43494839}
+  m_Layer: 8
   m_Name: Island 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,6 +252,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &43494839
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43494836}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.1878088, y: 1.4955384}
+  - {x: 2.2496295, y: 1.4609092}
 --- !u!114 &46477800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +649,8 @@ Transform:
   - {fileID: 1867017584}
   - {fileID: 43494837}
   - {fileID: 2021073412}
+  - {fileID: 654115268}
+  - {fileID: 541218669}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1336,7 +1357,8 @@ GameObject:
   m_Component:
   - component: {fileID: 541218669}
   - component: {fileID: 541218668}
-  m_Layer: 0
+  - component: {fileID: 541218670}
+  m_Layer: 8
   m_Name: Island 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1398,13 +1420,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541218667}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.9, y: -2.35, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.6242318, y: -2.9638104, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 267235808}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &541218670
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541218667}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -3.886149, y: 1.2441611}
+  - {x: 3.9615524, y: 1.1499047}
 --- !u!1 &557203238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1755,7 +1795,8 @@ GameObject:
   m_Component:
   - component: {fileID: 654115268}
   - component: {fileID: 654115267}
-  m_Layer: 0
+  - component: {fileID: 654115269}
+  m_Layer: 8
   m_Name: Island 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1817,13 +1858,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 654115266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.88, y: -0.95, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.1557684, y: -1.5638106, z: -0.0234375}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 267235808}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &654115269
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654115266}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -4.3404255, y: 1.2324679}
+  - {x: 4.3756413, y: 1.2324679}
 --- !u!114 &657464546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1960,7 +2019,8 @@ GameObject:
   m_Component:
   - component: {fileID: 763704756}
   - component: {fileID: 763704757}
-  m_Layer: 0
+  - component: {fileID: 763704758}
+  m_Layer: 8
   m_Name: Island 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2029,6 +2089,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &763704758
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763704755}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -4.739357, y: -0.32850087}
+  - {x: 4.8019314, y: -0.3441438}
 --- !u!114 &769580865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2739,7 +2817,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1033683038}
   - component: {fileID: 1033683039}
-  m_Layer: 0
+  - component: {fileID: 1033683040}
+  m_Layer: 8
   m_Name: Island 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2808,6 +2887,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &1033683040
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033683037}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -7.6299834, y: -0.8029723}
+  - {x: 7.6049995, y: -0.753009}
 --- !u!114 &1039206983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3943,7 +4040,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1309594275}
   - component: {fileID: 1309594276}
-  m_Layer: 0
+  - component: {fileID: 1309594277}
+  m_Layer: 8
   m_Name: Island 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4012,6 +4110,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &1309594277
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309594274}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -3.4816253, y: 1.3828206}
+  - {x: 3.5424137, y: 1.3650715}
 --- !u!114 &1326379761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5403,7 +5519,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1867017584}
   - component: {fileID: 1867017585}
-  m_Layer: 0
+  - component: {fileID: 1867017586}
+  m_Layer: 8
   m_Name: Isla 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5472,6 +5589,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &1867017586
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867017583}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -4.795368, y: 0.36295176}
+  - {x: 4.7726836, y: 0.20416051}
 --- !u!114 &1878023483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5621,7 +5756,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2021073412}
   - component: {fileID: 2021073413}
-  m_Layer: 0
+  - component: {fileID: 2021073414}
+  m_Layer: 8
   m_Name: Island 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5690,6 +5826,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!68 &2021073414
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021073411}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.9523253, y: -0.19127965}
+  - {x: 3.0069757, y: -0.2732575}
 --- !u!114 &2044116000
 MonoBehaviour:
   m_ObjectHideFlags: 0
