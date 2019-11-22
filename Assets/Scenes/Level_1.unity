@@ -4596,7 +4596,7 @@ MonoBehaviour:
   playlistMenuHide: 
   win: {fileID: 1689176987}
   lose: {fileID: 1311351368}
-  animator: {fileID: 0}
+  animator: {fileID: 1641866928}
 --- !u!95 &1641866928
 Animator:
   serializedVersion: 3
@@ -4772,7 +4772,7 @@ SpriteRenderer:
   m_Size: {x: 77.2, y: 43.600002}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1676031646
