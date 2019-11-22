@@ -52,6 +52,7 @@ MonoBehaviour:
     flipX: 0
     flipY: 0
     draw: 1
+    edit: 0
     debug: 1
     color: {r: 1, g: 0, b: 0, a: 1}
   layerToHit: 9
@@ -385,6 +386,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597921017496991690, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: radius
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336b20a0e32c641489bb09ab09369d57, type: 3}

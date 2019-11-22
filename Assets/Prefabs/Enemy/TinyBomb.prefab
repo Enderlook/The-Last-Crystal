@@ -421,18 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checker:
-    source: {x: 0, y: 0}
-    direction: {x: 0, y: -1}
-    distance: 0.1
-    referenceTransform: {fileID: 0}
-    spriteRenderer: {fileID: 0}
-    flipX: 0
-    flipY: 0
-    draw: 1
-    edit: 0
-    debug: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
+  position: {x: 0, y: 0}
+  radius: 0.075
   groundLayer: 8
 --- !u!114 &4581545093473408173
 MonoBehaviour:
