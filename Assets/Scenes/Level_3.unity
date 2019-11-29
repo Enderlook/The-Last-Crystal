@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 43494837}
   - component: {fileID: 43494838}
   - component: {fileID: 43494839}
+  - component: {fileID: 43494840}
   m_Layer: 8
   m_Name: Island 4
   m_TagString: Untagged
@@ -278,13 +279,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -2.1878088, y: 1.4955384}
   - {x: 2.2496295, y: 1.4609092}
+--- !u!251 &43494840
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43494836}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &44492343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1601,6 +1621,7 @@ GameObject:
   - component: {fileID: 541218669}
   - component: {fileID: 541218668}
   - component: {fileID: 541218670}
+  - component: {fileID: 541218671}
   m_Layer: 8
   m_Name: Island 2
   m_TagString: Untagged
@@ -1681,13 +1702,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -3.886149, y: 1.2441611}
   - {x: 3.9615524, y: 1.1499047}
+--- !u!251 &541218671
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541218667}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &555179796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,6 +2111,7 @@ GameObject:
   - component: {fileID: 654115268}
   - component: {fileID: 654115267}
   - component: {fileID: 654115269}
+  - component: {fileID: 654115270}
   m_Layer: 8
   m_Name: Island 7
   m_TagString: Untagged
@@ -2151,13 +2192,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -4.3404255, y: 1.2324679}
   - {x: 4.3756413, y: 1.2324679}
+--- !u!251 &654115270
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654115266}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &654913157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,6 +2340,7 @@ GameObject:
   - component: {fileID: 763704756}
   - component: {fileID: 763704757}
   - component: {fileID: 763704758}
+  - component: {fileID: 763704759}
   m_Layer: 8
   m_Name: Island 8
   m_TagString: Untagged
@@ -2360,13 +2421,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -4.739357, y: -0.32850087}
   - {x: 4.8019314, y: -0.3441438}
+--- !u!251 &763704759
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763704755}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &769580865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3113,6 +3193,7 @@ GameObject:
   - component: {fileID: 1033683038}
   - component: {fileID: 1033683039}
   - component: {fileID: 1033683040}
+  - component: {fileID: 1033683041}
   m_Layer: 8
   m_Name: Island 1
   m_TagString: Untagged
@@ -3193,13 +3274,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -7.6299834, y: -0.8029723}
   - {x: 7.6049995, y: -0.753009}
+--- !u!251 &1033683041
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033683037}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &1039206983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4293,6 +4393,7 @@ GameObject:
   - component: {fileID: 1309594275}
   - component: {fileID: 1309594276}
   - component: {fileID: 1309594277}
+  - component: {fileID: 1309594278}
   m_Layer: 8
   m_Name: Island 11
   m_TagString: Untagged
@@ -4373,13 +4474,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -3.4816253, y: 1.3828206}
   - {x: 3.5424137, y: 1.3650715}
+--- !u!251 &1309594278
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309594274}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &1312989962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5826,6 +5946,7 @@ GameObject:
   - component: {fileID: 1867017584}
   - component: {fileID: 1867017585}
   - component: {fileID: 1867017586}
+  - component: {fileID: 1867017587}
   m_Layer: 8
   m_Name: Isla 10
   m_TagString: Untagged
@@ -5906,13 +6027,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -4.795368, y: 0.36295176}
   - {x: 4.7726836, y: 0.20416051}
+--- !u!251 &1867017587
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867017583}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &1871612655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6003,6 +6143,7 @@ GameObject:
   - component: {fileID: 2021073412}
   - component: {fileID: 2021073413}
   - component: {fileID: 2021073414}
+  - component: {fileID: 2021073415}
   m_Layer: 8
   m_Name: Island 6
   m_TagString: Untagged
@@ -6083,13 +6224,32 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
   - {x: -2.9523253, y: -0.19127965}
   - {x: 3.0069757, y: -0.2732575}
+--- !u!251 &2021073415
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021073411}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!114 &2044116000
 MonoBehaviour:
   m_ObjectHideFlags: 0
