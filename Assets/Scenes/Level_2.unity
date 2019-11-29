@@ -1863,7 +1863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingMoney: 0
   crystal: {fileID: 6981132073293583962}
-  menu: {fileID: 0}
+  menu: {fileID: 1838201934}
   audioSystem:
     audioGame: {fileID: 1160684990}
     slashClips: {fileID: 8300000, guid: be4448b799cb7fd47ac320c8e040ae54, type: 3}
@@ -2363,6 +2363,12 @@ MonoBehaviour:
   start: {fileID: 1645782326}
   end: {fileID: 1573204440}
   isActive: 1
+--- !u!1 &1333857929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3653343962952647785, guid: 5812cbf50c688b74191c2070a027dbec,
+    type: 3}
+  m_PrefabInstance: {fileID: 1419782162}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1358386211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2665,6 +2671,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653343963440923652, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1333857929}
+    - target: {fileID: 3653343963440923652, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3653343963440923652, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
@@ -3571,6 +3592,18 @@ MonoBehaviour:
   start: {fileID: 263180939}
   end: {fileID: 1589513012}
   isActive: 1
+--- !u!114 &1838201934 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5661098376369262265, guid: 5812cbf50c688b74191c2070a027dbec,
+    type: 3}
+  m_PrefabInstance: {fileID: 1419782162}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c1cfd2d3a7dea4eb524522806ee325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1841963730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4103,6 +4136,16 @@ PrefabInstance:
       propertyPath: bar.bar
       value: 
       objectReference: {fileID: 551550183}
+    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1838201934}
+    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GameOver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d3df55b0c6aa642a77ca9f30e6ce21, type: 3}
 --- !u!4 &6981132073293583962 stripped

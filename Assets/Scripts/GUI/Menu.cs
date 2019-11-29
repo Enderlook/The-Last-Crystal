@@ -128,6 +128,7 @@ public class Menu : MonoBehaviour
     /// <param name="hasWon">Whenever players has won or loose.</param>
     public void GameOver(bool hasWon)
     {
+        DisplayMenuPause(true);
         Settings.IsPause = true;
         menuNoToggleable = true;
         if (hasWon)
