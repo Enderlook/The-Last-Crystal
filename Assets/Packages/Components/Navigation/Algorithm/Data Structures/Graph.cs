@@ -42,13 +42,18 @@ namespace Navigation
 
         public void RemoveNodeAndConnections(Node node)
         {
+            int toRemove = -1;
             for (int i = Grid.Count - 1; i >= 0; i--)
             {
                 Node n = Grid[i];
                 if (n == node)
-                    Grid.RemoveAt(i);
-                n.TryRemoveConnectionTo(node);
+                    toRemove = i;
+                else
+                    n.TryRemoveConnectionTo(node);
             }
+            if (toRemove == -1)
+                throw new KeyNotFoundException($"Not found {nameof(node)} in {nameof(Grid)}.");
+            Grid.RemoveAt(toRemove);
         }
 
         public void RemoveConnectionsToNothing()
