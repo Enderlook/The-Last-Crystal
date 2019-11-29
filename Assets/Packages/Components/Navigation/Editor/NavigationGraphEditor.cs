@@ -193,6 +193,31 @@ namespace Navigation
 
             if (GUILayout.Button(new GUIContent("Remove Isolated Nodes", "Remove nodes which doesn't have connection to any other node or no node is connected to them.")))
                 navigationGraph.RemoveNodesWithoutToOrFromConnection();
+
+            if (GUILayout.Button("Become local to world"))
+            {
+                foreach (Node node in navigationGraph.graph.Grid)
+                {
+                    node.position = navigationGraph.graph.GetWorldPosition(node);
+                }
+                navigationGraph.graph.Reference.position = Vector3.zero;
+            }
+
+            if (GUILayout.Button("Become local to world and fix childs"))
+            {
+                Transform reference = navigationGraph.graph.Reference;
+                Vector3 position = reference.position;
+                foreach (Node node in navigationGraph.graph.Grid)
+                {
+                    node.position = navigationGraph.graph.GetWorldPosition(node);
+                }
+                reference.position = Vector3.zero;
+
+                for (int i = 0; i < reference.childCount; i++)
+                {
+                    reference.GetChild(i).position += position;
+                }
+            }
         }
 
         private void DrawNodesAndConnections()
