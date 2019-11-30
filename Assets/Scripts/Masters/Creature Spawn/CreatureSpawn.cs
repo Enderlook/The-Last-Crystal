@@ -59,6 +59,10 @@ public class CreatureSpawn : MonoBehaviour
 
         public void SpawnInstantly()
         {
+            // If we don't have crystal, we don't respawn
+            if (spawningPoint == null)
+                return;
+
             GameObject gameObject = Instantiate(prefab, spawningPoint.position, spawningPoint.rotation);
             gameObject.AddComponent<DestroyNotifier>().AddCallback(SpawnWithDelay);
             NavigationAgent.InjectNavigationGraph(gameObject, navigationGraph);
