@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditorHelper;
@@ -54,14 +53,8 @@ namespace Navigation
 
             EditorGUILayout.PropertyField(serializedObject.FindProperty("graph").FindPropertyRelative("reference"));
 
-            if (navigationGraph.graph.reference == null)
-                navigationGraph.graph.reference = navigationGraph.transform;
-
-            if (GUILayout.Button("Reset Grid"))
-            {
-                navigationGraph.ResetGrid();
-                selectedNode = null;
-            }
+            if (navigationGraph.graph.Reference == null)
+                navigationGraph.graph.Reference = navigationGraph.transform;
 
             EditorGUILayout.Space();
 
@@ -77,7 +70,7 @@ namespace Navigation
 
             serializedObject.ApplyModifiedProperties();
         }
-        
+
         private void OnSceneGUI()
         {
             if (navigationGraph == null)
@@ -185,6 +178,46 @@ namespace Navigation
                 // Return lock to before start editing
                 ActiveEditorTracker.sharedTracker.isLocked = wasLockedBefore;
             }
+
+            if (GUILayout.Button("Reset Grid"))
+            {
+                navigationGraph.ResetGrid();
+                selectedNode = null;
+            }
+
+            if (GUILayout.Button("Remove Connections to nothing"))
+                navigationGraph.RemoveConnectionsToNothing();
+
+            if (GUILayout.Button("Add Missing Nodes from Connections"))
+                navigationGraph.AddMissingNodesFromConnections();
+
+            if (GUILayout.Button(new GUIContent("Remove Isolated Nodes", "Remove nodes which doesn't have connection to any other node or no node is connected to them.")))
+                navigationGraph.RemoveNodesWithoutToOrFromConnection();
+
+            if (GUILayout.Button("Become local to world"))
+            {
+                foreach (Node node in navigationGraph.graph.Grid)
+                {
+                    node.position = navigationGraph.graph.GetWorldPosition(node);
+                }
+                navigationGraph.graph.Reference.position = Vector3.zero;
+            }
+
+            if (GUILayout.Button("Become local to world and fix childs"))
+            {
+                Transform reference = navigationGraph.graph.Reference;
+                Vector3 position = reference.position;
+                foreach (Node node in navigationGraph.graph.Grid)
+                {
+                    node.position = navigationGraph.graph.GetWorldPosition(node);
+                }
+                reference.position = Vector3.zero;
+
+                for (int i = 0; i < reference.childCount; i++)
+                {
+                    reference.GetChild(i).position += position;
+                }
+            }
         }
 
         private void DrawNodesAndConnections()
@@ -233,10 +266,10 @@ namespace Navigation
                     {
                         if (e.shift)
                             // Switch Connection
-                            AlternateOrAddConnection(selectedNode, GetOrAddClosestNode(mousePosition));
+                            AlternateAddOrRemoveConnection(selectedNode, GetOrAddClosestNode(mousePosition));
                         if (e.control)
                             // Switch Inverse Connection
-                            AlternateOrAddConnection(GetOrAddClosestNode(mousePosition), selectedNode);
+                            AlternateAddOrRemoveConnection(GetOrAddClosestNode(mousePosition), selectedNode);
                     }
                 }
                 else if (e.button == 0) // Left Button
@@ -265,7 +298,7 @@ namespace Navigation
                     }
                     else if (closestNode == null)
                         // Add Node
-                        navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
+                        navigationGraph.graph.AddNode(mousePosition, true, PositionReference.WORLD);
                     else
                         // Select Closest Node
                         selectedNode = closestNode;
@@ -276,14 +309,19 @@ namespace Navigation
             }
         }
 
-        private static void AlternateOrAddConnection(Node from, Node to)
+        private static void AlternateAddOrRemoveConnection(Node from, Node to)
         {
             if (from == to || from == null || to == null)
                 return;
 
             if (from.TryGetConnectionTo(to, out Connection connection))
+            {
                 // Switch Connection
-                connection.SetActive(!connection.IsActive);
+                if (connection.IsActive)
+                    connection.SetActive(false);
+                else
+                    from.RemoveConnection(connection);
+            }
             else
                 // Add connection
                 from.AddConnectionTo(to, true);
@@ -310,7 +348,7 @@ namespace Navigation
         {
             Node closestNode = navigationGraph.FindClosestNode(mousePosition, autoSelectionRange, NavigationExtensions.NodeType.ALL);
             if (closestNode == null)
-                closestNode = navigationGraph.graph.AddNode(mousePosition, true, Graph.PositionReference.WORLD);
+                closestNode = navigationGraph.graph.AddNode(mousePosition, true, PositionReference.WORLD);
             return closestNode;
         }
 

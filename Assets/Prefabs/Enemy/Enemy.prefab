@@ -420,18 +420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checker:
-    source: {x: 0, y: 0}
-    direction: {x: 0, y: -1}
-    distance: 0.1
-    referenceTransform: {fileID: 0}
-    spriteRenderer: {fileID: 0}
-    flipX: 0
-    flipY: 0
-    draw: 1
-    edit: 0
-    debug: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
+  position: {x: 0, y: 0}
+  radius: 0.1
   groundLayer: 8
 --- !u!1001 &2914788185493605554
 PrefabInstance:
@@ -440,11 +430,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6140415168490267451}
     m_Modifications:
-    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar with Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,6 +534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar with Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6969e2527261f0045bc3f1b1a0c7b153, type: 3}

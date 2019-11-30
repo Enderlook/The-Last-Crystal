@@ -38,6 +38,9 @@ namespace Navigation
         /// </summary>
         public bool IsExtreme => start.isExtreme && end.isExtreme;
 
+        public override string ToString() => $"<start:{start}; end:{end}; active:{IsActive}; distance:{Distance}; extreme:{IsExtreme}";
+        public string ToString(NavigationGraph navigationGraph) => $"<start:{start.ToString(navigationGraph)}; end:{end.ToString(navigationGraph)}; active:{IsActive}; distance:{Distance}; extreme:{IsExtreme}";
+
         /// <summary>
         /// Create a new <see cref="Connection"/>.
         /// </summary>

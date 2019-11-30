@@ -1,0 +1,636 @@
+fileFormatVersion: 2
+guid: a5c24bc22af76b14eb5eb3b7b00d227b
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SPRITE_IDLE_ENEMYCLAW_0
+    21300002: SPRITE_IDLE_ENEMYCLAW_1
+    21300004: SPRITE_IDLE_ENEMYCLAW_2
+    21300006: SPRITE_IDLE_ENEMYCLAW_3
+    21300008: SPRITE_IDLE_ENEMYCLAW_4
+    21300010: SPRITE_IDLE_ENEMYCLAW_5
+    21300012: SPRITE_IDLE_ENEMYCLAW_6
+    21300014: SPRITE_IDLE_ENEMYCLAW_7
+    21300016: SPRITE_IDLE_ENEMYCLAW_8
+    21300018: SPRITE_IDLE_ENEMYCLAW_9
+    21300020: SPRITE_IDLE_ENEMYCLAW_10
+    21300022: SPRITE_IDLE_ENEMYCLAW_11
+    21300024: SPRITE_IDLE_ENEMYCLAW_12
+    21300026: SPRITE_IDLE_ENEMYCLAW_13
+    21300028: SPRITE_IDLE_ENEMYCLAW_14
+    21300030: SPRITE_IDLE_ENEMYCLAW_15
+    21300032: SPRITE_IDLE_ENEMYCLAW_16
+    21300034: SPRITE_IDLE_ENEMYCLAW_17
+    21300036: SPRITE_IDLE_ENEMYCLAW_18
+    21300038: SPRITE_IDLE_ENEMYCLAW_19
+    21300040: SPRITE_IDLE_ENEMYCLAW_20
+    21300042: SPRITE_IDLE_ENEMYCLAW_21
+    21300044: SPRITE_IDLE_ENEMYCLAW_22
+    21300046: SPRITE_IDLE_ENEMYCLAW_23
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_0
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 2613
+        width: 155
+        height: 310
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b6514632f1808e4eaf47a65a8e6988d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_1
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 2613
+        width: 154
+        height: 310
+      alignment: 9
+      pivot: {x: 0.38116884, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b23c47b28fd2d6448219a8d9a771ba9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_2
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 2613
+        width: 154
+        height: 310
+      alignment: 9
+      pivot: {x: 0.38116884, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d5084e50926e7a44a3be648b412f431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_3
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 2613
+        width: 155
+        height: 310
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21766d8c43559b744a873e0812ba9b42
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_4
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 2113
+        width: 155
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50885fac32c181f49ae9622909332e30
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_5
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 2113
+        width: 154
+        height: 309
+      alignment: 9
+      pivot: {x: 0.38116884, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2813ef96b448c649820e4f014ab8d25
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_6
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 2113
+        width: 159
+        height: 309
+      alignment: 9
+      pivot: {x: 0.3691824, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0a073e8be9ffc0418e0780c00468422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_7
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 2113
+        width: 155
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87887f22dcda20b428af148bfe6b13ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_8
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 1612
+        width: 155
+        height: 310
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc48da0b3d4a9a044bf11e33ec152af1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_9
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 1612
+        width: 154
+        height: 310
+      alignment: 9
+      pivot: {x: 0.38116884, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9c2ff9473cc3444e817f98f2d082018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_10
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1613
+        width: 154
+        height: 309
+      alignment: 9
+      pivot: {x: 0.38116884, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13aeaaa6f0bbb8e48a334d3aeb08301a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_11
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 1612
+        width: 155
+        height: 310
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4d19bbb5e5fddb45a69fd27bd508d39
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_12
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 1113
+        width: 155
+        height: 310
+      alignment: 9
+      pivot: {x: 0.37741935, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 868ce9f18eb2d72429f4e9c7f934fd47
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_13
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 1113
+        width: 154
+        height: 310
+      alignment: 9
+      pivot: {x: 0.37987012, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66bdbac7b0eb54e4cb293880d46a39e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_14
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 1113
+        width: 154
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37987012, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6391d5b785c7a4f4bb8f160e7fc15357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_15
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 1113
+        width: 155
+        height: 308
+      alignment: 9
+      pivot: {x: 0.37741935, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfdbee03c37341d4e8e8516d6eb0502b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_16
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 613
+        width: 153
+        height: 309
+      alignment: 9
+      pivot: {x: 0.38235295, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52ad453a2aa60a8478f92bfc79b4cc18
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_17
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 613
+        width: 153
+        height: 309
+      alignment: 9
+      pivot: {x: 0.38235295, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d762dc8d90d58534099367d8fb30389b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_18
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 613
+        width: 154
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37987012, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45d5d697b96391346a385e3f520f24bd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_19
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 613
+        width: 155
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37741935, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0f906912a2089944b4776704953d5bc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_20
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 113
+        width: 155
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37741935, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c70fdc8d83835cf4295110e2c9d7a4d0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_21
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 113
+        width: 155
+        height: 309
+      alignment: 9
+      pivot: {x: 0.37870967, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c6f40c5686670b40b7b54df6e3c86ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_22
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 114
+        width: 154
+        height: 308
+      alignment: 9
+      pivot: {x: 0.37987012, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3a99b685889a1644a8a552345c680e7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_IDLE_ENEMYCLAW_23
+      rect:
+        serializedVersion: 2
+        x: 1693
+        y: 113
+        width: 154
+        height: 309
+      alignment: 9
+      pivot: {x: 0.38116884, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4002907fb7daa954bacf41907f67376c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c0b0b79432f850e4ebae39307262bd1a
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

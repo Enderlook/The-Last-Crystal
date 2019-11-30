@@ -23,6 +23,18 @@ public class Menu : MonoBehaviour
     private GameObject win;
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
+
+    [Header("Animation")]
+    [SerializeField, Tooltip("Animator component.")]
+    private Animator animator;
+
+    private string sceneToLoad;
+
+    private static class ANIMATION_STATES
+    {
+        public const string
+            FADEOUT = "FadeOut";
+    }
 #pragma warning disable CS0649
 
     private void Start() => DisplayMenuPause(false);
@@ -99,7 +111,16 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <seealso cref="SceneManager.LoadScene(string)"/>
     /// <param name="scene">Scene name to load.</param>
-    public void LoadScene(string scene) => SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    public void LoadScene(string scene)
+    {
+        sceneToLoad = scene;
+        animator.SetTrigger(ANIMATION_STATES.FADEOUT);
+    }
+
+    /// <summary>
+    /// Load a scene through the animation event.
+    /// </summary>
+    public void FadeAnimationToLevel() => SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
 
     /// <summary>
     /// End game.
@@ -107,6 +128,7 @@ public class Menu : MonoBehaviour
     /// <param name="hasWon">Whenever players has won or loose.</param>
     public void GameOver(bool hasWon)
     {
+        DisplayMenuPause(true);
         Settings.IsPause = true;
         menuNoToggleable = true;
         if (hasWon)

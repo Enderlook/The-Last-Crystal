@@ -1,0 +1,636 @@
+fileFormatVersion: 2
+guid: 9ea9e57e8d44bee42a85cc2802c72a94
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SPRITE_RUN_ENEMYCLAW_0
+    21300002: SPRITE_RUN_ENEMYCLAW_1
+    21300004: SPRITE_RUN_ENEMYCLAW_2
+    21300006: SPRITE_RUN_ENEMYCLAW_3
+    21300008: SPRITE_RUN_ENEMYCLAW_4
+    21300010: SPRITE_RUN_ENEMYCLAW_5
+    21300012: SPRITE_RUN_ENEMYCLAW_6
+    21300014: SPRITE_RUN_ENEMYCLAW_7
+    21300016: SPRITE_RUN_ENEMYCLAW_8
+    21300018: SPRITE_RUN_ENEMYCLAW_9
+    21300020: SPRITE_RUN_ENEMYCLAW_10
+    21300022: SPRITE_RUN_ENEMYCLAW_11
+    21300024: SPRITE_RUN_ENEMYCLAW_12
+    21300026: SPRITE_RUN_ENEMYCLAW_13
+    21300028: SPRITE_RUN_ENEMYCLAW_14
+    21300030: SPRITE_RUN_ENEMYCLAW_15
+    21300032: SPRITE_RUN_ENEMYCLAW_16
+    21300034: SPRITE_RUN_ENEMYCLAW_17
+    21300036: SPRITE_RUN_ENEMYCLAW_18
+    21300038: SPRITE_RUN_ENEMYCLAW_19
+    21300040: SPRITE_RUN_ENEMYCLAW_20
+    21300042: SPRITE_RUN_ENEMYCLAW_21
+    21300044: SPRITE_RUN_ENEMYCLAW_22
+    21300046: SPRITE_RUN_ENEMYCLAW_23
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_0
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 2605
+        width: 220
+        height: 315
+      alignment: 9
+      pivot: {x: 0.39363635, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87ae8f4a42b4fc6499276a4028df160f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_1
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 2607
+        width: 219
+        height: 310
+      alignment: 9
+      pivot: {x: 0.41141552, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab8db9978fb6d294c9869e171f23baf4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_2
+      rect:
+        serializedVersion: 2
+        x: 1130
+        y: 2609
+        width: 219
+        height: 303
+      alignment: 9
+      pivot: {x: 0.42876714, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4bf70133448414c95cb3e784bc8c27
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_3
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 2609
+        width: 211
+        height: 300
+      alignment: 9
+      pivot: {x: 0.43459713, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae74a0fd9c8c0fb46adb7bd39d02a2ee
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_4
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 2108
+        width: 163
+        height: 305
+      alignment: 9
+      pivot: {x: 0.30920246, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2598ebc566a4654cac0f5309eb74da6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_5
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 2108
+        width: 140
+        height: 308
+      alignment: 9
+      pivot: {x: 0.23857144, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60e4258457bf3f544a1a86314314ad5d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_6
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 2108
+        width: 128
+        height: 312
+      alignment: 9
+      pivot: {x: 0.31328124, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b8025723f65af544af931847d2f854a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_7
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 2106
+        width: 151
+        height: 318
+      alignment: 9
+      pivot: {x: 0.3960265, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a5355b18c4abb64a9750977e91db836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_8
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 1605
+        width: 188
+        height: 323
+      alignment: 9
+      pivot: {x: 0.3925532, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecd4529a6265ca840a3e956229cf165d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_9
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 1612
+        width: 193
+        height: 315
+      alignment: 9
+      pivot: {x: 0.40984455, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b32dacb9b1e85e1459288b251464b0fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_10
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 1621
+        width: 194
+        height: 306
+      alignment: 9
+      pivot: {x: 0.41752577, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9027fab9f04b9340a37a232223f64ac
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_11
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 1614
+        width: 200
+        height: 310
+      alignment: 9
+      pivot: {x: 0.3875, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dbdb75f66966794cbb7c9626166cbff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_12
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 1106
+        width: 222
+        height: 314
+      alignment: 9
+      pivot: {x: 0.386036, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09a98c0e2f9b6e4c9d41764fe80c3e8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_13
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 1108
+        width: 218
+        height: 308
+      alignment: 9
+      pivot: {x: 0.4027523, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4fc66459fe84ec40969b06441206cf2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_14
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 1108
+        width: 214
+        height: 305
+      alignment: 9
+      pivot: {x: 0.40327105, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28db21711294392489db57f9948e0f9f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_15
+      rect:
+        serializedVersion: 2
+        x: 1635
+        y: 1108
+        width: 211
+        height: 301
+      alignment: 9
+      pivot: {x: 0.4085308, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ccff2beb94a3724b8d4682be65bbb43
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_16
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 608
+        width: 163
+        height: 304
+      alignment: 9
+      pivot: {x: 0.2932515, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a4387e782cd71a4a94072b994e12c10
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_17
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 608
+        width: 139
+        height: 308
+      alignment: 9
+      pivot: {x: 0.21582733, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 728979cec7d45614fa55f676fd17a902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_18
+      rect:
+        serializedVersion: 2
+        x: 1184
+        y: 607
+        width: 130
+        height: 314
+      alignment: 9
+      pivot: {x: 0.31384614, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8193c5fc2716b964d93cf5b1e735a866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_19
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 608
+        width: 152
+        height: 316
+      alignment: 9
+      pivot: {x: 0.3651316, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9408446ab3cb9e94bbe9050c3d2d0e23
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_20
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 106
+        width: 187
+        height: 322
+      alignment: 9
+      pivot: {x: 0.41229945, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0612191315f0f844ca0e3975293c6f58
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_21
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 112
+        width: 190
+        height: 315
+      alignment: 9
+      pivot: {x: 0.4036842, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb44c01ba0f2eec4fb2b4fae5540d63f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_22
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 121
+        width: 194
+        height: 306
+      alignment: 9
+      pivot: {x: 0.4072165, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9475e6cf40b22f7438fa6d4e9dc47ead
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_RUN_ENEMYCLAW_23
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 114
+        width: 202
+        height: 310
+      alignment: 9
+      pivot: {x: 0.36138615, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab715c08ac08bfc48ae64f4a934bead4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a8b706cf946df144e8f205a021bf1d1f
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
