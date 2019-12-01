@@ -448,7 +448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 / 100
+  m_Text: 
 --- !u!1 &7958255317115511162
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796e3bd3b299ffd45b1680b2f4bc477c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textShowed: '{0} / {1}'
+  textShowed: '{0}'
   dynamicNumbers: 0
   maxHealthColor: {r: 0.77109814, g: 0.990566, b: 0.4719206, a: 1}
   minHealthColor: {r: 0.990566, g: 0.5186454, b: 0.5186454, a: 1}
