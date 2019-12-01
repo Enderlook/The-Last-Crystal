@@ -9,11 +9,9 @@ namespace CreaturesAddons
 {
     public class Hurtable : MonoBehaviour, ITakeDamage
     {
-        [Header("Configuration")]
+        [Header("Setup")]
         [Tooltip("Health.")]
         public Pool health;
-
-        [Header("Setup")]
         [Tooltip("FloatingTextController Script")]
         public FloatingTextController floatingTextController;
 
