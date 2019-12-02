@@ -1841,7 +1841,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160684982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b75f49ddb863184dabddb1b62853434, type: 3}
   m_Name: 
@@ -1850,12 +1850,9 @@ MonoBehaviour:
   - prefabEnemy: {fileID: 5673377872746260060, guid: bea028410e0631d41a252eb07dfa7085,
       type: 3}
     probability: 5
-  - prefabEnemy: {fileID: 1091846710704527667, guid: b87a0287fc4bb504a908bff1217f33b1,
+  - prefabEnemy: {fileID: 7404249357495629987, guid: 46a0782705ddbe2489edb97408bbc928,
       type: 3}
-    probability: 50
-  - prefabEnemy: {fileID: 2669955741155959395, guid: f25a54120d757724087626040c499bf1,
-      type: 3}
-    probability: 80
+    probability: 95
   simultaneousEnemies: 4
   enemiesToSpawn: 14
   timeBtwSpawn: 2

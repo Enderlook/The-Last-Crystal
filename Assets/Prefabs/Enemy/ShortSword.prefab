@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShortSword
       objectReference: {fileID: 0}
+    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 5374955115178468116}
     - target: {fileID: 6140415168490267451, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -805,3 +810,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336b20a0e32c641489bb09ab09369d57, type: 3}
+--- !u!212 &5374955115178468116 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
+    type: 3}
+  m_PrefabInstance: {fileID: 8050300360319807523}
+  m_PrefabAsset: {fileID: 0}
