@@ -1850,10 +1850,10 @@ MonoBehaviour:
   - prefabEnemy: {fileID: 5673377872746260060, guid: bea028410e0631d41a252eb07dfa7085,
       type: 3}
     probability: 5
-  - prefabEnemy: {fileID: 1091846710704527667, guid: b87a0287fc4bb504a908bff1217f33b1,
+  - prefabEnemy: {fileID: 4598965145827479676, guid: 1e7ac38d2f7c10347b05de7b74971f01,
       type: 3}
     probability: 50
-  - prefabEnemy: {fileID: 2669955741155959395, guid: f25a54120d757724087626040c499bf1,
+  - prefabEnemy: {fileID: 7404249357495629987, guid: 46a0782705ddbe2489edb97408bbc928,
       type: 3}
     probability: 80
   - prefabEnemy: {fileID: 7404249357495629987, guid: 46a0782705ddbe2489edb97408bbc928,
