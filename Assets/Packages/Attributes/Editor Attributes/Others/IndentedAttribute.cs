@@ -13,12 +13,12 @@ namespace AdditionalAttributes
         /// <summary>
         /// Indentation to add.
         /// </summary>
-        public int IndentationOffset { get; }
+        public readonly int indentationOffset;
 
         /// <summary>
         /// Add or remove indentation to the drew serialized property.
         /// </summary>
         /// <param name="indentationOffset">Indentation to add. Negative values remove indentation.</param>
-        public IndentedAttribute(int indentationOffset = 1) => IndentationOffset = indentationOffset;
+        public IndentedAttribute(int indentationOffset = 1) => this.indentationOffset = indentationOffset;
     }
 }

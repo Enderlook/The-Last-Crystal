@@ -27,18 +27,18 @@ namespace AdditionalAttributes
             EnableDisable,
         }
 
-        public string NameOfConditional { get; }
-        public bool Goal { get; }
-        public ActionMode Mode { get; }
+        public readonly string nameOfConditional;
+        public readonly bool goal;
+        public readonly ActionMode mode;
 
-        public bool indented;
+        public readonly bool indented;
 
         /// <summary>
         /// Action to take depending of the condition.
         /// </summary>
         /// <param name="nameOfConditional">Action to take depending of the condition.</param>
         /// <param name="goal">Required boolean state to show or enable the property.</param>
-        public ShowIfAttribute(string nameOfConditional, ActionMode mode = ActionMode.ShowHide, bool goal = true) : this(nameOfConditional, goal) => Mode = mode;
+        public ShowIfAttribute(string nameOfConditional, ActionMode mode = ActionMode.ShowHide, bool goal = true) : this(nameOfConditional, goal) => this.mode = mode;
 
         /// <summary>
         /// Action to take depending of the condition.
@@ -46,8 +46,8 @@ namespace AdditionalAttributes
         /// <param name="goal">Required boolean state to show or enable the property.</param>
         public ShowIfAttribute(string nameOfConditional, bool goal)
         {
-            NameOfConditional = nameOfConditional;
-            Goal = goal;
+            this.nameOfConditional = nameOfConditional;
+            this.goal = goal;
         }
     }
 }

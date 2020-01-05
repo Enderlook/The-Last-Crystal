@@ -172,10 +172,10 @@ namespace AdditionalAttributes.PostCompiling
                 return;
             foreach (BaseExecuteWhenScriptsReloads attribute in methodInfo.GetCustomAttributes<BaseExecuteWhenScriptsReloads>())
             {
-                int loop = attribute.Loop;
+                int loop = attribute.loop;
                 if (attribute is ExecuteOnEachTypeWhenScriptsReloads executeOnEachTypeWhenScriptsReloads)
                 {
-                    ExecuteOnEachTypeWhenScriptsReloads.TypeFlags typeFlags = executeOnEachTypeWhenScriptsReloads.TypeFilter;
+                    ExecuteOnEachTypeWhenScriptsReloads.TypeFlags typeFlags = executeOnEachTypeWhenScriptsReloads.typeFilter;
 
                     if (TryGetDelegate(methodInfo, out Action<Type> action))
                     {
@@ -194,7 +194,7 @@ namespace AdditionalAttributes.PostCompiling
                 {
                     if (TryGetDelegate(methodInfo, out Action<FieldInfo> action))
                     {
-                        ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.FieldFilter;
+                        ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
                         if ((fieldFags & ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.SerializableByUnity) != 0)
                             SubscribeOnEachSerializableByUnityFieldOfTypes(action, loop);
                         if ((fieldFags & ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.NotSerializableByUnity) != 0)

@@ -12,8 +12,8 @@ namespace AdditionalAttributes.PostCompiling.Internal
         /// In which loop of the execution will this script executed.<br>
         /// Accept any kind of number.
         /// </summary>
-        public int Loop { get; private set; }
+        public readonly int loop;
 
-        protected BaseExecuteWhenScriptsReloads(int loop = 0) => Loop = loop;
+        protected BaseExecuteWhenScriptsReloads(int loop = 0) => this.loop = loop;
     }
 }

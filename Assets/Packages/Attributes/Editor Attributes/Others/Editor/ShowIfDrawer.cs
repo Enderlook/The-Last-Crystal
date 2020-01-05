@@ -29,8 +29,8 @@ namespace AdditionalAttributes
             string propertyName = property.name;
 
             ShowIfAttribute showIfAttribute = (ShowIfAttribute)attribute;
-            string conditionName = showIfAttribute.NameOfConditional;
-            mode = showIfAttribute.Mode;
+            string conditionName = showIfAttribute.nameOfConditional;
+            mode = showIfAttribute.mode;
 
             object parent;
             /* Sometimes when an array is resized, the property drawer is renderer before the actual array is resized.
@@ -130,7 +130,7 @@ namespace AdditionalAttributes
                     EditorGUI.indentLevel--;
             }
 
-            active = active == showIfAttribute.Goal;
+            active = active == showIfAttribute.goal;
             if (mode == ShowIfAttribute.ActionMode.ShowHide)
             {
                 if (active)

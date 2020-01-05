@@ -13,29 +13,29 @@ namespace AdditionalAttributes
         /// <summary>
         /// Whenever it should use <see cref="UnityEditor.Handles.PositionHandle(Vector3, Quaternion)"/> or <see cref="UnityEditor.Handles.FreeMoveHandle(Vector3, Quaternion, float, Vector3, UnityEditor.Handles.CapFunction)"/> to draw the handler.
         /// </summary>
-        public bool UsePositionHandler { get; }
+        public readonly bool usePositionHandler;
 
         /// <summary>
         /// Icon displayed in scene. If empty no icon will be displayed.
         /// </summary>
-        public string Icon { get; }
+        public readonly string icon;
 
         /// <summary>
         /// Reference used to show handler. If empty, <see cref="Transform"/> of the <see cref="GameObject"/> will be used.
         /// </summary>
-        public string Reference { get; }
+        public readonly string reference;
 
         public DrawVectorRelativeToTransformAttribute(bool usePositionHandler = false, string reference = "")
         {
-            UsePositionHandler = usePositionHandler;
-            Reference = reference;
+            this.usePositionHandler = usePositionHandler;
+            this.reference = reference;
         }
 
         public DrawVectorRelativeToTransformAttribute(string icon, bool usePositionHandler = false, string reference = "")
         {
-            UsePositionHandler = usePositionHandler;
-            Icon = icon;
-            Reference = reference;
+            this.usePositionHandler = usePositionHandler;
+            this.icon = icon;
+            this.reference = reference;
         }
     }
 }

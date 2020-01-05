@@ -10,7 +10,7 @@ namespace AdditionalAttributes
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             IndentedAttribute indentedAttribute = (IndentedAttribute)attribute;
-            int indentation = indentedAttribute.IndentationOffset;
+            int indentation = indentedAttribute.indentationOffset;
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.indentLevel += indentation;
             EditorGUI.PropertyField(position, property, label);

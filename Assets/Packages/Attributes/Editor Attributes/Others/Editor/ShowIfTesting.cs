@@ -38,7 +38,7 @@ namespace AdditionalAttributes
             foreach (KeyValuePair<Type, List<ShowIfAttribute>> classToCheck in typesAndAttributes)
             {
                 Type classType = classToCheck.Key;
-                HashSet<string> confirmFields = new HashSet<string>(classToCheck.Value.Select(e => e.NameOfConditional));
+                HashSet<string> confirmFields = new HashSet<string>(classToCheck.Value.Select(e => e.nameOfConditional));
 
                 confirmFields.ExceptWith(new HashSet<string>(
                     classType
