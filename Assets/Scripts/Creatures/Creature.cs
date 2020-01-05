@@ -1,7 +1,7 @@
-using System;
 using AdditionalComponents;
 using CreaturesAddons.Weapons;
 using Master;
+using System;
 using UnityEngine;
 
 namespace CreaturesAddons
@@ -12,6 +12,7 @@ namespace CreaturesAddons
         [Tooltip("Movement speed.")]
         public float speed = 1;
 
+        [Header("Setup")]
         [Tooltip("Sprite Renderer Component.")]
         public SpriteRenderer sprite;
 
@@ -64,7 +65,7 @@ namespace CreaturesAddons
             if (Settings.IsPause)
                 return;
             move?.Move(Time.deltaTime, SpeedMultiplier * speed);
-            attack?.Attack(Time.time);
+            attack?.Attack(Time.deltaTime);
             // We don't call base.Update() because that is made in the line below
             Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
         }

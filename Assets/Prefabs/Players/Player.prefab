@@ -49,6 +49,10 @@ GameObject:
   - component: {fileID: 4416114078013645945}
   - component: {fileID: 3430087774838448887}
   - component: {fileID: 2865848467112834137}
+  - component: {fileID: 1786681838222022307}
+  - component: {fileID: 7219742351414640916}
+  - component: {fileID: 4293240741395348600}
+  - component: {fileID: 5444643182364421536}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -340,19 +344,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checker:
-    source: {x: 0, y: 0}
-    direction: {x: 0, y: -1}
-    distance: 0.1
-    referenceTransform: {fileID: 0}
-    spriteRenderer: {fileID: 0}
-    flipX: 0
-    flipY: 0
-    draw: 1
-    edit: 0
-    debug: 0
-    color: {r: 1, g: 0, b: 0, a: 1}
+  position: {x: 0, y: 0}
+  radius: 0
   groundLayer: 8
+--- !u!114 &1786681838222022307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f045861820d9d094f82f0349a004e437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePool:
+    startingMax: 10
+    startingCurrent: -1
+  hasEmptyCallback: 0
+  emptyCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasFullCallback: 0
+  fullCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasChangeCallback: 0
+  changeCallback:
+    callback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  hasBar: 1
+  bar:
+    bar: {fileID: 0}
+  hasRecharger: 1
+  recharger:
+    rechargeRate: 2
+    rechargingDelay: 2
+    playlist: {fileID: 0}
+    audioSource: {fileID: 0}
+    startCallback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    endCallback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    activeCallback:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  hasDecreaseReduction: 0
+  decreaseReduction:
+    reductionFormula:
+      formula: 
+      compile: 0
+--- !u!114 &7219742351414640916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e615498ac0aeb624ea08bbd4789a405b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: {fileID: 1786681838222022307}
+--- !u!114 &4293240741395348600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5ffada08e88a049954e3a27f05cef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: {fileID: 1786681838222022307}
+  decreaseKey: 49
+  decreaseAmount: 5
+  increaseKey: 50
+  increaseAmount: 5
+  initialize: 0
+  update: 0
+--- !u!114 &5444643182364421536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5ffada08e88a049954e3a27f05cef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: {fileID: 4416114078013645945}
+  decreaseKey: 51
+  decreaseAmount: 30
+  increaseKey: 52
+  increaseAmount: 30
+  initialize: 0
+  update: 0
 --- !u!1 &3745464996977563344
 GameObject:
   m_ObjectHideFlags: 0
