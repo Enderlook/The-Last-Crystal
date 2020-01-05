@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+
 using UnityEngine;
+
 using static Master.Global;
 
 namespace Master

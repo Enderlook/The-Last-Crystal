@@ -1,8 +1,12 @@
-﻿using System;
-using System.Collections;
-using CreaturesAddons.Weapons;
+﻿using CreaturesAddons.Weapons;
+
 using FloatingText;
+
 using FloatPool;
+
+using System;
+using System.Collections;
+
 using UnityEngine;
 
 namespace CreaturesAddons

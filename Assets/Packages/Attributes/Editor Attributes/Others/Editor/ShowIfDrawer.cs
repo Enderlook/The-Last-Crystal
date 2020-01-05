@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using UnityEditor;
+
 using UnityEditorHelper;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -116,7 +118,7 @@ namespace AdditionalAttributes
             Debug.LogException(new Exception($"Field, property (with Get Method) or method (without mandatory parameters and with return) {conditionName} {sign} of type/return type {typeof(bool)} not found."));
             return;
 
-            outsideForeach:
+        outsideForeach:
             EditorGUI.BeginProperty(position, label, property);
             void DrawField()
             {

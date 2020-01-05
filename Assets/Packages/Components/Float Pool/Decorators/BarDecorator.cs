@@ -1,6 +1,9 @@
-﻿using System;
-using FloatPool.Internal;
+﻿using FloatPool.Internal;
+
 using HealthBarGUI;
+
+using System;
+
 using UnityEngine;
 
 namespace FloatPool.Decorators
@@ -17,11 +20,13 @@ namespace FloatPool.Decorators
                 bar.ManualUpdate(Current, Max);
             }
         }
+
         private void UpdateValues()
         {
             if (Bar != null)
                 Bar.UpdateValues(Current, Max);
         }
+
         public override (float remaining, float taken) Increase(float amount, bool allowOverflow = false)
         {
             (float remaining, float taken) result = base.Increase(amount, allowOverflow);

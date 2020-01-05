@@ -1,5 +1,7 @@
-﻿using System;
-using AdditionalAttributes;
+﻿using AdditionalAttributes;
+
+using System;
+
 using UnityEngine;
 
 namespace Serializables.Physics

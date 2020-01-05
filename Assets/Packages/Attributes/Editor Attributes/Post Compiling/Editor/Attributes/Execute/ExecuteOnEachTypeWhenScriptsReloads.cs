@@ -1,7 +1,8 @@
-﻿using System;
-using System.Reflection;
-using AdditionalAttributes.AttributeUsage;
+﻿using AdditionalAttributes.AttributeUsage;
 using AdditionalAttributes.PostCompiling.Internal;
+
+using System;
+using System.Reflection;
 
 namespace AdditionalAttributes.PostCompiling
 {
@@ -47,9 +48,6 @@ namespace AdditionalAttributes.PostCompiling
         /// </summary>
         /// <param name="typeFlags">Determines rules about in which types does match.</param>
         /// <param name="loop">In which loop of the execution will this script execute.</param>
-        public ExecuteOnEachTypeWhenScriptsReloads(TypeFlags typeFlags = TypeFlags.IsEitherEnumNonEnum, int loop = 0) : base(loop)
-        {
-            TypeFilter = typeFlags;
-        }
+        public ExecuteOnEachTypeWhenScriptsReloads(TypeFlags typeFlags = TypeFlags.IsEitherEnumNonEnum, int loop = 0) : base(loop) => TypeFilter = typeFlags;
     }
 }

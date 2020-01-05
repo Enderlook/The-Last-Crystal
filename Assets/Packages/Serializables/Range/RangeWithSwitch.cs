@@ -1,5 +1,6 @@
-﻿using System;
-using Serializables;
+﻿using Serializables;
+
+using System;
 
 namespace Range
 {
@@ -7,6 +8,7 @@ namespace Range
     public class RangeFloatSwitchable : Switch<RangeFloat, float>, IBasicRange<float>, IBasicRangeInt<float>
     {
         public float Value => Alternative ? Value2 : Value1.Value;
+
         public int ValueInt => Alternative ? RangeFloat.FloatToIntByChance(Value2) : Value1.ValueInt;
 
         /// <summary>
@@ -14,6 +16,7 @@ namespace Range
         /// </summary>
         /// <param name="source"><see cref="RangeFloatSwitchable"/> instance used to determine the random float.</param>
         public static explicit operator float(RangeFloatSwitchable source) => source.Value;
+
         /// <summary>
         /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
         /// The result is always an integer. Decimal numbers are used as chance to increment by one.
@@ -26,6 +29,7 @@ namespace Range
     public class RangeFloatStepSwitchable : Switch<RangeFloatStep, float>, IBasicRange<float>, IBasicRangeInt<float>
     {
         public float Value => Alternative ? Value2 : Value1.Value;
+
         public int ValueInt => Alternative ? RangeFloat.FloatToIntByChance(Value2) : Value1.ValueInt;
 
         /// <summary>
@@ -33,6 +37,7 @@ namespace Range
         /// </summary>
         /// <param name="source"><see cref="RangeFloatSwitchable"/> instance used to determine the random float.</param>
         public static explicit operator float(RangeFloatStepSwitchable source) => source.Value;
+
         /// <summary>
         /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
         /// The result is always an integer. Decimal numbers are used as chance to increment by one.
@@ -45,6 +50,7 @@ namespace Range
     public class RangeIntSwitchable : Switch<RangeInt, int>, IBasicRangeInt<int>
     {
         public int Value => Alternative ? Value2 : Value1.Value;
+
         public int ValueInt => Value;
 
         /// <summary>
@@ -58,6 +64,7 @@ namespace Range
     public class RangeIntStepSwitchable : Switch<RangeIntStep, int>, IBasicRangeInt<int>
     {
         public int Value => Alternative ? Value2 : Value1.Value;
+
         public int ValueInt => Value;
 
         /// <summary>

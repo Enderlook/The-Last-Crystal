@@ -1,7 +1,8 @@
-﻿using System;
+﻿using AdditionalAttributes.PostCompiling;
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AdditionalAttributes.PostCompiling;
 
 namespace AdditionalAttributes.AttributeUsage
 {

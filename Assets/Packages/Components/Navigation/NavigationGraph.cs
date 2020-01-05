@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 
 namespace Navigation
@@ -188,7 +189,7 @@ namespace Navigation
                     }
                 }
 
-                End:
+            End:
                 if (shouldBeDisabled)
                     node.SetActive(false);
             }

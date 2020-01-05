@@ -1,7 +1,9 @@
-﻿using System;
+﻿using AdditionalAttributes.AttributeUsage.Internal;
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AdditionalAttributes.AttributeUsage.Internal;
+
 using UnityEngine;
 
 namespace AdditionalAttributes.AttributeUsage

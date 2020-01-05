@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using CreaturesAddons;
-using Utils;
-using System.Collections;
+﻿using CreaturesAddons;
+
+using UnityEngine;
 
 namespace PlayerAddons
 {
@@ -42,7 +41,7 @@ namespace PlayerAddons
                     if (Input.GetKey(dashKey))
                     {
                         savedVelocity = rb2D.velocity;
-                        dash = Instantiate(effect, new Vector2(rb2D.position.x, rb2D.position.y + 0.15f), 
+                        dash = Instantiate(effect, new Vector2(rb2D.position.x, rb2D.position.y + 0.15f),
                             transform.rotation);
                         float vel = sprite.flipX ? -forceDash : forceDash;
                         rb2D.velocity = Vector2.right * vel;
@@ -57,7 +56,8 @@ namespace PlayerAddons
                         rb2D.velocity = savedVelocity;
                         dashState = DashState.Cooldown;
                     }
-                    else dashTime -= deltaTime;
+                    else
+                        dashTime -= deltaTime;
                     break;
                 case DashState.Cooldown:
                     dashTime += deltaTime;

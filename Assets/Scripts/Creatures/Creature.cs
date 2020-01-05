@@ -1,7 +1,11 @@
 using AdditionalComponents;
+
 using CreaturesAddons.Weapons;
+
 using Master;
+
 using System;
+
 using UnityEngine;
 
 namespace CreaturesAddons
@@ -101,6 +105,6 @@ namespace CreaturesAddons
             Invoke("ResetMaterial", .1f);
         }
 
-        void ResetMaterial() => sprite.material = defMaterial;
+        private void ResetMaterial() => sprite.material = defMaterial;
     }
 }

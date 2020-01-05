@@ -1,6 +1,9 @@
 ﻿using AdditionalAttributes;
+
 using Master;
+
 using Serializables.Physics;
+
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons
@@ -102,7 +105,8 @@ namespace CreaturesAddons.Weapons
                 thisAnimator.SetBool(animationState, false);
                 thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
                 thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, false);
-            } else if (isCombo == 0)
+            }
+            else if (isCombo == 0)
                 thisAnimator.SetBool(animationState, false);
             countOfClicks = 0;
         }

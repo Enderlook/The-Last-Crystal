@@ -1,5 +1,7 @@
-﻿using System;
-using AdditionalAttributes.AttributeUsage;
+﻿using AdditionalAttributes.AttributeUsage;
+
+using System;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -9,7 +11,7 @@ namespace AdditionalAttributes
     public sealed class DrawVectorRelativeToTransformAttribute : Attribute
     {
         /// <summary>
-        /// Whenever it should use <see cref="UnityEditor.Handles.PositionHandle(UnityEngine.Vector3, UnityEngine.Quaternion)"/> or <see cref="UnityEditor.Handles.FreeMoveHandle(UnityEngine.Vector3, UnityEngine.Quaternion, float, UnityEngine.Vector3, UnityEditor.Handles.CapFunction)"/> to draw the handler.
+        /// Whenever it should use <see cref="UnityEditor.Handles.PositionHandle(Vector3, Quaternion)"/> or <see cref="UnityEditor.Handles.FreeMoveHandle(Vector3, Quaternion, float, Vector3, UnityEditor.Handles.CapFunction)"/> to draw the handler.
         /// </summary>
         public bool UsePositionHandler { get; }
 
@@ -19,7 +21,7 @@ namespace AdditionalAttributes
         public string Icon { get; }
 
         /// <summary>
-        /// Reference used to show handler. If empty, transform the gameobject will be used.
+        /// Reference used to show handler. If empty, <see cref="Transform"/> of the <see cref="GameObject"/> will be used.
         /// </summary>
         public string Reference { get; }
 

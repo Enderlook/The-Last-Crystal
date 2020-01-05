@@ -1,7 +1,8 @@
 ﻿using AdditionalAttributes;
-using UnityEditor;
+
 #if UNITY_EDITOR
 using UnityEngine;
+
 #endif
 using RangeAttribute = UnityEngine.RangeAttribute;
 
@@ -21,7 +22,7 @@ public class GroundChecker : MonoBehaviour
     private Vector2 Position => (Vector2)transform.position + position;
 
     private int GroundLayer => 1 << groundLayer;
-    
+
     public bool IsGrounded() => Physics2D.OverlapCircle(Position, radius, GroundLayer);
 
     public bool IsGrounded(Vector2 offset) => Physics2D.OverlapCircle(Position + offset, radius, GroundLayer);

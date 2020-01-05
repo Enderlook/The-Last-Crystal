@@ -1,9 +1,13 @@
-﻿using System;
-using AdditionalComponents;
+﻿using AdditionalComponents;
+
 using Navigation;
+
+using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+
 using Utils;
 
 public class CreatureSpawn : MonoBehaviour

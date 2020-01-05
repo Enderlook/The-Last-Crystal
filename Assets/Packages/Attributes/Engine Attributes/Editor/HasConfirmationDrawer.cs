@@ -1,7 +1,11 @@
-﻿using System.Reflection;
-using AdditionalExtensions;
+﻿using AdditionalExtensions;
+
+using System.Reflection;
+
 using UnityEditor;
+
 using UnityEditorHelper;
+
 using UnityEngine;
 
 namespace AdditionalAttributes

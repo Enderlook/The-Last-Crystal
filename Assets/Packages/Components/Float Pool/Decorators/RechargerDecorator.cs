@@ -1,7 +1,11 @@
-﻿using System;
-using FloatPool.Internal;
+﻿using FloatPool.Internal;
+
 using Master;
+
 using SoundSystem;
+
+using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 

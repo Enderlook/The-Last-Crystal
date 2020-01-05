@@ -1,6 +1,8 @@
-﻿using System;
+﻿using AdditionalAttributes.AttributeUsage;
+
+using System;
 using System.Reflection;
-using AdditionalAttributes.AttributeUsage;
+
 using UnityEngine;
 
 namespace AdditionalAttributes

@@ -1,5 +1,7 @@
-﻿using System;
-using FloatPool.Internal;
+﻿using FloatPool.Internal;
+
+using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 

@@ -1,8 +1,13 @@
 ﻿using AdditionalComponents;
+
 using CreaturesAddons;
+
 using FloatPool.Decorators;
+
 using HealthBarGUI;
+
 using Master;
+
 using UnityEngine;
 
 public class InitializePlayers : MonoBehaviour

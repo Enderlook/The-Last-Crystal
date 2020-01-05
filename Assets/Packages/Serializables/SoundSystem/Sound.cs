@@ -1,5 +1,7 @@
-﻿using System;
-using Range;
+﻿using Range;
+
+using System;
+
 using UnityEngine;
 
 namespace SoundSystem

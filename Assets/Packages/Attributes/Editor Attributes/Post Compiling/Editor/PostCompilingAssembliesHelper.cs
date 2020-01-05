@@ -1,12 +1,17 @@
-﻿using System;
+﻿using AdditionalAttributes.PostCompiling.Internal;
+
+using AdditionalExtensions;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AdditionalAttributes.PostCompiling.Internal;
-using AdditionalExtensions;
+
 using UnityEditor.Callbacks;
 using UnityEditor.Compilation;
+
 using UnityEngine;
+
 using UnityAssembly = UnityEditor.Compilation.Assembly;
 
 namespace AdditionalAttributes.PostCompiling

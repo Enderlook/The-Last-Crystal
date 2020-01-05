@@ -1,6 +1,8 @@
 ﻿using FloatPool;
 using FloatPool.Decorators;
+
 using HealthBarGUI;
+
 using UnityEngine;
 
 namespace CreaturesAddons

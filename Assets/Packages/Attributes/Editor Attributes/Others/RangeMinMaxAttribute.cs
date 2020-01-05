@@ -1,6 +1,9 @@
-﻿using System;
-using AdditionalAttributes.AttributeUsage;
+﻿using AdditionalAttributes.AttributeUsage;
+
 using Range;
+
+using System;
+
 using UnityEngine;
 
 namespace AdditionalAttributes

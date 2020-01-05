@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
-using AdditionalAttributes;
+﻿using AdditionalAttributes;
+
+using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace FloatingText
