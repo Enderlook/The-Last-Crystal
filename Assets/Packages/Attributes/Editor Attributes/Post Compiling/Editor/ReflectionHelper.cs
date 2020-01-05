@@ -12,13 +12,9 @@ namespace AdditionalAttributes.PostCompiling
         public static IEnumerable<(Type type, T attribute)> GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<T>()
         {
             foreach (Type type in PostCompilingAssembliesHelper.GetAllTypesOfPlayerAndEditorAssemblies())
-            {
                 // Check if a class came from Attribute before using reflection because otherwise it would be a waste of performance
                 if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(T), true) is T attribute)
-                {
                     yield return (type, attribute);
-                }
-            }
         }
 
         private static IEnumerable<(T memberInfo, Type type, Attribute attribute)> GettAllAttributesOfMembersOf<T>(Type type, Func<Type, BindingFlags, T[]> getMembers) where T : MemberInfo
@@ -29,10 +25,8 @@ namespace AdditionalAttributes.PostCompiling
                 try
                 {
                     foreach (Attribute attribute in memberInfo.GetCustomAttributes())
-                    {
                         _attribute = attribute;
                         //yield return (memberInfo, type, attribute);
-                    }
                 }
                 catch (BadImageFormatException) { } // https://github.com/mono/mono/issues/17278
 
@@ -98,6 +92,5 @@ namespace AdditionalAttributes.PostCompiling
             }
             return false;
         }
-
     }
 }
