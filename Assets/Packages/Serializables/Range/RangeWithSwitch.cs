@@ -2,10 +2,27 @@
 
 using System;
 
+using UnityEngine;
+
 namespace Range
 {
+    public abstract class RangeSwitchable<T, U> : Switch<T, U>
+    {
+        private static readonly GUIContent item1GUIContent = new GUIContent("Range", "A random value from this range will be used.");
+
+        private static readonly GUIContent item2GUIContent = new GUIContent("Value", "This value will be used.");
+
+        private static readonly GUIContent useAlternativeGUIContent = new GUIContent("Use Range", "If checked, a random value from a range will be used.");
+
+        protected override GUIContent Item1GUIContent => item1GUIContent;
+
+        protected override GUIContent Item2GUIContent => item2GUIContent;
+
+        protected override GUIContent UseAlternativeGUIContent => useAlternativeGUIContent;
+    }
+
     [Serializable]
-    public class RangeFloatSwitchable : Switch<RangeFloat, float>, IBasicRange<float>, IBasicRangeInt<float>
+    public class RangeFloatSwitchable : RangeSwitchable<RangeFloat, float>, IBasicRange<float>, IBasicRangeInt<float>
     {
         public float Value => Alternative ? Value2 : Value1.Value;
 
@@ -26,7 +43,7 @@ namespace Range
     }
 
     [Serializable]
-    public class RangeFloatStepSwitchable : Switch<RangeFloatStep, float>, IBasicRange<float>, IBasicRangeInt<float>
+    public class RangeFloatStepSwitchable : RangeSwitchable<RangeFloatStep, float>, IBasicRange<float>, IBasicRangeInt<float>
     {
         public float Value => Alternative ? Value2 : Value1.Value;
 
@@ -47,7 +64,7 @@ namespace Range
     }
 
     [Serializable]
-    public class RangeIntSwitchable : Switch<RangeInt, int>, IBasicRangeInt<int>
+    public class RangeIntSwitchable : RangeSwitchable<RangeInt, int>, IBasicRangeInt<int>
     {
         public int Value => Alternative ? Value2 : Value1.Value;
 
@@ -61,7 +78,7 @@ namespace Range
     }
 
     [Serializable]
-    public class RangeIntStepSwitchable : Switch<RangeIntStep, int>, IBasicRangeInt<int>
+    public class RangeIntStepSwitchable : RangeSwitchable<RangeIntStep, int>, IBasicRangeInt<int>
     {
         public int Value => Alternative ? Value2 : Value1.Value;
 

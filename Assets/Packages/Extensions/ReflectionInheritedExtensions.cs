@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace AdditionalExtensions
 {
-    public static class ReflectionExtensions
+    public static class ReflectionInheritedExtensions
     {
         private static T GetInheritedStuff<T>(this Type source, Func<Type, T> Get) where T : MemberInfo
         {
@@ -23,6 +23,7 @@ namespace AdditionalExtensions
         /// <param name="bindingFlags"><see cref="BindingFlags"/> used to get the field.</param>
         /// <returns>The first field which match the name <paramref name="name"/>.</returns>
         public static FieldInfo GetInheritedField(this Type source, string name, BindingFlags bindingFlags = BindingFlags.Default) => source.GetInheritedStuff((type) => type.GetField(name, bindingFlags));
+
         /// <summary>
         /// Get the property <paramref name="name"/> recursively through the inheritance hierarchy of <paramref name="source"/>.
         /// </summary>
@@ -31,6 +32,7 @@ namespace AdditionalExtensions
         /// <param name="bindingFlags"><see cref="BindingFlags"/> used to get the property.</param>
         /// <returns>The first property which match the name <paramref name="name"/>.</returns>
         public static PropertyInfo GetInheritedProperty(this Type source, string name, BindingFlags bindingFlags = BindingFlags.Default) => source.GetInheritedStuff((type) => type.GetProperty(name, bindingFlags));
+
         /// <summary>
         /// Get the method <paramref name="name"/> recursively through the inheritance hierarchy of <paramref name="source"/>.
         /// </summary>

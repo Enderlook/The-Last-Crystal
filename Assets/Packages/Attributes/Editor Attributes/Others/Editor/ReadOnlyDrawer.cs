@@ -5,9 +5,9 @@ using UnityEngine;
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-    internal class ReadOnlyDrawer : PropertyDrawer
+    internal class ReadOnlyDrawer : AdditionalPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.BeginDisabledGroup(true);

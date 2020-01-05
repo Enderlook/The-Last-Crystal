@@ -7,19 +7,25 @@ using UnityEngine;
 namespace Serializables
 {
     [Serializable]
-    public class Switch<T1, T2>
+    public abstract class Switch<T1, T2>
     {
 #pragma warning disable CS0649
-        [SerializeField, Tooltip("Whenever it should use Item2, instead of Item1.")]
-        private bool useAlternative;
+        // Don't change to private any of there three fields or Unity Editor Freeze
+        [SerializeField, GUI(nameof(UseAlternativeGUIContent))]
+        protected bool useAlternative;
 
-        // Don't change to private or Unity Editor Freeze
-        [SerializeField, ShowIf(nameof(Alternative), false), Tooltip("Value used if Use Alternative is false.")]
+        [SerializeField, ShowIf(nameof(Alternative), false), GUI(nameof(Item1GUIContent))]
         protected T1 item1;
 
-        [SerializeField, ShowIf(nameof(Alternative)), Tooltip("Value used if Use Alternative is true.")]
+        [SerializeField, ShowIf(nameof(Alternative)), GUI(nameof(Item2GUIContent))]
         protected T2 item2;
 #pragma warning restore CS0649
+
+        protected abstract GUIContent Item1GUIContent { get; }
+
+        protected abstract GUIContent Item2GUIContent { get; }
+
+        protected abstract GUIContent UseAlternativeGUIContent { get; }
 
         [NonSerialized]
         private readonly string invalidOperationError = $"Can't read property {{0}} because {nameof(useAlternative)} is {{1}}";

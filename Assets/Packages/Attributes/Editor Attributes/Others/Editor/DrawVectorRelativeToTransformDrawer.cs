@@ -12,9 +12,9 @@ using UnityEngine;
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(DrawVectorRelativeToTransformAttribute)), InitializeOnLoad]
-    internal class DrawVectorRelativeToTransformEditor : PropertyDrawer
+    internal class DrawVectorRelativeToTransformEditor : AdditionalPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.PropertyField(position, property, label, true);

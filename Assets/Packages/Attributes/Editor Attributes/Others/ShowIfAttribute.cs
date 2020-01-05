@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace AdditionalAttributes
 {
-    [AttributeUsageAccessibility(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)]
+    [AttributeUsageAccessibility(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public sealed class ShowIfAttribute : PropertyAttribute
     {
