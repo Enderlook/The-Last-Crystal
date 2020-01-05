@@ -34,12 +34,12 @@ namespace AdditionalAttributes
 
             object parent;
             /* Sometimes when an array is resized, the property drawer is renderer before the actual array is resized.
-             * That is why it we may get error from our custom method GetParentTargetObjectOfProperty.*/
+             * That is why we may get error from our custom method GetParentTargetObjectOfProperty.*/
             try
             {
                 parent = property.GetParentTargetObjectOfProperty();
             }
-            catch (KeyNotFoundException) when (!persistentError)
+            catch (IndexOutOfRangeException) when (!persistentError)
             {
                 persistentError = true;
                 return;
