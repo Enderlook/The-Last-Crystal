@@ -7,11 +7,15 @@ namespace SoundSystem
     {
         [Tooltip("Name of the playlist, used to be access by other scripts.")]
         public string playlistName;
+
         [Tooltip("Playlist. It will be looped.")]
         public Sound[] playlist;
+
         private int playlistIndex = 0;
+
         [Tooltip("Playlist master volume.")]
         public float volume = 1;
+
         [Tooltip("Is the playlist random.")]
         public bool isRandom = false;
 
@@ -93,6 +97,7 @@ namespace SoundSystem
         }
 
         private (Sound sound, float volume) GetSound(bool isRandom) => isRandom ? GetRandomSound() : GetNextSound();
+
         private bool IsRandomFromMode(Mode mode = Mode.Configured) => (mode == Mode.Configured && isRandom) || mode == Mode.Random;
     }
 }

@@ -26,8 +26,15 @@ namespace SoundSystem
 
         public int PlaylistsAmount => playlists.Length;
 
-        private void Start()
-        {
+        private void Start()        {
+            if (audioSource == null)
+            {
+                Debug.LogWarning($"Gameobject {gameObject.name} has not assigned {nameof(AudioSource)} in {nameof(audioSource)} field of {nameof(PlaylistManager)}. Trying to get {nameof(Component)}.");
+                audioSource = GetComponent<AudioSource>();
+                if (audioSource == null)
+                    Debug.LogError($"Gameobject {gameObject.name} has not assigned {nameof(AudioSource)} in {nameof(audioSource)} field of {nameof(PlaylistManager)} and no one could be got.");
+            }
+
             audioSource.loop = false;
             isPlaying = playOnStart;
             playlistsIndex = startingPlaylistIndex;
