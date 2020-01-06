@@ -4,21 +4,20 @@ using System.Linq;
 using System.Reflection;
 
 using UnityEngine;
+using AdditionalExtensions;
 
 namespace AdditionalAttributes.PostCompiling
 {
     internal static class ReflectionHelper
     {
+        private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.Static;
+
         public static IEnumerable<(Type type, T attribute)> GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<T>()
         {
             foreach (Type type in PostCompilingAssembliesHelper.GetAllTypesOfPlayerAndEditorAssemblies())
-            {
                 // Check if a class came from Attribute before using reflection because otherwise it would be a waste of performance
                 if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(T), true) is T attribute)
-                {
                     yield return (type, attribute);
-                }
-            }
         }
 
         private static IEnumerable<(T memberInfo, Type type, Attribute attribute)> GettAllAttributesOfMembersOf<T>(Type type, Func<Type, BindingFlags, T[]> getMembers) where T : MemberInfo
@@ -29,10 +28,8 @@ namespace AdditionalAttributes.PostCompiling
                 try
                 {
                     foreach (Attribute attribute in memberInfo.GetCustomAttributes())
-                    {
                         _attribute = attribute;
                         //yield return (memberInfo, type, attribute);
-                    }
                 }
                 catch (BadImageFormatException) { } // https://github.com/mono/mono/issues/17278
 
@@ -99,5 +96,46 @@ namespace AdditionalAttributes.PostCompiling
             return false;
         }
 
+        /// <summary>
+        /// Get all member names of <paramref name="class"/> which:
+        /// <list type="bullet">
+        ///     <item><description>If <see cref="MethodInfo"/>, its <see cref="MethodInfo.ReturnType"/> must be <typeparamref name="T"/> and it must not require mandatory parameters (can have optionals or params).</description></item>
+        ///     <item><description>If <see cref="PropertyInfo"/>, its <see cref="PropertyInfo.PropertyType"/> must be <typeparamref name="T"/> and it must have a setter.</description></item>
+        ///     <item><description>If <see cref="FieldInfo"/>, its <see cref="FieldInfo.FieldType"/> must be <typeparamref name="T"/>.</description></item>
+        /// </list>
+        /// </summary>
+        /// <param name="class">Type where member are looked for.</param>
+        /// <param name="return">Return type for criteria.</param>
+        /// <returns>Member names which matches the criteria.</returns>
+        public static IEnumerable<string> FieldsPropertiesAndMethodsWithReturnTypeOf(this Type @class, Type @return) => @class
+                .GetFields(bindingFlags)
+                .Where(field => field.FieldType.IsCastableTo(@return) && field.CanBeSerializedByUnity())
+                .Cast<MemberInfo>()
+                .Concat(
+                    @class
+                        .GetProperties(bindingFlags)
+                        .Where(property => property.PropertyType.IsCastableTo(@return) && property.CanRead)
+                        .Cast<MemberInfo>()
+                )
+                .Concat(
+                    @class
+                        .GetMethods(bindingFlags)
+                        .Where(method => method.ReturnType.IsCastableTo(@return) && method.HasNoMandatoryParameters())
+                        .Cast<MemberInfo>()
+                )
+                .Select(member => member.Name);
+
+        /// <summary>
+        /// Get all member names of <paramref name="class"/> which:
+        /// <list type="bullet">
+        ///     <item><description>If <see cref="MethodInfo"/>, its <see cref="MethodInfo.ReturnType"/> must be <typeparamref name="T"/> and it must not require mandatory parameters (can have optionals or params).</description></item>
+        ///     <item><description>If <see cref="PropertyInfo"/>, its <see cref="PropertyInfo.PropertyType"/> must be <typeparamref name="T"/> and it must have a setter.</description></item>
+        ///     <item><description>If <see cref="FieldInfo"/>, its <see cref="FieldInfo.FieldType"/> must be <typeparamref name="T"/>.</description></item>
+        /// </list>
+        /// </summary>
+        /// <typeparam name="T">Return type for criteria.</typeparam>
+        /// <param name="class">Type where member are looked for.</param>
+        /// <returns>Member names which matches the criteria.</returns>
+        public static IEnumerable<string> FieldsPropertiesAndMethodsWithReturnTypeOf<T>(this Type @class) => FieldsPropertiesAndMethodsWithReturnTypeOf(@class, typeof(T));
     }
 }
