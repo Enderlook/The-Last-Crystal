@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AdditionalExceptions;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -40,7 +41,7 @@ namespace AdditionalExtensions
                 case MemberTypes.Method:
                     return (T)((MethodInfo)memberInfo).Invoke(obj);
                 default:
-                    throw new Exception("Impossible state.");
+                    throw new ImpossibleStateException();
             }
         }
 

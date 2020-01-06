@@ -6,6 +6,7 @@ using System.Reflection;
 using UnityEditor;
 
 using UnityEditorHelper;
+using AdditionalExceptions;
 
 using UnityEngine;
 
@@ -60,7 +61,7 @@ namespace AdditionalAttributes
                     DisplayErrorReference(serializedProperty.name);
                     break;
             }
-            throw new Exception("Impossible case");
+            throw new ImpossibleStateException();
         }
 
         private static Vector3 CastToVector3(object source, Type sourceType)
