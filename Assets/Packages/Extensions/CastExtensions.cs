@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace AdditionalExtensions
 {
@@ -80,5 +84,74 @@ namespace AdditionalExtensions
         {
             return obj is T ? (T)obj : null;
         }
+
+        private static readonly Dictionary<Type, IEnumerable<Type>> PrimitiveTypeTable = new Dictionary<Type, IEnumerable<Type>>
+        {
+            { typeof(decimal), new[] { typeof(long), typeof(ulong) } },
+            { typeof(double), new[] { typeof(float) } },
+            { typeof(float), new[] { typeof(long), typeof(ulong) } },
+            { typeof(ulong), new[] { typeof(uint) } },
+            { typeof(long), new[] { typeof(int), typeof(uint) } },
+            { typeof(uint), new[] { typeof(byte), typeof(ushort) } },
+            { typeof(int), new[] { typeof(sbyte), typeof(short), typeof(ushort) } },
+            { typeof(ushort), new[] { typeof(byte), typeof(char) } },
+            { typeof(short), new[] { typeof(byte) } }
+        };
+
+        private static bool IsPrimitiveCastableTo(this Type fromType, Type toType)
+        {
+            Queue<Type> keyTypes = new Queue<Type>(new[] { toType });
+            while (keyTypes.Count > 0)
+            {
+                Type key = keyTypes.Dequeue();
+                if (key == fromType) { return true; }
+                if (PrimitiveTypeTable.ContainsKey(key)) { PrimitiveTypeTable[key].ToList().ForEach(keyTypes.Enqueue); }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines if <paramref name="from"/> is castable to <paramref name="to"/>.
+        /// This method does more than the is-operator and allows for primitives and implicit/explicit conversions to be compared properly.
+        /// </summary>
+        /// <param name="from">The type to cast from.</param>
+        /// <param name="to">The type to be casted to.</param>
+        /// <returns><see langword="true"/> if <paramref name="from"/> can be casted to <paramref name="to"/>. <see langword="false"/> otherwise.</returns>
+        /// <see cref="https://stackoverflow.com/questions/18256742/c-sharp-is-operator-check-castability-for-all-conversions-available"/>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="from"/> or <paramref name="to"/> are <see langword="null"/></exception>
+        public static bool IsCastableTo(this Type from, Type to)
+        {
+            if (from == null)
+                throw new ArgumentNullException(nameof(from));
+            if (to == null)
+                throw new ArgumentNullException(nameof(to));
+
+            return to.IsAssignableFrom(from)
+                || from.IsPrimitiveCastableTo(to)
+                || from.GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Any(m => (m.ReturnType == to && m.Name == "op_Implicit") || m.Name == "op_Explicit");
+        }
+
+        /// <summary>
+        /// Determines if <paramref name="from"/> is castable to <typeparamref name="T"/>.
+        /// This method does more than the is-operator and allows for primitives and implicit/explicit conversions to be compared properly.
+        /// </summary>
+        /// <typeparam name="T">The type to be casted to.</typeparam>
+        /// <param name="from">The type to cast from.</param>
+        /// <returns><see langword="true"/> if <paramref name="from"/> can be casted to <typeparamref name="T"/>. <see langword="false"/> otherwise.</returns>
+        /// <see cref="https://stackoverflow.com/questions/18256742/c-sharp-is-operator-check-castability-for-all-conversions-available"/>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="from"/> is <see langword="null"/></exception>
+
+        public static bool IsCastableTo<T>(this Type from) => IsCastableTo(from, typeof(T));
+
+        /// <summary>
+        /// Determines if <typeparamref name="T"/> is castable to <typeparamref name="U"/>.
+        /// This method does more than the is-operator and allows for primitives and implicit/explicit conversions to be compared properly.
+        /// </summary>
+        /// <typeparam name="T">The type to cast from.</typeparam>
+        /// <typeparam name="U">The type to be casted to.</typeparam>
+        /// <returns><see langword="true"/> if <paramref name="from"/> can be casted to <typeparamref name="T"/>. <see langword="false"/> otherwise.</returns>
+        /// <see cref="https://stackoverflow.com/questions/18256742/c-sharp-is-operator-check-castability-for-all-conversions-available"/>
+        public static bool IsCastableTo<T, U>() => IsCastableTo(typeof(T), typeof(U));
     }
 }

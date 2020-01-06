@@ -1,17 +1,21 @@
-﻿using UnityEditor;
-using UnityEngine;
-using System.Reflection;
+﻿using AdditionalExtensions;
+
 using System;
-using AdditionalExtensions;
+using System.Reflection;
+
+using UnityEditor;
+
 using UnityEditorHelper;
 using AdditionalExceptions;
+
+using UnityEngine;
 
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(DrawVectorRelativeToTransformAttribute)), InitializeOnLoad]
-    internal class DrawVectorRelativeToTransformEditor : PropertyDrawer
+    internal class DrawVectorRelativeToTransformEditor : AdditionalPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.PropertyField(position, property, label, true);
@@ -119,24 +123,24 @@ namespace AdditionalAttributes
             switch (serializedProperty.propertyType)
             {
                 case SerializedPropertyType.Vector2:
-                    position = serializedProperty.vector2Value = DrawHandle(serializedProperty.vector2Value + (Vector2)reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
+                    position = serializedProperty.vector2Value = DrawHandle(serializedProperty.vector2Value + (Vector2)reference, drawVectorRelativeToTransform.usePositionHandler) - reference;
                     break;
                 case SerializedPropertyType.Vector2Int:
-                    serializedProperty.vector2IntValue = DrawHandle((Vector2)(serializedProperty.vector2IntValue + reference.ToVector2Int()), drawVectorRelativeToTransform.UsePositionHandler).ToVector2Int() - reference.ToVector2Int();
+                    serializedProperty.vector2IntValue = DrawHandle((Vector2)(serializedProperty.vector2IntValue + reference.ToVector2Int()), drawVectorRelativeToTransform.usePositionHandler).ToVector2Int() - reference.ToVector2Int();
                     position = (Vector2)serializedProperty.vector2IntValue;
                     break;
                 case SerializedPropertyType.Vector3:
-                    position = serializedProperty.vector3Value = DrawHandle(serializedProperty.vector3Value + reference, drawVectorRelativeToTransform.UsePositionHandler) - reference;
+                    position = serializedProperty.vector3Value = DrawHandle(serializedProperty.vector3Value + reference, drawVectorRelativeToTransform.usePositionHandler) - reference;
                     break;
                 case SerializedPropertyType.Vector3Int:
-                    position = serializedProperty.vector3IntValue = DrawHandle(serializedProperty.vector3IntValue + reference.ToVector3Int(), drawVectorRelativeToTransform.UsePositionHandler).ToVector3Int() - reference.ToVector3Int();
+                    position = serializedProperty.vector3IntValue = DrawHandle(serializedProperty.vector3IntValue + reference.ToVector3Int(), drawVectorRelativeToTransform.usePositionHandler).ToVector3Int() - reference.ToVector3Int();
                     break;
                 default:
                     Debug.LogError($"The attribute {nameof(DrawVectorRelativeToTransformAttribute)} is only allowed in types of {nameof(Vector2)}, {nameof(Vector2Int)}, {nameof(Vector3)} and {nameof(Vector3Int)}.");
                     return;
             }
-            if (!string.IsNullOrEmpty(drawVectorRelativeToTransform.Icon))
-                Handles.Label(position, (Texture2D)EditorGUIUtility.Load(drawVectorRelativeToTransform.Icon));
+            if (!string.IsNullOrEmpty(drawVectorRelativeToTransform.icon))
+                Handles.Label(position, (Texture2D)EditorGUIUtility.Load(drawVectorRelativeToTransform.icon));
 
         }
 
@@ -145,7 +149,7 @@ namespace AdditionalAttributes
             foreach ((SerializedProperty serializedProperty, object field, DrawVectorRelativeToTransformAttribute drawVectorRelativeToTransform, Editor editor) in PropertyDrawerHelper.FindAllSerializePropertiesInActiveEditorWithTheAttribute<DrawVectorRelativeToTransformAttribute>())
             {
                 serializedProperty.serializedObject.Update();
-                Vector3 reference = GetReference(serializedProperty.serializedObject, drawVectorRelativeToTransform.Reference);
+                Vector3 reference = GetReference(serializedProperty.serializedObject, drawVectorRelativeToTransform.reference);
 
                 if (serializedProperty.isArray)
                 {

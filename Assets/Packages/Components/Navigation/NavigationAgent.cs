@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CreaturesAddons;
+
+using System;
 using System.Collections.Generic;
-using CreaturesAddons;
+
 using UnityEngine;
 
 namespace Navigation
@@ -12,8 +14,7 @@ namespace Navigation
         [SerializeField, Tooltip("Navigation Graph used to find paths.")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "Serialized by Unity")]
         private NavigationGraph navigationGraph;
-        public NavigationGraph NavigationGraph
-        {
+        public NavigationGraph NavigationGraph {
             get => navigationGraph;
             set => navigationGraph = value;
         }

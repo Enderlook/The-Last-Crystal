@@ -1,7 +1,9 @@
-﻿using System;
+﻿using AdditionalExtensions;
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
-using AdditionalExtensions;
+
 using UnityEditor;
 
 namespace UnityEditorHelper

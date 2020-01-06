@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AdditionalAttributes.PostCompiling;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AdditionalAttributes.PostCompiling;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -34,7 +36,7 @@ namespace AdditionalAttributes
             foreach (KeyValuePair<Type, List<HasConfirmationFieldAttribute>> classToCheck in typesAndAttributes)
             {
                 Type classType = classToCheck.Key;
-                HashSet<string> confirmFields = new HashSet<string>(classToCheck.Value.Select(e => e.ConfirmFieldName));
+                HashSet<string> confirmFields = new HashSet<string>(classToCheck.Value.Select(e => e.confirmFieldName));
 
                 confirmFields.ExceptWith(new HashSet<string>(
                     classType

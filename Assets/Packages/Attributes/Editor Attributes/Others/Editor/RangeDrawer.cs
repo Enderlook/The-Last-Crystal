@@ -1,19 +1,23 @@
 ﻿using System;
+
 using UnityEditor;
+
 using UnityEditorHelper;
+
 using UnityEngine;
+
 using Random = UnityEngine.Random;
 
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(RangeAttribute))]
-    internal class RangeDrawer : PropertyDrawer
+    internal class RangeDrawer : AdditionalPropertyDrawer
     {
         private readonly string error = $"{nameof(RangeAttribute)} only supports serialized properties of {nameof(SerializedPropertyType.Integer)} ({typeof(int)}) and {nameof(SerializedPropertyType.Float)} ({typeof(float)})).";
 
         private bool foldout;
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
             if (foldout)
                 position.height -= EditorGUIUtility.singleLineHeight;

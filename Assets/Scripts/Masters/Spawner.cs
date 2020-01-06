@@ -1,9 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using AdditionalAttributes;
+﻿using AdditionalAttributes;
+
 using AdditionalComponents;
+
 using Master;
+
 using Navigation;
+
+using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -51,8 +56,8 @@ public class Spawner : MonoBehaviour
             int p = Random.Range(0, points.Count);
             enemyToSpawn = CumulativeProbability();
 
-            particleInstantiated = Instantiate(particle, new Vector2(points[p].x, points[p].y), 
-                Quaternion.identity);
+            particleInstantiated = Instantiate(particle, new Vector2(points[p].x, points[p].y), Quaternion.identity);
+            Destroy(particleInstantiated, 3);
             SpawnEnemy(enemyToSpawn, points[p]);
 
             yield return new WaitForSeconds(timeBtwSpawn);

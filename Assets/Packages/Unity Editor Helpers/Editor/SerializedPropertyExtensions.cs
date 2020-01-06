@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using UnityEditor;
+
 using UnityEngine;
 
 namespace UnityEditorHelper
@@ -127,5 +129,7 @@ namespace UnityEditorHelper
         /// <param name="source">><see cref="SerializedProperty"/> to get <see cref="GUIContent"/>.</param>
         /// <returns><see cref="GUIContent"/> of <paramref name="source"/>.</returns>
         public static GUIContent GetGUIContent(this SerializedProperty source) => new GUIContent(source.displayName, source.tooltip);
+
+        public static SerializedPropertyHelper GetHelper(this SerializedProperty source) => new SerializedPropertyHelper(source);
     }
 }

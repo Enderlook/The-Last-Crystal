@@ -1,4 +1,5 @@
 ﻿using System;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -7,17 +8,17 @@ namespace AdditionalAttributes
     /// Add or remove indentation to the drew serialized property.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class IndentedAttribute : PropertyAttribute
+    public sealed class IndentedAttribute : PropertyAttribute
     {
         /// <summary>
         /// Indentation to add.
         /// </summary>
-        public int IndentationOffset { get; private set; }
+        public readonly int indentationOffset;
 
         /// <summary>
         /// Add or remove indentation to the drew serialized property.
         /// </summary>
         /// <param name="indentationOffset">Indentation to add. Negative values remove indentation.</param>
-        public IndentedAttribute(int indentationOffset = 1) => IndentationOffset = indentationOffset;
+        public IndentedAttribute(int indentationOffset = 1) => this.indentationOffset = indentationOffset;
     }
 }

@@ -1,29 +1,37 @@
 ﻿using AdditionalAttributes;
-using CreaturesAddons;
-using Serializables.Physics;
+
+#if UNITY_EDITOR
 using UnityEngine;
 
-public class GroundChecker : MonoBehaviour, IInit
+#endif
+using RangeAttribute = UnityEngine.RangeAttribute;
+
+public class GroundChecker : MonoBehaviour
 {
 #pragma warning disable CS0649
-    [SerializeField, Tooltip("Ground checking raycast.")]
-    private RayCastingWithOffset checker;
+    [SerializeField, Tooltip("Ground checking raycast."), DrawVectorRelativeToTransform]
+    private Vector2 position;
+
+    [SerializeField, Tooltip("Checking radius."), Range(0, 1)]
+    private float radius;
 
     [SerializeField, Tooltip("Layer of ground."), Layer]
     private int groundLayer;
 #pragma warning restore CS0649
 
+    private Vector2 Position => (Vector2)transform.position + position;
+
     private int GroundLayer => 1 << groundLayer;
 
-    public void Init(Creature creature) => checker.SetReference(transform);
+    public bool IsGrounded() => Physics2D.OverlapCircle(Position, radius, GroundLayer);
 
-    public bool IsGrounded() => checker.Raycast(GroundLayer);
+    public bool IsGrounded(Vector2 offset) => Physics2D.OverlapCircle(Position + offset, radius, GroundLayer);
 
-    public bool IsGrounded(Vector2 offset)
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
     {
-        checker.SetOffset(offset);
-        bool isGrounded = checker.Raycast(GroundLayer);
-        checker.ResetOffset();
-        return isGrounded;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(Position, radius);
     }
+#endif
 }

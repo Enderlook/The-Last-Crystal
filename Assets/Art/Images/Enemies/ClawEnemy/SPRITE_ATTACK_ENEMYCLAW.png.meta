@@ -1,0 +1,510 @@
+fileFormatVersion: 2
+guid: b08973fc96107144bbe09b64303ea8a7
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: SPRITE_ATTACK_ENEMYCLAW_0
+    21300002: SPRITE_ATTACK_ENEMYCLAW_1
+    21300004: SPRITE_ATTACK_ENEMYCLAW_2
+    21300006: SPRITE_ATTACK_ENEMYCLAW_3
+    21300008: SPRITE_ATTACK_ENEMYCLAW_4
+    21300010: SPRITE_ATTACK_ENEMYCLAW_5
+    21300012: SPRITE_ATTACK_ENEMYCLAW_6
+    21300014: SPRITE_ATTACK_ENEMYCLAW_7
+    21300016: SPRITE_ATTACK_ENEMYCLAW_8
+    21300018: SPRITE_ATTACK_ENEMYCLAW_9
+    21300020: SPRITE_ATTACK_ENEMYCLAW_10
+    21300022: SPRITE_ATTACK_ENEMYCLAW_11
+    21300024: SPRITE_ATTACK_ENEMYCLAW_12
+    21300026: SPRITE_ATTACK_ENEMYCLAW_13
+    21300028: SPRITE_ATTACK_ENEMYCLAW_14
+    21300030: SPRITE_ATTACK_ENEMYCLAW_15
+    21300032: SPRITE_ATTACK_ENEMYCLAW_16
+    21300034: SPRITE_ATTACK_ENEMYCLAW_17
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_0
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 2113
+        width: 157
+        height: 309
+      alignment: 9
+      pivot: {x: 0.3732484, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bb789a5dca90214db8e30103d099d2c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_1
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 2113
+        width: 151
+        height: 310
+      alignment: 9
+      pivot: {x: 0.4450331, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2b28597110e8dc489f74426ca028949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_2
+      rect:
+        serializedVersion: 2
+        x: 1171
+        y: 2113
+        width: 149
+        height: 310
+      alignment: 9
+      pivot: {x: 0.5342282, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e47205c251e6684caa4e993d933cab4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_3
+      rect:
+        serializedVersion: 2
+        x: 1659
+        y: 2113
+        width: 148
+        height: 312
+      alignment: 9
+      pivot: {x: 0.63986486, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a3202b7a3447e84fa1fdf5c0b411125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_4
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 1613
+        width: 145
+        height: 313
+      alignment: 9
+      pivot: {x: 0.6917242, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85b25380e9c760d49a3540f79dea7860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_5
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 1613
+        width: 134
+        height: 310
+      alignment: 9
+      pivot: {x: 0.48134327, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3736a23221d80342b67a5e943eb49d3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 1613
+        width: 156
+        height: 309
+      alignment: 9
+      pivot: {x: 0.3705128, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6cf64a7af6bd94381a6e2a0304b013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_7
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 1613
+        width: 214
+        height: 308
+      alignment: 9
+      pivot: {x: 0.2962617, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af63aa66eaea180438ed7710c1a24056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_8
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 1112
+        width: 258
+        height: 307
+      alignment: 9
+      pivot: {x: 0.24263565, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b13c479d8900b0f41afe2d83fde91591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_9
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1113
+        width: 263
+        height: 306
+      alignment: 9
+      pivot: {x: 0.24106464, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994028164bbe5be4d973a14497aa4d81
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_10
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 1113
+        width: 268
+        height: 306
+      alignment: 9
+      pivot: {x: 0.23246269, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7a35e38548c5b44cab096193345eb29
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_11
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 1113
+        width: 273
+        height: 306
+      alignment: 9
+      pivot: {x: 0.21941392, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f72dbb61a892b94db1cc4f35aeb9a6b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_12
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 612
+        width: 278
+        height: 307
+      alignment: 9
+      pivot: {x: 0.21510792, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d74b689d7c4bd2c42ae7e21666994179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_13
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 612
+        width: 277
+        height: 307
+      alignment: 9
+      pivot: {x: 0.2104693, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39a4410ea768bb645aefa919b1650d34
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_14
+      rect:
+        serializedVersion: 2
+        x: 1199
+        y: 612
+        width: 229
+        height: 307
+      alignment: 9
+      pivot: {x: 0.2650655, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e662b46a22fb046a0632646557f41a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_15
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 612
+        width: 229
+        height: 307
+      alignment: 9
+      pivot: {x: 0.25240174, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a57b9bb1583e7034f8f76c3389f137cc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_16
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 112
+        width: 230
+        height: 307
+      alignment: 9
+      pivot: {x: 0.25913042, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73dfd46d4354ae543b6c9d647c0fd633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SPRITE_ATTACK_ENEMYCLAW_17
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 112
+        width: 229
+        height: 307
+      alignment: 9
+      pivot: {x: 0.2628821, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f904073c70f5c1548b2dc6207ecf6b81
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5dbf151a95eb4da44b266e30e48b2c37
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

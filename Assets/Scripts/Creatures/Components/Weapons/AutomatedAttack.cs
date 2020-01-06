@@ -1,5 +1,7 @@
-﻿using System;
-using CreaturesAddons.Weapons;
+﻿using CreaturesAddons.Weapons;
+
+using System;
+
 using UnityEngine;
 
 namespace CreaturesAddons

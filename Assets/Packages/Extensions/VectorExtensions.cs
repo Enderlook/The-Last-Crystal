@@ -120,10 +120,10 @@ namespace AdditionalExtensions
         {
             float Vx(float x) => x / origin.AngleByCosRadian(target);
             float Vy(float y) => y / Mathf.Abs(origin.AngleBySinRadian(target)) + .5f * Mathf.Abs(Physics2D.gravity.y);
-            
+
             float hY = origin.YDistance(target);
             float dX = origin.XDistance(target);
-            
+
             Vector2 v0 = new Vector2(dX, 0).normalized;
             v0 *= Vx(Mathf.Abs(dX));
             v0.y = Vy(hY);

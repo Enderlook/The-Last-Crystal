@@ -1,6 +1,7 @@
-﻿using System.Reflection;
-using AdditionalAttributes.AttributeUsage;
+﻿using AdditionalAttributes.AttributeUsage;
 using AdditionalAttributes.PostCompiling.Internal;
+
+using System.Reflection;
 
 namespace AdditionalAttributes.PostCompiling
 {

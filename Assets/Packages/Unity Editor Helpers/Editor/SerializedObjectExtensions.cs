@@ -1,9 +1,12 @@
-﻿using System;
-using System.Reflection;
-using UnityEditor;
-using UnityEngine;
+﻿using AdditionalAttributes;
+
+using System;
 using System.Linq;
-using AdditionalAttributes;
+using System.Reflection;
+
+using UnityEditor;
+
+using UnityEngine;
 
 namespace UnityEditorHelper
 {
@@ -236,7 +239,7 @@ namespace UnityEditorHelper
             if (!(type.GetField(serializedProperty, bindingFlags).GetCustomAttribute(typeof(HasConfirmationFieldAttribute)) is HasConfirmationFieldAttribute attribute))
                 throw new Exception($"The {type}.{serializedProperty} field must have the attribute {nameof(HasConfirmationFieldAttribute)}.");
             else
-                source.ToggleableField(serializedProperty, attribute.ConfirmFieldName, includeChildren);
+                source.ToggleableField(serializedProperty, attribute.confirmFieldName, includeChildren);
         }
 
         /// <summary>

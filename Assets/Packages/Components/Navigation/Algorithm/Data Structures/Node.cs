@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using UnityEngine;
 
 namespace Navigation
@@ -44,6 +45,9 @@ namespace Navigation
 
         private static readonly InvalidOperationException CANNOT_CONNECT_TO_ITSELF = new InvalidOperationException($"A {nameof(Node)} can't connect with itself.");
         private static readonly InvalidOperationException ALREADY_END_TARGET = new InvalidOperationException($"A {nameof(Connection)} with the same {nameof(Connection.end)} has already been added.");
+
+        public override string ToString() => $"<pos:{position}; active:{IsActive}; extreme:{isExtreme}; connections:{Connections.Count}";
+        public string ToString(NavigationGraph navigationGraph) => $"<pos:{navigationGraph.GetWorldPosition(this)}; active:{IsActive}; extreme:{isExtreme}; connections:{Connections.Count}";
 
         /// <summary>
         /// Make a <see cref="Connection"/> from this <see cref="Node"/> to <paramref name="end"/> and store it.
@@ -158,7 +162,7 @@ namespace Navigation
 
             for (int i = 0; i < Connections.Count; i++)
             {
-                if (Connections[i].end = end)
+                if (Connections[i].end == end)
                 {
                     Connections.RemoveAt(i);
                     return true;

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Reflection;
-using AdditionalAttributes.AttributeUsage;
+﻿using AdditionalAttributes.AttributeUsage;
 using AdditionalAttributes.PostCompiling.Internal;
+
+using System;
+using System.Reflection;
 
 namespace AdditionalAttributes.PostCompiling
 {
@@ -40,7 +41,7 @@ namespace AdditionalAttributes.PostCompiling
         /// <summary>
         /// Determines rules about in which field does match.
         /// </summary>
-        public FieldFlags FieldFilter { get; private set; }
+        public readonly FieldFlags fieldFilter;
 
         /// <summary>
         /// Executes the method decorated by this attribute for each field on each <see cref="Type"/> compiled by Unity.<br>
@@ -48,6 +49,6 @@ namespace AdditionalAttributes.PostCompiling
         /// </summary>
         /// <param name="fieldFlags">Whenever it must be Unity able to serialize it or if it does not matter.</param>
         /// <param name="loop">In which loop of the execution will this script execute.</param>
-        public ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldFlags fieldFlags = FieldFlags.NotSerializableByUnity, int loop = 0) : base(loop) => FieldFilter = fieldFlags;
+        public ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldFlags fieldFlags = FieldFlags.NotSerializableByUnity, int loop = 0) : base(loop) => fieldFilter = fieldFlags;
     }
 }

@@ -1,6 +1,7 @@
-﻿using System;
+﻿using AdditionalAttributes.AttributeUsage.Internal;
+
+using System;
 using System.Collections.Generic;
-using AdditionalAttributes.AttributeUsage.Internal;
 
 namespace AdditionalAttributes.AttributeUsage
 {

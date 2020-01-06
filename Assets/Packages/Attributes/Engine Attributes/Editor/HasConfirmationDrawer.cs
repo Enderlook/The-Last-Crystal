@@ -1,7 +1,11 @@
-﻿using System.Reflection;
-using AdditionalExtensions;
+﻿using AdditionalExtensions;
+
+using System.Reflection;
+
 using UnityEditor;
+
 using UnityEditorHelper;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -21,7 +25,7 @@ namespace AdditionalAttributes
 
             object targetObject = property.GetParentTargetObjectOfProperty();
 
-            FieldInfo confirmationField = targetObject.GetType().GetField(hasConfirmationFieldAttribute.ConfirmFieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+            FieldInfo confirmationField = targetObject.GetType().GetField(hasConfirmationFieldAttribute.confirmFieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 
             string name = confirmationField.Name.ToDisplayUnity();
             string tooltip = ((TooltipAttribute)confirmationField.GetCustomAttribute(typeof(TooltipAttribute), true))?.tooltip;

@@ -1,5 +1,7 @@
-using System;
 using CreaturesAddons;
+
+using System;
+
 using UnityEngine;
 
 namespace FloatPool

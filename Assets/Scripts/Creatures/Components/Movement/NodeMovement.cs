@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using AdditionalExtensions;
+
 using Navigation;
+
+using System.Collections.Generic;
+
 using UnityEngine;
+
 using Utils;
-using AdditionalExtensions;
 
 namespace CreaturesAddons.Movement.NodeMovement
 {
@@ -130,7 +134,7 @@ namespace CreaturesAddons.Movement.NodeMovement
         private void JumpTo(Vector2 target)
         {
             animator.SetBool(ANIMATION_STATES.JUMP, true);
-            thisRigidbody2D.velocity = thisRigidbody2D.position.ProjectileMotion(target);
+            thisRigidbody2D.velocity = thisRigidbody2D.position.ProjectileMotion(target) * thisRigidbody2D.mass;
         }
     }
 }

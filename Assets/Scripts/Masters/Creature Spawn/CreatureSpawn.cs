@@ -1,8 +1,13 @@
-﻿using System;
-using AdditionalComponents;
+﻿using AdditionalComponents;
+
 using Navigation;
+
+using System;
+
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
+
 using Utils;
 
 public class CreatureSpawn : MonoBehaviour
@@ -23,6 +28,7 @@ public class CreatureSpawn : MonoBehaviour
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "Used by Unity Editor, it doesn't matter if it isn't visible.")]
     public class CreatureSpawnToken
     {
+        [Header("Configuration")]
 #pragma warning disable CS0649, CA2235
         [SerializeField, Tooltip("Prefab to spawn.")]
         private GameObject prefab;
@@ -35,12 +41,17 @@ public class CreatureSpawn : MonoBehaviour
         private bool spawnOnStart;
         [SerializeField, Tooltip("Action executed when spawn prefab. The parameter is the spawned game object.")]
         private UnityEventGameObject action;
+        [Header("Setup")]
+        [SerializeField, Tooltip("Image used to show respawning time percent.")]
+        private Image image;
 #pragma warning restore CS0649
 
         [NonSerialized]
         private Clockwork timer;
         [NonSerialized]
         private NavigationGraph navigationGraph;
+
+        private bool enableFill;
 
         public void Initialize(NavigationGraph navigationGraph)
         {
@@ -49,15 +60,31 @@ public class CreatureSpawn : MonoBehaviour
             if (spawnOnStart)
                 SpawnInstantly();
         }
+
         public void SpawnInstantly()
         {
+            // If we don't have crystal, we don't respawn
+            if (spawningPoint == null)
+                return;
+
             GameObject gameObject = Instantiate(prefab, spawningPoint.position, spawningPoint.rotation);
             gameObject.AddComponent<DestroyNotifier>().AddCallback(SpawnWithDelay);
             NavigationAgent.InjectNavigationGraph(gameObject, navigationGraph);
             action.Invoke(gameObject);
+            enableFill = false;
         }
-        public void SpawnWithDelay() => timer.ResetCycles(1);
-        public void Update(float deltaTime) => timer.UpdateBehaviour(deltaTime);
+
+        public void SpawnWithDelay()
+        {
+            timer.ResetCycles(1);
+            enableFill = true;
+        }
+
+        public void Update(float deltaTime)
+        {
+            timer.UpdateBehaviour(deltaTime);
+            image.fillAmount = enableFill ? 1 - timer.CooldownPercent : 1;
+        }
 
         [Serializable]
         public class UnityEventGameObject : UnityEvent<GameObject> { }

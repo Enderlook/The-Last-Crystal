@@ -1,7 +1,11 @@
-﻿using System;
-using CreaturesAddons.Weapons;
+﻿using CreaturesAddons.Weapons;
+
 using Master;
+
 using SoundSystem;
+
+using System;
+
 using UnityEngine;
 using UnityEngine.UI;
 

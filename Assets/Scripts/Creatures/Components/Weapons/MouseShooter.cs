@@ -1,6 +1,9 @@
 ﻿using AdditionalAttributes;
+
 using Master;
+
 using UnityEngine;
+
 using Utils;
 
 namespace CreaturesAddons.Weapons
@@ -39,7 +42,9 @@ namespace CreaturesAddons.Weapons
         [SerializeField, DrawVectorRelativeToTransform]
         private Vector2 shootingPosition;
         [SerializeField, Tooltip("Animation played by projectile.")]
-        public RuntimeAnimatorController projectileAnimation;
+        private RuntimeAnimatorController projectileAnimation;
+        [SerializeField, Tooltip("Projectile collider scale.")]
+        private float projectileColliderScale;
 #pragma warning restore CS0649
 
         private Transform shootingTransform;
@@ -82,7 +87,7 @@ namespace CreaturesAddons.Weapons
             collider.isTrigger = projectileColliderIsTrigger;
 
             go.AddComponent<Animator>().runtimeAnimatorController = projectileAnimation;
-            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength);
+            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength, projectileColliderScale);
 
             Destroy(go, projectileDuration);
         }
@@ -92,6 +97,7 @@ namespace CreaturesAddons.Weapons
     {
         private SpriteRenderer spriteRenderer;
         private CircleCollider2D circleCollider2D;
+        private float scale;
 
         private void Start()
         {
@@ -102,13 +108,14 @@ namespace CreaturesAddons.Weapons
         private void Update()
         {
             Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
-            circleCollider2D.radius = Mathf.Max(spriteSize.x, spriteSize.y) / 2;
+            circleCollider2D.radius = Mathf.Max(spriteSize.x, spriteSize.y) / 2 * scale;
         }
 
-        public void SetConfiguration(float damage, float pushStrength)
+        public void SetConfiguration(float damage, float pushStrength, float scale = 1)
         {
             this.damage = damage;
             this.pushStrength = pushStrength;
+            this.scale = scale;
             thisTransform = transform;
         }
 

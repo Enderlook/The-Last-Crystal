@@ -1,5 +1,7 @@
-﻿using System;
-using AdditionalAttributes.AttributeUsage;
+﻿using AdditionalAttributes.AttributeUsage;
+
+using System;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
@@ -12,14 +14,17 @@ namespace AdditionalAttributes
         /// Minimal value that can be taken.
         /// </summary>
         public readonly float min;
+
         /// <summary>
         /// Maximum value that can be taken.
         /// </summary>
         public readonly float max;
+
         /// <summary>
         /// Steps of the taken value. The value must be a multiple of <see cref="step"/>.
         /// </summary>
         public readonly float step;
+
         /// <summary>
         /// Whenever a randomize button should be shown below the field in the inspector.
         /// </summary>

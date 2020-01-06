@@ -1,5 +1,7 @@
 using Master;
+
 using SoundSystem;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +25,18 @@ public class Menu : MonoBehaviour
     private GameObject win;
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
+
+    [Header("Animation")]
+    [SerializeField, Tooltip("Animator component.")]
+    private Animator animator;
+
+    private string sceneToLoad;
+
+    private static class ANIMATION_STATES
+    {
+        public const string
+            FADEOUT = "FadeOut";
+    }
 #pragma warning disable CS0649
 
     private void Start() => DisplayMenuPause(false);
@@ -39,19 +53,27 @@ public class Menu : MonoBehaviour
     /// Panels inside <seealso cref="panels"/> will be hidden first, one by one. If all of them are hidden, menu will hide.
     /// </summary>
     /// <param name="active">Whenever the menu is visible or not.</param>
-    public void DisplayMenuPause(bool? active = null)
+    /// <param name="continueWhenHideLastPanel">When the last panel from <see cref="panels"/> is hidden it determines if <see cref="menu"/> should be shown even when it's hidden or <see cref="menuNoToggleable"/> is <see langword="true"/>.</param>
+    public void DisplayMenuPause(bool? active = null, bool continueWhenHideLastPanel = false)
     {
         foreach (GameObject panel in panels)
         {
             if (panel.activeSelf)
             {
                 panel.SetActive(false);
-                return;
+                if (continueWhenHideLastPanel)
+                    break;
+                else
+                    return;
             }
         }
         if (menuNoToggleable)
+        {
+            if (continueWhenHideLastPanel)
+                menu.SetActive(true);
             return;
-        Settings.IsPause = active != null ? (bool)active : !Settings.IsPause;
+        }
+        Settings.IsPause = active == null ? !Settings.IsPause : (bool)active;
         menu.SetActive(Settings.IsPause);
         PlayMusic(Settings.IsPause, true);
     }
@@ -60,6 +82,11 @@ public class Menu : MonoBehaviour
     /// Hide the menu and set to <see langword="false"/> <seealso cref="IsPause"/>.
     /// </summary>
     public void HideMenu() => DisplayMenuPause(false);
+
+    /// <summary>
+    /// Show the menu and set to <see langword="true"/> <seealso cref="IsPause"/>.
+    /// </summary>
+    public void GoToMenu() => DisplayMenuPause(true, true);
 
     /// <summary>
     /// Play music.
@@ -99,7 +126,16 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <seealso cref="SceneManager.LoadScene(string)"/>
     /// <param name="scene">Scene name to load.</param>
-    public void LoadScene(string scene) => SceneManager.LoadScene(scene, LoadSceneMode.Single);
+    public void LoadScene(string scene)
+    {
+        sceneToLoad = scene;
+        animator.SetTrigger(ANIMATION_STATES.FADEOUT);
+    }
+
+    /// <summary>
+    /// Load a scene through the animation event.
+    /// </summary>
+    public void FadeAnimationToLevel() => SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
 
     /// <summary>
     /// End game.

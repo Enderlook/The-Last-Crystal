@@ -1,15 +1,16 @@
 ﻿using UnityEditor;
+
 using UnityEngine;
 
 namespace AdditionalAttributes
 {
     [CustomPropertyDrawer(typeof(IndentedAttribute))]
-    internal class IndentedDrawer : PropertyDrawer
+    internal class IndentedDrawer : AdditionalPropertyDrawer
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
             IndentedAttribute indentedAttribute = (IndentedAttribute)attribute;
-            int indentation = indentedAttribute.IndentationOffset;
+            int indentation = indentedAttribute.indentationOffset;
             EditorGUI.BeginProperty(position, label, property);
             EditorGUI.indentLevel += indentation;
             EditorGUI.PropertyField(position, property, label);
