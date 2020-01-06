@@ -27,10 +27,6 @@ namespace AdditionalAttributes
             }
         }
 
-        private static readonly string errorMissingFieldMessage = $"{{0}} does not have a field, property (with Get Method) or method (without mandatory parameters and with return type) of type {typeof(bool)} named {{1}} necessary for attribute {nameof(ShowIfAttribute)}.";
-
-        private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.Static;
-
         [ExecuteWhenScriptsReloads(1)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper")]
         private static void CheckFields()
@@ -40,32 +36,11 @@ namespace AdditionalAttributes
                 Type classType = classToCheck.Key;
                 HashSet<string> confirmFields = new HashSet<string>(classToCheck.Value.Select(e => e.nameOfConditional));
 
-                confirmFields.ExceptWith(new HashSet<string>(
-                    classType
-                        .GetFields(bindingFlags)
-                        .Where(field => CheckCasteability(field.FieldType) && field.CanBeSerializedByUnity())
-                        .Cast<MemberInfo>()
-                        .Concat(
-                            classType.GetProperties(bindingFlags)
-                            .Where(property => CheckCasteability(property.PropertyType) && property.CanRead)
-                            .Cast<MemberInfo>()
-                         )
-                        .Concat(
-                            classType.GetMethods(bindingFlags)
-                            .Where(method => CheckCasteability(method.ReturnType) && method.GetParameters().Count(parameter => parameter.IsOptional == false) > 0)
-                            .Cast<MemberInfo>()
-                         )
-                        .Select(member => member.Name)
-                    )
-                );
+                confirmFields.ExceptWith(new HashSet<string>(classType.FieldsPropertiesAndMethodsWithReturnTypeOf<bool>()));
 
                 foreach (string field in confirmFields)
-                {
-                    Debug.LogException(new ArgumentException(string.Format(errorMissingFieldMessage, classType, field)));
-                }
+                    Debug.LogException(new ArgumentException($"{classType} does not have a field, property (with Get Method) or method (without mandatory parameters and with return type) of type {typeof(bool)} named {field} necessary for attribute {nameof(ShowIfAttribute)}."));
             }
         }
-
-        private static bool CheckCasteability(Type type) => type == typeof(bool) || type.IsAssignableFrom(typeof(bool));
     }
 }

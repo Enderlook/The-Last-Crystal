@@ -1,7 +1,5 @@
 ﻿using AdditionalAttributes.PostCompiling;
 
-using AdditionalExtensions;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +27,6 @@ namespace AdditionalAttributes
             }
         }
 
-        private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.Static;
-
         [ExecuteWhenScriptsReloads(1)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper")]
         private static void CheckFields()
@@ -52,7 +48,7 @@ namespace AdditionalAttributes
                         .Where(e => e != null)
                     );
 
-                HashSet<string> members = new HashSet<string>(FieldsPropertiesAndMethodsWithReturnTypeOf<string>(classType));
+                HashSet<string> members = new HashSet<string>(classType.FieldsPropertiesAndMethodsWithReturnTypeOf<string>());
 
                 strings.ExceptWith(members);
 
@@ -65,30 +61,10 @@ namespace AdditionalAttributes
                         .Where(e => e != null)
                     );
 
-                members.UnionWith(FieldsPropertiesAndMethodsWithReturnTypeOf<GUIContent>(classType));
+                members.UnionWith(classType.FieldsPropertiesAndMethodsWithReturnTypeOf<GUIContent>());
 
                 stringOrGUIContent.ExceptWith(members);
             }
         }
-
-        private static IEnumerable<string> FieldsPropertiesAndMethodsWithReturnTypeOf(Type @class, Type @return) => @class
-                .GetFields(bindingFlags)
-                .Where(field => field.FieldType.IsCastableTo(@return) && field.CanBeSerializedByUnity())
-                .Cast<MemberInfo>()
-                .Concat(
-                    @class
-                        .GetProperties(bindingFlags)
-                        .Where(property => property.PropertyType.IsCastableTo(@return) && property.CanRead)
-                        .Cast<MemberInfo>()
-                )
-                .Concat(
-                    @class
-                        .GetMethods(bindingFlags)
-                        .Where(method => method.ReturnType.IsCastableTo(@return) && method.HasNoMandatoryParameters())
-                        .Cast<MemberInfo>()
-                )
-                .Select(member => member.Name);
-
-        private static IEnumerable<string> FieldsPropertiesAndMethodsWithReturnTypeOf<T>(Type @class) => FieldsPropertiesAndMethodsWithReturnTypeOf(@class, typeof(T));
     }
 }
