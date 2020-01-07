@@ -1,18 +1,13 @@
 ﻿using AdditionalAttributes.PostCompiling.Internal;
 
-using AdditionalExtensions;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 using UnityEditor.Callbacks;
-using UnityEditor.Compilation;
 
 using UnityEngine;
-
-using UnityAssembly = UnityEditor.Compilation.Assembly;
 
 namespace AdditionalAttributes.PostCompiling
 {
@@ -292,24 +287,8 @@ namespace AdditionalAttributes.PostCompiling
         /// Get all types of all Player and Editor assemblies.
         /// </summary>
         /// <returns>All types of Player and Editor assemblies.</returns>
-        public static IEnumerable<Type> GetAllTypesOfPlayerAndEditorAssemblies()
-        {
-            IEnumerable<UnityAssembly> unityAssemblies = CompilationPipeline.GetAssemblies(AssembliesType.Editor).Concat(CompilationPipeline.GetAssemblies(AssembliesType.Player));
-            foreach (System.Reflection.Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                if (unityAssemblies.ContainsBy(e => e.name == assembly.GetName().Name))
-                {
-                    // This is much more expensive that ContainsBy so we put this bellow
-                    // Check if we should not read it
-                    if (assembly.GetCustomAttribute<DoNotInspectAttribute>() == null)
-                    {
-                        foreach (Type type in assembly.GetTypes())
-                        {
-                            yield return type;
-                        }
-                    }
-                }
-            }
-        }
+        public static IEnumerable<Type> GetAllTypesOfPlayerAndEditorAssemblies() => AssembliesHelper.GetAllAssembliesOfPlayerAndEditorAssemblies()
+                .Where(e => e.GetCustomAttribute<DoNotInspectAttribute>() == null)
+                .SelectMany(e => e.GetTypes());
     }
 }
