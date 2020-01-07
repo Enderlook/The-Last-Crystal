@@ -1,8 +1,13 @@
-﻿using UnityEngine;
+﻿using AdditionalAttributes.AttributeUsage;
+using AdditionalAttributes.AttributeUsage.Internal;
+using System;
+using UnityEngine;
 
 namespace AdditionalAttributes
 {
-    public class ExpandableAttribute : PropertyAttribute
+    [AttributeUsageRequireDataType(typeof(UnityEngine.Object), includeEnumerableTypes = true, typeFlags = AttributeUsageHelper.TypeFlags.CheckSubclassOrAssignable)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public sealed class ExpandableAttribute : PropertyAttribute
     {
         public readonly bool? isBoxed;
 

@@ -2,6 +2,7 @@
 using UnityEditor;
 
 using UnityEngine;
+using UnityEditorHelper;
 
 namespace AdditionalAttributes
 {
@@ -29,8 +30,15 @@ namespace AdditionalAttributes
 
         protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
-            ExpandableAttribute expandableAttribute = (ExpandableAttribute)attribute;
             EditorGUI.PropertyField(position, property, label, true);
+
+            if (!property.serializedObject.targetObject.GetType().IsAssignableFrom(typeof(UnityEngine.Object)))
+            {
+                Debug.LogError($"{nameof(ExpandableAttribute)} can only be used on types assignable to {nameof(UnityEngine.Object)}. {property.name} from {property.GetParentTargetObjectOfProperty()} (path {property.propertyPath}) is type {property.serializedObject.targetObject.GetType()}.");
+                return;
+            }
+
+            ExpandableAttribute expandableAttribute = (ExpandableAttribute)attribute;
 
             // If we have a value
             if (property.objectReferenceValue != null)
