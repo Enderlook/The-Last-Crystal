@@ -131,5 +131,25 @@ namespace UnityEditorHelper
         public static GUIContent GetGUIContent(this SerializedProperty source) => new GUIContent(source.displayName, source.tooltip);
 
         public static SerializedPropertyHelper GetHelper(this SerializedProperty source) => new SerializedPropertyHelper(source);
+
+        /// <summary>
+        /// Get the field <see cref="Type"/> of the <see cref="SerializedProperty"/>.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> whose <see cref="Type"/> will be get.</param>
+        /// <returns><see cref="Type"/> of the <paramref name="source"/>.</returns>
+        public static Type GetFieldType(this SerializedProperty source)
+        {
+            return source.GetFieldInfo().FieldType;
+        }
+
+        /// <summary>
+        /// Get the <see cref="FieldInfo"/> of <see cref="SerializedProperty"/>.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> whose <see cref="FieldInfo"/> will be get.</param>
+        /// <returns><see cref="FieldInfo"/> of <paramref name="source"/>.</returns>
+        public static FieldInfo GetFieldInfo(this SerializedProperty source)
+        {
+            return source.serializedObject.targetObject.GetType().GetField(source.name);
+        }
     }
 }
