@@ -31,8 +31,9 @@ namespace UnityEditorHelper
                 PropertyInfo propertyInfo = type.GetProperty(name, bindingFlags | BindingFlags.IgnoreCase);
                 if (propertyInfo != null)
                     return propertyInfo.GetValue(source, null);
-            }
 
+                type = type.BaseType;
+            }
             return null;
         }
 
