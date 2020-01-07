@@ -16,6 +16,49 @@ namespace UnityEditorHelper
 
         private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
+        private static (Func<object> get, Action<object> set) GetAccessors(this object source, string name)
+        {
+            if (source == null)
+                return default;
+            Type type = source.GetType();
+
+            while (type != null)
+            {
+                FieldInfo fieldInfo = type.GetField(name, bindingFlags);
+                if (fieldInfo != null)
+                    return (() => fieldInfo.GetValue(source), (object value) => fieldInfo.SetValue(source, value));
+
+                PropertyInfo propertyInfo = type.GetProperty(name, bindingFlags | BindingFlags.IgnoreCase);
+                if (propertyInfo != null)
+                    return (() => propertyInfo.GetValue(source, null), (object value) => propertyInfo.SetValue(source, value, null));
+
+                type = type.BaseType;
+            }
+            return default;
+        }
+
+        private static (Func<object> get, Action<object> set) GetAccessors(this object source, string name, int index)
+        {
+            object obj = source.GetValue(name);
+
+            if (obj is Array array)
+                return (() => array.GetValue(index), (object value) => array.SetValue(value, index));
+
+            if (!(obj is IEnumerable enumerable))
+                return default;
+
+            IEnumerator enumerator = enumerable.GetEnumerator();
+            return (() =>
+            {
+                for (int i = 0; i <= index; i++)
+                {
+                    if (!enumerator.MoveNext())
+                        throw new ArgumentOutOfRangeException($"{name} field from {source.GetType()} doesn't have an element at index {index}.");
+                }
+                return enumerator.Current;
+            }, null);
+        }
+
         private static object GetValue(this object source, string name)
         {
             if (source == null)
@@ -128,6 +171,34 @@ namespace UnityEditorHelper
         /// If it doesn't have parent it will return itself.</param>
         /// <returns>Value of the <paramref name="source"/> as <see cref="object"/>.</returns>
         public static object GetParentTargetObjectOfProperty(this SerializedProperty source) => source.GetTargetObjectOfProperty(1);
+
+        /// <summary>
+        /// Get the getter and setter of <paramref name="source"/>. It does work for nested serialized properties.<br>
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> whose getter and setter will be get.</param>
+        /// <returns>Getter and setter of the <paramref name="source"/>.</returns>
+        public static (Func<object> get, Action<object> set) GetTargetObjectAccessors(this SerializedProperty source)
+        {
+            object parent = source.GetParentTargetObjectOfProperty();
+            Type parentType = parent.GetType();
+
+            string element = source.propertyPath.Replace(".Array.data[", "[").Split('.').Last();
+            if (element.Contains("["))
+            {
+                string elementName = element.Substring(0, element.IndexOf("["));
+                int index = int.Parse(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                try
+                {
+                    return parent.GetAccessors(elementName, index);
+                }
+                catch (ArgumentOutOfRangeException e)
+                {
+                    throw new IndexOutOfRangeException($"The element {element} has no index {index} in {parentType} from {source.name} in path {element}.", e);
+                }
+            }
+            else
+                return parent.GetAccessors(element);
+        }
 
         /// <summary>
         /// Produce a <see cref="GUIContent"/> with the <see cref="SerializedProperty.displayName"/> as <see cref="GUIContent.text"/> and <see cref="SerializedProperty.tooltip"/> as <see cref="GUIContent.tooltip"/>.
