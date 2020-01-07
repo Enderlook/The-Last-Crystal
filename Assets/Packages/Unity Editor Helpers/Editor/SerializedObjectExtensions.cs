@@ -59,7 +59,7 @@ namespace UnityEditorHelper
         }
 
         /// <summary>
-        /// Draw an idented field if <paramref name="confirm"/> is <see langword="true"/> and save an undo for it changes.
+        /// Draw an indented field if <paramref name="confirm"/> is <see langword="true"/> and save an undo for it changes.
         /// </summary>
         /// <typeparam name="T">Type of return value by <paramref name="toShowField"/>.</typeparam>
         /// <param name="source">Instance where its executed this method.</param>
