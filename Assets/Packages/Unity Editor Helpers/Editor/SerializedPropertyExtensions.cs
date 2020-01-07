@@ -39,7 +39,12 @@ namespace UnityEditorHelper
 
         private static object GetValue(this object source, string name, int index)
         {
-            if (!(source.GetValue(name) is IEnumerable enumerable))
+            object obj = source.GetValue(name);
+
+            if (obj is Array array)
+                return array.GetValue(index);
+
+            if (!(obj is IEnumerable enumerable))
                 return null;
 
             IEnumerator enumerator = enumerable.GetEnumerator();
