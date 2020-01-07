@@ -140,6 +140,7 @@ namespace UnityEditorHelper
         /// <summary>
         /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.
         /// </summary>
+        /// <typeparam name="T"><see cref="Type"/> of <paramref name="enumerable"/> elements.</typeparam>
         /// <param name="enumerable">Enumerable to print in console.</param>
         /// <param name="context">Object to which the message applies.</param>
         /// <param name="compact">Whenever it use a single log or several ones, one per line.</param>
@@ -147,7 +148,7 @@ namespace UnityEditorHelper
         /// <param name="memberName">Do not complete.</param>
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
-        public static void LogLines(IEnumerable<object> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
+        public static void LogLines<T>(IEnumerable<T> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
@@ -156,7 +157,7 @@ namespace UnityEditorHelper
                 Debug.Log(string.Join("\n", enumerable), context);
             else
             {
-                foreach (object item in enumerable)
+                foreach (T item in enumerable)
                 {
                     Debug.Log(item, context);
                 }
@@ -168,6 +169,7 @@ namespace UnityEditorHelper
         /// <summary>
         /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.
         /// </summary>
+        /// <typeparam name="T"><see cref="Type"/> of <paramref name="enumerable"/> elements.</typeparam>
         /// <param name="enumerable">Enumerable to print in console.</param>
         /// <param name="context">Object to which the message applies.</param>
         /// <param name="compact">Whenever it use a single log or several ones, one per line.</param>
@@ -175,7 +177,7 @@ namespace UnityEditorHelper
         /// <param name="memberName">Do not complete.</param>
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
-        public static void LogWarningLines(IEnumerable<object> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
+        public static void LogWarningLines<T>(IEnumerable<T> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
@@ -184,7 +186,7 @@ namespace UnityEditorHelper
                 Debug.LogWarning(string.Join("\n", enumerable), context);
             else
             {
-                foreach (object item in enumerable)
+                foreach (T item in enumerable)
                 {
                     Debug.LogWarning(item, context);
                 }
@@ -196,6 +198,7 @@ namespace UnityEditorHelper
         /// <summary>
         /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.
         /// </summary>
+        /// <typeparam name="T"><see cref="Type"/> of <paramref name="enumerable"/> elements.</typeparam>
         /// <param name="enumerable">Enumerable to print in console.</param>
         /// <param name="context">Object to which the message applies.</param>
         /// <param name="compact">Whenever it use a single log or several ones, one per line.</param>
@@ -203,7 +206,7 @@ namespace UnityEditorHelper
         /// <param name="memberName">Do not complete.</param>
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
-        public static void LogErrorLines(IEnumerable<object> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
+        public static void LogErrorLines<T>(IEnumerable<T> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
@@ -212,7 +215,7 @@ namespace UnityEditorHelper
                 Debug.LogError(string.Join("\n", enumerable), context);
             else
             {
-                foreach (object item in enumerable)
+                foreach (T item in enumerable)
                 {
                     Debug.LogError(item, context);
                 }
