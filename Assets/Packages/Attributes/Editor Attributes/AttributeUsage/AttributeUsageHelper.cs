@@ -72,7 +72,6 @@ namespace AdditionalAttributes.AttributeUsage.Internal
                     hashSet.Add(type.MakeArrayType());
                 }
                 return hashSet;
-
             }
             else
                 return new HashSet<Type>(types);
@@ -83,7 +82,7 @@ namespace AdditionalAttributes.AttributeUsage.Internal
         /// </summary>
         /// <param name="types">Elements to include in the result.</param>
         /// <param name="checkingFlags">Additional phrases.</param>
-        /// <param name="isBlackList">Whener the result forbbid instead of require the <paramref name="types"/>.</param>
+        /// <param name="isBlackList">Whenever the result forbid instead of require the <paramref name="types"/>.</param>
         /// <returns>A <see cref="string"/> with all elements.</returns>
         internal static string GetTextTypes(IEnumerable<Type> types, TypeFlags checkingFlags, bool isBlackList = false)
         {
