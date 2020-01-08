@@ -6,7 +6,7 @@ namespace ScriptableSound
     public class SoundClip : Sound
     {
         [Header("Setup")]
-        [SerializeField, Tooltip("Audioclip to play.")]
+        [SerializeField, Tooltip("Audioclip to play."), PlayAudioClip]
         protected AudioClip audioClip;
 
         public override void Update()
