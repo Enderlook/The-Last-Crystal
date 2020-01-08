@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
+using System.Threading.Tasks;
+using UnityEditor;
 using UnityEditor.Callbacks;
 
 using UnityEngine;
@@ -113,17 +114,45 @@ namespace AdditionalAttributes.PostCompiling
         private static readonly List<PropertyInfo> propertyInfos = new List<PropertyInfo>();
         private static readonly List<MethodInfo> methodInfos = new List<MethodInfo>();
 
+        [InitializeOnLoadMethod]
+        private static void Initialize()
+        {
+            // Add this to guarantee that task is completed.
+            EditorApplication.update += () =>
+            {
+                if (task?.IsCompleted == true)
+                {
+                    task.Wait();
+                    task = null;
+                }
+                else if (task?.IsFaulted == true)
+                {
+                    Exception exception = task.Exception;
+                    task = null;
+                    throw exception;
+                }
+            };
+        }
+
+        private static Task task;
+
         [DidReloadScripts(2)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Editor")]
         private static void ExecuteAnalysis()
         {
-            ScanAssemblies();
-            ExecuteCallbacks();
+            // Can't do unsafe work in non-main thread. And this is unsafe
+            IEnumerable<Type> types = GetAllTypesOfPlayerAndEditorAssemblies();
+            task = new Task(() =>
+            {
+                ScanAssemblies(types);
+                ExecuteCallbacks();
+            });
+            task.Start();
         }
 
-        private static void ScanAssemblies()
+        private static void ScanAssemblies(IEnumerable<Type> types)
         {
-            foreach (Type classType in GetAllTypesOfPlayerAndEditorAssemblies())
+            foreach (Type classType in types)
             {
                 if (classType.GetCustomAttribute<DoNotInspectAttribute>() == null)
                 {
@@ -280,7 +309,7 @@ namespace AdditionalAttributes.PostCompiling
         private static void ExecuteLoop<T>(int loop, Dictionary<int, Action<T>> callbacks, List<T> values)
         {
             if (callbacks.TryGetValue(loop, out Action<T> action))
-                values.ForEach(action);
+                Parallel.ForEach(values, action);
         }
 
         /// <summary>
