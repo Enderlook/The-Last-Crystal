@@ -7,6 +7,7 @@ namespace ScriptableSound
     [CreateAssetMenu(fileName = "SoundList", menuName = "Sound/SoundList")]
     public class SoundList : Sound
     {
+#pragma warning disable CS0649
         [Header("Setup")]
         [SerializeField, Tooltip("Sounds to play.")]
         private Sound[] sounds;
@@ -14,6 +15,7 @@ namespace ScriptableSound
         [Header("Configuration")]
         [SerializeField, Tooltip("Play mode order.")]
         private PlayModeOrder playMode;
+#pragma warning restore CS0649
 
         /// <summary>
         /// Only used by <see cref="PlayModeOrder.PingPong"/>.
