@@ -13,7 +13,19 @@ namespace ScriptableSound
         [SerializeField, Tooltip("List of sounds to play."), Expandable]
         private Sound[] sounds;
 
+        [SerializeField, Tooltip("If start playing on awake.")]
+        private bool playOnAwake;
+
+        [SerializeField, Tooltip("Which playlist play on awake."), ShowIf(nameof(playOnAwake), indented = true)]
+        private int onAwakeIndex;
+
         private int index;
+
+        private void Awake()
+        {
+            if (playOnAwake)
+                Play(onAwakeIndex);
+        }
 
         public void Play(int index, Action endCallback = null)
         {
