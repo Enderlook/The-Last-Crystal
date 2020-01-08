@@ -115,7 +115,7 @@ namespace AdditionalAttributes
             {
                 scriptableObject = Create();
                 set(scriptableObject);
-                Save(scriptableObject, _path);
+                AssetDatabaseHelper.SaveAsset(scriptableObject, _path);
             }
             EditorGUI.EndDisabledGroup();
 
@@ -123,19 +123,11 @@ namespace AdditionalAttributes
             if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
                 set(null);
             if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
-                Save(scriptableObject, _path);
+                AssetDatabaseHelper.SaveAsset(scriptableObject, _path);
             EditorGUI.EndDisabledGroup();
         }
 
         private ScriptableObject Create() => CreateInstance(allowedTypes[index]);
-
-        private static void Save(ScriptableObject scriptableObject, string path)
-        {
-            Directory.CreateDirectory(path);
-            AssetDatabase.Refresh();
-            AssetDatabase.CreateAsset(scriptableObject, path);
-            AssetDatabase.Refresh();
-        }
 
         private int GetIndex(Type type) => Array.IndexOf(allowedTypes, type);
     }
