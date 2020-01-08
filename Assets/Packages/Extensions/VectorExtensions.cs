@@ -137,7 +137,7 @@ namespace AdditionalExtensions
         /// <param name="origin">The point in 2D space where the projectile motion start.</param>
         /// <param name="target">The point in 2D space where the projectile motion ends.</param>
         /// <param name="t">The time of flight of a projectile motion.</param>
-        /// <returns><seealso cref="Vector2"/> with the initial momentun.</returns>
+        /// <returns><seealso cref="Vector2"/> with the initial momentum.</returns>
         public static Vector2 ProjectileMotion(this Vector2 origin, Vector2 target, float t)
         {
             float Vx(float x) => x / origin.AngleByCosRadian(target) * t;
