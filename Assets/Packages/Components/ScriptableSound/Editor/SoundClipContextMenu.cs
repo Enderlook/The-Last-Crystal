@@ -26,18 +26,6 @@ namespace ScriptableSound
                 string.Join(".", AssetDatabase.GetAssetPath(audioClip)
                     .Split('.').Reverse().Skip(1)
                     .Reverse().Append(".asset").ToArray()));
-
-            // We do this after store the asset so Unity initialize and serialize all the fields for us
-
-            object volume = typeof(Sound).GetField("volume", bindingFlags).GetValue(soundClip);
-            Type switchType = volume.GetType().BaseType.BaseType;
-            switchType.GetField("useAlternative", bindingFlags).SetValue(volume, true);
-            switchType.GetField("item2", bindingFlags).SetValue(volume, 1);
-
-            object pitch = typeof(Sound).GetField("pitch", bindingFlags).GetValue(soundClip);
-            switchType.GetField("useAlternative", bindingFlags).SetValue(pitch, true);
-            switchType.GetField("item2", bindingFlags).SetValue(pitch, 1);
-
         }
 
         [MenuItem("Assets/Create Sound Clip", true)]

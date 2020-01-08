@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AdditionalAttributes;
+using UnityEngine;
 
 using Random = UnityEngine.Random;
 
@@ -8,11 +9,9 @@ namespace ScriptableSound
     public class SoundList : Sound
     {
 #pragma warning disable CS0649
-        [Header("Setup")]
-        [SerializeField, Tooltip("Sounds to play.")]
+        [SerializeField, Tooltip("Sounds to play."), Expandable]
         private Sound[] sounds;
 
-        [Header("Configuration")]
         [SerializeField, Tooltip("Play mode order.")]
         private PlayModeOrder playMode;
 #pragma warning restore CS0649
