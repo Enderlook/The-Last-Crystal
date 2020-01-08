@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Reflection;
+using UnityEditor;
 
 using UnityEngine;
 
@@ -8,6 +9,11 @@ namespace AdditionalAttributes
     internal class ScriptableObjectDrawer : AdditionalPropertyDrawer
     {
         protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
+        {
+            DrawPropiertyField(position, property, label, fieldInfo);
+        }
+
+        public static void DrawPropiertyField(Rect position, SerializedProperty property, GUIContent label, FieldInfo fieldInfo)
         {
             GUIContent buttonLabel = new GUIContent("+", "Open Scriptable Object Menu.");
             float buttonWidth = GUI.skin.button.CalcSize(buttonLabel).x;
