@@ -37,7 +37,9 @@ namespace ScriptableSound
                 if (!sound.IsPlaying)
                 {
                     ChoseNextSound();
-                    sounds[index].Play();
+                    sound = sounds[index];
+                    sound.SetConfiguration(soundConfiguration);
+                    sound.Play();
                 }
             }
         }
