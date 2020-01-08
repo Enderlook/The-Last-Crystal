@@ -25,7 +25,7 @@ namespace UnityEditorHelper
                     Type targetObjectClassType = targetObject.GetType();
                     FieldInfo field = targetObjectClassType.GetInheritedField(serializedProperty.propertyPath, bindingFlags);
                     // If the field exist, it's the class type we want
-                    if (field != null && field.GetValue(targetObject) is T value)
+                    if (field?.GetValue(targetObject) is T value)
                         yield return (serializedProperty, value, editor);
                 }
             }
