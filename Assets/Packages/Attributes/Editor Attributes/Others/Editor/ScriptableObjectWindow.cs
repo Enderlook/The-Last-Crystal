@@ -78,22 +78,37 @@ namespace AdditionalAttributes
             }
             window.allowedTypes = GetDerivedTypes(type).ToArray();
             window.allowedTypesNames = window.allowedTypes.Select(e => e.Name).ToArray();
-            window.index = Array.IndexOf(window.allowedTypes, type);
+            window.index = window.GetIndex(type);
         }
 
         private void OnGUI()
         {
             titleContent = new GUIContent("Scriptable Object Manager");
 
-            index = EditorGUILayout.Popup(new GUIContent("Instance type", "Scriptable object instance type to create."), index, allowedTypesNames);
-
-            path = EditorGUILayout.TextField(new GUIContent("Path to save file", "Path used to save the asset file."), path);
-            string _path = path.StartsWith("Assets/") ? path : "Assets/" + path;
-            _path = _path.EndsWith(".asset") ? _path : _path + ".asset";
-            EditorGUILayout.LabelField("Path", _path);
-
             ScriptableObject scriptableObject = (ScriptableObject)get?.Invoke();
 
+            bool hasScriptableObject = scriptableObject != null;
+            EditorGUI.BeginDisabledGroup(hasScriptableObject);
+            if (hasScriptableObject)
+                index = GetIndex(scriptableObject.GetType());
+            index = EditorGUILayout.Popup(new GUIContent("Instance type", "Scriptable object instance type to create."), index, allowedTypesNames);
+            EditorGUI.EndDisabledGroup();
+
+            string pathToAsset = AssetDatabase.GetAssetPath(scriptableObject);
+            bool hasAsset = !string.IsNullOrEmpty(pathToAsset);
+
+            EditorGUI.BeginDisabledGroup(hasAsset && hasScriptableObject);
+            string currentPath = hasAsset ? pathToAsset : path;
+            currentPath = EditorGUILayout.TextField(new GUIContent("Path to file", "Path where the asset file is stored or will be saved."), currentPath);
+            if (!hasAsset)
+                path = currentPath;
+            string _path = path.StartsWith("Assets/") ? path : "Assets/" + path;
+            _path = _path.EndsWith(".asset") ? _path : _path + ".asset";
+
+            EditorGUILayout.LabelField("Path to save:", _path);
+            EditorGUI.EndDisabledGroup();
+
+            EditorGUI.BeginDisabledGroup(hasScriptableObject);
             if (GUILayout.Button(new GUIContent("Instantiate in field", "Create and instance and assign to field.")))
                 set(Create());
             if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
@@ -102,11 +117,12 @@ namespace AdditionalAttributes
                 set(scriptableObject);
                 Save(scriptableObject, _path);
             }
+            EditorGUI.EndDisabledGroup();
 
-            EditorGUI.BeginDisabledGroup(scriptableObject == null);
+            EditorGUI.BeginDisabledGroup(!hasScriptableObject);
             if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
                 set(null);
-            if (GUILayout.Button(new GUIContent("Save asset", "Save instance as an asset file.")))
+            if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
                 Save(scriptableObject, _path);
             EditorGUI.EndDisabledGroup();
         }
@@ -120,5 +136,7 @@ namespace AdditionalAttributes
             AssetDatabase.CreateAsset(scriptableObject, path);
             AssetDatabase.Refresh();
         }
+
+        private int GetIndex(Type type) => Array.IndexOf(allowedTypes, type);
     }
 }
