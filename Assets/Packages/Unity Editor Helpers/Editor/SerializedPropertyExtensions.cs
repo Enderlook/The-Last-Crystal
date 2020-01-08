@@ -105,8 +105,9 @@ namespace UnityEditorHelper
         /// </summary>
         /// <param name="source"><see cref="SerializedProperty"/> whose value will be get.</param>
         /// <param name="includeItself">If <see langword="true"/> the first returned element will be <c><paramref name="source"/>.serializedObject.targetObject</c>.</param>
+        /// <param name="preferNullInsteadOfException">If <see langword="true"/>, it will return <see langword="null"/> instead of throwing exceptions if can't find objects.</param>
         /// <returns>Hierarchy traveled to get the target object.</returns>
-        public static IEnumerable<object> GetEnumerableTargetObjectOfProperty(this SerializedProperty source, bool includeItself = true)
+        public static IEnumerable<object> GetEnumerableTargetObjectOfProperty(this SerializedProperty source, bool includeItself = true, bool preferNullInsteadOfException = true)
         {
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
@@ -117,10 +118,12 @@ namespace UnityEditorHelper
             {
                 string path = source.propertyPath.Replace(".Array.data[", "[");
 
-                object lastObject = source.serializedObject.targetObject;
-                yield return lastObject;
+                object obj = source.serializedObject.targetObject;
 
-                void NotFound(string element) => throw new KeyNotFoundException($"The element {element} was not found in {lastObject.GetType()} from {source.name} in path {path}.");
+                if (includeItself)
+                    yield return obj;
+
+                void NotFound(string element) => throw new KeyNotFoundException($"The element {element} was not found in {obj.GetType()} from {source.name} in path {path}.");
 
                 foreach (string element in path.Split('.'))
                 {
@@ -128,27 +131,25 @@ namespace UnityEditorHelper
                     {
                         string elementName = element.Substring(0, element.IndexOf("["));
                         int index = int.Parse(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
-                        object o;
                         try
                         {
-                            o = lastObject.GetValue(elementName, index);
+                            obj = obj.GetValue(elementName, index);
                         }
                         catch (ArgumentOutOfRangeException e)
                         {
-                            throw new IndexOutOfRangeException($"The element {element} has no index {index} in {lastObject.GetType()} from {source.name} in path {path}.", e);
+                            if (!preferNullInsteadOfException)
+                                throw new IndexOutOfRangeException($"The element {element} has no index {index} in {obj.GetType()} from {source.name} in path {path}.", e);
                         }
-                        if (o == null)
+                        if (obj == null && !preferNullInsteadOfException)
                             NotFound(element);
-                        lastObject = o;
-                        yield return lastObject;
+                        yield return obj;
                     }
                     else
                     {
-                        object o = lastObject.GetValue(element);
-                        if (o == null)
+                        obj = obj.GetValue(element);
+                        if (obj == null && !preferNullInsteadOfException)
                             NotFound(element);
-                        lastObject = o;
-                        yield return lastObject;
+                        yield return obj;
                     }
                 }
             }
@@ -216,17 +217,35 @@ namespace UnityEditorHelper
         /// <returns><see cref="Type"/> of the <paramref name="source"/>.</returns>
         public static Type GetFieldType(this SerializedProperty source)
         {
-            return source.GetFieldInfo().FieldType;
+            return source.GetTargetObjectOfProperty().GetType();
         }
 
         /// <summary>
-        /// Get the <see cref="FieldInfo"/> of <see cref="SerializedProperty"/>.
+        /// Get the <see cref="FieldInfo"/> of <see cref="SerializedProperty"/>.<br/>
+        /// Doesn't work on enumerable <see cref="SerializedProperty"/>.
         /// </summary>
         /// <param name="source"><see cref="SerializedProperty"/> whose <see cref="FieldInfo"/> will be get.</param>
         /// <returns><see cref="FieldInfo"/> of <paramref name="source"/>.</returns>
         public static FieldInfo GetFieldInfo(this SerializedProperty source)
         {
             return source.serializedObject.targetObject.GetType().GetField(source.name);
+        }
+
+        /// <summary>
+        /// Get the index of the <paramref name="source"/> if it's an element of an array.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> element of array.</param>
+        /// <returns>Its index.</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="source"/> doesn't come from an array.</exception>
+        public static int GetIndexFromArray(this SerializedProperty source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+
+            string part = source.propertyPath.Split('.').Last().Split('[').LastOrDefault();
+            if (part == default)
+                throw new ArgumentException("It doesn't come from an array", nameof(source));
+            else
+                return int.Parse(part.Replace("]", ""));
         }
     }
 }
