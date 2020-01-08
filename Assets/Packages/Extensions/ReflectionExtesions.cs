@@ -204,6 +204,30 @@ namespace AdditionalExtensions
             parameter = default;
             return false;
         }
+
+        /// <summary>
+        /// Get default value of the given <see cref="TypeInfo"/> <see cref="TypeInfo.AsType"/>.
+        /// </summary>
+        /// <param name="typeInfo"><see cref="TypeInfo"/> to get default value.</param>
+        /// <returns>Default value of <see cref="TypeInfo"/>.</returns>
+        public static object GetDefault(this TypeInfo typeInfo)
+        {
+            if (typeInfo.IsValueType)
+                return Activator.CreateInstance(typeInfo.AsType());
+            return null;
+        }
+
+        /// <summary>
+        /// Get default value of the given <see cref="Type"/>.
+        /// </summary>
+        /// <param name="typeInfo"><see cref="Type"/> to get default value.</param>
+        /// <returns>Default value of <see cref="Type"/>.</returns>
+        public static object GetDefault(this Type type)
+        {
+            if (type.GetTypeInfo().IsValueType)
+                return Activator.CreateInstance(type);
+            return null;
+        }
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<pendiente>")]

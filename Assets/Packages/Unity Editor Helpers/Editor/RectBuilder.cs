@@ -31,14 +31,15 @@ namespace UnityEditorHelper
         public virtual Rect GetRect(float value)
         {
             LastValue = value;
-            throw new NotImplementedException("This method must be overriden by the class child");
+            throw new NotImplementedException("This method must be overridden by the class child");
         }
+
         public abstract Rect GetRect();
 
         /// <summary>
-        /// Produces a rect using the last size configuration.
+        /// Produces a <see cref="Rect"/> using the last size configuration.
         /// </summary>
-        /// <returns>A rect with the last size configuration.</returns>
+        /// <returns>A <see cref="Rect"/> with the last size configuration.</returns>
         public Rect GetRectWithLastConfiguration() => GetRect(LastValue);
 
         public abstract void AddSpace(float value);

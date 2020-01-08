@@ -15,7 +15,6 @@ namespace Serializables
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            //RectangleFactory rectangleFactory = new RectangleFactory(position, true);
             verticalRectBuilder = new VerticalRectBuilder(position.position, new Vector2(position.width, EditorGUIUtility.singleLineHeight));
             EditorGUI.BeginProperty(position, label, property);
             SerializedProperty array = property.FindPropertyRelative("array");
@@ -27,7 +26,7 @@ namespace Serializables
                 EditorGUI.indentLevel++;
                 for (int i = 0; i < array.arraySize; i++)
                 {
-                    EditorGUI.PropertyField(verticalRectBuilder.GetRect(), array.GetArrayElementAtIndex(i));
+                    EditorGUI.PropertyField(verticalRectBuilder.GetRect(), array.GetArrayElementAtIndex(i), true);
                 }
                 EditorGUI.indentLevel--;
             }
