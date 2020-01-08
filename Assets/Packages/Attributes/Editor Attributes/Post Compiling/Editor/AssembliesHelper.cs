@@ -1,28 +1,33 @@
 ﻿using AdditionalExtensions;
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using UnityEditor.Compilation;
 
-using UnityAssembly = UnityEditor.Compilation.Assembly;
 using SystemAssembly = System.Reflection.Assembly;
+using UnityAssembly = UnityEditor.Compilation.Assembly;
 
 namespace AdditionalAttributes
 {
     internal static class AssembliesHelper
     {
+        private static SystemAssembly[] assemblies;
+
         /// <summary>
         /// Get all assemblies from <see cref="AppDomain.CurrentDomain"/> which are in the <see cref="CompilationPipeline.GetAssemblies"/> either <see cref="AssembliesType.Editor"/> and <see cref="AssembliesType.Player"/>.
         /// </summary>
+        /// <param name="ingoreCache">Whenever it should recalculate the value regardless the cache.</param>
         /// <returns>Assemblies which matches criteria.</returns>
-        public static IEnumerable<SystemAssembly> GetAllAssembliesOfPlayerAndEditorAssemblies()
+        public static SystemAssembly[] GetAllAssembliesOfPlayerAndEditorAssemblies(bool ingoreCache = false)
         {
-            IEnumerable<UnityAssembly> unityAssemblies = CompilationPipeline.GetAssemblies(AssembliesType.Editor).Concat(CompilationPipeline.GetAssemblies(AssembliesType.Player));
-            foreach (SystemAssembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-                if (unityAssemblies.ContainsBy(e => e.name == assembly.GetName().Name))
-                    yield return assembly;
+            // Cached because it takes like 100ms to do.
+            if (assemblies == null || ingoreCache)
+            {
+                UnityAssembly[] unityAssemblies = CompilationPipeline.GetAssemblies(AssembliesType.Editor).Concat(CompilationPipeline.GetAssemblies(AssembliesType.Player)).ToArray();
+                assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(e => unityAssemblies.ContainsBy(e2 => e2.name == e.GetName().Name)).ToArray();
+            }
+            return assemblies;
         }
     }
 }
