@@ -71,7 +71,7 @@ namespace UnityEditorHelper
                 if (fieldInfo != null)
                     return fieldInfo.GetValue(source);
 
-                PropertyInfo propertyInfo = type.GetProperty(name, bindingFlags | BindingFlags.IgnoreCase);
+                PropertyInfo propertyInfo = type.GetProperty(name, bindingFlags);
                 if (propertyInfo != null)
                     return propertyInfo.GetValue(source, null);
 
