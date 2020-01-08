@@ -4,10 +4,9 @@ using Random = UnityEngine.Random;
 
 namespace ScriptableSound
 {
-    [CreateAssetMenu(fileName = "SoundList", menuName = "ScriptableSound")]
+    [CreateAssetMenu(fileName = "SoundList", menuName = "Sound/SoundList")]
     public class SoundList : Sound
     {
-
         [Header("Setup")]
         [SerializeField, Tooltip("Sounds to play.")]
         private Sound[] sounds;

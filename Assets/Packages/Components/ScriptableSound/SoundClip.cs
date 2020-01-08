@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using AdditionalAttributes;
+using UnityEngine;
 
 namespace ScriptableSound
 {
-    [CreateAssetMenu(fileName = "SoundClip", menuName = "SoundClip")]
+    [CreateAssetMenu(fileName = "SoundClip", menuName = "Sound/SoundClip")]
     public class SoundClip : Sound
     {
         [Header("Setup")]
