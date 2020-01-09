@@ -12,7 +12,7 @@ namespace ScriptableSound
 {
     public class SoundListContextMenu : MonoBehaviour
     {
-        [MenuItem("Assets/Sound List/Create from SoundClips")]
+        [MenuItem("Assets/Sound/Sound List/Create from SoundClips")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private static void CreateSoundListFromSoundClips()
         {
@@ -23,11 +23,11 @@ namespace ScriptableSound
                 Path.Combine(AssetDatabaseHelper.GetAssetDirectory(soundClips[0]), "SoundList.asset"));
         }
 
-        [MenuItem("Assets/Create Sound List", true)]
+        [MenuItem("Assets/Sound/Create Sound List", true)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private static bool CreateSoundListFromSoundClipsValidation() => Selection.GetFiltered<SoundClip>(SelectionMode.DeepAssets).Length > 0;
 
-        [MenuItem("Assets/Sound List/Create from AudioClips")]
+        [MenuItem("Assets/Sound/Sound List/Create from AudioClips")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
 
         private static void CreateSoundListFromAudioClips()
@@ -44,7 +44,7 @@ namespace ScriptableSound
             AssetDatabaseHelper.AddObjectToAsset(soundClips, path);
         }
 
-        [MenuItem("Assets/Sound List/Create from AudioClips", true)]
+        [MenuItem("Assets/Sound/Sound List/Create from AudioClips", true)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private static bool CreateSoundListFromAudioClipsValidation() => Selection.GetFiltered<AudioClip>(SelectionMode.DeepAssets).Length > 0;
 
@@ -58,7 +58,7 @@ namespace ScriptableSound
             return soundList;
         }
 
-        [MenuItem("Assets/Sound List/Create from AudioClips and SoundClips", true)]
+        [MenuItem("Assets/Sound/Sound List/Create from AudioClips and SoundClips", true)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private static void CreateSoundListFromAudioClipsAndSoundClips()
         {
@@ -76,7 +76,7 @@ namespace ScriptableSound
             AssetDatabaseHelper.AddObjectToAsset(soundClipSelected, path);
         }
 
-        [MenuItem("Assets/Sound List/Create from AudioClips and SoundClips", true)]
+        [MenuItem("Assets/Sound/Sound List/Create from AudioClips and SoundClips", true)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private static bool CreateSoundListFromAudioClipsAndSoundClipsValidation() => Selection.GetFiltered<AudioClip>(SelectionMode.DeepAssets).Length > 0
             && Selection.GetFiltered<SoundClip>(SelectionMode.DeepAssets).Length > 0;
