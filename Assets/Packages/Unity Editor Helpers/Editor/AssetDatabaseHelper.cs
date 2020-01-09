@@ -116,7 +116,9 @@ namespace UnityEditorHelper
             if (path == null) throw new ArgumentNullException(nameof(path));
             if (path.Length == 0) throw new ArgumentException("Can't be empty", nameof(path));
 
-            return objectsToAdd.Select(e => AddObjectToAsset(e, path, createIfNotExist)).Last();
+            foreach (UnityObject objectToAdd in objectsToAdd)
+                path = AddObjectToAsset(objectToAdd, path, createIfNotExist);
+            return path;
         }
 
         /// <summary>
