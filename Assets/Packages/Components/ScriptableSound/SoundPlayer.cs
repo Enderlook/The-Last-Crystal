@@ -1,13 +1,14 @@
 ﻿using AdditionalAttributes;
+
 using System;
+
 using UnityEngine;
 
 namespace ScriptableSound
 {
+    [RequireComponent(typeof(AudioSource))]
     public class SoundPlayer : MonoBehaviour
     {
-        [Header("Configuration")]
-        [SerializeField, Tooltip("AudioSource used to play sound.")]
         private AudioSource audioSource;
 
         [SerializeField, Tooltip("List of sounds to play."), Expandable]
@@ -23,6 +24,7 @@ namespace ScriptableSound
 
         private void Awake()
         {
+            audioSource = GetComponent<AudioSource>();
             if (playOnAwake)
                 Play(onAwakeIndex);
         }
