@@ -1,4 +1,5 @@
 ﻿using AdditionalAttributes;
+
 using UnityEngine;
 
 using Random = UnityEngine.Random;
@@ -12,8 +13,16 @@ namespace ScriptableSound
         [SerializeField, Tooltip("Sounds to play."), Expandable]
         private Sound[] sounds;
 
-        [SerializeField, Tooltip("Play mode order.")]
-        private PlayModeOrder playMode;
+        [SerializeField, Tooltip("The order in which sounds will be played.")]
+        private PlayModeOrder playMode = PlayModeOrder.Sequence;
+
+        [SerializeField, Tooltip("The mode of how sounds will be played.")]
+        private PlayListMode playListMode;
+
+        [SerializeField, Min(-1), Tooltip("If playListMode is FullList, it's the amount of times the full list will be played.\n" +
+            "If playListMode is IndividualSounds, it's the amount of sounds that will be played.\n" +
+            "In any case, if this field is 0, no sound will be played. If -1, it will be and endless loop.")]
+        private int playsAmount = 1;
 #pragma warning restore CS0649
 
         /// <summary>
@@ -37,7 +46,7 @@ namespace ScriptableSound
                 CurrentSound.Update();
                 if (!CurrentSound.IsPlaying)
                 {
-                    if (HasEnoughLoops)
+                    if (playsAmount == -1 || playsAmount > 0)
                     {
                         ChoseNextSound();
                         CurrentSound.SetConfiguration(soundConfiguration);
@@ -55,15 +64,17 @@ namespace ScriptableSound
             {
                 case PlayModeOrder.Random:
                     if (++amountPlay == sounds.Length)
-                        ReduceRemainingLoopsByOne();
+                        ReducePlayAmountIf(PlayListMode.FullList);
+                    ReducePlayAmountIf(PlayListMode.IndividualSounds);
                     index = Random.Range(0, sounds.Length);
                     break;
                 case PlayModeOrder.Sequence:
                     if (++index == sounds.Length)
                     {
                         index = 0;
-                        ReduceRemainingLoopsByOne();
+                        ReducePlayAmountIf(PlayListMode.FullList);
                     }
+                    ReducePlayAmountIf(PlayListMode.IndividualSounds);
                     break;
                 case PlayModeOrder.PingPong:
                     if (isReverse)
@@ -72,7 +83,7 @@ namespace ScriptableSound
                         {
                             index = sounds.Length - 1;
                             isReverse = false;
-                            ReduceRemainingLoopsByOne();
+                            ReducePlayAmountIf(PlayListMode.FullList);
                         }
                     }
                     else
@@ -81,11 +92,17 @@ namespace ScriptableSound
                         {
                             index = 0;
                             isReverse = true;
-                            ReduceRemainingLoopsByOne();
+                            ReducePlayAmountIf(PlayListMode.FullList);
                         }
                     }
                     break;
             }
+        }
+
+        private void ReducePlayAmountIf(PlayListMode mode)
+        {
+            if (playsAmount != -1 && playListMode == mode)
+                playsAmount--;
         }
 
         public override void Stop()

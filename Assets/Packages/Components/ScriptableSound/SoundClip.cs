@@ -13,18 +13,29 @@ namespace ScriptableSound
         [SerializeField, Tooltip("Audioclip to play.\nModifiers doesn't work if played in Inspector."), PlayAudioClip]
         private AudioClip audioClip;
 
+        [SerializeField, Min(-1), Tooltip("Amount of times it will play when called Play method. If 0 doesn't play. If negative it loops forever.")]
+        private int playsAmount = 1;
+
+        private int remainingPlays;
+
         [SerializeField, Tooltip("Modifiers to AudioSource."), Expandable]
         private SoundModifier[] modifiers;
 #pragma warning restore
+
+        private bool HasEnoughPlays()
+        {
+            bool can = remainingPlays > 0 || playsAmount == -1;
+            remainingPlays--;
+            return can;
+        }
 
         public override void Update()
         {
             if (ShouldChangeSound)
             {
-                if (HasEnoughLoops)
+                if (HasEnoughPlays())
                 {
                     AudioSource audioSource = soundConfiguration.audioSource;
-                    ReduceRemainingLoopsByOne();
                     Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
                     audioSource.clip = audioClip;
                     audioSource.Play();
@@ -49,6 +60,12 @@ namespace ScriptableSound
         {
             BackToNormalAudioSource();
             base.Stop();
+        }
+
+        public override void Play()
+        {
+            remainingPlays = playsAmount;
+            base.Play();
         }
     }
 }

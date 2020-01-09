@@ -6,28 +6,6 @@ namespace ScriptableSound
 {
     public class Sound : ScriptableObject
     {
-#pragma warning disable CS0649
-        /// <summary>
-        /// Amount of times to loop, if negative loop forever.
-        /// </summary>
-        [SerializeField, Tooltip("Loop amount. If 0 doesn't loop. If negative it loops forever.")]
-        private int loops;
-
-        /// <summary>
-        /// Remaining loops to end, ignore this if <c><see cref="loops"/> == -1</c>.
-        /// </summary>
-        private int remainingLoops;
-
-        /// <summary>
-        /// Check if there are enough loops to keep playing.
-        /// </summary>
-        protected bool HasEnoughLoops => remainingLoops > 0 || loops == -1;
-
-        /// <summary>
-        /// Reduce <see cref="remainingLoops"/> by one.
-        /// </summary>
-        protected void ReduceRemainingLoopsByOne() => remainingLoops--;
-
         /// <summary>
         /// Whenever this class is playing music.
         /// </summary>
@@ -37,7 +15,6 @@ namespace ScriptableSound
         /// Configuration.
         /// </summary>
         protected SoundConfiguration soundConfiguration;
-#pragma warning restore
 
         /// <summary>
         /// Configure the sound.
@@ -57,7 +34,6 @@ namespace ScriptableSound
         {
             if (soundConfiguration == null)
                 throw new InvalidOperationException($"The method {nameof(SetConfiguration)} must be called first.");
-            remainingLoops = loops + 1;
             IsPlaying = true;
         }
 
