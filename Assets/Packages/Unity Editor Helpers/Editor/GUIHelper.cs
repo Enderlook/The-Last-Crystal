@@ -26,8 +26,15 @@ namespace UnityEditorHelper
         {
             // https://answers.unity.com/questions/550829/how-to-add-a-script-field-in-custom-inspector.html
             GUI.enabled = false;
-            MonoBehaviour script = (MonoBehaviour)Convert.ChangeType(source.target, source.target.GetType());
-            EditorGUILayout.ObjectField("Script", MonoScript.FromMonoBehaviour(script), typeof(MonoScript), false);
+            object target = Convert.ChangeType(source.target, source.target.GetType());
+            MonoScript script;
+            if (source.target.GetType().IsSubclassOf(typeof(MonoBehaviour)))
+                script = MonoScript.FromMonoBehaviour((MonoBehaviour)target);
+            else if (source.target.GetType().IsSubclassOf(typeof(ScriptableObject)))
+                script = MonoScript.FromScriptableObject((ScriptableObject)target);
+            else
+                throw new InvalidCastException($"Only support {typeof(MonoBehaviour)} or {typeof(ScriptableObject)}");
+            EditorGUILayout.ObjectField("Script", script, typeof(MonoScript), false);
             GUI.enabled = true;
         }
     }
