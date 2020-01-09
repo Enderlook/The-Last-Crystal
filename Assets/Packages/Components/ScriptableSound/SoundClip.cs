@@ -36,9 +36,9 @@ namespace ScriptableSound
                 if (HasEnoughPlays())
                 {
                     AudioSource audioSource = soundConfiguration.audioSource;
-                    Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
                     audioSource.clip = audioClip;
                     audioSource.Play();
+                    Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
                 }
                 else
                 {
@@ -67,5 +67,14 @@ namespace ScriptableSound
             remainingPlays = playsAmount;
             base.Play();
         }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            Debug.Log("A");
+            foreach (SoundModifier modifier in modifiers)
+                modifier.Validate(this);
+        }
+#endif
     }
 }
