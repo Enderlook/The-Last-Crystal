@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 
 using UnityEditor;
@@ -11,24 +13,45 @@ namespace ScriptableSound
 {
     public static class SoundClipContextMenu
     {
-        [MenuItem("Assets/Create Sound Clip")]
+        [MenuItem("Assets/Sound Clip/Create")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-        private static void CreateSoundClip()
+        private static void CreateSoundClipsOneByOne()
         {
-            AudioClip audioClip = (AudioClip)Selection.activeObject;
+            AudioClip[] audioClips = Selection.GetFiltered<AudioClip>(SelectionMode.DeepAssets).ToArray();
+
+            foreach ((SoundClip soundClip, AudioClip audioClip) in CreateSoundClips(audioClips).Zip(audioClips, (s, a) => (s, a)))
+            {
+                AssetDatabaseHelper.CreateAsset(soundClip,
+                    string.Join(".", AssetDatabase.GetAssetPath(audioClip)
+                        .Split('.').Reverse().Skip(1).Reverse().Append("asset").ToArray()));
+            }
+        }
+
+        [MenuItem("Assets/Sound Clip/Create all in a single asset")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
+        private static void CreateSoundClipsInSingleAsset()
+        {
+            AudioClip[] audioClips = Selection.GetFiltered<AudioClip>(SelectionMode.DeepAssets).ToArray();
+
+            AssetDatabaseHelper.CreateAssetFromObjects(
+                CreateSoundClips(audioClips).ToArray(),
+                Path.Combine(AssetDatabaseHelper.GetAssetDirectory(audioClips[0]), "SoundClip.asset"), true);
+        }
+
+        private static IEnumerable<SoundClip> CreateSoundClips(IEnumerable<AudioClip> audioClips) => audioClips.Select(CreateSoundClip);
+
+        private static SoundClip CreateSoundClip(AudioClip audioClip)
+        {
             SoundClip soundClip = ScriptableObject.CreateInstance<SoundClip>();
+            soundClip.name = audioClip.name;
 
-            const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy; ;
+            soundClip.GetType().GetField("audioClip", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy).SetValue(soundClip, audioClip);
 
-            soundClip.GetType().GetField("audioClip", bindingFlags).SetValue(soundClip, audioClip);
-
-            AssetDatabaseHelper.SaveAsset(soundClip,
-                string.Join(".", AssetDatabase.GetAssetPath(audioClip)
-                    .Split('.').Reverse().Skip(1)
-                    .Reverse().Append(".asset").ToArray()));
+            return soundClip;
         }
 
         [MenuItem("Assets/Create Sound Clip", true)]
-        private static bool CreateSoundClipValidation() => Selection.activeObject is AudioClip;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
+        private static bool CreateSoundClipsValidation() => Selection.GetFiltered<AudioClip>(SelectionMode.DeepAssets).Length > 0;
     }
 }
