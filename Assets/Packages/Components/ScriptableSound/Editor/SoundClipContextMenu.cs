@@ -38,7 +38,7 @@ namespace ScriptableSound
                 Path.Combine(AssetDatabaseHelper.GetAssetDirectory(audioClips[0]), "SoundClip.asset"), true);
         }
 
-        private static IEnumerable<SoundClip> CreateSoundClips(IEnumerable<AudioClip> audioClips) => audioClips.Select(CreateSoundClip);
+        public static IEnumerable<SoundClip> CreateSoundClips(IEnumerable<AudioClip> audioClips) => audioClips.Select(CreateSoundClip);
 
         private static SoundClip CreateSoundClip(AudioClip audioClip)
         {
