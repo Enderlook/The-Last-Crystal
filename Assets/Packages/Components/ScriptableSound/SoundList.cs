@@ -28,18 +28,23 @@ namespace ScriptableSound
 
         private int index;
 
+        private Sound CurrentSound => sounds[index];
+
         public override void Update()
         {
             if (IsPlaying)
             {
-                Sound sound = sounds[index];
-                sound.Update();
-                if (!sound.IsPlaying)
+                CurrentSound.Update();
+                if (!CurrentSound.IsPlaying)
                 {
-                    ChoseNextSound();
-                    sound = sounds[index];
-                    sound.SetConfiguration(soundConfiguration);
-                    sound.Play();
+                    if (HasEnoughLoops)
+                    {
+                        ChoseNextSound();
+                        CurrentSound.SetConfiguration(soundConfiguration);
+                        CurrentSound.Play();
+                    }
+                    else
+                        IsPlaying = false;
                 }
             }
         }
@@ -81,6 +86,21 @@ namespace ScriptableSound
                     }
                     break;
             }
+        }
+
+        public override void Stop()
+        {
+            CurrentSound.Stop();
+            base.Stop();
+        }
+
+        public override void Play()
+        {
+            index = -1;
+            ChoseNextSound();
+            CurrentSound.SetConfiguration(soundConfiguration);
+            CurrentSound.Play();
+            base.Play();
         }
     }
 }

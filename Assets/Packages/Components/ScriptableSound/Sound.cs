@@ -43,17 +43,33 @@ namespace ScriptableSound
         /// Configure the sound.
         /// </summary>
         /// <param name="soundConfiguration">Configuration.</param>
-        public void SetConfiguration(SoundConfiguration soundConfiguration) => this.soundConfiguration = soundConfiguration;
+        public void SetConfiguration(SoundConfiguration soundConfiguration)
+        {
+            if (soundConfiguration == null) throw new ArgumentNullException(nameof(soundConfiguration));
+
+            this.soundConfiguration = soundConfiguration;
+        }
 
         /// <summary>
         /// Play sound(s).
         /// </summary>
-        public void Play()
+        public virtual void Play()
         {
             if (soundConfiguration == null)
                 throw new InvalidOperationException($"The method {nameof(SetConfiguration)} must be called first.");
             remainingLoops = loops + 1;
             IsPlaying = true;
+        }
+
+        /// <summary>
+        /// Stop sound.
+        /// </summary>
+        public virtual void Stop()
+        {
+            if (IsPlaying)
+                IsPlaying = false;
+            else
+                throw new InvalidOperationException("Was already stopped.");
         }
 
         /// <summary>

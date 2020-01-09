@@ -21,21 +21,34 @@ namespace ScriptableSound
         {
             if (ShouldChangeSound)
             {
-                AudioSource audioSource = soundConfiguration.audioSource;
                 if (HasEnoughLoops)
                 {
+                    AudioSource audioSource = soundConfiguration.audioSource;
                     ReduceRemainingLoopsByOne();
                     Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
-                    audioSource.PlayOneShot(audioClip);
+                    audioSource.clip = audioClip;
+                    audioSource.Play();
                 }
                 else
                 {
                     IsPlaying = false;
-                    for (int i = modifiers.Length - 1; i >= 0; i--)
-                        modifiers[i].BackToNormalAudioSource(audioSource);
-                    soundConfiguration.EndCallback();
+                    BackToNormalAudioSource();
                 }
             }
+        }
+
+        private void BackToNormalAudioSource()
+        {
+            AudioSource audioSource = soundConfiguration.audioSource;
+            for (int i = modifiers.Length - 1; i >= 0; i--)
+                modifiers[i].BackToNormalAudioSource(audioSource);
+            soundConfiguration.EndCallback();
+        }
+
+        public override void Stop()
+        {
+            BackToNormalAudioSource();
+            base.Stop();
         }
     }
 }
