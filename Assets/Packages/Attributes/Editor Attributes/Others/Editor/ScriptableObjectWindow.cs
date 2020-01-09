@@ -62,8 +62,18 @@ namespace AdditionalAttributes
                 {
                     type = fieldType.GetElementType();
                     int index = property.GetIndexFromArray();
-                    if (fieldInfo.GetValue(property.serializedObject.targetObject) is Array array)
+
+                    UnityEngine.Object targetObject = property.serializedObject.targetObject;
+                    if (fieldInfo.GetValue(targetObject) is Array array)
                     {
+                        /* Until an element is in-Inspector dragged to the array element field, it seems that Unity doesn't rebound the array
+                         * So if the array is empty and it doesn't have space for us, we make a new array and inject it. */
+                        if (array.Length == 0)
+                        {
+                            array = Array.CreateInstance(fieldType.GetElementType(), 1);
+                            fieldInfo.SetValue(targetObject, array);
+                        }
+
                         window.get = () => array.GetValue(index);
                         window.set = (object value) => array.SetValue(value, index);
                     }
