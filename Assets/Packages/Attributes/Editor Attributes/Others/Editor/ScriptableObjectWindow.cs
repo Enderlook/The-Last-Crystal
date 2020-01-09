@@ -115,7 +115,7 @@ namespace AdditionalAttributes
             {
                 scriptableObject = Create();
                 set(scriptableObject);
-                AssetDatabaseHelper.SaveAsset(scriptableObject, _path);
+                AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
             }
             EditorGUI.EndDisabledGroup();
 
@@ -123,7 +123,7 @@ namespace AdditionalAttributes
             if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
                 set(null);
             if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
-                AssetDatabaseHelper.SaveAsset(scriptableObject, _path);
+                AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
             EditorGUI.EndDisabledGroup();
         }
 
