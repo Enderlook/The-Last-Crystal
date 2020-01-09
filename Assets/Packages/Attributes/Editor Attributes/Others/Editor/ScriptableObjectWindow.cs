@@ -118,22 +118,25 @@ namespace AdditionalAttributes
                 EditorGUILayout.LabelField("Path to save:", _path);
             EditorGUI.EndDisabledGroup();
 
+            UnityEngine.Object targetObject = property.serializedObject.targetObject;
+
             if (!hasAsset && !hasScriptableObject)
             {
                 // Create
                 if (GUILayout.Button(new GUIContent("Instantiate in field", "Create and instance and assign to field.")))
                 {
-                    Undo.RecordObject(property.serializedObject.targetObject, "Instantiate field");
+                    Undo.RecordObject(targetObject, "Instantiate field");
                     set(Create());
                 }
 
                 // Create and Save
                 if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
                 {
-                    Undo.RecordObject(property.serializedObject.targetObject, "Instantiate field");
+                    Undo.RecordObject(targetObject, "Instantiate field");
                     scriptableObject = Create();
                     set(scriptableObject);
                     AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
+                    EditorUtility.SetDirty(targetObject);
                 }
             }
 
@@ -157,8 +160,10 @@ namespace AdditionalAttributes
                 EditorGUILayout.EndHorizontal();
                 if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
                 {
+                    Undo.RecordObject(targetObject, "Clean field");
                     set(null);
                     path = DEFAULT_PATH;
+                    property.serializedObject.ApplyModifiedProperties();
                 }
 
                 if (!hasAsset)
