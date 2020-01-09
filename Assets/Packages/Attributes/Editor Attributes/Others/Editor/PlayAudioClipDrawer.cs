@@ -15,24 +15,20 @@ namespace AdditionalAttributes
         // https://forum.unity.com/threads/way-to-play-audio-in-editor-using-an-editor-script.132042/
         // https://github.com/MattRix/UnityDecompiled/blob/cc432a3de42b53920d5d5dae85968ff993f4ec0e/UnityEditor/UnityEditor/AudioUtil.cs
 
-        private static readonly VoidAudioClip Play;
-        private static readonly VoidAudioClip Stop;
-        private static readonly BoolAudioClip IsClipPlaying;
-        private static readonly FloatAudioClip GetClipPosition;
-
-        private delegate void VoidAudioClip(AudioClip audioClip);
-        private delegate bool BoolAudioClip(AudioClip audioClip);
-        private delegate float FloatAudioClip(AudioClip audioClip);
+        private static readonly Action<AudioClip> Play;
+        private static readonly Action<AudioClip> Stop;
+        private static readonly Func<AudioClip, bool> IsClipPlaying;
+        private static readonly Func<AudioClip, float> GetClipPosition;
 
         static PlayAudioClipDrawer()
         {
             Type audioUtilClass = typeof(AudioImporter).Assembly.GetType("UnityEditor.AudioUtil");
             Type[] parameter = new Type[] { typeof(AudioClip) };
             const BindingFlags bindingFlags = BindingFlags.Static | BindingFlags.Public;
-            Play = (VoidAudioClip)audioUtilClass.GetMethod("PlayClip", bindingFlags, null, parameter, null).CreateDelegate(typeof(VoidAudioClip));
-            Stop = (VoidAudioClip)audioUtilClass.GetMethod("StopClip", bindingFlags, null, parameter, null).CreateDelegate(typeof(VoidAudioClip));
-            IsClipPlaying = (BoolAudioClip)audioUtilClass.GetMethod("IsClipPlaying", bindingFlags, null, parameter, null).CreateDelegate(typeof(BoolAudioClip));
-            GetClipPosition = (FloatAudioClip)audioUtilClass.GetMethod("GetClipPosition", bindingFlags, null, parameter, null).CreateDelegate(typeof(FloatAudioClip));
+            Play = (Action<AudioClip>)audioUtilClass.GetMethod("PlayClip", bindingFlags, null, parameter, null).CreateDelegate(typeof(Action<AudioClip>));
+            Stop = (Action<AudioClip>)audioUtilClass.GetMethod("StopClip", bindingFlags, null, parameter, null).CreateDelegate(typeof(Action<AudioClip>));
+            IsClipPlaying = (Func<AudioClip, bool>)audioUtilClass.GetMethod("IsClipPlaying", bindingFlags, null, parameter, null).CreateDelegate(typeof(Func<AudioClip, bool>));
+            GetClipPosition = (Func<AudioClip, float>)audioUtilClass.GetMethod("GetClipPosition", bindingFlags, null, parameter, null).CreateDelegate(typeof(Func<AudioClip, float>));
         }
 
         protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
