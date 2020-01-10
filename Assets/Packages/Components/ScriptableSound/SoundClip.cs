@@ -71,7 +71,6 @@ namespace ScriptableSound
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            Debug.Log("A");
             foreach (SoundModifier modifier in modifiers)
                 modifier.Validate(this);
         }
