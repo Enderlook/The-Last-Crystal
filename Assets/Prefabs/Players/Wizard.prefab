@@ -45,7 +45,7 @@ MonoBehaviour:
   projectileAnimation: {fileID: 9100000, guid: 2e1f658194e3bc1498f5e5b9d7092c35, type: 2}
   shootingSound:
     audioSource: {fileID: 538832391249785834}
-    sound: {fileID: 11400000, guid: a6fb2eafcfe41754296664d2527e6ca3, type: 2}
+    sound: {fileID: 11400000, guid: 0691e52976f5e984781314fc9a4cd40d, type: 2}
 --- !u!1001 &7460415043436444691
 PrefabInstance:
   m_ObjectHideFlags: 0

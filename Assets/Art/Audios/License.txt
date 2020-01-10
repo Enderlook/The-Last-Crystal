@@ -1,7 +1,14 @@
+Spell 4 (fire) made by Bart K. under license CC-BY 3.0, CC-BY-SA 3.0, GPL 3.0, GPL 2.0, OGA-BY 3.0
+	https://opengameart.org/content/spell-4-fire
+	foom_0.wav
+
 Magic Smithe made by spookymodem under license CC-BY 3.0
 	https://opengameart.org/content/magic-smite
 	Magic Smite.wav
 
+Catching Fire made by themightyglider under license CC0
+	https://opengameart.org/content/catching-fire
+	flame.ogg
 
 3 Melee sounds made by remaxim under license CC0
 	https://opengameart.org/content/3-melee-sounds
