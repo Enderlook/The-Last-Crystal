@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AdditionalAttributes;
+using System;
 
 using UnityEngine;
 
 namespace ScriptableSound
 {
+    [AbstractScriptableObject]
     public class Sound : ScriptableObject
     {
         /// <summary>

@@ -62,8 +62,18 @@ namespace AdditionalAttributes
                 {
                     type = fieldType.GetElementType();
                     int index = property.GetIndexFromArray();
-                    if (fieldInfo.GetValue(property.serializedObject.targetObject) is Array array)
+
+                    UnityEngine.Object targetObject = property.serializedObject.targetObject;
+                    if (fieldInfo.GetValue(targetObject) is Array array)
                     {
+                        /* Until an element is in-Inspector dragged to the array element field, it seems that Unity doesn't rebound the array
+                         * So if the array is empty and it doesn't have space for us, we make a new array and inject it. */
+                        if (array.Length == 0)
+                        {
+                            array = Array.CreateInstance(fieldType.GetElementType(), 1);
+                            fieldInfo.SetValue(targetObject, array);
+                        }
+
                         window.get = () => array.GetValue(index);
                         window.set = (object value) => array.SetValue(value, index);
                     }
@@ -78,7 +88,7 @@ namespace AdditionalAttributes
                     window.set = (object value) => property.objectReferenceValue = (UnityEngine.Object)value;
                 }
             }
-            window.allowedTypes = GetDerivedTypes(type).ToArray();
+            window.allowedTypes = GetDerivedTypes(type).Where(e => !e.IsDefined(typeof(AbstractScriptableObjectAttribute))).ToArray();
             window.allowedTypesNames = window.allowedTypes.Select(e => e.Name).ToArray();
             window.index = window.GetIndex(type);
             window.property = property;
@@ -108,22 +118,25 @@ namespace AdditionalAttributes
                 EditorGUILayout.LabelField("Path to save:", _path);
             EditorGUI.EndDisabledGroup();
 
+            UnityEngine.Object targetObject = property.serializedObject.targetObject;
+
             if (!hasAsset && !hasScriptableObject)
             {
                 // Create
                 if (GUILayout.Button(new GUIContent("Instantiate in field", "Create and instance and assign to field.")))
                 {
-                    Undo.RecordObject(property.serializedObject.targetObject, "Instantiate field");
+                    Undo.RecordObject(targetObject, "Instantiate field");
                     set(Create());
                 }
 
                 // Create and Save
                 if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
                 {
-                    Undo.RecordObject(property.serializedObject.targetObject, "Instantiate field");
+                    Undo.RecordObject(targetObject, "Instantiate field");
                     scriptableObject = Create();
                     set(scriptableObject);
                     AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
+                    EditorUtility.SetDirty(targetObject);
                 }
             }
 
@@ -147,8 +160,10 @@ namespace AdditionalAttributes
                 EditorGUILayout.EndHorizontal();
                 if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
                 {
+                    Undo.RecordObject(targetObject, "Clean field");
                     set(null);
                     path = DEFAULT_PATH;
+                    property.serializedObject.ApplyModifiedProperties();
                 }
 
                 if (!hasAsset)

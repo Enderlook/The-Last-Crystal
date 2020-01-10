@@ -36,27 +36,32 @@ namespace AdditionalAttributes
             PlayAudioClipAttribute playAudioClipAttribute = (PlayAudioClipAttribute)attribute;
 
             AudioClip audioClip = (AudioClip)property.GetTargetObjectOfProperty();
-            bool isPlaying = IsClipPlaying(audioClip);
-            GUIContent playGUIContent = isPlaying ? EditorGUIUtility.IconContent("PauseButton", $"Stop {typeof(AudioClip)}. Remaining duration: {audioClip.length - GetClipPosition(audioClip)} seconds.") : EditorGUIUtility.IconContent("PlayButton", $"Play {typeof(AudioClip)}. Duration: {audioClip.length} seconds.");
-            float width = GUI.skin.button.CalcSize(playGUIContent).x;
-
-            EditorGUI.PropertyField(new Rect(position.x, position.y, position.width - width, position.height), property, label, true);
-
-            bool showProgressBar = isPlaying && playAudioClipAttribute.ShowProgressBar;
-
-            if (GUI.Button(new Rect(position.x + position.width - width, position.y, width, position.height / (showProgressBar ? 2 : 1)), playGUIContent))
+            if (audioClip == null)
+                EditorGUI.PropertyField(position, property, label);
+            else
             {
-                if (isPlaying)
-                    Stop(audioClip);
-                else
-                    Play(audioClip);
-            }
+                bool isPlaying = IsClipPlaying(audioClip);
+                GUIContent playGUIContent = isPlaying ? EditorGUIUtility.IconContent("PauseButton", $"Stop {typeof(AudioClip)}. Remaining duration: {audioClip.length - GetClipPosition(audioClip)} seconds.") : EditorGUIUtility.IconContent("PlayButton", $"Play {typeof(AudioClip)}. Duration: {audioClip.length} seconds.");
+                float width = GUI.skin.button.CalcSize(playGUIContent).x;
 
-            if (showProgressBar)
-            {
-                EditorGUI.ProgressBar(new Rect(position.x + position.width - width, position.y + position.height / 2, width, position.height / 2), GetClipPosition(audioClip) / audioClip.length, "");
-                // Forces repaint all the inspector per frame
-                EditorUtility.SetDirty(property.serializedObject.targetObject);
+                EditorGUI.PropertyField(new Rect(position.x, position.y, position.width - width, position.height), property, label, true);
+
+                bool showProgressBar = isPlaying && playAudioClipAttribute.ShowProgressBar;
+
+                if (GUI.Button(new Rect(position.x + position.width - width, position.y, width, position.height / (showProgressBar ? 2 : 1)), playGUIContent))
+                {
+                    if (isPlaying)
+                        Stop(audioClip);
+                    else
+                        Play(audioClip);
+                }
+
+                if (showProgressBar)
+                {
+                    EditorGUI.ProgressBar(new Rect(position.x + position.width - width, position.y + position.height / 2, width, position.height / 2), GetClipPosition(audioClip) / audioClip.length, "");
+                    // Forces repaint all the inspector per frame
+                    EditorUtility.SetDirty(property.serializedObject.targetObject);
+                }
             }
         }
     }
