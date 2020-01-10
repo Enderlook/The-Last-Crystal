@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ScriptableSound.Modifiers
 {
+    [CreateAssetMenu(fileName = "PitchRange", menuName = "Sound/Modifiers/Pitch Range")]
     public class PitchRangeModifier : SoundModifier
     {
 #pragma warning disable CS0649

@@ -1,8 +1,8 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ScriptableSound.Modifiers
 {
+    [CreateAssetMenu(fileName = "Pitch", menuName = "Sound/Modifiers/Pitch")]
     public class PitchModifier : SoundModifier
     {
         [SerializeField, Tooltip("Pitch multiplier.")]

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ScriptableSound.Modifiers
 {
+    [CreateAssetMenu(fileName = "VolumeRange", menuName = "Sound/Modifiers/Volume Range")]
     public class VolumeRangeModifier : SoundModifier
     {
 #pragma warning disable CS0649

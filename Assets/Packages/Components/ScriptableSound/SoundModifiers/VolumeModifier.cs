@@ -1,8 +1,8 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ScriptableSound.Modifiers
 {
+    [CreateAssetMenu(fileName = "Volume", menuName = "Sound/Modifiers/Volume")]
     public class VolumeModifier : SoundModifier
     {
         [SerializeField, Tooltip("Volume multiplier.")]

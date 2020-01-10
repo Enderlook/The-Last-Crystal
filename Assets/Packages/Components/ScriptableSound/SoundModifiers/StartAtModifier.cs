@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ScriptableSound.Modifiers
 {
+    [CreateAssetMenu(fileName = "StartAt", menuName = "Sound/Modifiers/Start At")]
     public class StartAtModifier : SoundModifier
     {
         [SerializeField, Tooltip("Start sound at second.")]
