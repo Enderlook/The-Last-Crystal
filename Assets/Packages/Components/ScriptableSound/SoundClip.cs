@@ -64,7 +64,10 @@ namespace ScriptableSound
 
         public override void Play()
         {
+            if (IsPlaying)
+                BackToNormalAudioSource();
             remainingPlays = playsAmount;
+            soundConfiguration.audioSource.Stop();
             base.Play();
         }
 
