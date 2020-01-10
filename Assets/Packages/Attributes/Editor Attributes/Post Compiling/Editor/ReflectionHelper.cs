@@ -14,7 +14,7 @@ namespace AdditionalAttributes.PostCompiling
 
         public static IEnumerable<(Type type, T attribute)> GetAllAttributesWithCustomAttributeInPlayerAndEditorAssemblies<T>()
         {
-            foreach (Type type in PostCompilingAssembliesHelper.GetAllTypesOfPlayerAndEditorAssemblies())
+            foreach (Type type in AssembliesHelper.GetAllAssembliesOfPlayerAndEditorAssemblies().SelectMany(e => e.GetTypes()))
                 // Check if a class came from Attribute before using reflection because otherwise it would be a waste of performance
                 if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(T), true) is T attribute)
                     yield return (type, attribute);
