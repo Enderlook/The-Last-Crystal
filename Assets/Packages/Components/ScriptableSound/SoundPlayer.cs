@@ -1,7 +1,7 @@
 ﻿using AdditionalAttributes;
 
 using System;
-
+using System.Linq;
 using UnityEngine;
 
 namespace ScriptableSound
@@ -26,6 +26,7 @@ namespace ScriptableSound
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
+            sounds = sounds.Select(e => e.CreatePrototype()).ToArray();
             if (playOnAwake)
                 Play(onAwakeIndex);
         }

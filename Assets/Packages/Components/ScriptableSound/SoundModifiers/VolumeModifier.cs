@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+using Utils;
+
 namespace ScriptableSound.Modifiers
 {
     [CreateAssetMenu(fileName = "Volume", menuName = "Sound/Modifiers/Volume")]
@@ -17,5 +19,13 @@ namespace ScriptableSound.Modifiers
         }
 
         public override void BackToNormalAudioSource(AudioSource audioSource) => audioSource.volume = oldVolume;
+
+        public override SoundModifier CreatePrototype()
+        {
+            VolumeModifier prototype = CreateInstance<VolumeModifier>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.volumeMultiplier = volumeMultiplier;
+            return prototype;
+        }
     }
 }

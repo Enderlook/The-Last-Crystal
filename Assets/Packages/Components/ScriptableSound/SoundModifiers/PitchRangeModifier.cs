@@ -2,6 +2,8 @@
 
 using UnityEngine;
 
+using Utils;
+
 namespace ScriptableSound.Modifiers
 {
     [CreateAssetMenu(fileName = "PitchRange", menuName = "Sound/Modifiers/Pitch Range")]
@@ -21,5 +23,13 @@ namespace ScriptableSound.Modifiers
         }
 
         public override void BackToNormalAudioSource(AudioSource audioSource) => audioSource.pitch = oldPitch;
+
+        public override SoundModifier CreatePrototype()
+        {
+            PitchRangeModifier prototype = CreateInstance<PitchRangeModifier>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.pitchMultiplier = pitchMultiplier;
+            return prototype;
+        }
     }
 }

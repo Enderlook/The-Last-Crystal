@@ -2,6 +2,8 @@
 
 using UnityEngine;
 
+using Utils;
+
 namespace ScriptableSound.Modifiers
 {
     [CreateAssetMenu(fileName = "StartAt", menuName = "Sound/Modifiers/Start At")]
@@ -12,11 +14,25 @@ namespace ScriptableSound.Modifiers
         private float startAtSecond;
 #pragma warning restore CS0649
 
+        private float oldValue;
+
         private FieldInfo audioClip = typeof(SoundClip).GetField("audioclip");
 
-        public override void ModifyAudioSource(AudioSource audioSource) => audioSource.time = startAtSecond; // Note: this only works if audiosource.Play() was called before
+        public override void ModifyAudioSource(AudioSource audioSource)
+        {
+            oldValue = audioSource.time;
+            audioSource.time = startAtSecond; // Note: this only works if audiosource.Play() was called before
+        }
 
-        public override void BackToNormalAudioSource(AudioSource audioSource) { }
+        public override void BackToNormalAudioSource(AudioSource audioSource) => audioSource.time = oldValue;
+
+        public override SoundModifier CreatePrototype()
+        {
+            StartAtModifier prototype = CreateInstance<StartAtModifier>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.startAtSecond = startAtSecond;
+            return prototype;
+        }
 
 #if UNITY_EDITOR
         public override void Validate(SoundClip soundClip)

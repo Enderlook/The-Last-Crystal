@@ -1,7 +1,7 @@
 ﻿using AdditionalAttributes;
-
+using System.Linq;
 using UnityEngine;
-
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace ScriptableSound
@@ -110,6 +110,8 @@ namespace ScriptableSound
 
         public override void Play()
         {
+            if (IsPlaying)
+                Stop();
             index = -1;
             remainingPlays = playsAmount;
             ConfigureNextSound();
@@ -121,6 +123,16 @@ namespace ScriptableSound
             ChoseNextSound();
             CurrentSound.SetConfiguration(soundConfiguration);
             CurrentSound.Play();
+        }
+
+        public override Sound CreatePrototype()
+        {
+            SoundList prototype = CreateInstance<SoundList>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.playMode = playMode;
+            prototype.playListMode = playListMode;
+            prototype.sounds = sounds.Select(e => e.CreatePrototype()).ToArray();
+            return prototype;
         }
     }
 }

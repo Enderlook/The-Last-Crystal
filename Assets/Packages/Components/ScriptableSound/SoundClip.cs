@@ -1,8 +1,13 @@
 ﻿using AdditionalAttributes;
+
 using ScriptableSound.Modifiers;
+
 using System;
+using System.Linq;
 
 using UnityEngine;
+
+using Utils;
 
 namespace ScriptableSound
 {
@@ -69,6 +74,16 @@ namespace ScriptableSound
             remainingPlays = playsAmount;
             soundConfiguration.audioSource.Stop();
             base.Play();
+        }
+
+        public override Sound CreatePrototype()
+        {
+            SoundClip prototype = CreateInstance<SoundClip>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.audioClip = audioClip;
+            prototype.modifiers = modifiers.Select(e => e.CreatePrototype()).ToArray();
+            prototype.playsAmount = playsAmount;
+            return prototype;
         }
 
 #if UNITY_EDITOR

@@ -1,12 +1,14 @@
 ﻿using AdditionalAttributes;
+
 using System;
 
 using UnityEngine;
+using Utils;
 
 namespace ScriptableSound
 {
     [AbstractScriptableObject]
-    public class Sound : ScriptableObject
+    public class Sound : ScriptableObject, IPrototypable<Sound>
     {
         /// <summary>
         /// Whenever this class is playing music.
@@ -56,8 +58,10 @@ namespace ScriptableSound
         /// <remarks>
         /// Use <see cref="AudioSource.time"/> instead of <see cref="AudioSource.isPlaying"/> because the second one produce wrong results if <see cref="AudioSource"/> is paused.
         /// </remarks>
-        protected bool ShouldChangeSound => IsPlaying && soundConfiguration.audioSource.time == 0;
+        protected bool ShouldChangeSound => IsPlaying && soundConfiguration != null && soundConfiguration.audioSource.time == 0; // TODO: soundConfiguration shouldn't be null if IsPlay is true, but removing this produces issues
 
         public virtual void Update() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
+
+        public virtual Sound CreatePrototype() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
     }
 }
