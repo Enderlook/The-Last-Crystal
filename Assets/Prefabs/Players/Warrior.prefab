@@ -49,22 +49,8 @@ MonoBehaviour:
   layerToHit: 10
   animationState: Attack
   slashingSound:
-    sound:
-      name: 
-      audioClip: {fileID: 8300000, guid: be4448b799cb7fd47ac320c8e040ae54, type: 3}
-      volume:
-        useAlternative: 1
-        item1:
-          min: 0
-          max: 0
-        item2: 1
-      pitch:
-        useAlternative: 0
-        item1:
-          min: 0.8
-          max: 1.2
-        item2: 0
     audioSource: {fileID: 4480896203077898536}
+    sound: {fileID: 11400000, guid: 5acc86af231a9b8419c57f008cfb329f, type: 2}
 --- !u!114 &5900227787012066578
 MonoBehaviour:
   m_ObjectHideFlags: 0
