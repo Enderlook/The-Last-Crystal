@@ -88,7 +88,7 @@ namespace AdditionalAttributes
                     window.set = (object value) => property.objectReferenceValue = (UnityEngine.Object)value;
                 }
             }
-            window.allowedTypes = GetDerivedTypes(type).ToArray();
+            window.allowedTypes = GetDerivedTypes(type).Where(e => !e.IsDefined(typeof(AbstractScriptableObjectAttribute))).ToArray();
             window.allowedTypesNames = window.allowedTypes.Select(e => e.Name).ToArray();
             window.index = window.GetIndex(type);
             window.property = property;
