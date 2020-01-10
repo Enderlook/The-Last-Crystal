@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SoundSystem
@@ -14,7 +12,7 @@ namespace SoundSystem
 
         [SerializeField, Tooltip("AudioSource used to play.")]
         private AudioSource audioSource;
-#pragma warning enable CS0649
+#pragma warning restore CS0649
 
         public void Play(AudioSource audioSource, PlayMode playMode, float volumeMultiplier = 1) => ((IPlaylist)playlist).Play(audioSource, playMode, volumeMultiplier);
         public bool Play(AudioSource audioSource, string name, float volumeMultiplier = 1) => ((IPlaylist)playlist).Play(audioSource, name, volumeMultiplier);

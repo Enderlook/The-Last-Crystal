@@ -30,18 +30,28 @@ namespace AdditionalAttributes
 
         protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.PropertyField(position, property, label, true);
+            object reference = property.objectReferenceValue;
 
-            if (!property.serializedObject.targetObject.GetType().IsAssignableFrom(typeof(UnityEngine.Object)))
+            // Compatibility with ScriptableObjectDrawer
+            Type type = fieldInfo.FieldType;
+            if (type.IsArray)
+                type = type.GetElementType();
+            if (type.IsSubclassOf(typeof(ScriptableObject)) || reference?.GetType().IsSubclassOf(typeof(ScriptableObject)) == true)
+                ScriptableObjectDrawer.DrawPropiertyField(position, property, label, fieldInfo);
+            else
+                EditorGUI.PropertyField(position, property, label, true);
+
+            type = property.serializedObject.targetObject.GetType();
+            if (!type.IsSubclassOf(typeof(UnityEngine.Object)))
             {
-                Debug.LogError($"{nameof(ExpandableAttribute)} can only be used on types assignable to {nameof(UnityEngine.Object)}. {property.name} from {property.GetParentTargetObjectOfProperty()} (path {property.propertyPath}) is type {property.serializedObject.targetObject.GetType()}.");
+                Debug.LogError($"{nameof(ExpandableAttribute)} can only be used on types subclasses of {nameof(UnityEngine.Object)}. {property.name} from {property.GetParentTargetObjectOfProperty()} (path {property.propertyPath}) is type {type}.");
                 return;
             }
 
             ExpandableAttribute expandableAttribute = (ExpandableAttribute)attribute;
 
             // If we have a value
-            if (property.objectReferenceValue != null)
+            if (reference != null)
             {
                 // We can make the field expandable with a Foldout
                 // No GUIContent because the property field below already has it.

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+
 using UnityEditor;
 using UnityEditor.Callbacks;
 
@@ -17,6 +18,7 @@ namespace AdditionalAttributes.PostCompiling
 #pragma warning disable CS0649
         // Type Less Enum
         private static readonly Dictionary<int, Action<Type>> executeOnEachTypeLessEnums = new Dictionary<int, Action<Type>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each <see cref="Type"/> in the assemblies compiled by Unity which <see cref="Type.IsEnum"/> is <see langword="false"/>.<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -24,8 +26,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachTypeLessEnums(Action<Type> action, int order) => SubscribeCallback(executeOnEachTypeLessEnums, action, order);
+
         // Type Enum
         private static readonly Dictionary<int, Action<Type>> executeOnEachTypeEnum = new Dictionary<int, Action<Type>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each <see cref="Type"/> in the assemblies compiled by Unity which <see cref="Type.IsEnum"/> is <see langword="true"/>.<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -33,8 +37,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachTypeEnum(Action<Type> action, int order) => SubscribeCallback(executeOnEachTypeEnum, action, order);
+
         // Member
         private static readonly Dictionary<int, Action<MemberInfo>> executeOnEachMemberOfTypes = new Dictionary<int, Action<MemberInfo>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each member of each <see cref="Type"/> in the assemblies compiled by Unity.<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -42,8 +48,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachMemberOfTypes(Action<MemberInfo> action, int order) => SubscribeCallback(executeOnEachMemberOfTypes, action, order);
+
         // Serializable By Unity Field
         private static readonly Dictionary<int, Action<FieldInfo>> executeOnEachSerializableByUnityFieldOfTypes = new Dictionary<int, Action<FieldInfo>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each field of each <see cref="Type"/> in the assemblies compiled by Unity which can be serialized by Unity (<seealso cref="ReflectionHelper.CanBeSerializedByUnity(FieldInfo)"/>).<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -51,8 +59,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachSerializableByUnityFieldOfTypes(Action<FieldInfo> action, int order) => SubscribeCallback(executeOnEachSerializableByUnityFieldOfTypes, action, order);
+
         // Non Serializable By Unity Field
         private static readonly Dictionary<int, Action<FieldInfo>> executeOnEachNonSerializableByUnityFieldOfTypes = new Dictionary<int, Action<FieldInfo>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each member of each <see cref="Type"/> in the assemblies compiled by Unity which can be serialized by Unity (<seealso cref="ReflectionHelper.CanBeSerializedByUnity(FieldInfo)"/>).<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -60,8 +70,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachNonSerializableByUnityFieldOfTypes(Action<FieldInfo> action, int order) => SubscribeCallback(executeOnEachNonSerializableByUnityFieldOfTypes, action, order);
+
         // Property
         private static readonly Dictionary<int, Action<PropertyInfo>> executeOnEachPropertyOfTypes = new Dictionary<int, Action<PropertyInfo>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each property of each <see cref="Type"/> in the assemblies compiled by Unity.<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -69,8 +81,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachPropertyOfTypes(Action<PropertyInfo> action, int order) => SubscribeCallback(executeOnEachPropertyOfTypes, action, order);
+
         // Method
         private static readonly Dictionary<int, Action<MethodInfo>> executeOnEachMethodOfTypes = new Dictionary<int, Action<MethodInfo>>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed on each method of each <see cref="Type"/> in the assemblies compiled by Unity.<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteOnEachTypeWhenScriptsReloads"/> attribute instead of this method.
@@ -78,8 +92,10 @@ namespace AdditionalAttributes.PostCompiling
         /// <param name="action">Action to subscribe.</param>
         /// <param name="order">Priority of this method to execute. After all other callbacks of lower order are executed on all targets this will be executed.</param>
         public static void SubscribeOnEachMethodOfTypes(Action<MethodInfo> action, int order) => SubscribeCallback(executeOnEachMethodOfTypes, action, order);
+
         // Once
         private static readonly Dictionary<int, Action> executeOnce = new Dictionary<int, Action>();
+
         /// <summary>
         /// Subscribes <paramref name="action"/> to be executed once wen Unity ompiles assemblies.<br>
         /// If possible, it's strongly advisable to use <see cref="ExecuteWhenScriptsReloads"/> attribute instead of this method.
@@ -115,24 +131,25 @@ namespace AdditionalAttributes.PostCompiling
         private static readonly List<MethodInfo> methodInfos = new List<MethodInfo>();
 
         [InitializeOnLoadMethod]
-        private static void Initialize()
-        {
+        private static void Initialize() =>
             // Add this to guarantee that task is completed.
             EditorApplication.update += () =>
             {
-                if (task?.IsCompleted == true)
+                if (task != null)
                 {
-                    task.Wait();
-                    task = null;
-                }
-                else if (task?.IsFaulted == true)
-                {
-                    Exception exception = task.Exception;
-                    task = null;
-                    throw exception;
+                    if (task.IsCompleted)
+                    {
+                        task.Wait();
+                        task = null;
+                    }
+                    else if (task.IsFaulted)
+                    {
+                        Exception exception = task.Exception;
+                        task = null;
+                        throw exception;
+                    }
                 }
             };
-        }
 
         private static Task task;
 
@@ -141,7 +158,7 @@ namespace AdditionalAttributes.PostCompiling
         private static void ExecuteAnalysis()
         {
             // Can't do unsafe work in non-main thread. And this is unsafe
-            IEnumerable<Type> types = GetAllTypesOfPlayerAndEditorAssemblies();
+            IEnumerable<Type> types = GetAllTypesOfPlayerAndEditorAssembliesThatShouldBeInspected();
             task = new Task(() =>
             {
                 ScanAssemblies(types);
@@ -150,40 +167,46 @@ namespace AdditionalAttributes.PostCompiling
             task.Start();
         }
 
+        /// <summary>
+        /// Get all types of all Player and Editor assemblies which doesn't have <see cref="DoNotInspectAttribute"/> either the type or the assembly.
+        /// </summary>
+        /// <returns>All types of Player and Editor assemblies, which matches criteria..</returns>
+        private static IEnumerable<Type> GetAllTypesOfPlayerAndEditorAssembliesThatShouldBeInspected() =>
+            AssembliesHelper.GetAllAssembliesOfPlayerAndEditorAssemblies()
+                .Where(e => !e.IsDefined(typeof(DoNotInspectAttribute)))
+                .SelectMany(e => e.GetTypes()).Where(e => !e.IsDefined(typeof(DoNotInspectAttribute)));
+
         private static void ScanAssemblies(IEnumerable<Type> types)
         {
             foreach (Type classType in types)
             {
-                if (classType.GetCustomAttribute<DoNotInspectAttribute>() == null)
+                if (classType.IsEnum)
+                    enumTypes.Add(classType);
+                else
                 {
-                    if (classType.IsEnum)
-                        enumTypes.Add(classType);
-                    else
+                    nonEnumTypes.Add(classType);
+
+                    foreach (MemberInfo memberInfo in classType.GetMembers(bindingFlags))
                     {
-                        nonEnumTypes.Add(classType);
+                        memberInfos.Add(memberInfo);
 
-                        foreach (MemberInfo memberInfo in classType.GetMembers(bindingFlags))
+                        switch (memberInfo.MemberType)
                         {
-                            memberInfos.Add(memberInfo);
-
-                            switch (memberInfo.MemberType)
-                            {
-                                case MemberTypes.Field:
-                                    FieldInfo fieldInfo = (FieldInfo)memberInfo;
-                                    if (fieldInfo.CanBeSerializedByUnity())
-                                        fieldInfosSerializableByUnity.Add((FieldInfo)memberInfo);
-                                    else
-                                        fieldInfosNonSerializableByUnity.Add((FieldInfo)memberInfo);
-                                    break;
-                                case MemberTypes.Property:
-                                    propertyInfos.Add((PropertyInfo)memberInfo);
-                                    break;
-                                case MemberTypes.Method:
-                                    MethodInfo methodInfo = (MethodInfo)memberInfo;
-                                    methodInfos.Add(methodInfo);
-                                    GetExecuteAttributes(methodInfo);
-                                    break;
-                            }
+                            case MemberTypes.Field:
+                                FieldInfo fieldInfo = (FieldInfo)memberInfo;
+                                if (fieldInfo.CanBeSerializedByUnity())
+                                    fieldInfosSerializableByUnity.Add((FieldInfo)memberInfo);
+                                else
+                                    fieldInfosNonSerializableByUnity.Add((FieldInfo)memberInfo);
+                                break;
+                            case MemberTypes.Property:
+                                propertyInfos.Add((PropertyInfo)memberInfo);
+                                break;
+                            case MemberTypes.Method:
+                                MethodInfo methodInfo = (MethodInfo)memberInfo;
+                                methodInfos.Add(methodInfo);
+                                GetExecuteAttributes(methodInfo);
+                                break;
                         }
                     }
                 }
@@ -289,15 +312,20 @@ namespace AdditionalAttributes.PostCompiling
                 ))
             {
                 void ExecuteList<T>(Dictionary<int, Action<T>> callbacks, List<T> values) => ExecuteLoop(loop, callbacks, values);
-                ExecuteList(executeOnEachTypeEnum, enumTypes);
-                ExecuteList(executeOnEachTypeLessEnums, nonEnumTypes);
-                ExecuteList(executeOnEachMemberOfTypes, memberInfos);
-                ExecuteList(executeOnEachSerializableByUnityFieldOfTypes, fieldInfosSerializableByUnity);
-                ExecuteList(executeOnEachNonSerializableByUnityFieldOfTypes, fieldInfosNonSerializableByUnity);
-                ExecuteList(executeOnEachPropertyOfTypes, propertyInfos);
-                ExecuteList(executeOnEachMethodOfTypes, methodInfos);
-                if (executeOnce.TryGetValue(loop, out Action action))
-                    action();
+
+                Task.WaitAll(new Task[] {
+                    Task.Run(() => ExecuteList(executeOnEachTypeEnum, enumTypes)),
+                    Task.Run(() => ExecuteList(executeOnEachTypeLessEnums, nonEnumTypes)),
+                    Task.Run(() => ExecuteList(executeOnEachMemberOfTypes, memberInfos)),
+                    Task.Run(() => ExecuteList(executeOnEachSerializableByUnityFieldOfTypes, fieldInfosSerializableByUnity)),
+                    Task.Run(() => ExecuteList(executeOnEachNonSerializableByUnityFieldOfTypes, fieldInfosNonSerializableByUnity)),
+                    Task.Run(() => ExecuteList(executeOnEachPropertyOfTypes, propertyInfos)),
+                    Task.Run(() => ExecuteList(executeOnEachMethodOfTypes, methodInfos)),
+                    Task.Run(() => {
+                        if (executeOnce.TryGetValue(loop, out Action action))
+                            action();
+                    })
+                });
             }
         }
 
@@ -309,15 +337,7 @@ namespace AdditionalAttributes.PostCompiling
         private static void ExecuteLoop<T>(int loop, Dictionary<int, Action<T>> callbacks, List<T> values)
         {
             if (callbacks.TryGetValue(loop, out Action<T> action))
-                Parallel.ForEach(values, action);
+                values.ForEach(action);
         }
-
-        /// <summary>
-        /// Get all types of all Player and Editor assemblies.
-        /// </summary>
-        /// <returns>All types of Player and Editor assemblies.</returns>
-        public static IEnumerable<Type> GetAllTypesOfPlayerAndEditorAssemblies() => AssembliesHelper.GetAllAssembliesOfPlayerAndEditorAssemblies()
-                .Where(e => e.GetCustomAttribute<DoNotInspectAttribute>() == null)
-                .SelectMany(e => e.GetTypes());
     }
 }

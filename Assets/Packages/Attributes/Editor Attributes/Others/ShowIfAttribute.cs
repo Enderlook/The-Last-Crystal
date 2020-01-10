@@ -31,7 +31,7 @@ namespace AdditionalAttributes
         public readonly bool goal;
         public readonly ActionMode mode;
 
-        public readonly bool indented;
+        public bool indented;
 
         /// <summary>
         /// Action to take depending of the condition.

@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -16,14 +15,17 @@ namespace AdditionalAttributes
 {
     internal class ScriptableObjectWindow : EditorWindow
     {
+        private const string DEFAULT_PATH = "Resources/";
         private static ILookup<Type, Type> derivedTypes;
 
+        private SerializedProperty property;
         private Func<object> get;
         private Action<object> set;
         private Type[] allowedTypes;
         private string[] allowedTypesNames;
         private int index;
-        private string path = "Resources/";
+        private string path = DEFAULT_PATH;
+        private string scriptableObjectName;
 
         private static void InitializeDerivedTypes()
         {
@@ -60,8 +62,18 @@ namespace AdditionalAttributes
                 {
                     type = fieldType.GetElementType();
                     int index = property.GetIndexFromArray();
-                    if (fieldInfo.GetValue(property.serializedObject.targetObject) is Array array)
+
+                    UnityEngine.Object targetObject = property.serializedObject.targetObject;
+                    if (fieldInfo.GetValue(targetObject) is Array array)
                     {
+                        /* Until an element is in-Inspector dragged to the array element field, it seems that Unity doesn't rebound the array
+                         * So if the array is empty and it doesn't have space for us, we make a new array and inject it. */
+                        if (array.Length == 0)
+                        {
+                            array = Array.CreateInstance(fieldType.GetElementType(), 1);
+                            fieldInfo.SetValue(targetObject, array);
+                        }
+
                         window.get = () => array.GetValue(index);
                         window.set = (object value) => array.SetValue(value, index);
                     }
@@ -76,9 +88,10 @@ namespace AdditionalAttributes
                     window.set = (object value) => property.objectReferenceValue = (UnityEngine.Object)value;
                 }
             }
-            window.allowedTypes = GetDerivedTypes(type).ToArray();
+            window.allowedTypes = GetDerivedTypes(type).Where(e => !e.IsDefined(typeof(AbstractScriptableObjectAttribute))).ToArray();
             window.allowedTypesNames = window.allowedTypes.Select(e => e.Name).ToArray();
             window.index = window.GetIndex(type);
+            window.property = property;
         }
 
         private void OnGUI()
@@ -86,56 +99,83 @@ namespace AdditionalAttributes
             titleContent = new GUIContent("Scriptable Object Manager");
 
             ScriptableObject scriptableObject = (ScriptableObject)get?.Invoke();
-
             bool hasScriptableObject = scriptableObject != null;
+
+            // Instance Type
             EditorGUI.BeginDisabledGroup(hasScriptableObject);
             if (hasScriptableObject)
                 index = GetIndex(scriptableObject.GetType());
             index = EditorGUILayout.Popup(new GUIContent("Instance type", "Scriptable object instance type to create."), index, allowedTypesNames);
-            EditorGUI.EndDisabledGroup();
 
+            // Path to Scriptable Object
             string pathToAsset = AssetDatabase.GetAssetPath(scriptableObject);
             bool hasAsset = !string.IsNullOrEmpty(pathToAsset);
-
-            EditorGUI.BeginDisabledGroup(hasAsset && hasScriptableObject);
-            string currentPath = hasAsset ? pathToAsset : path;
-            currentPath = EditorGUILayout.TextField(new GUIContent("Path to file", "Path where the asset file is stored or will be saved."), currentPath);
-            if (!hasAsset)
-                path = currentPath;
+            path = hasAsset ? pathToAsset : path;
+            path = EditorGUILayout.TextField(new GUIContent("Path to file", "Path where the asset file is stored or will be saved."), path);
             string _path = path.StartsWith("Assets/") ? path : "Assets/" + path;
             _path = _path.EndsWith(".asset") ? _path : _path + ".asset";
-
-            EditorGUILayout.LabelField("Path to save:", _path);
+            if (!hasAsset)
+                EditorGUILayout.LabelField("Path to save:", _path);
             EditorGUI.EndDisabledGroup();
 
-            EditorGUI.BeginDisabledGroup(hasScriptableObject);
-            if (GUILayout.Button(new GUIContent("Instantiate in field", "Create and instance and assign to field.")))
-                set(Create());
-            if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
+            UnityEngine.Object targetObject = property.serializedObject.targetObject;
+
+            if (!hasAsset && !hasScriptableObject)
             {
-                scriptableObject = Create();
-                set(scriptableObject);
-                Save(scriptableObject, _path);
-            }
-            EditorGUI.EndDisabledGroup();
+                // Create
+                if (GUILayout.Button(new GUIContent("Instantiate in field", "Create and instance and assign to field.")))
+                {
+                    Undo.RecordObject(targetObject, "Instantiate field");
+                    set(Create());
+                }
 
-            EditorGUI.BeginDisabledGroup(!hasScriptableObject);
-            if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
-                set(null);
-            if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
-                Save(scriptableObject, _path);
-            EditorGUI.EndDisabledGroup();
+                // Create and Save
+                if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
+                {
+                    Undo.RecordObject(targetObject, "Instantiate field");
+                    scriptableObject = Create();
+                    set(scriptableObject);
+                    AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
+                    EditorUtility.SetDirty(targetObject);
+                }
+            }
+
+            if (hasScriptableObject)
+            {
+                // Rename
+                if (string.IsNullOrEmpty(scriptableObjectName))
+                    scriptableObjectName = scriptableObject.name;
+                EditorGUILayout.BeginHorizontal();
+                EditorGUI.BeginDisabledGroup(scriptableObjectName == scriptableObject.name);
+                if (GUILayout.Button(new GUIContent("Rename", "Change the name of Scriptable Object.")))
+                {
+                    Undo.RecordObject(scriptableObject, "Rename");
+                    scriptableObject.name = scriptableObjectName;
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+                EditorGUI.EndDisabledGroup();
+                scriptableObjectName = EditorGUILayout.TextField(new GUIContent($"New Name", "Change current name to new one."), scriptableObjectName);
+
+                /// Clean
+                EditorGUILayout.EndHorizontal();
+                if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
+                {
+                    Undo.RecordObject(targetObject, "Clean field");
+                    set(null);
+                    path = DEFAULT_PATH;
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+
+                if (!hasAsset)
+                {
+                    // Save
+                    if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
+                        AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
+                }
+            }
         }
 
         private ScriptableObject Create() => CreateInstance(allowedTypes[index]);
-
-        private static void Save(ScriptableObject scriptableObject, string path)
-        {
-            Directory.CreateDirectory(path);
-            AssetDatabase.Refresh();
-            AssetDatabase.CreateAsset(scriptableObject, path);
-            AssetDatabase.Refresh();
-        }
 
         private int GetIndex(Type type) => Array.IndexOf(allowedTypes, type);
     }
