@@ -1,8 +1,10 @@
 ﻿using System;
+
 using UnityEditor;
 
-using UnityEngine;
 using UnityEditorHelper;
+
+using UnityEngine;
 
 namespace AdditionalAttributes
 {

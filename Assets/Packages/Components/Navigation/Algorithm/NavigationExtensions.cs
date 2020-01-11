@@ -7,6 +7,7 @@ namespace Navigation
     public static class NavigationExtensions
     {
         public enum NodeType { ONLY_ACTIVES, ONLY_DEACTIVES, ALL }
+
         public static Node FindClosestNode(this NavigationGraph navigation, Vector2 position, float maxDistanceFromPoint = 0, NodeType mode = NodeType.ONLY_ACTIVES)
         {
             Node closestNode = null;

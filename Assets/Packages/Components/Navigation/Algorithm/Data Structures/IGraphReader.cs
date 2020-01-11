@@ -2,7 +2,6 @@
 
 namespace Navigation
 {
-
     public interface IGraphReader
     {
         /// <summary>

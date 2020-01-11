@@ -1,0 +1,13 @@
+﻿[*.{cs,vb}]
+
+# IDE0054: Use compound assignment
+dotnet_style_prefer_compound_assignment = false:suggestion
+
+# RCS1058: Use compound assignment.
+dotnet_diagnostic.RCS1058.severity = none
+
+# IDE0066: Convert switch statement to expression
+csharp_style_prefer_switch_expression = false:suggestion
+
+# IDE0010: Add missing cases
+dotnet_diagnostic.IDE0010.severity = none

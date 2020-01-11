@@ -37,10 +37,7 @@ namespace AdditionalAttributes
 
         public readonly string guiContentOrReferenceName;
 
-        public GUIAttribute(string name)
-        {
-            guiContentOrReferenceName = name;
-        }
+        public GUIAttribute(string name) => guiContentOrReferenceName = name;
 
         public GUIAttribute(string name, Mode nameMode)
         {

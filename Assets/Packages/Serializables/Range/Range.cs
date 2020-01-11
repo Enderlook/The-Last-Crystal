@@ -28,9 +28,9 @@ namespace Range
     [Serializable]
     public abstract class Range<T> : IRange<T>
     {
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Minimal value (lower bound) of the range.")]
         // Used in RangeDrawer as string name. Don't forget to change string if this is renamed.
-#pragma warning disable CS0649
         private T min;
         [SerializeField, Tooltip("Maximum value (upper bound) of the range.")]
         // Used in RangeDrawer as string name. Don't forget to change string if this is renamed.

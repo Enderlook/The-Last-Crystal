@@ -19,6 +19,7 @@ namespace CreaturesAddons.Movement.NodeMovement
         [Header("Configuration")]
         [SerializeField, Tooltip("Cost calculator to follow crystal based on distance.")]
         private Calculator crystalCalculator;
+
         [SerializeField, Tooltip("Cost calculator to follow players based on distance.")]
         private Calculator playerCalculator;
 

@@ -26,15 +26,12 @@ namespace AdditionalAttributes
                 Func<SerializedProperty, T> getter, Action<SerializedProperty, T> setter,
                 Action<Rect, SerializedProperty, U, U, GUIContent> field,
                 Func<U, U, T> random, Func<T, U, T> stepper, Rect? rect = null
-            )
-            {
-                ShowField<T, U>(
+            ) => ShowField<T, U>(
                     rect ?? position, serializedProperty, attribute as RangeMinMaxAttribute,
                     getter, setter,
                     (r, property, lower, upper) => field(r, property, lower, upper, property.GetGUIContent()),
                     field, random, stepper
                 );
-            }
 
             switch (serializedProperty.propertyType)
             {

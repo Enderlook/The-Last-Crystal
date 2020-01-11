@@ -47,8 +47,10 @@ namespace AdditionalExtensions
         /// <seealso cref="RemoveByAll{T}(List{T}, Func{T, bool})"/>
         public static List<T> RemoveFirstBy<T>(this List<T> source, Func<T, bool> selector, int removeAmount = 1)
         {
-            if (removeAmount == 0)
-                throw new Exception($"{nameof(removeAmount)} parameter can't be 0.");
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (removeAmount == 0) throw new ArgumentOutOfRangeException($"{nameof(removeAmount)} parameter can't be 0.");
+
             return source.RemoveBy(selector, removeAmount: removeAmount);
         }
 
@@ -65,8 +67,10 @@ namespace AdditionalExtensions
         /// <seealso cref="RemoveByAll{T}(List{T}, Func{T, bool})"/>
         public static List<T> RemoveLastBy<T>(this List<T> source, Func<T, bool> selector, int removeAmount = 1)
         {
-            if (removeAmount == 0)
-                throw new System.Exception($"{nameof(removeAmount)} parameter can't be 0.");
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (removeAmount == 0) throw new ArgumentOutOfRangeException($"{nameof(removeAmount)} parameter can't be 0.");
+
             return source.RemoveBy(selector, ascendOrder: false, removeAmount: removeAmount);
         }
 
@@ -87,9 +91,9 @@ namespace AdditionalExtensions
         /// </summary>
         /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
         /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
-        /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+        /// <param name="function">Function to perform on each element of <paramref name="source"/></param>
         /// <returns>Updated <paramref name="source"/>.</returns>
-        /// <seealso cref="System.Array.ForEach{T}(T[], Action{T})"/>
+        /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
         public static List<T> ChangeEach<T>(this List<T> source, Func<T, T> function)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));

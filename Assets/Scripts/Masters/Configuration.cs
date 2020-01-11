@@ -19,6 +19,7 @@ namespace Master
         [Header("Setup")]
         [SerializeField, Tooltip("Crystal.")]
         private Transform crystal;
+
         [SerializeField, Tooltip("Menu.")]
         private Menu menu;
 #pragma warning restore CS0649

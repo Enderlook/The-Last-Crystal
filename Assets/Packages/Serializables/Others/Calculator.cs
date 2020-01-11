@@ -20,6 +20,7 @@ namespace Serializables
 #pragma warning disable CA2235
         [Tooltip("Formula to calculate.\nIt doesn't support operator precedence, instead use brackets.\nSupports string formating.")]
         public string formula;
+
         [Tooltip("Should Regex be compiled.\nIncreases constructor time but decreases matching time. It's only worth with very heavy loads (~1M matches).")]
         public bool compile;
         private Regex regex;
@@ -41,13 +42,13 @@ namespace Serializables
         }
 
         private static readonly Dictionary<string, Func<float, float, float>> operators = new Dictionary<string, Func<float, float, float>>()
-    {
-        { "+", (float l, float r) => l + r },
-        { "-", (float l, float r) => l - r },
-        { "*", (float l, float r) => l * r },
-        { "/", (float l, float r) => l / r },
-        { "^", Mathf.Pow },
-    };
+        {
+            { "+", (float l, float r) => l + r },
+            { "-", (float l, float r) => l - r },
+            { "*", (float l, float r) => l * r },
+            { "/", (float l, float r) => l / r },
+            { "^", Mathf.Pow },
+        };
 
         /// <summary>
         /// Construct a <see cref="Calculator"/> class.

@@ -49,9 +49,9 @@ namespace Range
     [Serializable]
     public class RangeIntStep : RangeInt, IRangeStep<int>, IRangeStepInt<int>
     {
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Step values used when producing random numbers.")]
         // Used in RangeStepDrawer as string name. Don't forget to change string if this is renamed.
-#pragma warning disable CS0649
         private int step;
 #pragma warning restore CS0649
 

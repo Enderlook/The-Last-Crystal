@@ -44,6 +44,7 @@ namespace CreaturesAddons.Weapons
     {
         void Push(Vector2 direction, float force = 1, PushMode pushMode = PushMode.Local);
     }
+
     public enum PushMode { Local, Global };
 
     public interface IAutomatedAttack

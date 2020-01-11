@@ -45,9 +45,6 @@ namespace AdditionalAttributes
             EditorGUI.EndProperty();
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return confirm ? EditorGUI.GetPropertyHeight(property) + EditorGUIUtility.singleLineHeight : EditorGUIUtility.singleLineHeight;
-        }
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => confirm ? EditorGUI.GetPropertyHeight(property) + EditorGUIUtility.singleLineHeight : EditorGUIUtility.singleLineHeight;
     }
 }

@@ -40,14 +40,17 @@ namespace PlayerAddons
     public class WeaponKeyPair
     {
         public enum MouseButton { None = -1, Left = 0, Right = 1, Middle = 2 }
-        [Tooltip("Weapon.")]
 #pragma warning disable CA2235
+        [Tooltip("Weapon.")]
         public Weapon weapon;
 #pragma warning restore CA2235
+
         [Tooltip("Key to shoot.")]
         public KeyCode key;
+
         [Tooltip("Mouse button to shoot.")]
         public MouseButton button;
+
         [Tooltip("Can be hold down.")]
         public bool canBeHoldDown;
 

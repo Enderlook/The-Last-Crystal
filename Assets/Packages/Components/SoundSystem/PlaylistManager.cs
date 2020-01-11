@@ -1,6 +1,9 @@
-﻿using System;
+﻿using AdditionalExceptions;
+
 using Master;
-using AdditionalExceptions;
+
+using System;
+
 using UnityEngine;
 
 namespace SoundSystem
@@ -8,22 +11,19 @@ namespace SoundSystem
     [RequireComponent(typeof(AudioSource))]
     public class PlaylistManager : MonoBehaviour
     {
+#pragma warning disable CS0649
         [Header("Configuration")]
         [SerializeField, Tooltip("Playlists.")]
-#pragma warning disable CS0649
         private Playlist[] playlists;
-#pragma warning restore CS0649
 
         [SerializeField, Tooltip("Default playlist set at start.")]
-#pragma warning disable CS0649
         private int startingPlaylistIndex;
-#pragma warning restore CS0649
+
         private int playlistsIndex;
 
         [SerializeField, Range(0f, 1f), Tooltip("Master volume.")]
         private float masterVolume = 1;
 
-#pragma warning disable CS0649
         [SerializeField, Tooltip("Play on start.")]
         private bool playOnStart;
 
@@ -31,6 +31,7 @@ namespace SoundSystem
         [Tooltip("Audio Source used to play music.")]
 #pragma warning disable IDE0044
         private AudioSource audioSource;
+
         [Tooltip("How is this considered.")]
         private Type type;
 #pragma warning restore IDE0044
@@ -102,7 +103,6 @@ namespace SoundSystem
                 throw new ArgumentNullException(nameof(audioClip));
             if (volume < 0 && volume > 1)
                 throw new ArgumentException("Must be a number between 0 and 1", nameof(volume));
-
 
             audioSource.Stop();
             audioSource.clip = audioClip;

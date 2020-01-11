@@ -215,10 +215,7 @@ namespace UnityEditorHelper
         /// </summary>
         /// <param name="source"><see cref="SerializedProperty"/> whose <see cref="Type"/> will be get.</param>
         /// <returns><see cref="Type"/> of the <paramref name="source"/>.</returns>
-        public static Type GetFieldType(this SerializedProperty source)
-        {
-            return source.GetTargetObjectOfProperty().GetType();
-        }
+        public static Type GetFieldType(this SerializedProperty source) => source.GetTargetObjectOfProperty().GetType();
 
         /// <summary>
         /// Get the <see cref="FieldInfo"/> of <see cref="SerializedProperty"/>.<br/>
@@ -226,10 +223,7 @@ namespace UnityEditorHelper
         /// </summary>
         /// <param name="source"><see cref="SerializedProperty"/> whose <see cref="FieldInfo"/> will be get.</param>
         /// <returns><see cref="FieldInfo"/> of <paramref name="source"/>.</returns>
-        public static FieldInfo GetFieldInfo(this SerializedProperty source)
-        {
-            return source.serializedObject.targetObject.GetType().GetField(source.name);
-        }
+        public static FieldInfo GetFieldInfo(this SerializedProperty source) => source.serializedObject.targetObject.GetType().GetField(source.name);
 
         /// <summary>
         /// Get the index of the <paramref name="source"/> if it's an element of an array.

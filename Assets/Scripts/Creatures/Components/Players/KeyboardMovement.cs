@@ -9,20 +9,28 @@ namespace PlayerAddons
         [Header("Configuration")]
         [Tooltip("Move right key.")]
         public KeyCode rightKey;
+
         [Tooltip("Move left key.")]
         public KeyCode leftKey;
+
         [Tooltip("Movement speed.")]
         public float speed;
 
         [Tooltip("Jump key.")]
         public KeyCode jumpKey;
+
         [Tooltip("Maximum number of jumps.")]
         public int maxJumps;
+
         private int remainingJumps;
+
         [Tooltip("Jump strength.")]
+
         public float jumpStrength;
+
         [Tooltip("Move force horizontal.")]
         public float moveForce;
+
         private Rigidbody2D thisRigidbody2D;
         private Animator thisAnimator;
         private SpriteRenderer thisSprite;

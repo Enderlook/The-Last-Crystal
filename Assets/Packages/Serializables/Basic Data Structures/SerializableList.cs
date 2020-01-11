@@ -15,18 +15,19 @@ namespace Serializables
             get => list ?? (list = new List<T>());
             set => list = value;
         }
+
         [SerializeField, HideInInspector]
         private T[] array;
 
         public SerializableList() => List = new List<T>();
+
         public SerializableList(IEnumerable<T> enumerable) => List = new List<T>(enumerable);
+
         public SerializableList(int capacity) => List = new List<T>(capacity);
+
         public SerializableList(List<T> list) => List = list;
 
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-            array = List.ToArray();
-        }
+        void ISerializationCallbackReceiver.OnBeforeSerialize() => array = List.ToArray();
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {

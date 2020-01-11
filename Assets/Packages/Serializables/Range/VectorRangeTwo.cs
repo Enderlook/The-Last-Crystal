@@ -58,7 +58,6 @@ namespace Range
         }
     }
 
-
     [Serializable]
     public class TransformRange : VectorRangeTwo
     {
@@ -91,12 +90,13 @@ namespace Range
         public static explicit operator Vector2(TransformRange x) => x.Vector2;
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Vector2RangeTwo : VectorRangeTwo
     {
 #pragma warning disable CA2235
         [Tooltip("Start vector.")]
         public Vector2 startVector;
+
         [Tooltip("End vector.")]
         public Vector2 endVector;
 #pragma warning restore CA2235
@@ -116,6 +116,7 @@ namespace Range
         /// </summary>
         /// <param name="x"><see cref="Vector2RangeTwo"/> instance used to determine the random <seealso cref="Vector3"/>.</param>
         public static explicit operator Vector3(Vector2RangeTwo x) => x.Vector3;
+
         /// <summary>
         /// Return a <seealso cref="Vector2"/> position. If <see cref="VectorRangeTwo.isRandom"/> is <see langword="true"/> it will return the position of the <see cref="StartVector"/>. On <see langword="false"/>, it will return a random <seealso cref="Vector2"/> between the <see cref="StartVector"/> and the <see cref="EndVector"/>.
         /// </summary>

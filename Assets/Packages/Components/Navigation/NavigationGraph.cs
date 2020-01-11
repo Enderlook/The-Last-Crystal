@@ -16,16 +16,20 @@ namespace Navigation
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Distance between each node.")]
         private float spacePerNode;
+
         [SerializeField, Tooltip("Amount of rows.")]
         private int rows;
+
         [SerializeField, Tooltip("Amount of columns.")]
         private int columns;
+
         [SerializeField, Tooltip("Layer used to check for collisions.\nIf a collision is found with a node, the node is destroyed.")]
         private LayerMask destroyMask;
 #pragma warning restore CS0649
 
         [SerializeField, HideInInspector]
         public Graph graph = new Graph();
+
         public List<Node> Grid {
             get {
                 if (graph == null)
@@ -142,7 +146,8 @@ namespace Navigation
             {
                 foreach (Connection connection in node.Connections)
                 {
-                    connection?.SetActive(node.IsActive);
+                    if (connection != null)
+                        connection.SetActive(node.IsActive);
                 }
             }
         }

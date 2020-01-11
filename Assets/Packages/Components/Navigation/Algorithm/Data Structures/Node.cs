@@ -13,6 +13,7 @@ namespace Navigation
 
         [SerializeField]
         private List<Connection> connections;
+
         /// <summary>
         /// All <see cref="Connection"/>s from this <see cref="Node"/> to other <see cref="Node"/>s.
         /// </summary>
@@ -25,12 +26,11 @@ namespace Navigation
             set => connections = value;
         }
 
-        [SerializeField]
-        private bool isActive;
         /// <summary>
         /// Whenever this <see cref="Node"/> is enabled or not.
         /// </summary>
-        public bool IsActive { get => isActive; private set => isActive = value; }
+        [field: SerializeField]
+        public bool IsActive { get; private set; }
 
         /// <summary>
         /// Set if this <see cref="Node"/> is active or not.
@@ -41,12 +41,13 @@ namespace Navigation
         /// <summary>
         /// Whenever this node is the end of an island or not.
         /// </summary>
-        public bool isExtreme = false;
+        public bool isExtreme;
 
         private static readonly InvalidOperationException CANNOT_CONNECT_TO_ITSELF = new InvalidOperationException($"A {nameof(Node)} can't connect with itself.");
         private static readonly InvalidOperationException ALREADY_END_TARGET = new InvalidOperationException($"A {nameof(Connection)} with the same {nameof(Connection.end)} has already been added.");
 
         public override string ToString() => $"<pos:{position}; active:{IsActive}; extreme:{isExtreme}; connections:{Connections.Count}";
+
         public string ToString(NavigationGraph navigationGraph) => $"<pos:{navigationGraph.GetWorldPosition(this)}; active:{IsActive}; extreme:{isExtreme}; connections:{Connections.Count}";
 
         /// <summary>
@@ -67,9 +68,9 @@ namespace Navigation
         }
 
         /// <summary>
-        /// Make a <see cref="Connection"/> from <paramref name="end"/> to this <see cref="Node"/> and store it.
+        /// Make a <see cref="Connection"/> from <paramref name="start"/> to this <see cref="Node"/> and store it.
         /// </summary>
-        /// <param name="end"><see cref="Connection.end"/> = <paramref name="end"/>.</param>
+        /// <param name="start"><see cref="Connection.start"/> = <paramref name="start"/>.</param>
         /// <param name="active">Whenever if the <see cref="Connection"/ is enabled or not</param>
         public void AddConnectionFrom(Node start, bool active = true)
         {
@@ -174,7 +175,7 @@ namespace Navigation
         /// <summary>
         /// Remove a <see cref="Connection"/> from this <see cref="Node"/> to <paramref name="start"/>.
         /// </summary>
-        /// <param name="start"><see cref="Connection.end"/> = <paramref name="start"/>.</param>
+        /// <param name="end"><see cref="Connection.end"/> = <paramref name="end"/>.</param>
         public void RemoveConnectionTo(Node end)
         {
             if (end == null)
@@ -189,7 +190,7 @@ namespace Navigation
         /// </summary>
         /// <param name="start"><see cref="Connection.start"/> = <paramref name="start"/>.</param>
         /// <param name="safe">On <see langword="true"/>, this method won't throw exception if <paramref name="start"/> and this <see cref="Node"/> are the same.<br>
-        /// Though it throw raise exception for <see cref="ArgumentNullException"/> in <paramref name="start"/>.</param> 
+        /// Though it throw raise exception for <see cref="ArgumentNullException"/> in <paramref name="start"/>.</param>
         /// <returns>Whenever there was a <see cref="Connection"/> which was removed or nothing could be found.</returns>
         public bool TryRemoveConnectionFrom(Node start, bool safe = false)
         {
@@ -269,7 +270,7 @@ namespace Navigation
         {
             Node node = CreateInstance<Node>();
             node.position = position;
-            node.isActive = isActive;
+            node.IsActive = isActive;
             return node;
         }
 

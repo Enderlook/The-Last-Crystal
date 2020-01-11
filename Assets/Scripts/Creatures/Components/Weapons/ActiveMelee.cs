@@ -11,8 +11,10 @@ namespace CreaturesAddons
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
+
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
+
         [SerializeField, Tooltip("Attacks per second.")]
         private float firerate = 1;
 

@@ -18,11 +18,14 @@ namespace Serializables
 
         [SerializeField, HideInInspector]
         private TKey[] keys;
+
         [SerializeField, HideInInspector]
         private TValue[] values;
 
         public SerializableDictionary() => Dictionary = new Dictionary<TKey, TValue>();
+
         public SerializableDictionary(int capacity) => Dictionary = new Dictionary<TKey, TValue>(capacity);
+
         public SerializableDictionary(IDictionary<TKey, TValue> dictionary) => Dictionary = new Dictionary<TKey, TValue>(dictionary);
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()

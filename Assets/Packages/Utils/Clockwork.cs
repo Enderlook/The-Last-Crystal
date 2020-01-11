@@ -7,8 +7,8 @@ namespace Utils
         /// <summary>
         /// Current cooldown time.
         /// </summary>
-        ///
         float CooldownTime { get; }
+
         /// <summary>
         /// Total cooldown time.
         /// </summary>
