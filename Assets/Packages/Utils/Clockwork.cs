@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Utils
 {
@@ -147,8 +148,10 @@ namespace Utils
 
     public class Clockwork : IClockWork
     {
-        private System.Action Callback;
+        private Action Callback;
+
         private bool autoExecute;
+
         public float CooldownTime {
             get => cooldownTime;
             private set {
@@ -157,14 +160,22 @@ namespace Utils
                     cooldownTime = 0;
             }
         }
+
         protected float cooldownTime = 0f;
+
         public float TotalCooldown { get; protected set; }
+
         public float CooldownPercent => Mathf.Clamp01(CooldownTime / TotalCooldown);
+
         public bool IsReady => CooldownTime <= 0;
 
+
         public int TotalCycles { get; private set; }
+
         public int RemainingCycles { get; private set; }
+
         public bool IsEndlessLoop => TotalCycles == -1;
+
         public bool IsEnabled => RemainingCycles > 0 || IsEndlessLoop;
 
         /// <summary>
@@ -174,7 +185,7 @@ namespace Utils
         /// <param name="cooldown">Time in seconds to execute <paramref name="Callback"/>.</param>
         /// <param name="Callback">Action to execute.</param>
         /// <param name="autoExecute">Whenever <see cref="UpdateBehaviour(float)"/> must call <see cref="Execute"/> when <see cref="CooldownTime"/> is 0.</param>
-        /// <param name="cycle">Number of times <see cref="Execute"/> can be call. Use -1 for unlimited. Use <see cref="ResetCycles"/> to recover their uses. Don't use 0 or the timer will be disabled by default.</param>
+        /// <param name="cycles">Number of times <see cref="Execute"/> can be call. Use -1 for unlimited. Use <see cref="ResetCycles"/> to recover their uses. Don't use 0 or the timer will be disabled by default.</param>
         public Clockwork(float cooldown, System.Action Callback, bool autoExecute = true, int cycles = -1)
         {
             ResetCycles(cycles);
@@ -212,6 +223,7 @@ namespace Utils
         }
 
         public void ResetCooldown() => CooldownTime = TotalCooldown;
+
         public void ResetCooldown(float newCooldownTime)
         {
             TotalCooldown = newCooldownTime;
@@ -219,6 +231,7 @@ namespace Utils
         }
 
         public void ResetCycles() => RemainingCycles = TotalCycles;
+
         public void ResetCycles(int newCycles)
         {
             TotalCycles = newCycles;
@@ -256,9 +269,13 @@ namespace Utils
                     cooldownTime = 0;
             }
         }
-        protected float cooldownTime = 0f;
+
+        protected float cooldownTime;
+
         public float TotalCooldown { get; protected set; }
+
         public float CooldownPercent => Mathf.Clamp01(CooldownTime / TotalCooldown);
+
         public bool IsReady => CooldownTime <= 0;
 
         /// <summary>
@@ -273,6 +290,7 @@ namespace Utils
         }
 
         public void ResetCooldown() => CooldownTime = TotalCooldown;
+
         public void ResetCooldown(float newCooldownTime)
         {
             TotalCooldown = newCooldownTime;
