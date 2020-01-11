@@ -8,6 +8,7 @@ namespace PlayerAddons
 
     public class DashEffect : MonoBehaviour, IInit, IUpdate
     {
+#pragma warning disable CS0649
         [Header("Setup")]
         [SerializeField, Tooltip("Input for dash.")]
         private KeyCode dashKey;
@@ -17,8 +18,8 @@ namespace PlayerAddons
         private float forceDash = 1;
         [SerializeField, Tooltip("Effect.")]
         private GameObject effect;
-
         public DashState dashState;
+#pragma warning restore CS0649
 
         private Rigidbody2D rb2D;
         private SpriteRenderer sprite;

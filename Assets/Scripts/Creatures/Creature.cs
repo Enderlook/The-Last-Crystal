@@ -32,8 +32,10 @@ namespace CreaturesAddons
         [Tooltip("Ground checker.")]
         public GroundChecker groundChecker;
 
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Material for effect hurt.")]
         private Material redFlash;
+#pragma warning restore CS0649
 
         private IMove move;
         private IAttack attack;
