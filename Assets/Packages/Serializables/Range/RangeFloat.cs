@@ -22,7 +22,7 @@ namespace Range
         /// </summary>
         /// <param name="source"><see cref="RangeFloat"/> instance used to determine the random float.</param>
         public static explicit operator float(RangeFloat source) => source.Value;
-        
+
         /// <summary>
         /// Return a random value between <see cref="Min"/> and <see cref="Max"/>.
         /// The result is always an integer. Decimal numbers are used as chance to increment by one.
