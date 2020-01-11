@@ -33,6 +33,10 @@ namespace ScriptableSound
                 Play(onAwakeIndex);
         }
 
+        /// <summary>
+        /// Play <see cref="sounds"/> at <see cref="index"/>.
+        /// </summary>
+        /// <param name="endCallback"><see cref="Action"/> called after <see cref="sound"/> ends.</param>
         public void Play(int index, Action endCallback = null)
         {
             Sound sound = sounds[index];
