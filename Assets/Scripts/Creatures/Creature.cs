@@ -5,7 +5,7 @@ using CreaturesAddons.Weapons;
 using Master;
 
 using System;
-
+using System.Linq;
 using UnityEngine;
 
 namespace CreaturesAddons
@@ -71,7 +71,7 @@ namespace CreaturesAddons
 
         private void LoadComponents()
         {
-            updates = gameObject.GetComponentsInChildren<IUpdate>();
+            updates = updates.Concat(gameObject.GetComponentsInChildren<IUpdate>()).ToArray();
             move = gameObject.GetComponentInChildren<IMove>();
             attack = gameObject.GetComponentInChildren<IAttack>();
             Array.ForEach(gameObject.GetComponents<IInit>(), e => e.Init(this));

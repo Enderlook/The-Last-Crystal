@@ -43,7 +43,7 @@ namespace CreaturesAddons.Weapons
                 THIRD_COMBO = "Attack3";
         }
 
-        public bool TargetInRange => rayCasting.Raycast(1 << layerToHit);
+        public bool TargetInRange => rayCasting.Raycast(1 << layerToHit).collider != null;
         public bool AutoAttack { get; set; }
 
         public bool AttackIfIsReadyAndIfTargetInRange(float deltaTime = 0) => TargetInRange ? TryExecute(deltaTime) : Recharge(deltaTime);
