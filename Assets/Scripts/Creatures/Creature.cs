@@ -104,7 +104,7 @@ namespace CreaturesAddons
         protected override void DisplayTakeDamageAnimation()
         {
             sprite.material = redFlash;
-            Invoke("ResetMaterial", .1f);
+            Invoke(nameof(ResetMaterial), .1f);
         }
 
         private void ResetMaterial() => sprite.material = defMaterial;
