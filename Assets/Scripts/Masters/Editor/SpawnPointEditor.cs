@@ -19,8 +19,11 @@ public class SpawnPointEditor : Editor
                                 "Use Alt + Right Click to remove closest point to mouse.", MessageType.Info);
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
     private void OnEnable() => points = ((Spawner)target).points;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "It's an instance method made by Unity.")]
     public void OnSceneGUI()
     {
         if (Event.current.type == EventType.MouseDown && Event.current.button == 1)

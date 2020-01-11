@@ -12,29 +12,40 @@ namespace CreaturesAddons
 {
     public class Creature : Hurtable, IPush
     {
+#pragma warning disable CS0649
         [Header("Configuration")]
         [Tooltip("Movement speed.")]
-        public float speed = 1;
+        private float speed = 1;
 
         [Header("Setup")]
         [Tooltip("Sprite Renderer Component.")]
-        public SpriteRenderer sprite;
+        private SpriteRenderer sprite;
+
+        public SpriteRenderer Sprite => sprite;
 
         [Tooltip("StoppableRigidbody Script")]
-        public StoppableRigidbody stoppableRigidbody;
+        private StoppableRigidbody stoppableRigidbody;
+
+        public StoppableRigidbody StoppableRigidbody => stoppableRigidbody;
 
         [Tooltip("Rigidbody Component.")]
         public Rigidbody2D thisRigidbody2D;
 
+        public Rigidbody2D ThisRigidbody2D => thisRigidbody2D;
+
         [Tooltip("Animator Component.")]
-        public Animator animator;
+        private Animator animator;
+
+        public Animator Animator => animator;
 
         [Tooltip("Ground checker.")]
-        public GroundChecker groundChecker;
+        private GroundChecker groundChecker;
 
-#pragma warning disable CS0649
+        public GroundChecker GroundChecker => groundChecker;
+
         [SerializeField, Tooltip("Material for effect hurt.")]
         private Material redFlash;
+
 #pragma warning restore CS0649
 
         private IMove move;
@@ -45,15 +56,15 @@ namespace CreaturesAddons
         private const string ANIMATION_STATE_HURT = "Hurt";
 
         public float SpeedMultiplier {
-            get => stoppableRigidbody.SpeedMultiplier;
-            set => stoppableRigidbody.SpeedMultiplier = value;
+            get => StoppableRigidbody.SpeedMultiplier;
+            set => StoppableRigidbody.SpeedMultiplier = value;
         }
 
-        public Transform Transform => thisRigidbody2D.transform;
+        public Transform Transform => ThisRigidbody2D.transform;
 
         protected override void Awake()
         {
-            defMaterial = sprite.material;
+            defMaterial = Sprite.material;
             base.Awake();
             LoadComponents();
         }
@@ -80,7 +91,7 @@ namespace CreaturesAddons
         /// Takes healing increasing its <see cref="Health"/>.
         /// </summary>
         /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
-        public void TakeHealing(float amount) => health.Increase(amount);
+        public void TakeHealing(float amount) => Health.Increase(amount);
 
         /// <summary>
         /// Push creature.
@@ -98,15 +109,15 @@ namespace CreaturesAddons
                 direction.y = 1; // Assign this value on the Y axis, because the actual value is 0 or less than 1.
             }
 
-            thisRigidbody2D.AddForce(direction * force);
+            ThisRigidbody2D.AddForce(direction * force);
         }
 
         protected override void DisplayTakeDamageAnimation()
         {
-            sprite.material = redFlash;
+            Sprite.material = redFlash;
             Invoke(nameof(ResetMaterial), .1f);
         }
 
-        private void ResetMaterial() => sprite.material = defMaterial;
+        private void ResetMaterial() => Sprite.material = defMaterial;
     }
 }

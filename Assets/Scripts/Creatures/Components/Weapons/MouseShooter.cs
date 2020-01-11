@@ -64,7 +64,7 @@ namespace CreaturesAddons.Weapons
         public override void Init(Creature creature)
         {
             shootingTransform = creature.Transform;
-            thisAnimator = creature.animator;
+            thisAnimator = creature.Animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
             base.Init(creature);
         }

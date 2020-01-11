@@ -13,12 +13,16 @@ namespace CreaturesAddons
 {
     public class Hurtable : MonoBehaviour, ITakeDamage
     {
+#pragma warning disable CS0649
         [Header("Setup")]
-        [Tooltip("Health.")]
-        public Pool health;
+        [SerializeField, Tooltip("Health.")]
+        private Pool health;
+
+        public Pool Health => health;
 
         [Tooltip("FloatingTextController Script")]
-        public FloatingTextController floatingTextController;
+        private FloatingTextController floatingTextController;
+#pragma warning restore CS0649
 
         protected IUpdate[] updates;
 
@@ -39,7 +43,7 @@ namespace CreaturesAddons
         /// <param name="displayAnimation">Whenever it should display <see cref="ANIMATION_STATE_HURT"/> animation.</param>
         public virtual void TakeDamage(float amount, bool displayText = true, bool displayAnimation = true)
         {
-            (float remaining, float taken) = health.Decrease(amount);
+            (_, float taken) = health.Decrease(amount);
             if (taken > 0)
             {
                 if (displayAnimation)

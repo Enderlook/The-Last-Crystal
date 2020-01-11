@@ -22,7 +22,7 @@ namespace Navigation
         [NonSerialized]
         private Transform thisTransform;
 
-        void IInit.Init(Creature creature) => thisTransform = creature.thisRigidbody2D.transform;
+        void IInit.Init(Creature creature) => thisTransform = creature.ThisRigidbody2D.transform;
 
         public Node FindClosestNode() => NavigationGraph.FindClosestNode(thisTransform.position);
 

@@ -6,30 +6,31 @@ namespace PlayerAddons
 {
     public class KeyboardMovement : MonoBehaviour, IMove, IInit
     {
+#pragma warning disable CS0649
         [Header("Configuration")]
-        [Tooltip("Move right key.")]
-        public KeyCode rightKey;
+        [SerializeField, Tooltip("Move right key.")]
+        private KeyCode rightKey;
 
-        [Tooltip("Move left key.")]
-        public KeyCode leftKey;
+        [SerializeField, Tooltip("Move left key.")]
+        private KeyCode leftKey;
 
-        [Tooltip("Movement speed.")]
-        public float speed;
+        [SerializeField, Tooltip("Movement speed.")]
+        private float speed;
 
-        [Tooltip("Jump key.")]
-        public KeyCode jumpKey;
+        [SerializeField, Tooltip("Jump key.")]
+        private KeyCode jumpKey;
 
-        [Tooltip("Maximum number of jumps.")]
-        public int maxJumps;
+        [SerializeField, Tooltip("Maximum number of jumps.")]
+        private int maxJumps;
 
         private int remainingJumps;
 
-        [Tooltip("Jump strength.")]
+        [SerializeField, Tooltip("Jump strength.")]
+        private float jumpStrength;
 
-        public float jumpStrength;
-
-        [Tooltip("Move force horizontal.")]
-        public float moveForce;
+        [SerializeField, Tooltip("Move force horizontal.")]
+        private float moveForce;
+#pragma warning restore CS0649
 
         private Rigidbody2D thisRigidbody2D;
         private Animator thisAnimator;
@@ -46,10 +47,10 @@ namespace PlayerAddons
 
         void IInit.Init(Creature creature)
         {
-            thisRigidbody2D = creature.thisRigidbody2D;
-            thisAnimator = creature.animator;
-            thisSprite = creature.sprite;
-            groundChecker = creature.groundChecker;
+            thisRigidbody2D = creature.ThisRigidbody2D;
+            thisAnimator = creature.Animator;
+            thisSprite = creature.Sprite;
+            groundChecker = creature.GroundChecker;
             remainingJumps = maxJumps;
         }
 

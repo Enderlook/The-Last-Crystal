@@ -94,10 +94,11 @@ public class WeaponCooldownDisplay : MonoBehaviour
 #pragma warning disable CA2235
         public Color color;
 #pragma warning restore CA2235
+
         [Tooltip("Sound to play")]
         public Sound sound;
-        [Range(0, 1)]
-        [Tooltip("Minimal fill amount to show it")]
+
+        [Tooltip("Minimal fill amount to show it"), Range(0, 1)]
         public float percent;
     }
 }

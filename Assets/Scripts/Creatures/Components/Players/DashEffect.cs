@@ -33,8 +33,8 @@ namespace PlayerAddons
 
         void IInit.Init(Creature creature)
         {
-            rb2D = creature.thisRigidbody2D;
-            sprite = creature.sprite;
+            rb2D = creature.ThisRigidbody2D;
+            sprite = creature.Sprite;
             dashTime = startDashTime;
         }
 
