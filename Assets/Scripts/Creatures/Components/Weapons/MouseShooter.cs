@@ -94,8 +94,12 @@ namespace CreaturesAddons.Weapons
             CircleCollider2D collider = go.AddComponent<CircleCollider2D>();
             collider.isTrigger = projectileColliderIsTrigger;
 
-            go.AddComponent<Animator>().runtimeAnimatorController = projectileAnimation;
-            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength);
+            Animator animator = go.AddComponent<Animator>();
+            animator.runtimeAnimatorController = projectileAnimation;
+            AnimationClip animationclip = projectileAnimation.animationClips[0];
+            animator.speed = animationclip.length / projectileDuration;
+
+            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength, .25f);
 
             Destroy(go, projectileDuration);
         }
@@ -107,14 +111,14 @@ namespace CreaturesAddons.Weapons
         private CircleCollider2D circleCollider2D;
         private float scale;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Used by Unity.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Start()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             circleCollider2D = gameObject.GetComponent<CircleCollider2D>();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Used by Unity.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Update()
         {
             Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
