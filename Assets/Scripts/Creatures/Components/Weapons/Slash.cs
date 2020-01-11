@@ -133,7 +133,7 @@ namespace CreaturesAddons.Weapons
 
         public override void UpdateBehaviour(float deltaTime)
         {
-            slashingSound.Update();
+            slashingSound.UpdateBehaviour(deltaTime);
             base.UpdateBehaviour(deltaTime);
             AttackIfAutomated();
         }

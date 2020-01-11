@@ -72,7 +72,7 @@ namespace CreaturesAddons.Weapons
 
         public override void UpdateBehaviour(float deltaTime)
         {
-            shootingSound.Update();
+            shootingSound.UpdateBehaviour(deltaTime);
             base.UpdateBehaviour(deltaTime);
         }
 
