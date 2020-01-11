@@ -1,5 +1,7 @@
 ﻿using AdditionalAttributes;
 
+using CreaturesAddons;
+
 using System;
 
 using UnityEngine;
@@ -7,7 +9,7 @@ using UnityEngine;
 namespace ScriptableSound
 {
     [Serializable]
-    public class SoundPlay
+    public class SoundPlay : IUpdate
     {
 #pragma warning disable CS0649
         [SerializeField, Tooltip("AudioSource where sound is played.")]
