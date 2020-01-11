@@ -114,9 +114,7 @@ MonoBehaviour:
   hurtSound:
     audioSource: {fileID: 969361126788582000}
     sound: {fileID: 11400000, guid: 9316afffa7ee09a49a150e70864e9f8c, type: 2}
-  dieSound:
-    audioSource: {fileID: 969361126788582000}
-    sound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
+  dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
   speed: 1
   sprite: {fileID: 4323033712557593908}
   stoppableRigidbody: {fileID: 1542282149665952432}

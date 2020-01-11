@@ -29,7 +29,7 @@ namespace CreaturesAddons
         private SoundPlay hurtSound;
 
         [SerializeField, Tooltip("Sound played on death.")]
-        private SoundPlay dieSound;
+        private Sound dieSound;
 #pragma warning restore CS0649
 
         protected IUpdate[] updates;
@@ -37,9 +37,8 @@ namespace CreaturesAddons
         protected virtual void Awake()
         {
             hurtSound.Init();
-            dieSound.Init();
             health.Initialize();
-            updates = new IUpdate[] { health, hurtSound, dieSound };
+            updates = new IUpdate[] { health, hurtSound };
         }
 
         protected virtual void Update() => Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));

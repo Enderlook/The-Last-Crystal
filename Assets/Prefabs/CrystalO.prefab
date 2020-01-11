@@ -225,9 +225,7 @@ MonoBehaviour:
   hurtSound:
     audioSource: {fileID: 3930796563646881865}
     sound: {fileID: 11400000, guid: 36dd3f8fa074b3f499de9508cf7ce9f2, type: 2}
-  dieSound:
-    audioSource: {fileID: 3930796563646881865}
-    sound: {fileID: 11400000, guid: 1192a04a8b28d7647a9351579e4a6f20, type: 2}
+  dieSound: {fileID: 11400000, guid: 1192a04a8b28d7647a9351579e4a6f20, type: 2}
 --- !u!95 &2479692871795222995
 Animator:
   serializedVersion: 3
