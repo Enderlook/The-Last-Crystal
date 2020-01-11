@@ -35,12 +35,11 @@ namespace AdditionalExtensions
         private static string FirstCharTo(this string source, Func<char, char> charFunc, Func<string, string> stringFunc) => source.Length > 1 ? charFunc(source[0]) + source.Substring(1) : stringFunc(source);
 
         /// <summary>
-        /// Convert the string to sentence case. Remove all uppercases but add uppercase to the first character.<br>
-        /// Example:<br>
-        ///     • the Quick Brown Fox Jumps Over The Lazy Dog. -> The quick brown fox jumps over the lazy dog.
+        /// Convert the string to sentence case. Remove all uppercases but add uppercase to the first character.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>the Quick Brown Fox Jumps Over The Lazy Dog. -> The quick brown fox jumps over the lazy dog.</example>
         public static string ToSentenceCase(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -50,16 +49,17 @@ namespace AdditionalExtensions
 
         /// <summary>
         /// Split the string in each non-first, non-last uppercase. Only the last consecutive uppercase it splitted.
-        /// Convert the string from camel case to common.<br>
-        /// Examples:<br>
-        ///     • camelCase -> camel Case<br>
-        ///     • PascalCase -> Pascal Case<br>
-        ///     • HTMLCase -> HTML Case<br>
+        /// Convert the string from camel case to common.
         /// Does the same as <see cref="SplitByPascalCase(string)"/>.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <paramref name="firstCharToUpper"/>If the first letter should be converted to uppercase through <see cref="FirstCharToUpper(string)"/>.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • camelCase -> camel Case<br>
+        ///     • PascalCase -> Pascal Case<br>
+        ///     • HTMLCase -> HTML Case
+        /// </example>
         public static string SplitByCamelCase(this string source, bool firstCharToUpper)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -69,16 +69,17 @@ namespace AdditionalExtensions
 
         /// <summary>
         /// Split the string in each non-first, non-last uppercase. Only the last consecutive uppercase it splitted.
-        /// Convert the string from pascal case to common.<br>
-        /// Examples:<br>
-        ///     • camelCase -> camel Case<br>
-        ///     • PascalCase -> Pascal Case<br>
-        ///     • HTMLCase -> HTML Case<br>
+        /// Convert the string from pascal case to common.
         /// Does the same as <see cref="SplitByCamelCase(string)"/>.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <paramref name="firstCharToUpper"/>If the first letter should be converted to uppercase through <see cref="FirstCharToUpper(string)"/>.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • camelCase -> camel Case<br>
+        ///     • PascalCase -> Pascal Case<br>
+        ///     • HTMLCase -> HTML Case
+        /// </example>
         public static string SplitByPascalCase(this string source, bool firstCharToUpper)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -88,15 +89,16 @@ namespace AdditionalExtensions
 
         /// <summary>
         /// Split the string in each non-first, non-last uppercase.
-        /// Convert the string from title case to common.<br>
-        /// Examples:<br>
-        ///     • camelCase -> camel Case<br>
-        ///     • PascalCase -> Pascal Case<br>
-        ///     • HTMLCase -> H T M L Case<br>
+        /// Convert the string from title case to common.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <paramref name="firstCharToUpper"/>If the first letter should be converted to uppercase through <see cref="FirstCharToUpper(string)"/>.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • camelCase -> camel Case<br>
+        ///     • PascalCase -> Pascal Case<br>
+        ///     • HTMLCase -> H T M L Case
+        /// </example>
         public static string SplitByTitleCase(this string source, bool firstCharToUpper)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -113,16 +115,17 @@ namespace AdditionalExtensions
 
         /// <summary>
         /// Split the string in each non-first, non-last underscore. Treats all consecutive underscores as one.<br>
-        /// Convert the string from snake case to common.<br>
-        /// Examples:<br>
-        ///     • snake_case -> snake case<br>
-        ///     • _snake_case -> snake case<br>
-        ///     • snake_case_ -> snake case<br>
-        ///     • snake__case -> snake case
+        /// Convert the string from snake case to common.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <paramref name="firstCharToUpper"/>If the first letter should be converted to uppercase through <see cref="FirstCharToUpper(string)"/>.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • snake_case -> snake case<br>
+        ///     • _snake_case -> snake case<br>
+        ///     • snake_case_ -> snake case<br>
+        ///     • snake__case -> snake case
+        /// </example>
         public static string SplitBySnakeCase(this string source, bool firstCharToUpper)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -132,16 +135,17 @@ namespace AdditionalExtensions
 
         /// <summary>
         /// Split the string in each non-first, non-last middle score. Treats all consecutive middle score as one.<br>
-        /// Convert the string from kebab case to common.<br>
-        /// Examples:<br>
-        ///     • kebab-case -> kebab case<br>
-        ///     • -kebab-case -> kebab case<br>
-        ///     • kebab-case_ -> kebab case<br>
-        ///     • kebab--case -> kebab case
+        /// Convert the string from kebab case to common.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <paramref name="firstCharToUpper"/>If the first letter should be converted to uppercase through <see cref="FirstCharToUpper(string)"/>.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • kebab-case -> kebab case<br>
+        ///     • -kebab-case -> kebab case<br>
+        ///     • kebab-case_ -> kebab case<br>
+        ///     • kebab--case -> kebab case
+        /// </example>
         public static string SplitByKebabCase(this string source, bool firstCharToUpper)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -150,12 +154,11 @@ namespace AdditionalExtensions
         }
 
         /// <summary>
-        /// Capitalize each word delimited by whitespace.<br>
-        /// Example:<br>
-        ///     • the quick brown fox jumps over the lazy dog ->  The Quick Brown Fox Jumps Over The Lazy Dog
+        /// Capitalize each word delimited by whitespace
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>the quick brown fox jumps over the lazy dog ->  The Quick Brown Fox Jumps Over The Lazy Dog</example>
         public static string ToCapitalWords(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -164,14 +167,15 @@ namespace AdditionalExtensions
         }
 
         /// <summary>
-        /// Capitalize each word delimited by whitespace and join them together.<br>
-        /// Example:<br>
-        ///     • pascal case -> PascalCase<br>
-        ///     • pAscal CaSe -> PascalCase<br>
+        /// Capitalize each word delimited by whitespace and join them together.
         /// Does the same as <see cref="ToTileCase(string)"/>.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • pascal case -> PascalCase<br>
+        ///     • pAscal CaSe -> PascalCase<br>
+        /// </example>
         public static string ToPascalCase(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -180,14 +184,15 @@ namespace AdditionalExtensions
         }
 
         /// <summary>
-        /// Capitalize each word delimited by whitespace and join them together.<br>
-        /// Example:<br>
-        ///     • title case -> TitleCase<br>
-        ///     • tItle caSe -> TitleCase<br>
+        /// Capitalize each word delimited by whitespace and join them together.
         /// Does the same as <see cref="ToPascalCase(string)"/>.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • title case -> TitleCase<br>
+        ///     • tItle caSe -> TitleCase<br>
+        /// </example>
         public static string ToTitleCase(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -196,13 +201,14 @@ namespace AdditionalExtensions
         }
 
         /// <summary>
-        /// Capitalize each word delimited by whitespace and join them together, except the first word which remains in lowercase.<br>
-        /// Example:<br>
-        ///     • camel case -> cameCase<br>
-        ///     • cAmel caSe -> cameCase<br>
+        /// Capitalize each word delimited by whitespace and join them together, except the first word which remains in lowercase.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>
+        ///     • camel case -> cameCase<br>
+        ///     • cAmel caSe -> cameCase<br>
+        /// </example>
         public static string ToCamelCase(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -211,12 +217,11 @@ namespace AdditionalExtensions
         }
 
         /// <summary>
-        /// Convert to lowercase and join each word delimited by whitespace with underscores.<br>
-        /// Example:<br>
-        ///     • Snake Case -> snake_case
+        /// Convert to lowercase and join each word delimited by whitespace with underscores.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>Snake Case -> snake_case</example>
         public static string ToSnakeCase(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -225,12 +230,11 @@ namespace AdditionalExtensions
         }
 
         /// <summary>
-        /// Convert to lowercase and join each word delimited by whitespace with underscores.<br>
-        /// Example:<br>
-        ///     • Kebab Case -> kebab-case
+        /// Convert to lowercase and join each word delimited by whitespace with underscores.
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        /// <example>Kebab Case -> kebab-case</example>
         public static string ToKebabCase(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));

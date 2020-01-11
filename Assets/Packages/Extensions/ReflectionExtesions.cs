@@ -177,8 +177,19 @@ namespace AdditionalExtensions
             return true;
         }
 
+        /// <summary>
+        /// Determines if the <paramref name="parameterInfo"/> is optional or param, or not.
+        /// </summary>
+        /// <param name="parameterInfo"><paramref name="parameterInfo"/> to check.</param>
+        /// <returns>Whenever it's optional or para, or if it's neither of them.</returns>
         public static bool IsOptionalOrParam(this ParameterInfo parameterInfo) => parameterInfo.IsOptional || parameterInfo.HasDefaultValue || parameterInfo.IsDefined(typeof(ParamArrayAttribute));
 
+        /// <summary>
+        /// Determines if the <paramref name="parameterInfo"/> is optional or param, or not.
+        /// </summary>
+        /// <param name="parameterInfo"><paramref name="parameterInfo"/> to check.</param>
+        /// <param name="parameter">Parameter that should by passed to an invoker if the method returns <see langword="true"/>.</param>
+        /// <returns>Whenever it's optional or para, or if it's neither of them.</returns>
         public static bool IsOptionalOrParam(this ParameterInfo parameterInfo, out object parameter)
         {
             // https://stackoverflow.com/a/16187807/7655838
