@@ -37,7 +37,7 @@ namespace ScriptableSound.Modifiers
 #if UNITY_EDITOR
         public override void Validate(SoundClip soundClip)
         {
-            if (((AudioClip)audioClip.GetValue(soundClip))?.length < startAtSecond)
+            if (audioClip != null && ((AudioClip)audioClip.GetValue(soundClip))?.length < startAtSecond)
                 Debug.LogError($"Modifier {name} ({nameof(StartAtModifier)}) in {soundClip.name} ({nameof(SoundClip)}) can't have a {nameof(startAtSecond)} field value greater than the length of the {nameof(AudioClip)} that is modifying.");
             base.Validate(soundClip);
         }
