@@ -44,22 +44,8 @@ MonoBehaviour:
   shootingPosition: {x: 0.064983614, y: 0.1796871}
   projectileAnimation: {fileID: 9100000, guid: 2e1f658194e3bc1498f5e5b9d7092c35, type: 2}
   shootingSound:
-    sound:
-      name: 
-      audioClip: {fileID: 8300000, guid: b022bfa3b9e8d4d4388f9204783996f4, type: 3}
-      volume:
-        useAlternative: 0
-        item1:
-          min: 0.8
-          max: 1.2
-        item2: 0
-      pitch:
-        useAlternative: 0
-        item1:
-          min: 0.8
-          max: 1.2
-        item2: 0
     audioSource: {fileID: 538832391249785834}
+    sound: {fileID: 11400000, guid: 0691e52976f5e984781314fc9a4cd40d, type: 2}
 --- !u!1001 &7460415043436444691
 PrefabInstance:
   m_ObjectHideFlags: 0

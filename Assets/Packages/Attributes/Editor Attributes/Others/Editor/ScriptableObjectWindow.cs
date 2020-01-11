@@ -48,7 +48,8 @@ namespace AdditionalAttributes
 
             ScriptableObjectWindow window = GetWindow<ScriptableObjectWindow>();
             Type type;
-            // If the property came from an array and the element is null this will be null which is a problem for us
+            /* If the property came from an array and the element is null this will be null which is a problem for us.
+             * This is also null if the property isn't array but the field is empty (null). That is also a problem. */
             if (property.objectReferenceValue)
             {
                 (window.get, window.set) = property.GetTargetObjectAccessors();
@@ -80,7 +81,6 @@ namespace AdditionalAttributes
                     else
                         throw new InvalidCastException();
                 }
-                // Just to be sure, but I think this case is impossible
                 else
                 {
                     type = fieldType;
@@ -127,6 +127,7 @@ namespace AdditionalAttributes
                 {
                     Undo.RecordObject(targetObject, "Instantiate field");
                     set(Create());
+                    property.serializedObject.ApplyModifiedProperties();
                 }
 
                 // Create and Save
@@ -135,8 +136,8 @@ namespace AdditionalAttributes
                     Undo.RecordObject(targetObject, "Instantiate field");
                     scriptableObject = Create();
                     set(scriptableObject);
+                    property.serializedObject.ApplyModifiedProperties();
                     AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
-                    EditorUtility.SetDirty(targetObject);
                 }
             }
 

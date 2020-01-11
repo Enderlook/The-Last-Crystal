@@ -1,8 +1,8 @@
 ﻿using AdditionalAttributes;
 
-using Serializables.Physics;
+using ScriptableSound;
 
-using SoundSystem;
+using Serializables.Physics;
 
 using UnityEngine;
 
@@ -28,7 +28,7 @@ namespace CreaturesAddons.Weapons
         protected string animationState;
 
         [SerializeField, Tooltip("Slashing sound.")]
-        private SoundWithAudioSource slashingSound;
+        private SoundPlay slashingSound;
 #pragma warning restore CS0649
 
         private Transform thisTransform;
@@ -54,6 +54,7 @@ namespace CreaturesAddons.Weapons
             thisAnimator = creature.Animator;
             thisSpriteRenderer = creature.Sprite;
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
+            slashingSound.Init();
             base.Init(creature);
         }
 
@@ -70,7 +71,7 @@ namespace CreaturesAddons.Weapons
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
         protected void HitTarget()
         {
-            slashingSound.PlayOneShootIfNotPlaying();
+            slashingSound.Play();
             RaycastHit2D[] raycastHits = rayCasting.RaycastAll(1 << layerToHit); // Ignore any layer that isn't layerToHit
             for (int n = 0; n < raycastHits.Length; n++)
             {
@@ -132,6 +133,7 @@ namespace CreaturesAddons.Weapons
 
         public override void UpdateBehaviour(float deltaTime)
         {
+            slashingSound.UpdateBehaviour(deltaTime);
             base.UpdateBehaviour(deltaTime);
             AttackIfAutomated();
         }

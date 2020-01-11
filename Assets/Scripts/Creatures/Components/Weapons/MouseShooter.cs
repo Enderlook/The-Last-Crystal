@@ -1,6 +1,6 @@
 ﻿using AdditionalAttributes;
 
-using SoundSystem;
+using ScriptableSound;
 
 using UnityEngine;
 
@@ -52,7 +52,7 @@ namespace CreaturesAddons.Weapons
         private RuntimeAnimatorController projectileAnimation;
 
         [SerializeField, Tooltip("Shooting sound.")]
-        private SoundWithAudioSource shootingSound;
+        private SoundPlay shootingSound;
 #pragma warning restore CS0649
 
         private Transform shootingTransform;
@@ -66,7 +66,14 @@ namespace CreaturesAddons.Weapons
             shootingTransform = creature.Transform;
             thisAnimator = creature.Animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
+            shootingSound.Init();
             base.Init(creature);
+        }
+
+        public override void UpdateBehaviour(float deltaTime)
+        {
+            shootingSound.UpdateBehaviour(deltaTime);
+            base.UpdateBehaviour(deltaTime);
         }
 
         protected override void Attack()
@@ -79,7 +86,7 @@ namespace CreaturesAddons.Weapons
 
         private void Shoot()
         {
-            shootingSound.PlayOneShootIfNotPlaying();
+            shootingSound.Play();
             GameObject go = new GameObject($"{nameof(MouseShooter)} Projectile");
             go.transform.position = ShootingPoint;
             go.transform.localScale *= projectileScaleMultiplier;

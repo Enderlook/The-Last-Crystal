@@ -4,10 +4,12 @@ using System;
 
 using UnityEngine;
 
+using Utils;
+
 namespace ScriptableSound
 {
     [AbstractScriptableObject]
-    public class Sound : ScriptableObject
+    public class Sound : ScriptableObject, IPrototypable<Sound>
     {
         /// <summary>
         /// Whenever this class is playing music.
@@ -25,9 +27,7 @@ namespace ScriptableSound
         /// <param name="soundConfiguration">Configuration.</param>
         public void SetConfiguration(SoundConfiguration soundConfiguration)
         {
-            if (soundConfiguration == null) throw new ArgumentNullException(nameof(soundConfiguration));
-
-            this.soundConfiguration = soundConfiguration;
+            this.soundConfiguration = soundConfiguration ?? throw new ArgumentNullException(nameof(soundConfiguration));
         }
 
         /// <summary>
@@ -57,8 +57,18 @@ namespace ScriptableSound
         /// <remarks>
         /// Use <see cref="AudioSource.time"/> instead of <see cref="AudioSource.isPlaying"/> because the second one produce wrong results if <see cref="AudioSource"/> is paused.
         /// </remarks>
-        protected bool ShouldChangeSound => IsPlaying && soundConfiguration.audioSource.time == 0;
+        protected bool ShouldChangeSound => IsPlaying && soundConfiguration != null && soundConfiguration.audioSource.time == 0; // TODO: soundConfiguration shouldn't be null if IsPlay is true, but removing this produces issues
 
-        public virtual void Update() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
+        /// <summary>
+        /// Updates behavior.
+        /// </summary>
+        /// <param name="deltaTime">Time since last update in seconds. <seealso cref="Time.deltaTime"/></param>
+        public virtual void UpdateBehaviour(float deltaTime) => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
+
+        /// <summary>
+        /// Instantiate a prototype of this instance using this as a template.
+        /// </summary>
+        /// <returns>New instance based on this one as template.</returns>
+        public virtual Sound CreatePrototype() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
     }
 }

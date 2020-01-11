@@ -3,8 +3,11 @@
 using ScriptableSound.Modifiers;
 
 using System;
+using System.Linq;
 
 using UnityEngine;
+
+using Utils;
 
 namespace ScriptableSound
 {
@@ -31,16 +34,16 @@ namespace ScriptableSound
             return can;
         }
 
-        public override void Update()
+        public override void UpdateBehaviour(float deltaTime)
         {
             if (ShouldChangeSound)
             {
                 if (HasEnoughPlays())
                 {
                     AudioSource audioSource = soundConfiguration.audioSource;
-                    Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
                     audioSource.clip = audioClip;
                     audioSource.Play();
+                    Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
                 }
                 else
                 {
@@ -66,8 +69,29 @@ namespace ScriptableSound
 
         public override void Play()
         {
+            if (IsPlaying)
+                BackToNormalAudioSource();
             remainingPlays = playsAmount;
+            soundConfiguration.audioSource.Stop();
             base.Play();
         }
+
+        public override Sound CreatePrototype()
+        {
+            SoundClip prototype = CreateInstance<SoundClip>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.audioClip = audioClip;
+            prototype.modifiers = modifiers.Select(e => e.CreatePrototype()).ToArray();
+            prototype.playsAmount = playsAmount;
+            return prototype;
+        }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            foreach (SoundModifier modifier in modifiers)
+                modifier.Validate(this);
+        }
+#endif
     }
 }

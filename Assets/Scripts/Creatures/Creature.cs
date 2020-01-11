@@ -6,6 +6,7 @@ using Master;
 
 using System;
 using System.Linq;
+
 using UnityEngine;
 
 namespace CreaturesAddons
@@ -112,10 +113,11 @@ namespace CreaturesAddons
             ThisRigidbody2D.AddForce(direction * force);
         }
 
-        protected override void DisplayTakeDamageAnimation()
+        protected override void TakeDamageFeedback()
         {
             Sprite.material = redFlash;
             Invoke(nameof(ResetMaterial), .1f);
+            base.TakeDamageFeedback();
         }
 
         private void ResetMaterial() => Sprite.material = defMaterial;

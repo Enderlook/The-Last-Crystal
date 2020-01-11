@@ -1,6 +1,10 @@
 ﻿using AdditionalAttributes;
 
+using System.Linq;
+
 using UnityEngine;
+
+using Utils;
 
 using Random = UnityEngine.Random;
 
@@ -25,6 +29,8 @@ namespace ScriptableSound
         private int playsAmount = 1;
 #pragma warning restore CS0649
 
+        private int remainingPlays;
+
         /// <summary>
         /// Only used by <see cref="PlayModeOrder.PingPong"/>.
         /// </summary>
@@ -39,19 +45,15 @@ namespace ScriptableSound
 
         private Sound CurrentSound => sounds[index];
 
-        public override void Update()
+        public override void UpdateBehaviour(float deltaTime)
         {
             if (IsPlaying)
             {
-                CurrentSound.Update();
+                CurrentSound.UpdateBehaviour(deltaTime);
                 if (!CurrentSound.IsPlaying)
                 {
-                    if (playsAmount == -1 || playsAmount > 0)
-                    {
-                        ChoseNextSound();
-                        CurrentSound.SetConfiguration(soundConfiguration);
-                        CurrentSound.Play();
-                    }
+                    if (playsAmount == -1 || remainingPlays > 0)
+                        ConfigureNextSound();
                     else
                         IsPlaying = false;
                 }
@@ -65,7 +67,6 @@ namespace ScriptableSound
                 case PlayModeOrder.Random:
                     if (++amountPlay == sounds.Length)
                         ReducePlayAmountIf(PlayListMode.FullList);
-                    ReducePlayAmountIf(PlayListMode.IndividualSounds);
                     index = Random.Range(0, sounds.Length);
                     break;
                 case PlayModeOrder.Sequence:
@@ -74,7 +75,6 @@ namespace ScriptableSound
                         index = 0;
                         ReducePlayAmountIf(PlayListMode.FullList);
                     }
-                    ReducePlayAmountIf(PlayListMode.IndividualSounds);
                     break;
                 case PlayModeOrder.PingPong:
                     if (isReverse)
@@ -97,12 +97,13 @@ namespace ScriptableSound
                     }
                     break;
             }
+            ReducePlayAmountIf(PlayListMode.IndividualSounds);
         }
 
         private void ReducePlayAmountIf(PlayListMode mode)
         {
             if (playsAmount != -1 && playListMode == mode)
-                playsAmount--;
+                remainingPlays--;
         }
 
         public override void Stop()
@@ -113,11 +114,29 @@ namespace ScriptableSound
 
         public override void Play()
         {
+            if (IsPlaying)
+                Stop();
             index = -1;
+            remainingPlays = playsAmount;
+            ConfigureNextSound();
+            base.Play();
+        }
+
+        private void ConfigureNextSound()
+        {
             ChoseNextSound();
             CurrentSound.SetConfiguration(soundConfiguration);
             CurrentSound.Play();
-            base.Play();
+        }
+
+        public override Sound CreatePrototype()
+        {
+            SoundList prototype = CreateInstance<SoundList>();
+            prototype.name = PrototypeHelper.GetPrototypeNameOf(prototype);
+            prototype.playMode = playMode;
+            prototype.playListMode = playListMode;
+            prototype.sounds = sounds.Select(e => e.CreatePrototype()).ToArray();
+            return prototype;
         }
     }
 }

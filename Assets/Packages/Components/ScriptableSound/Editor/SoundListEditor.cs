@@ -27,13 +27,15 @@ namespace ScriptableSound
         {
             this.DrawScriptField();
 
+            EditorGUI.BeginChangeCheck();
+
             EditorGUILayout.PropertyField(serializedObject.FindProperty("sounds"), true);
-
             EditorGUILayout.PropertyField(serializedObject.FindProperty("playMode"), true);
-
             EditorGUILayout.PropertyField(serializedObject.FindProperty("playListMode"), true);
-
             DrawAmountField(serializedObject.FindProperty("playsAmount"));
+
+            if (EditorGUI.EndChangeCheck())
+                serializedObject.ApplyModifiedProperties();
         }
 
         public static void DrawAmountField(SerializedProperty property)
