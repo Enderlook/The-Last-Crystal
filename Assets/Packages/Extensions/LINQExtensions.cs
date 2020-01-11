@@ -49,7 +49,6 @@ namespace AdditionalExtensions
         /// <param name="selector">Function which provides the property to compare.</param>
         /// <param name="comparer">Comparer used to compare the values returned by <paramref name="selector"/>.</param>
         /// <returns>The element with the highest property.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Estilo", "IDE0054:Usar la asignación compuesta", Justification = "Unity no lo soporta.")]
         public static TSource MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector, IComparer<TKey> comparer = null)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -58,7 +57,6 @@ namespace AdditionalExtensions
             comparer = comparer ?? Comparer<TKey>.Default;
             return source.Aggregate((a, c) => comparer.Compare(selector(a), selector(c)) > 0 ? a : c);
         }
-
 
         /// <summary>
         /// Return the element which the lowest property returned by <paramref name="selector"/>, using <paramref name="comparer"/>.
@@ -69,7 +67,6 @@ namespace AdditionalExtensions
         /// <param name="selector">Function which provides the property to compare.</param>
         /// <param name="comparer">Comparer used to compare the values returned by <paramref name="selector"/>.</param>
         /// <returns>The element with the lowest property.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Estilo", "IDE0054:Usar la asignación compuesta", Justification = "Unity no lo soporta.")]
         public static TSource MinBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> selector, IComparer<TKey> comparer = null)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
@@ -84,7 +81,7 @@ namespace AdditionalExtensions
         /// </summary>
         /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
         /// <param name="source">Source to look for a random element.</param>
-        /// <returns></returns>
+        /// <returns>Random element from <paramref name="source"/>.</returns>
         public static T RandomElement<T>(this IEnumerable<T> source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));

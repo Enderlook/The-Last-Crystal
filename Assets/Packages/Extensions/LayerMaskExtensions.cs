@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AdditionalExtensions
 {
@@ -29,14 +30,19 @@ namespace AdditionalExtensions
         /// <param name="layerToCheck">Layers to check if have <paramref name="layerTrigger"/>.</param>
         /// <param name="layerTrigger">Layers checked in <paramref name="layerToCheck"/>.</param>
         /// <returns>Whenever <paramref name="layerToCheck"/> has <paramref name="layerTrigger"/>.</returns>
-        public static bool LayerMatchTest(LayerMask layerToCheck, LayerMask layerTrigger) => ((1 << layerToCheck) & layerTrigger) != 0;
+        public static bool LayerMatchTest(this LayerMask layerToCheck, LayerMask layerTrigger) => ((1 << layerToCheck) & layerTrigger) != 0;
 
         /// <summary>
         /// Check if the <c><paramref name="source"/>.layer</c> is one the layers from <paramref name="layerTrigger"/>.
         /// </summary>
-        /// <param name="source">Gameobject to check its layers.</param>
+        /// <param name="source">GameObject to check its layers.</param>
         /// <param name="layerTrigger">Layer that must be checked.</param>
         /// <returns>Whenever <c><paramref name="source"/>.layer</c> is one the layers from <paramref name="layerTrigger"/>.</returns>
-        public static bool LayerMatchTest(this GameObject source, LayerMask layerTrigger) => LayerMatchTest(source.layer, layerTrigger);
+        public static bool LayerMatchTest(this GameObject source, LayerMask layerTrigger)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+
+            return LayerMatchTest(source.layer, layerTrigger);
+        }
     }
 }

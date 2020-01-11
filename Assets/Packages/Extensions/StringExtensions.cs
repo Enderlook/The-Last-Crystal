@@ -15,7 +15,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string FirstCharToUpper(this string source)
         {
-            if (source == null) throw new System.ArgumentNullException(nameof(source));
+            if (source is null) throw new System.ArgumentNullException(nameof(source));
 
             return source.FirstCharTo(char.ToUpper, e => e.ToUpper());
         }
@@ -27,7 +27,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string FirstCharToLower(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.FirstCharTo(char.ToLower, e => e.ToLower());
         }
@@ -43,7 +43,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToSentenceCase(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.ToLower().FirstCharToUpper();
         }
@@ -62,7 +62,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string SplitByCamelCase(this string source, bool firstCharToUpper)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return Regex.Replace(source, "([[A-z0-9_]+)([A-Z])", "$1 $2").DoIf(firstCharToUpper, FirstCharToUpper);
         }
@@ -81,7 +81,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string SplitByPascalCase(this string source, bool firstCharToUpper)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.SplitByCamelCase(firstCharToUpper);
         }
@@ -99,14 +99,14 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string SplitByTitleCase(this string source, bool firstCharToUpper)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return Regex.Replace(source, "([A-Z])", "$1 ").Trim().DoIf(firstCharToUpper, FirstCharToUpper);
         }
 
         private static string SplitBySomething(this string source, string spliter, bool firstCharToUpper)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return Regex.Replace(source, $"([A-z0-9])({spliter}+)([A-z0-9])", "$1 $3").DoIf(firstCharToUpper, FirstCharToUpper);
         }
@@ -125,7 +125,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string SplitBySnakeCase(this string source, bool firstCharToUpper)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.SplitBySomething("_", firstCharToUpper);
         }
@@ -144,7 +144,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string SplitByKebabCase(this string source, bool firstCharToUpper)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.SplitBySomething("-", firstCharToUpper);
         }
@@ -158,7 +158,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToCapitalWords(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.FirstCharToUpperOfEachWord(" ");
         }
@@ -174,7 +174,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToPascalCase(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.ToLower().FirstCharToUpperOfEachWord("");
         }
@@ -190,7 +190,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToTitleCase(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.ToPascalCase();
         }
@@ -205,7 +205,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToCamelCase(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.ToPascalCase().FirstCharToLower();
         }
@@ -219,11 +219,10 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToSnakeCase(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.JoinWhitespacesToLowerCase("_");
         }
-
 
         /// <summary>
         /// Convert to lowercase and join each word delimited by whitespace with underscores.<br>
@@ -234,7 +233,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToKebabCase(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.JoinWhitespacesToLowerCase("-");
         }
@@ -243,7 +242,7 @@ namespace AdditionalExtensions
 
         private static string FirstCharToUpperOfEachWord(this string source, string delimiter)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             MatchEvaluator matchEvaluator = new MatchEvaluator((match) => FirstCharToUpper(match, delimiter));
             return Regex.Replace(source, "([A-z0-9]+) ([A-z0-9]+)", matchEvaluator);
@@ -258,7 +257,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string ToDisplayUnity(this string source)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.SplitByCamelCase(false).SplitBySnakeCase(false).ToCapitalWords();
         }

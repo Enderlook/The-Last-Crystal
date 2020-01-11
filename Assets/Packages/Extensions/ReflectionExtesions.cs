@@ -26,12 +26,9 @@ namespace AdditionalExtensions
         /// <exception cref="MatchingMemberNotFoundException">Thrown no <see cref="MemberInfo"/> with name <paramref name="memberName"/> in <paramref name="obj"/> matched the necessary requirements.</exception>
         public static T GetValueFromFirstMember<T>(this object obj, string memberName)
         {
-            if (obj == null)
-                throw new ArgumentNullException(nameof(obj));
-            if (memberName == null)
-                throw new ArgumentNullException(nameof(memberName));
-            else if (memberName.Length == 0)
-                throw new ArgumentException("Can't be empty", nameof(memberName));
+            if (obj is null) throw new ArgumentNullException(nameof(obj));
+            if (memberName is null) throw new ArgumentNullException(nameof(memberName));
+            else if (memberName.Length == 0) throw new ArgumentException("Can't be empty", nameof(memberName));
 
             MemberInfo memberInfo = GetFirstMemberInfoInMatchReturn<T>(obj.GetType(), memberName);
 
@@ -65,12 +62,9 @@ namespace AdditionalExtensions
         /// <exception cref="MatchingMemberNotFoundException">Thrown no <see cref="MemberInfo"/> with name <paramref name="memberName"/> in <paramref name="obj"/> matched the necessary requirements.</exception>
         public static MemberInfo GetFirstMemberInfoInMatchReturn<T>(Type type, string memberName)
         {
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
-            if (memberName == null)
-                throw new ArgumentNullException(nameof(memberName));
-            else if (memberName.Length == 0)
-                throw new ArgumentException("Can't be empty", nameof(memberName));
+            if (type is null) throw new ArgumentNullException(nameof(type));
+            if (memberName is null) throw new ArgumentNullException(nameof(memberName));
+            else if (memberName.Length == 0) throw new ArgumentException("Can't be empty", nameof(memberName));
 
             MemberInfo[] memberInfos = type.GetMember(memberName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.Static);
             if (memberInfos.Length == 0)
@@ -140,10 +134,8 @@ namespace AdditionalExtensions
         /// <exception cref="ArgumentNullException">Throw when <paramref name="methodInfo"/> is <see langword="null"/>.</exception>
         public static object Invoke(this MethodInfo methodInfo, object obj)
         {
-            if (methodInfo == null)
-                throw new ArgumentNullException(nameof(methodInfo));
-            if (!methodInfo.HasNoMandatoryParameters(out object[] parameters))
-                throw new HasMandatoryParametersException(methodInfo);
+            if (methodInfo is null) throw new ArgumentNullException(nameof(methodInfo));
+            if (!methodInfo.HasNoMandatoryParameters(out object[] parameters)) throw new HasMandatoryParametersException(methodInfo);
 
             return methodInfo.Invoke(obj, parameters);
         }
@@ -156,8 +148,7 @@ namespace AdditionalExtensions
         /// <see cref="https://stackoverflow.com/a/627668/7655838"/>
         public static bool HasNoMandatoryParameters(this MethodInfo methodInfo)
         {
-            if (methodInfo == null)
-                throw new ArgumentNullException(nameof(methodInfo));
+            if (methodInfo is null) throw new ArgumentNullException(nameof(methodInfo));
 
             return methodInfo.GetParameters().All(e => e.IsOptional || e.IsDefined(typeof(ParamArrayAttribute)));
         }
@@ -171,8 +162,7 @@ namespace AdditionalExtensions
         /// <see cref="https://stackoverflow.com/a/627668/7655838"/>
         public static bool HasNoMandatoryParameters(this MethodInfo methodInfo, out object[] parameters)
         {
-            if (methodInfo == null)
-                throw new ArgumentNullException(nameof(methodInfo));
+            if (methodInfo is null) throw new ArgumentNullException(nameof(methodInfo));
 
             ParameterInfo[] parameterInfos = methodInfo.GetParameters();
             parameters = new object[parameterInfos.Length];
@@ -221,7 +211,7 @@ namespace AdditionalExtensions
         /// <summary>
         /// Get default value of the given <see cref="Type"/>.
         /// </summary>
-        /// <param name="typeInfo"><see cref="Type"/> to get default value.</param>
+        /// <param name="type"><see cref="Type"/> to get default value.</param>
         /// <returns>Default value of <see cref="Type"/>.</returns>
         public static object GetDefault(this Type type)
         {

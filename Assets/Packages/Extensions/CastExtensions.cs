@@ -99,6 +99,9 @@ namespace AdditionalExtensions
 
         private static bool IsPrimitiveCastableTo(this Type fromType, Type toType)
         {
+            if (fromType == null) throw new ArgumentNullException(nameof(fromType));
+            if (toType == null) throw new ArgumentNullException(nameof(toType));
+
             Queue<Type> keyTypes = new Queue<Type>(new[] { toType });
             while (keyTypes.Count > 0)
             {

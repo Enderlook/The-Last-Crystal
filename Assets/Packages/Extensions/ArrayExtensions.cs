@@ -11,7 +11,13 @@ namespace AdditionalExtensions
         /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
         /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
         /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
-        public static void ForEach<T>(this T[] source, Action<T> action) => Array.ForEach(source, action);
+        public static void ForEach<T>(this T[] source, Action<T> action)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (action == null) throw new ArgumentNullException(nameof(action));
+
+            Array.ForEach(source, action);
+        }
 
         /// <summary>
         /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
@@ -23,8 +29,8 @@ namespace AdditionalExtensions
         /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
         public static T[] ChangeEach<T>(this T[] source, Func<T, T> function)
         {
-            if (source is null) throw new ArgumentNullException(nameof(source));
-            if (function is null) throw new ArgumentNullException(nameof(function));
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (function == null) throw new ArgumentNullException(nameof(function));
             if (source.Length == 0)
                 return Array.Empty<T>();
 

@@ -64,8 +64,7 @@ namespace AdditionalExtensions
             Vector2 tO = origin.XYDistance(target);
             float magnitude = tO.magnitude;
             float cos = tO.x / magnitude;
-            float result = cos >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
-            return result;
+            return cos >= 0 ? Mathf.Round(Acos(cos)) : Mathf.Round(Acos(-cos));
         }
 
         /// <summary>
@@ -106,8 +105,7 @@ namespace AdditionalExtensions
             Vector2 tO = origin.XYDistance(target);
             float magnitude = tO.magnitude;
             float cos = tO.x / magnitude;
-            float result = cos >= 0 ? cos : -cos;
-            return result;
+            return cos >= 0 ? cos : -cos;
         }
 
         /// <summary>
