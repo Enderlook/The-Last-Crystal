@@ -54,7 +54,7 @@ namespace CreaturesAddons.Weapons
             thisAnimator = creature.animator;
             thisSpriteRenderer = creature.sprite;
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
-            slashingSound.Initialize();
+            slashingSound.Init();
             base.Init(creature);
         }
 

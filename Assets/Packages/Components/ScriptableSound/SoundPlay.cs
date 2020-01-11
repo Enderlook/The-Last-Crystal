@@ -17,7 +17,7 @@ namespace ScriptableSound
         private Sound sound;
 #pragma warning restore CS0649
 
-        public void Initialize() => sound = sound.CreatePrototype();
+        public void Init() => sound = sound.CreatePrototype();
 
         public void Update() => sound.UpdateBehaviour(Time.deltaTime);
 

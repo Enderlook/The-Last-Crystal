@@ -66,7 +66,7 @@ namespace CreaturesAddons.Weapons
             shootingTransform = creature.Transform;
             thisAnimator = creature.animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
-            shootingSound.Initialize();
+            shootingSound.Init();
             base.Init(creature);
         }
 
