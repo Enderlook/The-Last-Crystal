@@ -66,6 +66,10 @@ namespace ScriptableSound
         /// <param name="deltaTime">Time since last update in seconds. <seealso cref="Time.deltaTime"/></param>
         public virtual void UpdateBehaviour(float deltaTime) => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
 
+        /// <summary>
+        /// Instantiate a prototype of this instance using this as a template.
+        /// </summary>
+        /// <returns>New instance based on this one as template.</returns>
         public virtual Sound CreatePrototype() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
     }
 }
