@@ -8,7 +8,7 @@ namespace AdditionalComponents
     {
         private Rigidbody2D thisRigidbody2D;
 
-        void IInit.Init(Creature creature) => thisRigidbody2D = creature.thisRigidbody2D;
+        void IInit.Init(Creature creature) => thisRigidbody2D = creature.ThisRigidbody2D;
 
         private float angularVelocity;
         private Vector2 velocity;

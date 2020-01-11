@@ -14,11 +14,11 @@ namespace Serializables.Physics
     public class RayCasting
     {
 #pragma warning disable CS0649, CA2235
-        [Tooltip("The starting point of the ray in local coordinates.")]
-        public Vector2 source;
+        [SerializeField, Tooltip("The starting point of the ray in local coordinates.")]
+        private Vector2 source;
 
-        [Tooltip("The direction of the ray.")]
-        public Vector2 direction;
+        [SerializeField, Tooltip("The direction of the ray.")]
+        private Vector2 direction;
 
         [SerializeField, Tooltip("The max distance the ray should check for collisions.")]
         private float distance = Mathf.Infinity;

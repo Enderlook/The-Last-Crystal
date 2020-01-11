@@ -38,7 +38,7 @@ MonoBehaviour:
   projectileForce: 150
   projectileGravity: 0.3
   projectileColliderIsTrigger: 1
-  projectileScaleMultiplier: 0.3
+  projectileScaleMultiplier: 0.15
   projectileDuration: 1
   projectileLayer: 11
   shootingPosition: {x: 0.064983614, y: 0.1796871}
@@ -123,16 +123,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.13
       objectReference: {fileID: 0}
-    - target: {fileID: 5444643182364421536, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: decreaseKey
-      value: 55
-      objectReference: {fileID: 0}
-    - target: {fileID: 5444643182364421536, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: increaseKey
-      value: 56
-      objectReference: {fileID: 0}
     - target: {fileID: 5125575169536085736, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: weapons.Array.size
@@ -178,16 +168,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293240741395348600, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: decreaseKey
-      value: 53
-      objectReference: {fileID: 0}
-    - target: {fileID: 4293240741395348600, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: increaseKey
-      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 3625034397826583285, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
@@ -243,6 +223,26 @@ PrefabInstance:
         type: 3}
       propertyPath: radius
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444643182364421536, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: decreaseKey
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444643182364421536, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: increaseKey
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293240741395348600, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: decreaseKey
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 4293240741395348600, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: increaseKey
+      value: 54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}

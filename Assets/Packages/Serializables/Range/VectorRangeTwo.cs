@@ -61,12 +61,12 @@ namespace Range
     [Serializable]
     public class TransformRange : VectorRangeTwo
     {
-#pragma warning disable CA2235
-        [Tooltip("Start transform.")]
-        public Transform startTransform;
-        [Tooltip("End transform.")]
-        public Transform endTransform;
-#pragma warning restore CA2235
+#pragma warning disable CA2235, CS0649
+        [SerializeField, Tooltip("Start transform.")]
+        private Transform startTransform;
+        [SerializeField, Tooltip("End transform.")]
+        private Transform endTransform;
+#pragma warning restore CA2235, CS0649
 
         protected override Vector3 StartVector3 {
             get => startTransform.position;
@@ -94,11 +94,11 @@ namespace Range
     public class Vector2RangeTwo : VectorRangeTwo
     {
 #pragma warning disable CA2235
-        [Tooltip("Start vector.")]
-        public Vector2 startVector;
+        [SerializeField, Tooltip("Start vector.")]
+        private Vector2 startVector;
 
-        [Tooltip("End vector.")]
-        public Vector2 endVector;
+        [SerializeField, Tooltip("End vector.")]
+        private Vector2 endVector;
 #pragma warning restore CA2235
 
         protected override Vector3 StartVector3 {

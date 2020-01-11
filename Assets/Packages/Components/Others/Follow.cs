@@ -4,9 +4,11 @@ namespace AdditionalComponents
 {
     public class Follow : MonoBehaviour
     {
+#pragma warning disable CS0649
         [Header("Build")]
-        [Tooltip("Following transform")]
-        public Transform transformToFollow;
+        [SerializeField, Tooltip("Following transform")]
+        private Transform transformToFollow;
+#pragma warning restore CS0649
 
         private Vector3 originalLocalPosition;
 

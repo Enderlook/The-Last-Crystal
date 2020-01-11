@@ -11,18 +11,25 @@ public class Menu : MonoBehaviour
     [Header("Setup")]
     [SerializeField, Tooltip("Menu to display on escape key press.")]
     private GameObject menu;
+
     [SerializeField, Tooltip("Others panels. Used to hide them when press escape.")]
     private GameObject[] panels;
+
     [SerializeField, Tooltip("Force menu to be untoggleable.")]
     private bool menuNoToggleable;
+
     [SerializeField, Tooltip("Playlist Manager.")]
     private PlaylistManager playlistManager;
+
     [SerializeField, Tooltip("Name of the playlist to play when menu is shown.")]
     private string playlistMenuShow;
+
     [SerializeField, Tooltip("Name of the playlist to play when menu is hide.")]
     private string playlistMenuHide;
+
     [SerializeField, Tooltip("Panel displayed on win.")]
     private GameObject win;
+
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
 

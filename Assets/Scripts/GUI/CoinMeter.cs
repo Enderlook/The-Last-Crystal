@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class CoinMeter : MonoBehaviour
 {
+#pragma warning disable CS0649
     [Header("Setup")]
-    [Tooltip("Text where money will be displayed.")]
-    public Text moneyText;
+    [SerializeField, Tooltip("Text where money will be displayed.")]
+    private Text moneyText;
+#pragma warning restore CS0649
 
     public float showedMoney;
     private int oldMoney;

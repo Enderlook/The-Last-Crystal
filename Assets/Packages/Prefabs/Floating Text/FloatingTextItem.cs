@@ -7,31 +7,34 @@ namespace FloatingText
     {
         public enum TYPE_OF_ROUNDING { ROUND, CEIL, FLOOR, TRUNC }
 
+#pragma warning disable CS0649
         [Header("Configuration")]
         [Header("Overridable by Floating Text Controller", order = 2)]
-        [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
-        public float timeBeforeDestroy;
+        [SerializeField, Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
+        private float timeBeforeDestroy;
 
-        [Tooltip("Text color.")]
-        public Color textColor = Color.red;
+        [SerializeField, Tooltip("Text color.")]
+        private Color textColor = Color.red;
 
-        [Tooltip("Random spawn offset.")]
-        public Vector2 randomOffset = Vector2.one;
+        [SerializeField, Tooltip("Random spawn offset.")]
+        private Vector2 randomOffset = Vector2.one;
 
-        [Tooltip("Multiply the scale of the canvas by this value.")]
-        public float scaleMultiplier = 1;
+        [SerializeField, Tooltip("Multiply the scale of the canvas by this value.")]
+        private float scaleMultiplier = 1;
 
-        [Tooltip("Digit precision (decimals) for numbers. Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
-        public int digitPrecision = 0;
+        [SerializeField, Tooltip("Digit precision (decimals) for numbers. Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
+        private int digitPrecision = 0;
 
-        [Tooltip("Determines how decimal digits are rounded.")]
-        public TYPE_OF_ROUNDING typeOfRounding = TYPE_OF_ROUNDING.ROUND;
+        [SerializeField, Tooltip("Determines how decimal digits are rounded.")]
+        private TYPE_OF_ROUNDING typeOfRounding = TYPE_OF_ROUNDING.ROUND;
 
         [Header("Setup")]
-        [Tooltip("Text component to write.")]
-        public Text text;
-        [Tooltip("Animator component of text.")]
-        public Animator animator;
+        [SerializeField, Tooltip("Text component to write.")]
+        private Text text;
+
+        [SerializeField, Tooltip("Animator component of text.")]
+        private Animator animator;
+#pragma warning restore CS0649
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void Start()

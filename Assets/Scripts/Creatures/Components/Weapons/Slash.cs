@@ -51,8 +51,8 @@ namespace CreaturesAddons.Weapons
         public override void Init(Creature creature)
         {
             thisTransform = creature.Transform;
-            thisAnimator = creature.animator;
-            thisSpriteRenderer = creature.sprite;
+            thisAnimator = creature.Animator;
+            thisSpriteRenderer = creature.Sprite;
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
             slashingSound.Init();
             base.Init(creature);
