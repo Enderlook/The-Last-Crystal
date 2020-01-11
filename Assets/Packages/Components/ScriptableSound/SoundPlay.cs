@@ -17,6 +17,10 @@ namespace ScriptableSound
         private Sound sound;
 #pragma warning restore CS0649
 
+        /// <summary>
+        /// Whenever <see cref="sound"/> is playing or not.
+        /// </summary>
+        public bool IsPlaying => sound.IsPlaying;
 
         /// <summary>
         /// Initializes this <see cref="SoundPlay"/>.<br/>
@@ -39,5 +43,10 @@ namespace ScriptableSound
             sound.SetConfiguration(new SoundConfiguration(audioSource, endCallback));
             sound.Play();
         }
+
+        /// <summary>
+        /// Stop <see cref="sound"/> from playing.
+        /// </summary>
+        public void Stop() => sound.Stop();
     }
 }
