@@ -11,19 +11,24 @@ using UnityEngine.UI;
 
 public class WeaponCooldownDisplay : MonoBehaviour
 {
+#pragma warning disable CS0649
     [Header("Configuration")]
-    [Tooltip("Background sprite of weapon.")]
-    public Image image;
-    [Tooltip("Reverse fill mode.")]
-    public bool reverseFill;
-    [Tooltip("Configuration by percent.")]
-    public ModePercent[] modes;
+    [SerializeField, Tooltip("Background sprite of weapon.")]
+    private Image image;
+
+    [SerializeField, Tooltip("Reverse fill mode.")]
+    private bool reverseFill;
+
+    [SerializeField, Tooltip("Configuration by percent.")]
+    private ModePercent[] modes;
 
     [Header("Setup")]
-    [Tooltip("Weapon to track cooldown")]
-    public Weapon weapon;
-    [Tooltip("Audio Source to play sounds.")]
-    public AudioSource audioSource;
+    [SerializeField, Tooltip("Weapon to track cooldown")]
+    private Weapon weapon;
+
+    [SerializeField, Tooltip("Audio Source to play sounds.")]
+    private AudioSource audioSource;
+#pragma warning restore CS0649
 
     private Sound lastSound;
 
@@ -94,10 +99,11 @@ public class WeaponCooldownDisplay : MonoBehaviour
 #pragma warning disable CA2235
         public Color color;
 #pragma warning restore CA2235
+
         [Tooltip("Sound to play")]
         public Sound sound;
-        [Range(0, 1)]
-        [Tooltip("Minimal fill amount to show it")]
+
+        [Tooltip("Minimal fill amount to show it"), Range(0, 1)]
         public float percent;
     }
 }

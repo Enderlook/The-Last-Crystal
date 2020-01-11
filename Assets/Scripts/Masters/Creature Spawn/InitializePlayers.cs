@@ -12,17 +12,19 @@ using UnityEngine;
 
 public class InitializePlayers : MonoBehaviour
 {
+#pragma warning disable CS0649
     [SerializeField, Tooltip("Warrior health bar.")]
-    public HealthBar warriorHealthBar;
+    private HealthBar warriorHealthBar;
 
     [SerializeField, Tooltip("Warrior energy bar.")]
-    public HealthBar warriorEnergyBar;
+    private HealthBar warriorEnergyBar;
 
     [SerializeField, Tooltip("Wizard health bar.")]
-    public HealthBar wizardHealthBar;
+    private HealthBar wizardHealthBar;
 
     [SerializeField, Tooltip("Wizard energy bar.")]
-    public HealthBar wizardEnergyBar;
+    private HealthBar wizardEnergyBar;
+#pragma warning restore CS0649
 
     public void InitializeWarrior(GameObject warrior)
     {
@@ -40,7 +42,7 @@ public class InitializePlayers : MonoBehaviour
 
     private static void InitializeCreature(GameObject creature, HealthBar healthBar, HealthBar energyBar)
     {
-        BarDecorator barDecorator = creature.GetComponent<Creature>().health.GetLayer<BarDecorator>();
+        BarDecorator barDecorator = creature.GetComponent<Creature>().Health.GetLayer<BarDecorator>();
         barDecorator.Bar = healthBar;
         creature.GetComponent<EnergyManager>().SetEnergyBar(energyBar);
     }

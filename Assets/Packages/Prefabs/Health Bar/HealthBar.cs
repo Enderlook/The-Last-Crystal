@@ -87,53 +87,55 @@ namespace HealthBarGUI
 
     public class HealthBar : MonoBehaviour, IHealthBar
     {
+#pragma warning disable CS0649
         [Header("Configuration")]
-        [Tooltip("How numbers are shown, {0} is health, {1} is maximum health and {2} is percent of health. Eg: {0} / {1} ({2}%)")]
-        public string textShowed = "{0} / {1} ({2}%)";
+        [SerializeField, Tooltip("How numbers are shown, {0} is health, {1} is maximum health and {2} is percent of health. Eg: {0} / {1} ({2}%)")]
+        private string textShowed = "{0} / {1} ({2}%)";
 
-        [Tooltip("If damage or healing bars are active you can choose to add dynamic numbers.")]
-        public bool dynamicNumbers;
+        [SerializeField, Tooltip("If damage or healing bars are active you can choose to add dynamic numbers.")]
+        private bool dynamicNumbers;
 
-        [Tooltip("Health bar color (usually at max health). Use black color to use the Health image UI color.")]
-        public Color maxHealthColor = Color.green;
+        [SerializeField, Tooltip("Health bar color (usually at max health). Use black color to use the Health image UI color.")]
+        private Color maxHealthColor = Color.green;
 
-        [Tooltip("Health bar color at minimum health. If black, health won't change of color at low health.")]
-        public Color minHealthColor = Color.red;
+        [SerializeField, Tooltip("Health bar color at minimum health. If black, health won't change of color at low health.")]
+        private Color minHealthColor = Color.red;
 
         [Header("Setup")]
-        [Tooltip("Used to show numbers of health. Use null to deactivate it.")]
-        public Text textNumber;
+        [SerializeField, Tooltip("Used to show numbers of health. Use null to deactivate it.")]
+        private Text textNumber;
 
-        [Tooltip("Represent object health.")]
-        public GameObject healthBar;
+        [SerializeField, Tooltip("Represent object health.")]
+        private GameObject healthBar;
 
         private Image healthImage;
         private RectTransform healthTransform;
 
-        [Tooltip("Represent the amount of recent damage received. Use null to deactivate it.")]
-        public Image damageBar;
+        [SerializeField, Tooltip("Represent the amount of recent damage received. Use null to deactivate it.")]
+        private Image damageBar;
 
-        [Tooltip("Represent the amount of recent healing received. Use null to deactivate it.")]
-        public GameObject healingBar;
+        [SerializeField, Tooltip("Represent the amount of recent healing received. Use null to deactivate it.")]
+        private GameObject healingBar;
 
         private Image healingImage;
         private RectTransform healingTransform;
 
-        [Tooltip("Check to ceil health values (round up), useful if health is float, to avoid show 0 HP on bar while you still have 0.44 or below HP. On false, normal round will be performed.")]
-        public bool ceilValues = true;
+        [SerializeField, Tooltip("Check to ceil health values (round up), useful if health is float, to avoid show 0 HP on bar while you still have 0.44 or below HP. On false, normal round will be performed.")]
+        private bool ceilValues = true;
 
         [Header("Hidding Setup")]
-        [Tooltip("Used to show or hide the health bar. If null, it will show and hide each part by separate instead of just the canvas.")]
-        public Canvas canvas;
+        [SerializeField, Tooltip("Used to show or hide the health bar. If null, it will show and hide each part by separate instead of just the canvas.")]
+        private Canvas canvas;
 
-        [Tooltip("Only used to hide or show in case Canvas is null.")]
-        public Image frame;
+        [SerializeField, Tooltip("Only used to hide or show in case Canvas is null.")]
+        private Image frame;
 
-        [Tooltip("Only used to hide or show in case Canvas is null.")]
-        public Image background;
+        [SerializeField, Tooltip("Only used to hide or show in case Canvas is null.")]
+        private Image background;
 
-        [Tooltip("Only used to hide or show in case Canvas is null.")]
-        public Image icon;
+        [SerializeField, Tooltip("Only used to hide or show in case Canvas is null.")]
+        private Image icon;
+#pragma warning restore CS0649
 
         private float maxHealth;
         private float health;

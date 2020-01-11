@@ -46,13 +46,15 @@ namespace Serializables.Physics
                     Handles.color = color;
                     if (serializedProperty.FindPropertyRelative("distance").floatValue == Mathf.Infinity)
                     {
-                        Vector2 direction = rayCasting.direction;
+                        SerializedProperty directionProperty = serializedProperty.FindPropertyRelative("direction");
+
+                        Vector2 direction = directionProperty.vector2Value;
 
                         // We can't use the WorldEnd property because that will give infinity
                         Vector2 worldEndPosition = source + reference + direction;
 
                         if (edit)
-                            rayCasting.direction = ((Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity) - source - reference).normalized;
+                            directionProperty.vector2Value = ((Vector2)Handles.PositionHandle(worldEndPosition, Quaternion.identity) - source - reference).normalized;
 
                         Vector2 sourcePositionWorld = source + reference;
 

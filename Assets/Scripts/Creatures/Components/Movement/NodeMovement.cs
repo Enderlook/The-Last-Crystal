@@ -44,10 +44,10 @@ namespace CreaturesAddons.Movement.NodeMovement
 
         void IInit.Init(Creature creature)
         {
-            thisRigidbody2D = creature.thisRigidbody2D;
-            spriteRenderer = creature.sprite;
-            animator = creature.animator;
-            groundChecker = creature.groundChecker;
+            thisRigidbody2D = creature.ThisRigidbody2D;
+            spriteRenderer = creature.Sprite;
+            animator = creature.Animator;
+            groundChecker = creature.GroundChecker;
             targetAndPathGetter = GetComponent<TargetAndPathGetter>();
         }
 

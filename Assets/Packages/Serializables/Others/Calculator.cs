@@ -17,14 +17,14 @@ namespace Serializables
     [Serializable]
     public class Calculator
     {
-#pragma warning disable CA2235
-        [Tooltip("Formula to calculate.\nIt doesn't support operator precedence, instead use brackets.\nSupports string formating.")]
+#pragma warning disable CA2235, CS0649
+        [SerializeField, Tooltip("Formula to calculate.\nIt doesn't support operator precedence, instead use brackets.\nSupports string formating.")]
         public string formula;
 
-        [Tooltip("Should Regex be compiled.\nIncreases constructor time but decreases matching time. It's only worth with very heavy loads (~1M matches).")]
-        public bool compile;
+        [SerializeField, Tooltip("Should Regex be compiled.\nIncreases constructor time but decreases matching time. It's only worth with very heavy loads (~1M matches).")]
+        private bool compile;
         private Regex regex;
-#pragma warning restore CA2235
+#pragma warning restore CA2235, CS0649
 
         /// <summary>
         /// Whenever the regex object is compiled or not.

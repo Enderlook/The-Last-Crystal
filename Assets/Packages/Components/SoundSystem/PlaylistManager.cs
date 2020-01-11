@@ -27,12 +27,12 @@ namespace SoundSystem
         [SerializeField, Tooltip("Play on start.")]
         private bool playOnStart;
 
-        [Header("Setup")]
-        [Tooltip("Audio Source used to play music.")]
 #pragma warning disable IDE0044
+        [Header("Setup")]
+        [SerializeField, Tooltip("Audio Source used to play music.")]
         private AudioSource audioSource;
 
-        [Tooltip("How is this considered.")]
+        [SerializeField, Tooltip("How is this considered.")]
         private Type type;
 #pragma warning restore IDE0044
 #pragma warning restore CS0649
