@@ -27,9 +27,7 @@ namespace ScriptableSound
         /// <param name="soundConfiguration">Configuration.</param>
         public void SetConfiguration(SoundConfiguration soundConfiguration)
         {
-            if (soundConfiguration == null) throw new ArgumentNullException(nameof(soundConfiguration));
-
-            this.soundConfiguration = soundConfiguration;
+            this.soundConfiguration = soundConfiguration ?? throw new ArgumentNullException(nameof(soundConfiguration));
         }
 
         /// <summary>
