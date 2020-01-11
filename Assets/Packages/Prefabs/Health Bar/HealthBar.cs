@@ -23,20 +23,24 @@ namespace HealthBarGUI
         /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="healthBar"/>.<br/>
         /// </summary>
         float HealthBarPercentFill { get; }
+
         /// <summary>
         /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="healingBar"/>.<br/>
         /// Warning! If <see cref="healingBar"></see> is <see langword="null"/> it will return <see langword="null"/>.
         /// </summary>
         float? HealingBarPercentFill { get; }
+
         /// <summary>
         /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="damageBar"/>.<br/>
         /// Warning! If <see cref="damageBar"/> is <see langword="null"/> it will return <see langword="null"/>.
         /// </summary>
         float? DamageBarPercentFill { get; }
+
         /// <summary>
         /// Returns <see langword="true"/> if <seealso cref="Image.fillAmount"/> of the <see cref="healingBar"/> if 0 or <see cref="healingBar"/> is <see langword="null"/>.<br/>
         /// </summary>
         bool IsHealingBarPercentHide { get; }
+
         /// <summary>
         /// Returns <see langword="true"/> if <seealso cref="Image.fillAmount"/> of the <see cref="damageBar"/> if 0 or <see cref="damageBar"/> is <see langword="null"/>.<br/>
         /// </summary>
@@ -86,11 +90,13 @@ namespace HealthBarGUI
         [Header("Configuration")]
         [Tooltip("How numbers are shown, {0} is health, {1} is maximum health and {2} is percent of health. Eg: {0} / {1} ({2}%)")]
         public string textShowed = "{0} / {1} ({2}%)";
+
         [Tooltip("If damage or healing bars are active you can choose to add dynamic numbers.")]
         public bool dynamicNumbers;
 
         [Tooltip("Health bar color (usually at max health). Use black color to use the Health image UI color.")]
         public Color maxHealthColor = Color.green;
+
         [Tooltip("Health bar color at minimum health. If black, health won't change of color at low health.")]
         public Color minHealthColor = Color.red;
 
@@ -100,13 +106,16 @@ namespace HealthBarGUI
 
         [Tooltip("Represent object health.")]
         public GameObject healthBar;
+
         private Image healthImage;
         private RectTransform healthTransform;
 
         [Tooltip("Represent the amount of recent damage received. Use null to deactivate it.")]
-        public Image damageBar = null;
+        public Image damageBar;
+
         [Tooltip("Represent the amount of recent healing received. Use null to deactivate it.")]
-        public GameObject healingBar = null;
+        public GameObject healingBar;
+
         private Image healingImage;
         private RectTransform healingTransform;
 
@@ -116,15 +125,19 @@ namespace HealthBarGUI
         [Header("Hidding Setup")]
         [Tooltip("Used to show or hide the health bar. If null, it will show and hide each part by separate instead of just the canvas.")]
         public Canvas canvas;
+
         [Tooltip("Only used to hide or show in case Canvas is null.")]
         public Image frame;
+
         [Tooltip("Only used to hide or show in case Canvas is null.")]
         public Image background;
+
         [Tooltip("Only used to hide or show in case Canvas is null.")]
         public Image icon;
 
         private float maxHealth;
         private float health;
+
         public bool IsVisible {
             get => canvas != null ? canvas.enabled : isVisible;
             set {
@@ -149,10 +162,10 @@ namespace HealthBarGUI
                 }
             }
         }
-        private bool isVisible = false;
+
+        private bool isVisible;
         public bool IsEnabled { get; set; } = true;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void Awake() => Setup();
 
         public void ManualUpdate(float health, float maxHealth)
@@ -170,6 +183,7 @@ namespace HealthBarGUI
             if (healingImage != null)
                 healingImage.fillAmount = 0;
         }
+
         public void ManualUpdate(float maxHealth) => ManualUpdate(maxHealth, maxHealth);
 
         /// <summary>
@@ -178,7 +192,6 @@ namespace HealthBarGUI
         /// <returns>Color of the <see cref="healthImage"/></returns>
         private Color GetHealthColor() => Color.Lerp(minHealthColor, maxHealthColor, healthImage.fillAmount + (damageBar != null ? damageBar.fillAmount : 0) - (healingBar != null ? healingImage.fillAmount : 0));
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void Update()
         {
             if (IsEnabled)
@@ -206,11 +219,13 @@ namespace HealthBarGUI
         }
 
         private float Rounding(float value) => ceilValues ? Mathf.Ceil(value) : Mathf.Round(value);
+
         public void UpdateValues(float health, float maxHealth)
         {
             this.maxHealth = maxHealth;
             Set(health);
         }
+
         public void UpdateValues(float health) => Set(health);
 
         /// <summary>
@@ -287,7 +302,6 @@ namespace HealthBarGUI
         /// <summary>
         /// Update color of health bar.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void OnValidate()
         {
             Setup();

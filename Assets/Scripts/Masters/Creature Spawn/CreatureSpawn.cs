@@ -16,6 +16,7 @@ public class CreatureSpawn : MonoBehaviour
     [Header("Configuration")]
     [SerializeField, Tooltip("Creatures to spawn.")]
     private CreatureSpawnToken[] creatures;
+
     [Header("Setup")]
     [SerializeField, Tooltip("Navigation graph used by enemies to move.")]
     private NavigationGraph navigationGraph;
@@ -32,15 +33,20 @@ public class CreatureSpawn : MonoBehaviour
 #pragma warning disable CS0649, CA2235
         [SerializeField, Tooltip("Prefab to spawn.")]
         private GameObject prefab;
+
         [SerializeField, Tooltip("Spawning point.")]
         private Transform spawningPoint;
 #pragma warning restore CA2235
+
         [SerializeField, Tooltip("Respawning time in seconds.")]
         private float respawningTime;
+
         [SerializeField, Tooltip("Should be instantly spawn on Start.")]
         private bool spawnOnStart;
+
         [SerializeField, Tooltip("Action executed when spawn prefab. The parameter is the spawned game object.")]
         private UnityEventGameObject action;
+
         [Header("Setup")]
         [SerializeField, Tooltip("Image used to show respawning time percent.")]
         private Image image;
@@ -48,6 +54,7 @@ public class CreatureSpawn : MonoBehaviour
 
         [NonSerialized]
         private Clockwork timer;
+
         [NonSerialized]
         private NavigationGraph navigationGraph;
 

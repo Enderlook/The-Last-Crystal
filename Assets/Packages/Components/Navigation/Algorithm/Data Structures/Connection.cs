@@ -11,6 +11,7 @@ namespace Navigation
         /// Starting node.
         /// </summary>
         public Node start;
+
         /// <summary>
         /// Ending node.
         /// </summary>
@@ -21,17 +22,16 @@ namespace Navigation
         /// </summary>
         public float Distance => Vector2.Distance(start.position, end.position);
 
-        [SerializeField]
-        private bool isActive;
         /// <summary>
         /// Whenever it's active or not.
         /// </summary>
-        public bool IsActive { get => isActive; private set => isActive = value; }
+        [field: SerializeField]
+        public bool IsActive { get; private set; }
 
         /// <summary>
         /// Set if this <see cref="Connection"/> is active or not.
         /// </summary>
-        /// <param name="actived">Whenever it's active or not.</param>
+        /// <param name="active">Whenever it's active or not.</param>
         public void SetActive(bool active) => IsActive = active;
 
         /// <summary>
@@ -40,6 +40,7 @@ namespace Navigation
         public bool IsExtreme => start.isExtreme && end.isExtreme;
 
         public override string ToString() => $"<start:{start}; end:{end}; active:{IsActive}; distance:{Distance}; extreme:{IsExtreme}";
+
         public string ToString(NavigationGraph navigationGraph) => $"<start:{start.ToString(navigationGraph)}; end:{end.ToString(navigationGraph)}; active:{IsActive}; distance:{Distance}; extreme:{IsExtreme}";
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace Navigation
             Connection connection = CreateInstance<Connection>();
             connection.start = start;
             connection.end = end;
-            connection.isActive = isActive;
+            connection.IsActive = isActive;
             return connection;
         }
 

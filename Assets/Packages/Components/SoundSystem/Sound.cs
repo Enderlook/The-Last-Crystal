@@ -52,7 +52,7 @@ namespace SoundSystem
             return true;
         }
 
-       public void Play(AudioSource audioSource, float volumeMultiplier = 1)
+        public void Play(AudioSource audioSource, float volumeMultiplier = 1)
         {
             if (audioSource == null)
                 throw new ArgumentNullException(nameof(audioSource));

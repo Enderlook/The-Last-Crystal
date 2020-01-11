@@ -32,10 +32,7 @@ namespace AdditionalExtensions
             return source.FirstCharTo(char.ToLower, e => e.ToLower());
         }
 
-        private static string FirstCharTo(this string source, Func<char, char> charFunc, Func<string, string> stringFunc)
-        {
-            return source.Length > 1 ? charFunc(source[0]) + source.Substring(1) : stringFunc(source);
-        }
+        private static string FirstCharTo(this string source, Func<char, char> charFunc, Func<string, string> stringFunc) => source.Length > 1 ? charFunc(source[0]) + source.Substring(1) : stringFunc(source);
 
         /// <summary>
         /// Convert the string to sentence case. Remove all uppercases but add uppercase to the first character.<br>
@@ -242,10 +239,7 @@ namespace AdditionalExtensions
             return source.JoinWhitespacesToLowerCase("-");
         }
 
-        private static string JoinWhitespacesToLowerCase(this string source, string delimiter)
-        {
-            return string.Join(delimiter, source.ToLower().Split(' '));
-        }
+        private static string JoinWhitespacesToLowerCase(this string source, string delimiter) => string.Join(delimiter, source.ToLower().Split(' '));
 
         private static string FirstCharToUpperOfEachWord(this string source, string delimiter)
         {

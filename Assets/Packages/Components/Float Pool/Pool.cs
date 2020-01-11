@@ -19,31 +19,37 @@ namespace FloatPool
 #pragma warning disable CS0649, IDE0051
         [SerializeField, HideInInspector]
         private bool hasEmptyCallback;
+
         [SerializeField, HasConfirmationField(nameof(hasEmptyCallback))]
         private EmptyCallbackDecorator emptyCallback;
 
         [SerializeField, HideInInspector]
         private bool hasFullCallback;
+
         [SerializeField, HasConfirmationField(nameof(hasFullCallback))]
         private FullCallbackDecorator fullCallback;
 
         [SerializeField, HideInInspector]
         private bool hasChangeCallback;
+
         [SerializeField, HasConfirmationField(nameof(hasChangeCallback))]
         private ChangeCallbackDecorator changeCallback;
 
         [SerializeField, HideInInspector]
         private bool hasBar;
+
         [SerializeField, HasConfirmationField(nameof(hasBar))]
         private BarDecorator bar;
 
         [SerializeField, HideInInspector]
         private bool hasRecharger;
+
         [SerializeField, HasConfirmationField(nameof(hasRecharger))]
         private RechargerDecorator recharger;
 
         [SerializeField, HideInInspector]
         private bool hasDecreaseReduction;
+
         [SerializeField, HasConfirmationField(nameof(hasDecreaseReduction))]
         private DecreaseReductionDecorator decreaseReduction;
 #pragma warning restore IDE0051, CS0649

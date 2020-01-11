@@ -54,6 +54,7 @@ namespace Master
         /// If possible, use <seealso cref="IsPause"/>.
         /// </summary>
         public static bool IsPlaying => !isPause;
+
         private static bool isPause;
         /// <summary>
         /// Whenever the game is paused or not.

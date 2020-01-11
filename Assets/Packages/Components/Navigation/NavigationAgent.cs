@@ -66,19 +66,18 @@ namespace Navigation
         }
 
 #if UNITY_EDITOR
+#pragma warning disable CS0649
         [Header("Editor Only")]
         [SerializeField, Tooltip("Draw last path calculated on play.")]
-#pragma warning disable CS0649
         private bool drawPath;
+
         [SerializeField, Tooltip("Color of path.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "Serialized by Unity.")]
         private Color pathColor = Color.blue;
 
         [NonSerialized]
         private List<Connection> lastPath;
 #pragma warning restore CS0649
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0052:Quitar miembros privados no leídos", Justification = "Used by Unity.")]
         private void OnDrawGizmos()
         {
             if (drawPath && lastPath != null)

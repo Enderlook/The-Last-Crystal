@@ -13,6 +13,7 @@ namespace AdditionalComponents
         private float angularVelocity;
         private Vector2 velocity;
         private float speedMultiplier = 1;
+
         /// <summary>
         /// Change this value affect the speed of the current and future <see cref="Rigidbody2D"/>.<br/>
         /// If 0, the <seealso cref="Rigidbody2D"/> will be stopped and turn into <c><see cref="Rigidbody2D.isKinematic"/> = <see langword="true"/></c>.

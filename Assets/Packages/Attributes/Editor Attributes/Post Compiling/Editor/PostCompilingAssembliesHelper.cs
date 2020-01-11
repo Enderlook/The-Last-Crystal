@@ -329,10 +329,7 @@ namespace AdditionalAttributes.PostCompiling
             }
         }
 
-        private static IEnumerable<int> GetKeySortedUnion(params IEnumerable<int>[] keys)
-        {
-            return keys.SelectMany(e => e).Distinct().OrderByDescending(e => e).Reverse();
-        }
+        private static IEnumerable<int> GetKeySortedUnion(params IEnumerable<int>[] keys) => keys.SelectMany(e => e).Distinct().OrderByDescending(e => e).Reverse();
 
         private static void ExecuteLoop<T>(int loop, Dictionary<int, Action<T>> callbacks, List<T> values)
         {

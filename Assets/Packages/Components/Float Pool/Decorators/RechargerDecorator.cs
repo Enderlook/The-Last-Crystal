@@ -20,18 +20,24 @@ namespace FloatPool.Decorators
 
         [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
         private float rechargingDelay;
+
         private float _currentRechargingDelay;
 
         [SerializeField, Tooltip("Sound played while recharging.")]
         private Playlist playlist;
+
         [SerializeField, Tooltip("Audio Source used to play sound.")]
         private AudioSource audioSource;
 
         [SerializeField, Tooltip("Event executed when start recharging.")]
         private UnityEvent startCallback;
+
         private bool _startCalled;
+
         [SerializeField, Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
         private UnityEventBoolean endCallback;
+
+
         [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
         private UnityEventBoolean activeCallback;
 #pragma warning restore CS0649

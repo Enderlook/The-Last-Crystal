@@ -84,10 +84,7 @@ namespace UnityEditorHelper
         /// <param name="serializedProperty"><see cref="SerializedProperty"/> to show in the inspector./param>
         /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
         /// <param name="confirm">Whenever it should be drew or not.</param>
-        private static void DrawFieldIfConfirmed(this SerializedObject source, SerializedProperty serializedProperty, bool includeChildren, bool confirm)
-        {
-            DrawIdentedIfConfirmed(() => source.PropertyFieldAutoSave(serializedProperty, includeChildren), confirm);
-        }
+        private static void DrawFieldIfConfirmed(this SerializedObject source, SerializedProperty serializedProperty, bool includeChildren, bool confirm) => DrawIdentedIfConfirmed(() => source.PropertyFieldAutoSave(serializedProperty, includeChildren), confirm);
 
         /// <summary>
         /// Draw an idented property field if <paramref name="confirm"/> is <see langword="true"/> and save an undo for it changes.
@@ -96,10 +93,7 @@ namespace UnityEditorHelper
         /// <param name="serializedProperty">Name of the <see cref="SerializedProperty"/> to show in the inspector./param>
         /// <param name="includeChildren"/>If <see langword="true"/> the property including children is drawn.</param>
         /// <param name="confirm">Whenever it should be drew or not.</param>
-        private static void DrawFieldIfConfirmed(this SerializedObject source, string serializedProperty, bool includeChildren, bool confirm)
-        {
-            DrawIdentedIfConfirmed(() => source.PropertyFieldAutoSave(serializedProperty, includeChildren), confirm);
-        }
+        private static void DrawFieldIfConfirmed(this SerializedObject source, string serializedProperty, bool includeChildren, bool confirm) => DrawIdentedIfConfirmed(() => source.PropertyFieldAutoSave(serializedProperty, includeChildren), confirm);
 
         /// <summary>
         /// Do something idented in the Unity Inspector if <paramref name="confirm"/> is <see langword="true"/>.
@@ -129,10 +123,7 @@ namespace UnityEditorHelper
         /// <param name="reasonForUndo">Reason used when save undo operation.<br>
         /// If <see langword="null"/>, <paramref name="confirmationLabel"/> will be used instead.<br>
         /// To this it's appended " Checkbox." or " Change value." depending which action it was done.</param>
-        public static void ToggleableField<T>(this SerializedObject source, ref T field, Func<T> toShowField, ref bool confirmationVariable, string confirmationLabel, string confirmationTooltip = "", string reasonForUndo = null)
-        {
-            source.ToggleableField(ref field, toShowField, ref confirmationVariable, new GUIContent(confirmationLabel, confirmationTooltip), reasonForUndo ?? confirmationLabel);
-        }
+        public static void ToggleableField<T>(this SerializedObject source, ref T field, Func<T> toShowField, ref bool confirmationVariable, string confirmationLabel, string confirmationTooltip = "", string reasonForUndo = null) => source.ToggleableField(ref field, toShowField, ref confirmationVariable, new GUIContent(confirmationLabel, confirmationTooltip), reasonForUndo ?? confirmationLabel);
 
 
         /// <summary>
@@ -219,10 +210,7 @@ namespace UnityEditorHelper
         /// <param name="serializedProperty">Name of the <see cref="SerializedProperty"/> to show in the inspector./param>
         /// <param name="booleanSerializedProperty">Name of the <see cref="SerializedProperty"/> to show in the inspector as confirmation checkbox./param>
         /// <param name="includeChildren"/>If <see langword="true"/> the <paramref name="serializedProperty"/> including children is drawn.</param>
-        public static void ToggleableField(this SerializedObject source, string serializedProperty, string booleanSerializedProperty, bool includeChildren = false)
-        {
-            source.ToggleableField(source.FindProperty(serializedProperty), source.FindProperty(booleanSerializedProperty), includeChildren);
-        }
+        public static void ToggleableField(this SerializedObject source, string serializedProperty, string booleanSerializedProperty, bool includeChildren = false) => source.ToggleableField(source.FindProperty(serializedProperty), source.FindProperty(booleanSerializedProperty), includeChildren);
 
         /// <summary>
         /// Generate a toggleable button to hide or show a certain field, which is also created by this method.

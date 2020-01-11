@@ -17,16 +17,22 @@ public class Spawner : MonoBehaviour
     [Header("Configuration")]
     [SerializeField, Tooltip("Enemies to spawn.")]
     private Enemy[] enemies;
+
     [SerializeField, Tooltip("Maximum amount of enemies at the same time")]
     private int simultaneousEnemies;
+
     [SerializeField, Tooltip("Total enemies to spawn.")]
     private int enemiesToSpawn;
+
     [SerializeField, Tooltip("Time between spawn enemies.")]
     private float timeBtwSpawn;
+
     [SerializeField, Tooltip("Start time spawn")]
     private float startSpawn;
+
     [SerializeField, Tooltip("Boss spawned after all enemies die.")]
     private GameObject boss;
+
     [SerializeField, Tooltip("Particle effect.")]
     private GameObject particle;
 
@@ -100,6 +106,7 @@ public class Enemy
 {
     [Tooltip("Prefab of the enemy.")]
     public GameObject prefabEnemy;
+
     [Tooltip("Probability that the enemy has to be spawned.")]
     public int probability;
 }

@@ -237,11 +237,9 @@ namespace Navigation
 
         [MenuItem("CONTEXT/" + nameof(NavigationGraph) + "/Reset Grid")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Usado por Unity")]
-        private static void NewMenuOption(MenuCommand menuCommand)
-        {
+        private static void NewMenuOption(MenuCommand menuCommand) =>
             // https://learn.unity.com/tutorial/editor-scripting#5c7f8528edbc2a002053b5fa
             ((NavigationGraph)menuCommand.context).ResetGrid();
-        }
 
         private void EditingLogic()
         {
@@ -503,9 +501,6 @@ namespace Navigation
             DrawDistance(start, target, textColor, fontSize);
         }
 
-        public static Vector2[] GetWorldPosition(this Graph reference, params Node[] nodes)
-        {
-            return reference == null ? nodes.Select(e => e.position).ToArray() : nodes.Select(e => reference.GetWorldPosition(e)).ToArray();
-        }
+        public static Vector2[] GetWorldPosition(this Graph reference, params Node[] nodes) => reference == null ? nodes.Select(e => e.position).ToArray() : nodes.Select(e => reference.GetWorldPosition(e)).ToArray();
     }
 }

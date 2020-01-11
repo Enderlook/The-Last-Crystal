@@ -126,9 +126,6 @@ namespace UnityEditorHelper
         /// </summary>
         /// <param name="object">Asset to get directory.</param>
         /// <returns>Directory where thee asset is saved.</returns>
-        public static string GetAssetDirectory(UnityObject @object)
-        {
-            return Path.GetDirectoryName(AssetDatabase.GetAssetPath(@object));
-        }
+        public static string GetAssetDirectory(UnityObject @object) => Path.GetDirectoryName(AssetDatabase.GetAssetPath(@object));
     }
 }

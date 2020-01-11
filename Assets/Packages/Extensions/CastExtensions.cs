@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+
 using UnityEngine;
 
 namespace AdditionalExtensions
@@ -37,21 +38,23 @@ namespace AdditionalExtensions
         /// <typeparam name="T">Type of the value to cast.</typeparam>
         /// <param name="obj"><see cref="Object"/> to cast.</param>
         /// <returns>Return <c>(<typeparamref name="T"/>)<paramref name="obj"/></c>. <c>default(<typeparamref name="T"/>)<c> if it can't cast.</returns>
-        public static T CastOrDefault<T>(this object obj)
-        {
-            return obj is T ? (T)obj : (default);
-        }
+        public static T CastOrDefault<T>(this object obj) => obj is T ? (T)obj : (default);
+
 
         /// <summary>
         /// Don't use me.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "It won't be used.")]
         public class RequireStruct<T> where T : struct { }
+
         /// <summary>
         /// Don't use me.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "It won't be used.")]
         public class RequireClass<T> where T : class { }
+
 
         /// <summary>
         /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/>.
@@ -64,10 +67,8 @@ namespace AdditionalExtensions
         /// <seealso cref="TryCast{T}(object, out T)"/>
         /// <seealso cref="CastOrDefault{T}(object)"/>
         /// <seealso cref="CastOrNull{T}(object, RequireClass{T})"/>
-        public static T? CastOrNull<T>(this object obj, RequireStruct<T> ignoreMe = null) where T : struct
-        {
-            return obj is T ? (T?)(T)obj : null;
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Required in order to make the overload.")]
+        public static T? CastOrNull<T>(this object obj, RequireStruct<T> ignoreMe = null) where T : struct => obj is T ? (T?)(T)obj : null;
 
         /// <summary>
         /// Try to cast <paramref name="obj"/> into <typeparamref name="T"/>.
@@ -80,10 +81,8 @@ namespace AdditionalExtensions
         /// <seealso cref="TryCast{T}(object, out T)"/>
         /// <seealso cref="CastOrDefault{T}(object)"/>
         /// <seealso cref="CastOrNull{T}(object, RequireStruct{T})"/>
-        public static T CastOrNull<T>(this object obj, RequireClass<T> ignoreMe = null) where T : class
-        {
-            return obj is T ? (T)obj : null;
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Required in order to make the overload.")]
+        public static T CastOrNull<T>(this object obj, RequireClass<T> ignoreMe = null) where T : class => obj is T ? (T)obj : null;
 
         private static readonly Dictionary<Type, IEnumerable<Type>> PrimitiveTypeTable = new Dictionary<Type, IEnumerable<Type>>
         {

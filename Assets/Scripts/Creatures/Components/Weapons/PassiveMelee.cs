@@ -7,8 +7,10 @@ namespace CreaturesAddons.Weapons
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
         protected float damage = 1;
+
         [SerializeField, Tooltip("Push strength on hit.")]
         protected float pushStrength = 0;
+
         [SerializeField, Tooltip("Whenever it should or not display damage floating text and animation.")]
         private bool showHurt = true;
 

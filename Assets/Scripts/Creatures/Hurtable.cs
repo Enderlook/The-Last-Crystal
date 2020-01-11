@@ -16,6 +16,7 @@ namespace CreaturesAddons
         [Header("Setup")]
         [Tooltip("Health.")]
         public Pool health;
+
         [Tooltip("FloatingTextController Script")]
         public FloatingTextController floatingTextController;
 

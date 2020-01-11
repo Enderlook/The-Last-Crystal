@@ -9,15 +9,12 @@ namespace Navigation
     [Serializable]
     public class Graph : IGraphReader, IGraphEditing
     {
-        [SerializeField]
-        private Transform reference;
-        public Transform Reference {
-            get => reference;
-            set => reference = value;
-        }
+        [field: SerializeField]
+        public Transform Reference { get; set; }
 
         [SerializeField]
         private List<Node> grid;
+
         /// <summary>
         /// All nodes of this graph.
         /// </summary>
@@ -28,14 +25,14 @@ namespace Navigation
 
         public void RemoveDuplicatedPositionsFromGrid() => Grid = Grid.Distinct().ToList();
 
-        public Vector2 GetWorldPosition(Node node) => reference == null ? node.position : node.position + (Vector2)reference.position;
+        public Vector2 GetWorldPosition(Node node) => Reference == null ? node.position : node.position + (Vector2)Reference.position;
 
-        public Vector2 GetLocalPosition(Vector2 position) => reference == null ? position : position - (Vector2)reference.position;
+        public Vector2 GetLocalPosition(Vector2 position) => Reference == null ? position : position - (Vector2)Reference.position;
 
         public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD)
         {
             if (mode == PositionReference.WORLD)
-                position -= (Vector2)reference.position;
+                position -= (Vector2)Reference.position;
             Node node = Node.CreateNode(position, isActive);
             Grid.Add(node);
             return node;

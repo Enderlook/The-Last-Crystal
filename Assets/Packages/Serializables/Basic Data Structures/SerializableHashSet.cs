@@ -11,20 +11,20 @@ namespace Serializables
     public class SerializableHashSet<T> : ICollection<T>, IEnumerable<T>, IEnumerable, IReadOnlyCollection<T>, ISet<T>, ISerializationCallbackReceiver
     {
         private HashSet<T> hashSet;
+
         private HashSet<T> HashSet {
             get => hashSet ?? (hashSet = new HashSet<T>());
             set => hashSet = value;
         }
+
         [SerializeField, HideInInspector]
         private T[] array;
 
         public SerializableHashSet() => HashSet = new HashSet<T>();
+
         public SerializableHashSet(IEnumerable<T> enumerable) => HashSet = new HashSet<T>(enumerable);
 
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-            array = HashSet.ToArray();
-        }
+        void ISerializationCallbackReceiver.OnBeforeSerialize() => array = HashSet.ToArray();
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {

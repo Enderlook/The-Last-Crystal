@@ -11,12 +11,14 @@ namespace FloatingText
         [Header("Configuration")]
         [SerializeField, Tooltip("Spawning point of prefab. If there are several, a random point will be used.")]
         private Transform[] spawningPoints = new Transform[1];
+
         [SerializeField, Tooltip("Maximum amount of floating texts at time. New texts will remove old ones. Use 0 for unlimited.")]
         private int maximumAmountFloatingText = 10;
 
 #pragma warning disable CS0649
         [SerializeField, HideInInspector]
         private bool overrideTimeBeforeDestroy;
+
         [Header("Floating Text Override Configuration")]
         [HasConfirmationField(nameof(overrideTimeBeforeDestroy))]
         [SerializeField, Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
@@ -24,30 +26,35 @@ namespace FloatingText
 
         [SerializeField, HideInInspector]
         private bool overrideTextColor;
+
         [HasConfirmationField(nameof(overrideTextColor))]
         [SerializeField, Tooltip("Color used by text")]
         private Color textColor = Color.red;
 
         [SerializeField, HideInInspector]
         private bool overrideRandomOffset;
+
         [HasConfirmationField(nameof(overrideRandomOffset))]
         [SerializeField, Tooltip("Random spawn offset.")]
         private Vector2 randomOffset = Vector2.one;
 
         [SerializeField, HideInInspector]
         private bool overrideScaleMultiplier;
+
         [HasConfirmationField(nameof(overrideScaleMultiplier))]
         [SerializeField, Tooltip("Multiply the scale of the canvas by this value.")]
         private float scaleMultiplier = 1;
 
         [SerializeField, HideInInspector]
         private bool overrideDigitPrecision;
+
         [HasConfirmationField(nameof(overrideDigitPrecision))]
         [SerializeField, Tooltip("Digit precision (decimals) for numbers .Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
         private int digitPrecision = 0;
 
         [SerializeField, HideInInspector]
         private bool overrideTypeOfRounding;
+
         [HasConfirmationField(nameof(overrideTypeOfRounding))]
         [SerializeField, Tooltip("Determines how decimal digits are rounded.")]
         private FloatingTextItem.TYPE_OF_ROUNDING typeOfRounding = FloatingTextItem.TYPE_OF_ROUNDING.ROUND;
@@ -55,16 +62,19 @@ namespace FloatingText
         [Header("Setup")]
         [SerializeField, Tooltip("Floating Text prefab.")]
         private GameObject floatingTextPrefab;
+
         [SerializeField, Tooltip("Parent transform of all floating texts. Just for organization of scene.\nOptional.\nDO NOT USE A MOVING TRANSFORM!")]
         private Transform floatingTextParent;
 #pragma warning restore CS0649
 
         private static Transform floatingTextParentStatic;
+        
         /// <summary>
         /// Set the parent of all Floating Text <see cref="GameObject"/>s spawned by <see cref="FloatingTextController"/>s which <see cref="floatingTextParent"/> is <see langword="null"/>.
         /// </summary>
         /// <param name="floatingTextParent">Parent of all <see cref="FloatingTextItem"/> <see cref="GameObject"/>s.</param>
         public static void SetFloatingTextParentStatic(Transform floatingTextParent) => floatingTextParentStatic = floatingTextParent;
+        
         /// <summary>
         /// Transform used as parent for spawned floating texts.<br/>
         /// <see cref="FloatingTextParent"/> will be returned unless it's <see langword="null"/>. If <see langword="null"/>, <see cref="floatingTextParentStatic"/> will be returned.

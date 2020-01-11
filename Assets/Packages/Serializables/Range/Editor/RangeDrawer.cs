@@ -90,9 +90,6 @@ namespace Range
             EditorGUI.EndProperty();
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label) + errorHeight + (EditorGUIUtility.wideMode ? 0 : EditorGUIUtility.singleLineHeight);
-        }
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => EditorGUI.GetPropertyHeight(property, label) + errorHeight + (EditorGUIUtility.wideMode ? 0 : EditorGUIUtility.singleLineHeight);
     }
 }

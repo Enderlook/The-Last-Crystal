@@ -29,11 +29,7 @@ namespace AdditionalExtensions
         /// <param name="layerToCheck">Layers to check if have <paramref name="layerTrigger"/>.</param>
         /// <param name="layerTrigger">Layers checked in <paramref name="layerToCheck"/>.</param>
         /// <returns>Whenever <paramref name="layerToCheck"/> has <paramref name="layerTrigger"/>.</returns>
-        public static bool LayerMatchTest(LayerMask layerToCheck, LayerMask layerTrigger)
-        // https://forum.unity.com/threads/making-a-ray-ignore-a-layer.385224/#post-2504429
-        {
-            return ((1 << layerToCheck) & layerTrigger) != 0;
-        }
+        public static bool LayerMatchTest(LayerMask layerToCheck, LayerMask layerTrigger) => ((1 << layerToCheck) & layerTrigger) != 0;
 
         /// <summary>
         /// Check if the <c><paramref name="source"/>.layer</c> is one the layers from <paramref name="layerTrigger"/>.

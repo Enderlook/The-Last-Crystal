@@ -9,6 +9,7 @@
         /// Position is calculated by local coordinates from <see cref="reference"/>.
         /// </summary>
         LOCAL,
+
         /// <summary>
         /// Position is calculated without <see cref="reference"/>.
         /// </summary>

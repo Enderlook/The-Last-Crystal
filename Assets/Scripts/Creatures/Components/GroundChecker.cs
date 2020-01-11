@@ -28,6 +28,7 @@ public class GroundChecker : MonoBehaviour
     public bool IsGrounded(Vector2 offset) => Physics2D.OverlapCircle(Position + offset, radius, GroundLayer);
 
 #if UNITY_EDITOR
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Used by Unity.")]
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

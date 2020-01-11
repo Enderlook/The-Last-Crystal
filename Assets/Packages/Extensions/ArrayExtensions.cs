@@ -18,7 +18,7 @@ namespace AdditionalExtensions
         /// </summary>
         /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
         /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
-        /// <param name="action">Action to perform on each element of <paramref name="source"/></param>
+        /// <param name="function">Function to perform on each element of <paramref name="source"/></param>
         /// <returns>Updated <paramref name="source"/>.</returns>
         /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
         public static T[] ChangeEach<T>(this T[] source, Func<T, T> function)

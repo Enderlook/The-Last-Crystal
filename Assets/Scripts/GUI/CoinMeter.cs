@@ -28,6 +28,7 @@ public class CoinMeter : MonoBehaviour
         moneyText.text = amount.ToString();
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Used by Unity.")]
     private void Update()
     {
         if (Settings.IsPause)

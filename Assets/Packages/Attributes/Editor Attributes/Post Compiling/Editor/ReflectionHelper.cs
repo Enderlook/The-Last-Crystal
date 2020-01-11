@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AdditionalExtensions;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 using UnityEngine;
-using AdditionalExtensions;
 
 namespace AdditionalAttributes.PostCompiling
 {
@@ -29,7 +30,7 @@ namespace AdditionalAttributes.PostCompiling
                 {
                     foreach (Attribute attribute in memberInfo.GetCustomAttributes())
                         _attribute = attribute;
-                        //yield return (memberInfo, type, attribute);
+                    //yield return (memberInfo, type, attribute);
                 }
                 catch (BadImageFormatException) { } // https://github.com/mono/mono/issues/17278
 
@@ -38,25 +39,13 @@ namespace AdditionalAttributes.PostCompiling
             }
         }
 
-        public static IEnumerable<(MemberInfo memberInfo, Type type, Attribute attribute)> GettAllAttributesOfMembersOf(Type type)
-        {
-            return GettAllAttributesOfMembersOf(type, (e, b) => e.GetMembers(b));
-        }
+        public static IEnumerable<(MemberInfo memberInfo, Type type, Attribute attribute)> GettAllAttributesOfMembersOf(Type type) => GettAllAttributesOfMembersOf(type, (e, b) => e.GetMembers(b));
 
-        public static IEnumerable<(FieldInfo fieldInfo, Type type, Attribute attribute)> GettAllAttributesOfFieldsOf(Type type)
-        {
-            return GettAllAttributesOfMembersOf(type, (e, b) => e.GetFields(b));
-        }
+        public static IEnumerable<(FieldInfo fieldInfo, Type type, Attribute attribute)> GettAllAttributesOfFieldsOf(Type type) => GettAllAttributesOfMembersOf(type, (e, b) => e.GetFields(b));
 
-        public static IEnumerable<(PropertyInfo propertyInfo, Type type, Attribute attribute)> GettAllAttributesOfPropertiesOf(Type type)
-        {
-            return GettAllAttributesOfMembersOf(type, (e, b) => e.GetProperties(b));
-        }
+        public static IEnumerable<(PropertyInfo propertyInfo, Type type, Attribute attribute)> GettAllAttributesOfPropertiesOf(Type type) => GettAllAttributesOfMembersOf(type, (e, b) => e.GetProperties(b));
 
-        public static IEnumerable<(MethodInfo methodInfo, Type type, Attribute attribute)> GettAllAttributesOfMethodsOf(Type type)
-        {
-            return GettAllAttributesOfMembersOf(type, (e, b) => e.GetMethods(b));
-        }
+        public static IEnumerable<(MethodInfo methodInfo, Type type, Attribute attribute)> GettAllAttributesOfMethodsOf(Type type) => GettAllAttributesOfMembersOf(type, (e, b) => e.GetMethods(b));
 
         private static readonly Type[] unityDefaultNonPrimitiveSerilizables = new Type[]
         {

@@ -210,8 +210,11 @@ namespace AdditionalExtensions
         public static Vector3 XYZDistance(this Vector3 source, Vector3 target) => target - source;
 
         public static Vector2Int ToVector2Int(this Vector2 source) => new Vector2Int((int)source.x, (int)source.y);
+
         public static Vector2Int ToVector2Int(this Vector3 source) => ToVector2Int(source);
+
         public static Vector3Int ToVector3Int(this Vector3 source) => new Vector3Int((int)source.x, (int)source.y, (int)source.z);
+
         public static Vector3Int ToVector3Int(this Vector2 source) => ToVector3Int(source);
     }
 }

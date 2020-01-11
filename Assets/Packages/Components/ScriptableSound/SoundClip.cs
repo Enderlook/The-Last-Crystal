@@ -1,5 +1,7 @@
 ﻿using AdditionalAttributes;
+
 using ScriptableSound.Modifiers;
+
 using System;
 
 using UnityEngine;

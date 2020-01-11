@@ -11,15 +11,19 @@ namespace FloatingText
         [Header("Overridable by Floating Text Controller", order = 2)]
         [Tooltip("Time before self destroy in seconds. If 0, duration of the animation will be used.")]
         public float timeBeforeDestroy;
+
         [Tooltip("Text color.")]
         public Color textColor = Color.red;
+
         [Tooltip("Random spawn offset.")]
         public Vector2 randomOffset = Vector2.one;
+
         [Tooltip("Multiply the scale of the canvas by this value.")]
         public float scaleMultiplier = 1;
 
         [Tooltip("Digit precision (decimals) for numbers. Whenever a float is given to show, the number is rounded by a certain amount of digits.")]
         public int digitPrecision = 0;
+
         [Tooltip("Determines how decimal digits are rounded.")]
         public TYPE_OF_ROUNDING typeOfRounding = TYPE_OF_ROUNDING.ROUND;
 
@@ -148,9 +152,6 @@ namespace FloatingText
         /// <param name="randomOffset">Random offset applied on spawn of the floating text.</param>
         public void SetRandomOffset(Vector2 randomOffset) => this.randomOffset = randomOffset;
 
-        private Vector2 RandomOffset()
-        {
-            return new Vector2(Random.Range(-randomOffset.x, randomOffset.x), Random.Range(-randomOffset.y, randomOffset.y));
-        }
+        private Vector2 RandomOffset() => new Vector2(Random.Range(-randomOffset.x, randomOffset.x), Random.Range(-randomOffset.y, randomOffset.y));
     }
 }

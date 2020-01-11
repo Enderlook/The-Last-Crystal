@@ -1,6 +1,9 @@
 ﻿using AdditionalAttributes;
+
 using Serializables.Physics;
+
 using SoundSystem;
+
 using UnityEngine;
 
 namespace CreaturesAddons.Weapons
@@ -9,17 +12,21 @@ namespace CreaturesAddons.Weapons
     {
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
+
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
 
-        [Header("Setup")]
 #pragma warning disable CS0649
+        [Header("Setup")]
         [SerializeField]
         private RayCasting rayCasting;
+
         [SerializeField, Layer, Tooltip("The target to hit")]
         private int layerToHit;
+
         [SerializeField, Tooltip("Animation played on attack.")]
         protected string animationState;
+
         [SerializeField, Tooltip("Slashing sound.")]
         private SoundWithAudioSource slashingSound;
 #pragma warning restore CS0649

@@ -47,10 +47,7 @@ namespace AdditionalAttributes.AttributeUsage
         /// <param name="toCheckType"></param>
         /// <param name="toCheckName"></param>
         /// <param name="attributeName"></param>
-        public void CheckAllowance(Type toCheckType, string toCheckName, string attributeName)
-        {
-            AttributeUsageHelper.CheckContains(nameof(AttributeUsageRequireDataTypeAttribute), Types, typeFlags, isBlackList, AllowedTypes, toCheckType, attributeName, toCheckName);
-        }
+        public void CheckAllowance(Type toCheckType, string toCheckName, string attributeName) => AttributeUsageHelper.CheckContains(nameof(AttributeUsageRequireDataTypeAttribute), Types, typeFlags, isBlackList, AllowedTypes, toCheckType, attributeName, toCheckName);
     }
 #endif
 }

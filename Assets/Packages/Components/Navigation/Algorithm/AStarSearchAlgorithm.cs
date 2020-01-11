@@ -34,7 +34,7 @@ namespace Navigation
                 case DistanceFormula.Chebyshov:
                     return Distances.CalculateChebyshovDistance;
                 default:
-                    return (a, b) => 0; // Not heuristic
+                    return (__, _) => 0; // Not heuristic
             }
         }
 
@@ -86,15 +86,9 @@ namespace Navigation
             return connections;
         }
 
-        public static float SearchRawPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> connections, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
-        {
-            return navigation.AStarSearchPath(source, out connections, target, heuristicFormula);
-        }
+        public static float SearchRawPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> connections, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean) => navigation.AStarSearchPath(source, out connections, target, heuristicFormula);
 
-        public static float CalculatePathDistance(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
-        {
-            return navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
-        }
+        public static float CalculatePathDistance(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean) => navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
 
         public static List<Connection> SearchPath(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
         {
@@ -144,6 +138,7 @@ namespace Navigation
             }
             return newDistance;
         }
+
         private static void Relax(Dictionary<Node, float> distances, Dictionary<Node, Connection> path, Connection connection) => Relax(distances, path, connection, distances[connection.end]);
     }
 }

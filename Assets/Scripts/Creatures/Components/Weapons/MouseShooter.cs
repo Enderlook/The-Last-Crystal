@@ -1,5 +1,7 @@
 ﻿using AdditionalAttributes;
+
 using SoundSystem;
+
 using UnityEngine;
 
 using Utils;
@@ -11,9 +13,11 @@ namespace CreaturesAddons.Weapons
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
         private float damage = 1;
+
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength;
+
         [SerializeField, Tooltip("Animation attack name.")]
         private string animationName;
 #pragma warning restore CS0649
@@ -21,26 +25,32 @@ namespace CreaturesAddons.Weapons
         [Header("Projectile Configuration")]
         [SerializeField, Tooltip("Projectile force.")]
         private float projectileForce = 10;
+
         [SerializeField, Tooltip("Gravity scale of projectile.")]
         private float projectileGravity = 1;
+
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Whenever if projectile collider is trigger.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0044:Add readonly modifier", Justification = "Unity Editor can't handle readonly.")]
         private bool projectileColliderIsTrigger;
+
 #pragma warning restore CS0649
         [SerializeField, Tooltip("Projectile scale multiplier.")]
         private float projectileScaleMultiplier = 1;
+
         [SerializeField, Tooltip("Projectile duration in seconds.")]
         private float projectileDuration = 1;
 #pragma warning disable CS0649
+
         [SerializeField, Tooltip("Projectile layer."), Layer]
         private int projectileLayer;
 
         [Header("Setup")]
         [SerializeField, DrawVectorRelativeToTransform]
         private Vector2 shootingPosition;
+
         [SerializeField, Tooltip("Animation played by projectile.")]
         private RuntimeAnimatorController projectileAnimation;
+
         [SerializeField, Tooltip("Shooting sound.")]
         private SoundWithAudioSource shootingSound;
 #pragma warning restore CS0649
@@ -97,12 +107,14 @@ namespace CreaturesAddons.Weapons
         private CircleCollider2D circleCollider2D;
         private float scale;
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Used by Unity.")]
         private void Start()
         {
             spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
             circleCollider2D = gameObject.GetComponent<CircleCollider2D>();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1213:Remove unused member declaration.", Justification = "Used by Unity.")]
         private void Update()
         {
             Vector2 spriteSize = spriteRenderer.sprite.bounds.size;
@@ -123,9 +135,12 @@ namespace CreaturesAddons.Weapons
             Destroy(gameObject);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Unity's method.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Used by Unity.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1163:Unused parameter.", Justification = "Used by Unity")]
         private void OnCollisionEnter(Collision collision) => Destroy(gameObject);
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Unity's method.")]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Used by Unity.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Redundancy", "RCS1163:Unused parameter.", Justification = "Used by Unity")]
         private void OnTriggerEnter(Collider other) => Destroy(gameObject);
     }
 }

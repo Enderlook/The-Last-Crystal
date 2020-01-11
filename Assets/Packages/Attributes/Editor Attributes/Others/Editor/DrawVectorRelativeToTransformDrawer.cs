@@ -1,4 +1,6 @@
-﻿using AdditionalExtensions;
+﻿using AdditionalExceptions;
+
+using AdditionalExtensions;
 
 using System;
 using System.Reflection;
@@ -6,7 +8,6 @@ using System.Reflection;
 using UnityEditor;
 
 using UnityEditorHelper;
-using AdditionalExceptions;
 
 using UnityEngine;
 
