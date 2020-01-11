@@ -19,7 +19,7 @@ namespace ScriptableSound
 
         public void Initialize() => sound = sound.CreatePrototype();
 
-        public void Update() => sound.Update();
+        public void Update() => sound.UpdateBehaviour(Time.deltaTime);
 
         public void Play(Action endCallback = null)
         {

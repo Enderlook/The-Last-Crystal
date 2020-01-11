@@ -60,7 +60,11 @@ namespace ScriptableSound
         /// </remarks>
         protected bool ShouldChangeSound => IsPlaying && soundConfiguration != null && soundConfiguration.audioSource.time == 0; // TODO: soundConfiguration shouldn't be null if IsPlay is true, but removing this produces issues
 
-        public virtual void Update() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
+        /// <summary>
+        /// Updates behavior.
+        /// </summary>
+        /// <param name="deltaTime">Time since last update in seconds. <seealso cref="Time.deltaTime"/></param>
+        public virtual void UpdateBehaviour(float deltaTime) => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
 
         public virtual Sound CreatePrototype() => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");
     }

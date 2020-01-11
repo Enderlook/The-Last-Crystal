@@ -34,7 +34,7 @@ namespace ScriptableSound
             return can;
         }
 
-        public override void Update()
+        public override void UpdateBehaviour(float deltaTime)
         {
             if (ShouldChangeSound)
             {

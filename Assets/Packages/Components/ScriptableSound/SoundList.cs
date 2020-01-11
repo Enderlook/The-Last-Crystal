@@ -41,11 +41,11 @@ namespace ScriptableSound
 
         private Sound CurrentSound => sounds[index];
 
-        public override void Update()
+        public override void UpdateBehaviour(float deltaTime)
         {
             if (IsPlaying)
             {
-                CurrentSound.Update();
+                CurrentSound.UpdateBehaviour(deltaTime);
                 if (!CurrentSound.IsPlaying)
                 {
                     if (playsAmount == -1 || remainingPlays > 0)
