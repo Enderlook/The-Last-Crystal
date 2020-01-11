@@ -4,6 +4,8 @@ using FloatingText;
 
 using FloatPool;
 
+using ScriptableSound;
+
 using System;
 using System.Collections;
 
@@ -22,14 +24,22 @@ namespace CreaturesAddons
 
         [SerializeField, Tooltip("FloatingTextController Script")]
         private FloatingTextController floatingTextController;
+
+        [SerializeField, Tooltip("Sound played when hurt.")]
+        private SoundPlay hurtSound;
+
+        [SerializeField, Tooltip("Sound played on death.")]
+        private SoundPlay dieSound;
 #pragma warning restore CS0649
 
         protected IUpdate[] updates;
 
         protected virtual void Awake()
         {
+            hurtSound.Init();
+            dieSound.Init();
             health.Initialize();
-            updates = new IUpdate[] { health };
+            updates = new IUpdate[] { health, hurtSound, dieSound };
         }
 
         protected virtual void Update() => Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
@@ -40,14 +50,14 @@ namespace CreaturesAddons
         /// </summary>
         /// <param name="amount">Amount of <see cref="Health"/> lost. Must be positive.</param>
         /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
-        /// <param name="displayAnimation">Whenever it should display <see cref="ANIMATION_STATE_HURT"/> animation.</param>
-        public virtual void TakeDamage(float amount, bool displayText = true, bool displayAnimation = true)
+        /// <param name="produceFeedback">Whenever it should display <see cref="ANIMATION_STATE_HURT"/> animation and play <see cref="hurtSound"/> sound.</param>
+        public virtual void TakeDamage(float amount, bool displayText = true, bool produceFeedback = true)
         {
             (_, float taken) = health.Decrease(amount);
             if (taken > 0)
             {
-                if (displayAnimation)
-                    DisplayTakeDamageAnimation();
+                if (produceFeedback)
+                    TakeDamageFeedback();
                 if (displayText)
                     SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), health.Ratio));
                 if (health.Current <= 0)
@@ -63,6 +73,7 @@ namespace CreaturesAddons
         {
             Array.ForEach(gameObject.GetComponentsInChildren<IDie>(), e => e.Die(suicide));
             StartCoroutine(DestroyOnNextFrame());
+            SimpleSoundPlayer.CreateOneTimePlayer(dieSound, true, true);
         }
 
         private IEnumerator DestroyOnNextFrame()
@@ -71,7 +82,10 @@ namespace CreaturesAddons
             Destroy(gameObject);
         }
 
-        protected virtual void DisplayTakeDamageAnimation() { }
+        protected virtual void TakeDamageFeedback()
+        {
+            hurtSound.Play();
+        }
 
         /// <summary>
         /// Spawn a floating text above the creature.

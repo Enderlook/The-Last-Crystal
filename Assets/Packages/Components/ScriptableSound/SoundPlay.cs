@@ -17,6 +17,8 @@ namespace ScriptableSound
 
         [SerializeField, Tooltip("Sound to play."), Expandable]
         private Sound sound;
+
+        public Sound Sound => sound;
 #pragma warning restore CS0649
 
         /// <summary>

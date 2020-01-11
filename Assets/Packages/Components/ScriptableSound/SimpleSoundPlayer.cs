@@ -13,8 +13,8 @@ namespace ScriptableSound
         [SerializeField, Tooltip("Sound to play."), Expandable]
         private Sound sound;
 
-        [SerializeField, Tooltip("If start playing on awake.")]
-        private bool playOnAwake;
+        [SerializeField, Tooltip("If start playing on start.")]
+        private bool playOnStart;
 
         [SerializeField, Tooltip("Whenever it should destroy the gameObjet when sound(s) ends.")]
         private bool destroyOnFinish;
@@ -30,11 +30,11 @@ namespace ScriptableSound
         public bool IsPlaying => sound.IsPlaying;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-        private void Awake()
+        private void Start()
         {
             audioSource = GetComponent<AudioSource>();
             sound = sound.CreatePrototype();
-            if (playOnAwake)
+            if (playOnStart)
                 Play();
         }
 
@@ -72,16 +72,21 @@ namespace ScriptableSound
         /// <param name="sound"><see cref="Sound"/> included in the component.</param>
         /// <param name="playOnAwake">Whenever it should start playing on awake.</param>
         /// <param name="destroyOnFinish">Whenever it should be destroyed after end playing.</param>
-        /// <returns></returns>
-        public static SimpleSoundPlayer CreateOneTimePlayer(Sound sound, bool playOnAwake = false, bool destroyOnFinish = false)
+        public static void CreateOneTimePlayer(Sound sound, bool playOnAwake = false, bool destroyOnFinish = false)
         {
             GameObject gameObject = new GameObject("One Time Simple Sound Player");
             SimpleSoundPlayer simpleSoundPlayer = gameObject.AddComponent<SimpleSoundPlayer>();
-            simpleSoundPlayer.playOnAwake = playOnAwake;
+            simpleSoundPlayer.playOnStart = playOnAwake;
             simpleSoundPlayer.destroyOnFinish = destroyOnFinish;
             simpleSoundPlayer.sound = sound.CreatePrototype();
-
-            return simpleSoundPlayer;
         }
+
+        /// <summary>
+        /// Create a new <see cref="GameObject"/> with this component on it.
+        /// </summary>
+        /// <param name="soundPlay"><see cref="SoundPlay"/> where <see cref="Sound"/> will be taken.</param>
+        /// <param name="playOnAwake">Whenever it should start playing on awake.</param>
+        /// <param name="destroyOnFinish">Whenever it should be destroyed after end playing.</param>
+        public static void CreateOneTimePlayer(SoundPlay soundPlay, bool playOnAwake = false, bool destroyOnFinish = false) => CreateOneTimePlayer(soundPlay.Sound, playOnAwake, destroyOnFinish);
     }
 }

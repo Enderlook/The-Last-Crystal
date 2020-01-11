@@ -2,5 +2,5 @@
 
 public class Crystal : Hurtable
 {
-    protected override void DisplayTakeDamageAnimation() { }
+    protected override void TakeDamageFeedback() { }
 }
