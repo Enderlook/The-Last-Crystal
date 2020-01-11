@@ -40,3 +40,7 @@ Glass Smashing (Bottles) » Glass Smash, Bottle, D.wav made by InspectorJ under 
 smashing glass.wav made by mgamabile under license CC0 1.0
 	https://freesound.org/people/mgamabile/sounds/440773/
 	440773__mgamabile__smashing-glass.wav
+
+Rumble/Explosion made by Michel Baradari under license CC-BY 3.0
+	https://opengameart.org/content/rumbleexplosion
+	rumble.flac

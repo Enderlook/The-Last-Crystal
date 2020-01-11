@@ -443,6 +443,7 @@ MonoBehaviour:
   damage: 20
   pushStrength: 40
   showHurt: 1
+  hitSound: {fileID: 11400000, guid: 76c43e029abf0b44f86e6f59341445a3, type: 2}
 --- !u!82 &969361126788582000
 AudioSource:
   m_ObjectHideFlags: 0
