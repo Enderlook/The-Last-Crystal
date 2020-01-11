@@ -1,14 +1,14 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Extensions;
+using Additions.Utils.Rects;
+using Additions.Utils.UnityEditor;
 
 using System.Reflection;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(HasConfirmationFieldAttribute))]
     internal class HasConfirmationDrawer : PropertyDrawer
@@ -21,7 +21,6 @@ namespace AdditionalAttributes
 
             HasConfirmationFieldAttribute hasConfirmationFieldAttribute = (HasConfirmationFieldAttribute)attribute;
 
-            VerticalRectBuilder verticalRectBuilder = new VerticalRectBuilder(position.x, position.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight);
 
             object targetObject = property.GetParentTargetObjectOfProperty();
 
@@ -30,13 +29,13 @@ namespace AdditionalAttributes
             string name = confirmationField.Name.ToDisplayUnity();
             string tooltip = ((TooltipAttribute)confirmationField.GetCustomAttribute(typeof(TooltipAttribute), true))?.tooltip;
             confirm = (bool)confirmationField.GetValue(targetObject);
-            confirm = EditorGUI.Toggle(verticalRectBuilder.GetRect(), new GUIContent(name, tooltip ?? ""), confirm);
+            confirm = EditorGUI.Toggle(new VerticalRectBuilder(position.x, position.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight).GetRect(), new GUIContent(name, tooltip ?? ""), confirm);
             confirmationField.SetValue(targetObject, confirm);
 
             if (confirm)
             {
                 EditorGUI.indentLevel++;
-                EditorGUI.PropertyField(verticalRectBuilder.GetRect(), property, label, true);
+                EditorGUI.PropertyField(new VerticalRectBuilder(position.x, position.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight).GetRect(), property, label, true);
                 EditorGUI.indentLevel--;
             }
 

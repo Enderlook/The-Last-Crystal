@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Additions.Utils;
 
-using Utils;
+using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     public static class NavigationExtensions
     {
@@ -14,8 +14,7 @@ namespace Navigation
             float closest = float.MaxValue;
 
             foreach (Node node in navigation.Grid)
-            {
-                if (mode == NodeType.ALL || (mode == NodeType.ONLY_ACTIVES && node.IsActive) || (mode == NodeType.ONLY_DEACTIVES && !node.IsActive))
+                if (mode == NodeType.ALL || mode == NodeType.ONLY_ACTIVES && node.IsActive || mode == NodeType.ONLY_DEACTIVES && !node.IsActive)
                 {
                     float distance = (navigation.graph.GetWorldPosition(node) - position).magnitude;
                     if (distance < closest && (maxDistanceFromPoint == 0 || distance < maxDistanceFromPoint))
@@ -24,14 +23,15 @@ namespace Navigation
                         closestNode = node;
                     }
                 }
-            }
 
             return closestNode;
         }
 #if UNITY_EDITOR
         public static Node FindClosestNodeToMouseInEditor(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInEditor());
 #endif
+
         public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame());
+
         public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation, Camera camera) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame(camera));
     }
 }

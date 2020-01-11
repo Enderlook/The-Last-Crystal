@@ -1,14 +1,12 @@
-﻿using AdditionalComponents;
-
-using Navigation;
+﻿using Additions.Components;
+using Additions.Components.Navigation;
+using Additions.Utils.Clockworks;
 
 using System;
 
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
-using Utils;
 
 public class CreatureSpawn : MonoBehaviour
 {

@@ -1,7 +1,6 @@
-﻿using FloatPool;
-using FloatPool.Decorators;
-
-using HealthBarGUI;
+﻿using Additions.Components.FloatPool;
+using Additions.Components.FloatPool.Decorators;
+using Additions.Prefabs.HealthBarGUI;
 
 using UnityEngine;
 

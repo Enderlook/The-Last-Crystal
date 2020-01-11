@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     internal class ReadOnlyDrawer : AdditionalPropertyDrawer

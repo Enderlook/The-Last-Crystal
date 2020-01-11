@@ -1,16 +1,16 @@
-﻿using Range;
+﻿using Additions.Serializables.Ranges;
+using Additions.Utils.Rects;
+using Additions.Utils.UnityEditor;
 
 using System;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(RangeMinMaxAttribute))]
     internal class MinMaxRangeDrawer : RangeDrawer
@@ -95,8 +95,8 @@ namespace AdditionalAttributes
                     bool isRangeObject = false;
                     if (objectType == typeof(RangeIntStep) || objectType == typeof(RangeFloatStep))
                     {
-                        MIN = Range.RangeDrawer.MIN_FIELD_NAME;
-                        MAX = Range.RangeDrawer.MAX_FIELD_NAME;
+                        MIN = Serializables.Ranges.RangeDrawer.MIN_FIELD_NAME;
+                        MAX = Serializables.Ranges.RangeDrawer.MAX_FIELD_NAME;
                         isRangeObject = true;
                     }
 
@@ -171,7 +171,7 @@ namespace AdditionalAttributes
 
                     if (isRangeObject)
                     {
-                        SerializedProperty stepProperty = serializedProperty.FindPropertyRelative(Range.RangeDrawer.STEP_FIELD_NAME);
+                        SerializedProperty stepProperty = serializedProperty.FindPropertyRelative(Serializables.Ranges.RangeDrawer.STEP_FIELD_NAME);
 
                         void DrawFieldWithStep(Action<Rect?> slider)
                         {
@@ -180,7 +180,7 @@ namespace AdditionalAttributes
                             float block = (horizontalRectBuilder.RemainingWidth - labelWidth) / 10;
                             slider(horizontalRectBuilder.GetRect(block * 9));
                             horizontalRectBuilder.AddSpace(5);
-                            GUI.Label(horizontalRectBuilder.GetRect(labelWidth), new GUIContent(Range.RangeDrawer.STEP_FIELD_DISPLAY_NAME, stepProperty.tooltip));
+                            GUI.Label(horizontalRectBuilder.GetRect(labelWidth), new GUIContent(Serializables.Ranges.RangeDrawer.STEP_FIELD_DISPLAY_NAME, stepProperty.tooltip));
                             EditorGUI.PropertyField(horizontalRectBuilder.GetRemainingRect(), stepProperty, new GUIContent("", stepProperty.tooltip));
                         }
 
@@ -194,12 +194,11 @@ namespace AdditionalAttributes
                                 DrawFieldWithStep(IntSlider);
                                 break;
                             default:
-                                ShowError(position, error + $" Property {MIN_FIELD_NAME}, {MAX_FIELD_NAME}, and {Range.RangeDrawer.STEP_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
+                                ShowError(position, error + $" Property {MIN_FIELD_NAME}, {MAX_FIELD_NAME}, and {Serializables.Ranges.RangeDrawer.STEP_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
                                 break;
                         }
                     }
                     else
-                    {
                         // Only check one of them since both are the same type
                         switch (min.propertyType)
                         {
@@ -213,7 +212,6 @@ namespace AdditionalAttributes
                                 ShowError(position, error + $" Property {MIN_FIELD_NAME} and {MAX_FIELD_NAME} of {serializedProperty.name} are {serializedProperty.propertyType}.");
                                 break;
                         }
-                    }
                     break;
                 default:
                     ShowError(position, error + $" Property {serializedProperty.name} is {serializedProperty.propertyType}.");
@@ -229,7 +227,7 @@ namespace AdditionalAttributes
             float Cast(T v) => (float)Convert.ChangeType(v, typeof(float));
             T UnCast(float v) => (T)Convert.ChangeType(v, typeof(T));
             string GetInvalidCastingErrorMessage() => $"Generic parameter {nameof(T)} {typeof(T)} must be casteable to {typeof(float)} and vice-versa.";
-            return (Rect rect, SerializedProperty property, T lower, T upper, GUIContent guiContent) =>
+            return (rect, property, lower, upper, guiContent) =>
             {
                 (T min, T max) = getter(property);
                 T oldMin = min, oldMax = max;

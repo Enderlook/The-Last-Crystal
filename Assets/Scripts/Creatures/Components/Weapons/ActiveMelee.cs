@@ -1,12 +1,12 @@
-﻿using CreaturesAddons.Weapons;
+﻿using Additions.Utils.Clockworks;
+
+using CreaturesAddons.Weapons;
 
 using UnityEngine;
 
-using Utils;
-
 namespace CreaturesAddons
 {
-    public class ActiveMelee : MonoBehaviour, IInit, IBasicClockWork, IDamageOnTouch
+    public class ActiveMelee : MonoBehaviour, IInit, IBasicClockwork, IDamageOnTouch
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -40,13 +40,13 @@ namespace CreaturesAddons
             }
         }
 
-        public float CooldownTime => ((IBasicClockWork)basicClockwork).CooldownTime;
-        public float TotalCooldown => ((IBasicClockWork)basicClockwork).TotalCooldown;
-        public float CooldownPercent => ((IBasicClockWork)basicClockwork).CooldownPercent;
-        public bool IsReady => ((IBasicClockWork)basicClockwork).IsReady;
-        public bool Recharge(float deltaTime) => ((IBasicClockWork)basicClockwork).Recharge(deltaTime);
-        public void ResetCooldown() => ((IBasicClockWork)basicClockwork).ResetCooldown();
-        public void UpdateBehaviour(float deltaTime) => ((IBasicClockWork)basicClockwork).UpdateBehaviour(deltaTime);
-        public void ResetCooldown(float newCooldownTime) => ((IBasicClockWork)basicClockwork).ResetCooldown(newCooldownTime);
+        public float CooldownTime => ((IBasicClockwork)basicClockwork).CooldownTime;
+        public float TotalCooldown => ((IBasicClockwork)basicClockwork).TotalCooldown;
+        public float CooldownPercent => ((IBasicClockwork)basicClockwork).CooldownPercent;
+        public bool IsReady => ((IBasicClockwork)basicClockwork).IsReady;
+        public bool Recharge(float deltaTime) => ((IBasicClockwork)basicClockwork).Recharge(deltaTime);
+        public void ResetCooldown() => ((IBasicClockwork)basicClockwork).ResetCooldown();
+        public void UpdateBehaviour(float deltaTime) => ((IBasicClockwork)basicClockwork).UpdateBehaviour(deltaTime);
+        public void ResetCooldown(float newCooldownTime) => ((IBasicClockwork)basicClockwork).ResetCooldown(newCooldownTime);
     }
 }

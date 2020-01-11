@@ -1,10 +1,11 @@
-﻿using AdditionalAttributes;
+﻿
+using Additions.Attributes;
 
 using System;
 
 using UnityEngine;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [RequireComponent(typeof(AudioSource))]
     public class SimpleSoundPlayer : MonoBehaviour

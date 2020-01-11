@@ -1,16 +1,16 @@
-﻿using System.IO;
+﻿using Additions.Utils.UnityEditor;
+
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
-    public class SoundListContextMenu : MonoBehaviour
+    internal class SoundListContextMenu : MonoBehaviour
     {
         [MenuItem("Assets/Sound/Sound List/Create from SoundClips")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]

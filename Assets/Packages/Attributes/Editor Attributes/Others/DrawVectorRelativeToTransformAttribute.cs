@@ -1,10 +1,10 @@
-﻿using AdditionalAttributes.AttributeUsage;
+﻿using Additions.Attributes.AttributeUsage;
 
 using System;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(Vector2), typeof(Vector2Int), typeof(Vector3), typeof(Vector3), typeof(Vector4), typeof(Transform), includeEnumerableTypes = true)]
     [AttributeUsage(AttributeTargets.Field)]

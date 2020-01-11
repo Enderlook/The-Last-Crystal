@@ -1,15 +1,14 @@
-﻿using FloatPool.Internal;
+﻿using Additions.Components.FloatPool.Internal;
+using Additions.Components.SoundSystem;
 
 using Master;
-
-using SoundSystem;
 
 using System;
 
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace FloatPool.Decorators
+namespace Additions.Components.FloatPool.Decorators
 {
     [Serializable]
     public class RechargerDecorator : Decorator
@@ -72,7 +71,6 @@ namespace FloatPool.Decorators
         private void Recharge(float deltaTime)
         {
             if (_currentRechargingDelay >= rechargingDelay)
-            {
                 if (Current < Max)
                 {
                     CallStartCallback();
@@ -85,11 +83,8 @@ namespace FloatPool.Decorators
                     activeCallback.Invoke(false);
                     CallEndCallback(false);
                 }
-            }
             else
-            {
                 _currentRechargingDelay += deltaTime;
-            }
         }
 
         /// <summary>
@@ -122,17 +117,13 @@ namespace FloatPool.Decorators
         private void PlayRechargingSound()
         {
             if (audioSource != null)
-            {
                 if (playlist != null)
-                {
                     if (!audioSource.isPlaying && Settings.IsSoundActive)
                         playlist.Play(audioSource);
-                }
+                    else
+                        Debug.LogWarning($"{nameof(RechargerDecorator)} doesn't have an {nameof(playlist)}.");
                 else
-                    Debug.LogWarning($"{nameof(RechargerDecorator)} doesn't have an {nameof(playlist)}.");
-            }
-            else
-                Debug.LogWarning($"{nameof(RechargerDecorator)} doesn't have an {nameof(audioSource)}.");
+                    Debug.LogWarning($"{nameof(RechargerDecorator)} doesn't have an {nameof(audioSource)}.");
         }
 
         [Serializable]

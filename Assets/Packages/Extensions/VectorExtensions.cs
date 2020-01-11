@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class VectorExtensions
     {
@@ -209,10 +209,10 @@ namespace AdditionalExtensions
 
         public static Vector2Int ToVector2Int(this Vector2 source) => new Vector2Int((int)source.x, (int)source.y);
 
-        public static Vector2Int ToVector2Int(this Vector3 source) => ToVector2Int(source);
+        public static Vector2Int ToVector2Int(this Vector3 source) => source.ToVector2Int();
 
         public static Vector3Int ToVector3Int(this Vector3 source) => new Vector3Int((int)source.x, (int)source.y, (int)source.z);
 
-        public static Vector3Int ToVector3Int(this Vector2 source) => ToVector3Int(source);
+        public static Vector3Int ToVector3Int(this Vector2 source) => source.ToVector3Int();
     }
 }

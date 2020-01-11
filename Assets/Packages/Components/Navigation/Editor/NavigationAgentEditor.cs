@@ -4,14 +4,14 @@ using UnityEditor;
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     [CustomEditor(typeof(NavigationAgent))]
     internal class NavigationAgentEditor : Editor
     {
         private NavigationAgent navigationAgent;
 
-        private bool drawPathToMouse = false;
+        private bool drawPathToMouse;
 
         public override void OnInspectorGUI()
         {

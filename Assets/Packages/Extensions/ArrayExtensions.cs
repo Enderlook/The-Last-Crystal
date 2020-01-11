@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class ArrayExtensions
     {
@@ -35,9 +35,7 @@ namespace AdditionalExtensions
                 return Array.Empty<T>();
 
             for (int i = 0; i < source.Length; i++)
-            {
                 source[i] = function(source[i]);
-            }
 
             return source;
         }

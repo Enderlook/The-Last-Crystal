@@ -1,10 +1,10 @@
-﻿using System.Reflection;
+﻿using Additions.Utils;
+
+using System.Reflection;
 
 using UnityEngine;
 
-using Utils;
-
-namespace ScriptableSound.Modifiers
+namespace Additions.Components.ScriptableSound.Modifiers
 {
     [CreateAssetMenu(fileName = "StartAt", menuName = "Sound/Modifiers/Start At")]
     public class StartAtModifier : SoundModifier

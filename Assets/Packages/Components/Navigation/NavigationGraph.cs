@@ -3,7 +3,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     public class NavigationGraph : MonoBehaviour, IGraphReader, IGraphEditing
     {
@@ -58,7 +58,6 @@ namespace Navigation
             Grid = new List<Node>(nodeAmount);
 
             for (int r = 0; r < rows; r++)
-            {
                 for (int c = 0; c < columns; c++)
                 {
                     float width = c * spacePerNode * 2;
@@ -67,7 +66,6 @@ namespace Navigation
                     Vector2 position = new Vector2(width, r * spacePerNode); // Not * 2 as column in order to make diamond shape ♦
                     graph.AddNode(position, mode: PositionReference.LOCAL);
                 }
-            }
             AddConnectionsToNodes();
         }
 
@@ -90,7 +88,7 @@ namespace Navigation
             int index = -1;
             bool isStartOfRow = nodeIndex % columns == 0;
             bool isEndOfRow = (nodeIndex + 1) % columns == 0;
-            bool isOddRow = (nodeIndex / columns) % 2 == 0; // Due to diamond shape ♦
+            bool isOddRow = nodeIndex / columns % 2 == 0; // Due to diamond shape ♦
 
             switch (direction)
             {
@@ -143,19 +141,14 @@ namespace Navigation
         private void SetActiveConnections()
         {
             foreach (Node node in Grid)
-            {
                 foreach (Connection connection in node.Connections)
-                {
                     if (connection != null)
                         connection.SetActive(node.IsActive);
-                }
-            }
         }
 
         private void DeactivateBadConnections()
         {
             foreach (Node node in Grid)
-            {
                 for (int i = 0; i < node.Connections.Count; i++)
                 {
                     Connection connection = node.Connections[i];
@@ -166,7 +159,6 @@ namespace Navigation
                         node.Connections[i].SetActive(!hit);
                     }
                 }
-            }
         }
 
         private void DeactivateUnconnectedNodes()
@@ -185,13 +177,11 @@ namespace Navigation
                     }
 
                     foreach (Connection endConnection in connection.end.Connections)
-                    {
                         if (endConnection != null && endConnection.start == node && endConnection.IsActive)
                         {
                             shouldBeDisabled = false;
                             goto End;
                         }
-                    }
                 }
 
             End:

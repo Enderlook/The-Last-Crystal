@@ -4,7 +4,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(LayerAttribute))]
     internal class LayerAttributeEditor : AdditionalPropertyDrawer
@@ -17,7 +17,6 @@ namespace AdditionalAttributes
             EditorGUI.BeginChangeCheck();
             int layer = EditorGUI.LayerField(position, label, property.intValue);
             if (EditorGUI.EndChangeCheck())
-            {
                 switch (property.propertyType)
                 {
                     case SerializedPropertyType.Integer:
@@ -35,7 +34,6 @@ namespace AdditionalAttributes
                     default:
                         throw new ArgumentException(ERROR_SERIALIZED_PROPERTY_TYPE);
                 }
-            }
             EditorGUI.EndProperty();
         }
     }

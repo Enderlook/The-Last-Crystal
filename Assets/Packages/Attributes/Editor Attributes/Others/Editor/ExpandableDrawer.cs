@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Additions.Utils.UnityEditor;
+
+using System;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     //[CustomPropertyDrawer(typeof(UnityEngine.Object), true)] // Will affect all objects
     //[CustomPropertyDrawer(typeof(ScriptableObject), true)] // Will only affect scriptable objects
@@ -54,11 +54,9 @@ namespace AdditionalAttributes
 
             // If we have a value
             if (reference != null)
-            {
                 // We can make the field expandable with a Foldout
                 // No GUIContent because the property field below already has it.
                 property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, GUIContent.none, true);
-            }
 
             // If the foldout is expanded
             if (property.isExpanded)
@@ -82,19 +80,17 @@ namespace AdditionalAttributes
                         GUILayout.BeginVertical("box");
                     }
                     else
-                    {
                         if (colorMultiplier != 1)
-                        {
-                            GUIStyle guiStyle = new GUIStyle();
-                            Texture2D texture2D = new Texture2D(1, 1);
-                            texture2D.SetPixel(0, 0, new Color(0, 0, 0, 1 - colorMultiplier));
-                            texture2D.Apply();
-                            guiStyle.normal.background = texture2D;
-                            GUILayout.BeginVertical(guiStyle);
-                        }
-                        else
-                            GUILayout.BeginVertical();
+                    {
+                        GUIStyle guiStyle = new GUIStyle();
+                        Texture2D texture2D = new Texture2D(1, 1);
+                        texture2D.SetPixel(0, 0, new Color(0, 0, 0, 1 - colorMultiplier));
+                        texture2D.Apply();
+                        guiStyle.normal.background = texture2D;
+                        GUILayout.BeginVertical(guiStyle);
                     }
+                    else
+                        GUILayout.BeginVertical();
                     #endregion
                     EditorGUI.BeginChangeCheck();
                     editor.OnInspectorGUI();

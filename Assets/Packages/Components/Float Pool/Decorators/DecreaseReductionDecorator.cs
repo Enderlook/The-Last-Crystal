@@ -1,12 +1,11 @@
-﻿using FloatPool.Internal;
-
-using Serializables;
+﻿using Additions.Components.FloatPool.Internal;
+using Additions.Serializables;
 
 using System;
 
 using UnityEngine;
 
-namespace FloatPool.Decorators
+namespace Additions.Components.FloatPool.Decorators
 {
     [Serializable]
     public class DecreaseReductionDecorator : Decorator

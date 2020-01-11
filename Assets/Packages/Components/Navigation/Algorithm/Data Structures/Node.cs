@@ -4,7 +4,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     [Serializable]
     public class Node : ScriptableObject
@@ -118,13 +118,11 @@ namespace Navigation
                 throw CANNOT_CONNECT_TO_ITSELF;
 
             foreach (Connection c in Connections)
-            {
                 if (c.end == end)
                 {
                     connection = c;
                     return true;
                 }
-            }
 
             connection = null;
             return false;
@@ -162,13 +160,11 @@ namespace Navigation
                 throw CANNOT_CONNECT_TO_ITSELF;
 
             for (int i = 0; i < Connections.Count; i++)
-            {
                 if (Connections[i].end == end)
                 {
                     Connections.RemoveAt(i);
                     return true;
                 }
-            }
             return false;
         }
 
@@ -225,13 +221,11 @@ namespace Navigation
                 throw new ArgumentNullException(nameof(connection));
 
             for (int i = 0; i < Connections.Count; i++)
-            {
                 if (Connections[i] == connection)
                 {
                     Connections.RemoveAt(i);
                     return true;
                 }
-            }
             return false;
         }
 
@@ -288,9 +282,7 @@ namespace Navigation
             Node node = CreateNode(position, isActive);
             bool connectionActive = areConnectionsActive ?? isActive;
             foreach (Node to in connectionsTo)
-            {
                 node.AddConnectionTo(to, connectionActive);
-            }
             return node;
         }
     }

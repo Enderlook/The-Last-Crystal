@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(IndentedAttribute))]
     internal class IndentedDrawer : AdditionalPropertyDrawer

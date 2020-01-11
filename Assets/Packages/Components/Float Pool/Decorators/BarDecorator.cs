@@ -1,12 +1,11 @@
-﻿using FloatPool.Internal;
-
-using HealthBarGUI;
+﻿using Additions.Components.FloatPool.Internal;
+using Additions.Prefabs.HealthBarGUI;
 
 using System;
 
 using UnityEngine;
 
-namespace FloatPool.Decorators
+namespace Additions.Components.FloatPool.Decorators
 {
     [Serializable]
     public class BarDecorator : Decorator, IHealthBarViewer

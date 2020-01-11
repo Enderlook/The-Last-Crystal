@@ -1,10 +1,10 @@
-﻿using UnityEditor;
+﻿using Additions.Utils.UnityEditor;
 
-using UnityEditorHelper;
+using UnityEditor;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     public abstract class AdditionalPropertyDrawer : PropertyDrawer
     {

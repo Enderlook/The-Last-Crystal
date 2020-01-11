@@ -1,10 +1,8 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Components.Navigation;
+using Additions.Extensions;
+using Additions.Serializables;
 
 using Master;
-
-using Navigation;
-
-using Serializables;
 
 using System.Collections.Generic;
 

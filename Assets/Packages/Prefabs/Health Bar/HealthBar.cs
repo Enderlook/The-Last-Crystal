@@ -1,90 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HealthBarGUI
+namespace Additions.Prefabs.HealthBarGUI
 {
-    public interface IHealthBarViewer
-    {
-        /// <summary>
-        /// Whenever the health bar is showed or hidden.<br/>
-        /// Take into account that the script is still enabled and will update the health bar even if it's hidden.
-        /// </summary>
-        /// <seealso cref="IsEnabled"/>
-        bool IsVisible { get; set; }
-
-        /// <summary>
-        /// Whenever the health bar will be updated each frame or not.<br/>
-        /// Take into account that the script is still enabled but it won't be updated on each frame. Also, it's still visible.
-        /// </summary>
-        /// <seealso cref="IsHidden"/>
-        bool IsEnabled { get; set; }
-
-        /// <summary>
-        /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="healthBar"/>.<br/>
-        /// </summary>
-        float HealthBarPercentFill { get; }
-
-        /// <summary>
-        /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="healingBar"/>.<br/>
-        /// Warning! If <see cref="healingBar"></see> is <see langword="null"/> it will return <see langword="null"/>.
-        /// </summary>
-        float? HealingBarPercentFill { get; }
-
-        /// <summary>
-        /// Returns <seealso cref="Image.fillAmount"/> of the <see cref="damageBar"/>.<br/>
-        /// Warning! If <see cref="damageBar"/> is <see langword="null"/> it will return <see langword="null"/>.
-        /// </summary>
-        float? DamageBarPercentFill { get; }
-
-        /// <summary>
-        /// Returns <see langword="true"/> if <seealso cref="Image.fillAmount"/> of the <see cref="healingBar"/> if 0 or <see cref="healingBar"/> is <see langword="null"/>.<br/>
-        /// </summary>
-        bool IsHealingBarPercentHide { get; }
-
-        /// <summary>
-        /// Returns <see langword="true"/> if <seealso cref="Image.fillAmount"/> of the <see cref="damageBar"/> if 0 or <see cref="damageBar"/> is <see langword="null"/>.<br/>
-        /// </summary>
-        bool IsDamageBarPercentHide { get; }
-    }
-    public interface IHealthBarWorker
-    {
-        /// <summary>
-        /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
-        /// The health bar fill will be instantaneously set without producing animation. Health numbers will also change immediately.
-        /// Both damage bar and healing bar fill will be set to 0, halting any current animation on them.
-        /// Designed to initialize the health bar by first time.
-        /// </summary>
-        /// <param name="health"></param>
-        /// <param name="maxHealth"></param>
-        void ManualUpdate(float health, float maxHealth);
-
-        /// <summary>
-        /// Modify the health bar values without producing any animation effects (sliding the bar or changing the numbers).
-        /// The health bar fill will be instantaneously set without producing animation. Health numbers will also change immediately.
-        /// Both damage bar and healing bar fill will be set to 0, halting any current animation on them.
-        /// Both current health and maximum health will be assigned by maxHealth.
-        /// Designed to initialize the health bar by first time.
-        /// </summary>
-        void ManualUpdate(float health);
-
-        /// <summary>
-        /// Modify the current health and maximum health.
-        /// This method will automatically calculate, show and animate the health bar, damage bar, healing bar and health number.
-        /// </summary>
-        /// <param name="health"></param>
-        /// <param name="maxhealth"></param>
-        void UpdateValues(float health, float maxHealth);
-
-        /// <summary>
-        /// Modify the current health.
-        /// This method will automatically calculate, show and animate the health bar, damage bar, healing bar and health number.
-        /// </summary>
-        /// <param name="health"></param>
-        void UpdateValues(float health);
-    }
-
-    public interface IHealthBar : IHealthBarViewer, IHealthBarWorker { }
-
     public class HealthBar : MonoBehaviour, IHealthBar
     {
 #pragma warning disable CS0649
@@ -207,7 +125,6 @@ namespace HealthBarGUI
                 healthImage.color = minHealthColor != Color.black ? GetHealthColor() : maxHealthColor;
 
                 if (textNumber != null)
-                {
                     if (dynamicNumbers)
                     {
                         float dynamicPercent = healthImage.fillAmount + damageBar.fillAmount - healingImage.fillAmount,
@@ -216,7 +133,6 @@ namespace HealthBarGUI
                     }
                     else
                         textNumber.text = string.Format(textShowed, Rounding(health), Rounding(maxHealth), Rounding(health / maxHealth * 100));
-                }
             }
         }
 
@@ -296,8 +212,8 @@ namespace HealthBarGUI
                 }
             }
             // Fix bug, preventing the healing bar overflow from the left side
-            if (healingBar != null && healingTransform.rect.width < (healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x))
-                healingImage.fillAmount -= ((healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x) - healingTransform.rect.width) / healingTransform.rect.width;
+            if (healingBar != null && healingTransform.rect.width < healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x)
+                healingImage.fillAmount -= (healingTransform.rect.width * healingImage.fillAmount - healingBar.transform.localPosition.x - healingTransform.rect.width) / healingTransform.rect.width;
         }
 
 #if UNITY_EDITOR

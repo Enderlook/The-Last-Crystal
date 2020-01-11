@@ -1,12 +1,10 @@
-﻿using AdditionalExtensions;
-
-using Navigation;
+﻿using Additions.Components.Navigation;
+using Additions.Extensions;
+using Additions.Utils.Clockworks;
 
 using System.Collections.Generic;
 
 using UnityEngine;
-
-using Utils;
 
 namespace CreaturesAddons.Movement.NodeMovement
 {

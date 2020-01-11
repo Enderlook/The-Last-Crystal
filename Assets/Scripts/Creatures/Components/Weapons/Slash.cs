@@ -1,8 +1,6 @@
-﻿using AdditionalAttributes;
-
-using ScriptableSound;
-
-using Serializables.Physics;
+﻿using Additions.Attributes;
+using Additions.Components.ScriptableSound;
+using Additions.Serializables.Physics;
 
 using UnityEngine;
 
@@ -19,7 +17,7 @@ namespace CreaturesAddons.Weapons
 #pragma warning disable CS0649
         [Header("Setup")]
         [SerializeField]
-        private RayCasting rayCasting;
+        private Raycaster rayCasting;
 
         [SerializeField, Layer, Tooltip("The target to hit")]
         private int layerToHit;

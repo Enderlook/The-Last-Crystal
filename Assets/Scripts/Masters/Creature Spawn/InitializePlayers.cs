@@ -1,10 +1,8 @@
-﻿using AdditionalComponents;
+﻿using Additions.Components;
+using Additions.Components.FloatPool.Decorators;
+using Additions.Prefabs.HealthBarGUI;
 
 using CreaturesAddons;
-
-using FloatPool.Decorators;
-
-using HealthBarGUI;
 
 using Master;
 

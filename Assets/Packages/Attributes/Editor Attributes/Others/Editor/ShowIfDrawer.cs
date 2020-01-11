@@ -1,10 +1,10 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Extensions;
 
 using UnityEditor;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(ShowIfAttribute))]
     internal class ShowIfDrawer : AdditionalPropertyDrawer
@@ -38,16 +38,14 @@ namespace AdditionalAttributes
 
                 active = active == showIfAttribute.goal;
                 if (mode == ShowIfAttribute.ActionMode.ShowHide)
-                {
                     if (active)
                         DrawField();
-                }
-                else
-                {
-                    EditorGUI.BeginDisabledGroup(active);
-                    DrawField();
-                    EditorGUI.EndDisabledGroup();
-                }
+                    else
+                    {
+                        EditorGUI.BeginDisabledGroup(active);
+                        DrawField();
+                        EditorGUI.EndDisabledGroup();
+                    }
                 EditorGUI.EndProperty();
             }
         }

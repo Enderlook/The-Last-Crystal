@@ -1,15 +1,15 @@
-﻿using System.Linq;
+﻿using Additions.Utils.UnityEditor;
+
+using System.Linq;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [CustomEditor(typeof(SoundList))]
-    public class SoundPlayerEditor : Editor
+    internal class SoundPlayerEditor : Editor
     {
         private static readonly GUIContent[] OPTIONS_GUI_CONTENTS = new GUIContent[]
             {

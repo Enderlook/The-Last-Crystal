@@ -1,12 +1,11 @@
-﻿using AdditionalAttributes;
+﻿using Additions.Attributes;
+using Additions.Utils;
 
 using System;
 
 using UnityEngine;
 
-using Utils;
-
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [AbstractScriptableObject]
     public class Sound : ScriptableObject, IPrototypable<Sound>
@@ -25,10 +24,7 @@ namespace ScriptableSound
         /// Configure the sound.
         /// </summary>
         /// <param name="soundConfiguration">Configuration.</param>
-        public void SetConfiguration(SoundConfiguration soundConfiguration)
-        {
-            this.soundConfiguration = soundConfiguration ?? throw new ArgumentNullException(nameof(soundConfiguration));
-        }
+        public void SetConfiguration(SoundConfiguration soundConfiguration) => this.soundConfiguration = soundConfiguration ?? throw new ArgumentNullException(nameof(soundConfiguration));
 
         /// <summary>
         /// Play sound(s).

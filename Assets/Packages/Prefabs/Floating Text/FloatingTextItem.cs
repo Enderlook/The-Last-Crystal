@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace FloatingText
+namespace Additions.Prefabs.FloatingText
 {
     public class FloatingTextItem : MonoBehaviour
     {

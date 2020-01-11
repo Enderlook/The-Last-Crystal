@@ -1,10 +1,10 @@
-﻿using AdditionalAttributes.PostCompiling;
+﻿using Additions.Attributes.PostCompiling.Attributes;
 
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace AdditionalAttributes.AttributeUsage
+namespace Additions.Attributes.AttributeUsage
 {
     internal static class AttributeUsageRequireDataTypeTesting
     {

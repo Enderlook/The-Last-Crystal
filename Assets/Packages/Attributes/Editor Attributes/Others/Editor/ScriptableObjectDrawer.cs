@@ -4,7 +4,7 @@ using UnityEditor;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(ScriptableObject), true)]
     internal class ScriptableObjectDrawer : AdditionalPropertyDrawer

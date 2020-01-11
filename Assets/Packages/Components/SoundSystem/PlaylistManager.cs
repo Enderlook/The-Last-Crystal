@@ -1,4 +1,4 @@
-﻿using AdditionalExceptions;
+﻿using Additions.Exceptions;
 
 using Master;
 
@@ -6,7 +6,7 @@ using System;
 
 using UnityEngine;
 
-namespace SoundSystem
+namespace Additions.Components.SoundSystem
 {
     [RequireComponent(typeof(AudioSource))]
     public class PlaylistManager : MonoBehaviour
@@ -171,13 +171,11 @@ namespace SoundSystem
         public bool SetPlaylist(string name)
         {
             for (int i = 0; i < playlists.Length; i++)
-            {
                 if (playlists[i].PlayListName == name)
                 {
                     playlistsIndex = i;
                     return true;
                 }
-            }
             return false;
         }
 

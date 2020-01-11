@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class LayerMaskExtensions
     {
@@ -31,7 +31,7 @@ namespace AdditionalExtensions
         /// <param name="layerToCheck">Layers to check if have <paramref name="layerTrigger"/>.</param>
         /// <param name="layerTrigger">Layers checked in <paramref name="layerToCheck"/>.</param>
         /// <returns>Whenever <paramref name="layerToCheck"/> has <paramref name="layerTrigger"/>.</returns>
-        public static bool LayerMatchTest(this LayerMask layerToCheck, LayerMask layerTrigger) => ((1 << layerToCheck) & layerTrigger) != 0;
+        public static bool LayerMatchTest(this LayerMask layerToCheck, LayerMask layerTrigger) => (1 << layerToCheck & layerTrigger) != 0;
 
         /// <summary>
         /// Check if the <c><paramref name="source"/>.layer</c> is one the layers from <paramref name="layerTrigger"/>.

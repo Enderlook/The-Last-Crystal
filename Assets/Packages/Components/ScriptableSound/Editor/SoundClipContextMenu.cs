@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Additions.Utils.UnityEditor;
+
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
-    public static class SoundClipContextMenu
+    internal static class SoundClipContextMenu
     {
         [MenuItem("Assets/Sound/Sound Clip/Create")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
@@ -20,11 +20,9 @@ namespace ScriptableSound
             AudioClip[] audioClips = Selection.GetFiltered<AudioClip>(SelectionMode.DeepAssets).ToArray();
 
             foreach ((SoundClip soundClip, AudioClip audioClip) in CreateSoundClips(audioClips).Zip(audioClips, (s, a) => (s, a)))
-            {
                 AssetDatabaseHelper.CreateAsset(soundClip,
                     string.Join(".", AssetDatabase.GetAssetPath(audioClip)
                         .Split('.').Reverse().Skip(1).Reverse().Append("asset").ToArray()));
-            }
         }
 
         [MenuItem("Assets/Sound/Sound Clip/Create all in a single asset")]

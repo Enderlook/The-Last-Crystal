@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     public static class Distances
     {

@@ -1,10 +1,8 @@
-﻿using CreaturesAddons.Weapons;
+﻿using Additions.Components.FloatPool;
+using Additions.Components.ScriptableSound;
+using Additions.Prefabs.FloatingText;
 
-using FloatingText;
-
-using FloatPool;
-
-using ScriptableSound;
+using CreaturesAddons.Weapons;
 
 using System;
 using System.Collections;
@@ -81,10 +79,7 @@ namespace CreaturesAddons
             Destroy(gameObject);
         }
 
-        protected virtual void TakeDamageFeedback()
-        {
-            hurtSound.Play();
-        }
+        protected virtual void TakeDamageFeedback() => hurtSound.Play();
 
         /// <summary>
         /// Spawn a floating text above the creature.

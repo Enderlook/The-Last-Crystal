@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using Additions.Utils;
 
-using Utils;
+using UnityEngine;
 
-namespace ScriptableSound.Modifiers
+namespace Additions.Components.ScriptableSound.Modifiers
 {
     [CreateAssetMenu(fileName = "Volume", menuName = "Sound/Modifiers/Volume")]
     public class VolumeModifier : SoundModifier

@@ -1,4 +1,4 @@
-﻿namespace ScriptableSound
+﻿namespace Additions.Components.ScriptableSound
 {
     public enum PlayListMode
     {

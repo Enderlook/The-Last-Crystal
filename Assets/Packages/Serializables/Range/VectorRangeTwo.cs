@@ -4,7 +4,7 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-namespace Range
+namespace Additions.Serializables.Ranges
 {
     public abstract class VectorRangeTwo
     {

@@ -4,9 +4,9 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
-    public static class AStarSearchAlgorithm
+    internal static class AStarSearchAlgorithm
     {
         /* https://code.msdn.microsoft.com/windowsdesktop/Dijkstras-Single-Soruce-69faddb3
          * https://www.geeksforgeeks.org/csharp-program-for-dijkstras-shortest-path-algorithm-greedy-algo-7/
@@ -14,14 +14,6 @@ namespace Navigation
          * http://theory.stanford.edu/~amitp/GameProgramming/AStarComparison.html
          * https://www.redblobgames.com/pathfinding/a-star/introduction.html
          */
-
-        public enum DistanceFormula
-        {
-            Euclidean, // Squared grids that allow any direction
-            Manhattan, // Squared grids that only allow 4 directions of movement ('+' shape)
-            Chebyshov, // Squared grids that allow 8 directions of movement ('+' and 'x' shapes)
-            None, // Dijkstra without heuristic distance
-        };
 
         private static Func<Vector2, Vector2, float> ChooseHeuristicFormula(DistanceFormula distanceFormula)
         {
@@ -121,9 +113,7 @@ namespace Navigation
         {
             Dictionary<Node, float> distances = new Dictionary<Node, float>();
             foreach (Node node in navigation.Grid)
-            {
                 distances.Add(node, float.MaxValue);
-            }
             distances[source] = 0;
             return distances;
         }

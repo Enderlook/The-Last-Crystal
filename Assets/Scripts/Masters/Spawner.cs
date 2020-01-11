@@ -1,10 +1,8 @@
-﻿using AdditionalAttributes;
-
-using AdditionalComponents;
+﻿using Additions.Attributes;
+using Additions.Components;
+using Additions.Components.Navigation;
 
 using Master;
-
-using Navigation;
 
 using System.Collections;
 using System.Collections.Generic;

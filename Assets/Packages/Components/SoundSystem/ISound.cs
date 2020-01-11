@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SoundSystem
+namespace Additions.Components.SoundSystem
 {
     public interface ISound
     {

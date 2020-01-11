@@ -1,14 +1,13 @@
-﻿using AdditionalAttributes;
+﻿using Additions.Attributes;
+using Additions.Utils;
 
 using System.Linq;
 
 using UnityEngine;
 
-using Utils;
-
 using Random = UnityEngine.Random;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [CreateAssetMenu(fileName = "SoundList", menuName = "Sound/SoundList")]
     public class SoundList : Sound
@@ -51,12 +50,10 @@ namespace ScriptableSound
             {
                 CurrentSound.UpdateBehaviour(deltaTime);
                 if (!CurrentSound.IsPlaying)
-                {
                     if (playsAmount == -1 || remainingPlays > 0)
                         ConfigureNextSound();
                     else
                         IsPlaying = false;
-                }
             }
         }
 
@@ -78,23 +75,19 @@ namespace ScriptableSound
                     break;
                 case PlayModeOrder.PingPong:
                     if (isReverse)
-                    {
                         if (--index < 0)
                         {
                             index = sounds.Length - 1;
                             isReverse = false;
                             ReducePlayAmountIf(PlayListMode.FullList);
                         }
-                    }
-                    else
-                    {
+                        else
                         if (++index == sounds.Length)
                         {
                             index = 0;
                             isReverse = true;
                             ReducePlayAmountIf(PlayListMode.FullList);
                         }
-                    }
                     break;
             }
             ReducePlayAmountIf(PlayListMode.IndividualSounds);

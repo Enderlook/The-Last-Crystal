@@ -5,10 +5,10 @@ using UnityEditor;
 
 using UnityEngine;
 
-namespace Range
+namespace Additions.Serializables.Ranges
 {
     [CustomPropertyDrawer(typeof(RangeFloat), true), CustomPropertyDrawer(typeof(RangeInt), true), CustomPropertyDrawer(typeof(RangeFloatStep), true), CustomPropertyDrawer(typeof(RangeIntStep), true)]
-    public class RangeDrawer : PropertyDrawer
+    internal class RangeDrawer : PropertyDrawer
     {
         // Field display name must be a single letter
         // Public consts are used in MinMaxRangeAttributeDrawer
@@ -75,14 +75,12 @@ namespace Range
             List<string> errors = new List<string>();
             if (min >= max)
                 errors.Add($"Value of {minProperty.displayName} can't be higher or equal to {maxProperty.displayName}.");
-            if (step != null && step > (max - min))
+            if (step != null && step > max - min)
                 errors.Add($"Value of {stepProperty.displayName} can't be higher than the difference between {minProperty.displayName} and {maxProperty.displayName}.");
             if (errors.Count == 0)
                 return;
             foreach (string error in errors)
-            {
                 Debug.LogWarning(error);
-            }
             string message = string.Join("\n", errors);
             errorHeight = GUI.skin.box.CalcHeight(new GUIContent(message), position.width);
             EditorGUI.HelpBox(new Rect(position.x, position.y + position.height - errorHeight, position.width, errorHeight), message, MessageType.Error);

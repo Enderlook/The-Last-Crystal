@@ -1,11 +1,11 @@
-﻿using UnityEditor;
+﻿using Additions.Utils.UnityEditor;
 
-using UnityEditorHelper;
+using UnityEditor;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [CustomEditor(typeof(SoundClip))]
-    public class SoundClipEditor : Editor
+    internal class SoundClipEditor : Editor
     {
         public override void OnInspectorGUI()
         {

@@ -5,7 +5,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class CastExtensions
     {
@@ -106,8 +106,7 @@ namespace AdditionalExtensions
             while (keyTypes.Count > 0)
             {
                 Type key = keyTypes.Dequeue();
-                if (key == fromType) { return true; }
-                if (PrimitiveTypeTable.ContainsKey(key)) { PrimitiveTypeTable[key].ToList().ForEach(keyTypes.Enqueue); }
+                if (key == fromType) return true; if (PrimitiveTypeTable.ContainsKey(key)) PrimitiveTypeTable[key].ToList().ForEach(keyTypes.Enqueue);
             }
             return false;
         }
@@ -131,7 +130,7 @@ namespace AdditionalExtensions
             return to.IsAssignableFrom(from)
                 || from.IsPrimitiveCastableTo(to)
                 || from.GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    .Any(m => (m.ReturnType == to && m.Name == "op_Implicit") || m.Name == "op_Explicit");
+                    .Any(m => m.ReturnType == to && m.Name == "op_Implicit" || m.Name == "op_Explicit");
         }
 
         /// <summary>
@@ -144,7 +143,7 @@ namespace AdditionalExtensions
         /// <see cref="https://stackoverflow.com/questions/18256742/c-sharp-is-operator-check-castability-for-all-conversions-available"/>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="from"/> is <see langword="null"/></exception>
 
-        public static bool IsCastableTo<T>(this Type from) => IsCastableTo(from, typeof(T));
+        public static bool IsCastableTo<T>(this Type from) => from.IsCastableTo(typeof(T));
 
         /// <summary>
         /// Determines if <typeparamref name="T"/> is castable to <typeparamref name="U"/>.
@@ -154,6 +153,6 @@ namespace AdditionalExtensions
         /// <typeparam name="U">The type to be casted to.</typeparam>
         /// <returns><see langword="true"/> if <paramref name="from"/> can be casted to <typeparamref name="T"/>. <see langword="false"/> otherwise.</returns>
         /// <see cref="https://stackoverflow.com/questions/18256742/c-sharp-is-operator-check-castability-for-all-conversions-available"/>
-        public static bool IsCastableTo<T, U>() => IsCastableTo(typeof(T), typeof(U));
+        public static bool IsCastableTo<T, U>() => typeof(T).IsCastableTo(typeof(U));
     }
 }

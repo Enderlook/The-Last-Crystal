@@ -4,7 +4,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     public sealed class HasConfirmationFieldAttribute : PropertyAttribute
     {

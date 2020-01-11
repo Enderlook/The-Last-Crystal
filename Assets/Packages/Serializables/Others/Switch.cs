@@ -1,10 +1,10 @@
-﻿using AdditionalAttributes;
+﻿using Additions.Attributes;
 
 using System;
 
 using UnityEngine;
 
-namespace Serializables
+namespace Additions.Serializables
 {
     [Serializable]
     public abstract class Switch<T1, T2>

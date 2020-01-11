@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
-
     public interface IGraphEditing
     {
         /// <summary>

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Additions.Utils.UnityEditor;
+
+using System;
 using System.Reflection;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(PlayAudioClipAttribute))]
     public class PlayAudioClipDrawer : AdditionalPropertyDrawer
@@ -49,12 +49,10 @@ namespace AdditionalAttributes
                 bool showProgressBar = isPlaying && playAudioClipAttribute.ShowProgressBar;
 
                 if (GUI.Button(new Rect(position.x + position.width - width, position.y, width, position.height / (showProgressBar ? 2 : 1)), playGUIContent))
-                {
                     if (isPlaying)
                         Stop(audioClip);
                     else
                         Play(audioClip);
-                }
 
                 if (showProgressBar)
                 {

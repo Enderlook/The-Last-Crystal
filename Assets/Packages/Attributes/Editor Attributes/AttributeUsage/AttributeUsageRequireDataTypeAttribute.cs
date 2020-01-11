@@ -1,11 +1,9 @@
-﻿using AdditionalAttributes.AttributeUsage.Internal;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace AdditionalAttributes.AttributeUsage
+namespace Additions.Attributes.AttributeUsage
 {
-    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = AttributeUsageHelper.TypeFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = TypeFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageRequireDataTypeAttribute : Attribute
     {
@@ -14,7 +12,7 @@ namespace AdditionalAttributes.AttributeUsage
         /// <summary>
         /// Additional checking rules.
         /// </summary>
-        public AttributeUsageHelper.TypeFlags typeFlags;
+        public TypeFlags typeFlags;
 
         /// <summary>
         /// If <see langword="true"/>, <see cref="Types"/> will be forbidden types (blacklist).<br>

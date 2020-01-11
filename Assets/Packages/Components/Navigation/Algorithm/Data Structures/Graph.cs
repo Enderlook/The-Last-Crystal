@@ -4,13 +4,18 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     [Serializable]
     public class Graph : IGraphReader, IGraphEditing
     {
-        [field: SerializeField]
-        public Transform Reference { get; set; }
+        [SerializeField]
+        private Transform reference;
+
+        public Transform Reference {
+            get => reference;
+            set => reference = value;
+        }
 
         [SerializeField]
         private List<Node> grid;
@@ -60,9 +65,7 @@ namespace Navigation
             HashSet<Node> nodes = new HashSet<Node>(grid);
 
             foreach (Node node in nodes)
-            {
                 node.Connections = node.Connections.Where(e => nodes.Contains(e.end)).ToList();
-            }
         }
 
         public void AddMissingNodesFromConnections()
@@ -71,16 +74,12 @@ namespace Navigation
             HashSet<Node> nodes = new HashSet<Node>(grid);
 
             foreach (Node node in nodes)
-            {
                 foreach (Connection connection in node.Connections)
-                {
                     if (!nodes.Contains(connection.end))
                     {
                         grid.Add(connection.end);
                         nodes.Add(connection.end);
                     }
-                }
-            }
         }
 
         public void RemoveNodesWithoutToOrFromConnection()

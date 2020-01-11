@@ -1,10 +1,10 @@
-﻿using Range;
+﻿using Additions.Serializables.Ranges;
 
 using System;
 
 using UnityEngine;
 
-namespace SoundSystem
+namespace Additions.Components.SoundSystem
 {
     [Serializable]
     public class Sound : ISound

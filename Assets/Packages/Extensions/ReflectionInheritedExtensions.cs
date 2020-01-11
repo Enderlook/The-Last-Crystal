@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class ReflectionInheritedExtensions
     {

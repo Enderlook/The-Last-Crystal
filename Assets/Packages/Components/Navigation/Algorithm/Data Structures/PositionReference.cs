@@ -1,4 +1,4 @@
-﻿namespace Navigation
+﻿namespace Additions.Components.Navigation
 {
     /// <summary>
     /// How position of <see cref="Node"/>s is calculated.

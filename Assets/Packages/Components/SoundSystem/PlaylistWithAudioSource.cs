@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace SoundSystem
+namespace Additions.Components.SoundSystem
 {
     [Serializable]
     public class PlaylistWithAudioSource : IPlaylist

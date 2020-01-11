@@ -1,10 +1,9 @@
-﻿using Range;
+﻿using Additions.Serializables.Ranges;
+using Additions.Utils;
 
 using UnityEngine;
 
-using Utils;
-
-namespace ScriptableSound.Modifiers
+namespace Additions.Components.ScriptableSound.Modifiers
 {
     [CreateAssetMenu(fileName = "PitchRange", menuName = "Sound/Modifiers/Pitch Range")]
     public class PitchRangeModifier : SoundModifier

@@ -1,4 +1,4 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Extensions;
 
 using System;
 using System.Linq;
@@ -8,7 +8,7 @@ using UnityEditor.Compilation;
 using SystemAssembly = System.Reflection.Assembly;
 using UnityAssembly = UnityEditor.Compilation.Assembly;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes.PostCompiling
 {
     internal static class AssembliesHelper
     {

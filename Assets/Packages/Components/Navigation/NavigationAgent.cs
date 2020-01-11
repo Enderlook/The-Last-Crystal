@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     [Serializable]
     public class NavigationAgent : MonoBehaviour, IInit
@@ -84,9 +84,7 @@ namespace Navigation
             {
                 Gizmos.color = pathColor;
                 foreach (Connection connection in lastPath)
-                {
                     Gizmos.DrawLine(connection.start.position, connection.end.position);
-                }
             }
         }
 #endif

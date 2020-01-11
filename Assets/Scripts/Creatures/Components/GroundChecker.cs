@@ -1,9 +1,7 @@
-﻿using AdditionalAttributes;
+﻿using Additions.Attributes;
 
-#if UNITY_EDITOR
 using UnityEngine;
 
-#endif
 using RangeAttribute = UnityEngine.RangeAttribute;
 
 public class GroundChecker : MonoBehaviour

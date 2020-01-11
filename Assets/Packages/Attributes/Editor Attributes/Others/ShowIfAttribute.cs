@@ -1,11 +1,11 @@
-﻿using AdditionalAttributes.AttributeUsage;
+﻿using Additions.Attributes.AttributeUsage;
 
 using System;
 using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [AttributeUsageAccessibility(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]

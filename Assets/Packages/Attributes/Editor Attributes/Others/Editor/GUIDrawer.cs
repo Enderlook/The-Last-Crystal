@@ -1,12 +1,11 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Extensions;
+using Additions.Utils.UnityEditor;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(GUIAttribute))]
     internal class GUIDrawer : AdditionalPropertyDrawer
@@ -43,7 +42,6 @@ namespace AdditionalAttributes
                 return new GUIContent(text ?? label.text, label.image, tooltip ?? label.tooltip);
             }
             else if (helper.TryGetParentTargetObjectOfProperty(out object parent))
-            {
                 try
                 {
                     return parent.GetValueFromFirstMember<GUIContent>(attribute.guiContentOrReferenceName);
@@ -53,7 +51,6 @@ namespace AdditionalAttributes
                     text = parent.GetValueFromFirstMember<string>(attribute.guiContentOrReferenceName);
                     return new GUIContent(text ?? label.text, label.image, label.tooltip);
                 }
-            }
 
             return label;
         }
@@ -82,9 +79,10 @@ namespace AdditionalAttributes
         /// <returns>Whenever there was or not an special <see cref="GUIContent"/>.</returns>
         public static bool GetGUIContent(SerializedProperty serializedProperty, ref GUIContent label)
         {
-            if (serializedProperty.GetHelper().TryGetAttributeFromField(out GUIAttribute guiAttribute))
+            SerializedPropertyHelper helper = serializedProperty.GetHelper();
+            if (helper.TryGetAttributeFromField(out GUIAttribute guiAttribute))
             {
-                label = GetGUIContent(guiAttribute, serializedProperty.GetHelper(), label);
+                label = GetGUIContent(guiAttribute, helper, label);
                 return true;
             }
             return false;

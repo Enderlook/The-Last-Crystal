@@ -1,4 +1,5 @@
-﻿using AdditionalAttributes.PostCompiling;
+﻿using Additions.Attributes.PostCompiling;
+using Additions.Attributes.PostCompiling.Attributes;
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     internal static class GUITesting
     {

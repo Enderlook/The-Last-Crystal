@@ -1,4 +1,4 @@
-﻿using AdditionalAttributes;
+﻿using Additions.Attributes;
 
 using CreaturesAddons;
 
@@ -6,7 +6,7 @@ using System;
 
 using UnityEngine;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [Serializable]
     public class SoundPlay : IUpdate

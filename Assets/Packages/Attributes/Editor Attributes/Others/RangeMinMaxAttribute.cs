@@ -1,14 +1,15 @@
-﻿using AdditionalAttributes.AttributeUsage;
-
-using Range;
+﻿using Additions.Attributes.AttributeUsage;
+using Additions.Serializables.Ranges;
 
 using System;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+using RangeInt = Additions.Serializables.Ranges.RangeInt;
+
+namespace Additions.Attributes
 {
-    [AttributeUsageRequireDataType(typeof(Vector2), typeof(Vector2Int), typeof(Range.RangeInt), typeof(RangeIntStep), typeof(RangeFloat), typeof(RangeFloatStep), includeEnumerableTypes = true)]
+    [AttributeUsageRequireDataType(typeof(Vector2), typeof(Vector2Int), typeof(RangeInt), typeof(RangeIntStep), typeof(RangeFloat), typeof(RangeFloatStep), includeEnumerableTypes = true)]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class RangeMinMaxAttribute : RangeAttribute
     {

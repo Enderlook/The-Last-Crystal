@@ -1,6 +1,6 @@
-using Master;
+using Additions.Components.SoundSystem;
 
-using SoundSystem;
+using Master;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;

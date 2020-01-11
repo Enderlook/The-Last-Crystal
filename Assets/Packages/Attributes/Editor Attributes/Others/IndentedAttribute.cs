@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     /// <summary>
     /// Add or remove indentation to the drew serialized property.

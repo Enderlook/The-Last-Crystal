@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class StringExtensions
     {
@@ -15,7 +15,7 @@ namespace AdditionalExtensions
         /// <returns>Converted string.</returns>
         public static string FirstCharToUpper(this string source)
         {
-            if (source is null) throw new System.ArgumentNullException(nameof(source));
+            if (source is null) throw new ArgumentNullException(nameof(source));
 
             return source.FirstCharTo(char.ToUpper, e => e.ToUpper());
         }

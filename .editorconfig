@@ -11,3 +11,6 @@ csharp_style_prefer_switch_expression = false:suggestion
 
 # IDE0010: Add missing cases
 dotnet_diagnostic.IDE0010.severity = none
+
+# RCS1128: Use coalesce expression.
+dotnet_diagnostic.RCS1128.severity = none

@@ -1,10 +1,10 @@
-﻿using AdditionalAttributes.AttributeUsage;
+﻿using Additions.Attributes.AttributeUsage;
 
 using System;
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(AudioClip), includeEnumerableTypes = true)]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]

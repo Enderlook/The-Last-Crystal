@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class OthersExtensions
     {

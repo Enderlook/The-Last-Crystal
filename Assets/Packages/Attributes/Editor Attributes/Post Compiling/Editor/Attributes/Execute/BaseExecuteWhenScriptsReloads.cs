@@ -1,9 +1,9 @@
-﻿using AdditionalAttributes.AttributeUsage;
+﻿using Additions.Attributes.AttributeUsage;
 
 using System;
 using System.Reflection;
 
-namespace AdditionalAttributes.PostCompiling.Internal
+namespace Additions.Attributes.PostCompiling.Attributes
 {
     [AttributeUsageAccessibility(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)]
     public abstract class BaseExecuteWhenScriptsReloads : Attribute

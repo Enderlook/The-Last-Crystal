@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace AdditionalComponents
+namespace Additions.Components
 {
     public class StoppableRigidbody : MonoBehaviour, IInit
     {

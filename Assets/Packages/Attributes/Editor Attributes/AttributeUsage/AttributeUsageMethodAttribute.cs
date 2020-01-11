@@ -1,48 +1,15 @@
-﻿using AdditionalAttributes.AttributeUsage.Internal;
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalAttributes.AttributeUsage
+namespace Additions.Attributes.AttributeUsage
 {
-    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = AttributeUsageHelper.TypeFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = TypeFlags.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageMethodAttribute : Attribute
     {
-        /// <summary>
-        /// The parameter mode.
-        /// </summary>
-        public enum ParameterMode
-        {
-            /// <summary>
-            /// Specifies an common parameter.<br>
-            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
-            /// </summary>
-            Common,
-            /// <summary>
-            /// Specifies an in parameter.<br>
-            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
-            /// </summary>
-            In,
-            /// <summary>
-            /// Specifies an out parameter.
-            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
-            /// </summary>
-            Out,
-            /// <summary>
-            /// Specifies a reference parameter.
-            /// If <see cref="parameterNumber"/> is 0, this will be ignored.
-            /// </summary>
-            Ref,
-            /// <summary>
-            /// Specifies that this parameter should not exist.
-            /// </summary>
-            VoidOrNone
-        }
-
         /// <summary>
         /// Number of the parameter to check.<br>
         /// Example:<br>
@@ -61,7 +28,7 @@ namespace AdditionalAttributes.AttributeUsage
         /// <summary>
         /// Additional checking rules.
         /// </summary>
-        public AttributeUsageHelper.TypeFlags checkingFlags;
+        public TypeFlags checkingFlags;
 
         private readonly Type[] basicTypes;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdditionalAttributes.PostCompiling
+namespace Additions.Attributes.PostCompiling.Attributes
 {
     [AttributeUsage(AttributeTargets.All)]
     public class DoNotInspectAttribute : Attribute { }

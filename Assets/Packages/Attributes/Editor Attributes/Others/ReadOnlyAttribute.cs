@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = true)]
     public sealed class ReadOnlyAttribute : PropertyAttribute { }

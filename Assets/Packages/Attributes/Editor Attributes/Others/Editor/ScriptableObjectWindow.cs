@@ -1,4 +1,6 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Attributes.PostCompiling;
+using Additions.Extensions;
+using Additions.Utils.UnityEditor;
 
 using System;
 using System.Collections.Generic;
@@ -7,11 +9,9 @@ using System.Reflection;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     internal class ScriptableObjectWindow : EditorWindow
     {
@@ -76,7 +76,7 @@ namespace AdditionalAttributes
                         }
 
                         window.get = () => array.GetValue(index);
-                        window.set = (object value) => array.SetValue(value, index);
+                        window.set = (value) => array.SetValue(value, index);
                     }
                     else
                         throw new InvalidCastException();
@@ -85,7 +85,7 @@ namespace AdditionalAttributes
                 {
                     type = fieldType;
                     window.get = () => property.objectReferenceValue;
-                    window.set = (object value) => property.objectReferenceValue = (UnityEngine.Object)value;
+                    window.set = (value) => property.objectReferenceValue = (UnityEngine.Object)value;
                 }
             }
             window.allowedTypes = GetDerivedTypes(type).Where(e => !e.IsDefined(typeof(AbstractScriptableObjectAttribute))).ToArray();
@@ -168,11 +168,9 @@ namespace AdditionalAttributes
                 }
 
                 if (!hasAsset)
-                {
                     // Save
                     if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
                         AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
-                }
             }
         }
 

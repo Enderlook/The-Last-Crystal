@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     public class SoundConfiguration
     {

@@ -4,7 +4,7 @@ using System;
 
 using UnityEngine;
 
-namespace FloatPool
+namespace Additions.Components.FloatPool
 {
     public interface IFloatPool : IUpdate
     {

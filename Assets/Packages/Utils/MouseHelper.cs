@@ -1,9 +1,10 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
 #endif
+
 using UnityEngine;
 
-namespace Utils
+namespace Additions.Utils
 {
     public class MouseHelper : MonoBehaviour
     {

@@ -1,10 +1,10 @@
-using UnityEngine;
+using Additions.Utils.Clockworks;
 
-using Utils;
+using UnityEngine;
 
 namespace CreaturesAddons.Weapons
 {
-    public abstract class Weapon : MonoBehaviour, IInit, IClockWork
+    public abstract class Weapon : MonoBehaviour, IInit, IClockwork
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Attacks per second.")]
@@ -17,22 +17,22 @@ namespace CreaturesAddons.Weapons
 
         protected abstract void Attack();
 
-        public float CooldownTime => ((IClockWork)clockwork).CooldownTime;
-        public float TotalCooldown => ((IClockWork)clockwork).TotalCooldown;
-        public float CooldownPercent => ((IClockWork)clockwork).CooldownPercent;
-        public bool IsReady => ((IClockWork)clockwork).IsReady;
-        public int TotalCycles => ((IClockWork)clockwork).TotalCycles;
-        public int RemainingCycles => ((IClockWork)clockwork).RemainingCycles;
-        public bool IsEndlessLoop => ((IClockWork)clockwork).IsEndlessLoop;
-        public bool IsEnabled => ((IClockWork)clockwork).IsEnabled;
-        public void Execute() => ((IClockWork)clockwork).Execute();
-        public virtual bool Recharge(float deltaTime) => ((IClockWork)clockwork).Recharge(deltaTime);
-        public void ResetCooldown() => ((IClockWork)clockwork).ResetCooldown();
-        public bool TryExecute(float deltaTime = 0) => ((IClockWork)clockwork).TryExecute(deltaTime);
-        public virtual void UpdateBehaviour(float deltaTime) => ((IClockWork)clockwork).UpdateBehaviour(deltaTime);
-        public void ResetCycles() => ((IClockWork)clockwork).ResetCycles();
-        public void ResetCycles(int newCycles) => ((IClockWork)clockwork).ResetCycles(newCycles);
-        public void ResetCooldown(float newCooldownTime) => ((IClockWork)clockwork).ResetCooldown(newCooldownTime);
+        public float CooldownTime => ((IClockwork)clockwork).CooldownTime;
+        public float TotalCooldown => ((IClockwork)clockwork).TotalCooldown;
+        public float CooldownPercent => ((IClockwork)clockwork).CooldownPercent;
+        public bool IsReady => ((IClockwork)clockwork).IsReady;
+        public int TotalCycles => ((IClockwork)clockwork).TotalCycles;
+        public int RemainingCycles => ((IClockwork)clockwork).RemainingCycles;
+        public bool IsEndlessLoop => ((IClockwork)clockwork).IsEndlessLoop;
+        public bool IsEnabled => ((IClockwork)clockwork).IsEnabled;
+        public void Execute() => ((IClockwork)clockwork).Execute();
+        public virtual bool Recharge(float deltaTime) => ((IClockwork)clockwork).Recharge(deltaTime);
+        public void ResetCooldown() => ((IClockwork)clockwork).ResetCooldown();
+        public bool TryExecute(float deltaTime = 0) => ((IClockwork)clockwork).TryExecute(deltaTime);
+        public virtual void UpdateBehaviour(float deltaTime) => ((IClockwork)clockwork).UpdateBehaviour(deltaTime);
+        public void ResetCycles() => ((IClockwork)clockwork).ResetCycles();
+        public void ResetCycles(int newCycles) => ((IClockwork)clockwork).ResetCycles(newCycles);
+        public void ResetCooldown(float newCooldownTime) => ((IClockwork)clockwork).ResetCooldown(newCooldownTime);
     }
 
     public interface ITakeDamage

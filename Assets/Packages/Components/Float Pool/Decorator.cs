@@ -1,10 +1,5 @@
-﻿namespace FloatPool.Internal
+﻿namespace Additions.Components.FloatPool.Internal
 {
-    public interface IDecorator
-    {
-        void SetDecorable(IFloatPool decorable);
-    }
-
     public abstract class Decorator : IFloatPool, IDecorator
     {
         private IFloatPool decorable;

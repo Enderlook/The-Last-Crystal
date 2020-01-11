@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Additions.Utils.UnityEditor;
+
+using System;
 
 using UnityEditor;
-
-using UnityEditorHelper;
 
 using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(RangeAttribute))]
     internal class RangeDrawer : AdditionalPropertyDrawer

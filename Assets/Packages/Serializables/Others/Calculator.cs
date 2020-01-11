@@ -1,4 +1,4 @@
-using AdditionalExtensions;
+using Additions.Extensions;
 
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 using UnityEngine;
 
-namespace Serializables
+namespace Additions.Serializables
 {
     /// <summary>
     /// Used to calculate formulas.<br>
@@ -23,6 +23,7 @@ namespace Serializables
 
         [SerializeField, Tooltip("Should Regex be compiled.\nIncreases constructor time but decreases matching time. It's only worth with very heavy loads (~1M matches).")]
         private bool compile;
+
         private Regex regex;
 #pragma warning restore CA2235, CS0649
 

@@ -1,10 +1,8 @@
-﻿using AdditionalAttributes;
-
-using ScriptableSound;
+﻿using Additions.Attributes;
+using Additions.Components.ScriptableSound;
+using Additions.Utils;
 
 using UnityEngine;
-
-using Utils;
 
 namespace CreaturesAddons.Weapons
 {

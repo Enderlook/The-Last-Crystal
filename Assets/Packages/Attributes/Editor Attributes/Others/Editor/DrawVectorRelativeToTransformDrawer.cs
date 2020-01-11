@@ -1,17 +1,15 @@
-﻿using AdditionalExceptions;
-
-using AdditionalExtensions;
+﻿using Additions.Exceptions;
+using Additions.Extensions;
+using Additions.Utils.UnityEditor;
 
 using System;
 using System.Reflection;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(DrawVectorRelativeToTransformAttribute)), InitializeOnLoad]
     internal class DrawVectorRelativeToTransformEditor : AdditionalPropertyDrawer
@@ -25,12 +23,9 @@ namespace AdditionalAttributes
 
         static DrawVectorRelativeToTransformEditor() => SceneView.onSceneGUIDelegate += RenderSceneGUI;
 
-        private static Vector3 DrawHandle(Vector3 position, bool usePositionHandle)
-        {
-            return usePositionHandle
+        private static Vector3 DrawHandle(Vector3 position, bool usePositionHandle) => usePositionHandle
                 ? Handles.PositionHandle(position, Quaternion.identity)
                 : Handles.FreeMoveHandle(position, Quaternion.identity, HandleUtility.GetHandleSize(position) * .1f, Vector2.one, Handles.CylinderHandleCap);
-        }
 
         private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
 
@@ -153,13 +148,11 @@ namespace AdditionalAttributes
                 Vector3 reference = GetReference(serializedProperty.serializedObject, drawVectorRelativeToTransform.reference);
 
                 if (serializedProperty.isArray)
-                {
                     for (int i = 0; i < serializedProperty.arraySize; i++)
                     {
                         SerializedProperty item = serializedProperty.GetArrayElementAtIndex(i);
                         RenderSingleSerializedProperty(item, drawVectorRelativeToTransform, reference);
                     }
-                }
                 else
                     RenderSingleSerializedProperty(serializedProperty, drawVectorRelativeToTransform, reference);
 

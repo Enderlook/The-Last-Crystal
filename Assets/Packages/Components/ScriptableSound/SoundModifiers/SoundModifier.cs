@@ -1,12 +1,11 @@
-﻿using AdditionalAttributes;
+﻿using Additions.Attributes;
+using Additions.Utils;
 
 using System;
 
 using UnityEngine;
 
-using Utils;
-
-namespace ScriptableSound.Modifiers
+namespace Additions.Components.ScriptableSound.Modifiers
 {
     [AbstractScriptableObject]
     public class SoundModifier : ScriptableObject, IPrototypable<SoundModifier>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdditionalExceptions
+namespace Additions.Exceptions
 {
     public class ImpossibleStateException : InvalidOperationException
     {

@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     [Serializable]
     public class Connection : ScriptableObject

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class ListExtensions
     {
@@ -14,7 +14,7 @@ namespace AdditionalExtensions
         /// <param name="ascendOrder">Whenever it must remove in ascending or descending order.</param>
         /// <param name="removeAmount">Amount of items which must the criteria must be removed. If 0, remove all the matched elements.</param>
         /// <returns><paramref name="source"/>.</returns>
-        private static List<T> RemoveBy<T>(this List<T> source, System.Func<T, bool> selector, bool ascendOrder = true, int removeAmount = 1)
+        private static List<T> RemoveBy<T>(this List<T> source, Func<T, bool> selector, bool ascendOrder = true, int removeAmount = 1)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
@@ -23,14 +23,12 @@ namespace AdditionalExtensions
                 throw new Exception($"{nameof(removeAmount)} parameter can't be negative.");
             int removed = 0;
             for (int i = ascendOrder ? 0 : source.Count; i < (ascendOrder ? source.Count : 0); i += ascendOrder ? 1 : -1)
-            {
                 if (selector(source[i]))
                 {
                     source.RemoveAt(i);
                     removed++;
                     if (removeAmount == 0 || removed >= removeAmount) break;
                 }
-            }
             return source;
         }
 
@@ -102,9 +100,7 @@ namespace AdditionalExtensions
                 return new List<T>(0);
 
             for (int i = 0; i < source.Count; i++)
-            {
                 source[i] = function(source[i]);
-            }
 
             return source;
         }

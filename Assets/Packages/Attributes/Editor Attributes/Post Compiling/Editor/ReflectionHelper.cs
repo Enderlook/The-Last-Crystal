@@ -1,4 +1,4 @@
-﻿using AdditionalExtensions;
+﻿using Additions.Extensions;
 
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalAttributes.PostCompiling
+namespace Additions.Attributes.PostCompiling
 {
     internal static class ReflectionHelper
     {
@@ -125,6 +125,6 @@ namespace AdditionalAttributes.PostCompiling
         /// <typeparam name="T">Return type for criteria.</typeparam>
         /// <param name="class">Type where member are looked for.</param>
         /// <returns>Member names which matches the criteria.</returns>
-        public static IEnumerable<string> FieldsPropertiesAndMethodsWithReturnTypeOf<T>(this Type @class) => FieldsPropertiesAndMethodsWithReturnTypeOf(@class, typeof(T));
+        public static IEnumerable<string> FieldsPropertiesAndMethodsWithReturnTypeOf<T>(this Type @class) => @class.FieldsPropertiesAndMethodsWithReturnTypeOf(typeof(T));
     }
 }

@@ -1,11 +1,11 @@
-﻿using FloatPool.Internal;
+﻿using Additions.Components.FloatPool.Internal;
 
 using System;
 
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace FloatPool.Decorators
+namespace Additions.Components.FloatPool.Decorators
 {
     [Serializable]
     public class ChangeCallbackDecorator : Decorator

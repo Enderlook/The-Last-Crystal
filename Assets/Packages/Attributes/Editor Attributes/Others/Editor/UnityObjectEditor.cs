@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace AdditionalAttributes
+namespace Additions.Attributes
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(UnityEngine.Object), true)]

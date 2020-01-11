@@ -1,4 +1,4 @@
-﻿using AdditionalAttributes.PostCompiling.Internal;
+﻿using Additions.Attributes.PostCompiling.Attributes;
 
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using UnityEditor.Callbacks;
 
 using UnityEngine;
 
-namespace AdditionalAttributes.PostCompiling
+namespace Additions.Attributes.PostCompiling
 {
     public static class PostCompilingAssembliesHelper
     {
@@ -136,7 +136,6 @@ namespace AdditionalAttributes.PostCompiling
             EditorApplication.update += () =>
             {
                 if (task != null)
-                {
                     if (task.IsCompleted)
                     {
                         task.Wait();
@@ -148,7 +147,6 @@ namespace AdditionalAttributes.PostCompiling
                         task = null;
                         throw exception;
                     }
-                }
             };
 
         private static Task task;
@@ -179,7 +177,6 @@ namespace AdditionalAttributes.PostCompiling
         private static void ScanAssemblies(IEnumerable<Type> types)
         {
             foreach (Type classType in types)
-            {
                 if (classType.IsEnum)
                     enumTypes.Add(classType);
                 else
@@ -210,7 +207,6 @@ namespace AdditionalAttributes.PostCompiling
                         }
                     }
                 }
-            }
         }
 
         private static void GetExecuteAttributes(MethodInfo methodInfo)
@@ -233,38 +229,26 @@ namespace AdditionalAttributes.PostCompiling
                     }
                 }
                 else if (attribute is ExecuteOnEachMemberOfEachTypeWhenScriptsReloads executeOnEachMemberOfEachTypeWhenScriptsReloads)
-                {
                     if (TryGetDelegate(methodInfo, out Action<MemberInfo> action))
                         SubscribeOnEachMemberOfTypes(action, loop);
-                }
-                else if (attribute is ExecuteOnEachFieldOfEachTypeWhenScriptsReloads executeOnEachFieldOfEachTypeWhenScriptsReloads)
-                {
-                    if (TryGetDelegate(methodInfo, out Action<FieldInfo> action))
-                    {
-                        ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
-                        if ((fieldFags & ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.SerializableByUnity) != 0)
-                            SubscribeOnEachSerializableByUnityFieldOfTypes(action, loop);
-                        if ((fieldFags & ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.NotSerializableByUnity) != 0)
-                            SubscribeOnEachNonSerializableByUnityFieldOfTypes(action, loop);
-                    }
-                }
-                else if (attribute is ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads executeOnEachPropertyOfEachTypeWhenScriptsReloads)
-                {
-                    if (TryGetDelegate(methodInfo, out Action<PropertyInfo> action))
-                        SubscribeOnEachPropertyOfTypes(action, loop);
-                }
-                else if (attribute is ExecuteOnEachMethodOfEachTypeWhenScriptsReloads executeOnEachMethodOfEachTypeWhenScriptsReloads)
-                {
-                    if (TryGetDelegate(methodInfo, out Action<MethodInfo> action))
-                        SubscribeOnEachMethodOfTypes(action, loop);
-                }
-                else if (attribute is ExecuteWhenScriptsReloads executeWhenScriptsReloads)
-                {
-                    if (TryGetDelegate(methodInfo, out Action action))
-                    {
-                        SubscribeToExecuteOnce(action, loop);
-                    }
-                }
+                    else if (attribute is ExecuteOnEachFieldOfEachTypeWhenScriptsReloads executeOnEachFieldOfEachTypeWhenScriptsReloads)
+                        if (TryGetDelegate(methodInfo, out action))
+                        {
+                            ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
+                            if ((fieldFags & ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.SerializableByUnity) != 0)
+                                SubscribeOnEachSerializableByUnityFieldOfTypes(action, loop);
+                            if ((fieldFags & ExecuteOnEachFieldOfEachTypeWhenScriptsReloads.FieldFlags.NotSerializableByUnity) != 0)
+                                SubscribeOnEachNonSerializableByUnityFieldOfTypes(action, loop);
+                        }
+                        else if (attribute is ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads executeOnEachPropertyOfEachTypeWhenScriptsReloads)
+                            if (TryGetDelegate(methodInfo, out action))
+                                SubscribeOnEachPropertyOfTypes(action, loop);
+                            else if (attribute is ExecuteOnEachMethodOfEachTypeWhenScriptsReloads executeOnEachMethodOfEachTypeWhenScriptsReloads)
+                                if (TryGetDelegate(methodInfo, out action))
+                                    SubscribeOnEachMethodOfTypes(action, loop);
+                                else if (attribute is ExecuteWhenScriptsReloads executeWhenScriptsReloads)
+                                    if (TryGetDelegate(methodInfo, out Action action2))
+                                        SubscribeToExecuteOnce(action2, loop);
             }
         }
 

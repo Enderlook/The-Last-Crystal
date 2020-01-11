@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Additions.Utils;
+using Additions.Utils.UnityEditor;
+
+using System.Collections.Generic;
 using System.Linq;
 
 using UnityEditor;
 
-using UnityEditorHelper;
-
 using UnityEngine;
 
-using Utils;
-
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     [CustomEditor(typeof(NavigationGraph))]
     internal class NavigationGraphEditor : Editor
@@ -22,9 +21,9 @@ namespace Navigation
         private bool drawConnections = true;
         private bool drawDistances = true;
 
-        private bool isEditingEnable = false;
-        private bool wasEditingEnable = false;
-        private bool wasLockedBefore = false;
+        private bool isEditingEnable;
+        private bool wasEditingEnable;
+        private bool wasLockedBefore;
         private float autoSelectionRange = 0.25f;
         private Node selectedNode;
 
@@ -201,9 +200,7 @@ namespace Navigation
             if (GUILayout.Button("Become local to world"))
             {
                 foreach (Node node in navigationGraph.graph.Grid)
-                {
                     node.position = navigationGraph.graph.GetWorldPosition(node);
-                }
                 navigationGraph.graph.Reference.position = Vector3.zero;
             }
 
@@ -212,15 +209,11 @@ namespace Navigation
                 Transform reference = navigationGraph.graph.Reference;
                 Vector3 position = reference.position;
                 foreach (Node node in navigationGraph.graph.Grid)
-                {
                     node.position = navigationGraph.graph.GetWorldPosition(node);
-                }
                 reference.position = Vector3.zero;
 
                 for (int i = 0; i < reference.childCount; i++)
-                {
                     reference.GetChild(i).position += position;
-                }
             }
         }
 
@@ -236,7 +229,7 @@ namespace Navigation
         }
 
         [MenuItem("CONTEXT/" + nameof(NavigationGraph) + "/Reset Grid")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Usado por Unity")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private static void NewMenuOption(MenuCommand menuCommand) =>
             // https://learn.unity.com/tutorial/editor-scripting#5c7f8528edbc2a002053b5fa
             ((NavigationGraph)menuCommand.context).ResetGrid();
@@ -361,12 +354,12 @@ namespace Navigation
             if (closestNode != null)
             {
                 closestNode.DrawLineTo(selectedNode, selectedColor, navigationGraph.graph, 1);
-                ConnectionEditorExtensions.DrawDistance(selectedNode, closestNode, selectedColor, navigationGraph.graph, 14);
+                selectedNode.DrawDistance(closestNode, selectedColor, navigationGraph.graph, 14);
             }
             else
             {
                 selectedNode.DrawLineTo(mousePosition, addColor, navigationGraph.graph, 1);
-                ConnectionEditorExtensions.DrawDistance(selectedNode, mousePosition, addColor, navigationGraph.graph, 14);
+                selectedNode.DrawDistance(mousePosition, addColor, navigationGraph.graph, 14);
             }
 
             selectedNode.DrawPositionHandler(navigationGraph.graph);
@@ -398,19 +391,15 @@ namespace Navigation
         public static void DrawConnections(this Node node, Color active, Color inactive, Graph reference = null, int fontSize = 0)
         {
             foreach (Connection connection in node.Connections)
-            {
                 if (connection != null) // Why this?
                     connection.DrawConnection(active, inactive, reference, fontSize);
-            }
         }
 
         public static void DrawConnections(this Node node, Color color, Graph reference = null, int fontSize = 0)
         {
             foreach (Connection connection in node.Connections)
-            {
                 if (connection != null) // Why this?
                     connection.DrawConnection(color, reference, fontSize);
-            }
         }
 
         public static void DrawLineTo(Vector2 source, Vector2 target, Color color, float? screenSpaceSize = null)
@@ -468,7 +457,7 @@ namespace Navigation
             Handles.DrawSolidArc(half, Vector3.forward, (start - end).normalized, 35, arrowDrawSize);
             Handles.DrawSolidArc(half, Vector3.forward, (start - end).normalized, -35, arrowDrawSize);
             if (fontSize > 0)
-                DrawDistance(start, end, color, fontSize);
+                start.DrawDistance(end, color, fontSize);
 
             if (connection.IsExtreme)
             {
@@ -492,13 +481,13 @@ namespace Navigation
         public static void DrawDistance(this Node source, Node target, Color textColor, Graph reference = null, int fontSize = 10)
         {
             Vector2[] positions = reference.GetWorldPosition(source, target);
-            DrawDistance(positions[0], positions[1], textColor, fontSize);
+            positions[0].DrawDistance(positions[1], textColor, fontSize);
         }
 
         public static void DrawDistance(this Node source, Vector2 target, Color textColor, Graph reference = null, int fontSize = 10)
         {
             Vector2 start = reference.GetWorldPosition(source);
-            DrawDistance(start, target, textColor, fontSize);
+            start.DrawDistance(target, textColor, fontSize);
         }
 
         public static Vector2[] GetWorldPosition(this Graph reference, params Node[] nodes) => reference == null ? nodes.Select(e => e.position).ToArray() : nodes.Select(e => reference.GetWorldPosition(e)).ToArray();

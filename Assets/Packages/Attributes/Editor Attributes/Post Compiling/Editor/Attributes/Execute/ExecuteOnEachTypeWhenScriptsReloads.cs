@@ -1,10 +1,9 @@
-﻿using AdditionalAttributes.AttributeUsage;
-using AdditionalAttributes.PostCompiling.Internal;
+﻿using Additions.Attributes.AttributeUsage;
 
 using System;
 using System.Reflection;
 
-namespace AdditionalAttributes.PostCompiling
+namespace Additions.Attributes.PostCompiling.Attributes
 {
     /// <summary>
     /// Executes the method decorated by this attribute for each <see cref="Type"/> compiled by Unity each time Unity compiles code.<br>

@@ -1,4 +1,4 @@
-﻿using AdditionalExceptions;
+﻿using Additions.Exceptions;
 
 using System;
 
@@ -6,7 +6,7 @@ using UnityEngine;
 
 using Random = UnityEngine.Random;
 
-namespace SoundSystem
+namespace Additions.Components.SoundSystem
 {
     [CreateAssetMenu(fileName = "Playlist", menuName = "Playlist")]
     public class Playlist : ScriptableObject, IPlaylist, ISound

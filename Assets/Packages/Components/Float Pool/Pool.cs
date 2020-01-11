@@ -1,7 +1,6 @@
-﻿using AdditionalAttributes;
-
-using FloatPool.Decorators;
-using FloatPool.Internal;
+﻿using Additions.Attributes;
+using Additions.Components.FloatPool.Decorators;
+using Additions.Components.FloatPool.Internal;
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-namespace FloatPool
+namespace Additions.Components.FloatPool
 {
     [Serializable]
     public class Pool : MonoBehaviour, IFloatPool
@@ -72,9 +71,7 @@ namespace FloatPool
         private IEnumerable<Decorator> GetAppliedDecorators()
         {
             foreach (FieldInfo field in HasConfirmationFieldAttribute.GetConfirmedFields(this))
-            {
                 yield return (Decorator)field.GetValue(this);
-            }
         }
 
         public void ConstructDecorators()
@@ -90,10 +87,8 @@ namespace FloatPool
         public U GetLayer<U>() where U : IFloatPool
         {
             foreach (Decorator decorator in GetAppliedDecorators())
-            {
                 if (decorator.GetType() == typeof(U))
                     return (U)(IFloatPool)decorator;
-            }
             return default;
         }
 

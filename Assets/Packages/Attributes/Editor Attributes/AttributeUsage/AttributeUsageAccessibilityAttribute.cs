@@ -3,7 +3,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-namespace AdditionalAttributes.AttributeUsage
+namespace Additions.Attributes.AttributeUsage
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageAccessibilityAttribute : Attribute

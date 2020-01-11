@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Navigation
+namespace Additions.Components.Navigation
 {
     public class PriorityQueue<T>
     {

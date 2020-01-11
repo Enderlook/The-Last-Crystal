@@ -1,15 +1,13 @@
-﻿using AdditionalAttributes;
-
-using ScriptableSound.Modifiers;
+﻿using Additions.Attributes;
+using Additions.Components.ScriptableSound.Modifiers;
+using Additions.Utils;
 
 using System;
 using System.Linq;
 
 using UnityEngine;
 
-using Utils;
-
-namespace ScriptableSound
+namespace Additions.Components.ScriptableSound
 {
     [CreateAssetMenu(fileName = "SoundClip", menuName = "Sound/SoundClip")]
     public class SoundClip : Sound
@@ -37,7 +35,6 @@ namespace ScriptableSound
         public override void UpdateBehaviour(float deltaTime)
         {
             if (ShouldChangeSound)
-            {
                 if (HasEnoughPlays())
                 {
                     AudioSource audioSource = soundConfiguration.audioSource;
@@ -50,7 +47,6 @@ namespace ScriptableSound
                     IsPlaying = false;
                     BackToNormalAudioSource();
                 }
-            }
         }
 
         private void BackToNormalAudioSource()

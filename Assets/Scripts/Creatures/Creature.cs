@@ -1,4 +1,4 @@
-using AdditionalComponents;
+using Additions.Components;
 
 using CreaturesAddons.Weapons;
 

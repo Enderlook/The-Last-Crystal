@@ -1,10 +1,10 @@
-﻿using AdditionalExceptions;
+﻿using Additions.Exceptions;
 
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace AdditionalExtensions
+namespace Additions.Extensions
 {
     public static class ReflectionExtesions
     {
@@ -71,7 +71,6 @@ namespace AdditionalExtensions
                 throw new MemberNotFoundException(memberName, type);
 
             foreach (MemberInfo memberInfo in memberInfos)
-            {
                 switch (memberInfo.MemberType)
                 {
                     case MemberTypes.Field:
@@ -82,14 +81,10 @@ namespace AdditionalExtensions
                     case MemberTypes.Property:
                         PropertyInfo propertyInfo = (PropertyInfo)memberInfo;
                         if (propertyInfo.CanRead)
-                        {
                             foreach (MethodInfo accessor in propertyInfo.GetAccessors(true))
-                            {
                                 // Check if it is a getter (has return type) and is the type we are looking for
                                 if (accessor.ReturnType == typeof(T))
                                     return accessor;
-                            }
-                        }
                         break;
                     case MemberTypes.Method:
                         MethodInfo methodInfo = (MethodInfo)memberInfo;
@@ -102,7 +97,6 @@ namespace AdditionalExtensions
                         }
                         break;
                 }
-            }
             throw new MatchingMemberNotFoundException(memberName, type, typeof(T));
         }
 
@@ -168,12 +162,10 @@ namespace AdditionalExtensions
             parameters = new object[parameterInfos.Length];
             int i = 0;
             foreach (ParameterInfo parameterInfo in parameterInfos)
-            {
                 if (parameterInfo.IsOptionalOrParam(out object parameter))
                     parameters[i++] = parameter;
                 else
                     return false;
-            }
             return true;
         }
 
