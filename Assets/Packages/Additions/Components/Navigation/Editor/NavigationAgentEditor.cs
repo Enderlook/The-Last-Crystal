@@ -31,9 +31,9 @@ namespace Additions.Components.Navigation
                     return;
                 foreach (Connection connection in path)
                 {
-                    connection.start.DrawNode(Color.blue, navigationAgent.NavigationGraph.graph);
-                    connection.end.DrawNode(Color.blue, navigationAgent.NavigationGraph.graph);
-                    connection.DrawConnection(Color.blue, navigationAgent.NavigationGraph.graph);
+                    connection.start.DrawNode(Color.blue, navigationAgent.NavigationGraph.Graph);
+                    connection.end.DrawNode(Color.blue, navigationAgent.NavigationGraph.Graph);
+                    connection.DrawConnection(Color.blue, navigationAgent.NavigationGraph.Graph);
                 }
             }
         }

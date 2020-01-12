@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Additions.Extensions;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -208,6 +210,18 @@ namespace Additions.Utils.UnityEditor
         /// <returns><see cref="GUIContent"/> of <paramref name="source"/>.</returns>
         public static GUIContent GetGUIContent(this SerializedProperty source) => new GUIContent(source.displayName, source.tooltip);
 
+        /// <summary>
+        /// Produce a <see cref="GUIContent"/> with the <see cref="SerializedProperty.displayName"/> as <see cref="GUIContent.text"/> and <see cref="SerializedProperty.tooltip"/> as <see cref="GUIContent.tooltip"/>, but removing the backing field tag.
+        /// </summary>
+        /// <param name="source">><see cref="SerializedProperty"/> to get <see cref="GUIContent"/>.</param>
+        /// <returns><see cref="GUIContent"/> of <paramref name="source"/>.</returns>
+        public static GUIContent GetGUIContentOfBackingField(this SerializedProperty source)
+        {
+            GUIContent guiContent = source.GetGUIContent();
+            guiContent.text = guiContent.text.Replace("<", "").Replace(">k__Backing Field", "");
+            return guiContent;
+        }
+
         public static SerializedPropertyHelper GetHelper(this SerializedProperty source) => new SerializedPropertyHelper(source);
 
         /// <summary>
@@ -240,6 +254,39 @@ namespace Additions.Utils.UnityEditor
                 throw new ArgumentException("It doesn't come from an array", nameof(source));
             else
                 return int.Parse(part.Replace("]", ""));
+        }
+
+        /// <summary>
+        /// Get the <see cref="SerializedProperty"/> of the backing field of a property.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> where the <see cref="SerializedProperty"/> will be taken.</param>
+        /// <param name="name">Name of the property which backing field will be get.</param>
+        /// <returns><see cref="SerializedProperty"/> of the backing field of <paramref name="name"/> property.</returns>
+        public static SerializedProperty FindRelativeBackingFieldOfProperty(this SerializedProperty source, string name)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0) throw new ArgumentException("Can't be empty.", nameof(name));
+
+            return source.FindPropertyRelative(ReflectionExtesions.GetBackingFieldName(name));
+        }
+
+        /// <summary>
+        /// Get the <see cref="SerializedProperty"/> of the field or backing field of it property.
+        /// </summary>
+        /// <param name="source"><see cref="SerializedProperty"/> where the <see cref="SerializedProperty"/> will be taken.</param>
+        /// <param name="name">Name of the property to get.</param>
+        /// <returns><see cref="SerializedProperty"/> of the field or backing field of <paramref name="name"/> property.</returns>
+        public static SerializedProperty FindRelativePropertyOrBackingField(this SerializedProperty source, string name)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0) throw new ArgumentException("Can't be empty.", nameof(name));
+
+            SerializedProperty serializedProperty = source.FindPropertyRelative(name);
+            if (serializedProperty == null)
+                serializedProperty = source.FindPropertyRelative(ReflectionExtesions.GetBackingFieldName(name));
+            return serializedProperty;
         }
     }
 }

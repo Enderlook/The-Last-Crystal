@@ -2,7 +2,6 @@
 using Additions.Utils.UnityEditor;
 
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEditor;
 
@@ -37,14 +36,14 @@ namespace Additions.Components.Navigation
         public static Color disabledColor = Color.red;
         public static Color extremeColor = Color.yellow;
 
-        private static bool showQuickActionsMenu = false;
-        private static bool showRestructureMenu = false;
-        private static bool showLocalToWorldMenu = false;
-        private static bool showToggleMenu = false;
+        private static bool showQuickActionsMenu;
+        private static bool showRestructureMenu;
+        private static bool showLocalToWorldMenu;
+        private static bool showToggleMenu;
 
         private static bool showHelp = true;
 
-        private static bool showGridGenerationConfigurationMenu = false;
+        private static bool showGridGenerationConfigurationMenu;
 
         private static GUIStyle BOLDED_FOLDOUT => new GUIStyle(EditorStyles.foldout)
         {
@@ -59,10 +58,10 @@ namespace Additions.Components.Navigation
 
             navigationGraph = (NavigationGraph)target;
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("graph").FindPropertyRelative("reference"));
+            EditorGUILayout.PropertyField(serializedObject.FindBackingFieldOfProperty("Graph").FindRelativeBackingFieldOfProperty("Reference"));
 
-            if (navigationGraph.graph.Reference == null)
-                navigationGraph.graph.Reference = navigationGraph.transform;
+            if (navigationGraph.Graph.Reference == null)
+                navigationGraph.Graph.Reference = navigationGraph.transform;
 
             EditorGUILayout.Space();
 
@@ -103,6 +102,7 @@ namespace Additions.Components.Navigation
                 {
                     navigationGraph.ResetGrid();
                     navigationGraph.GenerateGrid();
+                    serializedObject.ApplyModifiedProperties();
                 }
             }
         }
@@ -211,17 +211,17 @@ namespace Additions.Components.Navigation
                 {
                     if (GUILayout.Button("Become local to world"))
                     {
-                        foreach (Node node in navigationGraph.graph.Grid)
-                            node.position = navigationGraph.graph.GetWorldPosition(node);
-                        navigationGraph.graph.Reference.position = Vector3.zero;
+                        foreach (Node node in navigationGraph.Graph.Grid)
+                            node.position = navigationGraph.Graph.GetWorldPosition(node);
+                        navigationGraph.Graph.Reference.position = Vector3.zero;
                     }
 
                     if (GUILayout.Button("Become local to world and fix childs"))
                     {
-                        Transform reference = navigationGraph.graph.Reference;
+                        Transform reference = navigationGraph.Graph.Reference;
                         Vector3 position = reference.position;
-                        foreach (Node node in navigationGraph.graph.Grid)
-                            node.position = navigationGraph.graph.GetWorldPosition(node);
+                        foreach (Node node in navigationGraph.Graph.Grid)
+                            node.position = navigationGraph.Graph.GetWorldPosition(node);
                         reference.position = Vector3.zero;
 
                         for (int i = 0; i < reference.childCount; i++)
@@ -232,22 +232,34 @@ namespace Additions.Components.Navigation
                 if (showToggleMenu = EditorGUILayout.Foldout(showToggleMenu, "Toggle", true))
                 {
                     if (GUILayout.Button("Disable all nodes"))
+                    {
                         navigationGraph.ToggleAllNodes(ToggleMode.Disable);
+                    }
 
                     if (GUILayout.Button("Enable all nodes"))
+                    {
                         navigationGraph.ToggleAllNodes(ToggleMode.Enable);
+                    }
 
                     if (GUILayout.Button(new GUIContent("Toggle all nodes", "Disable active nodes and active disabled nodes.")))
+                    {
                         navigationGraph.ToggleAllNodes(ToggleMode.Toggle);
+                    }
 
                     if (GUILayout.Button("Disable all connections"))
+                    {
                         navigationGraph.ToggleAllConnections(ToggleMode.Disable);
+                    }
 
                     if (GUILayout.Button("Enable all connections"))
+                    {
                         navigationGraph.ToggleAllConnections(ToggleMode.Enable);
+                    }
 
                     if (GUILayout.Button(new GUIContent("Toggle all connections", "Disable connections nodes and active disabled connections.")))
+                    {
                         navigationGraph.ToggleAllConnections(ToggleMode.Toggle);
+                    }
                 }
 
                 if (GUILayout.Button("Reset Grid"))
@@ -264,9 +276,9 @@ namespace Additions.Components.Navigation
             foreach (Node node in Grid)
             {
                 if (drawNodes)
-                    node.DrawNode(navigationGraph.graph);
+                    node.DrawNode(navigationGraph.Graph);
                 if (drawConnections)
-                    node.DrawConnections(navigationGraph.graph, drawDistances ? 14 : 0);
+                    node.DrawConnections(navigationGraph.Graph, drawDistances ? 14 : 0);
             }
         }
 
@@ -322,7 +334,7 @@ namespace Additions.Components.Navigation
                         // Remove Node
                         if (closestNode != null)
                         {
-                            navigationGraph.graph.RemoveNodeAndConnections(closestNode);
+                            navigationGraph.Graph.RemoveNodeAndConnections(closestNode);
                             if (selectedNode == closestNode)
                                 selectedNode = null;
                             closestNode = null;
@@ -335,7 +347,7 @@ namespace Additions.Components.Navigation
                     }
                     else if (closestNode == null)
                         // Add Node
-                        navigationGraph.graph.AddNode(mousePosition, true, PositionReference.WORLD);
+                        navigationGraph.Graph.AddNode(mousePosition, true, PositionReference.WORLD);
                     else
                         // Select Closest Node
                         selectedNode = closestNode;
@@ -377,7 +389,7 @@ namespace Additions.Components.Navigation
         {
             Node closestNode = navigationGraph.FindClosestNode(mousePosition, autoSelectionRange, NavigationExtensions.NodeType.ALL);
             if (closestNode != null)
-                closestNode.DrawNode(closestColor, navigationGraph.graph);
+                closestNode.DrawNode(closestColor, navigationGraph.Graph);
             return closestNode;
         }
 
@@ -385,26 +397,26 @@ namespace Additions.Components.Navigation
         {
             Node closestNode = navigationGraph.FindClosestNode(mousePosition, autoSelectionRange, NavigationExtensions.NodeType.ALL);
             if (closestNode == null)
-                closestNode = navigationGraph.graph.AddNode(mousePosition, true, PositionReference.WORLD);
+                closestNode = navigationGraph.Graph.AddNode(mousePosition, true, PositionReference.WORLD);
             return closestNode;
         }
 
         private void DrawSelectedNode(Node closestNode, Vector2 mousePosition)
         {
-            selectedNode.DrawNode(selectedColor, navigationGraph.graph);
+            selectedNode.DrawNode(selectedColor, navigationGraph.Graph);
 
             if (closestNode != null)
             {
-                closestNode.DrawLineTo(selectedNode, selectedColor, navigationGraph.graph, 1);
-                selectedNode.DrawDistance(closestNode, selectedColor, navigationGraph.graph, 14);
+                closestNode.DrawLineTo(selectedNode, selectedColor, navigationGraph.Graph, 1);
+                selectedNode.DrawDistance(closestNode, selectedColor, navigationGraph.Graph, 14);
             }
             else
             {
-                selectedNode.DrawLineTo(mousePosition, addColor, navigationGraph.graph, 1);
-                selectedNode.DrawDistance(mousePosition, addColor, navigationGraph.graph, 14);
+                selectedNode.DrawLineTo(mousePosition, addColor, navigationGraph.Graph, 1);
+                selectedNode.DrawDistance(mousePosition, addColor, navigationGraph.Graph, 14);
             }
 
-            selectedNode.DrawPositionHandler(navigationGraph.graph);
+            selectedNode.DrawPositionHandler(navigationGraph.Graph);
         }
     }
 }

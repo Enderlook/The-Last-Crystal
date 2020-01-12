@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 83954436}
   end: {fileID: 1126367331}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &46042802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1324417408}
   end: {fileID: 174559025}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &59630974
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 2132775587}
   end: {fileID: 803190500}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &77545573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 538627790}
   end: {fileID: 1586197296}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &83954436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   position: {x: -8.827486, y: 1.7389933}
   connections:
   - {fileID: 11046885}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &92288098
 MonoBehaviour:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1590774969}
   end: {fileID: 701903958}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &129846279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
   connections:
   - {fileID: 416711859}
   - {fileID: 1795823816}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &174559025
 MonoBehaviour:
@@ -311,7 +311,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1135332082}
   - {fileID: 612286027}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &190681369
 MonoBehaviour:
@@ -327,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 316636051}
   end: {fileID: 1958988823}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &233309638 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7460925922202390072, guid: 45a3c836f2b9db8419709fb461db655c,
@@ -396,8 +396,8 @@ MonoBehaviour:
   destroyMask:
     serializedVersion: 2
     m_Bits: 0
-  graph:
-    reference: {fileID: 267235808}
+  <Graph>k__BackingField:
+    <Reference>k__BackingField: {fileID: 267235808}
     grid:
     - {fileID: 83954436}
     - {fileID: 803190500}
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1047103812}
   end: {fileID: 791696900}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &301500624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1389299667}
   end: {fileID: 916105123}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &316636051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1815540901}
   - {fileID: 190681369}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &331870741
 MonoBehaviour:
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 916105123}
   end: {fileID: 1389299667}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &364381407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1679490309}
   end: {fileID: 791696900}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &374413350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1798459773}
   end: {fileID: 1844932130}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &387025051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1586197296}
   end: {fileID: 538627790}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &393106358
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 129846279}
   end: {fileID: 874596527}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &468819939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 874596527}
   end: {fileID: 129846279}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &499840373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1679490309}
   end: {fileID: 996395494}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -750,9 +750,9 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 2.8
+  field of view: 32
+  orthographic: 0
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -796,7 +796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1174681642}
   end: {fileID: 916105123}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &538627790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,7 +813,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1310537959}
   - {fileID: 77545573}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &552435574
 MonoBehaviour:
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 803190500}
   end: {fileID: 129846279}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &559870483
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +912,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1533681970}
   - {fileID: 1397291621}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!1 &592686825
 GameObject:
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 174559025}
   end: {fileID: 1324417408}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &701903958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1080287391}
   - {fileID: 2096072361}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!1 &719828671
 GameObject:
@@ -1197,7 +1197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1126367331}
   end: {fileID: 83954436}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &745120303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1126367331}
   end: {fileID: 2132775587}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &786121640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1227,7 +1227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 996395494}
   end: {fileID: 1679490309}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &791696900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,7 +1244,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1665843789}
   - {fileID: 1018575968}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &803190500
 MonoBehaviour:
@@ -1262,7 +1262,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1687983640}
   - {fileID: 552435574}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &803586028
 MonoBehaviour:
@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1844932130}
   end: {fileID: 1798459773}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &831816402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 840572951}
   end: {fileID: 1004334425}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &840572951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,7 +1310,7 @@ MonoBehaviour:
   connections:
   - {fileID: 831816402}
   - {fileID: 956534419}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &865460712
 MonoBehaviour:
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1490298015}
   end: {fileID: 1564269748}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &874596527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   connections:
   - {fileID: 468819939}
   - {fileID: 1265376657}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &891669115
 MonoBehaviour:
@@ -1359,7 +1359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1579941423}
   end: {fileID: 1586197296}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &916105123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1376,7 +1376,7 @@ MonoBehaviour:
   connections:
   - {fileID: 331870741}
   - {fileID: 1630336586}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!224 &932639567 stripped
 RectTransform:
@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1324417408}
   end: {fileID: 316636051}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &956534419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,7 +1413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 840572951}
   end: {fileID: 1542307180}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &958474920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1958988823}
   end: {fileID: 316636051}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &996395494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   connections:
   - {fileID: 786121640}
   - {fileID: 1779922350}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &1004334425
 MonoBehaviour:
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   position: {x: 5.350807, y: -1.8184844}
   connections:
   - {fileID: 1168712490}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1018575968
 MonoBehaviour:
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 791696900}
   end: {fileID: 1679490309}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1035662638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,7 +1613,7 @@ MonoBehaviour:
   connections:
   - {fileID: 2147369071}
   - {fileID: 293125898}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &1057406601
 MonoBehaviour:
@@ -1629,7 +1629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1490298015}
   end: {fileID: 996395494}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1074892473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1644,7 +1644,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1564269748}
   end: {fileID: 1490298015}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1080287391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,7 +1659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 701903958}
   end: {fileID: 1590774969}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1114362718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,7 +1674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1542307180}
   end: {fileID: 1798459773}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1126367331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1691,7 +1691,7 @@ MonoBehaviour:
   connections:
   - {fileID: 745120303}
   - {fileID: 734353780}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1135332082
 MonoBehaviour:
@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 174559025}
   end: {fileID: 1564269748}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1160684982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,11 +1757,6 @@ MonoBehaviour:
   startingMoney: 0
   crystal: {fileID: 1601040596}
   menu: {fileID: 3653343962048357922}
-  audioSystem:
-    audioGame: {fileID: 1160684990}
-    slashClips: {fileID: 8300000, guid: be4448b799cb7fd47ac320c8e040ae54, type: 3}
-    shotClips: {fileID: 8300000, guid: b022bfa3b9e8d4d4388f9204783996f4, type: 3}
-    stepClips: []
 --- !u!4 &1160684985
 Transform:
   m_ObjectHideFlags: 0
@@ -1833,7 +1828,7 @@ MonoBehaviour:
       m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     image: {fileID: 6044440295465154361}
-  navigationGraph: {fileID: 267235809}
+  navigationGraph: {fileID: 0}
 --- !u!114 &1160684987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2000,7 +1995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1004334425}
   end: {fileID: 840572951}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1174681642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2016,7 +2011,7 @@ MonoBehaviour:
   position: {x: 5.91249, y: 1.3747963}
   connections:
   - {fileID: 520256740}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1251050711
 MonoBehaviour:
@@ -2032,7 +2027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1958988823}
   end: {fileID: 538627790}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1256990148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2165,7 +2160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 874596527}
   end: {fileID: 701903958}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1275387484 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7958255317115511165, guid: 3a697cf95e07e78459ac17b32b06bab0,
@@ -2198,7 +2193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 538627790}
   end: {fileID: 1958988823}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1324417408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2215,7 +2210,7 @@ MonoBehaviour:
   connections:
   - {fileID: 46042802}
   - {fileID: 949174097}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1389299667
 MonoBehaviour:
@@ -2233,7 +2228,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1446288534}
   - {fileID: 301500624}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1397291621
 MonoBehaviour:
@@ -2249,7 +2244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 577554109}
   end: {fileID: 1389299667}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1446288534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,7 +2259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1389299667}
   end: {fileID: 577554109}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1458645042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,7 +2512,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1057406601}
   - {fileID: 865460712}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &1509338405
 MonoBehaviour:
@@ -2533,7 +2528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1590774969}
   end: {fileID: 1579941423}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1528551514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,7 +2543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1798459773}
   end: {fileID: 1542307180}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1533681970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2563,7 +2558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 577554109}
   end: {fileID: 1047103812}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1542307180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,7 +2575,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1114362718}
   - {fileID: 1954389494}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1564269748
 MonoBehaviour:
@@ -2598,7 +2593,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1074892473}
   - {fileID: 1839317598}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1579941423
 MonoBehaviour:
@@ -2616,7 +2611,7 @@ MonoBehaviour:
   connections:
   - {fileID: 891669115}
   - {fileID: 1679461096}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1586197296
 MonoBehaviour:
@@ -2634,7 +2629,7 @@ MonoBehaviour:
   connections:
   - {fileID: 387025051}
   - {fileID: 2124060664}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &1590774969
 MonoBehaviour:
@@ -2652,7 +2647,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1509338405}
   - {fileID: 92288098}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!4 &1601040596 stripped
 Transform:
@@ -2674,7 +2669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 916105123}
   end: {fileID: 1174681642}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1641636613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2689,7 +2684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1844932130}
   end: {fileID: 1679490309}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1641866922
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,7 +2822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 791696900}
   end: {fileID: 1047103812}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1676031644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +2916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1579941423}
   end: {fileID: 1590774969}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1679490309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2939,7 +2934,7 @@ MonoBehaviour:
   - {fileID: 364381407}
   - {fileID: 2124334480}
   - {fileID: 499840373}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &1687983640
 MonoBehaviour:
@@ -2955,7 +2950,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 803190500}
   end: {fileID: 2132775587}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1779922350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2970,7 +2965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 996395494}
   end: {fileID: 1490298015}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1795823816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2985,7 +2980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 129846279}
   end: {fileID: 803190500}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1798459773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3002,7 +2997,7 @@ MonoBehaviour:
   connections:
   - {fileID: 374413350}
   - {fileID: 1528551514}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &1815540901
 MonoBehaviour:
@@ -3018,7 +3013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 316636051}
   end: {fileID: 1324417408}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1 &1818958094
 GameObject:
   m_ObjectHideFlags: 0
@@ -3107,7 +3102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1564269748}
   end: {fileID: 174559025}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1844932130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3124,7 +3119,7 @@ MonoBehaviour:
   connections:
   - {fileID: 1641636613}
   - {fileID: 803586028}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 1
 --- !u!114 &1884243017 stripped
 MonoBehaviour:
@@ -3152,7 +3147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1542307180}
   end: {fileID: 840572951}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &1958988823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3169,7 +3164,7 @@ MonoBehaviour:
   connections:
   - {fileID: 958474920}
   - {fileID: 1251050711}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!1001 &2095376745
 PrefabInstance:
@@ -3310,7 +3305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 701903958}
   end: {fileID: 874596527}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &2110930750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3325,7 +3320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 2132775587}
   end: {fileID: 1126367331}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &2124060664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3340,7 +3335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1586197296}
   end: {fileID: 1579941423}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &2124334480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3355,7 +3350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1679490309}
   end: {fileID: 1844932130}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!114 &2132775587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3372,7 +3367,7 @@ MonoBehaviour:
   connections:
   - {fileID: 65138006}
   - {fileID: 2110930750}
-  isActive: 1
+  <IsActive>k__BackingField: 1
   isExtreme: 0
 --- !u!114 &2147369071
 MonoBehaviour:
@@ -3388,7 +3383,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   start: {fileID: 1047103812}
   end: {fileID: 577554109}
-  isActive: 1
+  <IsActive>k__BackingField: 1
 --- !u!1001 &2479692870999726345
 PrefabInstance:
   m_ObjectHideFlags: 0

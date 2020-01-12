@@ -1,4 +1,5 @@
-﻿using CreaturesAddons;
+﻿using Additions.Attributes;
+using CreaturesAddons;
 
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,10 @@ namespace Additions.Components.Navigation
     [Serializable]
     public class NavigationAgent : MonoBehaviour, IInit
     {
-        [Header("Setup")]
-        [SerializeField, Tooltip("Navigation Graph used to find paths.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2235:Mark all non-serializable fields", Justification = "Serialized by Unity")]
-        private NavigationGraph navigationGraph;
-        public NavigationGraph NavigationGraph {
-            get => navigationGraph;
-            set => navigationGraph = value;
-        }
+        [field: Header("Setup")]
+        [field: SerializeField, IsProperty, Tooltip("Navigation Graph used to find paths.")]
+        public NavigationGraph NavigationGraph { get; set; }
 
-        [NonSerialized]
         private Transform thisTransform;
 
         void IInit.Init(Creature creature) => thisTransform = creature.ThisRigidbody2D.transform;

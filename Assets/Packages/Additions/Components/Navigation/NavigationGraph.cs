@@ -1,7 +1,9 @@
+using Additions.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Additions.Components.Navigation
 {
@@ -25,23 +27,22 @@ namespace Additions.Components.Navigation
 
         [SerializeField, Tooltip("Layer used to check for collisions.\nIf a collision is found with a node, the node is destroyed.")]
         private LayerMask destroyMask;
-#pragma warning restore CS0649
 
-        [SerializeField, HideInInspector]
-        public Graph graph = new Graph();
+        [field: SerializeField, IsProperty, HideInInspector]
+        public Graph Graph { get; set; } = new Graph();
 
         public List<Node> Grid {
             get {
-                if (graph == null)
+                if (Graph == null)
                     ResetGrid();
-                return graph.Grid;
+                return Graph.Grid;
             }
-            private set => graph.Grid = value;
+            private set => Graph.Grid = value;
         }
 
-        public Transform Reference => ((IGraphReader)graph).Reference;
+        public Transform Reference => ((IGraphReader)Graph).Reference;
 
-        public void ResetGrid() => graph.Grid = new List<Node>();
+        public void ResetGrid() => Graph.Grid = new List<Node>();
 
         public void GenerateGrid()
         {
@@ -64,7 +65,7 @@ namespace Additions.Components.Navigation
                     if (r % 2 == 0) // Add diamond shape ♦
                         width += spacePerNode;
                     Vector2 position = new Vector2(width, r * spacePerNode); // Not * 2 as column in order to make diamond shape ♦
-                    graph.AddNode(position, mode: PositionReference.LOCAL);
+                    Graph.AddNode(position, mode: PositionReference.LOCAL);
                 }
             AddConnectionsToNodes();
         }
@@ -190,15 +191,15 @@ namespace Additions.Components.Navigation
             }
         }
 
-        public Vector2 GetWorldPosition(Node node) => ((IGraphReader)graph).GetWorldPosition(node);
-        public Vector2 GetLocalPosition(Vector2 position) => ((IGraphReader)graph).GetLocalPosition(position);
-        public void RemoveDuplicatedPositionsFromGrid() => ((IGraphEditing)graph).RemoveDuplicatedPositionsFromGrid();
-        public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD) => ((IGraphEditing)graph).AddNode(position, isActive, mode);
-        public void RemoveNodeAndConnections(Node node) => ((IGraphEditing)graph).RemoveNodeAndConnections(node);
-        public void RemoveConnectionsToNothing() => ((IGraphEditing)graph).RemoveConnectionsToNothing();
-        public void AddMissingNodesFromConnections() => ((IGraphEditing)graph).AddMissingNodesFromConnections();
-        public void RemoveNodesWithoutToOrFromConnection() => ((IGraphEditing)graph).RemoveNodesWithoutToOrFromConnection();
-        public void ToggleAllNodes(ToggleMode mode) => ((IGraphEditing)graph).ToggleAllNodes(mode);
-        public void ToggleAllConnections(ToggleMode mode) => ((IGraphEditing)graph).ToggleAllConnections(mode);
+        public Vector2 GetWorldPosition(Node node) => ((IGraphReader)Graph).GetWorldPosition(node);
+        public Vector2 GetLocalPosition(Vector2 position) => ((IGraphReader)Graph).GetLocalPosition(position);
+        public void RemoveDuplicatedPositionsFromGrid() => ((IGraphEditing)Graph).RemoveDuplicatedPositionsFromGrid();
+        public Node AddNode(Vector2 position, bool isActive = false, PositionReference mode = PositionReference.WORLD) => ((IGraphEditing)Graph).AddNode(position, isActive, mode);
+        public void RemoveNodeAndConnections(Node node) => ((IGraphEditing)Graph).RemoveNodeAndConnections(node);
+        public void RemoveConnectionsToNothing() => ((IGraphEditing)Graph).RemoveConnectionsToNothing();
+        public void AddMissingNodesFromConnections() => ((IGraphEditing)Graph).AddMissingNodesFromConnections();
+        public void RemoveNodesWithoutToOrFromConnection() => ((IGraphEditing)Graph).RemoveNodesWithoutToOrFromConnection();
+        public void ToggleAllNodes(ToggleMode mode) => ((IGraphEditing)Graph).ToggleAllNodes(mode);
+        public void ToggleAllConnections(ToggleMode mode) => ((IGraphEditing)Graph).ToggleAllConnections(mode);
     }
 }

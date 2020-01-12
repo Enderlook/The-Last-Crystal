@@ -222,6 +222,20 @@ namespace Additions.Extensions
                 return Activator.CreateInstance(type);
             return null;
         }
+
+        /// <summary>
+        /// Get the name of the backing field of a property.
+        /// </summary>
+        /// <param name="nameOfProperty">Name of the property.</param>
+        /// <returns>Name of the backing field.</returns>
+        public static string GetBackingFieldName(string nameOfProperty) => $"<{nameOfProperty}>k__BackingField";
+
+        /// <summary>
+        /// Get the name of the property of a backing field;
+        /// </summary>
+        /// <param name="backingFieldName">Name of the backing field.</param>
+        /// <returns>Name of the property.</returns>
+        public static string GetPropertyNameOfBackingField(string backingFieldName) => backingFieldName.Replace("<", "").Replace(">K__BackingField", "");
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<pendiente>")]

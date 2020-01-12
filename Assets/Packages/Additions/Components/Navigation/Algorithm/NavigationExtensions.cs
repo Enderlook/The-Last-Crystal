@@ -16,7 +16,7 @@ namespace Additions.Components.Navigation
             foreach (Node node in navigation.Grid)
                 if (mode == NodeType.ALL || mode == NodeType.ONLY_ACTIVES && node.IsActive || mode == NodeType.ONLY_DEACTIVES && !node.IsActive)
                 {
-                    float distance = (navigation.graph.GetWorldPosition(node) - position).magnitude;
+                    float distance = (navigation.Graph.GetWorldPosition(node) - position).magnitude;
                     if (distance < closest && (maxDistanceFromPoint == 0 || distance < maxDistanceFromPoint))
                     {
                         closest = distance;

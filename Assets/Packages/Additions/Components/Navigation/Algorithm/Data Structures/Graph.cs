@@ -1,4 +1,5 @@
-﻿using Additions.Exceptions;
+﻿using Additions.Attributes;
+using Additions.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,8 @@ namespace Additions.Components.Navigation
     [Serializable]
     public class Graph : IGraphReader, IGraphEditing
     {
-        [SerializeField]
-        private Transform reference;
-
-        public Transform Reference {
-            get => reference;
-            set => reference = value;
-        }
+        [field: SerializeField, IsProperty]
+        public Transform Reference { get; set; }
 
         [SerializeField]
         private List<Node> grid;
