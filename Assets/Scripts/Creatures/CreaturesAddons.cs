@@ -1,4 +1,4 @@
-﻿namespace CreaturesAddons
+﻿namespace Creatures
 {
     public interface IInit
     {

@@ -1,7 +1,7 @@
 using Additions.Components;
 using Additions.Utils;
 
-using CreaturesAddons.Weapons;
+using Creatures.Weapons;
 
 using Master;
 
@@ -10,7 +10,7 @@ using System.Linq;
 
 using UnityEngine;
 
-namespace CreaturesAddons
+namespace Creatures
 {
     public class Creature : Hurtable, IPush
     {

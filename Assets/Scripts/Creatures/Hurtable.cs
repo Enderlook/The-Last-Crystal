@@ -3,14 +3,14 @@ using Additions.Components.ScriptableSound;
 using Additions.Prefabs.FloatingText;
 using Additions.Utils;
 
-using CreaturesAddons.Weapons;
+using Creatures.Weapons;
 
 using System;
 using System.Collections;
 
 using UnityEngine;
 
-namespace CreaturesAddons
+namespace Creatures
 {
     public class Hurtable : MonoBehaviour, ITakeDamage
     {

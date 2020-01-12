@@ -5,7 +5,7 @@ using Additions.Utils;
 
 using UnityEngine;
 
-namespace CreaturesAddons
+namespace Creatures
 {
     public class EnergyManager : MonoBehaviour, IInit, IUpdate, IFloatPool
     {

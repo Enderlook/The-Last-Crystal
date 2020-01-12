@@ -1,11 +1,11 @@
 ﻿
 using Additions.Utils.Clockworks;
 
-using CreaturesAddons.Weapons;
+using Creatures.Weapons;
 
 using UnityEngine;
 
-namespace CreaturesAddons
+namespace Creatures
 {
     public class ActiveMelee : MonoBehaviour, IInit, IBasicClockwork, IDamageOnTouch
     {

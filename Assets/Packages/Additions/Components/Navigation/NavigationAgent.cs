@@ -1,6 +1,6 @@
 ﻿using Additions.Attributes;
 
-using CreaturesAddons;
+using Creatures;
 
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿
 using Additions.Components.SoundSystem;
 
-using CreaturesAddons.Weapons;
+using Creatures.Weapons;
 
 using Master;
 

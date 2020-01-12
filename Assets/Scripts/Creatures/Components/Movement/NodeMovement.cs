@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace CreaturesAddons.Movement.NodeMovement
+namespace Creatures.Movement.NodeMovement
 {
     [RequireComponent(typeof(TargetAndPathGetter)), RequireComponent(typeof(NavigationAgent))]
     public class NodeMovement : MonoBehaviour, IInit, IMove

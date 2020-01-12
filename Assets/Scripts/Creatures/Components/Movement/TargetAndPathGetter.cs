@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
-namespace CreaturesAddons.Movement.NodeMovement
+namespace Creatures.Movement.NodeMovement
 {
     [RequireComponent(typeof(NavigationAgent))]
     public class TargetAndPathGetter : MonoBehaviour, IInit

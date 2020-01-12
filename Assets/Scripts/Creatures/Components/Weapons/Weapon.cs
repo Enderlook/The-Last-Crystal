@@ -3,7 +3,7 @@ using Additions.Utils.Clockworks;
 
 using UnityEngine;
 
-namespace CreaturesAddons.Weapons
+namespace Creatures.Weapons
 {
     public abstract class Weapon : MonoBehaviour, IInit, IClockwork
     {

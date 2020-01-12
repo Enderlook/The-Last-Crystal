@@ -2,7 +2,7 @@
 using Additions.Components.FloatPool.Decorators;
 using Additions.Prefabs.HealthBarGUI;
 
-using CreaturesAddons;
+using Creatures;
 
 using Master;
 

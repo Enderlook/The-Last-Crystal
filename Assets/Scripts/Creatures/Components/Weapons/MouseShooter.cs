@@ -4,7 +4,7 @@ using Additions.Utils;
 
 using UnityEngine;
 
-namespace CreaturesAddons.Weapons
+namespace Creatures.Weapons
 {
     public class MouseShooter : Weapon
     {

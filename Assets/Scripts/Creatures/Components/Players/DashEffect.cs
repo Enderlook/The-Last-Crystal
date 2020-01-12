@@ -1,6 +1,6 @@
 ﻿using Additions.Utils;
 
-using CreaturesAddons;
+using Creatures;
 
 using UnityEngine;
 

@@ -3,7 +3,7 @@ using Additions.Components.ScriptableSound;
 
 using UnityEngine;
 
-namespace CreaturesAddons.Weapons
+namespace Creatures.Weapons
 {
     public class Kamikaze : PassiveMelee
     {
