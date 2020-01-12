@@ -1,4 +1,5 @@
-﻿using Additions.Components.ScriptableSound;
+﻿
+using Additions.Components.ScriptableSound;
 
 using UnityEngine;
 

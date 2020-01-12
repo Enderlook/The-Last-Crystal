@@ -2,6 +2,7 @@
 using Additions.Components.FloatPool.Decorators;
 using Additions.Prefabs.HealthBarGUI;
 using Additions.Utils;
+
 using UnityEngine;
 
 namespace CreaturesAddons

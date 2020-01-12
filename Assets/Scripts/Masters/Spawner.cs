@@ -47,6 +47,7 @@ public class Spawner : MonoBehaviour
     [DrawVectorRelativeToTransform]
     public List<Vector2> points;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
     private void Start() => StartCoroutine(SpawnEnemies());
 
     private IEnumerator SpawnEnemies()

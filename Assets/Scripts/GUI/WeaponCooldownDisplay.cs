@@ -1,4 +1,5 @@
-﻿using Additions.Components.SoundSystem;
+﻿
+using Additions.Components.SoundSystem;
 
 using CreaturesAddons.Weapons;
 

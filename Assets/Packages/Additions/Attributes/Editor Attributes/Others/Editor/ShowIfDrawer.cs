@@ -1,9 +1,9 @@
-﻿using Additions.Extensions;
+﻿
+using Additions.Extensions;
 
 using UnityEditor;
 
 using UnityEngine;
-
 namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(ShowIfAttribute))]

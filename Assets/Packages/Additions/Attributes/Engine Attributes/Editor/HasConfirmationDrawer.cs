@@ -21,7 +21,6 @@ namespace Additions.Attributes
 
             HasConfirmationFieldAttribute hasConfirmationFieldAttribute = (HasConfirmationFieldAttribute)attribute;
 
-
             object targetObject = property.GetParentTargetObjectOfProperty();
 
             FieldInfo confirmationField = targetObject.GetType().GetField(hasConfirmationFieldAttribute.confirmFieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
