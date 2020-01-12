@@ -25,18 +25,30 @@ namespace Additions.Components.Navigation
         void RemoveNodeAndConnections(Node node);
 
         /// <summary>
-        /// Remove connections to missing nodes.
+        /// Remove <see cref="Connection"/>s to missing <see cref="Node"/>.
         /// </summary>
         void RemoveConnectionsToNothing();
 
         /// <summary>
-        /// Add missing nodes from connections.
+        /// Add missing <see cref="Node"/>s from <see cref="Connection"/>s.
         /// </summary>
         void AddMissingNodesFromConnections();
 
         /// <summary>
-        /// Remove nodes which doesn't have connection to any other node or no node is connected to them.
+        /// Remove <see cref="Node"/>s which doesn't have <see cref="Connection"/> to any other <see cref="Node"/> or no <see cref="Node"/> is connected to them.
         /// </summary>
         void RemoveNodesWithoutToOrFromConnection();
+
+        /// <summary>
+        /// Toggle all <see cref="Node"/>s according to <paramref name="mode"/>.
+        /// </summary>
+        /// <param name="mode"></param>
+        void ToggleAllNodes(ToggleMode mode);
+
+        /// <summary>
+        /// Toggle all <see cref="Connection"/>s according to <paramref name="mode"/>.
+        /// </summary>
+        /// <param name="mode"></param>
+        void ToggleAllConnections(ToggleMode mode);
     }
 }

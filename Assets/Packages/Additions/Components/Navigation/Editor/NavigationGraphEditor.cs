@@ -37,6 +37,11 @@ namespace Additions.Components.Navigation
         public static Color disabledColor = Color.red;
         public static Color extremeColor = Color.yellow;
 
+        private static bool showQuickActionsMenu = false;
+        private static bool showRestructureMenu = false;
+        private static bool showLocalToWorldMenu = false;
+        private static bool showToggleMenu = false;
+
         private static bool showHelp = true;
 
         private static bool showGridGenerationConfigurationMenu = false;
@@ -65,7 +70,7 @@ namespace Additions.Components.Navigation
 
             EditorGUILayout.Space();
 
-            EditingMenu();
+            ShowEditingMenu();
 
             EditorGUILayout.Space();
 
@@ -127,7 +132,7 @@ namespace Additions.Components.Navigation
             }
         }
 
-        private void EditingMenu()
+        private void ShowEditingMenu()
         {
             isEditingEnable = EditorGUILayout.Foldout(isEditingEnable, new GUIContent("Editing Tool", "While open, enable editing tools and lock inspector window.\nTo unlock inspector this must be closed."), true, BOLDED_FOLDOUT);
             if (isEditingEnable)
@@ -174,6 +179,8 @@ namespace Additions.Components.Navigation
                           + "\nR+A+C: Remove connection from Closest to Selected."
                         , MessageType.Info);
                 }
+
+                ShowQuickActions();
             }
             else if (wasEditingEnable)
             {
@@ -181,39 +188,74 @@ namespace Additions.Components.Navigation
                 // Return lock to before start editing
                 ActiveEditorTracker.sharedTracker.isLocked = wasLockedBefore;
             }
+        }
 
-            if (GUILayout.Button("Reset Grid"))
+        private void ShowQuickActions()
+        {
+            if (showQuickActionsMenu = EditorGUILayout.Foldout(showQuickActionsMenu, "Quick Actions", true, BOLDED_FOLDOUT))
             {
-                navigationGraph.ResetGrid();
-                selectedNode = null;
-            }
+                EditorGUI.indentLevel++;
+                if (showRestructureMenu = EditorGUILayout.Foldout(showRestructureMenu, "Restructure", true))
+                {
+                    if (GUILayout.Button("Remove Connections to nothing"))
+                        navigationGraph.RemoveConnectionsToNothing();
 
-            if (GUILayout.Button("Remove Connections to nothing"))
-                navigationGraph.RemoveConnectionsToNothing();
+                    if (GUILayout.Button("Add Missing Nodes from Connections"))
+                        navigationGraph.AddMissingNodesFromConnections();
 
-            if (GUILayout.Button("Add Missing Nodes from Connections"))
-                navigationGraph.AddMissingNodesFromConnections();
+                    if (GUILayout.Button(new GUIContent("Remove Isolated Nodes", "Remove nodes which doesn't have connection to any other node or no node is connected to them.")))
+                        navigationGraph.RemoveNodesWithoutToOrFromConnection();
+                }
 
-            if (GUILayout.Button(new GUIContent("Remove Isolated Nodes", "Remove nodes which doesn't have connection to any other node or no node is connected to them.")))
-                navigationGraph.RemoveNodesWithoutToOrFromConnection();
+                if (showLocalToWorldMenu = EditorGUILayout.Foldout(showLocalToWorldMenu, "Local to World", true))
+                {
+                    if (GUILayout.Button("Become local to world"))
+                    {
+                        foreach (Node node in navigationGraph.graph.Grid)
+                            node.position = navigationGraph.graph.GetWorldPosition(node);
+                        navigationGraph.graph.Reference.position = Vector3.zero;
+                    }
 
-            if (GUILayout.Button("Become local to world"))
-            {
-                foreach (Node node in navigationGraph.graph.Grid)
-                    node.position = navigationGraph.graph.GetWorldPosition(node);
-                navigationGraph.graph.Reference.position = Vector3.zero;
-            }
+                    if (GUILayout.Button("Become local to world and fix childs"))
+                    {
+                        Transform reference = navigationGraph.graph.Reference;
+                        Vector3 position = reference.position;
+                        foreach (Node node in navigationGraph.graph.Grid)
+                            node.position = navigationGraph.graph.GetWorldPosition(node);
+                        reference.position = Vector3.zero;
 
-            if (GUILayout.Button("Become local to world and fix childs"))
-            {
-                Transform reference = navigationGraph.graph.Reference;
-                Vector3 position = reference.position;
-                foreach (Node node in navigationGraph.graph.Grid)
-                    node.position = navigationGraph.graph.GetWorldPosition(node);
-                reference.position = Vector3.zero;
+                        for (int i = 0; i < reference.childCount; i++)
+                            reference.GetChild(i).position += position;
+                    }
+                }
 
-                for (int i = 0; i < reference.childCount; i++)
-                    reference.GetChild(i).position += position;
+                if (showToggleMenu = EditorGUILayout.Foldout(showToggleMenu, "Toggle", true))
+                {
+                    if (GUILayout.Button("Disable all nodes"))
+                        navigationGraph.ToggleAllNodes(ToggleMode.Disable);
+
+                    if (GUILayout.Button("Enable all nodes"))
+                        navigationGraph.ToggleAllNodes(ToggleMode.Enable);
+
+                    if (GUILayout.Button(new GUIContent("Toggle all nodes", "Disable active nodes and active disabled nodes.")))
+                        navigationGraph.ToggleAllNodes(ToggleMode.Toggle);
+
+                    if (GUILayout.Button("Disable all connections"))
+                        navigationGraph.ToggleAllConnections(ToggleMode.Disable);
+
+                    if (GUILayout.Button("Enable all connections"))
+                        navigationGraph.ToggleAllConnections(ToggleMode.Enable);
+
+                    if (GUILayout.Button(new GUIContent("Toggle all connections", "Disable connections nodes and active disabled connections.")))
+                        navigationGraph.ToggleAllConnections(ToggleMode.Toggle);
+                }
+
+                if (GUILayout.Button("Reset Grid"))
+                {
+                    navigationGraph.ResetGrid();
+                    selectedNode = null;
+                }
+                EditorGUI.indentLevel--;
             }
         }
 
@@ -364,132 +406,5 @@ namespace Additions.Components.Navigation
 
             selectedNode.DrawPositionHandler(navigationGraph.graph);
         }
-    }
-
-    public static class NodeEditorExtensions
-    {
-        public const float nodeDrawSize = 0.05f;
-
-        public static void DrawNode(this Node node, Graph reference = null) => node.DrawNode(NavigationGraphEditor.activeColor, NavigationGraphEditor.disabledColor, reference);
-
-        public static void DrawNode(this Node node, Color active, Color inactive, Graph reference = null) => node.DrawNode(node.IsActive ? active : inactive, reference);
-
-        public static void DrawNode(this Node node, Color color, Graph reference = null)
-        {
-            Vector2 position = reference == null ? node.position : reference.GetWorldPosition(node);
-            Handles.color = color;
-            Handles.DrawSolidDisc(position, Vector3.forward, nodeDrawSize);
-            if (node.isExtreme)
-            {
-                Handles.color = NavigationGraphEditor.extremeColor;
-                Handles.DrawWireDisc(position, Vector3.forward, nodeDrawSize);
-            }
-        }
-
-        public static void DrawConnections(this Node node, Graph reference = null, int fontSize = 0) => node.DrawConnections(NavigationGraphEditor.activeColor, NavigationGraphEditor.disabledColor, reference, fontSize);
-
-        public static void DrawConnections(this Node node, Color active, Color inactive, Graph reference = null, int fontSize = 0)
-        {
-            foreach (Connection connection in node.Connections)
-                if (connection != null) // Why this?
-                    connection.DrawConnection(active, inactive, reference, fontSize);
-        }
-
-        public static void DrawConnections(this Node node, Color color, Graph reference = null, int fontSize = 0)
-        {
-            foreach (Connection connection in node.Connections)
-                if (connection != null) // Why this?
-                    connection.DrawConnection(color, reference, fontSize);
-        }
-
-        public static void DrawLineTo(Vector2 source, Vector2 target, Color color, float? screenSpaceSize = null)
-        {
-            Handles.color = color;
-            if (screenSpaceSize == null)
-                Handles.DrawLine(source, target);
-            else
-                Handles.DrawDottedLine(source, target, (int)screenSpaceSize);
-        }
-
-        public static void DrawLineTo(this Node source, Vector2 target, Color color, Graph reference = null, float? screenSpaceSize = null)
-        {
-            Vector2 start = reference.GetWorldPosition(source);
-            DrawLineTo(start, target, color, screenSpaceSize);
-        }
-
-        public static void DrawLineTo(this Node source, Node target, Color color, Graph reference = null, float? screenSpaceSize = null)
-        {
-            Vector2[] positions = reference.GetWorldPosition(source, target);
-            Vector2 start = positions[0];
-            Vector2 end = positions[1];
-
-            DrawLineTo(start, end, color, screenSpaceSize);
-        }
-
-        public static Vector2 DrawPositionHandler(this Node source, Graph reference = null)
-        {
-            Vector2 position = reference.GetWorldPosition(source);
-            position = reference.GetLocalPosition(Handles.PositionHandle(position, Quaternion.identity));
-            source.position = position;
-            return position;
-        }
-    }
-
-    public static class ConnectionEditorExtensions
-    {
-        public const float arrowDrawSize = 0.05f;
-
-        public static void DrawConnection(this Connection connection, Graph reference = null, int fontSize = 0) => connection.DrawConnection(NavigationGraphEditor.activeColor, NavigationGraphEditor.disabledColor, reference, fontSize);
-
-        public static void DrawConnection(this Connection connection, Color active, Color inactive, Graph reference = null, int fontSize = 0) => connection.DrawConnection(connection.IsActive ? active : inactive, reference, fontSize);
-
-        public static void DrawConnection(this Connection connection, Color color, Graph reference = null, int fontSize = 0)
-        {
-            Vector2[] positions = reference.GetWorldPosition(connection.start, connection.end);
-            Vector2 start = positions[0];
-            Vector2 end = positions[1];
-
-            Handles.color = color;
-            Handles.DrawLine(start, end);
-            Vector2 half = (start + end) / 2;
-
-            // Draw arrow
-            Handles.DrawSolidArc(half, Vector3.forward, (start - end).normalized, 35, arrowDrawSize);
-            Handles.DrawSolidArc(half, Vector3.forward, (start - end).normalized, -35, arrowDrawSize);
-            if (fontSize > 0)
-                start.DrawDistance(end, color, fontSize);
-
-            if (connection.IsExtreme)
-            {
-                Handles.color = NavigationGraphEditor.extremeColor;
-                Handles.DrawWireArc(half, Vector3.forward, (start - end).normalized, 35, arrowDrawSize);
-                Handles.DrawWireArc(half, Vector3.forward, (start - end).normalized, -35, arrowDrawSize);
-            }
-        }
-
-        public static void DrawDistance(this Vector2 a, Vector2 b, Color textColor, int fontSize = 10)
-        {
-            GUIStyle style = new GUIStyle
-            {
-                fontSize = fontSize
-            };
-            style.normal.textColor = textColor;
-            GUIContent content = new GUIContent(Vector2.Distance(a, b).ToString("0.##"));
-            Handles.Label((a + b) / 2, content, style);
-        }
-
-        public static void DrawDistance(this Node source, Node target, Color textColor, Graph reference = null, int fontSize = 10)
-        {
-            Vector2[] positions = reference.GetWorldPosition(source, target);
-            positions[0].DrawDistance(positions[1], textColor, fontSize);
-        }
-
-        public static void DrawDistance(this Node source, Vector2 target, Color textColor, Graph reference = null, int fontSize = 10)
-        {
-            Vector2 start = reference.GetWorldPosition(source);
-            start.DrawDistance(target, textColor, fontSize);
-        }
-
-        public static Vector2[] GetWorldPosition(this Graph reference, params Node[] nodes) => reference == null ? nodes.Select(e => e.position).ToArray() : nodes.Select(e => reference.GetWorldPosition(e)).ToArray();
     }
 }

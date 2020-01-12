@@ -198,5 +198,7 @@ namespace Additions.Components.Navigation
         public void RemoveConnectionsToNothing() => ((IGraphEditing)graph).RemoveConnectionsToNothing();
         public void AddMissingNodesFromConnections() => ((IGraphEditing)graph).AddMissingNodesFromConnections();
         public void RemoveNodesWithoutToOrFromConnection() => ((IGraphEditing)graph).RemoveNodesWithoutToOrFromConnection();
+        public void ToggleAllNodes(ToggleMode mode) => ((IGraphEditing)graph).ToggleAllNodes(mode);
+        public void ToggleAllConnections(ToggleMode mode) => ((IGraphEditing)graph).ToggleAllConnections(mode);
     }
 }

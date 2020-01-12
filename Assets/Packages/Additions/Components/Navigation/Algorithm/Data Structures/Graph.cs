@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Additions.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -88,6 +89,51 @@ namespace Additions.Components.Navigation
             HashSet<Node> nodes = new HashSet<Node>(grid);
 
             grid = grid.Where(e => e.Connections.Count > 0 || grid.Any(e2 => e2.Connections.Any(e3 => e3.end == e))).ToList();
+        }
+
+        public void ToggleAllNodes(ToggleMode mode)
+        {
+            foreach (Node node in Grid)
+            {
+                switch (mode)
+                {
+                    case ToggleMode.Enable:
+                        node.SetActive(true);
+                        break;
+                    case ToggleMode.Disable:
+                        node.SetActive(false);
+                        break;
+                    case ToggleMode.Toggle:
+                        node.SetActive(!node.IsActive);
+                        break;
+                    default:
+                        throw new ImpossibleStateException();
+                }
+            }
+        }
+
+        public void ToggleAllConnections(ToggleMode mode)
+        {
+            foreach (Node node in Grid)
+            {
+                foreach (Connection connection in node.Connections)
+                {
+                    switch (mode)
+                    {
+                        case ToggleMode.Enable:
+                            connection.SetActive(true);
+                            break;
+                        case ToggleMode.Disable:
+                            connection.SetActive(false);
+                            break;
+                        case ToggleMode.Toggle:
+                            connection.SetActive(!node.IsActive);
+                            break;
+                        default:
+                            throw new ImpossibleStateException();
+                    }
+                }
+            }
         }
     }
 }
