@@ -36,13 +36,4 @@
         /// <param name="time">Time since last update in seconds.<seealso cref="UnityEngine.Time.deltaTime"/></param>
         void Attack(float time);
     }
-
-    public interface IUpdate
-    {
-        /// <summary>
-        /// Updates behavior.
-        /// </summary>
-        /// <param name="deltaTime">Time since last update in seconds. <seealso cref="UnityEngine.Time.deltaTime"/></param>
-        void UpdateBehaviour(float deltaTime);
-    }
 }

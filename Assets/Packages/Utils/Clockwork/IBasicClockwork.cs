@@ -2,7 +2,7 @@
 
 namespace Additions.Utils.Clockworks
 {
-    public interface IBasicClockwork : CreaturesAddons.IUpdate
+    public interface IBasicClockwork : IUpdate
     {
         /// <summary>
         /// Current cooldown time.
