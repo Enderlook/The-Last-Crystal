@@ -36,7 +36,6 @@ namespace Additions.Components.FloatPool.Decorators
         [SerializeField, Tooltip("Event executed when end recharging.\nIf ended before Current reached Max it will be true. Otherwise false.")]
         private UnityEventBoolean endCallback;
 
-
         [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
         private UnityEventBoolean activeCallback;
 #pragma warning restore CS0649
