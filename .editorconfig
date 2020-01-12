@@ -14,3 +14,6 @@ dotnet_diagnostic.IDE0010.severity = none
 
 # RCS1128: Use coalesce expression.
 dotnet_diagnostic.RCS1128.severity = none
+
+# RCS1146: Use conditional access.
+dotnet_diagnostic.RCS1146.severity = none
