@@ -1,8 +1,7 @@
-﻿using Creatures;
-
+﻿
 using UnityEngine;
 
-namespace Additions.Components
+namespace Creatures
 {
     public class StoppableRigidbody : MonoBehaviour, IInit
     {
