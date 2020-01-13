@@ -1,5 +1,4 @@
-﻿using Additions.Extensions;
-using Additions.Utils.Rects;
+﻿using Additions.Utils.Rects;
 using Additions.Utils.UnityEditor;
 
 using System.Reflection;
@@ -25,7 +24,7 @@ namespace Additions.Attributes
 
             FieldInfo confirmationField = targetObject.GetType().GetField(hasConfirmationFieldAttribute.confirmFieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
 
-            string name = confirmationField.Name.ToDisplayUnity();
+            string name = ObjectNames.NicifyVariableName(confirmationField.Name);
             string tooltip = ((TooltipAttribute)confirmationField.GetCustomAttribute(typeof(TooltipAttribute), true))?.tooltip;
             confirm = (bool)confirmationField.GetValue(targetObject);
             confirm = EditorGUI.Toggle(new VerticalRectBuilder(position.x, position.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight).GetRect(), new GUIContent(name, tooltip ?? ""), confirm);

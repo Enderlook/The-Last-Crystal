@@ -259,6 +259,7 @@ namespace Additions.Extensions
         /// </summary>
         /// <param name="source">String to convert.</param>
         /// <returns>Converted string.</returns>
+        [Obsolete("Use ObjectNames.NicifyVariableName method instead.")]
         public static string ToDisplayUnity(this string source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
