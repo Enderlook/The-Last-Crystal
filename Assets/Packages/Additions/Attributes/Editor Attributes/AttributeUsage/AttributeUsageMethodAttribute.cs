@@ -64,6 +64,7 @@ namespace Additions.Attributes.AttributeUsage
         /// </summary>
         /// <param name="methodInfo"></param>
         /// <param name="attributeName"></param>
+        /// <remarks>Only use in Unity Editor.</remarks>
         public void CheckAllowance(MethodInfo methodInfo, string attributeName)
         {
             string GetMessageInit() => $"{messageBase} {attributeName} require a method with";

@@ -22,6 +22,7 @@ namespace Additions.Attributes.AttributeUsage
         /// </summary>
         /// <param name="memberInfo"></param>
         /// <param name="attributeName"></param>
+        /// <remarks>Only use in Unity Editor.</remarks>
         public void CheckAllowance(MemberInfo memberInfo, string attributeName)
         {
             if (memberInfo.ReflectedType.GetMember(memberInfo.Name, bindingFlags).Length == 0)

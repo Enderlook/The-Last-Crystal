@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,6 @@ namespace Additions.Attributes.AttributeUsage
 {
     internal static class AttributeUsageHelper
     {
-#if UNITY_EDITOR
         /// <summary>
         /// Produces a <see cref="HashSet{T}"/> with <paramref name="types"/>.
         /// </summary>
@@ -17,6 +17,7 @@ namespace Additions.Attributes.AttributeUsage
         /// <param name="includeEnumerableTypes">If <see langword="true"/>, it will also check for array o list versions of types.<br>
         /// Useful because Unity <see cref="PropertyDrawer"/> are draw on each element of an array or list <see cref="SerializedProperty"/></param>
         /// <returns><see cref="HashSet{T}"/> with all types to check.</returns>
+        /// <remarks>Only use in Unity Editor.</remarks>
         internal static HashSet<Type> GetHashsetTypes(Type[] types, bool includeEnumerableTypes = false)
         {
             if (includeEnumerableTypes)
@@ -42,6 +43,7 @@ namespace Additions.Attributes.AttributeUsage
         /// <param name="checkingFlags">Additional phrases.</param>
         /// <param name="isBlackList">Whenever the result forbid instead of require the <paramref name="types"/>.</param>
         /// <returns>A <see cref="string"/> with all elements.</returns>
+        /// <remarks>Only use in Unity Editor.</remarks>
         internal static string GetTextTypes(IEnumerable<Type> types, TypeFlags checkingFlags, bool isBlackList = false)
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -72,6 +74,7 @@ namespace Additions.Attributes.AttributeUsage
         /// <param name="toCheckType"><see cref="Type"/> to be checked.</param>
         /// <param name="attributeName">Name of the current attribute which is being checked.</param>
         /// <param name="toCheckName">Name of what is <paramref name="toCheckType"/> or where it was taken from (e.g: <c><see cref="System.Reflection.FieldInfo"/>.Name</c>.</param>
+        /// <remarks>Only use in Unity Editor.</remarks>
         internal static void CheckContains(string attributeCheckerName, HashSet<Type> types, TypeFlags typeFlags, bool isBlackList, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
         {
             bool contains = types.Contains(toCheckType);
@@ -106,6 +109,6 @@ namespace Additions.Attributes.AttributeUsage
             if (contains == isBlackList)
                 Debug.LogException(new ArgumentException($"According to {attributeCheckerName}, {attributeName} {allowedTypes}. {toCheckName} is {toCheckType.Name} type."));
         }
-#endif
     }
 }
+#endif

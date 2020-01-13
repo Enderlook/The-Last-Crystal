@@ -7,6 +7,8 @@ using System.Reflection;
 
 using UnityEngine;
 
+using UnityObject = UnityEngine.Object;
+
 namespace Additions.Attributes.PostCompiling
 {
     internal static class ReflectionHelper
@@ -47,7 +49,7 @@ namespace Additions.Attributes.PostCompiling
 
         public static IEnumerable<(MethodInfo methodInfo, Type type, Attribute attribute)> GettAllAttributesOfMethodsOf(Type type) => GettAllAttributesOfMembersOf(type, (e, b) => e.GetMethods(b));
 
-        private static readonly Type[] unityDefaultNonPrimitiveSerilizables = new Type[]
+        private static readonly Type[] unityDefaultNonPrimitiveSerializables = new Type[]
         {
             typeof(Vector2), typeof(Vector3), typeof(Vector4),
             typeof(Rect), typeof(Quaternion), typeof(Matrix4x4),
@@ -55,35 +57,57 @@ namespace Additions.Attributes.PostCompiling
             typeof(AnimationCurve), typeof(Gradient), typeof(RectOffset), typeof(GUIStyle)
         };
 
+        /// <summary>
+        /// Check if the given type can be serialized by Unity.
+        /// </summary>
+        /// <param name="type">Type to check.</param>
+        /// <returns>Whenever the field can be serialized by Unity of not.</returns>
+        public static bool CanBeSerializedByUnity(this Type type)
+        {
+            if (type.IsArray)
+                type = type.GetElementType();
+
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+                type = type.GetGenericArguments()[0];
+
+            if (type.IsAbstract || type.IsGenericType || type.IsInterface)
+                return false;
+
+            if (type.IsPrimitive || type.IsEnum || type.IsValueType || unityDefaultNonPrimitiveSerializables.Contains(type))
+                return true;
+
+            if (type.IsSubclassOf(typeof(UnityObject)))
+                return true;
+
+            if (type.IsDefined(typeof(SerializableAttribute)))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Check if the given field can be serialized by Unity.
+        /// </summary>
+        /// <param name="fieldInfo">Field to check.</param>
+        /// <returns>Whenever the field can be serialized by Unity of not.</returns>
         public static bool CanBeSerializedByUnity(this FieldInfo fieldInfo)
         {
-            if (fieldInfo.IsPublic || fieldInfo.GetCustomAttribute<SerializeField>() != null)
+            if (fieldInfo.IsPublic || fieldInfo.IsDefined(typeof(SerializeField)))
             {
                 if (fieldInfo.IsStatic || fieldInfo.IsInitOnly || fieldInfo.IsLiteral)
                     return false;
 
-                Type type = fieldInfo.FieldType;
-
-                if (type.IsArray)
-                    type = type.GetElementType();
-
-                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
-                    type = type.GetGenericArguments()[0];
-
-                if (type.IsAbstract || type.IsGenericType)
-                    return false;
-
-                if (type.IsPrimitive || type.IsEnum || type.IsValueType || unityDefaultNonPrimitiveSerilizables.Contains(type))
-                    return true;
-
-                if (type.IsSubclassOf(typeof(UnityEngine.Object)))
-                    return true;
-
-                if (type.GetCustomAttributes<SerializableAttribute>() != null)
-                    return true;
+                return fieldInfo.FieldType.CanBeSerializedByUnity();
             }
             return false;
         }
+
+        /// <summary>
+        /// Check if the given type can be serialized by Unity.
+        /// </summary>
+        /// <param name="typeInfo">Typeinfo of type to check.</param>
+        /// <returns>Whenever the field can be serialized by Unity of not.</returns>
+        public static bool CanBeSerializedByUnity(this TypeInfo typeInfo) => typeInfo.GetType().CanBeSerializedByUnity();
 
         /// <summary>
         /// Get all member names of <paramref name="class"/> which:

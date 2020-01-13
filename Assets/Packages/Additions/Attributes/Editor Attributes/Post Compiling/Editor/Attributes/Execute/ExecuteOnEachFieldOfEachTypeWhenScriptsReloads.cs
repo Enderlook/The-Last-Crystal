@@ -22,12 +22,12 @@ namespace Additions.Attributes.PostCompiling.Attributes
         {
             /// <summary>
             /// Non serializable fields by Unity are allowed.<br>
-            /// <seealso cref="AttributeUsageHelper.CanBeSerializedByUnity(FieldInfo)"/>.
+            /// <seealso cref="ReflectionHelper.CanBeSerializedByUnity(FieldInfo)"/>.
             /// </summary>
             NotSerializableByUnity = 1,
             /// <summary>
             /// Serializable fields by Unity are allowed.
-            /// <seealso cref="AttributeUsageHelper.CanBeSerializedByUnity(FieldInfo)"/>.
+            /// <seealso cref="ReflectionHelper.CanBeSerializedByUnity(FieldInfo)"/>.
             /// </summary>
             SerializableByUnity = 1 << 1,
             /// <summary>
