@@ -28,7 +28,7 @@ public class SpawnPointEditor : Editor
     {
         if (Event.current.type == EventType.MouseDown && Event.current.button == 1)
         {
-            Vector2 mousePosition = MouseHelper.GetMousePositionInEditor();
+            Vector2 mousePosition = MouseHelper.GetMouseWorldPositionInEditor();
             if (Event.current.control)
                 points.Add(mousePosition);
             else if (Event.current.alt)

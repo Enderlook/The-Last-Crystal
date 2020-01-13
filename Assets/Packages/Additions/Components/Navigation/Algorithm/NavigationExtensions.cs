@@ -27,11 +27,11 @@ namespace Additions.Components.Navigation
             return closestNode;
         }
 #if UNITY_EDITOR
-        public static Node FindClosestNodeToMouseInEditor(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInEditor());
+        public static Node FindClosestNodeToMouseInEditor(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMouseWorldPositionInEditor());
 #endif
 
-        public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame());
+        public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation) => navigation.FindClosestNode(MouseHelper.GetMouseWorldPositionInGame());
 
-        public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation, Camera camera) => navigation.FindClosestNode(MouseHelper.GetMousePositionInGame(camera));
+        public static Node FindClosestNodeToMouseInGame(this NavigationGraph navigation, Camera camera) => navigation.FindClosestNode(MouseHelper.GetMouseWorldPositionInGame(camera));
     }
 }

@@ -378,7 +378,7 @@ namespace Additions.Components.Navigation
 
         private Vector2 GetAndDrawMousePosition()
         {
-            Vector2 mousePosition = MouseHelper.GetMousePositionInEditor();
+            Vector2 mousePosition = MouseHelper.GetMouseWorldPositionInEditor();
             Handles.color = addColor;
             Handles.DrawWireDisc(mousePosition, Vector3.forward, NodeEditorExtensions.nodeDrawSize);
             Handles.DrawWireDisc(mousePosition, Vector3.forward, autoSelectionRange);

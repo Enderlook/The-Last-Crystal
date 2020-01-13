@@ -91,7 +91,7 @@ namespace Creatures.Weapons
             go.layer = projectileLayer;
 
             Rigidbody2D rigidbody = go.AddComponent<Rigidbody2D>();
-            rigidbody.AddForce((MouseHelper.GetMousePositionInGame() - ShootingPoint).normalized * projectileForce);
+            rigidbody.AddForce(-(MouseHelper.GetMouseWorldPositionInGame() - ShootingPoint).normalized * projectileForce);
             rigidbody.gravityScale = projectileGravity;
 
             go.AddComponent<SpriteRenderer>();
