@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Additions.Attributes.AttributeUsage
 {
-    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = TypeFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = TypeCasting.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageRequireDataTypeAttribute : Attribute
     {
@@ -12,7 +12,7 @@ namespace Additions.Attributes.AttributeUsage
         /// <summary>
         /// Additional checking rules.
         /// </summary>
-        public TypeFlags typeFlags;
+        public TypeCasting typeFlags;
 
         /// <summary>
         /// If <see langword="true"/>, <see cref="Types"/> will be forbidden types (blacklist).<br>

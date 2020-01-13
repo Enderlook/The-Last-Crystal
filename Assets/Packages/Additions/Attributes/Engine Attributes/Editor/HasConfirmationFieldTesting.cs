@@ -14,7 +14,7 @@ namespace Additions.Attributes
     {
         private static readonly Dictionary<Type, List<HasConfirmationFieldAttribute>> typesAndAttributes = new Dictionary<Type, List<HasConfirmationFieldAttribute>>();
 
-        [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldFlags.SerializableByUnity, 0)]
+        [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldSerialization.SerializableByUnity, 0)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper")]
         private static void GetFields(FieldInfo fieldInfo)
         {

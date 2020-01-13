@@ -17,7 +17,7 @@ namespace Additions.Attributes.PostCompiling.Attributes
         /// <summary>
         /// Determines rules about in which field does match.
         /// </summary>
-        public readonly FieldFlags fieldFilter;
+        public readonly FieldSerialization fieldFilter;
 
         /// <summary>
         /// Executes the method decorated by this attribute for each field on each <see cref="Type"/> compiled by Unity.<br>
@@ -25,6 +25,6 @@ namespace Additions.Attributes.PostCompiling.Attributes
         /// </summary>
         /// <param name="fieldFlags">Whenever it must be Unity able to serialize it or if it does not matter.</param>
         /// <param name="loop">In which loop of the execution will this script execute.</param>
-        public ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldFlags fieldFlags = FieldFlags.NotSerializableByUnity, int loop = 0) : base(loop) => fieldFilter = fieldFlags;
+        public ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldSerialization fieldFlags = FieldSerialization.NotSerializableByUnity, int loop = 0) : base(loop) => fieldFilter = fieldFlags;
     }
 }

@@ -47,7 +47,7 @@ namespace Additions.Attributes.AttributeUsage
             }
         }
 
-        [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldFlags.EitherSerializableOrNotByUnity, 1)]
+        [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldSerialization.EitherSerializableOrNotByUnity, 1)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper.")]
         private static void CheckFields(FieldInfo fieldInfo) => CheckSomething(fieldInfo, fieldInfo.FieldType, "Field");
 

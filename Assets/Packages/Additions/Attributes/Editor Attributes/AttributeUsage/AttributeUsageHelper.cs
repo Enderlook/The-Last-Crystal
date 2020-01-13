@@ -44,20 +44,20 @@ namespace Additions.Attributes.AttributeUsage
         /// <param name="isBlackList">Whenever the result forbid instead of require the <paramref name="types"/>.</param>
         /// <returns>A <see cref="string"/> with all elements.</returns>
         /// <remarks>Only use in Unity Editor.</remarks>
-        internal static string GetTextTypes(IEnumerable<Type> types, TypeFlags checkingFlags, bool isBlackList = false)
+        internal static string GetTextTypes(IEnumerable<Type> types, TypeCasting checkingFlags, bool isBlackList = false)
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder
                 .Append(isBlackList ? "doesn't" : "only")
                 .Append(" accept types of ")
                 .Append(string.Join(", ", types.Select(e => e.Name)));
-            if ((checkingFlags & TypeFlags.CheckSubclassTypes) != 0)
+            if ((checkingFlags & TypeCasting.CheckSubclassTypes) != 0)
                 stringBuilder.Append(", their subclasses");
-            if ((checkingFlags & TypeFlags.CheckSuperclassTypes) != 0)
+            if ((checkingFlags & TypeCasting.CheckSuperclassTypes) != 0)
                 stringBuilder.Append(", their superclasses");
-            if ((checkingFlags & TypeFlags.CheckSuperclassTypes) != 0)
+            if ((checkingFlags & TypeCasting.CheckSuperclassTypes) != 0)
                 stringBuilder.Append(", types assignable to them");
-            if ((checkingFlags & TypeFlags.CheckCanBeAssignedTypes) != 0)
+            if ((checkingFlags & TypeCasting.CheckCanBeAssignedTypes) != 0)
                 stringBuilder.Append(", types assignable from them");
             return stringBuilder.ToString();
         }
@@ -75,7 +75,7 @@ namespace Additions.Attributes.AttributeUsage
         /// <param name="attributeName">Name of the current attribute which is being checked.</param>
         /// <param name="toCheckName">Name of what is <paramref name="toCheckType"/> or where it was taken from (e.g: <c><see cref="System.Reflection.FieldInfo"/>.Name</c>.</param>
         /// <remarks>Only use in Unity Editor.</remarks>
-        internal static void CheckContains(string attributeCheckerName, HashSet<Type> types, TypeFlags typeFlags, bool isBlackList, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
+        internal static void CheckContains(string attributeCheckerName, HashSet<Type> types, TypeCasting typeFlags, bool isBlackList, string allowedTypes, Type toCheckType, string attributeName, string toCheckName)
         {
             bool contains = types.Contains(toCheckType);
 
@@ -96,13 +96,13 @@ namespace Additions.Attributes.AttributeUsage
 
                 // Check if checkingFlags has the following flags
                 // We could use checkingFlags.HasFlag(flag), but it's ~10 times slower
-                if ((typeFlags & TypeFlags.CheckSubclassTypes) != 0)
+                if ((typeFlags & TypeCasting.CheckSubclassTypes) != 0)
                     Check((f, t) => f.IsSubclassOf(t));
-                if ((typeFlags & TypeFlags.CheckSuperclassTypes) != 0 && !contains)
+                if ((typeFlags & TypeCasting.CheckSuperclassTypes) != 0 && !contains)
                     Check((f, t) => t.IsSubclassOf(f));
-                if ((typeFlags & TypeFlags.CheckCanBeAssignedTypes) != 0 && !contains)
+                if ((typeFlags & TypeCasting.CheckCanBeAssignedTypes) != 0 && !contains)
                     Check((f, t) => f.IsAssignableFrom(t));
-                if ((typeFlags & TypeFlags.CheckIsAssignableTypes) != 0 && !contains)
+                if ((typeFlags & TypeCasting.CheckIsAssignableTypes) != 0 && !contains)
                     Check((f, t) => t.IsAssignableFrom(f));
             }
 

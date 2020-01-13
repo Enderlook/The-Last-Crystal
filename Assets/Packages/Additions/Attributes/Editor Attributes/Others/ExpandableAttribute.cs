@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Additions.Attributes
 {
-    [AttributeUsageRequireDataType(typeof(UnityEngine.Object), includeEnumerableTypes = true, typeFlags = TypeFlags.CheckSubclassOrAssignable)]
+    [AttributeUsageRequireDataType(typeof(UnityEngine.Object), includeEnumerableTypes = true, typeFlags = TypeCasting.CheckSubclassOrAssignable)]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class ExpandableAttribute : PropertyAttribute
     {

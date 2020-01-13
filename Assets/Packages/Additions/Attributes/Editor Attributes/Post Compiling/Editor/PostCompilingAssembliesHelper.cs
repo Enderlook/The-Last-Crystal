@@ -234,10 +234,10 @@ namespace Additions.Attributes.PostCompiling
                     else if (attribute is ExecuteOnEachFieldOfEachTypeWhenScriptsReloads executeOnEachFieldOfEachTypeWhenScriptsReloads)
                         if (TryGetDelegate(methodInfo, out action))
                         {
-                            FieldFlags fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
-                            if ((fieldFags & FieldFlags.SerializableByUnity) != 0)
+                            FieldSerialization fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
+                            if ((fieldFags & FieldSerialization.SerializableByUnity) != 0)
                                 SubscribeOnEachSerializableByUnityFieldOfTypes(action, loop);
-                            if ((fieldFags & FieldFlags.NotSerializableByUnity) != 0)
+                            if ((fieldFags & FieldSerialization.NotSerializableByUnity) != 0)
                                 SubscribeOnEachNonSerializableByUnityFieldOfTypes(action, loop);
                         }
                         else if (attribute is ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads executeOnEachPropertyOfEachTypeWhenScriptsReloads)

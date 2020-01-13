@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Additions.Attributes.AttributeUsage
 {
-    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = TypeFlags.CheckSubclassTypes)]
+    [AttributeUsageRequireDataType(typeof(Attribute), typeFlags = TypeCasting.CheckSubclassTypes)]
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public sealed class AttributeUsageMethodAttribute : Attribute
     {
@@ -28,7 +28,7 @@ namespace Additions.Attributes.AttributeUsage
         /// <summary>
         /// Additional checking rules.
         /// </summary>
-        public TypeFlags checkingFlags;
+        public TypeCasting checkingFlags;
 
         private readonly Type[] basicTypes;
 

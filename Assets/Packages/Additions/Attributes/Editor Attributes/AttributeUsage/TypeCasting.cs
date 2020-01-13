@@ -6,7 +6,7 @@ namespace Additions.Attributes.AttributeUsage
     /// Determine relation of types to look for.
     /// </summary>
     [Flags]
-    public enum TypeFlags
+    public enum TypeCasting
     {
         /// <summary>
         /// It must check for the same exact type.

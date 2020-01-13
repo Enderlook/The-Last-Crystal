@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Reflection;
 
 namespace Additions.Attributes.PostCompiling.Attributes
@@ -8,7 +7,7 @@ namespace Additions.Attributes.PostCompiling.Attributes
     /// Rules that should be match by the field.
     /// </summary>
     [Flags]
-    public enum FieldFlags
+    public enum FieldSerialization
     {
         /// <summary>
         /// Non serializable fields by Unity are allowed.<br>
