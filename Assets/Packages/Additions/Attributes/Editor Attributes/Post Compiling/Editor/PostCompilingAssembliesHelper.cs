@@ -229,27 +229,37 @@ namespace Additions.Attributes.PostCompiling
                             SubscribeOnEachTypeLessEnums(action, loop);
                     }
                 }
-                else if (attribute is ExecuteOnEachMemberOfEachTypeWhenScriptsReloads executeOnEachMemberOfEachTypeWhenScriptsReloads)
+                if (attribute is ExecuteOnEachMemberOfEachTypeWhenScriptsReloads executeOnEachMemberOfEachTypeWhenScriptsReloads)
+                {
                     if (TryGetDelegate(methodInfo, out Action<MemberInfo> action))
                         SubscribeOnEachMemberOfTypes(action, loop);
-                    else if (attribute is ExecuteOnEachFieldOfEachTypeWhenScriptsReloads executeOnEachFieldOfEachTypeWhenScriptsReloads)
-                        if (TryGetDelegate(methodInfo, out action))
-                        {
-                            FieldSerialization fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
-                            if ((fieldFags & FieldSerialization.SerializableByUnity) != 0)
-                                SubscribeOnEachSerializableByUnityFieldOfTypes(action, loop);
-                            if ((fieldFags & FieldSerialization.NotSerializableByUnity) != 0)
-                                SubscribeOnEachNonSerializableByUnityFieldOfTypes(action, loop);
-                        }
-                        else if (attribute is ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads executeOnEachPropertyOfEachTypeWhenScriptsReloads)
-                            if (TryGetDelegate(methodInfo, out action))
-                                SubscribeOnEachPropertyOfTypes(action, loop);
-                            else if (attribute is ExecuteOnEachMethodOfEachTypeWhenScriptsReloads executeOnEachMethodOfEachTypeWhenScriptsReloads)
-                                if (TryGetDelegate(methodInfo, out action))
-                                    SubscribeOnEachMethodOfTypes(action, loop);
-                                else if (attribute is ExecuteWhenScriptsReloads executeWhenScriptsReloads)
-                                    if (TryGetDelegate(methodInfo, out Action action2))
-                                        SubscribeToExecuteOnce(action2, loop);
+                }
+                if (attribute is ExecuteOnEachFieldOfEachTypeWhenScriptsReloads executeOnEachFieldOfEachTypeWhenScriptsReloads)
+                {
+                    if (TryGetDelegate(methodInfo, out Action<FieldInfo> action))
+                    {
+                        FieldSerialization fieldFags = executeOnEachFieldOfEachTypeWhenScriptsReloads.fieldFilter;
+                        if ((fieldFags & FieldSerialization.SerializableByUnity) != 0)
+                            SubscribeOnEachSerializableByUnityFieldOfTypes(action, loop);
+                        if ((fieldFags & FieldSerialization.NotSerializableByUnity) != 0)
+                            SubscribeOnEachNonSerializableByUnityFieldOfTypes(action, loop);
+                    }
+                }
+                if (attribute is ExecuteOnEachPropertyOfEachTypeWhenScriptsReloads executeOnEachPropertyOfEachTypeWhenScriptsReloads)
+                {
+                    if (TryGetDelegate(methodInfo, out Action<PropertyInfo> action))
+                        SubscribeOnEachPropertyOfTypes(action, loop);
+                }
+                if (attribute is ExecuteOnEachMethodOfEachTypeWhenScriptsReloads executeOnEachMethodOfEachTypeWhenScriptsReloads)
+                {
+                    if (TryGetDelegate(methodInfo, out Action<MethodInfo> action))
+                        SubscribeOnEachMethodOfTypes(action, loop);
+                }
+                if (attribute is ExecuteWhenScriptsReloads executeWhenScriptsReloads)
+                {
+                    if (TryGetDelegate(methodInfo, out Action action))
+                        SubscribeToExecuteOnce(action, loop);
+                }
             }
         }
 
