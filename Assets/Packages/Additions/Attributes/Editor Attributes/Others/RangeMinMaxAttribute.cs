@@ -10,6 +10,7 @@ using RangeInt = Additions.Serializables.Ranges.RangeInt;
 namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(Vector2), typeof(Vector2Int), typeof(RangeInt), typeof(RangeIntStep), typeof(RangeFloat), typeof(RangeFloatStep), includeEnumerableTypes = true)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class RangeMinMaxAttribute : RangeAttribute
     {

@@ -8,6 +8,7 @@ using UnityEngine;
 namespace Additions.Attributes
 {
     [AttributeUsageAccessibility(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
     public sealed class ShowIfAttribute : PropertyAttribute
     {

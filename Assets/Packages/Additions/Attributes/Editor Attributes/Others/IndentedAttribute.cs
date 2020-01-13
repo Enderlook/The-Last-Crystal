@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Additions.Attributes.AttributeUsage;
+using System;
 
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Additions.Attributes
     /// <summary>
     /// Add or remove indentation to the drew serialized property.
     /// </summary>
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class IndentedAttribute : PropertyAttribute
     {

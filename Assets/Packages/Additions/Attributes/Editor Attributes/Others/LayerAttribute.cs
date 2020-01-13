@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(int), typeof(float), typeof(LayerMask), typeof(string), includeEnumerableTypes = true)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class LayerAttribute : PropertyAttribute
     {

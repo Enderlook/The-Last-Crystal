@@ -177,6 +177,7 @@ namespace Additions.Attributes.PostCompiling
 
         private static void ScanAssemblies(IEnumerable<Type> types)
         {
+            // We don't filter by DoNotInspectAttribute because we did that before
             foreach (Type classType in types)
                 if (classType.IsEnum)
                     enumTypes.Add(classType);
@@ -184,7 +185,9 @@ namespace Additions.Attributes.PostCompiling
                 {
                     nonEnumTypes.Add(classType);
 
-                    foreach (MemberInfo memberInfo in classType.GetMembers(bindingFlags))
+                    foreach (MemberInfo memberInfo in classType.GetMembers(bindingFlags)
+                        // We don't check those member which doesn't want to be checked
+                        .Where(e => !e.IsDefined(typeof(DoNotInspectAttribute))))
                     {
                         memberInfos.Add(memberInfo);
 

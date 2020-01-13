@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(AudioClip), includeEnumerableTypes = true)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class PlayAudioClipAttribute : PropertyAttribute
     {

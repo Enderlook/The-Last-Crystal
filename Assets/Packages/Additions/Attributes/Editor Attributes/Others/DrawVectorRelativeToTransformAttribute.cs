@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(Vector2), typeof(Vector2Int), typeof(Vector3), typeof(Vector3), typeof(Vector4), typeof(Transform), includeEnumerableTypes = true)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field)]
     public sealed class DrawVectorRelativeToTransformAttribute : Attribute
     {

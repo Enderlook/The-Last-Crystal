@@ -8,6 +8,7 @@ using UnityEngine;
 namespace Additions.Attributes
 {
     [AttributeUsageAccessibility(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public sealed class GUIAttribute : PropertyAttribute
     {

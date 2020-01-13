@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Additions.Attributes
 {
     [AttributeUsageRequireDataType(typeof(int), typeof(float), includeEnumerableTypes = true)]
+    [AttributeUsageFieldMustBeSerializableByUnity]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class RangeAttribute : PropertyAttribute
     {
