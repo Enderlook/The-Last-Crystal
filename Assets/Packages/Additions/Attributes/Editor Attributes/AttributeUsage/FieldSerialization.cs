@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Reflection;
 
-namespace Additions.Attributes.PostCompiling.Attributes
+namespace Additions.Attributes.AttributeUsage
 {
     /// <summary>
     /// Rules that should be match by the field.
