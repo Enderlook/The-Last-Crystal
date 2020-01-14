@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using UnityEngine;
 
 namespace Additions.Attributes.AttributeUsage
 {
@@ -15,7 +14,7 @@ namespace Additions.Attributes.AttributeUsage
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper.")]
         private static void GetAttributesAndTypes(Type type)
         {
-            if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(AttributeUsageRequireDataTypeAttribute), true) is AttributeUsageRequireDataTypeAttribute attribute)
+            if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute<AttributeUsageRequireDataTypeAttribute>(true) is AttributeUsageRequireDataTypeAttribute attribute)
             {
                 AttributeUsageAttribute attributeUsageAttribute = type.GetCustomAttribute<AttributeUsageAttribute>();
                 checkers.Add(type, (attributeUsageAttribute?.ValidOn ?? AttributeTargets.All, (checkType, checkName) => attribute.CheckAllowance(checkType, checkName, type.Name)));
@@ -26,18 +25,28 @@ namespace Additions.Attributes.AttributeUsage
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper.")]
         private static void CheckClasses(Type type)
         {
+            if (type.CheckIfShouldBeIgnored(typeof(AttributeUsageMethodAttribute)))
+                return;
             foreach (Attribute attribute in type.GetCustomAttributes())
-                if (checkers.TryGetValue(attribute.GetType(), out (AttributeTargets targets, Action<Type, string> checker) value))
-                    // Check if has the proper flag
-                    if ((value.targets & AttributeTargets.Class) != 0)
-                        value.checker(type, $"Class {type.Name}");
+            {
+                Type attributeType = attribute.GetType();
+                if (checkers.TryGetValue(attributeType, out (AttributeTargets targets, Action<Type, string> checker) value)
+                    && (value.targets & AttributeTargets.Class) != 0 // Check if has the proper flag
+                    && type.CheckIfShouldBeIgnored(attributeType))
+                    value.checker(type, $"Class {type.Name}");
+            }
         }
 
         private static void CheckSomething(MemberInfo memberInfo, Type type, string memberType, AttributeTargets checkIf)
         {
             foreach (Attribute attribute in memberInfo.GetCustomAttributes())
-                if (checkers.TryGetValue(attribute.GetType(), out (AttributeTargets targets, Action<Type, string> checker) value) /*&& (value.targets & checkIf) != 0*/)
+            {
+                Type attributeType = attribute.GetType();
+                if (checkers.TryGetValue(attributeType, out (AttributeTargets targets, Action<Type, string> checker) value)
+                    && (value.targets & checkIf) != 0  // Check if has the proper flag
+                    && memberInfo.CheckIfShouldBeIgnored(attributeType))
                     value.checker(type, $"{memberType} {memberInfo.Name} in {memberInfo.DeclaringType.Name} class");
+            }
         }
 
         [ExecuteOnEachFieldOfEachTypeWhenScriptsReloads(FieldSerialization.EitherSerializableOrNotByUnity, 1)]

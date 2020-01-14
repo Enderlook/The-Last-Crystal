@@ -14,7 +14,8 @@ namespace Additions.Attributes.AttributeUsage
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper.")]
         private static void GetAttributesAndTypes(Type type)
         {
-            if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(AttributeUsageAccessibilityAttribute), true) is AttributeUsageAccessibilityAttribute attribute)
+            if (type.IsSubclassOf(typeof(Attribute))
+                && type.GetCustomAttribute<AttributeUsageAccessibilityAttribute>(true) is AttributeUsageAccessibilityAttribute attribute)
                 checkers.Add(type, attribute.CheckAllowance);
         }
 
@@ -24,7 +25,9 @@ namespace Additions.Attributes.AttributeUsage
         {
             foreach (Attribute attribute in memberInfo.GetCustomAttributes())
             {
-                if (checkers.TryGetValue(attribute.GetType(), out Action<MemberInfo, string> check))
+                Type type = attribute.GetType();
+                if (checkers.TryGetValue(type, out Action<MemberInfo, string> check)
+                    && !memberInfo.CheckIfShouldBeIgnored(type))
                     check(memberInfo, $"Member {memberInfo.Name} in {memberInfo.DeclaringType.Name} class");
             }
         }

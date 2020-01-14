@@ -19,6 +19,8 @@ namespace Additions.Attributes
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper")]
         private static void GetFields(FieldInfo fieldInfo)
         {
+            if (fieldInfo.CheckIfShouldBeIgnored(typeof(ShowIfAttribute)))
+                return;
             if (fieldInfo.GetCustomAttribute<ShowIfAttribute>() is ShowIfAttribute attribute)
             {
                 Type type = fieldInfo.DeclaringType;

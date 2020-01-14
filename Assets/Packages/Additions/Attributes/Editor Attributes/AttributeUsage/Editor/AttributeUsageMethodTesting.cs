@@ -14,8 +14,11 @@ namespace Additions.Attributes.AttributeUsage
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by PostCompilingAssembliesHelper.")]
         private static void GetAttributesAndTypes(Type type)
         {
-            if (type.IsSubclassOf(typeof(Attribute)) && type.GetCustomAttribute(typeof(AttributeUsageMethodAttribute), true) is AttributeUsageMethodAttribute attribute)
+            if (type.IsSubclassOf(typeof(Attribute))
+                && type.GetCustomAttribute<AttributeUsageMethodAttribute>(true) is AttributeUsageMethodAttribute attribute)
+            {
                 checkers.Add(type, attribute.CheckAllowance);
+            }
         }
 
         [ExecuteOnEachMethodOfEachTypeWhenScriptsReloads(1)]
@@ -24,7 +27,9 @@ namespace Additions.Attributes.AttributeUsage
         {
             foreach (Attribute attribute in methodInfo.GetCustomAttributes())
             {
-                if (checkers.TryGetValue(attribute.GetType(), out Action<MethodInfo, string> check))
+                Type type = attribute.GetType();
+                if (checkers.TryGetValue(attribute.GetType(), out Action<MethodInfo, string> check)
+                    && !methodInfo.CheckIfShouldBeIgnored(type))
                     check(methodInfo, $"method {methodInfo.Name} in {methodInfo.DeclaringType.Name} class");
             }
         }
