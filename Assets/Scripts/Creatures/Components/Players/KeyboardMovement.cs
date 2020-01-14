@@ -1,5 +1,5 @@
 ﻿using Creatures;
-
+using System;
 using UnityEngine;
 
 namespace PlayerAddons
@@ -80,9 +80,12 @@ namespace PlayerAddons
         private void MoveHorizontal(float distance)
         {
             thisSprite.flipX = distance < 0;
-            thisRigidbody2D.AddForce(thisRigidbody2D.transform.right * distance * moveForce);
-            if (Mathf.Abs(thisRigidbody2D.velocity.x) > speed)
-                thisRigidbody2D.velocity = new Vector2(Mathf.Sign(thisRigidbody2D.velocity.x) * speed, thisRigidbody2D.velocity.y);
+            Vector3 impulse = thisRigidbody2D.transform.right * distance * moveForce;
+            Vector3 acceleration = impulse * thisRigidbody2D.mass;
+            if (Math.Abs(thisRigidbody2D.velocity.x + acceleration.x) <= speed)
+                thisRigidbody2D.AddForce(impulse);
+            else if (Math.Abs(thisRigidbody2D.velocity.x) < speed)
+                thisRigidbody2D.AddForce((acceleration - new Vector3(speed, 0)) / thisRigidbody2D.mass);
         }
     }
 }

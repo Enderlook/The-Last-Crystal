@@ -46,6 +46,8 @@ namespace Additions.Utils.Clockworks
             return IsReady;
         }
 
+        public void SetReady() => CooldownTime = 0;
+
         /// <summary>
         /// Calls <see cref="Recharge(float)"/>.</summary>
         /// <param name="deltaTime">Time since last increase.</param>

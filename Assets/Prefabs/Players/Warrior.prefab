@@ -63,11 +63,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8728ec6d0ad86204f87c1c9090b65587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 1
+  forceDash: 3
+  energyCost: 5
   dashKey: 103
-  startDashTime: 0.6
-  forceDash: 2
   effect: {fileID: 7028745611146491222, guid: e7eb454633c0d9c4c912fb8a6a09f921, type: 3}
-  dashState: 0
+  energyPool: {fileID: 5050259429030611058}
+  melee: {fileID: 9047649054987026332}
+  dashSound:
+    audioSource: {fileID: 4480896203077898536}
+    sound: {fileID: 11400000, guid: 3c66b8da460e09e47a64bb04d1387dca, type: 2}
+--- !u!114 &9047649054987026332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573732952227708787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fbfdf9399b49a243b01a41726ab6557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 8
+  pushStrength: 80
+  firerate: 4
+  <IsEnabled>k__BackingField: 0
+  hitSound:
+    audioSource: {fileID: 4480896203077898536}
+    sound: {fileID: 11400000, guid: f77994a4ee645714a9e0fc583f341f30, type: 2}
 --- !u!1001 &6835815089219722961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,3 +326,15 @@ SpriteRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 6835815089219722961}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5050259429030611058 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1786681838222022307, guid: 6c61c90b7234d194783c42bdc917bec5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6835815089219722961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573732952227708787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f045861820d9d094f82f0349a004e437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

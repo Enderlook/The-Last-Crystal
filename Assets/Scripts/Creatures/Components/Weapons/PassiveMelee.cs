@@ -1,3 +1,4 @@
+using Additions.Attributes;
 using UnityEngine;
 
 namespace Creatures.Weapons
@@ -14,16 +15,22 @@ namespace Creatures.Weapons
         [SerializeField, Tooltip("Whenever it should or not display damage floating text and animation.")]
         private bool showHurt = true;
 
+        [field: SerializeField, Tooltip("Whenever it's enabled or disabled."), IsProperty]
+        public bool IsEnabled { get; set; } = true;
+
         protected Transform thisTransform;
 
         void IInit.Init(Creature creature) => thisTransform = creature.Transform;
 
         public virtual void ProduceDamage(object victim)
         {
-            if (thisTransform != null && victim is IPush push)
-                push.Push(thisTransform.position, pushStrength, PushMode.Local);
-            if (victim is ITakeDamage takeDamage)
-                takeDamage.TakeDamage(damage, showHurt, showHurt);
+            if (IsEnabled)
+            {
+                if (thisTransform != null && victim is IPush push)
+                    push.Push(thisTransform.position, pushStrength, PushMode.Local);
+                if (victim is ITakeDamage takeDamage)
+                    takeDamage.TakeDamage(damage, showHurt, showHurt);
+            }
         }
     }
 

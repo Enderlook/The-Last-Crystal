@@ -114,5 +114,7 @@ namespace Additions.Utils.Clockworks
             if (IsEnabled && Recharge(deltaTime) && autoExecute)
                 Execute();
         }
+
+        public void SetReady() => CooldownTime = 0;
     }
 }

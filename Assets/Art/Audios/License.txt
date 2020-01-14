@@ -44,3 +44,11 @@ smashing glass.wav made by mgamabile under license CC0 1.0
 Rumble/Explosion made by Michel Baradari under license CC-BY 3.0
 	https://opengameart.org/content/rumbleexplosion
 	rumble.flac
+
+Medieval » Sword Slash 1 made by smokebomb99 uner license CC0 1.0
+	https://freesound.org/people/smokebomb99/sounds/147288/
+	147288__smokebomb99__sword-slash-1.wav
+
+Fast Collision Reverb made by qubodup under license CC0 1.0
+	https://freesound.org/people/qubodup/sounds/332057/
+	332057__qubodup__fast-collision-reverb.flac

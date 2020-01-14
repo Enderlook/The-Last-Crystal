@@ -34,6 +34,7 @@ namespace Creatures.Weapons
         public void ResetCycles() => ((IClockwork)clockwork).ResetCycles();
         public void ResetCycles(int newCycles) => ((IClockwork)clockwork).ResetCycles(newCycles);
         public void ResetCooldown(float newCooldownTime) => ((IClockwork)clockwork).ResetCooldown(newCooldownTime);
+        public void SetReady() => ((IClockwork)clockwork).SetReady();
     }
 
     public interface ITakeDamage

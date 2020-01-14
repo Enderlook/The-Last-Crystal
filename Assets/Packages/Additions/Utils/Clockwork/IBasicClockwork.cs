@@ -40,5 +40,10 @@ namespace Additions.Utils.Clockworks
         /// <param name="deltaTime"><see cref="Time.deltaTime"/></param>
         /// <returns><see cref="IsReady"/>.</returns>
         bool Recharge(float deltaTime);
+
+        /// <summary>
+        /// Set clockwork ready to be used by setting <see cref="CooldownTime"/> to 0.
+        /// </summary>
+        void SetReady();
     }
 }
