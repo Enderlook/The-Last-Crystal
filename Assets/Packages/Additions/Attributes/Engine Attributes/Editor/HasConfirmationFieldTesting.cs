@@ -1,6 +1,6 @@
 ﻿using Additions.Attributes.AttributeUsage;
-using Additions.Attributes.PostCompiling;
-using Additions.Attributes.PostCompiling.Attributes;
+using Additions.Attributes.AttributeUsage.PostCompiling;
+using Additions.Attributes.AttributeUsage.PostCompiling.Attributes;
 
 using System;
 using System.Collections.Generic;

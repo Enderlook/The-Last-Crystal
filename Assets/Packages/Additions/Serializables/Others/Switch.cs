@@ -1,5 +1,5 @@
 ﻿using Additions.Attributes;
-using Additions.Attributes.PostCompiling.Attributes;
+using Additions.Attributes.AttributeUsage;
 
 using System;
 
