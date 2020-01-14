@@ -1,4 +1,5 @@
 ﻿using Additions.Attributes;
+using Additions.Attributes.AttributeUsage;
 
 using System;
 
@@ -14,9 +15,12 @@ namespace Additions.Serializables
         [SerializeField, GUI(nameof(UseAlternativeGUIContent))]
         protected bool useAlternative;
 
+        // Don't check because generic types can't be serialized by Unity, but this class is just a template
+        [DoNotCheck(typeof(ShowIfAttribute), typeof(GUIAttribute))]
         [SerializeField, ShowIf(nameof(Alternative), false), GUI(nameof(Item1GUIContent))]
         protected T1 item1;
 
+        [DoNotCheck(typeof(ShowIfAttribute), typeof(GUIAttribute))]
         [SerializeField, ShowIf(nameof(Alternative)), GUI(nameof(Item2GUIContent))]
         protected T2 item2;
 #pragma warning restore CS0649
