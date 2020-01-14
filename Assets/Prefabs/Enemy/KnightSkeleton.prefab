@@ -59,6 +59,7 @@ MonoBehaviour:
   damage: 1
   pushStrength: 60
   firerate: 0.5
+  <IsEnabled>k__BackingField: 1
 --- !u!1001 &6867324390007404908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -282,11 +283,6 @@ PrefabInstance:
       propertyPath: radius
       value: 0.125
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 8818724890466740827}
     - target: {fileID: 8948837633536277635, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: floatingTextParent

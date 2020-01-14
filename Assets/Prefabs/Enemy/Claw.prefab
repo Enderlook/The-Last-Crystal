@@ -702,11 +702,6 @@ PrefabInstance:
       propertyPath: m_Points.m_Paths.Array.data[2].Array.data[38].y
       value: 0.7935536
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 1406335654834621387}
     - target: {fileID: 6140415168490267451, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -211,7 +211,7 @@ MonoBehaviour:
     sound: {fileID: 11400000, guid: 9316afffa7ee09a49a150e70864e9f8c, type: 2}
   dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
   speed: 1
-  sprite: {fileID: 0}
+  sprite: {fileID: 2679576587458712375}
   stoppableRigidbody: {fileID: 843876848762180787}
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
@@ -420,13 +420,13 @@ MonoBehaviour:
     endCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     activeCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   hasDecreaseReduction: 0
   decreaseReduction:
     reductionFormula:
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ffb9316b425a2440993b91af82dccc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navigationGraph: {fileID: 0}
+  <NavigationGraph>k__BackingField: {fileID: 0}
   drawPath: 0
   pathColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &3490750178117718918

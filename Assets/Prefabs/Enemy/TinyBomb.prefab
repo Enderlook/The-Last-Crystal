@@ -15,6 +15,7 @@ MonoBehaviour:
   damage: 20
   pushStrength: 40
   showHurt: 1
+  <IsEnabled>k__BackingField: 1
   hitSound: {fileID: 11400000, guid: 76c43e029abf0b44f86e6f59341445a3, type: 2}
 --- !u!1001 &2184584120000391411
 PrefabInstance:
@@ -26,7 +27,7 @@ PrefabInstance:
     - target: {fileID: 5794628492074983519, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: TinyBomb
       objectReference: {fileID: 0}
     - target: {fileID: 2679576587458712375, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}

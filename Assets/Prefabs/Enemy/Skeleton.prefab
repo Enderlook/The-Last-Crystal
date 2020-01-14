@@ -202,11 +202,6 @@ PrefabInstance:
       propertyPath: radius
       value: 0.125
       objectReference: {fileID: 0}
-    - target: {fileID: 8992450155653528796, guid: 336b20a0e32c641489bb09ab09369d57,
-        type: 3}
-      propertyPath: sprite
-      value: 
-      objectReference: {fileID: 5785143950583992587}
     - target: {fileID: 8948837633536277635, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: floatingTextParent
