@@ -85,9 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbfdf9399b49a243b01a41726ab6557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
+  damage: 5
   pushStrength: 80
-  firerate: 4
+  firerate: 3
   <IsEnabled>k__BackingField: 0
   hitSound:
     audioSource: {fileID: 4480896203077898536}
