@@ -41,15 +41,16 @@ GameObject:
   - component: {fileID: 6151014269483833352}
   - component: {fileID: 8157229962283897169}
   - component: {fileID: 6985899684395519993}
+  - component: {fileID: 3430087774838448887}
+  - component: {fileID: 7526445749177953701}
+  - component: {fileID: 8392426017629629405}
   - component: {fileID: 4901582744108699570}
   - component: {fileID: 5042988860275578343}
   - component: {fileID: 8836964168732201439}
   - component: {fileID: 3625034397826583285}
-  - component: {fileID: 5125575169536085736}
-  - component: {fileID: 7526445749177953701}
-  - component: {fileID: 4416114078013645945}
-  - component: {fileID: 3430087774838448887}
   - component: {fileID: 2865848467112834137}
+  - component: {fileID: 5125575169536085736}
+  - component: {fileID: 4416114078013645945}
   - component: {fileID: 1786681838222022307}
   - component: {fileID: 7219742351414640916}
   m_Layer: 9
@@ -192,6 +193,89 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!70 &3430087774838448887
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!212 &7526445749177953701
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!95 &8392426017629629405
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4901582744108699570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,13 +294,13 @@ MonoBehaviour:
     audioSource: {fileID: 6985899684395519993}
     sound: {fileID: 11400000, guid: 9316afffa7ee09a49a150e70864e9f8c, type: 2}
   dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
-  speed: 1
   sprite: {fileID: 7526445749177953701}
+  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
+  speed: 1
   stoppableRigidbody: {fileID: 8836964168732201439}
   thisRigidbody2D: {fileID: 8157229962283897169}
-  animator: {fileID: 0}
+  animator: {fileID: 8392426017629629405}
   groundChecker: {fileID: 2865848467112834137}
-  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
 --- !u!114 &5042988860275578343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +362,21 @@ MonoBehaviour:
   maxJumps: 0
   jumpStrength: 0
   moveForce: 0
+--- !u!114 &2865848467112834137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  radius: 0
+  groundLayer: 8
 --- !u!114 &5125575169536085736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,54 +390,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons: []
---- !u!212 &7526445749177953701
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891791631359779234}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
 --- !u!114 &4416114078013645945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,49 +454,18 @@ MonoBehaviour:
     endCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     activeCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   hasDecreaseReduction: 0
   decreaseReduction:
     reductionFormula:
       formula: 
       compile: 0
---- !u!70 &3430087774838448887
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891791631359779234}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
---- !u!114 &2865848467112834137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891791631359779234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d15e0bbd5672c42469053551e24e6b74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  position: {x: 0, y: 0}
-  radius: 0
-  groundLayer: 8
 --- !u!114 &1786681838222022307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,13 +519,13 @@ MonoBehaviour:
     endCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     activeCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: FloatPool.Decorators.RechargerDecorator+UnityEventBoolean, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
+        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   hasDecreaseReduction: 0
   decreaseReduction:
     reductionFormula:
