@@ -59,13 +59,13 @@ namespace Creatures.Weapons
 
         private Vector2 ShootingPoint => new Vector3(creatureSpriteRenderer.flipX ? -shootingPosition.x : shootingPosition.x, shootingPosition.y) + shootingTransform.position;
 
-        public override void Init(Creature creature)
+        public override void Initialize(Creature creature)
         {
             shootingTransform = creature.Transform;
             thisAnimator = creature.Animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
             shootingSound.Init();
-            base.Init(creature);
+            base.Initialize(creature);
         }
 
         public override void UpdateBehaviour(float deltaTime)

@@ -7,14 +7,14 @@ using UnityEngine;
 
 namespace Creatures
 {
-    public class EnergyManager : MonoBehaviour, IInit, IUpdate, IFloatPool
+    public class EnergyManager : MonoBehaviour, IInitialize<Creature>, IFloatPool
     {
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Energy pool.")]
         private Pool energy;
 #pragma warning restore CS0649
 
-        public void Init(Creature creature) => energy.Initialize();
+        public void Initialize(Creature creature) => energy.Initialize();
 
         public void SetEnergyBar(HealthBar energyBar) => energy.GetLayer<BarDecorator>().Bar = energyBar;
 

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Creatures
 {
-    public class ActiveMelee : MonoBehaviour, IInit, IUpdate, IBasicClockwork, IDamageOnTouch
+    public class ActiveMelee : MonoBehaviour, IInitialize<Creature>, IUpdate, IBasicClockwork, IDamageOnTouch
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -34,7 +34,7 @@ namespace Creatures
         private Transform thisTransform;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        void IInit.Init(Creature creature)
+        void IInitialize<Creature>.Initialize(Creature creature)
         {
             basicClockwork = new BasicClockwork(1 / firerate);
             thisTransform = creature.Transform;

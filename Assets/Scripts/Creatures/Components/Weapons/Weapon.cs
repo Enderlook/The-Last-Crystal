@@ -1,11 +1,12 @@
 
+using Additions.Utils;
 using Additions.Utils.Clockworks;
 
 using UnityEngine;
 
 namespace Creatures.Weapons
 {
-    public abstract class Weapon : MonoBehaviour, IInit, IClockwork
+    public abstract class Weapon : MonoBehaviour, IInitialize<Creature>, IClockwork
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Attacks per second.")]
@@ -14,7 +15,7 @@ namespace Creatures.Weapons
         private Clockwork clockwork;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
-        public virtual void Init(Creature creature) => clockwork = new Clockwork(1 / firerate, Attack, false);
+        public virtual void Initialize(Creature creature) => clockwork = new Clockwork(1 / firerate, Attack, false);
 
         protected abstract void Attack();
 

@@ -1,10 +1,14 @@
-﻿using Creatures;
+﻿using Additions.Utils;
+
+using Creatures;
+
 using System;
+
 using UnityEngine;
 
 namespace PlayerAddons
 {
-    public class KeyboardMovement : MonoBehaviour, IMove, IInit
+    public class KeyboardMovement : MonoBehaviour, IMove, IInitialize<Creature>
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
@@ -45,7 +49,7 @@ namespace PlayerAddons
                 JUMP = "Jump";
         }
 
-        void IInit.Init(Creature creature)
+        void IInitialize<Creature>.Initialize(Creature creature)
         {
             thisRigidbody2D = creature.ThisRigidbody2D;
             thisAnimator = creature.Animator;

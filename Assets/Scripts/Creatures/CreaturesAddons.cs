@@ -1,14 +1,5 @@
 ﻿namespace Creatures
 {
-    public interface IInit
-    {
-        /// <summary>
-        /// Initialize behavior.
-        /// </summary>
-        /// <param name="creature">Instance of the creature who is initializing it.</param>
-        void Init(Creature creature);
-    }
-
     public interface IDie
     {
         /// <summary>

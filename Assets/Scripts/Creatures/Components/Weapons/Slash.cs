@@ -46,14 +46,14 @@ namespace Creatures.Weapons
 
         public bool AttackIfIsReadyAndIfTargetInRange(float deltaTime = 0) => TargetInRange ? TryExecute(deltaTime) : Recharge(deltaTime);
 
-        public override void Init(Creature creature)
+        public override void Initialize(Creature creature)
         {
             thisTransform = creature.Transform;
             thisAnimator = creature.Animator;
             thisSpriteRenderer = creature.Sprite;
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
             slashingSound.Init();
-            base.Init(creature);
+            base.Initialize(creature);
         }
 
         protected override void Attack()

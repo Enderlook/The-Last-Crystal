@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace Creatures
 {
-    public class AutomatedAttack : MonoBehaviour, IInit, IUpdate
+    public class AutomatedAttack : MonoBehaviour, IInitialize<Creature>, IUpdate
     {
         private IAutomatedAttack[] weapons;
 
-        public void Init(Creature creature) => weapons = gameObject.GetComponents<IAutomatedAttack>();
+        public void Initialize(Creature creature) => weapons = gameObject.GetComponents<IAutomatedAttack>();
 
         public void UpdateBehaviour(float deltaTime) => Array.ForEach(weapons, e => e.AttackIfIsReadyAndIfTargetInRange());
     }

@@ -1,4 +1,5 @@
 ﻿using Additions.Attributes;
+using Additions.Utils;
 
 using Creatures;
 
@@ -10,7 +11,7 @@ using UnityEngine;
 namespace Additions.Components.Navigation
 {
     [Serializable]
-    public class NavigationAgent : MonoBehaviour, IInit
+    public class NavigationAgent : MonoBehaviour, IInitialize<Creature>
     {
         [field: Header("Setup")]
         [field: SerializeField, IsProperty, Tooltip("Navigation Graph used to find paths.")]
@@ -18,7 +19,7 @@ namespace Additions.Components.Navigation
 
         private Transform thisTransform;
 
-        void IInit.Init(Creature creature) => thisTransform = creature.ThisRigidbody2D.transform;
+        void IInitialize<Creature>.Initialize(Creature creature) => thisTransform = creature.ThisRigidbody2D.transform;
 
         public Node FindClosestNode() => NavigationGraph.FindClosestNode(thisTransform.position);
 

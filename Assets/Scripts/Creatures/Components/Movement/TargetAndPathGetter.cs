@@ -1,6 +1,7 @@
 ﻿using Additions.Components.Navigation;
 using Additions.Extensions;
 using Additions.Serializables;
+using Additions.Utils;
 
 using Master;
 
@@ -11,7 +12,7 @@ using UnityEngine;
 namespace Creatures.Movement.NodeMovement
 {
     [RequireComponent(typeof(NavigationAgent))]
-    public class TargetAndPathGetter : MonoBehaviour, IInit
+    public class TargetAndPathGetter : MonoBehaviour, IInitialize<Creature>
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
@@ -24,7 +25,7 @@ namespace Creatures.Movement.NodeMovement
         private NavigationAgent navigationAgent;
 #pragma warning restore CS0649
 
-        void IInit.Init(Creature creature) => navigationAgent = GetComponent<NavigationAgent>();
+        void IInitialize<Creature>.Initialize(Creature creature) => navigationAgent = GetComponent<NavigationAgent>();
 
         private readonly List<(Transform target, float distancePriority, List<Connection> path)> targets = new List<(Transform target, float distancePriority, List<Connection> path)>();
 

@@ -75,7 +75,7 @@ namespace Creatures
             updates = updates.Concat(gameObject.GetComponentsInChildren<IUpdate>()).ToArray();
             move = gameObject.GetComponentInChildren<IMove>();
             attack = gameObject.GetComponentInChildren<IAttack>();
-            Array.ForEach(gameObject.GetComponents<IInit>(), e => e.Init(this));
+            Array.ForEach(gameObject.GetComponents<IInitialize<Creature>>(), e => e.Initialize(this));
         }
 
         protected override void Update()

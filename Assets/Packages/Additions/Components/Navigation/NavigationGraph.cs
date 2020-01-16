@@ -185,7 +185,7 @@ namespace Additions.Components.Navigation
                         }
                 }
 
-            End:
+                End:
                 if (shouldBeDisabled)
                     node.SetActive(false);
             }

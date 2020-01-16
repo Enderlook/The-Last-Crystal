@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace PlayerAddons
 {
-    public class DashEffect : MonoBehaviour, IInit, IUpdate
+    public class DashEffect : MonoBehaviour, IInitialize<Creature>, IUpdate
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
@@ -43,7 +43,7 @@ namespace PlayerAddons
         private float remaining_time;
         private bool isDashing;
 
-        void IInit.Init(Creature creature)
+        void IInitialize<Creature>.Initialize(Creature creature)
         {
             thisRigidbody2D = creature.ThisRigidbody2D;
             sprite = creature.Sprite;

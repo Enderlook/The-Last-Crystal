@@ -1,5 +1,6 @@
 ﻿using Additions.Components.Navigation;
 using Additions.Extensions;
+using Additions.Utils;
 using Additions.Utils.Clockworks;
 
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace Creatures.Movement.NodeMovement
 {
     [RequireComponent(typeof(TargetAndPathGetter)), RequireComponent(typeof(NavigationAgent))]
-    public class NodeMovement : MonoBehaviour, IInit, IMove
+    public class NodeMovement : MonoBehaviour, IInitialize<Creature>, IMove
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
@@ -40,7 +41,7 @@ namespace Creatures.Movement.NodeMovement
                 JUMP = "Jump";
         }
 
-        void IInit.Init(Creature creature)
+        void IInitialize<Creature>.Initialize(Creature creature)
         {
             thisRigidbody2D = creature.ThisRigidbody2D;
             spriteRenderer = creature.Sprite;

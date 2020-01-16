@@ -1,9 +1,11 @@
 using Additions.Attributes;
+using Additions.Utils;
+
 using UnityEngine;
 
 namespace Creatures.Weapons
 {
-    public class PassiveMelee : MonoBehaviour, IInit, IDamageOnTouch
+    public class PassiveMelee : MonoBehaviour, IInitialize<Creature>, IDamageOnTouch
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -20,7 +22,7 @@ namespace Creatures.Weapons
 
         protected Transform thisTransform;
 
-        void IInit.Init(Creature creature) => thisTransform = creature.Transform;
+        void IInitialize<Creature>.Initialize(Creature creature) => thisTransform = creature.Transform;
 
         public virtual void ProduceDamage(object victim)
         {

@@ -1,13 +1,15 @@
 ﻿
+using Additions.Utils;
+
 using UnityEngine;
 
 namespace Creatures
 {
-    public class StoppableRigidbody : MonoBehaviour, IInit
+    public class StoppableRigidbody : MonoBehaviour, IInitialize<Creature>
     {
         private Rigidbody2D thisRigidbody2D;
 
-        void IInit.Init(Creature creature) => thisRigidbody2D = creature.ThisRigidbody2D;
+        void IInitialize<Creature>.Initialize(Creature creature) => thisRigidbody2D = creature.ThisRigidbody2D;
 
         private float angularVelocity;
         private Vector2 velocity;
