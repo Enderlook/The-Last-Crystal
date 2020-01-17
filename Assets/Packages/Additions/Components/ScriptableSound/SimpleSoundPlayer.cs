@@ -1,5 +1,4 @@
-﻿
-using Additions.Attributes;
+﻿using Additions.Attributes;
 
 using System;
 
@@ -50,8 +49,13 @@ namespace Additions.Components.ScriptableSound
         /// <summary>
         /// Play <see cref="sound"/>.
         /// </summary>
+        public void Play() => Play(null); // We require this method for Unity events buttons.
+
+        /// <summary>
+        /// Play <see cref="sound"/>.
+        /// </summary>
         /// <param name="endCallback"><see cref="Action"/> called after <see cref="sound"/> ends.</param>
-        private void Play(Action endCallback = null)
+        public void Play(Action endCallback)
         {
             Action callback = endCallback;
             if (destroyOnFinish)
