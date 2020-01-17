@@ -1,5 +1,8 @@
-﻿using Additions.Components.FloatPool;
+﻿using Additions.Attributes;
+using Additions.Components.ColorCombiner;
+using Additions.Components.FloatPool;
 using Additions.Components.ScriptableSound;
+using Additions.Extensions;
 using Additions.Prefabs.FloatingText;
 using Additions.Utils;
 
@@ -7,6 +10,7 @@ using Creatures.Weapons;
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -29,18 +33,38 @@ namespace Creatures
 
         [SerializeField, Tooltip("Sound played on death.")]
         private Sound dieSound;
+
+        [SerializeField, Tooltip("Sprite Renderer Component.")]
+        private SpriteRenderer sprite;
+
+        public SpriteRenderer Sprite => sprite;
+
+        [SerializeField, Tooltip("Sprite colorer.")]
+        protected SpriteRenderColorerWithTimer spriteColorer;
+
+        [SerializeField, Tooltip("Color tint for Sprite Renderer used when hurt.")]
+        private Color hurtColor = Color.red;
 #pragma warning restore CS0649
 
-        protected IUpdate[] updates;
-
+        protected HashSet<IUpdate> updates;
         protected virtual void Awake()
         {
             hurtSound.Init();
             health.Initialize();
-            updates = new IUpdate[] { health, hurtSound };
+            spriteColorer.Initialize();
+            updates = new HashSet<IUpdate>
+            {
+                health,
+                hurtSound,
+                spriteColorer
+            };
         }
 
-        protected virtual void Update() => Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
+        protected virtual void Update()
+        {
+            foreach (IUpdate update in updates)
+                update.UpdateBehaviour(Time.deltaTime);
+        }
 
         /// <summary>
         /// Take damage reducing its <see cref="Health"/>.<br>
@@ -80,7 +104,11 @@ namespace Creatures
             Destroy(gameObject);
         }
 
-        protected virtual void TakeDamageFeedback() => hurtSound.Play();
+        protected virtual void TakeDamageFeedback()
+        {
+            hurtSound.Play();
+            spriteColorer.Add(hurtColor, .1f);
+        }
 
         /// <summary>
         /// Spawn a floating text above the creature.

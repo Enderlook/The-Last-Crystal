@@ -19,11 +19,6 @@ namespace Creatures
         private float speed = 1;
 
         [Header("Setup")]
-        [SerializeField, Tooltip("Sprite Renderer Component.")]
-        private SpriteRenderer sprite;
-
-        public SpriteRenderer Sprite => sprite;
-
         [SerializeField, Tooltip("StoppableRigidbody Script")]
         private StoppableRigidbody stoppableRigidbody;
 
@@ -43,16 +38,10 @@ namespace Creatures
         private GroundChecker groundChecker;
 
         public GroundChecker GroundChecker => groundChecker;
-
-        [SerializeField, Tooltip("Material for effect hurt.")]
-        private Material redFlash;
-
 #pragma warning restore CS0649
 
         private IMove move;
         private IAttack attack;
-
-        private Material defMaterial;
 
         private const string ANIMATION_STATE_HURT = "Hurt";
 
@@ -65,14 +54,13 @@ namespace Creatures
 
         protected override void Awake()
         {
-            defMaterial = Sprite.material;
             base.Awake();
             LoadComponents();
         }
 
         private void LoadComponents()
         {
-            updates = updates.Concat(gameObject.GetComponentsInChildren<IUpdate>()).ToArray();
+            updates.UnionWith(gameObject.GetComponentsInChildren<IUpdate>());
             move = gameObject.GetComponentInChildren<IMove>();
             attack = gameObject.GetComponentInChildren<IAttack>();
             Array.ForEach(gameObject.GetComponents<IInitialize<Creature>>(), e => e.Initialize(this));
@@ -85,7 +73,8 @@ namespace Creatures
             move?.Move(Time.deltaTime, SpeedMultiplier * speed);
             attack?.Attack(Time.deltaTime);
             // We don't call base.Update() because that is made in the line below
-            Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
+            foreach (IUpdate update in updates)
+                update.UpdateBehaviour(Time.deltaTime);
         }
 
         /// <summary>
@@ -112,14 +101,5 @@ namespace Creatures
 
             ThisRigidbody2D.AddForce(direction * force);
         }
-
-        protected override void TakeDamageFeedback()
-        {
-            Sprite.material = redFlash;
-            Invoke(nameof(ResetMaterial), .1f);
-            base.TakeDamageFeedback();
-        }
-
-        private void ResetMaterial() => Sprite.material = defMaterial;
     }
 }

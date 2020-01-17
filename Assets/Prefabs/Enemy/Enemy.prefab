@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 3490750178117718918}
   - component: {fileID: 5381365898832506502}
   - component: {fileID: 8597921017496991690}
+  - component: {fileID: 7802901863001622724}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -210,13 +211,14 @@ MonoBehaviour:
     audioSource: {fileID: 5036014791774581759}
     sound: {fileID: 11400000, guid: 9316afffa7ee09a49a150e70864e9f8c, type: 2}
   dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
-  speed: 1
   sprite: {fileID: 2679576587458712375}
+  spriteColorer: {fileID: 7802901863001622724}
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  speed: 1
   stoppableRigidbody: {fileID: 843876848762180787}
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
   groundChecker: {fileID: 8597921017496991690}
-  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
 --- !u!114 &8948837633536277635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,6 +495,22 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   radius: 0.1
   groundLayer: 8
+--- !u!114 &7802901863001622724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794628492074983519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9cd0edc73392a4abd40f08eefeef7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 2679576587458712375}
+  useSpriteRendererDefaultColor: 1
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  autoManage: 0
 --- !u!1001 &2914788185493605554
 PrefabInstance:
   m_ObjectHideFlags: 0
