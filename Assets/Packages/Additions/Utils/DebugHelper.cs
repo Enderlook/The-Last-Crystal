@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Additions.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+using UnityEngine;
+
 using Debug = UnityEngine.Debug;
+using UnityObject = UnityEngine.Object;
 
 namespace Additions.Utils
 {
@@ -19,22 +23,76 @@ namespace Additions.Utils
         public static TraceMode traceMode = TraceMode.FullStackTrace;
 
         /// <summary>
-        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.
+        /// Print to console all <paramref name="objects"/> as strings separated by ', '.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="objects">Objects to print in console.</param>
         public static void Log(params object[] objects) => Debug.Log(GetStrings(objects));
 
         /// <summary>
-        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.
+        /// Print to console <paramref name="object"/> as strings.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
+        /// </summary>
+        /// <param name="object">Object to print in console.</param>
+        /// <param name="context">Object to which the message applies.</param>
+        public static void Log(object @object, UnityObject context = null,
+            [CallerMemberName] string memberName = "",
+            [CallerFilePath] string sourceFilePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Debug.Log(@object, context);
+            MethodInformation(traceMode, memberName, sourceFilePath, sourceLineNumber, context, Debug.Log);
+        }
+
+        /// <summary>
+        /// Print to console all <paramref name="objects"/> as strings separated by ', '.
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="objects">Objects to print in console.</param>
         public static void LogWarning(params object[] objects) => Debug.LogWarning(GetStrings(objects));
 
         /// <summary>
-        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.
+        /// Print to console <paramref name="object"/> as strings.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
+        /// </summary>
+        /// <param name="object">Object to print in console.</param>
+        /// <param name="context">Object to which the message applies.</param>
+        public static void LogWarning(object @object, UnityObject context = null,
+            [CallerMemberName] string memberName = "",
+            [CallerFilePath] string sourceFilePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Debug.LogWarning(@object, context);
+            MethodInformation(traceMode, memberName, sourceFilePath, sourceLineNumber, context, Debug.LogWarning);
+        }
+
+        /// <summary>
+        /// Print to console all <paramref name="objects"/> as strings separated by ', '.
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="objects">Objects to print in console.</param>
         public static void LogError(params object[] objects) => Debug.LogError(GetStrings(objects));
+
+        /// <summary>
+        /// Print to console <paramref name="object"/> as strings.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
+        /// </summary>
+        /// <param name="object">Object to print in console.</param>
+        /// <param name="context">Object to which the message applies.</param>
+        public static void LogError(object @object, UnityObject context = null,
+            [CallerMemberName] string memberName = "",
+            [CallerFilePath] string sourceFilePath = "",
+            [CallerLineNumber] int sourceLineNumber = 0)
+        {
+            Debug.LogError(@object, context);
+            MethodInformation(traceMode, memberName, sourceFilePath, sourceLineNumber, context, Debug.LogError);
+        }
 
         private static void MethodInformation(TraceMode? mode, string memberName, string sourceFilePath, int sourceLineNumber, UnityEngine.Object context, Action<string, UnityEngine.Object> debug)
         {
@@ -66,7 +124,9 @@ namespace Additions.Utils
         }
 
         /// <summary>
-        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.
+        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="message">A message to print in console. It will be treated as an additional object.</param>
         /// <param name="context">Object to which the message applies.</param>
@@ -75,7 +135,7 @@ namespace Additions.Utils
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
         /// <param name="objects">Objects to print in console.</param>
-        public static void Log(string message = null, UnityEngine.Object context = null, TraceMode? traceMode = null,
+        public static void Log(string message = null, UnityObject context = null, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0,
@@ -86,7 +146,9 @@ namespace Additions.Utils
         }
 
         /// <summary>
-        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.
+        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="message">A message to print in console. It will be treated as an additional object.</param>
         /// <param name="context">Object to which the message applies.</param>
@@ -95,7 +157,7 @@ namespace Additions.Utils
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
         /// <param name="objects">Objects to print in console.</param>
-        public static void LogError(string message = null, UnityEngine.Object context = null, TraceMode? traceMode = null,
+        public static void LogError(string message = null, UnityObject context = null, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0,
@@ -106,7 +168,9 @@ namespace Additions.Utils
         }
 
         /// <summary>
-        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.
+        /// Print to console all <paramref name="objects"/> as strings separated by ', ', preceded by message.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="message">A message to print in console. It will be treated as an additional object.</param>
         /// <param name="context">Object to which the message applies.</param>
@@ -115,7 +179,7 @@ namespace Additions.Utils
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
         /// <param name="objects">Objects to print in console.</param>
-        public static void LogWarning(string message = null, UnityEngine.Object context = null, TraceMode? traceMode = null,
+        public static void LogWarning(string message = null, UnityObject context = null, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0,
@@ -126,16 +190,36 @@ namespace Additions.Utils
         }
 
         /// <summary>
+        /// Return an string with the <paramref name="object"/> as string.<br>
+        /// <see langword="null"/>s are turned into "null".<br>
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
+        /// </summary>
+        /// <param name="object">Object to get string.</param>
+        /// <returns>String version of <paramref name="object"/>.</returns>
+        public static string GetString(object @object)
+        {
+            if (@object == null)
+                return "null";
+            if (@object is Color color)
+                return color.ToColoredString();
+            return @object.ToString();
+        }
+
+        /// <summary>
         /// Return an string with all objects as strings separated by ', '.<br>
-        /// <see langword="null"/> are turned into "null".
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <param name="objects">Objects to join as string.</param>
-        public static string GetStrings(params object[] objects) => string.Join(", ", objects.Select(e => e == null ? "null" : e.ToString()));
+        /// <returns>String version of <paramref name="objects"/>.</returns>
+        public static string GetStrings(params object[] objects) => string.Join(", ", objects.Select(GetString));
 
         private static string GetStrings(string message, object[] objects) => (message == null ? "" : message + ", ") + GetStrings(objects);
 
         /// <summary>
-        /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.
+        /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <typeparam name="T"><see cref="Type"/> of <paramref name="enumerable"/> elements.</typeparam>
         /// <param name="enumerable">Enumerable to print in console.</param>
@@ -145,22 +229,24 @@ namespace Additions.Utils
         /// <param name="memberName">Do not complete.</param>
         /// <param name="sourceFilePath">Do not complete.</param>
         /// <param name="sourceLineNumber">Do not complete.</param>
-        public static void LogLines<T>(IEnumerable<T> enumerable, UnityEngine.Object context = null, bool compact = false, TraceMode? traceMode = null,
+        public static void LogLines<T>(IEnumerable<T> enumerable, UnityObject context = null, bool compact = false, TraceMode? traceMode = null,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (compact)
-                Debug.Log(string.Join("\n", enumerable), context);
+                Log(string.Join("\n", enumerable), context);
             else
                 foreach (T item in enumerable)
-                    Debug.Log(item, context);
+                    Log(item, context);
 
             MethodInformation(traceMode, memberName, sourceFilePath, sourceLineNumber, context, Debug.Log);
         }
 
         /// <summary>
-        /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.
+        /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <typeparam name="T"><see cref="Type"/> of <paramref name="enumerable"/> elements.</typeparam>
         /// <param name="enumerable">Enumerable to print in console.</param>
@@ -176,16 +262,18 @@ namespace Additions.Utils
             [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (compact)
-                Debug.LogWarning(string.Join("\n", enumerable), context);
+                LogWarning(string.Join("\n", enumerable), context);
             else
                 foreach (T item in enumerable)
-                    Debug.LogWarning(item, context);
+                    LogWarning(item, context);
 
             MethodInformation(traceMode, memberName, sourceFilePath, sourceLineNumber, context, Debug.LogWarning);
         }
 
         /// <summary>
-        /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.
+        /// Print to console all <paramref name="enumerable"/> as strings separated by , preceded by message.<br>
+        /// <see langword="null"/>s are turned into "null".
+        /// Objects of type <see cref="Color"/> will have included the HTMl tag color.
         /// </summary>
         /// <typeparam name="T"><see cref="Type"/> of <paramref name="enumerable"/> elements.</typeparam>
         /// <param name="enumerable">Enumerable to print in console.</param>
@@ -201,10 +289,10 @@ namespace Additions.Utils
             [CallerLineNumber] int sourceLineNumber = 0)
         {
             if (compact)
-                Debug.LogError(string.Join("\n", enumerable), context);
+                LogError(string.Join("\n", enumerable), context);
             else
                 foreach (T item in enumerable)
-                    Debug.LogError(item, context);
+                    LogError(item, context);
 
             MethodInformation(traceMode, memberName, sourceFilePath, sourceLineNumber, context, Debug.LogError);
         }
