@@ -1,4 +1,5 @@
-﻿using Additions.Utils;
+﻿using Additions.Components.ScriptableSound;
+using Additions.Utils;
 
 using Creatures;
 
@@ -34,6 +35,10 @@ namespace PlayerAddons
 
         [SerializeField, Tooltip("Move force horizontal.")]
         private float moveForce;
+
+        [Header("Setup")]
+        [SerializeField, Tooltip("Sound played when jump.")]
+        private SoundPlay jumpSound;
 #pragma warning restore CS0649
 
         private Rigidbody2D thisRigidbody2D;
@@ -56,10 +61,12 @@ namespace PlayerAddons
             thisSprite = creature.Sprite;
             groundChecker = creature.GroundChecker;
             remainingJumps = maxJumps;
+            jumpSound.Init();
         }
 
         void IMove.Move(float deltaTime, float speedMultiplier)
         {
+            jumpSound.UpdateBehaviour(deltaTime);
             if (groundChecker.IsGrounded())
             {
                 remainingJumps = maxJumps;
@@ -78,6 +85,7 @@ namespace PlayerAddons
                 thisRigidbody2D.AddForce(thisRigidbody2D.transform.up * jumpStrength * thisRigidbody2D.mass);
                 remainingJumps--;
                 thisAnimator.SetBool(ANIMATION_STATES.JUMP, true);
+                jumpSound.Play();
             }
         }
 

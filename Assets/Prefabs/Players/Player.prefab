@@ -294,13 +294,13 @@ MonoBehaviour:
     audioSource: {fileID: 6985899684395519993}
     sound: {fileID: 11400000, guid: 9316afffa7ee09a49a150e70864e9f8c, type: 2}
   dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
-  sprite: {fileID: 7526445749177953701}
-  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
   speed: 1
+  sprite: {fileID: 7526445749177953701}
   stoppableRigidbody: {fileID: 8836964168732201439}
   thisRigidbody2D: {fileID: 8157229962283897169}
   animator: {fileID: 8392426017629629405}
   groundChecker: {fileID: 2865848467112834137}
+  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
 --- !u!114 &5042988860275578343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +362,9 @@ MonoBehaviour:
   maxJumps: 0
   jumpStrength: 0
   moveForce: 0
+  jumpSound:
+    audioSource: {fileID: 6985899684395519993}
+    sound: {fileID: 11400000, guid: 1cbe591e603eaae44b44d44c36a88c42, type: 2}
 --- !u!114 &2865848467112834137
 MonoBehaviour:
   m_ObjectHideFlags: 0

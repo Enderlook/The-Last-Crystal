@@ -1,4 +1,5 @@
 ﻿using Additions.Components.Navigation;
+using Additions.Components.ScriptableSound;
 using Additions.Extensions;
 using Additions.Utils;
 using Additions.Utils.Clockworks;
@@ -16,6 +17,10 @@ namespace Creatures.Movement.NodeMovement
         [Header("Configuration")]
         [SerializeField, Tooltip("Maximum speed movement.")]
         private float speed = 1;
+
+        [Header("Setup")]
+        [SerializeField, Tooltip("Sound played when jump.")]
+        private SoundPlay jumpSound;
 #pragma warning restore CS0649
 
         private const float MARGIN_ERROR_DISTANCE = 0.1f;
@@ -48,10 +53,13 @@ namespace Creatures.Movement.NodeMovement
             animator = creature.Animator;
             groundChecker = creature.GroundChecker;
             targetAndPathGetter = GetComponent<TargetAndPathGetter>();
+            jumpSound.Init();
         }
 
         void IMove.Move(float deltaTime, float speedMultiplier)
         {
+            jumpSound.UpdateBehaviour(deltaTime);
+
             // Don't move while stunned
             if (clockWork != null)
             {
@@ -134,6 +142,7 @@ namespace Creatures.Movement.NodeMovement
         {
             animator.SetBool(ANIMATION_STATES.JUMP, true);
             thisRigidbody2D.velocity = thisRigidbody2D.position.ProjectileMotion(target) * thisRigidbody2D.mass;
+            jumpSound.Play();
         }
     }
 }

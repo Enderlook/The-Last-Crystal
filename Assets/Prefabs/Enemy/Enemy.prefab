@@ -478,6 +478,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  jumpSound:
+    audioSource: {fileID: 5036014791774581759}
+    sound: {fileID: 11400000, guid: 1cbe591e603eaae44b44d44c36a88c42, type: 2}
 --- !u!114 &8597921017496991690
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,3 +52,7 @@ Medieval » Sword Slash 1 made by smokebomb99 uner license CC0 1.0
 Fast Collision Reverb made by qubodup under license CC0 1.0
 	https://freesound.org/people/qubodup/sounds/332057/
 	332057__qubodup__fast-collision-reverb.flac
+
+Jump Landing Sound made by MentalSanityOff under license CC0
+	https://opengameart.org/content/jump-landing-sound
+	jumpland.wav
