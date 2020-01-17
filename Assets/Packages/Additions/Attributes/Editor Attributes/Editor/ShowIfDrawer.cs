@@ -1,5 +1,4 @@
-﻿
-using Additions.Extensions;
+﻿using Additions.Extensions;
 
 using UnityEditor;
 
@@ -37,19 +36,26 @@ namespace Additions.Attributes
                 }
 
                 active = active == showIfAttribute.goal;
+
                 if (mode == ShowIfAttribute.ActionMode.ShowHide)
+                {
                     if (active)
                         DrawField();
-                    else
-                    {
-                        EditorGUI.BeginDisabledGroup(active);
-                        DrawField();
-                        EditorGUI.EndDisabledGroup();
-                    }
+                }
+                else if (mode == ShowIfAttribute.ActionMode.EnableDisable)
+                {
+                    EditorGUI.BeginDisabledGroup(!active);
+                    DrawField();
+                    EditorGUI.EndDisabledGroup();
+                }
+
                 EditorGUI.EndProperty();
             }
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => mode == ShowIfAttribute.ActionMode.ShowHide && active ? EditorGUI.GetPropertyHeight(property, label, true) : 0;
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) =>
+            mode == ShowIfAttribute.ActionMode.EnableDisable || active
+                ? EditorGUI.GetPropertyHeight(property, label, true)
+                : 0;
     }
 }
