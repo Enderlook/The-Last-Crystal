@@ -1,8 +1,6 @@
-﻿using Additions.Attributes;
-using Additions.Components.ColorCombiner;
+﻿using Additions.Components.ColorCombiner;
 using Additions.Components.FloatPool;
 using Additions.Components.ScriptableSound;
-using Additions.Extensions;
 using Additions.Prefabs.FloatingText;
 using Additions.Utils;
 
@@ -47,6 +45,7 @@ namespace Creatures
 #pragma warning restore CS0649
 
         protected HashSet<IUpdate> updates;
+
         protected virtual void Awake()
         {
             hurtSound.Init();
@@ -104,10 +103,29 @@ namespace Creatures
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Add a color to <see cref="spriteColorer"/>.
+        /// </summary>
+        /// <param name="color">Color to add.</param>
+        public void AddColorTint(Color color) => spriteColorer.Add(color);
+
+        /// <summary>
+        /// Remove a color from <see cref="spriteColorer"/>.
+        /// </summary>
+        /// <param name="color">Color to remove.</param>
+        public void RemoveColorTint(Color color) => spriteColorer.Remove(color);
+
+        /// <summary>
+        /// Add a color to <see cref="spriteColorer"/>.
+        /// </summary>
+        /// <param name="color">Color to add.</param>
+        /// <param name="duration">Duration of color in seconds.</param>
+        public void AddColorTint(Color color, float duration) => spriteColorer.Add(color, duration);
+
         protected virtual void TakeDamageFeedback()
         {
             hurtSound.Play();
-            spriteColorer.Add(hurtColor, .1f);
+            AddColorTint(hurtColor, .1f);
         }
 
         /// <summary>
@@ -139,11 +157,11 @@ namespace Creatures
 
         protected virtual void OnTriggerEnter2D(Collider2D collision) => CheckInDamageCollision(collision.gameObject);
 
-        private void CheckInDamageCollision(GameObject target)
+        protected virtual void CheckInDamageCollision(GameObject target)
         {
-            IDamageOnTouch damageOnTouch = target.gameObject.GetComponent<IDamageOnTouch>();
+            IDamageOnTouch<Creature> damageOnTouch = target.gameObject.GetComponent<IDamageOnTouch<Creature>>();
             if (damageOnTouch != null)
-                damageOnTouch.ProduceDamage(this);
+                damageOnTouch.ProduceDamage(this, null, null);
         }
     }
 }

@@ -1,17 +1,17 @@
 using Additions.Utils;
 
+using Creatures.Effects;
 using Creatures.Weapons;
 
 using Master;
 
 using System;
-using System.Linq;
 
 using UnityEngine;
 
 namespace Creatures
 {
-    public class Creature : Hurtable, IPush
+    public class Creature : Hurtable, ITakePush, ITakeEffect<Creature>
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
@@ -43,7 +43,11 @@ namespace Creatures
         private IMove move;
         private IAttack attack;
 
+        private EffectManager<Creature> effectManager;
+
         private const string ANIMATION_STATE_HURT = "Hurt";
+
+        public bool isStunned;
 
         public float SpeedMultiplier {
             get => StoppableRigidbody.SpeedMultiplier;
@@ -60,7 +64,9 @@ namespace Creatures
 
         private void LoadComponents()
         {
+            effectManager = new EffectManager<Creature>(this);
             updates.UnionWith(gameObject.GetComponentsInChildren<IUpdate>());
+            updates.Add(effectManager);
             move = gameObject.GetComponentInChildren<IMove>();
             attack = gameObject.GetComponentInChildren<IAttack>();
             Array.ForEach(gameObject.GetComponents<IInitialize<Creature>>(), e => e.Initialize(this));
@@ -70,8 +76,11 @@ namespace Creatures
         {
             if (Settings.IsPause)
                 return;
-            move?.Move(Time.deltaTime, SpeedMultiplier * speed);
-            attack?.Attack(Time.deltaTime);
+            if (!isStunned)
+            {
+                move?.Move(Time.deltaTime, SpeedMultiplier * speed);
+                attack?.Attack(Time.deltaTime);
+            }
             // We don't call base.Update() because that is made in the line below
             foreach (IUpdate update in updates)
                 update.UpdateBehaviour(Time.deltaTime);
@@ -88,7 +97,7 @@ namespace Creatures
         /// </summary>
         /// <param name="direction">Direction to apply force.</param>
         /// <param name="force">Amount of force to apply</param>
-        public void Push(Vector2 direction, float force = 1, PushMode pushMode = PushMode.Local)
+        public void TakePush(Vector2 direction, float force = 1, PushMode pushMode = PushMode.Local)
         {
             if (pushMode == PushMode.Local)
             {
@@ -101,5 +110,18 @@ namespace Creatures
 
             ThisRigidbody2D.AddForce(direction * force);
         }
+
+        protected override void CheckInDamageCollision(GameObject target)
+        {
+            IDamageOnTouch<Creature> damageOnTouch = target.gameObject.GetComponent<IDamageOnTouch<Creature>>();
+            if (damageOnTouch != null)
+                damageOnTouch.ProduceDamage(this, this, this);
+        }
+
+        /// <summary>
+        /// Take an effect.
+        /// </summary>
+        /// <param name="effect">Effect to take.</param>
+        public void TakeEffect(Effect<Creature> effect) => effectManager.AddEffect(effect);
     }
 }

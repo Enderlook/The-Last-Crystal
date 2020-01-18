@@ -1,4 +1,3 @@
-
 using Additions.Utils;
 using Additions.Utils.Clockworks;
 
@@ -36,38 +35,5 @@ namespace Creatures.Weapons
         public void ResetCycles(int newCycles) => ((IClockwork)clockwork).ResetCycles(newCycles);
         public void ResetCooldown(float newCooldownTime) => ((IClockwork)clockwork).ResetCooldown(newCooldownTime);
         public void SetReady() => ((IClockwork)clockwork).SetReady();
-    }
-
-    public interface ITakeDamage
-    {
-        void TakeDamage(float amount, bool displayText = true, bool displayAnimation = true);
-    }
-
-    public interface IPush
-    {
-        void Push(Vector2 direction, float force = 1, PushMode pushMode = PushMode.Local);
-    }
-
-    public enum PushMode { Local, Global };
-
-    public interface IAutomatedAttack
-    {
-        /// <summary>
-        /// Whenever the weapon has any target in range or not.
-        /// </summary>
-        bool TargetInRange { get; }
-
-        /// <summary>
-        /// Check if <see cref="TargetInRange"/>.<br>
-        /// If <see langword="true"/> calls <see cref="Weapon.TryExecute(float)"/> using <paramref name="deltaTime"/> as parameter.<br>
-        /// If <see langword="false"/> calls <see cref="Weapon.Recharge(float)"/> using <paramref name="deltaTime"/>.
-        /// </summary>
-        /// <returns>Whenever an attack was made or not.</returns>
-        bool AttackIfIsReadyAndIfTargetInRange(float deltaTime = 0);
-
-        /// <summary>
-        /// Whenever should automatically attack or not when <see cref="TargetInRange"/> and <see cref="Weapon.IsReady"/> are <see langword="true"/> on each <see cref="Weapon.UpdateBehaviour(float)"/> or <see cref="Weapon.Recharge(float)"/> call.
-        /// </summary>
-        bool AutoAttack { get; set; }
     }
 }
