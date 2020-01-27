@@ -338,6 +338,7 @@ MonoBehaviour:
   damage: 100000
   pushStrength: 0
   showHurt: 0
+  <IsEnabled>k__BackingField: 1
 --- !u!61 &59630976
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -869,7 +870,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 42
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
