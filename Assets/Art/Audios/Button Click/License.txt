@@ -53,6 +53,11 @@ Fast Collision Reverb made by qubodup under license CC0 1.0
 	https://freesound.org/people/qubodup/sounds/332057/
 	332057__qubodup__fast-collision-reverb.flac
 
+Freeze Spell made by artisticdude under license CC0
+	https://opengameart.org/content/freeze-spell-0
+	freeze.wav
+	freeze.wav
 Jump Landing Sound made by MentalSanityOff under license CC0
 	https://opengameart.org/content/jump-landing-sound
+	jumpland.wav
 	jumpland.wav

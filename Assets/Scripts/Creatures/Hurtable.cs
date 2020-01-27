@@ -1,4 +1,5 @@
-﻿using Additions.Components.FloatPool;
+﻿using Additions.Components.ColorCombiner;
+using Additions.Components.FloatPool;
 using Additions.Components.ScriptableSound;
 using Additions.Prefabs.FloatingText;
 using Additions.Utils;
@@ -7,6 +8,7 @@ using Creatures.Weapons;
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -29,18 +31,39 @@ namespace Creatures
 
         [SerializeField, Tooltip("Sound played on death.")]
         private Sound dieSound;
+
+        [SerializeField, Tooltip("Sprite Renderer Component.")]
+        private SpriteRenderer sprite;
+
+        public SpriteRenderer Sprite => sprite;
+
+        [SerializeField, Tooltip("Sprite colorer.")]
+        protected SpriteRenderColorerWithTimer spriteColorer;
+
+        [SerializeField, Tooltip("Color tint for Sprite Renderer used when hurt.")]
+        private Color hurtColor = Color.red;
 #pragma warning restore CS0649
 
-        protected IUpdate[] updates;
+        protected HashSet<IUpdate> updates;
 
         protected virtual void Awake()
         {
             hurtSound.Init();
             health.Initialize();
-            updates = new IUpdate[] { health, hurtSound };
+            spriteColorer.Initialize();
+            updates = new HashSet<IUpdate>
+            {
+                health,
+                hurtSound,
+                spriteColorer
+            };
         }
 
-        protected virtual void Update() => Array.ForEach(updates, e => e.UpdateBehaviour(Time.deltaTime));
+        protected virtual void Update()
+        {
+            foreach (IUpdate update in updates)
+                update.UpdateBehaviour(Time.deltaTime);
+        }
 
         /// <summary>
         /// Take damage reducing its <see cref="Health"/>.<br>
@@ -80,7 +103,30 @@ namespace Creatures
             Destroy(gameObject);
         }
 
-        protected virtual void TakeDamageFeedback() => hurtSound.Play();
+        /// <summary>
+        /// Add a color to <see cref="spriteColorer"/>.
+        /// </summary>
+        /// <param name="color">Color to add.</param>
+        public void AddColorTint(Color color) => spriteColorer.Add(color);
+
+        /// <summary>
+        /// Remove a color from <see cref="spriteColorer"/>.
+        /// </summary>
+        /// <param name="color">Color to remove.</param>
+        public void RemoveColorTint(Color color) => spriteColorer.Remove(color);
+
+        /// <summary>
+        /// Add a color to <see cref="spriteColorer"/>.
+        /// </summary>
+        /// <param name="color">Color to add.</param>
+        /// <param name="duration">Duration of color in seconds.</param>
+        public void AddColorTint(Color color, float duration) => spriteColorer.Add(color, duration);
+
+        protected virtual void TakeDamageFeedback()
+        {
+            hurtSound.Play();
+            AddColorTint(hurtColor, .1f);
+        }
 
         /// <summary>
         /// Spawn a floating text above the creature.
@@ -111,11 +157,11 @@ namespace Creatures
 
         protected virtual void OnTriggerEnter2D(Collider2D collision) => CheckInDamageCollision(collision.gameObject);
 
-        private void CheckInDamageCollision(GameObject target)
+        protected virtual void CheckInDamageCollision(GameObject target)
         {
-            IDamageOnTouch damageOnTouch = target.gameObject.GetComponent<IDamageOnTouch>();
+            IDamageOnTouch<Creature> damageOnTouch = target.gameObject.GetComponent<IDamageOnTouch<Creature>>();
             if (damageOnTouch != null)
-                damageOnTouch.ProduceDamage(this);
+                damageOnTouch.ProduceDamage(this, null, null);
         }
     }
 }

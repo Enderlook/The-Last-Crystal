@@ -1,11 +1,13 @@
 using Additions.Attributes;
 using Additions.Utils;
 
+using Creatures.Effects;
+
 using UnityEngine;
 
 namespace Creatures.Weapons
 {
-    public class PassiveMelee : MonoBehaviour, IInitialize<Creature>, IDamageOnTouch
+    public class PassiveMelee : MonoBehaviour, IInitialize<Creature>, IDamageOnTouch<Creature>
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -24,24 +26,14 @@ namespace Creatures.Weapons
 
         void IInitialize<Creature>.Initialize(Creature creature) => thisTransform = creature.Transform;
 
-        public virtual void ProduceDamage(object victim)
+        public virtual void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             if (IsEnabled)
             {
-                if (thisTransform != null && victim is IPush push)
-                    push.Push(thisTransform.position, pushStrength, PushMode.Local);
-                if (victim is ITakeDamage takeDamage)
-                    takeDamage.TakeDamage(damage, showHurt, showHurt);
+                if (thisTransform != null)
+                    takePush?.TakePush(thisTransform.position, pushStrength, PushMode.Local);
+                takeDamage?.TakeDamage(damage, showHurt, showHurt);
             }
         }
-    }
-
-    public interface IDamageOnTouch
-    {
-        /// <summary>
-        /// Produce damage. It will try to cast <paramref name="victim"/> to <see cref="ITakeDamage"/> and <see cref="IPush"/>.
-        /// </summary>
-        /// <param name="victim">Victim who will receive damage and possibly be pushed back.</param>
-        void ProduceDamage(object victim);
     }
 }

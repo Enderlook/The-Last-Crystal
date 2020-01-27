@@ -3,13 +3,14 @@ using Additions.Components.ScriptableSound;
 using Additions.Utils;
 using Additions.Utils.Clockworks;
 
+using Creatures.Effects;
 using Creatures.Weapons;
 
 using UnityEngine;
 
 namespace Creatures
 {
-    public class ActiveMelee : MonoBehaviour, IInitialize<Creature>, IUpdate, IBasicClockwork, IDamageOnTouch
+    public class ActiveMelee : MonoBehaviour, IInitialize<Creature>, IUpdate, IBasicClockwork, IDamageOnTouch<Creature>
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Damage on hit.")]
@@ -33,7 +34,6 @@ namespace Creatures
 
         private Transform thisTransform;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Type Safety", "UNT0006:Incorrect message signature", Justification = "This isn't Unity method.")]
         void IInitialize<Creature>.Initialize(Creature creature)
         {
             basicClockwork = new BasicClockwork(1 / firerate);
@@ -42,14 +42,13 @@ namespace Creatures
                 hitSound.Init();
         }
 
-        void IDamageOnTouch.ProduceDamage(object victim)
+        public void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             if (basicClockwork.IsReady && IsEnabled)
             {
-                if (thisTransform != null && victim is IPush push)
-                    push.Push(thisTransform.position, pushStrength, PushMode.Local);
-                if (victim is ITakeDamage takeDamage)
-                    takeDamage.TakeDamage(damage);
+                if (thisTransform != null)
+                    takePush?.TakePush(thisTransform.position, pushStrength, PushMode.Local);
+                takeDamage?.TakeDamage(damage);
                 if (hitSound != null)
                     hitSound.Play();
             }

@@ -1,5 +1,6 @@
-﻿
-using Additions.Components.ScriptableSound;
+﻿using Additions.Components.ScriptableSound;
+
+using Creatures.Effects;
 
 using UnityEngine;
 
@@ -12,9 +13,9 @@ namespace Creatures.Weapons
         private Sound hitSound;
 #pragma warning restore CS0649
 
-        public override void ProduceDamage(object victim)
+        public override void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
-            base.ProduceDamage(victim);
+            base.ProduceDamage(takeDamage, takePush, takeEffect);
             SimpleSoundPlayer.CreateOneTimePlayer(hitSound, true, true);
             Destroy(thisTransform.gameObject);
         }

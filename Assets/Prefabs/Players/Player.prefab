@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 4416114078013645945}
   - component: {fileID: 1786681838222022307}
   - component: {fileID: 7219742351414640916}
+  - component: {fileID: 4301053365877223748}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -294,6 +295,9 @@ MonoBehaviour:
     audioSource: {fileID: 6985899684395519993}
     sound: {fileID: 11400000, guid: 9316afffa7ee09a49a150e70864e9f8c, type: 2}
   dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
+  sprite: {fileID: 7526445749177953701}
+  spriteColorer: {fileID: 4301053365877223748}
+  hurtColor: {r: 1, g: 0.05275345, b: 0, a: 1}
   speed: 1
   sprite: {fileID: 7526445749177953701}
   stoppableRigidbody: {fileID: 8836964168732201439}
@@ -547,6 +551,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energy: {fileID: 1786681838222022307}
+--- !u!114 &4301053365877223748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891791631359779234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9cd0edc73392a4abd40f08eefeef7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7526445749177953701}
+  useSpriteRendererDefaultColor: 1
+  defaultColor: {r: 1, g: 1, b: 1, a: 0}
+  autoManage: 0
 --- !u!1 &3745464996977563344
 GameObject:
   m_ObjectHideFlags: 0
