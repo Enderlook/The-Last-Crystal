@@ -1,6 +1,6 @@
 ﻿namespace Additions.Components.Navigation
 {
-    internal enum DistanceFormula
+    public enum DistanceFormula
     {
         Euclidean, // Squared grids that allow any direction
         Manhattan, // Squared grids that only allow 4 directions of movement ('+' shape)

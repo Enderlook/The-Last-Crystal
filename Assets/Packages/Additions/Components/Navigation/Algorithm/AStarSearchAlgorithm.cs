@@ -1,3 +1,4 @@
+using Additions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Additions.Components.Navigation
 {
-    internal static class AStarSearchAlgorithm
+    public static class AStarSearchAlgorithm
     {
         /* https://code.msdn.microsoft.com/windowsdesktop/Dijkstras-Single-Soruce-69faddb3
          * https://www.geeksforgeeks.org/csharp-program-for-dijkstras-shortest-path-algorithm-greedy-algo-7/
@@ -26,20 +27,25 @@ namespace Additions.Components.Navigation
                 case DistanceFormula.Chebyshov:
                     return Distances.CalculateChebyshovDistance;
                 default:
-                    return (__, _) => 0; // Not heuristic
+                    return null;
             }
         }
 
-        private static float AStarSearchPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> previous, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
+        private static float AStarSearchPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> previous, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean) => navigation.AStarSearchPath(source, out previous, out Dictionary<Node, float> _, target, heuristicFormula);
+
+        private static float AStarSearchPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> previous, out Dictionary<Node, float> distances, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
         {
-            previous = new Dictionary<Node, Connection>();
-
             if (!navigation.Grid.Contains(source)) // Path will never find a way
+            {
+                previous = null;
+                distances = null;
                 return -1;
+            }
 
-            Func<Vector2, Vector2, float> Heuristic = target == null ? ChooseHeuristicFormula(DistanceFormula.None) : ChooseHeuristicFormula(heuristicFormula);
+            Func<Vector2, Vector2, float> Heuristic = ChooseHeuristicFormula(target == null ? DistanceFormula.None : heuristicFormula);
 
-            Dictionary<Node, float> distances = InitializeDistances(navigation, source);
+            previous = new Dictionary<Node, Connection>();
+            distances = InitializeDistances(navigation, source);
             HashSet<Node> visited = new HashSet<Node>();
             PriorityQueue<Node> toVisit = new PriorityQueue<Node>();
             toVisit.Enqueue(source, 0);
@@ -61,7 +67,7 @@ namespace Additions.Components.Navigation
                     if (neighbour.IsActive)
                     {
                         float distance = Relax(distances, previous, connection, distanceFromSource);
-                        toVisit.Enqueue(neighbour, distance + Heuristic(neighbour.position, target.position));
+                        toVisit.Enqueue(neighbour, distance + Heuristic?.Invoke(neighbour.position, target.position) ?? 0);
                         if (neighbour == target)
                             return distance;
                     }
@@ -80,6 +86,8 @@ namespace Additions.Components.Navigation
 
         public static float SearchRawPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> connections, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean) => navigation.AStarSearchPath(source, out connections, target, heuristicFormula);
 
+        public static float SearchRawPath(this NavigationGraph navigation, Node source, out Dictionary<Node, Connection> connections, out Dictionary<Node, float> distances, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean) => navigation.AStarSearchPath(source, out connections, out distances, target, heuristicFormula);
+
         public static float CalculatePathDistance(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean) => navigation.AStarSearchPath(source, out Dictionary<Node, Connection> connections, target, heuristicFormula);
 
         public static List<Connection> SearchPath(this NavigationGraph navigation, Node source, Node target = null, DistanceFormula heuristicFormula = DistanceFormula.Euclidean)
@@ -95,7 +103,7 @@ namespace Additions.Components.Navigation
             return distance;
         }
 
-        private static List<Connection> FromPreviousDictionaryToListPath(Dictionary<Node, Connection> previous, Node target)
+        public static List<Connection> FromPreviousDictionaryToListPath(Dictionary<Node, Connection> previous, Node target)
         {
             LinkedList<Connection> path = new LinkedList<Connection>();
             if (previous.Count == 0)
@@ -107,6 +115,24 @@ namespace Additions.Components.Navigation
                 node = connection.start;
             }
             return path.ToList();
+        }
+
+        public static (List<(Connection connection, float totalDistance)> path, HashSet<(Connection connection, float totlaDistance)> others) FromRawToPaths(Dictionary<Node, Connection> previous, Dictionary<Node, float> distances, Node target)
+        {
+            LinkedList<(Connection connection, float totalDistance)> path = new LinkedList<(Connection connection, float totalDistance)>();
+            HashSet<Node> added = new HashSet<Node>();
+
+            Node node = target;
+            while (previous.TryGetValue(node, out Connection connection))
+            {
+                path.AddFirst((connection, distances[node]));
+                added.Add(node);
+                node = connection.start;
+            }
+
+            // TODO: If Unity implements .Net Standard 2.1, this should be constructed using new HashSet(int capacity) to avoid several reallocations
+            HashSet<(Connection, float)> hashSet = new HashSet<(Connection, float)>(previous.Where(e => !added.Contains(e.Key)).Select(e => (e.Value, distances[e.Key])));
+            return (path.ToList(), hashSet);
         }
 
         private static Dictionary<Node, float> InitializeDistances(NavigationGraph navigation, Node source)
