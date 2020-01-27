@@ -82,7 +82,13 @@ namespace Additions.Components.Navigation
             {
                 Gizmos.color = pathColor;
                 foreach (Connection connection in lastPath)
-                    Gizmos.DrawLine(connection.start.position, connection.end.position);
+                {
+                    Vector2 start = NavigationGraph.GetWorldPosition(connection.start);
+                    Vector2 end = NavigationGraph.GetWorldPosition(connection.end);
+                    Gizmos.DrawLine(start, end);
+                    Gizmos.DrawSphere(start, .025f);
+                    Gizmos.DrawSphere(end, .025f);
+                }
             }
         }
 #endif
