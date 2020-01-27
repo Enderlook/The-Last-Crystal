@@ -2151,7 +2151,7 @@ PrefabInstance:
     - target: {fileID: 2479692871795223005, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.45
+      value: 1.253
       objectReference: {fileID: 0}
     - target: {fileID: 2479692871795223005, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
         type: 3}
@@ -2212,6 +2212,26 @@ PrefabInstance:
         type: 3}
       propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479692871795222993, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479692871795222993, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479692871795222993, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479692871795222993, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d3df55b0c6aa642a77ca9f30e6ce21, type: 3}
