@@ -1,5 +1,6 @@
 ﻿using Additions.Utils;
 using Additions.Utils.UnityEditor;
+using Additions.Extensions;
 
 using System.Collections.Generic;
 
@@ -36,6 +37,14 @@ namespace Additions.Components.Navigation
         public static Color disabledColor = Color.red;
         public static Color extremeColor = Color.yellow;
 
+        private static bool showTravel = true;
+        private static Color travelColor = Color.cyan;
+        private static DistanceFormula distanceFormula = DistanceFormula.Euclidean;
+        private static bool showExplored;
+        private static Color exploredColor = Color.white;
+        private static bool showAll;
+        private static Color allColor = Color.gray;
+
         private static bool showQuickActionsMenu;
         private static bool showRestructureMenu;
         private static bool showLocalToWorldMenu;
@@ -45,10 +54,20 @@ namespace Additions.Components.Navigation
 
         private static bool showGridGenerationConfigurationMenu;
 
+        private HashSet<Vector2> numbersPositionsToNotDraw = new HashSet<Vector2>();
+        private const int DISTANCE_FONT_SIZE = 15;
+        private const int DOTTED_LINE_SIZE = 1;
+
         private static GUIStyle BOLDED_FOLDOUT => new GUIStyle(EditorStyles.foldout)
         {
             fontStyle = FontStyle.Bold
         };
+
+        private Vector2 GetCenter(Connection connection)
+        {
+            Vector2[] positions = navigationGraph.Graph.GetWorldPosition(connection.start, connection.end);
+            return (positions[0] + positions[1]) / 2;
+        }
 
         public override void OnInspectorGUI()
         {
@@ -155,6 +174,18 @@ namespace Additions.Components.Navigation
                     addColor = EditorGUILayout.ColorField("Add", addColor);
                     selectedColor = EditorGUILayout.ColorField("Selected", selectedColor);
                     closestColor = EditorGUILayout.ColorField("Closest", closestColor);
+                }
+
+                if (showTravel = EditorGUILayout.Toggle(new GUIContent("Show Travel", "Show nodes and connections that must be travel in order to move from selected node to closest."), showTravel))
+                {
+                    EditorGUI.indentLevel++;
+                    travelColor = EditorGUILayout.ColorField(new GUIContent("Travel", "Color used to show nodes and connections that must be traveled to move from selected node to closes."), travelColor);
+                    distanceFormula = (DistanceFormula)EditorGUILayout.EnumPopup(new GUIContent("Heuristic", "Heuristic used to determine path."), distanceFormula);
+                    if (showExplored = EditorGUILayout.Toggle(new GUIContent("Show Explored", "Show nodes and connections that were explored in order to find the path."), showExplored))
+                        exploredColor = EditorGUILayout.ColorField(new GUIContent("Explored", "Color used to show nodes and connections that were explored."), exploredColor);
+                    if (showAll = EditorGUILayout.Toggle(new GUIContent("Show All Paths", "Show nodes and connections that can be traveled from selected node."), showAll))
+                        allColor = EditorGUILayout.ColorField(new GUIContent("Paths", "Color used to show nodes and connections than can be traveled from selected node."), allColor);
+                    EditorGUI.indentLevel--;
                 }
 
                 showHelp = EditorGUILayout.Foldout(showHelp, "Help", true);
@@ -278,7 +309,21 @@ namespace Additions.Components.Navigation
                 if (drawNodes)
                     node.DrawNode(navigationGraph.Graph);
                 if (drawConnections)
-                    node.DrawConnections(navigationGraph.Graph, drawDistances ? 14 : 0);
+                {
+                    foreach (Connection connection in node.Connections)
+                    {
+                        connection.DrawConnection(navigationGraph.Graph);
+                        if (drawDistances)
+                        {
+                            Vector2 center = GetCenter(connection);
+                            if (!numbersPositionsToNotDraw.Contains(center))
+                            {
+                                numbersPositionsToNotDraw.Add(center);
+                                connection.DrawDistance(navigationGraph.Graph, DISTANCE_FONT_SIZE);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -294,42 +339,86 @@ namespace Additions.Components.Navigation
 
             Node closestNode = GetAndDrawClosestNode(mousePosition);
 
-            if (selectedNode != null)
-                DrawSelectedNode(closestNode, mousePosition);
+            numbersPositionsToNotDraw.Clear();
 
-            Event e = Event.current;
-            if (e.type == EventType.MouseDown)
+            if (selectedNode != null)
             {
-                if (e.button == 1) // Right Button
+                DrawSelectedNode(closestNode, mousePosition);
+                if (showTravel)
                 {
-                    if (e.alt)
+                    if (closestNode != null)
+                    {
+                        navigationGraph.SearchRawPath(selectedNode, out Dictionary<Node, Connection> connections, out Dictionary<Node, float> distances, closestNode, distanceFormula);
+
+                        (List<(Connection connection, float totalDistance)> path, HashSet<(Connection connection, float totalDistance)> others) = AStarSearchAlgorithm.FromRawToPaths(connections, distances, closestNode);
+
+                        foreach ((Connection connection, float totalDistance) in path)
+                        {
+                            connection.DrawConnection(travelColor, navigationGraph.Graph, DOTTED_LINE_SIZE);
+                            connection.DrawNumber(totalDistance, travelColor, navigationGraph.Graph, DISTANCE_FONT_SIZE);
+                            numbersPositionsToNotDraw.Add(GetCenter(connection));
+                        }
+
+                        if (showExplored)
+                        {
+                            foreach ((Connection connection, float totalDistance) in others)
+                            {
+                                connection.DrawConnection(exploredColor, navigationGraph.Graph, DOTTED_LINE_SIZE);
+                                connection.DrawNumber(totalDistance, exploredColor, navigationGraph.Graph, DISTANCE_FONT_SIZE);
+                                numbersPositionsToNotDraw.Add(GetCenter(connection));
+                            }
+                        }
+                    }
+                    if (showAll)
+                    {
+                        navigationGraph.SearchRawPath(selectedNode, out Dictionary<Node, Connection> connections, out Dictionary<Node, float> distances, null, distanceFormula);
+
+                        foreach ((Node node, Connection connection) in connections)
+                        {
+                            Vector2 center = GetCenter(connection);
+                            if (numbersPositionsToNotDraw.Contains(center))
+                                continue;
+                            numbersPositionsToNotDraw.Add(center);
+                            connection.DrawConnection(allColor, navigationGraph.Graph, DOTTED_LINE_SIZE);
+                            connection.DrawNumber(distances[node], allColor, navigationGraph.Graph, DISTANCE_FONT_SIZE);
+                        }
+                    }
+                }
+            }
+
+            Event @event = Event.current;
+            if (@event.type == EventType.MouseDown)
+            {
+                if (@event.button == 1) // Right Button
+                {
+                    if (@event.alt)
                     {
                         if (selectedNode != null && closestNode != null && selectedNode != closestNode)
                         {
                             selectedNode.TryRemoveConnectionTo(closestNode);
-                            if (e.control)
+                            if (@event.control)
                                 closestNode.TryRemoveConnectionTo(selectedNode);
                         }
                     }
                     else
                     {
-                        if (e.shift)
+                        if (@event.shift)
                             // Switch Connection
                             AlternateAddOrRemoveConnection(selectedNode, GetOrAddClosestNode(mousePosition));
-                        if (e.control)
+                        if (@event.control)
                             // Switch Inverse Connection
                             AlternateAddOrRemoveConnection(GetOrAddClosestNode(mousePosition), selectedNode);
                     }
                 }
-                else if (e.button == 0) // Left Button
+                else if (@event.button == 0) // Left Button
                 {
-                    if (e.control)
+                    if (@event.control)
                     {
                         // Switch Node
                         if (closestNode != null)
                             closestNode.SetActive(!closestNode.IsActive);
                     }
-                    else if (e.shift)
+                    else if (@event.shift)
                     {
                         // Remove Node
                         if (closestNode != null)
@@ -340,7 +429,7 @@ namespace Additions.Components.Navigation
                             closestNode = null;
                         }
                     }
-                    else if (e.alt)
+                    else if (@event.alt)
                     {
                         if (closestNode != null)
                             closestNode.isExtreme = !closestNode.isExtreme;
@@ -352,7 +441,7 @@ namespace Additions.Components.Navigation
                         // Select Closest Node
                         selectedNode = closestNode;
                 }
-                else if (e.alt)
+                else if (@event.alt)
                     // Select Closest Node
                     selectedNode = closestNode;
             }
@@ -407,12 +496,12 @@ namespace Additions.Components.Navigation
 
             if (closestNode != null)
             {
-                closestNode.DrawLineTo(selectedNode, selectedColor, navigationGraph.Graph, 1);
+                closestNode.DrawLineTo(selectedNode, selectedColor, navigationGraph.Graph, DOTTED_LINE_SIZE);
                 selectedNode.DrawDistance(closestNode, selectedColor, navigationGraph.Graph, 14);
             }
             else
             {
-                selectedNode.DrawLineTo(mousePosition, addColor, navigationGraph.Graph, 1);
+                selectedNode.DrawLineTo(mousePosition, addColor, navigationGraph.Graph, DOTTED_LINE_SIZE);
                 selectedNode.DrawDistance(mousePosition, addColor, navigationGraph.Graph, 14);
             }
 

@@ -40,22 +40,22 @@ namespace Additions.Components.Navigation
                     connection.DrawConnection(color, reference, fontSize);
         }
 
-        public static void DrawLineTo(Vector2 source, Vector2 target, Color color, float? screenSpaceSize = null)
+        public static void DrawLineTo(Vector2 source, Vector2 target, Color color, float screenSpaceSize = -1)
         {
             Handles.color = color;
-            if (screenSpaceSize == null)
+            if (screenSpaceSize == -1)
                 Handles.DrawLine(source, target);
             else
                 Handles.DrawDottedLine(source, target, (int)screenSpaceSize);
         }
 
-        public static void DrawLineTo(this Node source, Vector2 target, Color color, Graph reference = null, float? screenSpaceSize = null)
+        public static void DrawLineTo(this Node source, Vector2 target, Color color, Graph reference = null, float screenSpaceSize = -1)
         {
             Vector2 start = reference.GetWorldPosition(source);
             DrawLineTo(start, target, color, screenSpaceSize);
         }
 
-        public static void DrawLineTo(this Node source, Node target, Color color, Graph reference = null, float? screenSpaceSize = null)
+        public static void DrawLineTo(this Node source, Node target, Color color, Graph reference = null, float screenSpaceSize = -1)
         {
             Vector2[] positions = reference.GetWorldPosition(source, target);
             Vector2 start = positions[0];

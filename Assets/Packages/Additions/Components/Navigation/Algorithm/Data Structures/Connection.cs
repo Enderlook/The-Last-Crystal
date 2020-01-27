@@ -63,5 +63,12 @@ namespace Additions.Components.Navigation
         /// Remove this <see cref="Connection"/> from <see cref="start"/>
         /// </summary>
         public void DisconnectFromNode() => start.RemoveConnection(this);
+
+        /// <summary>
+        /// Check if <paramref name="connection"/> is the opposite connection of this one.
+        /// </summary>
+        /// <param name="connection">Connection to check.</param>
+        /// <returns>Whenever they are opposite connections or not.</returns>
+        public bool AreOpposite(Connection connection) => start == connection.end && end == connection.start;
     }
 }
