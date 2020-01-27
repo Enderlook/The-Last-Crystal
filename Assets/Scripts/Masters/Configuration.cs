@@ -25,6 +25,7 @@ namespace Master
 #pragma warning restore CS0649
 #pragma warning restore IDE0051
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void Awake() => StoreGlobals();
 
         private void StoreGlobals()
