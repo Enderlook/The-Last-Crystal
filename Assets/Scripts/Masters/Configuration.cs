@@ -39,7 +39,7 @@ namespace Master
             }
 
             //Global.SetCoinMeter(coinMeter, startingMoney);
-            Global.TransformCreature.Crystal.SetTransform(transform);
+            Global.TransformCreature.Crystal.SetTransform(crystal);
         }
     }
 }
