@@ -175,6 +175,7 @@ MonoBehaviour:
   damage: 100000
   pushStrength: 0
   showHurt: 0
+  <IsEnabled>k__BackingField: 1
 --- !u!61 &59630976
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3590,6 +3591,12 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1641866928}
+    - target: {fileID: 127513567015536371, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 54be444d053f1634d8cf554e2bf154d7,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
 --- !u!114 &3653343962048357922 stripped

@@ -1,0 +1,102 @@
+Spell 4 (fire) made by Bart K. under license CC-BY 3.0, CC-BY-SA 3.0, GPL 3.0, GPL 2.0, OGA-BY 3.0
+	https://opengameart.org/content/spell-4-fire
+	foom_0.wav
+
+Magic Smithe made by spookymodem under license CC-BY 3.0
+	https://opengameart.org/content/magic-smite
+	Magic Smite.wav
+
+Catching Fire made by themightyglider under license CC0
+	https://opengameart.org/content/catching-fire
+	flame.ogg
+
+3 Melee sounds made by remaxim under license CC0
+	https://opengameart.org/content/3-melee-sounds
+	animal melee sound.wav
+	melee sound.wav
+	sword sound.wav
+
+80 CC0 creture SFX #2 made by rubberduck under license CC0
+	https://opengameart.org/content/80-cc0-creture-sfx-2
+	80-CC0-crature-sfx-2.zip
+	die_04.ogg80
+
+Hurt Sounds » male_hurt11.ogg made by micahl under license CC0 1.0
+	https://freesound.org/people/micahlg/sounds/413174/
+	413174__micahlg__male-hurt11
+
+80 CC0 creture SFX #2 made by rubberduck under license CC0
+	https://opengameart.org/content/80-cc0-creture-sfx-2
+	die_04.ogg
+
+Breaking Bottle made by spookymodem under license CC-BY 3.0
+	https://opengameart.org/content/breaking-bottle
+	Bottle Break.wav
+
+Glass Smashing (Bottles) » Glass Smash, Bottle, D.wav made by InspectorJ under license CC-BY 3.0
+	https://freesound.org/people/InspectorJ/sounds/344265/
+	344265__inspectorj__glass-smash-bottle-d.wav
+
+smashing glass.wav made by mgamabile under license CC0 1.0
+	https://freesound.org/people/mgamabile/sounds/440773/
+	440773__mgamabile__smashing-glass.wav
+
+Rumble/Explosion made by Michel Baradari under license CC-BY 3.0
+	https://opengameart.org/content/rumbleexplosion
+	rumble.flac
+
+Medieval » Sword Slash 1 made by smokebomb99 uner license CC0 1.0
+	https://freesound.org/people/smokebomb99/sounds/147288/
+	147288__smokebomb99__sword-slash-1.wav
+
+Fast Collision Reverb made by qubodup under license CC0 1.0
+	https://freesound.org/people/qubodup/sounds/332057/
+	332057__qubodup__fast-collision-reverb.flac
+
+Freeze Spell made by artisticdude under license CC0
+	https://opengameart.org/content/freeze-spell-0
+	freeze.wav
+
+Jump Landing Sound made by MentalSanityOff under license CC0
+	https://opengameart.org/content/jump-landing-sound
+	jumpland.wav
+
+Soliloquy by Matthew Pablo under license CC-BY 3.0
+	https://opengameart.org/content/soliloquy
+	Soliloquy.mp3
+
+Prologue by Telaron under license GPL 2.0, GPL 3.0, CC-BY-SA 3.0
+	https://opengameart.org/content/prologue
+	prologue.mp3
+
+Radakan - Game Lost made by Janne Hanhisuanto under license CC-BY-SA 3.0
+	https://opengameart.org/content/radakan-game-lost
+	radakan - game lost.ogg	
+
+Heroic Minority made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/heroic-minority
+	Героическая минорная.mp3
+
+Open the Gate made by Alexandr Zhelanov under license CC-BY-3.0
+	https://opengameart.org/content/open-the-gate
+	Open the gate.ogg
+
+Deal with the Devil made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/deal-with-the-devil
+	Deal with the Devil.mp3
+
+Battle Music made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/battle-music
+	demo_track_1.mp3 demo_track_1.mp3
+
+Rise of Spirit made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/rise-of-spirit
+	Rise of spirit.ogg
+
+Epic Departur made by Of Far Different Nature under license CC-BY 4.0
+	https://opengameart.org/content/epic-departure
+	Of Far Different Nature - Scene - Epic Departure (CC-BY).mp3
+
+Brave Soldiers made by Alexandr Zhelanov under license CC-BY-3.0
+	https://opengameart.org/content/brave-soldiers
+	Brave Soldiers.mp3

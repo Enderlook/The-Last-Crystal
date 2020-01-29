@@ -1,5 +1,5 @@
 
-using Additions.Components.SoundSystem;
+using Additions.Components.ScriptableSound;
 
 using Master;
 
@@ -19,20 +19,27 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Force menu to be untoggleable.")]
     private bool menuNoToggleable;
 
-    [SerializeField, Tooltip("Playlist Manager.")]
-    private PlaylistManager playlistManager;
-
-    [SerializeField, Tooltip("Name of the playlist to play when menu is shown.")]
-    private string playlistMenuShow;
-
-    [SerializeField, Tooltip("Name of the playlist to play when menu is hide.")]
-    private string playlistMenuHide;
-
     [SerializeField, Tooltip("Panel displayed on win.")]
     private GameObject win;
 
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
+
+    [Header("Music")]
+    [SerializeField, Tooltip("Sound player script which manages music.")]
+    private SoundPlayer soundPlayer;
+
+    [SerializeField, Tooltip("Sound index play on game.")]
+    private int gameIndex;
+
+    [SerializeField, Tooltip("Sound index play on menu.")]
+    private int menuIndex;
+
+    [SerializeField, Tooltip("Sound index play on win.")]
+    private int winIndex;
+
+    [SerializeField, Tooltip("Sound index play on lose.")]
+    private int loseIndex;
 
     [Header("Animation")]
     [SerializeField, Tooltip("Animator component.")]
@@ -78,7 +85,8 @@ public class Menu : MonoBehaviour
         }
         Settings.IsPause = active == null ? !Settings.IsPause : (bool)active;
         menu.SetActive(Settings.IsPause);
-        PlayMusic(Settings.IsPause, true);
+        if (soundPlayer != null)
+            soundPlayer.Play(Settings.IsPause ? menuIndex : gameIndex);
     }
 
     /// <summary>
@@ -90,22 +98,6 @@ public class Menu : MonoBehaviour
     /// Show the menu and set to <see langword="true"/> <seealso cref="IsPause"/>.
     /// </summary>
     public void GoToMenu() => DisplayMenuPause(true, true);
-
-    /// <summary>
-    /// Play music.
-    /// </summary>
-    /// <param name="menuMusic">Whenever menu music should be player or game music.</param>
-    /// <param name="resetCurrentMusic">Whenever it should reset the current music (not playlist) or wait until it ends.</param>
-    public void PlayMusic(bool menuMusic, bool resetCurrentMusic)
-    {
-        if (playlistManager == null)
-            return;
-        if (menuMusic)
-            playlistManager.SetPlaylist(playlistMenuShow);
-        else
-            playlistManager.SetPlaylist(playlistMenuHide);
-        playlistManager.ResetPlaylist(resetCurrentMusic);
-    }
 
 #pragma warning disable CA1822 // Unity Editor can't assign static methods to buttons
     /// <summary>
@@ -140,9 +132,17 @@ public class Menu : MonoBehaviour
         Settings.IsPause = true;
         menuNoToggleable = true;
         if (hasWon)
+        {
             win.SetActive(true);
+            if (soundPlayer != null)
+                soundPlayer.Play(winIndex);
+        }
         else
+        {
             lose.SetActive(true);
+            if (soundPlayer != null)
+                soundPlayer.Play(loseIndex);
+        }
     }
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }
