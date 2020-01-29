@@ -38,13 +38,6 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Animator component.")]
     private Animator animator;
 
-    private string sceneToLoad;
-
-    private static class ANIMATION_STATES
-    {
-        public const string
-            FADEOUT = "FadeOut";
-    }
 #pragma warning disable CS0649
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
@@ -136,16 +129,7 @@ public class Menu : MonoBehaviour
     /// </summary>
     /// <seealso cref="SceneManager.LoadScene(string)"/>
     /// <param name="scene">Scene name to load.</param>
-    public void LoadScene(string scene)
-    {
-        sceneToLoad = scene;
-        animator.SetTrigger(ANIMATION_STATES.FADEOUT);
-    }
-
-    /// <summary>
-    /// Load a scene through the animation event.
-    /// </summary>
-    public void FadeAnimationToLevel() => SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+    public void LoadScene(string scene) => SceneManager.LoadScene(scene, LoadSceneMode.Single);
 
     /// <summary>
     /// End game.
