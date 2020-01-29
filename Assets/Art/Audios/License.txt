@@ -57,7 +57,12 @@ Freeze Spell made by artisticdude under license CC0
 	https://opengameart.org/content/freeze-spell-0
 	freeze.wav
 	freeze.wav
+
 Jump Landing Sound made by MentalSanityOff under license CC0
 	https://opengameart.org/content/jump-landing-sound
 	jumpland.wav
 	jumpland.wav
+
+Soliloquy by Matthew Pablo under license CC-BY 3.0
+	https://opengameart.org/content/soliloquy
+	Soliloquy.mp3
