@@ -506,8 +506,8 @@ RectTransform:
   m_Father: {fileID: 1813966675}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.26848507, y: 0.3}
-  m_AnchorMax: {x: 0.7, y: 0.786}
+  m_AnchorMin: {x: 0.22011615, y: 0.3}
+  m_AnchorMax: {x: 0.7967376, y: 0.80481005}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -544,9 +544,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "PROTECT THE CRYSTAL FROM ENEMIES AT ALL COST\n\nPLAYERS RESPAWN AFTER DIE\n\nWARRIOR:
-    \nMOVE A D\nJUMP W \nATTACK Q.\n\nWIZARD: \nMOVE R.ARROW L.ARROW \nJUMP UP ARROW\nATTACK
-    MOUSE CLICK"
+  m_Text: "PROTECT THE CRYSTAL FROM ENEMIES AT ALL COST\n\nWARRIOR: \nMOVE: A & D
+    | JUMP: W    \nATTACK: Q | DASH: G   \n\nWIZARD: \nMOVE: LEFT & RIGHT ARROWS\nJUMP:
+    UP ARROW\nATTACK: LEFT CLICK \nFREZEE: RIGHT CLICK"
 --- !u!222 &216734106
 CanvasRenderer:
   m_ObjectHideFlags: 0
