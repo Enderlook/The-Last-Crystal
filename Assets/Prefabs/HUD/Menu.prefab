@@ -525,10 +525,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SCORE
-
-
-    3265'
+  m_Text: YOU WIN!
 --- !u!1 &3653343961879152832
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,8 +1280,8 @@ RectTransform:
   m_Father: {fileID: 3653343962952647784}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.26848507, y: 0.3}
-  m_AnchorMax: {x: 0.7, y: 0.632}
+  m_AnchorMin: {x: 0.28359643, y: 0.31655267}
+  m_AnchorMax: {x: 0.7, y: 0.64855266}
   m_AnchoredPosition: {x: 0, y: -0.12999725}
   m_SizeDelta: {x: 0, y: -0.25999832}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1323,16 +1320,13 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 1
     m_MaxSize: 30
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SCORE
-
-
-    100'
+  m_Text: YOU LOSE
 --- !u!1 &3653343962349572749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2135,8 +2129,8 @@ RectTransform:
   m_Father: {fileID: 3653343962952647784}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3, y: 0.15}
-  m_AnchorMax: {x: 0.7, y: 0.3}
+  m_AnchorMin: {x: 0.2899258, y: 0.15}
+  m_AnchorMax: {x: 0.6899258, y: 0.3}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
