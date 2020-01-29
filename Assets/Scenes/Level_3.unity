@@ -1820,6 +1820,12 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1641866928}
+    - target: {fileID: 127513567015536371, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1962220d7335d2d4491fa38947c51a45,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
 --- !u!224 &924621616 stripped

@@ -2710,6 +2710,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 127513567015536371, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: bc5f6d57e9b820c4d8929cd0517c2ea3,
+        type: 2}
     - target: {fileID: 3653343961879152834, guid: 5812cbf50c688b74191c2070a027dbec,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

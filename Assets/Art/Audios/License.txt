@@ -56,11 +56,9 @@ Fast Collision Reverb made by qubodup under license CC0 1.0
 Freeze Spell made by artisticdude under license CC0
 	https://opengameart.org/content/freeze-spell-0
 	freeze.wav
-	freeze.wav
 
 Jump Landing Sound made by MentalSanityOff under license CC0
 	https://opengameart.org/content/jump-landing-sound
-	jumpland.wav
 	jumpland.wav
 
 Soliloquy by Matthew Pablo under license CC-BY 3.0
@@ -81,5 +79,24 @@ Heroic Minority made by Alexandr Zhelanov under license CC-BY 3.0
 
 Open the Gate made by Alexandr Zhelanov under license CC-BY-3.0
 	https://opengameart.org/content/open-the-gate
-	Open the gate.mp3
 	Open the gate.ogg
+
+Deal with the Devil made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/deal-with-the-devil
+	Deal with the Devil.mp3
+
+Battle Music made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/battle-music
+	demo_track_1.mp3 demo_track_1.mp3
+
+Rise of Spirit made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/rise-of-spirit
+	Rise of spirit.ogg
+
+Epic Departur made by Of Far Different Nature under license CC-BY 4.0
+	https://opengameart.org/content/epic-departure
+	Of Far Different Nature - Scene - Epic Departure (CC-BY).mp3
+
+Brave Soldiers made by Alexandr Zhelanov under license CC-BY-3.0
+	https://opengameart.org/content/brave-soldiers
+	Brave Soldiers.mp3

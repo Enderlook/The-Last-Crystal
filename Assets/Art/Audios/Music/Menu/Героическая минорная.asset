@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: "\u0413\u0435\u0440\u043E\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u043C\u0438\u043D\u043E\u0440\u043D\u0430\u044F"
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 68d0550f1a1013e46946e2f77d3ec928, type: 3}
-  playsAmount: 1
+  playsAmount: -1
   modifiers: []

@@ -15,6 +15,7 @@ MonoBehaviour:
   sounds:
   - {fileID: 114098563983515718}
   - {fileID: 114203981302541140}
+  - {fileID: 11400000, guid: 1e49ef7d7addfd741b8f84148b70dd45, type: 2}
   playMode: 1
   playListMode: 0
   playsAmount: 1
