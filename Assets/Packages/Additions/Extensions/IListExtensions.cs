@@ -5,6 +5,9 @@ namespace Additions.Extensions
 {
     public static class IListExtensions
     {
+        private const string CAN_NOT_BE_NEGATIVE = "Can't be negative.";
+        private const string CANT_NOT_BE_ZERO = "Can't be 0.";
+
         /// <summary>
         /// Removes an element from a list if matches a criteria determined by <paramref name="selector"/>.
         /// </summary>
@@ -18,9 +21,8 @@ namespace Additions.Extensions
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
+            if (removeAmount < 0) throw new ArgumentException(CAN_NOT_BE_NEGATIVE, nameof(removeAmount));
 
-            if (removeAmount < 0)
-                throw new Exception($"{nameof(removeAmount)} parameter can't be negative.");
             int removed = 0;
             for (int i = ascendOrder ? 0 : source.Count; i < (ascendOrder ? source.Count : 0); i += ascendOrder ? 1 : -1)
                 if (selector(source[i]))
@@ -44,7 +46,7 @@ namespace Additions.Extensions
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            if (removeAmount == 0) throw new ArgumentOutOfRangeException($"{nameof(removeAmount)} parameter can't be 0.");
+            if (removeAmount == 0) throw new ArgumentOutOfRangeException(CANT_NOT_BE_ZERO, nameof(removeAmount));
 
             return source.RemoveBy(selector, removeAmount: removeAmount);
         }
@@ -61,7 +63,7 @@ namespace Additions.Extensions
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
-            if (removeAmount == 0) throw new ArgumentOutOfRangeException($"{nameof(removeAmount)} parameter can't be 0.");
+            if (removeAmount == 0) throw new ArgumentOutOfRangeException(CANT_NOT_BE_ZERO, nameof(removeAmount));
 
             return source.RemoveBy(selector, ascendOrder: false, removeAmount: removeAmount);
         }
