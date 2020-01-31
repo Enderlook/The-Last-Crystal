@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Additions.Extensions
 {
-    public static class ListExtensions
+    public static class IListExtensions
     {
         /// <summary>
         /// Removes an element from a list if matches a criteria determined by <paramref name="selector"/>.
@@ -14,7 +14,7 @@ namespace Additions.Extensions
         /// <param name="ascendOrder">Whenever it must remove in ascending or descending order.</param>
         /// <param name="removeAmount">Amount of items which must the criteria must be removed. If 0, remove all the matched elements.</param>
         /// <returns><paramref name="source"/>.</returns>
-        private static List<T> RemoveBy<T>(this List<T> source, Func<T, bool> selector, bool ascendOrder = true, int removeAmount = 1)
+        private static IList<T> RemoveBy<T>(this IList<T> source, Func<T, bool> selector, bool ascendOrder = true, int removeAmount = 1)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
@@ -40,10 +40,7 @@ namespace Additions.Extensions
         /// <param name="selector">Function to determine if the item must be removed.</param>
         /// <param name="removeAmount">Amount of items which must the criteria must be removed. Value can't be 0.</param>
         /// <returns><paramref name="source"/>.</returns>
-        /// <see cref="RemoveBy{T}(List{T}, Func{T, bool}, bool, int)"/>
-        /// <seealso cref="RemoveLastBy{T}(List{T}, Func{T, bool}, int)"/>
-        /// <seealso cref="RemoveByAll{T}(List{T}, Func{T, bool})"/>
-        public static List<T> RemoveFirstBy<T>(this List<T> source, Func<T, bool> selector, int removeAmount = 1)
+        public static IList<T> RemoveFirstBy<T>(this IList<T> source, Func<T, bool> selector, int removeAmount = 1)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
@@ -60,10 +57,7 @@ namespace Additions.Extensions
         /// <param name="selector">Function to determine if the item must be removed.</param>
         /// <param name="removeAmount">Amount of items which must the criteria must be removed. Value can't be 0.</param>
         /// <returns><paramref name="source"/>.</returns>
-        /// <see cref="RemoveBy{T}(List{T}, Func{T, bool}, bool, int)"/>
-        /// <seealso cref="RemoveFirstBy{T}(List{T}, Func{T, bool}, int)"/>
-        /// <seealso cref="RemoveByAll{T}(List{T}, Func{T, bool})"/>
-        public static List<T> RemoveLastBy<T>(this List<T> source, Func<T, bool> selector, int removeAmount = 1)
+        public static IList<T> RemoveLastBy<T>(this IList<T> source, Func<T, bool> selector, int removeAmount = 1)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (selector is null) throw new ArgumentNullException(nameof(selector));
@@ -82,7 +76,7 @@ namespace Additions.Extensions
         /// <see cref="RemoveBy{T}(List{T}, Func{T, bool}, bool, int)"/>
         /// <seealso cref="RemoveFirstBy{T}(List{T}, Func{T, bool}, int)"/>
         /// <seealso cref="RemoveLastBy{T}(List{T}, Func{T, bool}, int)"/>
-        public static List<T> RemoveByAll<T>(this List<T> source, Func<T, bool> selector) => source.RemoveBy(selector, removeAmount: 0);
+        public static IList<T> RemoveByAll<T>(this IList<T> source, Func<T, bool> selector) => source.RemoveBy(selector, removeAmount: 0);
 
         /// <summary>
         /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
@@ -92,7 +86,7 @@ namespace Additions.Extensions
         /// <param name="function">Function to perform on each element of <paramref name="source"/></param>
         /// <returns>Updated <paramref name="source"/>.</returns>
         /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
-        public static List<T> ChangeEach<T>(this List<T> source, Func<T, T> function)
+        public static IList<T> ChangeEach<T>(this IList<T> source, Func<T, T> function)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
             if (function is null) throw new ArgumentNullException(nameof(function));
