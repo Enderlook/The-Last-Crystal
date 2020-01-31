@@ -77,13 +77,14 @@ namespace Additions.Components.ScriptableSound
         /// <param name="sound"><see cref="Sound"/> included in the component.</param>
         /// <param name="playOnAwake">Whenever it should start playing on awake.</param>
         /// <param name="destroyOnFinish">Whenever it should be destroyed after end playing.</param>
-        public static void CreateOneTimePlayer(Sound sound, bool playOnAwake = false, bool destroyOnFinish = false)
+        public static SimpleSoundPlayer CreateOneTimePlayer(Sound sound, bool playOnAwake = true, bool destroyOnFinish = true)
         {
             GameObject gameObject = new GameObject("One Time Simple Sound Player");
             SimpleSoundPlayer simpleSoundPlayer = gameObject.AddComponent<SimpleSoundPlayer>();
             simpleSoundPlayer.playOnStart = playOnAwake;
             simpleSoundPlayer.destroyOnFinish = destroyOnFinish;
             simpleSoundPlayer.sound = sound.CreatePrototype();
+            return simpleSoundPlayer;
         }
 
         /// <summary>
@@ -92,6 +93,6 @@ namespace Additions.Components.ScriptableSound
         /// <param name="soundPlay"><see cref="SoundPlay"/> where <see cref="Sound"/> will be taken.</param>
         /// <param name="playOnAwake">Whenever it should start playing on awake.</param>
         /// <param name="destroyOnFinish">Whenever it should be destroyed after end playing.</param>
-        public static void CreateOneTimePlayer(SoundPlay soundPlay, bool playOnAwake = false, bool destroyOnFinish = false) => CreateOneTimePlayer(soundPlay.Sound, playOnAwake, destroyOnFinish);
+        public static SimpleSoundPlayer CreateOneTimePlayer(SoundPlay soundPlay, bool playOnAwake = true, bool destroyOnFinish = true) => CreateOneTimePlayer(soundPlay.Sound, playOnAwake, destroyOnFinish);
     }
 }
