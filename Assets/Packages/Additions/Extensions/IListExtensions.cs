@@ -5,6 +5,7 @@ namespace Additions.Extensions
 {
     public static class IListExtensions
     {
+        private const string CAN_NOT_BE_EMPTY = "Can't be empty.";
         private const string CAN_NOT_BE_NEGATIVE = "Can't be negative.";
         private const string CANT_NOT_BE_ZERO = "Can't be 0.";
 
@@ -100,5 +101,90 @@ namespace Additions.Extensions
 
             return source;
         }
+
+        /// <summary>
+        /// Remove and returns the element at the begging of <paramref name="source"/>.<br/>
+        /// </summary>
+        /// <typeparam name="T">Type of element to remove.</typeparam>
+        /// <param name="source"><see cref="IList{T}"/> where element is taken.</param>
+        /// <returns>Element removed from the begging of <paramref name="source"/>.</returns>
+        /// <remarks>This is an O(n) operation.</remarks>
+        public static T PopFirst<T>(this IList<T> source)
+        {
+            if (source.Count == 0) throw new ArgumentException(CAN_NOT_BE_EMPTY, nameof(source));
+
+            T element = source[0];
+            source.RemoveAt(0);
+            return element;
+        }
+
+        /// <summary>
+        /// Try to remove and return the element at the begging of <paramref name="source"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of element to remove.</typeparam>
+        /// <param name="source"><see cref="IList{T}"/> where element is taken.</param>
+        /// <param name="element">Element removed from the begging of <paramref name="source"/>, if return is <see langword="true"/></param>
+        /// <returns>Whenever an element was removed or not (<paramref name="source"/> is empty).</returns>
+        /// <remarks>This is an O(n) operation.</remarks>
+        public static bool TryPopFirst<T>(this IList<T> source, out T element)
+        {
+            if (source.Count == 0)
+            {
+                element = default;
+                return false;
+            }
+
+            element = source[0];
+            source.RemoveAt(0);
+            return true;
+        }
+
+        /// <summary>
+        /// Remove and returns the element at the end of <paramref name="source"/>.<br/>
+        /// </summary>
+        /// <typeparam name="T">Type of element to remove.</typeparam>
+        /// <param name="source"><see cref="IList{T}"/> where element is taken.</param>
+        /// <returns>Element removed from the end of <paramref name="source"/>.</returns>
+        /// <remarks>This is an O(1) amortized O(n) operation.</remarks>
+        public static T PopLast<T>(this IList<T> source)
+        {
+            if (source.Count == 0) throw new ArgumentException(CAN_NOT_BE_EMPTY, nameof(source));
+
+            int index = source.Count - 1;
+            T element = source[index];
+            source.RemoveAt(index);
+            return element;
+        }
+
+        /// <summary>
+        /// Try to remove and return the element at the end of <paramref name="source"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of element to remove.</typeparam>
+        /// <param name="source"><see cref="IList{T}"/> where element is taken.</param>
+        /// <param name="element">Element removed from the end of <paramref name="source"/>, if return is <see langword="true"/></param>
+        /// <returns>Whenever an element was removed or not (<paramref name="source"/> is empty).</returns>
+        /// <remarks>This is an O(1) amortized O(n) operation.</remarks>
+        public static bool TryPopLast<T>(this IList<T> source, out T element)
+        {
+            if (source.Count == 0)
+            {
+                element = default;
+                return false;
+            }
+
+            int index = source.Count - 1;
+            element = source[index];
+            source.RemoveAt(index);
+            return true;
+        }
+
+        /// <summary>
+        /// Add <paramref name="element"/> at begging of <paramref name="source"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of element to add.</typeparam>
+        /// <param name="source"><see cref="IList{T}"/> where elements are added.</param>
+        /// <param name="element">Element to add at begging of <paramref name="source"/>.</param>
+        /// <remarks>This is an O(n) operation.</remarks>
+        public static void AddFirst<T>(this IList<T> source, T element) => source.Insert(0, element);
     }
 }
