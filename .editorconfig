@@ -20,3 +20,6 @@ dotnet_diagnostic.RCS1146.severity = none
 
 # IDE0063: Use simple 'using' statement
 csharp_prefer_simple_using_statement = true:none
+
+# IDE0062: Make local function 'static'
+csharp_prefer_static_local_function = true:none
