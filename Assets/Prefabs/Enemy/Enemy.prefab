@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 5381365898832506502}
   - component: {fileID: 8597921017496991690}
   - component: {fileID: 7802901863001622724}
+  - component: {fileID: 8471697138206256346}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -214,11 +215,14 @@ MonoBehaviour:
   sprite: {fileID: 2679576587458712375}
   spriteColorer: {fileID: 7802901863001622724}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  healingSpriteColor: {r: 0, g: 1, b: 0, a: 1}
+  healingTextColor: {r: 0, g: 1, b: 0, a: 1}
   speed: 1
   stoppableRigidbody: {fileID: 843876848762180787}
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
   groundChecker: {fileID: 8597921017496991690}
+  isStunned: 0
 --- !u!114 &8948837633536277635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +518,21 @@ MonoBehaviour:
   useSpriteRendererDefaultColor: 1
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   autoManage: 0
+--- !u!114 &8471697138206256346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794628492074983519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8852b86a8299834586de7b58e458ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropsTable:
+    weightedElements: []
+    emptyWeight: 0
 --- !u!1001 &2914788185493605554
 PrefabInstance:
   m_ObjectHideFlags: 0

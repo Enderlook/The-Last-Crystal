@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3430087774838448887}
   - component: {fileID: 7526445749177953701}
   - component: {fileID: 8392426017629629405}
-  - component: {fileID: 4901582744108699570}
+  - component: {fileID: 3731946733286580160}
   - component: {fileID: 5042988860275578343}
   - component: {fileID: 8836964168732201439}
   - component: {fileID: 3625034397826583285}
@@ -52,7 +52,6 @@ GameObject:
   - component: {fileID: 5125575169536085736}
   - component: {fileID: 4416114078013645945}
   - component: {fileID: 1786681838222022307}
-  - component: {fileID: 7219742351414640916}
   - component: {fileID: 4301053365877223748}
   m_Layer: 9
   m_Name: Player
@@ -277,7 +276,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4901582744108699570
+--- !u!114 &3731946733286580160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -286,7 +285,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2891791631359779234}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dacd0781548837648bd838a6523b2288, type: 3}
+  m_Script: {fileID: 11500000, guid: 935fa284eaa972946b69bf321e4b8ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 4416114078013645945}
@@ -297,14 +296,18 @@ MonoBehaviour:
   dieSound: {fileID: 11400000, guid: b828f1d2f7870c4409ed514699db3afb, type: 2}
   sprite: {fileID: 7526445749177953701}
   spriteColorer: {fileID: 4301053365877223748}
-  hurtColor: {r: 1, g: 0.05275345, b: 0, a: 1}
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  healingSpriteColor: {r: 0, g: 1, b: 0, a: 1}
+  healingTextColor: {r: 0, g: 1, b: 0, a: 1}
   speed: 1
-  sprite: {fileID: 7526445749177953701}
   stoppableRigidbody: {fileID: 8836964168732201439}
   thisRigidbody2D: {fileID: 8157229962283897169}
   animator: {fileID: 8392426017629629405}
   groundChecker: {fileID: 2865848467112834137}
-  redFlash: {fileID: 2100000, guid: a7e00aa7a22388448b0152bdcbf8216c, type: 2}
+  isStunned: 0
+  energy: {fileID: 1786681838222022307}
+  addEnergySpriteColor: {r: 0, g: 1, b: 0, a: 1}
+  addEnergyTextColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &5042988860275578343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +420,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4901582744108699570}
+        - m_Target: {fileID: 0}
           m_MethodName: Die
           m_Mode: 6
           m_Arguments:
@@ -538,19 +541,6 @@ MonoBehaviour:
     reductionFormula:
       formula: 
       compile: 0
---- !u!114 &7219742351414640916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891791631359779234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e615498ac0aeb624ea08bbd4789a405b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energy: {fileID: 1786681838222022307}
 --- !u!114 &4301053365877223748
 MonoBehaviour:
   m_ObjectHideFlags: 0

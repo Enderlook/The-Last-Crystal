@@ -40,8 +40,8 @@ public class InitializePlayers : MonoBehaviour
 
     private static void InitializeCreature(GameObject creature, HealthBar healthBar, HealthBar energyBar)
     {
-        BarDecorator barDecorator = creature.GetComponent<Creature>().Health.GetLayer<BarDecorator>();
-        barDecorator.Bar = healthBar;
-        creature.GetComponent<EnergyManager>().SetEnergyBar(energyBar);
+        CreatureWithEnergy creatureWithEnergy = creature.GetComponent<CreatureWithEnergy>();
+        creatureWithEnergy.SetHealthBar(healthBar);
+        creatureWithEnergy.SetEnergyBar(energyBar);
     }
 }

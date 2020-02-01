@@ -1,7 +1,9 @@
 ﻿using Additions.Components.ColorCombiner;
 using Additions.Components.FloatPool;
+using Additions.Components.FloatPool.Decorators;
 using Additions.Components.ScriptableSound;
 using Additions.Prefabs.FloatingText;
+using Additions.Prefabs.HealthBarGUI;
 using Additions.Utils;
 
 using Creatures.Weapons;
@@ -9,19 +11,16 @@ using Creatures.Weapons;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace Creatures
 {
-    public class Hurtable : MonoBehaviour, ITakeDamage
+    public class Hurtable : MonoBehaviour, IHasHealth
     {
 #pragma warning disable CS0649
         [Header("Setup")]
         [SerializeField, Tooltip("Health.")]
         private Pool health;
-
-        public Pool Health => health;
 
         [SerializeField, Tooltip("FloatingTextController Script")]
         private FloatingTextController floatingTextController;
@@ -42,6 +41,12 @@ namespace Creatures
 
         [SerializeField, Tooltip("Color tint for Sprite Renderer used when hurt.")]
         private Color hurtColor = Color.red;
+
+        [SerializeField, Tooltip("Color tint for Sprite Renderer used when healed.")]
+        private Color healingSpriteColor = Color.green;
+
+        [SerializeField, Tooltip("Color of floating text when healed.")]
+        private Color healingTextColor = Color.green;
 #pragma warning restore CS0649
 
         protected HashSet<IUpdate> updates;
@@ -59,30 +64,42 @@ namespace Creatures
             };
         }
 
+        public void SetHealthBar(HealthBar energyBar) => health.GetLayer<BarDecorator>().Bar = energyBar;
+
         protected virtual void Update()
         {
             foreach (IUpdate update in updates)
                 update.UpdateBehaviour(Time.deltaTime);
         }
 
-        /// <summary>
-        /// Take damage reducing its <see cref="Health"/>.<br>
-        /// Animation and floating text will only be show if their parameters are <see langword="true"/> and the effective taken damage is greater than 0.
-        /// </summary>
-        /// <param name="amount">Amount of <see cref="Health"/> lost. Must be positive.</param>
-        /// <param name="displayText">Whenever the damage taken must be shown in a floating text.</param>
-        /// <param name="produceFeedback">Whenever it should display <see cref="ANIMATION_STATE_HURT"/> animation and play <see cref="hurtSound"/> sound.</param>
+        /// <inheritdoc />
         public virtual void TakeDamage(float amount, bool displayText = true, bool produceFeedback = true)
         {
             (_, float taken) = health.Decrease(amount);
             if (taken > 0)
             {
                 if (produceFeedback)
-                    TakeDamageFeedback();
+                {
+                    hurtSound.Play();
+                    AddColorTint(hurtColor, .1f);
+                }
                 if (displayText)
                     SpawnFloatingText(amount, Color.Lerp(Color.red, new Color(1, .5f, 0), health.Ratio));
                 if (health.Current <= 0)
                     Die();
+            }
+        }
+
+        /// <inheritdoc />
+        public void TakeHealing(float amount, bool displayText = true, bool produceFeedback = true)
+        {
+            (_, float increased) = health.Increase(amount);
+            if (increased > 0)
+            {
+                if (produceFeedback)
+                    AddColorTint(healingSpriteColor, .1f);
+                if (displayText)
+                    SpawnFloatingText(amount, healingTextColor);
             }
         }
 
@@ -121,12 +138,6 @@ namespace Creatures
         /// <param name="color">Color to add.</param>
         /// <param name="duration">Duration of color in seconds.</param>
         public void AddColorTint(Color color, float duration) => spriteColorer.Add(color, duration);
-
-        protected virtual void TakeDamageFeedback()
-        {
-            hurtSound.Play();
-            AddColorTint(hurtColor, .1f);
-        }
 
         /// <summary>
         /// Spawn a floating text above the creature.

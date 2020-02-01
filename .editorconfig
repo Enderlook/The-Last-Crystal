@@ -17,3 +17,6 @@ dotnet_diagnostic.RCS1128.severity = none
 
 # RCS1146: Use conditional access.
 dotnet_diagnostic.RCS1146.severity = none
+
+# IDE0063: Use simple 'using' statement
+csharp_prefer_simple_using_statement = true:none

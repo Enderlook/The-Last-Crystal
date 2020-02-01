@@ -26,7 +26,7 @@ namespace Creatures.Weapons
 
         void IInitialize<Creature>.Initialize(Creature creature) => thisTransform = creature.Transform;
 
-        public virtual void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
+        public virtual void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             if (IsEnabled)
             {

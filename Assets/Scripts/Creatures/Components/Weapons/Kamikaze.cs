@@ -13,7 +13,7 @@ namespace Creatures.Weapons
         private Sound hitSound;
 #pragma warning restore CS0649
 
-        public override void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
+        public override void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             base.ProduceDamage(takeDamage, takePush, takeEffect);
             SimpleSoundPlayer.CreateOneTimePlayer(hitSound, true, true);

@@ -354,11 +354,6 @@ PrefabInstance:
       propertyPath: weapons.Array.data[1].button
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: speed
-      value: 2.8
-      objectReference: {fileID: 0}
     - target: {fileID: 8392426017629629405, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: m_Controller
@@ -440,6 +435,11 @@ PrefabInstance:
       propertyPath: radius
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 4901582744108699570, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: speed
+      value: 2.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5444643182364421536, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: decreaseKey
@@ -459,6 +459,11 @@ PrefabInstance:
         type: 3}
       propertyPath: increaseKey
       value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731946733286580160, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: speed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}

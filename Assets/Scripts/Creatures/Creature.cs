@@ -87,12 +87,6 @@ namespace Creatures
         }
 
         /// <summary>
-        /// Takes healing increasing its <see cref="Health"/>.
-        /// </summary>
-        /// <param name="amount">Amount of <see cref="Health"/> recovered. Must be positive.</param>
-        public void TakeHealing(float amount) => Health.Increase(amount);
-
-        /// <summary>
         /// Push creature.
         /// </summary>
         /// <param name="direction">Direction to apply force.</param>

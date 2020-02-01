@@ -71,7 +71,7 @@ Prologue by Telaron under license GPL 2.0, GPL 3.0, CC-BY-SA 3.0
 
 Radakan - Game Lost made by Janne Hanhisuanto under license CC-BY-SA 3.0
 	https://opengameart.org/content/radakan-game-lost
-	radakan - game lost.ogg	
+	radakan - game lost.ogg
 
 Heroic Minority made by Alexandr Zhelanov under license CC-BY 3.0
 	https://opengameart.org/content/heroic-minority
@@ -100,3 +100,9 @@ Epic Departur made by Of Far Different Nature under license CC-BY 4.0
 Brave Soldiers made by Alexandr Zhelanov under license CC-BY-3.0
 	https://opengameart.org/content/brave-soldiers
 	Brave Soldiers.mp3
+
+3 Heal Spells made by DoKashiteru unde license CC-BY 3.0, GPL 3.0, GPL 2.0
+	https://opengameart.org/content/3-heal-spells
+	healspell1.aif
+	healspell2.aif
+	healspell3.aif

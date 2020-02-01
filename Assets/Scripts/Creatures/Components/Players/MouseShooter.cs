@@ -139,7 +139,7 @@ namespace Creatures.Weapons
             thisTransform = transform;
         }
 
-        public override void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
+        public override void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             base.ProduceDamage(takeDamage, takePush, takeEffect);
             Destroy(gameObject);

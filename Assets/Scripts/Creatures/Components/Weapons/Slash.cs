@@ -75,7 +75,7 @@ namespace Creatures.Weapons
             {
                 Transform victim = raycastHits[n].transform;
                 victim.transform.GetComponent<ITakePush>()?.TakePush(thisTransform.position, pushStrength);
-                victim.transform.GetComponent<ITakeDamage>()?.TakeDamage(damage);
+                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(damage);
             }
         }
 

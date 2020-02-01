@@ -42,7 +42,7 @@ namespace Creatures
                 hitSound.Init();
         }
 
-        public void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
+        public void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             if (basicClockwork.IsReady && IsEnabled)
             {

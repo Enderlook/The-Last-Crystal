@@ -136,7 +136,7 @@ namespace Creatures.Weapons
                 this.effectColor = effectColor;
             }
 
-            public void ProduceDamage(ITakeDamage takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
+            public void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
             {
                 takeEffect?.TakeEffect(new StunEffect(effectDuration, effectColor));
             }
