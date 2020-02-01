@@ -1,13 +1,20 @@
-﻿using Additions.Extensions;
+﻿using Additions.Exceptions;
+using Additions.Extensions;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Random = UnityEngine.Random;
+
 namespace Additions.Extensions
 {
     public static class LinqExtensions
     {
+        public delegate bool AggregatorWhile<TSource>(TSource accumulated, TSource current, out TSource result);
+
+        public delegate bool AggregatorWhile<TSource, TAccumulate>(TAccumulate accumulated, TSource current, out TAccumulate result);
+
         /// <summary>
         /// Add a the <paramref name="element"/> at the end of the returned <seealso cref="IEnumerable{T}"/> <paramref name="source"/>.
         /// </summary>
@@ -82,11 +89,73 @@ namespace Additions.Extensions
         /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
         /// <param name="source">Source to look for a random element.</param>
         /// <returns>Random element from <paramref name="source"/>.</returns>
-        public static T RandomElement<T>(this IEnumerable<T> source)
+        public static T RandomPick<T>(this IEnumerable<T> source)
         {
             if (source is null) throw new ArgumentNullException(nameof(source));
 
-            return source.ElementAt(UnityEngine.Random.Range(0, source.Count()));
+            return source.ElementAt(Random.Range(0, source.Count()));
+        }
+
+        /// <summary>
+        /// Returns a random element from <paramref name="source"/> taking into account its weight from <paramref name="weigths"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+        /// <param name="source">Source to look for a random element.</param>
+        /// <param name="weigths">Weight of each element.</param>
+        /// <returns>Random element from <paramref name="source"/>.</returns>
+        public static T RandomPickWeighted<T>(this IEnumerable<T> source, IEnumerable<float> weigths)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (weigths is null) throw new ArgumentNullException(nameof(source));
+
+            const string MUST_HAVE_SAME_COUNT = "{0} and {1} must have same Count.";
+
+            float value = Random.Range(0, weigths.Sum());
+
+            using (IEnumerator<T> sourceEnumerator = source.GetEnumerator())
+            {
+                using (IEnumerator<float> weigthsEnumerator = weigths.GetEnumerator())
+                {
+                    float cumulative = 0;
+                    do // Otherwise, if value is 0 it would return nothing (since enumerators start with null Current)
+                    {
+                        if (sourceEnumerator.MoveNext())
+                        {
+                            if (!weigthsEnumerator.MoveNext())
+                                throw new ArgumentException(string.Format(MUST_HAVE_SAME_COUNT, nameof(source), nameof(weigths)));
+                            cumulative += weigthsEnumerator.Current;
+                        }
+                        else
+                            throw new ArgumentException(string.Format(MUST_HAVE_SAME_COUNT, nameof(source), nameof(weigths)));
+                    }
+                    while (cumulative <= value);
+
+                    return sourceEnumerator.Current;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns a random element from <paramref name="source"/> taking into account its weight produced by <paramref name="weighter"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
+        /// <param name="source">Source to look for a random element.</param>
+        /// <param name="weighter">Produce weight of elements.</param>
+        /// <returns>Random element from <paramref name="source"/>.</returns>
+        public static T RandomPickWeighted<T>(this IEnumerable<T> source, Func<T, float> weighter)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+
+            float value = Random.Range(0, source.Sum(e => weighter(e)));
+            float cumulative = 0;
+            foreach (T element in source)
+            {
+                cumulative += weighter(element);
+                if (cumulative <= value)
+                    return element;
+            }
+
+            throw new ImpossibleStateException();
         }
 
         /// <summary>
@@ -164,6 +233,100 @@ namespace Additions.Extensions
             if (predicate is null) throw new ArgumentNullException(nameof(predicate));
 
             return source.Select(e => predicate(e)).ToLookup();
+        }
+
+        /// <summary>
+        /// Applies <paramref name="func"/> over the elements of the sequence carrying the last result until it returns <see langword="false"/>.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in <paramref name="source"/>.</typeparam>
+        /// <param name="source">Sequence which elements will be applied to <paramref name="func"/>.</param>
+        /// <param name="func">Method applied to elements of <paramref name="source"/>. If it returns <see cref="false"/> it stop.</param>
+        /// <returns>The last result of <paramref name="func"/>.</returns>
+        public static TSource AggregateWhile<TSource>(this IEnumerable<TSource> source, AggregatorWhile<TSource> func)
+        {
+            const string NO_ELEMENTS = "Sequence contains no elements.";
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (func is null) throw new ArgumentNullException(nameof(func));
+
+            using (IEnumerator<TSource> enumerator = source.GetEnumerator())
+            {
+                if (!enumerator.MoveNext())
+                    // InvalidOperationException because it's used by Enumerable.Aggregate
+                    throw new InvalidOperationException(NO_ELEMENTS);
+
+                TSource result = enumerator.Current;
+                while (enumerator.MoveNext() && func(result, enumerator.Current, out result)) ;
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Applies <paramref name="func"/> over the elements of the sequence carrying the last result until it returns <see langword="false"/>.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in <paramref name="source"/>.</typeparam>
+        /// <param name="source">Sequence which elements will be applied to <paramref name="func"/>.</param>
+        /// <param name="seed">Initial value.</param>
+        /// <param name="func">Method applied to elements of <paramref name="source"/>. If it returns <see cref="false"/> it stop.</param>
+        /// <returns>The last result of <paramref name="func"/>.</returns>
+        public static TSource AggregateWhile<TSource>(this IEnumerable<TSource> source, TSource seed, AggregatorWhile<TSource> func)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (func is null) throw new ArgumentNullException(nameof(func));
+
+            TSource result = seed;
+            foreach (TSource element in source)
+                if (!func(result, element, out result))
+                    break;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Applies <paramref name="func"/> over the elements of the sequence carrying the last result until it returns <see langword="false"/>.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate">Type of the accumulated value.</typeparam>
+        /// <param name="source">Sequence which elements will be applied to <paramref name="func"/>.</param>
+        /// <param name="seed">Initial value.</param>
+        /// <param name="func">Method applied to elements of <paramref name="source"/>. If it returns <see cref="false"/> it stop.</param>
+        /// <returns>Result of <paramref name="resultSelector"/>.</returns>
+        public static TAccumulate AggregateWhile<TSource, TAccumulate>(this IEnumerable<TSource> source, TAccumulate seed, AggregatorWhile<TSource, TAccumulate> func)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (func is null) throw new ArgumentNullException(nameof(func));
+
+            TAccumulate result = seed;
+            foreach (TSource element in source)
+                if (!func(result, element, out result))
+                    break;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Applies <paramref name="func"/> over the elements of the sequence carrying the last result until it returns <see langword="false"/>.
+        /// </summary>
+        /// <typeparam name="TSource">Type of element in <paramref name="source"/>.</typeparam>
+        /// <typeparam name="TAccumulate">Type of the accumulated value.</typeparam>
+        /// <typeparam name="TResult">Type of the result value.</typeparam>
+        /// <param name="source">Sequence which elements will be applied to <paramref name="func"/>.</param>
+        /// <param name="seed">Initial value.</param>
+        /// <param name="func">Method applied to elements of <paramref name="source"/>. If it returns <see cref="false"/> it stop.</param>
+        /// <param name="resultSelector">Function which transform the last result of <paramref name="func"/> into the result value.</param>
+        /// <returns>Result of <paramref name="resultSelector"/>.</returns>
+        public static TResult AggregateWhile<TSource, TAccumulate, TResult>(this IEnumerable<TSource> source, TAccumulate seed, AggregatorWhile<TSource, TAccumulate> func, Func<TAccumulate, TResult> resultSelector)
+        {
+            if (source is null) throw new ArgumentNullException(nameof(source));
+            if (func is null) throw new ArgumentNullException(nameof(func));
+            if (resultSelector is null) throw new ArgumentNullException(nameof(resultSelector));
+
+            TAccumulate result = seed;
+            foreach (TSource element in source)
+                if (!func(result, element, out result))
+                    break;
+
+            return resultSelector(result);
         }
     }
 }

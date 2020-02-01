@@ -23,7 +23,7 @@ namespace Additions.Extensions
         /// Performs the specified <paramref name="action"/> on each element of the <paramref name="source"/>.
         /// </summary>
         /// <typeparam name="T">Type of the element inside <paramref name="source"/>.</typeparam>
-        /// <param name="source">Source to look for element to perform the <paramref name="action"/></param>
+        /// <param name="source">Source to look for element to perform the <paramref name="function"/></param>
         /// <param name="function">Function to perform on each element of <paramref name="source"/></param>
         /// <returns>Updated <paramref name="source"/>.</returns>
         /// <seealso cref="Array.ForEach{T}(T[], Action{T})"/>
