@@ -24,7 +24,7 @@ namespace Creatures.Weapons
 
         protected Transform thisTransform;
 
-        void IInitialize<Creature>.Initialize(Creature creature) => thisTransform = creature.Transform;
+        public virtual void Initialize(Creature creature) => thisTransform = creature.Transform;
 
         public virtual void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {

@@ -13,11 +13,19 @@ namespace Creatures.Weapons
         private Sound hitSound;
 #pragma warning restore CS0649
 
+        private Creature creature;
+
+        public override void Initialize(Creature creature)
+        {
+            base.Initialize(creature);
+            this.creature = creature;
+        }
+
         public override void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
             base.ProduceDamage(takeDamage, takePush, takeEffect);
             SimpleSoundPlayer.CreateOneTimePlayer(hitSound, true, true);
-            Destroy(thisTransform.gameObject);
+            creature.Die(true);
         }
     }
 }
