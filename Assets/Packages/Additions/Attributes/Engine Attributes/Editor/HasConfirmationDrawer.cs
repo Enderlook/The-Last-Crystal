@@ -33,7 +33,7 @@ namespace Additions.Attributes
             if (confirm)
             {
                 EditorGUI.indentLevel++;
-                EditorGUI.PropertyField(new VerticalRectBuilder(position.x, position.y, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight).GetRect(), property, label, true);
+                EditorGUI.PropertyField(new VerticalRectBuilder(position.x, position.y + EditorGUIUtility.singleLineHeight, EditorGUIUtility.currentViewWidth, EditorGUIUtility.singleLineHeight).GetRect(), property, label, true);
                 EditorGUI.indentLevel--;
             }
 
