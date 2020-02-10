@@ -4,7 +4,6 @@ using Additions.Components.FloatPool.Internal;
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 using UnityEngine;
 
@@ -19,37 +18,37 @@ namespace Additions.Components.FloatPool
         [SerializeField, HideInInspector]
         private bool hasEmptyCallback;
 
-        [SerializeField, HasConfirmationField(nameof(hasEmptyCallback))]
+        [SerializeField, ShowIf(nameof(hasEmptyCallback))]
         private EmptyCallbackDecorator emptyCallback;
 
         [SerializeField, HideInInspector]
         private bool hasFullCallback;
 
-        [SerializeField, HasConfirmationField(nameof(hasFullCallback))]
+        [SerializeField, ShowIf(nameof(hasFullCallback))]
         private FullCallbackDecorator fullCallback;
 
         [SerializeField, HideInInspector]
         private bool hasChangeCallback;
 
-        [SerializeField, HasConfirmationField(nameof(hasChangeCallback))]
+        [SerializeField, ShowIf(nameof(hasChangeCallback))]
         private ChangeCallbackDecorator changeCallback;
 
         [SerializeField, HideInInspector]
         private bool hasBar;
 
-        [SerializeField, HasConfirmationField(nameof(hasBar))]
+        [SerializeField, ShowIf(nameof(hasBar))]
         private BarDecorator bar;
 
         [SerializeField, HideInInspector]
         private bool hasRecharger;
 
-        [SerializeField, HasConfirmationField(nameof(hasRecharger))]
+        [SerializeField, ShowIf(nameof(hasRecharger))]
         private RechargerDecorator recharger;
 
         [SerializeField, HideInInspector]
         private bool hasDecreaseReduction;
 
-        [SerializeField, HasConfirmationField(nameof(hasDecreaseReduction))]
+        [SerializeField, ShowIf(nameof(hasDecreaseReduction))]
         private DecreaseReductionDecorator decreaseReduction;
 #pragma warning restore IDE0051, CS0649
 
@@ -70,8 +69,18 @@ namespace Additions.Components.FloatPool
 
         private IEnumerable<Decorator> GetAppliedDecorators()
         {
-            foreach (FieldInfo field in HasConfirmationFieldAttribute.GetConfirmedFields(this))
-                yield return (Decorator)field.GetValue(this);
+            if (hasEmptyCallback)
+                yield return emptyCallback;
+            if (hasFullCallback)
+                yield return fullCallback;
+            if (hasChangeCallback)
+                yield return changeCallback;
+            if (hasBar)
+                yield return bar;
+            if (hasRecharger)
+                yield return recharger;
+            if (hasDecreaseReduction)
+                yield return decreaseReduction;
         }
 
         public void ConstructDecorators()
