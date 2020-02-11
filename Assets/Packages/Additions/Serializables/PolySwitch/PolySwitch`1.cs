@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Additions.Serializables.PolySwitcher
 {
-    [Serializable, AbstractScriptableObject]
+    [Serializable, AbstractScriptableObject, CannotBeUsedAsMember]
     public class PolySwitch<T> : ScriptableObject
     {
 #pragma warning disable CA2235, CS0649
