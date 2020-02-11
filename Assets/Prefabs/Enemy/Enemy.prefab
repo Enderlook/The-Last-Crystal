@@ -222,7 +222,6 @@ MonoBehaviour:
   thisRigidbody2D: {fileID: 9122259109595901824}
   animator: {fileID: 2922834967895029636}
   groundChecker: {fileID: 8597921017496991690}
-  isStunned: 0
 --- !u!114 &8948837633536277635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +532,7 @@ MonoBehaviour:
   dropsTable:
     weightedElements: []
     emptyWeight: 0
+  deathCondition: 6
 --- !u!1001 &2914788185493605554
 PrefabInstance:
   m_ObjectHideFlags: 0

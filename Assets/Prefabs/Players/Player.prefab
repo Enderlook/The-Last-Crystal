@@ -304,7 +304,6 @@ MonoBehaviour:
   thisRigidbody2D: {fileID: 8157229962283897169}
   animator: {fileID: 8392426017629629405}
   groundChecker: {fileID: 2865848467112834137}
-  isStunned: 0
   energy: {fileID: 1786681838222022307}
   addEnergySpriteColor: {r: 0, g: 1, b: 0, a: 1}
   addEnergyTextColor: {r: 0, g: 1, b: 0, a: 1}
