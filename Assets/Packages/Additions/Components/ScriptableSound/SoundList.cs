@@ -1,6 +1,7 @@
 ﻿using Additions.Attributes;
 using Additions.Utils;
 
+using System;
 using System.Linq;
 
 using UnityEngine;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 
 namespace Additions.Components.ScriptableSound
 {
-    [CreateAssetMenu(fileName = "SoundList", menuName = "Sound/SoundList")]
+    [Serializable, CreateAssetMenu(fileName = "SoundList", menuName = "Sound/SoundList")]
     public class SoundList : Sound
     {
 #pragma warning disable CS0649

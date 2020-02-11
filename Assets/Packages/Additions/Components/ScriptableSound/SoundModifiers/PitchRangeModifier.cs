@@ -1,11 +1,13 @@
 ﻿using Additions.Serializables.Ranges;
 using Additions.Utils;
 
+using System;
+
 using UnityEngine;
 
 namespace Additions.Components.ScriptableSound.Modifiers
 {
-    [CreateAssetMenu(fileName = "PitchRange", menuName = "Sound/Modifiers/Pitch Range")]
+    [Serializable, CreateAssetMenu(fileName = "PitchRange", menuName = "Sound/Modifiers/Pitch Range")]
     public class PitchRangeModifier : SoundModifier
     {
 #pragma warning disable CS0649

@@ -1,10 +1,12 @@
 ﻿using Additions.Utils;
 
+using System;
+
 using UnityEngine;
 
 namespace Additions.Components.ScriptableSound.Modifiers
 {
-    [CreateAssetMenu(fileName = "Volume", menuName = "Sound/Modifiers/Volume")]
+    [Serializable, CreateAssetMenu(fileName = "Volume", menuName = "Sound/Modifiers/Volume")]
     public class VolumeModifier : SoundModifier
     {
         [SerializeField, Tooltip("Volume multiplier.")]

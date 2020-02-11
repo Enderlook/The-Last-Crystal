@@ -1,12 +1,13 @@
 ﻿using Additions.Utils;
 
+using System;
 using System.Reflection;
 
 using UnityEngine;
 
 namespace Additions.Components.ScriptableSound.Modifiers
 {
-    [CreateAssetMenu(fileName = "StartAt", menuName = "Sound/Modifiers/Start At")]
+    [Serializable, CreateAssetMenu(fileName = "StartAt", menuName = "Sound/Modifiers/Start At")]
     public class StartAtModifier : SoundModifier
     {
 #pragma warning disable CS0649

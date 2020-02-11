@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Additions.Components.ScriptableSound
 {
-    [CreateAssetMenu(fileName = "SoundClip", menuName = "Sound/SoundClip")]
+    [Serializable, CreateAssetMenu(fileName = "SoundClip", menuName = "Sound/SoundClip")]
     public class SoundClip : Sound
     {
 #pragma warning disable CS0649

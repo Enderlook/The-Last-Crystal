@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Additions.Components.ScriptableSound
 {
-    [AbstractScriptableObject]
+    [Serializable, AbstractScriptableObject]
     public class Sound : ScriptableObject, IPrototypable<Sound>
     {
         /// <summary>
