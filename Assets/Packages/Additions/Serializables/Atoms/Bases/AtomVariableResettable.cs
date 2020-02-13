@@ -4,8 +4,10 @@ namespace Additions.Serializables.Atoms
 {
     public abstract class AtomVariableResettable<T> : AtomVariable<T>, IReseteable
     {
+#pragma warning disable CS0649
         [SerializeField, Tooltip("Initial value of this variable.")]
         private T initialValue;
+#pragma warning restore CS0649
 
         /// <summary>
         /// <see cref="initialValue"/> as property.
