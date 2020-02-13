@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-namespace Additions.Serializables.Atoms
+namespace Additions.Serializables.Atoms.Premades.System
 {
     [CreateAssetMenu(fileName = nameof(StringVariableResettable), menuName = nameof(Atom) + "/Variables/Resettables/" + nameof(String))]
     public class StringVariableResettable : AtomVariableResettable<string> { }
