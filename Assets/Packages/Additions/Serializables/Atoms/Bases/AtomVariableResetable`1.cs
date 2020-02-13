@@ -2,7 +2,7 @@
 
 namespace Additions.Serializables.Atoms
 {
-    public abstract class AtomVariableResetable<T> : AtomVariable<T>, IReseteable
+    public abstract class AtomVariableResettable<T> : AtomVariable<T>, IReseteable
     {
         [SerializeField, Tooltip("Initial value of this variable.")]
         private T initialValue;
