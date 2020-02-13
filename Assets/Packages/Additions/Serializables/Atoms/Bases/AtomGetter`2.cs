@@ -2,16 +2,9 @@
 
 namespace Additions.Serializables.Atoms
 {
-    public abstract class AtomGetter<T, U> : Atom
+    public abstract class AtomGetter<T, U> : AtomGet<U>
     {
         [SerializeField]
         protected T value;
-
-        public abstract U Value { get; }
-
-        /// <summary>
-        /// Boxed value of <see cref="Value"/>
-        /// </summary>
-        public object ObjectValue => Value;
     }
 }

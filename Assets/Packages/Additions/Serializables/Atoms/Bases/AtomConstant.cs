@@ -4,20 +4,15 @@ using UnityEngine;
 
 namespace Additions.Serializables.Atoms
 {
-    public abstract class AtomConstant<T> : Atom, IGet<T>
+    public abstract class AtomConstant<T> : AtomGet<T>
     {
         [SerializeField]
         protected T value;
 
         /// <summary>
-        /// Boxed value of <see cref="Value"/>
+        /// Value of <see cref="Value"/>.
         /// </summary>
-        public object ObjectValue => Value;
-
-        /// <summary>
-        /// <see cref="value"/> as property.
-        /// </summary>
-        public T Value => value;
+        public override T Value => value;
 
         private bool Equals(AtomConstant<T> other) => EqualityComparer<T>.Default.Equals(value, other.value);
 

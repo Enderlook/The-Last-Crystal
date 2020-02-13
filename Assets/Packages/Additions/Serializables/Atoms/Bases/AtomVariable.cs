@@ -8,7 +8,7 @@
             set => this.value = value;
         }
 
-        /// <inheritdoc cref="AtomConstant{T}.value"/>
+        /// <inheritdoc cref="AtomGet{T}.ObjectValue"/>
         public new object ObjectValue {
             get => Value;
             set => Value = (T)value;
