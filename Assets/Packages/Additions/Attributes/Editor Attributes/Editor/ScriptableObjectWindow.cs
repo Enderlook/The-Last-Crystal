@@ -29,14 +29,24 @@ namespace Additions.Attributes
 
         private static void InitializeDerivedTypes()
         {
-            Type[] types = AssembliesHelper.GetAllAssembliesOfPlayerAndEditorAssemblies()
+            Stack<Type> types = new Stack<Type>(AssembliesHelper.GetAllAssembliesOfPlayerAndEditorAssemblies()
                 .SelectMany(e => e.GetTypes())
-                .Where(e => e.IsSubclassOf(typeof(ScriptableObject))).ToArray();
+                .Where(e => typeof(ScriptableObject).IsAssignableFrom(e)));
 
-            derivedTypes = types
-                .Select(e => new KeyValuePair<Type, Type>(e.BaseType, e))
-                .Concat(types.Select(e => new KeyValuePair<Type, Type>(e, e)))
-                .ToLookup();
+            HashSet<KeyValuePair<Type, Type>> typesKV = new HashSet<KeyValuePair<Type, Type>>();
+
+            while (types.TryPop(out Type result))
+            {
+                typesKV.Add(new KeyValuePair<Type, Type>(result, result));
+                Type baseType = result.BaseType;
+                if (typeof(ScriptableObject).IsAssignableFrom(baseType))
+                {
+                    typesKV.Add(new KeyValuePair<Type, Type>(baseType, result));
+                    types.Push(baseType);
+                }
+            }
+
+            derivedTypes = typesKV.ToLookup();
         }
 
         private static IEnumerable<Type> GetDerivedTypes(Type type) => derivedTypes[type].Where(e => e != type).SelectMany(GetDerivedTypes).Prepend(type);
@@ -88,7 +98,16 @@ namespace Additions.Attributes
                     window.set = (value) => property.objectReferenceValue = (UnityEngine.Object)value;
                 }
             }
-            window.allowedTypes = GetDerivedTypes(type).Where(e => !e.IsAbstract).ToArray();
+
+            IEnumerable<Type> allowedTypes = GetDerivedTypes(type).Where(e => !e.IsAbstract);
+
+            // RestrictTypeAttribute compatibility
+            RestrictTypeAttribute restrictTypeAttribute = fieldInfo.GetCustomAttribute<RestrictTypeAttribute>();
+            if (restrictTypeAttribute != null)
+                allowedTypes = allowedTypes.Where(e => restrictTypeAttribute.CheckIfTypeIsAllowed(e, out string _)).ToArray();
+
+            window.allowedTypes = allowedTypes.ToArray();
+
             window.allowedTypesNames = window.allowedTypes.Select(e => e.Name).ToArray();
             window.index = window.GetIndex(type);
             window.property = property;
