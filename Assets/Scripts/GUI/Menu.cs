@@ -45,6 +45,13 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Animator component.")]
     private Animator animator;
 
+    private static class ANIMATIONS
+    {
+        public const string
+            SHOWINTRO = "ShowIntro",
+            SHOWPRESSANYKEY = "ShowPressAnyKey";
+    }
+
 #pragma warning disable CS0649
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
@@ -144,5 +151,16 @@ public class Menu : MonoBehaviour
                 soundPlayer.Play(loseIndex);
         }
     }
+
+    /// <summary>
+    /// Animation state to show screen intro, called trought event.
+    /// </summary>
+    public void ShowSplashIntro() => animator.SetTrigger(ANIMATIONS.SHOWINTRO);
+
+    /// <summary>
+    /// Animation state to show text in screen intro, called trought event.
+    /// </summary>
+    public void ShowPressAnyKeyText() => animator.SetTrigger(ANIMATIONS.SHOWPRESSANYKEY);
+    
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }
