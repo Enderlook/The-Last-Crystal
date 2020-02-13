@@ -1,0 +1,9 @@
+﻿using System;
+
+using UnityEngine;
+
+namespace Additions.Serializables.Atoms.Premades.PolySwitch
+{
+    [CreateAssetMenu(fileName = nameof(DecimalPolySwitchGet), menuName = nameof(Atom) + "/Variables/Others/PolySwitch/" + nameof(Decimal))]
+    public class DecimalPolySwitchGet : AtomPolySwitchGetter<decimal> { }
+}
