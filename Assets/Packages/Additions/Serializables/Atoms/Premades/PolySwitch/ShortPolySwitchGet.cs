@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Additions.Serializables.PolySwitcher;
+
+using System;
 
 using UnityEngine;
 
 namespace Additions.Serializables.Atoms.Premades.PolySwitch
 {
     [Serializable, CreateAssetMenu(fileName = nameof(ShortPolySwitchGet), menuName = nameof(Atom) + "/Variables/Others/PolySwitch/" + "Short")]
-    public class ShortPolySwitchGet : AtomPolySwitchGetter<short> { }
+    public class ShortPolySwitchGet : AtomPolySwitchGetter<PolySwitchShort, short> { }
 }
