@@ -11,7 +11,7 @@ using UnityObject = UnityEngine.Object;
 namespace Additions.Attributes
 {
     [CustomPropertyDrawer(typeof(RestrictTypeAttribute))]
-    public class RestrictTypeDrawer : PropertyDrawer
+    public class RestrictTypeDrawer : AdditionalPropertyDrawer
     {
         private float? height;
         private bool firstTime = true;
@@ -22,7 +22,7 @@ namespace Additions.Attributes
             return new Rect(position.x, position.y, position.width, height.Value);
         }
 
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUIAdditional(Rect position, SerializedProperty property, GUIContent label)
         {
             void DrawErrorBox(string message)
             {
@@ -77,7 +77,9 @@ namespace Additions.Attributes
             }
 
             UnityObject old = property.objectReferenceValue;
-            EditorGUI.PropertyField(position, property, label);
+            // Compatibility with ScriptableObjectDrawer
+            if (!ScriptableObjectDrawer.DrawPropertyFieldIfIsScriptableObject(position, property, label, fieldInfo))
+                EditorGUI.PropertyField(position, property, label);
             UnityObject result = property.objectReferenceValue;
 
             // We check for differences to avoid wasting perfomance
