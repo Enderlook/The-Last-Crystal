@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Additions.Serializables.Atoms.Premades.Unity
 {
-    [CreateAssetMenu(fileName = nameof(ColorConstant), menuName = nameof(Atom) + "/Variables/Constants/" + nameof(Color))]
+    [Serializable, CreateAssetMenu(fileName = nameof(ColorConstant), menuName = nameof(Atom) + "/Variables/Constants/" + nameof(Color))]
     public class ColorConstant : AtomConstant<Color> { }
 }

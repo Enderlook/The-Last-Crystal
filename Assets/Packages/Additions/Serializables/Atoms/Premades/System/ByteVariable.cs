@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Additions.Serializables.Atoms.Premades.System
 {
-    [CreateAssetMenu(fileName = nameof(ByteVariable), menuName = nameof(Atom) + "/Variables/Commons/" + "Byte")]
+    [Serializable, CreateAssetMenu(fileName = nameof(ByteVariable), menuName = nameof(Atom) + "/Variables/Commons/" + "Byte")]
     public class ByteVariable : AtomVariable<byte> { }
 }

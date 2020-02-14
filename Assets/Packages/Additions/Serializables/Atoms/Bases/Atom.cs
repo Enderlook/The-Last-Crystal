@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Additions.Serializables.Atoms
 {
+    [Serializable]
     public abstract class Atom : ScriptableObject
     {
 #if UNITY_EDITOR

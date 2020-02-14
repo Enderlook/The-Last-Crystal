@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Additions.Serializables.Atoms.Premades.System
 {
-    [CreateAssetMenu(fileName = nameof(UIntVariable), menuName = nameof(Atom) + "/Variables/Commons/" + "UInt")]
+    [Serializable, CreateAssetMenu(fileName = nameof(UIntVariable), menuName = nameof(Atom) + "/Variables/Commons/" + "UInt")]
     public class UIntVariable : AtomVariable<uint> { }
 }

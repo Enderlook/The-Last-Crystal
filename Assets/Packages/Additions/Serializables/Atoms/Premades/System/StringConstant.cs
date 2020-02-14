@@ -4,6 +4,6 @@ using UnityEngine;
 
 namespace Additions.Serializables.Atoms.Premades.System
 {
-    [CreateAssetMenu(fileName = nameof(StringConstant), menuName = nameof(Atom) + "/Variables/Constants/" + nameof(String))]
+    [Serializable, CreateAssetMenu(fileName = nameof(StringConstant), menuName = nameof(Atom) + "/Variables/Constants/" + nameof(String))]
     public class StringConstant : AtomConstant<string> { }
 }
