@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 namespace Additions.Serializables.PolySwitcher
 {
-    [CreateAssetMenu(fileName = nameof(PolySwitchString), menuName = nameof(PolySwitcher) + "/Types/" + nameof(PolySwitchString))]
+    [Serializable, CreateAssetMenu(fileName = nameof(PolySwitchString), menuName = nameof(PolySwitcher) + "/Types/" + nameof(PolySwitchString))]
     public class PolySwitchString : PolySwitch<string> { }
 }
