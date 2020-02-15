@@ -11,6 +11,8 @@ using UnityEditor;
 
 using UnityEngine;
 
+using UnityObject = UnityEngine.Object;
+
 namespace Additions.Attributes
 {
     internal class ScriptableObjectWindow : EditorWindow
@@ -85,7 +87,7 @@ namespace Additions.Attributes
             }
             else
             {
-                UnityEngine.Object targetObject = property.serializedObject.targetObject;
+                UnityObject targetObject = property.serializedObject.targetObject;
                 Type fieldType = fieldInfo.FieldType;
                 // Just confirming that it's an array
                 if (fieldType.IsArray)
@@ -164,27 +166,21 @@ namespace Additions.Attributes
                 EditorGUILayout.LabelField("Path to save:", _path);
             EditorGUI.EndDisabledGroup();
 
-            UnityEngine.Object targetObject = property.serializedObject.targetObject;
+            UnityObject targetObject = property.serializedObject.targetObject;
 
             if (!hasAsset && !hasScriptableObject)
             {
                 // Create
                 if (GUILayout.Button(new GUIContent("Instantiate in field and add to asset", "Create and instance and assign to field. The scriptable object will be added to the scene/prefab file.")))
                 {
-                    Undo.RecordObject(targetObject, "Instantiate field");
-                    scriptableObject = Create();
-                    set(scriptableObject);
-                    property.serializedObject.ApplyModifiedProperties();
+                    scriptableObject = InstantiateAndApply(targetObject);
                     AssetDatabaseHelper.AddObjectToAsset(scriptableObject, propertyPath);
                 }
 
                 // Create and Save
                 if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
                 {
-                    Undo.RecordObject(targetObject, "Instantiate field");
-                    scriptableObject = Create();
-                    set(scriptableObject);
-                    property.serializedObject.ApplyModifiedProperties();
+                    scriptableObject = InstantiateAndApply(targetObject);
                     AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
                 }
             }
@@ -222,7 +218,15 @@ namespace Additions.Attributes
             }
         }
 
-        private ScriptableObject Create() => CreateInstance(allowedTypes[index]);
+        private ScriptableObject InstantiateAndApply(UnityObject targetObject)
+        {
+            ScriptableObject scriptableObject;
+            Undo.RecordObject(targetObject, "Instantiate field");
+            scriptableObject = CreateInstance(allowedTypes[index]);
+            set(scriptableObject);
+            property.serializedObject.ApplyModifiedProperties();
+            return scriptableObject;
+        }
 
         private int GetIndex(Type type) => Array.IndexOf(allowedTypes, type);
     }
