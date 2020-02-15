@@ -26,6 +26,7 @@ namespace Additions.Attributes
         private int index;
         private string path = DEFAULT_PATH;
         private string scriptableObjectName;
+        private string propertyPath;
 
         private static void InitializeDerivedTypes()
         {
@@ -72,6 +73,8 @@ namespace Additions.Attributes
                 InitializeDerivedTypes();
 
             ScriptableObjectWindow window = GetWindow<ScriptableObjectWindow>();
+
+            window.propertyPath = AssetDatabaseHelper.GetAssetPath(property);
             Type type;
             /* If the property came from an array and the element is null this will be null which is a problem for us.
              * This is also null if the property isn't array but the field is empty (null). That is also a problem. */
@@ -166,11 +169,13 @@ namespace Additions.Attributes
             if (!hasAsset && !hasScriptableObject)
             {
                 // Create
-                if (GUILayout.Button(new GUIContent("Instantiate in field", "Create and instance and assign to field.")))
+                if (GUILayout.Button(new GUIContent("Instantiate in field and add to asset", "Create and instance and assign to field. The scriptable object will be added to the scene/prefab file.")))
                 {
                     Undo.RecordObject(targetObject, "Instantiate field");
-                    set(Create());
+                    scriptableObject = Create();
+                    set(scriptableObject);
                     property.serializedObject.ApplyModifiedProperties();
+                    AssetDatabaseHelper.AddObjectToAsset(scriptableObject, propertyPath);
                 }
 
                 // Create and Save
