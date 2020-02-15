@@ -22,10 +22,11 @@ namespace Additions.Serializables.PolySwitcher
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
         private void OnValidate()
         {
-            if (values.Length != master.Indexes)
+            if (values != null && master != null && values.Length != master.Indexes)
             {
+                float oldLength = values.Length;
                 Array.Resize(ref values, master.Indexes);
-                Debug.LogWarning($"Length of {nameof(values)} in {GetType()} must be equal to {nameof(master)}.{nameof(master.Indexes)}. Was {values.Length} instead of {master.Indexes}.");
+                Debug.LogWarning($"Length of {nameof(values)} in {GetType()} must be equal to {nameof(master)}.{nameof(master.Indexes)}. Was {oldLength} instead of {master.Indexes}.");
             }
         }
 #endif
