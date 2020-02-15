@@ -82,6 +82,7 @@ namespace Additions.Attributes
             }
             else
             {
+                UnityEngine.Object targetObject = property.serializedObject.targetObject;
                 Type fieldType = fieldInfo.FieldType;
                 // Just confirming that it's an array
                 if (fieldType.IsArray)
@@ -89,7 +90,6 @@ namespace Additions.Attributes
                     type = fieldType.GetElementType();
                     int index = property.GetIndexFromArray();
 
-                    UnityEngine.Object targetObject = property.serializedObject.targetObject;
                     if (fieldInfo.GetValue(targetObject) is Array array)
                     {
                         /* Until an element is in-Inspector dragged to the array element field, it seems that Unity doesn't rebound the array
@@ -110,10 +110,18 @@ namespace Additions.Attributes
                 {
                     type = fieldType;
                     window.get = () => property.objectReferenceValue;
-                    window.set = (value) => property.objectReferenceValue = (UnityEngine.Object)value;
+
+                    Action<object, object> set;
+                    if (fieldInfo.FieldType == targetObject.GetType())
+                        set = fieldInfo.SetValue;
+                    else
+                        set = targetObject
+                                .GetType()
+                                .GetField(property.name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                                .SetValue;
+                    window.set = (value) => set(targetObject, value);
                 }
             }
-
             IEnumerable<Type> allowedTypes = GetDerivedTypes(type).Where(e => !e.IsAbstract);
 
             // RestrictTypeAttribute compatibility
