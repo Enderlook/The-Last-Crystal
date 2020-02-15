@@ -115,15 +115,19 @@ namespace Additions.Attributes
                 {
                     type = fieldType;
                     window.get = () => property.objectReferenceValue;
-
                     Action<object, object> set;
                     if (fieldInfo.FieldType == targetObject.GetType())
                         set = fieldInfo.SetValue;
                     else
-                        set = targetObject
+                    {
+                        FieldInfo fieldInfo2 = targetObject
                                 .GetType()
-                                .GetField(property.name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                                .SetValue;
+                                .GetField(property.name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                        if (fieldInfo2 != null)
+                            set = fieldInfo2.SetValue;
+                        else
+                            set = (_, value) => property.objectReferenceValue = (UnityObject)value;
+                    }
                     window.set = (value) => set(targetObject, value);
                 }
             }
