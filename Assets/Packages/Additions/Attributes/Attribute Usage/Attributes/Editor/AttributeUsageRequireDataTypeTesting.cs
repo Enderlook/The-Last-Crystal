@@ -43,8 +43,8 @@ namespace Additions.Attributes.AttributeUsage
             {
                 Type attributeType = attribute.GetType();
                 if (checkers.TryGetValue(attributeType, out (AttributeTargets targets, Action<Type, string> checker) value)
-                    && (value.targets & checkIf) != 0  // Check if has the proper flag
-                    && memberInfo.CheckIfShouldBeIgnored(attributeType))
+                    && (value.targets & checkIf) != 0 // Check if has the proper flag
+                    && !memberInfo.CheckIfShouldBeIgnored(attributeType))
                     value.checker(type, $"{memberType} {memberInfo.Name} in {memberInfo.DeclaringType.Name} class");
             }
         }
