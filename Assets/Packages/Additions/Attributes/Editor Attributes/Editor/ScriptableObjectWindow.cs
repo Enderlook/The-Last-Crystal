@@ -170,6 +170,7 @@ namespace Additions.Attributes
 
             if (!hasAsset && !hasScriptableObject)
             {
+                EditorGUI.BeginDisabledGroup(index == -1);
                 // Create
                 if (GUILayout.Button(new GUIContent("Instantiate in field and add to asset", "Create and instance and assign to field. The scriptable object will be added to the scene/prefab file.")))
                 {
@@ -183,6 +184,7 @@ namespace Additions.Attributes
                     scriptableObject = InstantiateAndApply(targetObject);
                     AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
                 }
+                EditorGUI.EndDisabledGroup();
             }
 
             if (hasScriptableObject)
