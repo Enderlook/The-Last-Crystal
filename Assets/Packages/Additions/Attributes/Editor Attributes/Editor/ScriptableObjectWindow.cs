@@ -49,7 +49,22 @@ namespace Additions.Attributes
             derivedTypes = typesKV.ToLookup();
         }
 
-        private static IEnumerable<Type> GetDerivedTypes(Type type) => derivedTypes[type].Where(e => e != type).SelectMany(GetDerivedTypes).Prepend(type);
+        private static IEnumerable<Type> GetDerivedTypes(Type type)
+        {
+            Stack<Type> types = new Stack<Type>(derivedTypes[type].Where(e => e != type));
+            LinkedList<Type> linkedList = new LinkedList<Type>(types);
+            linkedList.AddFirst(type);
+
+            while (types.TryPop(out Type result))
+            {
+                foreach (Type t in derivedTypes[result].Where(e => e != result))
+                {
+                    types.Push(t);
+                    linkedList.AddLast(t);
+                }
+            }
+            return linkedList;
+        }
 
         public static void CreateWindow(SerializedProperty property, FieldInfo fieldInfo)
         {
