@@ -173,5 +173,58 @@ namespace Additions.Utils.UnityEditor
         /// <param serializedProperty="object"><see cref="SerializedProperty"/> to get asset path.</param>
         /// <returns>Asset path of object, if any.</returns>
         public static string GetAssetPath(SerializedProperty serializedProperty) => GetAssetPath(serializedProperty.serializedObject);
+
+        /// <summary>
+        /// Extract a sub asset from an asset file to <paramref name="newPath"/>.
+        /// </summary>
+        /// <param name="subAsset">Sub asset to extract. Can't be main asset.</param>
+        /// <param name="newPath">Path to new asset file.</param>
+        /// <returns>New sub asset. <see langword="null"/> if <paramref name="subAsset"/> was a main asset.</returns>
+        public static UnityObject ExtractSubAsset(UnityObject subAsset, string newPath)
+        {
+            if (subAsset == null) throw new ArgumentNullException(nameof(subAsset));
+            if (newPath == null) throw new ArgumentNullException(nameof(newPath));
+            if (newPath.Length == 0) throw new ArgumentException("Can't be empty", nameof(newPath));
+
+            string path = AssetDatabase.GetAssetPath(subAsset);
+            if (AssetDatabase.LoadMainAssetAtPath(path) != subAsset)
+            {
+                UnityObject newAsset = UnityObject.Instantiate(subAsset);
+                AssetDatabase.RemoveObjectFromAsset(subAsset);
+                AssetDatabase.CreateAsset(newAsset, newPath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                return newAsset;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Extract a sub asset from an asset file to <paramref name="newPath"/>.<br/>
+        /// </summary>
+        /// <param name="subAsset">Sub asset to extract. Can't be main asset, otherwise <paramref name="subAsset"/> becomes <see langword="null"/>.</param>
+        /// <param name="newPath">Path to new asset file.</param>
+        public static void ExtractSubAsset(ref UnityObject subAsset, string newPath)
+        {
+            if (subAsset == null) throw new ArgumentNullException(nameof(subAsset));
+            if (newPath == null) throw new ArgumentNullException(nameof(newPath));
+            if (newPath.Length == 0) throw new ArgumentException("Can't be empty", nameof(newPath));
+
+            subAsset = ExtractSubAsset(subAsset, newPath);
+        }
+
+        /// <summary>
+        /// Extract a sub asset from an asset file.<br/>
+        /// </summary>
+        /// <param name="subAsset">Sub asset to extract. Can't be main asset, otherwise <paramref name="subAsset"/> becomes <see langword="null"/>.</param>
+        /// <returns>New sub asset path, if fail this path is invalid.</returns>
+        public static string ExtractSubAsset(ref UnityObject subAsset)
+        {
+            if (subAsset == null) throw new ArgumentNullException(nameof(subAsset));
+
+            string path = $"{string.Concat(AssetDatabase.GetAssetPath(subAsset).Split('.').Reverse().Skip(1).Reverse())} {subAsset.name}.asset";
+            ExtractSubAsset(ref subAsset, path);
+            return path;
+        }
     }
 }
