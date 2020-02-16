@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 899af5c3516053a4ca18c5528f28ab35, type: 2}
+    - target: {fileID: 1549091846290657791, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: basePool.startingMax
+      value: 
+      objectReference: {fileID: 114866452290962582}
     - target: {fileID: 371628961907377835, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
@@ -265,3 +270,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 336b20a0e32c641489bb09ab09369d57, type: 3}
+--- !u!114 &114151618277992658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Health PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 5
+  - 8
+  - 12
+--- !u!114 &114866452290962582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Health
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114151618277992658}

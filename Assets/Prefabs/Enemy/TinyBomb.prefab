@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 395a29f0bf869f342aa50979a09ddefe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: {fileID: 114414695064524660}
   pushStrength: 40
   showHurt: 1
   <IsEnabled>k__BackingField: 1
@@ -74,6 +74,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 25cbe49581fe0ca42bf55e86f5abbe01, type: 2}
+    - target: {fileID: 1549091846290657791, guid: 336b20a0e32c641489bb09ab09369d57,
+        type: 3}
+      propertyPath: basePool.startingMax
+      value: 
+      objectReference: {fileID: 114765767918510654}
     - target: {fileID: 371628961907377835, guid: 336b20a0e32c641489bb09ab09369d57,
         type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
@@ -238,3 +243,65 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2184584120000391411}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &114322648680859522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Damage PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 20
+  - 30
+  - 40
+--- !u!114 &114414695064524660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Damage
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114322648680859522}
+--- !u!114 &114608295499693154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Health PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 10
+  - 15
+  - 20
+--- !u!114 &114765767918510654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Health
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114608295499693154}
