@@ -29,6 +29,7 @@ namespace Additions.Attributes
         private string path = DEFAULT_PATH;
         private string scriptableObjectName;
         private string propertyPath;
+        private bool scriptableObjectNameAuto = true;
 
         private static void InitializeDerivedTypes()
         {
@@ -158,8 +159,50 @@ namespace Additions.Attributes
             if (hasScriptableObject)
                 index = GetIndex(scriptableObject.GetType());
             index = EditorGUILayout.Popup(new GUIContent("Instance type", "Scriptable object instance type to create."), index, allowedTypesNames);
+            EditorGUI.EndDisabledGroup();
 
-            // Path to Scriptable Object
+            UnityObject targetObject = property.serializedObject.targetObject;
+
+            // Get Name
+            if (scriptableObjectNameAuto && !hasScriptableObject)
+                scriptableObjectName = path.Split('/').Last().Split(new string[] { ".asset", ".prefab", ".scene" }, StringSplitOptions.None).First();
+
+            if (hasScriptableObject)
+            {
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.TextField("Name of Scriptable Object", scriptableObject.name);
+                EditorGUI.EndDisabledGroup();
+                scriptableObjectName = EditorGUILayout.TextField("New name", scriptableObjectName);
+
+                if (GUILayout.Button("Rename Scriptable Object"))
+                {
+                    scriptableObject.name = scriptableObjectName;
+                    property.serializedObject.ApplyModifiedProperties();
+                }
+            }
+            else
+            {
+                string old = scriptableObjectName;
+                scriptableObjectName = EditorGUILayout.TextField("Name of Scriptable Object", scriptableObjectName);
+                scriptableObjectNameAuto = scriptableObjectNameAuto && scriptableObjectName == old;
+            }
+
+            if (!hasScriptableObject)
+            {
+                // Create
+                EditorGUI.BeginDisabledGroup(index == -1 || string.IsNullOrEmpty(scriptableObjectName));
+                if (GUILayout.Button(new GUIContent("Instantiate in field and add to asset", "Create and instance and assign to field. The scriptable object will be added to the scene/prefab file.")))
+                {
+                    scriptableObject = InstantiateAndApply(targetObject, scriptableObjectName);
+                    AssetDatabaseHelper.AddObjectToAsset(scriptableObject, propertyPath);
+                }
+                EditorGUI.EndDisabledGroup();
+            }
+
+            EditorGUILayout.Space();
+
+            // Get path to file
+            EditorGUI.BeginDisabledGroup(hasScriptableObject);
             string pathToAsset = AssetDatabase.GetAssetPath(scriptableObject);
             bool hasAsset = !string.IsNullOrEmpty(pathToAsset);
             path = hasAsset ? pathToAsset : path;
@@ -170,45 +213,20 @@ namespace Additions.Attributes
                 EditorGUILayout.LabelField("Path to save:", _path);
             EditorGUI.EndDisabledGroup();
 
-            UnityObject targetObject = property.serializedObject.targetObject;
-
-            if (!hasAsset && !hasScriptableObject)
+            // Create file
+            if (!hasScriptableObject)
             {
                 EditorGUI.BeginDisabledGroup(index == -1);
-                // Create
-                if (GUILayout.Button(new GUIContent("Instantiate in field and add to asset", "Create and instance and assign to field. The scriptable object will be added to the scene/prefab file.")))
-                {
-                    scriptableObject = InstantiateAndApply(targetObject);
-                    AssetDatabaseHelper.AddObjectToAsset(scriptableObject, propertyPath);
-                }
-
-                // Create and Save
                 if (GUILayout.Button(new GUIContent("Instantiate in field and save asset", "Create and instance, assign to field and save it as an asset file.")))
                 {
-                    scriptableObject = InstantiateAndApply(targetObject);
+                    scriptableObject = InstantiateAndApply(targetObject, scriptableObjectName);
                     AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
                 }
                 EditorGUI.EndDisabledGroup();
             }
-
-            if (hasScriptableObject)
+            else
             {
-                // Rename
-                if (string.IsNullOrEmpty(scriptableObjectName))
-                    scriptableObjectName = scriptableObject.name;
-                EditorGUILayout.BeginHorizontal();
-                EditorGUI.BeginDisabledGroup(scriptableObjectName == scriptableObject.name);
-                if (GUILayout.Button(new GUIContent("Rename", "Change the name of Scriptable Object.")))
-                {
-                    Undo.RecordObject(scriptableObject, "Rename");
-                    scriptableObject.name = scriptableObjectName;
-                    property.serializedObject.ApplyModifiedProperties();
-                }
-                EditorGUI.EndDisabledGroup();
-                scriptableObjectName = EditorGUILayout.TextField(new GUIContent($"New Name", "Change current name to new one."), scriptableObjectName);
-
                 /// Clean
-                EditorGUILayout.EndHorizontal();
                 if (GUILayout.Button(new GUIContent("Clean field", "Remove current instance of field.")))
                 {
                     Undo.RecordObject(targetObject, "Clean field");
@@ -216,19 +234,15 @@ namespace Additions.Attributes
                     path = DEFAULT_PATH;
                     property.serializedObject.ApplyModifiedProperties();
                 }
-
-                if (!hasAsset)
-                    // Save
-                    if (GUILayout.Button(new GUIContent("Save asset as file", "Save instance as an asset file.")))
-                        AssetDatabaseHelper.CreateAsset(scriptableObject, _path);
             }
         }
 
-        private ScriptableObject InstantiateAndApply(UnityObject targetObject)
+        private ScriptableObject InstantiateAndApply(UnityObject targetObject, string name)
         {
             ScriptableObject scriptableObject;
             Undo.RecordObject(targetObject, "Instantiate field");
             scriptableObject = CreateInstance(allowedTypes[index]);
+            scriptableObject.name = name;
             set(scriptableObject);
             property.serializedObject.ApplyModifiedProperties();
             return scriptableObject;
