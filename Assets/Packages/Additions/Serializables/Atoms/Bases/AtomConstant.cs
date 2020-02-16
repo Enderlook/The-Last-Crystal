@@ -14,6 +14,18 @@ namespace Additions.Serializables.Atoms
         /// </summary>
         public override T Value => value;
 
+        /// <summary>
+        /// Create new <see cref="AtomConstant{T}"/> with given value.
+        /// </summary>
+        /// <param name="value">Value of new <see cref="AtomConstant{T}"/>.</param>
+        /// <returns>New <see cref="AtomConstant{T}"/>.</returns>
+        public static AtomConstant<T> Create(T value)
+        {
+            AtomConstant<T> atom = CreateInstance<AtomConstant<T>>();
+            atom.value = value;
+            return atom;
+        }
+
         private bool Equals(AtomConstant<T> other) => EqualityComparer<T>.Default.Equals(value, other.value);
 
         public override int GetHashCode() => value.GetHashCode();
