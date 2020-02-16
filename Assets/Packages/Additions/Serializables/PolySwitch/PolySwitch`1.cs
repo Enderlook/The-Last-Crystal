@@ -16,7 +16,7 @@ namespace Additions.Serializables.PolySwitcher
         [SerializeField, Tooltip("Value per difficulty.")]
         private T[] values;
 
-        public T Value => values[master.CurrentIndex];
+        public T Value => values[master.Index];
 
 #if UNITY_EDITOR
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]

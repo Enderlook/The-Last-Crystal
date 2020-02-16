@@ -14,12 +14,15 @@ namespace Additions.Serializables.PolySwitcher
         [field: SerializeField, Tooltip("Amount of indexes."), IsProperty, Min(1)]
         public int Indexes { get; private set; } = 1;
 
-        [field: SerializeField, Tooltip("Current index. Must be number between 0 and indexes,"), IsProperty, Min(0)]
-        // This value is zero-based index, but in the inspector is shown as one-based index.
-        internal int Index { get; private set; } = 1;
+        [field: SerializeField, Tooltip("Current index. Must be number between 0 and indexes."), IsProperty, Min(1)]
+        /// <summary>
+        /// Current index, zero-based.<br/>
+        /// However, in the Unity inspector it's seen as one-based.
+        /// </summary>
+        internal int Index { get; private set; } = 0;
 
         /// <summary>
-        /// Current difficulty level, from
+        /// Current index one-based.
         /// </summary>
         public int CurrentIndex {
             get => Index + 1;
@@ -28,6 +31,24 @@ namespace Additions.Serializables.PolySwitcher
                     throw new ArgumentOutOfRangeException($"Must be a number between 1 and {nameof(Indexes)} ({Indexes}). Was {value}.");
                 Index = value - 1;
             }
+        }
+
+        /// <summary>
+        /// Increment current index by one. If max, reset to zero.
+        /// </summary>
+        /// <returns>New index zero-based.</returns>
+        public int IncrementIndexByOne() => Index = (Index + 1) % Indexes;
+
+        /// <summary>
+        /// Decrement current index by one. If 0, reset to highest index.
+        /// </summary>
+        /// <returns>New index zero-based.</returns>
+        public int DecrementIndexByOne()
+        {
+            Index--;
+            if (Index < 0)
+                Index = Indexes - 1;
+            return Index;
         }
     }
 }
