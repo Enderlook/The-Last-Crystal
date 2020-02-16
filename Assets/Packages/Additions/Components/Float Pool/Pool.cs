@@ -102,6 +102,7 @@ namespace Additions.Components.FloatPool
         }
 
         public void Initialize() => FloatPool.Initialize();
+
         public void UpdateBehaviour(float deltatime) => FloatPool.UpdateBehaviour(deltatime);
         public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => FloatPool.Decrease(amount, allowUnderflow);
         public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => FloatPool.Increase(amount, allowOverflow);

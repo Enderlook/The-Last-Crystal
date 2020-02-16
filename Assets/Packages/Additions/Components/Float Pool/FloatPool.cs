@@ -1,3 +1,5 @@
+using Additions.Attributes;
+using Additions.Serializables.Atoms;
 using Additions.Utils;
 
 using System;
@@ -48,10 +50,10 @@ namespace Additions.Components.FloatPool
     public class FloatPool : IFloatPool
     {
         [Header("Main Configuration")]
-        [SerializeField, Tooltip("Maximum Current.")]
-        private float startingMax = 100;
-        public float Max { get; private set; }
+        [SerializeField, Tooltip("Maximum Current."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        public Atom startingMax;
 
+        public float Max { get; private set; }
 
         [SerializeField, Tooltip("Starting Current. Set -1 to use Max value.")]
         private float startingCurrent = -1;
@@ -66,8 +68,8 @@ namespace Additions.Components.FloatPool
         /// </summary>
         public void Initialize()
         {
-            Current = startingCurrent == -1 ? startingMax : startingCurrent;
-            Max = startingMax;
+            Current = startingCurrent == -1 ? startingMax.GetValue<float>() : startingCurrent;
+            Max = startingMax.GetValue<float>();
         }
 
         public void UpdateBehaviour(float deltaTime) { }

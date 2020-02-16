@@ -1,5 +1,6 @@
 ﻿using Additions.Attributes;
 using Additions.Components.ScriptableSound;
+using Additions.Serializables.Atoms;
 using Additions.Utils;
 using Additions.Utils.Clockworks;
 
@@ -12,9 +13,13 @@ namespace Creatures
 {
     public class ActiveMelee : MonoBehaviour, IInitialize<Creature>, IUpdate, IBasicClockwork, IDamageOnTouch<Creature>
     {
+#pragma warning disable CS0649
         [Header("Configuration")]
-        [SerializeField, Tooltip("Damage on hit.")]
-        private float damage = 1;
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        private Atom damage;
+#pragma warning restore CS0649
+
+        private float Damage;
 
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
@@ -40,6 +45,7 @@ namespace Creatures
             thisTransform = creature.Transform;
             if (hitSound != null)
                 hitSound.Init();
+            Damage = damage.GetValue<float>();
         }
 
         public void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
@@ -48,7 +54,7 @@ namespace Creatures
             {
                 if (thisTransform != null)
                     takePush?.TakePush(thisTransform.position, pushStrength, PushMode.Local);
-                takeDamage?.TakeDamage(damage);
+                takeDamage?.TakeDamage(Damage);
                 if (hitSound != null)
                     hitSound.Play();
             }

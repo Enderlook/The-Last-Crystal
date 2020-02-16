@@ -1,10 +1,11 @@
 
 using Additions.Components.ScriptableSound;
-
+using Additions.Serializables.PolySwitcher;
 using Master;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -41,6 +42,12 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Sound index play on lose.")]
     private int loseIndex;
 
+    [SerializeField, Tooltip("Difficulty.")]
+    private PolySwitchMaster difficulty;
+
+    [SerializeField, Tooltip("Difficulty text.")]
+    private Text difficultyText;
+
     [Header("Animation")]
     [SerializeField, Tooltip("Animator component.")]
     private Animator animator;
@@ -48,13 +55,42 @@ public class Menu : MonoBehaviour
 #pragma warning disable CS0649
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-    private void Start() => DisplayMenuPause(false);
+    private void Start()
+    {
+        DisplayMenuPause(false);
+        ShowDifficulty();
+    }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             DisplayMenuPause();
+    }
+
+    /// <summary>
+    /// Shift current difficulty by one and update difficulty button text.
+    /// </summary>
+    public void ChangeDifficulty()
+    {
+        difficulty.IncrementIndexByOne();
+        ShowDifficulty();
+    }
+
+    private void ShowDifficulty()
+    {
+        switch (difficulty.CurrentIndex)
+        {
+            case 1:
+                difficultyText.text = "EASY";
+                break;
+            case 2:
+                difficultyText.text = "NORMAL";
+                break;
+            case 3:
+                difficultyText.text = "HARD";
+                break;
+        }
     }
 
     /// <summary>

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSound: {fileID: 11400000, guid: 777563e6df4cc50459809bd42ddb5390, type: 2}
-  lifespan: 5
-  healingAmount: 15
+  lifespan: {fileID: 11400000, guid: abfa601e870bd6442846d09a2491a023, type: 2}
+  healingAmount: {fileID: 114239638028271154}
 --- !u!1001 &2111894850698595410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25,7 +25,7 @@ PrefabInstance:
     - target: {fileID: 6548041805104225295, guid: c374a6a36ef31fb45b0e71126f9cdbe8,
         type: 3}
       propertyPath: m_Name
-      value: Crystal Variant
+      value: Health Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 1539040988253782099, guid: c374a6a36ef31fb45b0e71126f9cdbe8,
         type: 3}
@@ -106,3 +106,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2111894850698595410}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &114239638028271154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Healing
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114972126009073954}
+--- !u!114 &114972126009073954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Healing PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 30
+  - 25
+  - 15

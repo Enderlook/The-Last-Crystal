@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSound: {fileID: 11400000, guid: 2cfa435571d1f9f4a9835c94bfe0cb38, type: 2}
-  lifespan: 5
-  healingAmount: 10
+  lifespan: {fileID: 11400000, guid: abfa601e870bd6442846d09a2491a023, type: 2}
+  healingAmount: {fileID: 114074720517982076}
 --- !u!1001 &8249353207110612775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,3 +116,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8249353207110612775}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &114074720517982076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Healing
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114452116200178520}
+--- !u!114 &114452116200178520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Healing PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 20
+  - 15
+  - 10

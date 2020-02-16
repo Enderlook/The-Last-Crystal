@@ -1,6 +1,7 @@
-﻿using Additions.Components.FloatPool.Internal;
+﻿using Additions.Attributes;
+using Additions.Components.FloatPool.Internal;
 using Additions.Components.SoundSystem;
-
+using Additions.Serializables.Atoms;
 using Master;
 
 using System;
@@ -14,11 +15,15 @@ namespace Additions.Components.FloatPool.Decorators
     public class RechargerDecorator : Decorator
     {
 #pragma warning disable CS0649
-        [SerializeField, Tooltip("Value per second increases in Current.")]
-        private float rechargeRate;
+        [SerializeField, Tooltip("Value per second increases in Current."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        private Atom rechargeRate;
 
-        [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging.")]
-        private float rechargingDelay;
+        private float RechargeRate;
+
+        [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        private Atom rechargingDelay;
+
+        private float RechargingDelay;
 
         private float _currentRechargingDelay;
 
@@ -39,6 +44,13 @@ namespace Additions.Components.FloatPool.Decorators
         [SerializeField, Tooltip("Event executed when can recharge.\nIf it is recharging it will be true")]
         private UnityEventBoolean activeCallback;
 #pragma warning restore CS0649
+
+        public override void Initialize()
+        {
+            RechargeRate = rechargeRate.GetValue<float>();
+            RechargingDelay = rechargingDelay.GetValue<float>();
+            base.Initialize();
+        }
 
         public override (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false)
         {
@@ -69,11 +81,11 @@ namespace Additions.Components.FloatPool.Decorators
         /// <param name="deltaTime"></param>
         private void Recharge(float deltaTime)
         {
-            if (_currentRechargingDelay >= rechargingDelay)
+            if (_currentRechargingDelay >= RechargingDelay)
                 if (Current < Max)
                 {
                     CallStartCallback();
-                    Increase(rechargeRate * deltaTime);
+                    Increase(RechargeRate * deltaTime);
                     PlayRechargingSound();
                     activeCallback.Invoke(true);
                 }

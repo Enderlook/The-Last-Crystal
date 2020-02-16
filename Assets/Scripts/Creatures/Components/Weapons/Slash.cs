@@ -1,5 +1,6 @@
 ﻿using Additions.Attributes;
 using Additions.Components.ScriptableSound;
+using Additions.Serializables.Atoms;
 using Additions.Serializables.Physics;
 
 using UnityEngine;
@@ -8,8 +9,12 @@ namespace Creatures.Weapons
 {
     public class Slash : Weapon, IAutomatedAttack
     {
-        [SerializeField, Tooltip("Damage on hit.")]
-        private float damage = 1;
+#pragma warning disable CS0649
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        private Atom damage;
+#pragma warning restore CS0649
+
+        private float Damage;
 
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
@@ -53,6 +58,8 @@ namespace Creatures.Weapons
             thisSpriteRenderer = creature.Sprite;
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
             slashingSound.Init();
+            if (damage != null)
+                Damage = damage.GetValue<float>();
             base.Initialize(creature);
         }
 
@@ -66,7 +73,7 @@ namespace Creatures.Weapons
             countOfClicks = Mathf.Clamp(countOfClicks, 0, 3);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
         protected void HitTarget()
         {
             slashingSound.Play();
@@ -75,11 +82,11 @@ namespace Creatures.Weapons
             {
                 Transform victim = raycastHits[n].transform;
                 victim.transform.GetComponent<ITakePush>()?.TakePush(thisTransform.position, pushStrength);
-                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(damage);
+                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(Damage);
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
         protected void ComboHitA()
         {
             if (countOfClicks >= 2)
@@ -91,7 +98,7 @@ namespace Creatures.Weapons
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack2'")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
         protected void ComboHitB()
         {
             if (countOfClicks >= 3)

@@ -9,7 +9,7 @@ namespace Creatures.Weapons
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("Attacks per second.")]
-        private float firerate = 1;
+        private float firerate;
 
         private Clockwork clockwork;
 
