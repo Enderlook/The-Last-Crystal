@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basePool:
-    startingMax: 100
+    startingMax: {fileID: 0}
     startingCurrent: -1
   hasEmptyCallback: 0
   emptyCallback:
@@ -451,8 +451,8 @@ MonoBehaviour:
     bar: {fileID: 0}
   hasRecharger: 0
   recharger:
-    rechargeRate: 0
-    rechargingDelay: 0
+    rechargeRate: {fileID: 0}
+    rechargingDelay: {fileID: 0}
     playlist: {fileID: 0}
     audioSource: {fileID: 0}
     startCallback:
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basePool:
-    startingMax: 10
+    startingMax: {fileID: 114561599635406976}
     startingCurrent: -1
   hasEmptyCallback: 0
   emptyCallback:
@@ -516,8 +516,8 @@ MonoBehaviour:
     bar: {fileID: 0}
   hasRecharger: 1
   recharger:
-    rechargeRate: 2
-    rechargingDelay: 2
+    rechargeRate: {fileID: 114353812285311148}
+    rechargingDelay: {fileID: 114804996305500276}
     playlist: {fileID: 0}
     audioSource: {fileID: 0}
     startCallback:
@@ -586,3 +586,96 @@ Transform:
   m_Father: {fileID: 6151014269483833352}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114218828154967444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Recharge Delay PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 1
+  - 2
+  - 3
+--- !u!114 &114353812285311148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Recharge Rate
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114360378658425850}
+--- !u!114 &114360378658425850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Recharge Rate PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 3
+  - 2.2
+  - 1.8
+--- !u!114 &114520041584879506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Energy PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 15
+  - 10
+  - 10
+--- !u!114 &114561599635406976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Energy
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114520041584879506}
+--- !u!114 &114804996305500276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Recharge Delay
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114218828154967444}

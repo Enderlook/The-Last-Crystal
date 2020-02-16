@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firerate: 2.2
-  damage: 8
+  damage: {fileID: 114035230103219490}
   pushStrength: 65
   rayCasting:
     source: {x: 0.03, y: 0.22094885}
@@ -354,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fbfdf9399b49a243b01a41726ab6557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: {fileID: 114837971166032272}
   pushStrength: 80
   firerate: 3
   <IsEnabled>k__BackingField: 0
@@ -492,8 +492,8 @@ PrefabInstance:
     - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: basePool.startingMax
-      value: 130
-      objectReference: {fileID: 0}
+      value: 
+      objectReference: {fileID: 114988385432350004}
     - target: {fileID: 4416114078013645945, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
       propertyPath: hasDecreaseReduction
@@ -533,6 +533,11 @@ PrefabInstance:
         type: 3}
       propertyPath: moveForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731946733286580160, guid: 6c61c90b7234d194783c42bdc917bec5,
+        type: 3}
+      propertyPath: speed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3430087774838448887, guid: 6c61c90b7234d194783c42bdc917bec5,
         type: 3}
@@ -574,11 +579,6 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: bacd2014698cf10418888ce03d41eee2, type: 2}
-    - target: {fileID: 3731946733286580160, guid: 6c61c90b7234d194783c42bdc917bec5,
-        type: 3}
-      propertyPath: speed
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c61c90b7234d194783c42bdc917bec5, type: 3}
 --- !u!1 &8573732952227708787 stripped
@@ -611,3 +611,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f045861820d9d094f82f0349a004e437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114035230103219490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Slash Damage
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114468886259013714}
+--- !u!114 &114468886259013714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Slash Damage PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 9
+  - 8
+  - 7
+--- !u!114 &114592242913759578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Active Damage PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 4.5
+  - 4
+  - 3
+--- !u!114 &114783593743607714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Health PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 150
+  - 130
+  - 100
+--- !u!114 &114837971166032272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Active Damage
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114592242913759578}
+--- !u!114 &114988385432350004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Health
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114783593743607714}

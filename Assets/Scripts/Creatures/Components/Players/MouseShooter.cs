@@ -1,5 +1,7 @@
 ﻿using Additions.Attributes;
 using Additions.Components.ScriptableSound;
+using Additions.Serializables.Atoms;
+using Additions.Serializables.Atoms.Premades.System;
 using Additions.Utils;
 
 using Creatures.Effects;
@@ -12,8 +14,10 @@ namespace Creatures.Weapons
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
-        [SerializeField, Tooltip("Damage on hit.")]
-        private float damage = 1;
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(IGet<float>))]
+        private Atom damage;
+
+        private IGet<float> Damage;
 
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength;
@@ -66,6 +70,7 @@ namespace Creatures.Weapons
             thisAnimator = creature.Animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
             shootingSound.Init();
+            Damage = (IGet<float>)damage;
             base.Initialize(creature);
         }
 
@@ -105,7 +110,7 @@ namespace Creatures.Weapons
             AnimationClip animationclip = projectileAnimation.animationClips[0];
             animator.speed = animationclip.length / projectileDuration;
 
-            go.AddComponent<Projectile>().SetConfiguration(damage, pushStrength, projectileColliderMultiplier);
+            go.AddComponent<Projectile>().SetConfiguration(Damage.Value, pushStrength, projectileColliderMultiplier);
 
             Destroy(go, projectileDuration);
         }
@@ -133,7 +138,7 @@ namespace Creatures.Weapons
 
         public void SetConfiguration(float damage, float pushStrength, float scale = 1)
         {
-            this.damage = damage;
+            Damage = FloatConstant.Create(damage);
             this.pushStrength = pushStrength;
             this.scale = scale;
             thisTransform = transform;
