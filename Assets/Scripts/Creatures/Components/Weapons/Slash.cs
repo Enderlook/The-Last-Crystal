@@ -10,11 +10,11 @@ namespace Creatures.Weapons
     public class Slash : Weapon, IAutomatedAttack
     {
 #pragma warning disable CS0649
-        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(IGet<float>))]
         private Atom damage;
 #pragma warning restore CS0649
 
-        private float Damage;
+        private IGet<float> Damage;
 
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
@@ -59,7 +59,7 @@ namespace Creatures.Weapons
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
             slashingSound.Init();
             if (damage != null)
-                Damage = damage.GetValue<float>();
+                Damage = (IGet<float>)damage;
             base.Initialize(creature);
         }
 
@@ -82,7 +82,7 @@ namespace Creatures.Weapons
             {
                 Transform victim = raycastHits[n].transform;
                 victim.transform.GetComponent<ITakePush>()?.TakePush(thisTransform.position, pushStrength);
-                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(Damage);
+                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(Damage.Value);
             }
         }
 

@@ -50,8 +50,10 @@ namespace Additions.Components.FloatPool
     public class FloatPool : IFloatPool
     {
         [Header("Main Configuration")]
-        [SerializeField, Tooltip("Maximum Current."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        [SerializeField, Tooltip("Maximum Current."), Expandable, RestrictType(typeof(IGet<float>))]
         public Atom startingMax;
+
+        private IGet<float> StartingMax;
 
         public float Max { get; private set; }
 
@@ -68,11 +70,12 @@ namespace Additions.Components.FloatPool
         /// </summary>
         public void Initialize()
         {
-            Current = startingCurrent == -1 ? startingMax.GetValue<float>() : startingCurrent;
-            Max = startingMax.GetValue<float>();
+            StartingMax = (IGet<float>)startingMax;
+            Current = startingCurrent == -1 ? StartingMax.Value : startingCurrent;
+            Max = StartingMax.Value;
         }
 
-        public void UpdateBehaviour(float deltaTime) { }
+        public void UpdateBehaviour(float deltaTime) => Max = StartingMax.Value;
 
         /// <summary>
         /// Changes the value of <see cref="Current"/> by <paramref name="amount"/>, and clamp values to 0 and <see cref="Max"/> if <paramref name="allowUnderflow"/> and <paramref name="allowOverflow"/> are <see langword="false"/>, respectively.

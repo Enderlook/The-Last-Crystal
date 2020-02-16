@@ -15,11 +15,11 @@ namespace Creatures
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
-        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(IGet<float>))]
         private Atom damage;
 #pragma warning restore CS0649
 
-        private float Damage;
+        private IGet<float> Damage;
 
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
@@ -45,7 +45,7 @@ namespace Creatures
             thisTransform = creature.Transform;
             if (hitSound != null)
                 hitSound.Init();
-            Damage = damage.GetValue<float>();
+            Damage = (IGet<float>)damage;
         }
 
         public void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
@@ -54,7 +54,7 @@ namespace Creatures
             {
                 if (thisTransform != null)
                     takePush?.TakePush(thisTransform.position, pushStrength, PushMode.Local);
-                takeDamage?.TakeDamage(Damage);
+                takeDamage?.TakeDamage(Damage.Value);
                 if (hitSound != null)
                     hitSound.Play();
             }

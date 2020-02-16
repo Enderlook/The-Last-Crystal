@@ -15,15 +15,15 @@ namespace Additions.Components.FloatPool.Decorators
     public class RechargerDecorator : Decorator
     {
 #pragma warning disable CS0649
-        [SerializeField, Tooltip("Value per second increases in Current."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        [SerializeField, Tooltip("Value per second increases in Current."), Expandable, RestrictType(typeof(IGet<float>))]
         private Atom rechargeRate;
 
-        private float RechargeRate;
+        private IGet<float> RechargeRate;
 
-        [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        [SerializeField, Tooltip("Amount of time in seconds after call Decrease method in order to start recharging."), Expandable, RestrictType(typeof(IGet<float>))]
         private Atom rechargingDelay;
 
-        private float RechargingDelay;
+        private IGet<float> RechargingDelay;
 
         private float _currentRechargingDelay;
 
@@ -47,8 +47,8 @@ namespace Additions.Components.FloatPool.Decorators
 
         public override void Initialize()
         {
-            RechargeRate = rechargeRate.GetValue<float>();
-            RechargingDelay = rechargingDelay.GetValue<float>();
+            RechargeRate = (IGet<float>)rechargeRate;
+            RechargingDelay = (IGet<float>)rechargingDelay;
             base.Initialize();
         }
 
@@ -81,11 +81,11 @@ namespace Additions.Components.FloatPool.Decorators
         /// <param name="deltaTime"></param>
         private void Recharge(float deltaTime)
         {
-            if (_currentRechargingDelay >= RechargingDelay)
+            if (_currentRechargingDelay >= RechargingDelay.Value)
                 if (Current < Max)
                 {
                     CallStartCallback();
-                    Increase(RechargeRate * deltaTime);
+                    Increase(RechargeRate.Value * deltaTime);
                     PlayRechargingSound();
                     activeCallback.Invoke(true);
                 }

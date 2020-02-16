@@ -15,10 +15,10 @@ namespace Creatures.Weapons
     {
 #pragma warning disable CS0649
         [Header("Configuration")]
-        [SerializeField, Tooltip("Duration of freeze effect."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        [SerializeField, Tooltip("Duration of freeze effect."), Expandable, RestrictType(typeof(IGet<float>))]
         private Atom effectDuration;
 
-        private float EffectDuration;
+        private IGet<float> EffectDuration;
 
         [SerializeField, Tooltip("Energy consumed to shoot.")]
         private float energyCost;
@@ -66,7 +66,7 @@ namespace Creatures.Weapons
             thisAnimator = creature.Animator;
             creatureSpriteRenderer = creature.GetComponent<SpriteRenderer>();
             shootingSound.Init();
-            EffectDuration = effectDuration.GetValue<float>();
+            EffectDuration = (IGet<float>)effectDuration;
             base.Initialize(creature);
         }
 
@@ -106,7 +106,7 @@ namespace Creatures.Weapons
             AnimationClip animationclip = cloudAnimation.animationClips[0];
             animator.speed = animationclip.length / cloudDuration;
 
-            go.AddComponent<Cloud>().SetConfiguration(EffectDuration, effectColor, cloudColliderMultiplier);
+            go.AddComponent<Cloud>().SetConfiguration(EffectDuration.Value, effectColor, cloudColliderMultiplier);
 
             Destroy(go, cloudDuration);
         }

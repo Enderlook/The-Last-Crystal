@@ -1,6 +1,7 @@
 ﻿using Additions.Attributes;
 using Additions.Components.FloatPool.Decorators;
 using Additions.Components.FloatPool.Internal;
+using Additions.Serializables.PolySwitcher;
 
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Additions.Components.FloatPool
     [Serializable]
     public class Pool : MonoBehaviour, IFloatPool
     {
+        private float oldMax;
+
         public FloatPool basePool;
 
 #pragma warning disable CS0649, IDE0051
@@ -101,9 +104,28 @@ namespace Additions.Components.FloatPool
             return default;
         }
 
-        public void Initialize() => FloatPool.Initialize();
+        public void Initialize()
+        {
+            FloatPool.Initialize();
+            oldMax = FloatPool.Max;
+        }
 
-        public void UpdateBehaviour(float deltatime) => FloatPool.UpdateBehaviour(deltatime);
+        public void UpdateBehaviour(float deltatime)
+        {
+            FloatPool.UpdateBehaviour(deltatime);
+            if (oldMax != FloatPool.Max)
+            {
+                if (oldMax > FloatPool.Max)
+                {
+                    if (FloatPool.Current > FloatPool.Max)
+                        FloatPool.Decrease(FloatPool.Max - FloatPool.Current);
+                }
+                else
+                    FloatPool.Increase(FloatPool.Max - oldMax);
+                oldMax = FloatPool.Max;
+            }
+        }
+
         public (float remaining, float taken) Decrease(float amount, bool allowUnderflow = false) => FloatPool.Decrease(amount, allowUnderflow);
         public (float remaining, float taken) Increase(float amount, bool allowOverflow = false) => FloatPool.Increase(amount, allowOverflow);
     }
