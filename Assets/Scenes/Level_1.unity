@@ -3388,11 +3388,6 @@ PrefabInstance:
       propertyPath: bar.bar
       value: 
       objectReference: {fileID: 1275387484}
-    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
-        type: 3}
-      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GameOver
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d3df55b0c6aa642a77ca9f30e6ce21, type: 3}
 --- !u!1001 &3653343962048357921
@@ -3517,6 +3512,22 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1641866928}
+    - target: {fileID: 1329678993, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.399963
+      objectReference: {fileID: 0}
+    - target: {fileID: 1329678993, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.23999
+      objectReference: {fileID: 0}
+    - target: {fileID: 973568211, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -13.940002
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010961851, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -10.399963
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
 --- !u!114 &3653343962048357922 stripped
