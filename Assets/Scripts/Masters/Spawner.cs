@@ -31,6 +31,9 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("Boss spawned after all enemies die.")]
     private GameObject boss;
 
+    [SerializeField, Tooltip("Portal effect.")]
+    private GameObject portal;
+
     [SerializeField, Tooltip("Particle effect.")]
     private GameObject particle;
 
@@ -48,7 +51,14 @@ public class Spawner : MonoBehaviour
     public List<Vector2> points;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-    private void Start() => StartCoroutine(SpawnEnemies());
+    private void Start()
+    {
+        for (int x = 0; x < points.Count; x++)
+        {
+            Instantiate(portal, new Vector2(points[x].x, points[x].y), Quaternion.identity);
+        }
+        StartCoroutine(SpawnEnemies());
+    }
 
     private IEnumerator SpawnEnemies()
     {
