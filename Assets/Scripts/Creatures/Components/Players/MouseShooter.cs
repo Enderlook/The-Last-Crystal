@@ -138,7 +138,7 @@ namespace Creatures.Weapons
 
         public void SetConfiguration(float damage, float pushStrength, float scale = 1)
         {
-            Damage = FloatConstant.Create(damage);
+            Damage = damage;
             this.pushStrength = pushStrength;
             this.scale = scale;
             thisTransform = transform;
