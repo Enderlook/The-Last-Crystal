@@ -25,7 +25,7 @@ namespace Creatures.Weapons
                     _damage = (IGet<float>)damage;
                 return _damage.Value;
             }
-            set => _damage = FloatConstant.Create(value);
+            set => _damage = FloatConstant.Create<FloatConstant>(value);
         }
 
         [SerializeField, Tooltip("Push strength on hit.")]

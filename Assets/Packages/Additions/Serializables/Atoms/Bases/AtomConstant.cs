@@ -19,9 +19,10 @@ namespace Additions.Serializables.Atoms
         /// </summary>
         /// <param name="value">Value of new <see cref="AtomConstant{T}"/>.</param>
         /// <returns>New <see cref="AtomConstant{T}"/>.</returns>
-        public static AtomConstant<T> Create(T value)
+        public static U Create<U>(T value) where U : AtomConstant<T>
         {
-            AtomConstant<T> atom = CreateInstance<AtomConstant<T>>();
+            // We must specify U instead of use AtomConstant<T> because CreateInstance doesn't work fine with generics classes
+            U atom = CreateInstance<U>();
             atom.value = value;
             return atom;
         }
