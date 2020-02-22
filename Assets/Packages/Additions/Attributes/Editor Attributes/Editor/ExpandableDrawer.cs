@@ -35,15 +35,15 @@ namespace Additions.Attributes
             object reference = property.objectReferenceValue;
 
             // Compatibility with ScriptableObjectDrawer
-            Type type = fieldInfo.FieldType;
-            if (type.IsArray)
-                type = type.GetElementType();
-            if (type.IsSubclassOf(typeof(ScriptableObject)) || reference?.GetType().IsSubclassOf(typeof(ScriptableObject)) == true)
-                ScriptableObjectDrawer.DrawPropiertyField(position, property, label, fieldInfo);
-            else
-                EditorGUI.PropertyField(position, property, label, true);
+            if (!ScriptableObjectDrawer.DrawPropertyFieldIfIsScriptableObject(position, property, label, fieldInfo))
+            {
+                if (reference?.GetType().IsSubclassOf(typeof(ScriptableObject)) == true)
+                    ScriptableObjectDrawer.DrawPropiertyField(position, property, label, fieldInfo);
+                else
+                    EditorGUI.PropertyField(position, property, label, true);
+            }
 
-            type = property.serializedObject.targetObject.GetType();
+            Type type = property.serializedObject.targetObject.GetType();
             if (!type.IsSubclassOf(typeof(UnityEngine.Object)))
             {
                 Debug.LogError($"{nameof(ExpandableAttribute)} can only be used on types subclasses of {nameof(UnityEngine.Object)}. {property.name} from {property.GetParentTargetObjectOfProperty()} (path {property.propertyPath}) is type {type}.");

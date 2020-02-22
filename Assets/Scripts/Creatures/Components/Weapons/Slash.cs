@@ -1,5 +1,6 @@
 ﻿using Additions.Attributes;
 using Additions.Components.ScriptableSound;
+using Additions.Serializables.Atoms;
 using Additions.Serializables.Physics;
 
 using UnityEngine;
@@ -8,8 +9,12 @@ namespace Creatures.Weapons
 {
     public class Slash : Weapon, IAutomatedAttack
     {
-        [SerializeField, Tooltip("Damage on hit.")]
-        private float damage = 1;
+#pragma warning disable CS0649
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(IGet<float>))]
+        private Atom damage;
+#pragma warning restore CS0649
+
+        private IGet<float> Damage;
 
         [SerializeField, Tooltip("Push strength on hit.")]
         private float pushStrength = 0;
@@ -32,14 +37,6 @@ namespace Creatures.Weapons
         private Transform thisTransform;
         protected Animator thisAnimator;
         private SpriteRenderer thisSpriteRenderer;
-        private int countOfClicks;
-
-        private static class ANIMATION_STATES
-        {
-            public const string
-                SECOND_COMBO = "Attack2",
-                THIRD_COMBO = "Attack3";
-        }
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit).collider != null;
         public bool AutoAttack { get; set; }
@@ -53,20 +50,20 @@ namespace Creatures.Weapons
             thisSpriteRenderer = creature.Sprite;
             rayCasting.SetReference(thisTransform, thisSpriteRenderer);
             slashingSound.Init();
+            if (damage != null)
+                Damage = (IGet<float>)damage;
             base.Initialize(creature);
         }
 
         protected override void Attack()
         {
-            countOfClicks++;
             if (thisAnimator == null || string.IsNullOrEmpty(animationState))
                 HitTarget();
-            else if (countOfClicks == 1)
-                thisAnimator.SetBool(animationState, true);
-            countOfClicks = Mathf.Clamp(countOfClicks, 0, 3);
+            else
+                thisAnimator.SetTrigger(animationState);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
         protected void HitTarget()
         {
             slashingSound.Play();
@@ -75,45 +72,8 @@ namespace Creatures.Weapons
             {
                 Transform victim = raycastHits[n].transform;
                 victim.transform.GetComponent<ITakePush>()?.TakePush(thisTransform.position, pushStrength);
-                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(damage);
+                victim.transform.GetComponent<IHasHealth>()?.TakeDamage(Damage.Value);
             }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack'")]
-        protected void ComboHitA()
-        {
-            if (countOfClicks >= 2)
-                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, true);
-            else
-            {
-                thisAnimator.SetBool(animationState, false);
-                countOfClicks = 0;
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Calidad del código", "IDE0051:Quitar miembros privados no utilizados", Justification = "Used by Unity Animator event 'Attack2'")]
-        protected void ComboHitB()
-        {
-            if (countOfClicks >= 3)
-                thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, true);
-            else
-            {
-                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
-                countOfClicks = 0;
-            }
-        }
-
-        protected void ResetAnimation(int isCombo = 0)
-        {
-            if (isCombo == 1)
-            {
-                thisAnimator.SetBool(animationState, false);
-                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
-                thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, false);
-            }
-            else if (isCombo == 0)
-                thisAnimator.SetBool(animationState, false);
-            countOfClicks = 0;
         }
 
         private void AttackIfAutomated()

@@ -1,5 +1,4 @@
-﻿using Additions.Attributes;
-using Additions.Utils;
+﻿using Additions.Utils;
 
 using System;
 
@@ -7,8 +6,8 @@ using UnityEngine;
 
 namespace Additions.Components.ScriptableSound
 {
-    [Serializable, AbstractScriptableObject]
-    public class Sound : ScriptableObject, IPrototypable<Sound>
+    [Serializable]
+    public abstract class Sound : ScriptableObject, IPrototypable<Sound>
     {
         /// <summary>
         /// Whenever this class is playing music.

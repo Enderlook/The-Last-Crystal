@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basePool:
-    startingMax: 20
+    startingMax: {fileID: 0}
     startingCurrent: -1
   hasEmptyCallback: 0
   emptyCallback:

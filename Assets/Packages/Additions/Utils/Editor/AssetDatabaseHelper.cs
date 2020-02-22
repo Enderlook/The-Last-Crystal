@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 
 using UnityEditor;
+using UnityEditor.Experimental.SceneManagement;
+
+using UnityEngine;
 
 using UnityObject = UnityEngine.Object;
 
@@ -127,5 +130,101 @@ namespace Additions.Utils.UnityEditor
         /// <param name="object">Asset to get directory.</param>
         /// <returns>Directory where thee asset is saved.</returns>
         public static string GetAssetDirectory(UnityObject @object) => Path.GetDirectoryName(AssetDatabase.GetAssetPath(@object));
+
+        /// <summary>
+        /// Get the asset path of <paramref name="object"/>.<br/>
+        /// For <see cref="GameObject"/>s it does return the file where it's being save, which can be an scene or prefab file.
+        /// </summary>
+        /// <param name="object">Object to get asset path.</param>
+        /// <returns>Asset path of object, if any.</returns>
+        public static string GetAssetPath(UnityObject @object)
+        {
+            // Check for 99% of objects
+            string path = AssetDatabase.GetAssetPath(@object);
+
+            // Handle GameObjects
+            if (string.IsNullOrEmpty(path))
+            {
+#pragma warning disable UNT0007, UNT0008 // "as" isn't a Unity feature, this is a real null
+                // Check if @object is a GameObject or Component of one
+                GameObject gameObject = @object as GameObject ?? (@object as Component)?.gameObject;
+                // Check if that GameObject is in an scene
+                path = gameObject?.scene.path;
+#pragma warning restore UNT0007, UNT0008
+                if (string.IsNullOrEmpty(path) && gameObject != null)
+                    // Check if it's in a prefab file
+                    path = PrefabStageUtility.GetPrefabStage(gameObject).prefabAssetPath;
+            }
+            return path;
+        }
+
+        /// <summary>
+        /// Get the asset path of <paramref name="serializedObject"/>.<br/>
+        /// For <see cref="GameObject"/>s it does return the file where it's being save, which can be an scene or prefab file.
+        /// </summary>
+        /// <param serializedObject="object"><see cref="SerializedObject"/> to get asset path.</param>
+        /// <returns>Asset path of object, if any.</returns>
+        public static string GetAssetPath(SerializedObject serializedObject) => GetAssetPath(serializedObject.targetObject);
+
+        /// <summary>
+        /// Get the asset path of <paramref name="serializedProperty"/>.<br/>
+        /// For <see cref="GameObject"/>s it does return the file where it's being save, which can be an scene or prefab file.
+        /// </summary>
+        /// <param serializedProperty="object"><see cref="SerializedProperty"/> to get asset path.</param>
+        /// <returns>Asset path of object, if any.</returns>
+        public static string GetAssetPath(SerializedProperty serializedProperty) => GetAssetPath(serializedProperty.serializedObject);
+
+        /// <summary>
+        /// Extract a sub asset from an asset file to <paramref name="newPath"/>.
+        /// </summary>
+        /// <param name="subAsset">Sub asset to extract. Can't be main asset.</param>
+        /// <param name="newPath">Path to new asset file.</param>
+        /// <returns>New sub asset. <see langword="null"/> if <paramref name="subAsset"/> was a main asset.</returns>
+        public static UnityObject ExtractSubAsset(UnityObject subAsset, string newPath)
+        {
+            if (subAsset == null) throw new ArgumentNullException(nameof(subAsset));
+            if (newPath == null) throw new ArgumentNullException(nameof(newPath));
+            if (newPath.Length == 0) throw new ArgumentException("Can't be empty", nameof(newPath));
+
+            string path = AssetDatabase.GetAssetPath(subAsset);
+            if (AssetDatabase.LoadMainAssetAtPath(path) != subAsset)
+            {
+                UnityObject newAsset = UnityObject.Instantiate(subAsset);
+                AssetDatabase.RemoveObjectFromAsset(subAsset);
+                AssetDatabase.CreateAsset(newAsset, newPath);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+                return newAsset;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Extract a sub asset from an asset file to <paramref name="newPath"/>.<br/>
+        /// </summary>
+        /// <param name="subAsset">Sub asset to extract. Can't be main asset, otherwise <paramref name="subAsset"/> becomes <see langword="null"/>.</param>
+        /// <param name="newPath">Path to new asset file.</param>
+        public static void ExtractSubAsset(ref UnityObject subAsset, string newPath)
+        {
+            if (subAsset == null) throw new ArgumentNullException(nameof(subAsset));
+            if (newPath == null) throw new ArgumentNullException(nameof(newPath));
+            if (newPath.Length == 0) throw new ArgumentException("Can't be empty", nameof(newPath));
+
+            subAsset = ExtractSubAsset(subAsset, newPath);
+        }
+
+        /// <summary>
+        /// Extract a sub asset from an asset file.<br/>
+        /// </summary>
+        /// <param name="subAsset">Sub asset to extract. Can't be main asset, otherwise <paramref name="subAsset"/> becomes <see langword="null"/>.</param>
+        /// <returns>New sub asset path, if fail this path is invalid.</returns>
+        public static string ExtractSubAsset(ref UnityObject subAsset)
+        {
+            if (subAsset == null) throw new ArgumentNullException(nameof(subAsset));
+
+            string path = $"{string.Concat(AssetDatabase.GetAssetPath(subAsset).Split('.').Reverse().Skip(1).Reverse())} {subAsset.name}.asset";
+            ExtractSubAsset(ref subAsset, path);
+            return path;
+        }
     }
 }

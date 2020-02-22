@@ -1,4 +1,6 @@
 using Additions.Attributes;
+using Additions.Serializables.Atoms;
+using Additions.Serializables.Atoms.Premades.System;
 using Additions.Utils;
 
 using Creatures.Effects;
@@ -9,9 +11,22 @@ namespace Creatures.Weapons
 {
     public class PassiveMelee : MonoBehaviour, IInitialize<Creature>, IDamageOnTouch<Creature>
     {
+#pragma warning disable CS0649
         [Header("Configuration")]
-        [SerializeField, Tooltip("Damage on hit.")]
-        protected float damage = 1;
+        [SerializeField, Tooltip("Damage on hit."), Expandable, RestrictType(typeof(IGet<float>))]
+        private Atom damage;
+#pragma warning restore CS0649
+
+        protected IGet<float> _damage;
+
+        protected float Damage {
+            get {
+                if (_damage == null)
+                    _damage = (IGet<float>)damage;
+                return _damage.Value;
+            }
+            set => _damage = FloatConstant.Create(value);
+        }
 
         [SerializeField, Tooltip("Push strength on hit.")]
         protected float pushStrength = 0;
@@ -32,7 +47,7 @@ namespace Creatures.Weapons
             {
                 if (thisTransform != null)
                     takePush?.TakePush(thisTransform.position, pushStrength, PushMode.Local);
-                takeDamage?.TakeDamage(damage, showHurt, showHurt);
+                takeDamage?.TakeDamage(Damage, showHurt, showHurt);
             }
         }
     }

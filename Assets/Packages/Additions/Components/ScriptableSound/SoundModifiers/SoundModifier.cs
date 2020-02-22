@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Additions.Components.ScriptableSound.Modifiers
 {
-    [Serializable, AbstractScriptableObject]
+    [Serializable]
     public class SoundModifier : ScriptableObject, IPrototypable<SoundModifier>
     {
         public virtual void ModifyAudioSource(AudioSource audioSource) => throw new NotImplementedException("This class is 'abstract' and should not be instantiated by its own. Use derived classes instead which override this method.");

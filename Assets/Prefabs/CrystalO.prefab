@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basePool:
-    startingMax: 100
+    startingMax: {fileID: 114118561460502532}
     startingCurrent: -1
   hasEmptyCallback: 1
   emptyCallback:
@@ -185,8 +185,8 @@ MonoBehaviour:
     bar: {fileID: 0}
   hasRecharger: 0
   recharger:
-    rechargeRate: 0
-    rechargingDelay: 0
+    rechargeRate: {fileID: 0}
+    rechargingDelay: {fileID: 0}
     playlist: {fileID: 0}
     audioSource: {fileID: 0}
     startCallback:
@@ -230,6 +230,8 @@ MonoBehaviour:
   sprite: {fileID: 2479692871795223002}
   spriteColorer: {fileID: 6172403172661937216}
   hurtColor: {r: 1, g: 0, b: 0, a: 1}
+  healingSpriteColor: {r: 0, g: 1, b: 0, a: 1}
+  healingTextColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!95 &2479692871795222995
 Animator:
   serializedVersion: 3
@@ -391,3 +393,34 @@ Transform:
   m_Father: {fileID: 2479692871795223005}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114029641553728876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
+  m_Name: Health PolySwitch
+  m_EditorClassIdentifier: 
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 150
+  - 120
+  - 100
+--- !u!114 &114118561460502532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df3d0a480c23d442828f420c03c8bb7, type: 3}
+  m_Name: Health
+  m_EditorClassIdentifier: 
+  developerDescription: 
+  value: {fileID: 114029641553728876}

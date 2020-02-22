@@ -14,7 +14,7 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: SaintDeity
   productName: The Last Crystal
-  defaultCursor: {fileID: 0}
+  defaultCursor: {fileID: 2800000, guid: 4f02b182e12e1624fa015891be7f5c28, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1

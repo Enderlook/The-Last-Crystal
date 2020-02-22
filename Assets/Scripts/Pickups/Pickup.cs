@@ -1,4 +1,6 @@
-﻿using Additions.Components.ScriptableSound;
+﻿using Additions.Attributes;
+using Additions.Components.ScriptableSound;
+using Additions.Serializables.Atoms;
 
 using UnityEngine;
 
@@ -9,12 +11,12 @@ namespace Pickups
 #pragma warning disable CS0649
         [SerializeField, Tooltip("Sound played when picked up.")]
         private Sound pickupSound;
+
+        [SerializeField, Tooltip("Duration of the pickup in seconds before self destroy."), Expandable, RestrictType(typeof(AtomGet<float>))]
+        private Atom lifespan;
 #pragma warning restore CS0649
 
-        [SerializeField, Tooltip("Duration of the pickup in seconds before self destroy.")]
-        private float lifespan = 5;
-
-        private void Awake() => Destroy(gameObject, lifespan);
+        private void Awake() => Destroy(gameObject, lifespan.GetValue<float>());
 
         protected void PlaySoundAndDestroy()
         {

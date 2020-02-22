@@ -1,6 +1,7 @@
 ﻿using Additions.Exceptions;
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -236,6 +237,50 @@ namespace Additions.Extensions
         /// <param name="backingFieldName">Name of the backing field.</param>
         /// <returns>Name of the property.</returns>
         public static string GetPropertyNameOfBackingField(string backingFieldName) => backingFieldName.Replace("<", "").Replace(">K__BackingField", "");
+
+        /// <summary>
+        /// Determines if <paramref name="type"/> is an array or a <see cref="List{T}"/>.
+        /// </summary>
+        /// <param name="type"><see cref="Type"/> to check.</param>
+        /// <returns>Whenever it's an array or <see cref="List{T}"/>, or if not.</returns>
+        public static bool IsArrayOrList(this Type type) => type.IsArray || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>));
+
+        /// <summary>
+        /// Get the element <see cref="Type"/> of the array or list <see cref="Type"/> <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type"><see cref="Type"/> of array or list.</param>
+        /// <returns>Element <see cref="Type"/>.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when <paramref name="type"/> isn't array nor a concrete <see cref="Type"/> of <see cref="List{T}"/>.</exception>
+        public static Type GetElementTypeOfArrayOrList(this Type type)
+        {
+            if (type.IsArray)
+                return type.GetElementType();
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+                return type.GenericTypeArguments[0];
+            throw new InvalidOperationException($"{nameof(type)} ({type}) is nor an array not a concrete type of {typeof(List<>)}.");
+        }
+
+        /// <summary>
+        /// Try get element <see cref="Type"/> of <paramref name="type"/> if it is an array or list.
+        /// </summary>
+        /// <param name="type"><see cref="Type"/> to check.</param>
+        /// <param name="elementType">Element <see cref="Type"/> of <paramref name="type"/>, if returns <see langword="true"/>.</param>
+        /// <returns>Whenever it could get the element <see cref="Type"/> or not (because it wasn't an array nor a concrete <see cref="Type"/> of <see cref="List{T}"/>).</returns>
+        public static bool TryGetElementTypeOfArrayOrList(this Type type, out Type elementType)
+        {
+            if (type.IsArray)
+            {
+                elementType = type.GetElementType();
+                return true;
+            }
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                elementType = type.GenericTypeArguments[0];
+                return true;
+            }
+            elementType = default;
+            return false;
+        }
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1032:Implement standard exception constructors", Justification = "<pendiente>")]
