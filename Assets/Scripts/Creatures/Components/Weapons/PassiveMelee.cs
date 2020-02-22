@@ -1,5 +1,6 @@
 using Additions.Attributes;
 using Additions.Serializables.Atoms;
+using Additions.Serializables.Atoms.Premades.System;
 using Additions.Utils;
 
 using Creatures.Effects;
@@ -16,7 +17,16 @@ namespace Creatures.Weapons
         private Atom damage;
 #pragma warning restore CS0649
 
-        protected IGet<float> Damage;
+        protected IGet<float> _damage;
+
+        protected float Damage {
+            get {
+                if (_damage == null)
+                    _damage = (IGet<float>)damage;
+                return _damage.Value;
+            }
+            set => _damage = FloatConstant.Create<FloatConstant>(value);
+        }
 
         [SerializeField, Tooltip("Push strength on hit.")]
         protected float pushStrength = 0;
@@ -29,12 +39,7 @@ namespace Creatures.Weapons
 
         protected Transform thisTransform;
 
-        public virtual void Initialize(Creature creature)
-        {
-            if (damage != null)
-                Damage = (IGet<float>)damage;
-            thisTransform = creature.Transform;
-        }
+        public virtual void Initialize(Creature creature) => thisTransform = creature.Transform;
 
         public virtual void ProduceDamage(IHasHealth takeDamage, ITakePush takePush, ITakeEffect<Creature> takeEffect)
         {
@@ -42,7 +47,7 @@ namespace Creatures.Weapons
             {
                 if (thisTransform != null)
                     takePush?.TakePush(thisTransform.position, pushStrength, PushMode.Local);
-                takeDamage?.TakeDamage(Damage.Value, showHurt, showHurt);
+                takeDamage?.TakeDamage(Damage, showHurt, showHurt);
             }
         }
     }

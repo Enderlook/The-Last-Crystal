@@ -405,8 +405,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 547b07f335b7e624eb16cee9eee5dbcb, type: 3}
   m_Name: Health PolySwitch
   m_EditorClassIdentifier: 
-  master: {fileID: 0}
-  values: []
+  master: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
+  values:
+  - 150
+  - 120
+  - 100
 --- !u!114 &114118561460502532
 MonoBehaviour:
   m_ObjectHideFlags: 0
