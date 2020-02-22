@@ -1,7 +1,7 @@
 ﻿using Additions.Attributes;
 using Additions.Components;
 using Additions.Components.Navigation;
-
+using Additions.Exceptions;
 using Master;
 
 using System.Collections;
@@ -96,7 +96,7 @@ public class Spawner : MonoBehaviour
             if (random <= cumulative) return enemy.prefabEnemy;
         }
 
-        return null;
+        throw new ImpossibleStateException();
     }
 }
 
