@@ -1415,7 +1415,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 54be444d053f1634d8cf554e2bf154d7,
+      objectReference: {fileID: 11400000, guid: b2daced0a7355af4aad9b46c2f929bff,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c743f430f575342ad4415b8a297df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100000
+  damage: {fileID: 0}
   pushStrength: 0
   showHurt: 0
   <IsEnabled>k__BackingField: 1
@@ -2373,8 +2373,10 @@ MonoBehaviour:
   timeBtwSpawn: 2
   startSpawn: 4
   boss: {fileID: 5363415117319019817, guid: 68bf06f97f8991f4584e3e4ce3ed5305, type: 3}
+  portal: {fileID: 0}
   particle: {fileID: 6477713787646980818, guid: b40b703b9eaf73a409911f45eaf0db3b,
     type: 3}
+  readyTextAnimator: {fileID: 0}
   navigationGraph: {fileID: 1307858829}
   points:
   - {x: 9.328556, y: -0.34367394}
@@ -2436,6 +2438,7 @@ MonoBehaviour:
       m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     image: {fileID: 678407186}
+  navigationGraph: {fileID: 0}
 --- !u!114 &1218858286
 MonoBehaviour:
   m_ObjectHideFlags: 0

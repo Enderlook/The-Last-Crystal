@@ -106,3 +106,11 @@ Brave Soldiers made by Alexandr Zhelanov under license CC-BY-3.0
 	healspell1.aif
 	healspell2.aif
 	healspell3.aif
+
+Battle Music made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/battle-music
+	battle-mus.mp3
+
+I's Our Battle made by Alexandr Zhelanov under license CC-BY 3.0
+	https://opengameart.org/content/its-our-battle
+	It's our battle.mp3
