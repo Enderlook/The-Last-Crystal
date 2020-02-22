@@ -55,8 +55,8 @@ public class Menu : MonoBehaviour
     private static class ANIMATIONS
     {
         public const string
-            SHOWINTRO = "ShowIntro",
-            SHOWPRESSANYKEY = "ShowPressAnyKey";
+            SHOW_INTRO = "ShowIntro",
+            SHOW_PRESS_ANY_KEY = "ShowPressAnyKey";
     }
 
 #pragma warning disable CS0649
@@ -189,14 +189,13 @@ public class Menu : MonoBehaviour
     }
 
     /// <summary>
-    /// Animation state to show screen intro, called trought event.
+    /// Animation state to show screen intro, called through event.
     /// </summary>
-    public void ShowSplashIntro() => animator.SetTrigger(ANIMATIONS.SHOWINTRO);
+    public void ShowSplashIntro() => animator.SetTrigger(ANIMATIONS.SHOW_INTRO);
 
     /// <summary>
-    /// Animation state to show text in screen intro, called trought event.
+    /// Animation state to show text in screen intro, called through event.
     /// </summary>
-    public void ShowPressAnyKeyText() => animator.SetTrigger(ANIMATIONS.SHOWPRESSANYKEY);
-    
+    public void ShowPressAnyKeyText() => animator.SetTrigger(ANIMATIONS.SHOW_PRESS_ANY_KEY);
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }
