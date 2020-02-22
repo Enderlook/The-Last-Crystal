@@ -14,14 +14,10 @@ public class CreatureSpawn : MonoBehaviour
     [Header("Configuration")]
     [SerializeField, Tooltip("Creatures to spawn.")]
     private CreatureSpawnToken[] creatures;
-
-    [Header("Setup")]
-    [SerializeField, Tooltip("Navigation graph used by enemies to move.")]
-    private NavigationGraph navigationGraph;
 #pragma warning restore CS0649
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-    private void Start() => Array.ForEach(creatures, e => e.Initialize(navigationGraph));
+    private void Start() => Array.ForEach(creatures, e => e.Initialize());
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
     private void Update() => Array.ForEach(creatures, e => e.Update(Time.deltaTime));
@@ -56,14 +52,10 @@ public class CreatureSpawn : MonoBehaviour
         [NonSerialized]
         private Clockwork timer;
 
-        [NonSerialized]
-        private NavigationGraph navigationGraph;
-
         private bool enableFill;
 
-        public void Initialize(NavigationGraph navigationGraph)
+        public void Initialize()
         {
-            this.navigationGraph = navigationGraph;
             timer = new Clockwork(respawningTime, SpawnInstantly, true, 0);
             if (spawnOnStart)
                 SpawnInstantly();
@@ -77,7 +69,6 @@ public class CreatureSpawn : MonoBehaviour
 
             GameObject gameObject = Instantiate(prefab, spawningPoint.position, spawningPoint.rotation);
             gameObject.AddComponent<DestroyNotifier>().AddCallback(SpawnWithDelay);
-            NavigationAgent.InjectNavigationGraph(gameObject, navigationGraph);
             action.Invoke(gameObject);
             enableFill = false;
         }
