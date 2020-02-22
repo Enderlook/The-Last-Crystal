@@ -12,6 +12,61 @@ PrefabInstance:
       propertyPath: m_Name
       value: Warrior
       objectReference: {fileID: 0}
+    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: maxHealthColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: maxHealthColor.g
+      value: 0.9716981
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: maxHealthColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: minHealthColor.r
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: minHealthColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: minHealthColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: maxHealthColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: maxHealthColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: maxHealthColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: minHealthColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: minHealthColor.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7968881161876618374, guid: 8592f54dd4fc982448178f3d0766ccdb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -117,66 +172,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: maxHealthColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: maxHealthColor.g
-      value: 0.9716981
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: maxHealthColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: minHealthColor.r
-      value: 0.990566
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: minHealthColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881162309069598, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: minHealthColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: maxHealthColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: maxHealthColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: maxHealthColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: minHealthColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: minHealthColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7968881161798406176, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: minHealthColor.b
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7968881161989064933, guid: 8592f54dd4fc982448178f3d0766ccdb,
         type: 3}
       propertyPath: m_Color.r
@@ -192,11 +187,6 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7968881161989064933, guid: 8592f54dd4fc982448178f3d0766ccdb,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7968881162510874761, guid: 8592f54dd4fc982448178f3d0766ccdb,
         type: 3}
       propertyPath: m_Color.r
@@ -211,6 +201,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162072696549, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162072696549, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162072696549, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162223180174, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162223180174, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7968881162223180174, guid: 8592f54dd4fc982448178f3d0766ccdb,
+        type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8592f54dd4fc982448178f3d0766ccdb, type: 3}

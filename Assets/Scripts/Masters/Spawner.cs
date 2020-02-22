@@ -31,8 +31,14 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("Boss spawned after all enemies die.")]
     private GameObject boss;
 
+    [SerializeField, Tooltip("Portal effect.")]
+    private GameObject portal;
+
     [SerializeField, Tooltip("Particle effect.")]
     private GameObject particle;
+
+    [SerializeField, Tooltip("Animator of UI.")]
+    private Animator readyTextAnimator;
 
     [Header("Setup")]
     [SerializeField, Tooltip("Navigation Graph used to produce enemy movement.")]
@@ -43,12 +49,48 @@ public class Spawner : MonoBehaviour
     private GameObject particleInstantiated;
     private int random;
     private GameObject enemyToSpawn;
+    private const string QUIT_TEXT_READY = "OffTextReady";
 
     [DrawVectorRelativeToTransform]
     public List<Vector2> points;
 
+    private static Spawner instance;
+
+    public static Spawner Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject spawner = new GameObject();
+            }
+
+            return instance;
+        }
+    }
+
+    private void Awake() => instance = this;
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
-    private void Start() => StartCoroutine(SpawnEnemies());
+    private void Start()
+    {
+        
+    }
+
+    public void InitializeWave()
+    {
+        InstantiatePortal();
+        StartCoroutine(SpawnEnemies());
+        readyTextAnimator.SetBool(QUIT_TEXT_READY, true);
+    }
+
+    private void InstantiatePortal()
+    {
+        for (int x = 0; x < points.Count; x++)
+        {
+            Instantiate(portal, new Vector2(points[x].x, points[x].y), Quaternion.identity);
+        }
+    }
 
     private IEnumerator SpawnEnemies()
     {

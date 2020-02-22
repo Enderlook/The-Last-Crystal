@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3f74220ff256b49a023026fdb4b768, type: 3}
+  m_Name: Level_2
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 114864910607316924}
+  - {fileID: 114941925643513758}
+  playMode: 1
+  playListMode: 0
+  playsAmount: -1
+--- !u!114 &114864910607316924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb974d40ce91a04193f8be2b01dcfb8, type: 3}
+  m_Name: Rise of spirit
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: d939b21183d971240b8486cce3cd9592, type: 3}
+  playsAmount: 1
+  modifiers: []
+--- !u!114 &114941925643513758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb974d40ce91a04193f8be2b01dcfb8, type: 3}
+  m_Name: Of Far Different Nature - Scene - Epic Departure (CC-BY)
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: d0f908966de50f4408c7a2e210c4df96, type: 3}
+  playsAmount: 1
+  modifiers: []
