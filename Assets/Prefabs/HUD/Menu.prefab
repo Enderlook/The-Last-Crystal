@@ -2765,8 +2765,8 @@ MonoBehaviour:
   soundPlayer: {fileID: 127513567015536371}
   gameIndex: 0
   menuIndex: 1
-  winIndex: 2
-  loseIndex: 3
+  winIndex: 3
+  loseIndex: 2
   difficulty: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
   difficultyText: {fileID: 7202499681219657050}
   animator: {fileID: 0}
