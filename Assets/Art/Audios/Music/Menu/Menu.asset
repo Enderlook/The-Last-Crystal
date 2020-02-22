@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eb974d40ce91a04193f8be2b01dcfb8, type: 3}
-  m_Name: healspell3
+  m_Name: Menu
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: a3592a3b72f7ebd41a26f45bf9ad10f2, type: 3}
-  playsAmount: 1
+  audioClip: {fileID: 8300000, guid: 68d0550f1a1013e46946e2f77d3ec928, type: 3}
+  playsAmount: -1
   modifiers: []

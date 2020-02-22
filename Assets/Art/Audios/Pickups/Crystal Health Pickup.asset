@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eb974d40ce91a04193f8be2b01dcfb8, type: 3}
-  m_Name: 332057__qubodup__fast-collision-reverb
+  m_Name: Crystal Health Pickup
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: d4b94c17d00b9294493850561a8b491b, type: 3}
+  audioClip: {fileID: 8300000, guid: bb83b4fe3fa251c4b91a0961b7921a97, type: 3}
   playsAmount: 1
-  modifiers:
-  - {fileID: 11400000, guid: 8a8902e3d84d4c5489b552ac56627c71, type: 2}
-  - {fileID: 11400000, guid: 06c35ec05a694cc4a8b21191e5f2e1b5, type: 2}
+  modifiers: []

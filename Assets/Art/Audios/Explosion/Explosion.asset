@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eb974d40ce91a04193f8be2b01dcfb8, type: 3}
-  m_Name: 147288__smokebomb99__sword-slash-1
+  m_Name: Explosion
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 8c200738604e1b9419b80511229bd56d, type: 3}
+  audioClip: {fileID: 8300000, guid: 214b0d57baf94694dab616c181a45823, type: 3}
   playsAmount: 1
-  modifiers:
-  - {fileID: 11400000, guid: 8a8902e3d84d4c5489b552ac56627c71, type: 2}
-  - {fileID: 11400000, guid: 06c35ec05a694cc4a8b21191e5f2e1b5, type: 2}
+  modifiers: []

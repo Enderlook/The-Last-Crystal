@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eb974d40ce91a04193f8be2b01dcfb8, type: 3}
-  m_Name: healspell2
+  m_Name: Energy Pickup
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: aecd9020a4b2b204480ac1b27e566c5f, type: 3}
   playsAmount: 1
