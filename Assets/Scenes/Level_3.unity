@@ -2182,21 +2182,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
-        type: 3}
-      propertyPath: bar.bar
-      value: 
-      objectReference: {fileID: 1897199896}
-    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
-        type: 3}
-      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
-        type: 3}
-      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GameOver
-      objectReference: {fileID: 0}
     - target: {fileID: 2479692871795222993, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
         type: 3}
       propertyPath: m_Offset.x
@@ -2216,6 +2201,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.x
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: bar.bar
+      value: 
+      objectReference: {fileID: 1897199896}
+    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479692871795223004, guid: 75d3df55b0c6aa642a77ca9f30e6ce21,
+        type: 3}
+      propertyPath: emptyCallback.callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GameOver
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d3df55b0c6aa642a77ca9f30e6ce21, type: 3}
@@ -3211,6 +3211,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0.19998169
       objectReference: {fileID: 0}
+    - target: {fileID: 7938913578926560866, guid: d876f50072dcc83458a638ad53c3a869,
+        type: 3}
+      propertyPath: sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1962220d7335d2d4491fa38947c51a45,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d876f50072dcc83458a638ad53c3a869, type: 3}
 --- !u!114 &1540815996
