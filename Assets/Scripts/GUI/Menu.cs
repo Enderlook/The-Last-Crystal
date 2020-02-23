@@ -26,6 +26,9 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
 
+    [SerializeField, Tooltip("Show slider values in UI.")]
+    private ValueSlider[] valueSliders;
+
     [Header("Music")]
     [SerializeField, Tooltip("Sound player script which manages music.")]
     private SoundPlayer soundPlayer;
@@ -197,5 +200,20 @@ public class Menu : MonoBehaviour
     /// Animation state to show text in screen intro, called through event.
     /// </summary>
     public void ShowPressAnyKeyText() => animator.SetTrigger(ANIMATIONS.SHOW_PRESS_ANY_KEY);
+
+    public void TextUpdate(int index = 0) => valueSliders[index].valueSliderText.text = $"{valueSliders[index].slider.value}";
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
+}
+
+[System.Serializable]
+public class ValueSlider
+{
+    [Tooltip("Name of the slider value.")]
+    public string nameSlider;
+
+    [Tooltip("Text to show slider values.")]
+    public Text valueSliderText;
+
+    [Tooltip("Slider.")]
+    public Slider slider;
 }
