@@ -3563,7 +3563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &438475452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3796,7 +3796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &540954725
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7343,16 +7343,6 @@ MonoBehaviour:
   menuNoToggleable: 0
   win: {fileID: 0}
   lose: {fileID: 0}
-  valueSliders:
-  - nameSlider: MasterVolume
-    valueSliderText: {fileID: 133405653}
-    slider: {fileID: 1914622297}
-  - nameSlider: SoundVolume
-    valueSliderText: {fileID: 1131244548}
-    slider: {fileID: 1016430012}
-  - nameSlider: MusicVolume
-    valueSliderText: {fileID: 1340668209}
-    slider: {fileID: 413636161}
   resolutionDropdown: {fileID: 214952237}
   soundPlayer: {fileID: 0}
   gameIndex: 0
@@ -10383,7 +10373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1519450950
 RectTransform:
   m_ObjectHideFlags: 0
