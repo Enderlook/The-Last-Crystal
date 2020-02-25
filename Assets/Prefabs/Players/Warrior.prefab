@@ -316,7 +316,7 @@ MonoBehaviour:
     debug: 0
     color: {r: 1, g: 0, b: 0, a: 1}
   layerToHit: 10
-  animationState: Attack
+  animationState: AttackTrigger
   slashingSound:
     audioSource: {fileID: 6050690592085237573}
     sound: {fileID: 11400000, guid: 5acc86af231a9b8419c57f008cfb329f, type: 2}
@@ -342,6 +342,7 @@ MonoBehaviour:
   dashSound:
     audioSource: {fileID: 4745914529729984847}
     sound: {fileID: 11400000, guid: 3c66b8da460e09e47a64bb04d1387dca, type: 2}
+  animationState: Dash
 --- !u!114 &9047649054987026332
 MonoBehaviour:
   m_ObjectHideFlags: 0

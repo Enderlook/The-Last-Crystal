@@ -37,14 +37,6 @@ namespace Creatures.Weapons
         private Transform thisTransform;
         protected Animator thisAnimator;
         private SpriteRenderer thisSpriteRenderer;
-        private int countOfClicks;
-
-        private static class ANIMATION_STATES
-        {
-            public const string
-                SECOND_COMBO = "Attack2",
-                THIRD_COMBO = "Attack3";
-        }
 
         public bool TargetInRange => rayCasting.Raycast(1 << layerToHit).collider != null;
         public bool AutoAttack { get; set; }
@@ -65,12 +57,10 @@ namespace Creatures.Weapons
 
         protected override void Attack()
         {
-            countOfClicks++;
             if (thisAnimator == null || string.IsNullOrEmpty(animationState))
                 HitTarget();
-            else if (countOfClicks == 1)
-                thisAnimator.SetBool(animationState, true);
-            countOfClicks = Mathf.Clamp(countOfClicks, 0, 3);
+            else
+                thisAnimator.SetTrigger(animationState);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
@@ -84,43 +74,6 @@ namespace Creatures.Weapons
                 victim.transform.GetComponent<ITakePush>()?.TakePush(thisTransform.position, pushStrength);
                 victim.transform.GetComponent<IHasHealth>()?.TakeDamage(Damage.Value);
             }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
-        protected void ComboHitA()
-        {
-            if (countOfClicks >= 2)
-                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, true);
-            else
-            {
-                thisAnimator.SetBool(animationState, false);
-                countOfClicks = 0;
-            }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity Animator.")]
-        protected void ComboHitB()
-        {
-            if (countOfClicks >= 3)
-                thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, true);
-            else
-            {
-                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
-                countOfClicks = 0;
-            }
-        }
-
-        protected void ResetAnimation(int isCombo = 0)
-        {
-            if (isCombo == 1)
-            {
-                thisAnimator.SetBool(animationState, false);
-                thisAnimator.SetBool(ANIMATION_STATES.SECOND_COMBO, false);
-                thisAnimator.SetBool(ANIMATION_STATES.THIRD_COMBO, false);
-            }
-            else if (isCombo == 0)
-                thisAnimator.SetBool(animationState, false);
-            countOfClicks = 0;
         }
 
         private void AttackIfAutomated()

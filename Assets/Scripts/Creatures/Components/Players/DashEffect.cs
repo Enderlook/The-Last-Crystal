@@ -36,16 +36,22 @@ namespace PlayerAddons
 
         [SerializeField, Tooltip("Dash sound.")]
         private SoundPlay dashSound;
+
+        [SerializeField, Tooltip("Animation played on dash.")]
+        private string animationState;
+
 #pragma warning restore CS0649
 
         private Rigidbody2D thisRigidbody2D;
         private SpriteRenderer sprite;
+        private Animator animator;
         private float remaining_time;
         private bool isDashing;
 
         void IInitialize<Creature>.Initialize(Creature creature)
         {
             thisRigidbody2D = creature.ThisRigidbody2D;
+            animator = creature.Animator;
             sprite = creature.Sprite;
             dashSound.Init();
         }
@@ -63,6 +69,7 @@ namespace PlayerAddons
                 remaining_time -= deltaTime;
                 if (remaining_time <= 0)
                 {
+                    animator.SetBool(animationState, false);
                     isDashing = false;
                     thisRigidbody2D.velocity = Vector2.zero;
                     if (melee != null)
@@ -79,6 +86,7 @@ namespace PlayerAddons
                 // Spawn particles
                 Destroy(Instantiate(effect, new Vector2(thisRigidbody2D.position.x, thisRigidbody2D.position.y + 0.15f), transform.rotation), duration);
 
+                animator.SetBool(animationState, true);
                 thisRigidbody2D.velocity += GetVelocityBonus();
                 isDashing = true;
                 remaining_time = duration;

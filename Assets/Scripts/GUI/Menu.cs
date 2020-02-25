@@ -2,7 +2,7 @@
 using Additions.Components.ScriptableSound;
 using Additions.Serializables.PolySwitcher;
 using Master;
-
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -25,6 +25,12 @@ public class Menu : MonoBehaviour
 
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
+
+    [SerializeField, Tooltip("Show slider values in UI.")]
+    private ValueSlider[] valueSliders;
+
+    [SerializeField, Tooltip("Resolution dropdown.")]
+    private Dropdown resolutionDropdown;
 
     [Header("Music")]
     [SerializeField, Tooltip("Sound player script which manages music.")]
@@ -52,11 +58,24 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Animator component.")]
     private Animator animator;
 
+    private Resolution[] resolutions; // Variable to store all detected resolutions.
+
+    // Statics variables.
+    private static int currentResolutionIndex;
+
+    private static class ANIMATIONS
+    {
+        public const string
+            SHOW_INTRO = "ShowIntro",
+            SHOW_PRESS_ANY_KEY = "ShowPressAnyKey";
+    }
+
 #pragma warning disable CS0649
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
     private void Start()
     {
+        SetResolutionsInDropdown();
         DisplayMenuPause(false);
         ShowDifficulty();
     }
@@ -66,6 +85,28 @@ public class Menu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             DisplayMenuPause();
+    }
+
+    private void SetResolutionsInDropdown()
+    {
+        resolutions = Screen.resolutions;
+
+        resolutionDropdown.ClearOptions();
+
+        List<string> optionsDropDown = new List<string>();
+
+        for (int x = 0; x < resolutions.Length; x++)
+        {
+            string option = $"{resolutions[x].width} x {resolutions[x].height}";
+            optionsDropDown.Add(option);
+
+            currentResolutionIndex = resolutions[x].width == Screen.currentResolution.width 
+                && resolutions[x].height == Screen.currentResolution.height ? x : currentResolutionIndex;
+        }
+
+        resolutionDropdown.AddOptions(optionsDropDown);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
     }
 
     /// <summary>
@@ -180,5 +221,57 @@ public class Menu : MonoBehaviour
                 soundPlayer.Play(loseIndex);
         }
     }
+
+    /// <summary>
+    /// Animation state to show screen intro, called through event.
+    /// </summary>
+    public void ShowSplashIntro() => animator.SetTrigger(ANIMATIONS.SHOW_INTRO);
+
+    /// <summary>
+    /// Animation state to show text in screen intro, called through event.
+    /// </summary>
+    public void ShowPressAnyKeyText() => animator.SetTrigger(ANIMATIONS.SHOW_PRESS_ANY_KEY);
+
+    /// <summary>
+    /// Function called through the sliders event.
+    /// </summary>
+    /// <param name="index">Array index.</param>
+    public void TextUpdate(int index = 0) => valueSliders[index].valueSliderText.text = $"{valueSliders[index].slider.value}";
+
+    /// <summary>
+    /// Set the quality of the game.
+    /// </summary>
+    /// <param name="index">Array index.</param>
+    public void SetQuality(int index) => QualitySettings.SetQualityLevel(index);
+
+    /// <summary>
+    /// Set the fullscreen mode.
+    /// </summary>
+    /// <param name="isFullScreen"><seealso cref="bool"/> value to change fullscreen mode.</param>
+    public void SetScreenMode(bool isFullScreen) => Screen.fullScreen = isFullScreen;
+
+    /// <summary>
+    /// Set the resolution of the game.
+    /// </summary>
+    /// <param name="index">Array index</param>
+    public void SetResolution(int index)
+    {
+        currentResolutionIndex = index;
+        Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+    }
+
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
+}
+
+[System.Serializable]
+public class ValueSlider
+{
+    [Tooltip("Name of the slider value.")]
+    public string nameSlider;
+
+    [Tooltip("Text to show slider values.")]
+    public Text valueSliderText;
+
+    [Tooltip("Slider.")]
+    public Slider slider;
 }
