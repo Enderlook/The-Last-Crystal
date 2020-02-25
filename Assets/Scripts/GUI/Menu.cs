@@ -26,9 +26,6 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Panel displayed on defeat.")]
     private GameObject lose;
 
-    [SerializeField, Tooltip("Show slider values in UI.")]
-    private ValueSlider[] valueSliders;
-
     [SerializeField, Tooltip("Resolution dropdown.")]
     private Dropdown resolutionDropdown;
 
@@ -100,7 +97,7 @@ public class Menu : MonoBehaviour
             string option = $"{resolutions[x].width} x {resolutions[x].height}";
             optionsDropDown.Add(option);
 
-            currentResolutionIndex = resolutions[x].width == Screen.currentResolution.width 
+            currentResolutionIndex = resolutions[x].width == Screen.currentResolution.width
                 && resolutions[x].height == Screen.currentResolution.height ? x : currentResolutionIndex;
         }
 
@@ -233,12 +230,6 @@ public class Menu : MonoBehaviour
     public void ShowPressAnyKeyText() => animator.SetTrigger(ANIMATIONS.SHOW_PRESS_ANY_KEY);
 
     /// <summary>
-    /// Function called through the sliders event.
-    /// </summary>
-    /// <param name="index">Array index.</param>
-    public void TextUpdate(int index = 0) => valueSliders[index].valueSliderText.text = $"{valueSliders[index].slider.value}";
-
-    /// <summary>
     /// Set the quality of the game.
     /// </summary>
     /// <param name="index">Array index.</param>
@@ -260,18 +251,23 @@ public class Menu : MonoBehaviour
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
     }
 
+    /// <summary>
+    /// Set master volume.
+    /// </summary>
+    /// <param name="volume">New volume value.</param>
+    public void SetMasterVolume(float volume) => Settings.MasterVolume = volume;
+
+    /// <summary>
+    /// Set sound volume.
+    /// </summary>
+    /// <param name="volume">New volume value.</param>
+    public void SetSoundVolume(float volume) => Settings.SoundVolume = volume;
+
+    /// <summary>
+    /// Set music volume.
+    /// </summary>
+    /// <param name="volume">New volume value.</param>
+    public void SetMusicVolume(float volume) => Settings.MusicVolume = volume;
+
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
-}
-
-[System.Serializable]
-public class ValueSlider
-{
-    [Tooltip("Name of the slider value.")]
-    public string nameSlider;
-
-    [Tooltip("Text to show slider values.")]
-    public Text valueSliderText;
-
-    [Tooltip("Slider.")]
-    public Slider slider;
 }
