@@ -2002,7 +2002,6 @@ MonoBehaviour:
       m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     image: {fileID: 6044440295465154361}
-  navigationGraph: {fileID: 0}
 --- !u!114 &1160684987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2031,9 +2030,9 @@ MonoBehaviour:
   - prefabEnemy: {fileID: 4598965145827479676, guid: 1e7ac38d2f7c10347b05de7b74971f01,
       type: 3}
     probability: 45
-  simultaneousEnemies: 4
-  enemiesToSpawn: 14
-  timeBtwSpawn: 2
+  simultaneousEnemies: 6
+  enemiesToSpawn: 22
+  timeBtwSpawn: 1.8
   startSpawn: 4
   boss: {fileID: 5363415117319019817, guid: 68bf06f97f8991f4584e3e4ce3ed5305, type: 3}
   portal: {fileID: 558978172750866583, guid: bdb66e4197fa0bd4ea34b2311559aaf0, type: 3}
