@@ -36,6 +36,7 @@ MonoBehaviour:
   modifiers:
   - {fileID: 11400000, guid: 8a8902e3d84d4c5489b552ac56627c71, type: 2}
   - {fileID: 11400000, guid: 06c35ec05a694cc4a8b21191e5f2e1b5, type: 2}
+  audioMixerGroup: {fileID: 24300002, guid: 2856b9ed91ad71b4db7c0f3f403d6b94, type: 2}
 --- !u!114 &114291720083167158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,6 +54,7 @@ MonoBehaviour:
   modifiers:
   - {fileID: 11400000, guid: 8a8902e3d84d4c5489b552ac56627c71, type: 2}
   - {fileID: 11400000, guid: 06c35ec05a694cc4a8b21191e5f2e1b5, type: 2}
+  audioMixerGroup: {fileID: 24300002, guid: 2856b9ed91ad71b4db7c0f3f403d6b94, type: 2}
 --- !u!114 &114890361158970822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,3 +72,4 @@ MonoBehaviour:
   modifiers:
   - {fileID: 11400000, guid: 8a8902e3d84d4c5489b552ac56627c71, type: 2}
   - {fileID: 11400000, guid: 06c35ec05a694cc4a8b21191e5f2e1b5, type: 2}
+  audioMixerGroup: {fileID: 24300002, guid: 2856b9ed91ad71b4db7c0f3f403d6b94, type: 2}

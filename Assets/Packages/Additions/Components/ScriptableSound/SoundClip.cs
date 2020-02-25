@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Additions.Components.ScriptableSound
 {
@@ -23,6 +24,11 @@ namespace Additions.Components.ScriptableSound
 
         [SerializeField, Tooltip("Modifiers to AudioSource."), Expandable]
         private SoundModifier[] modifiers;
+
+        [SerializeField, Tooltip("Audio mixer group used by this sound.")]
+        private AudioMixerGroup audioMixerGroup;
+
+        private AudioMixerGroup oldAudioMixerGroup;
 #pragma warning restore
 
         private bool HasEnoughPlays()
@@ -38,6 +44,8 @@ namespace Additions.Components.ScriptableSound
                 if (HasEnoughPlays())
                 {
                     AudioSource audioSource = soundConfiguration.audioSource;
+                    oldAudioMixerGroup = audioSource.outputAudioMixerGroup;
+                    audioSource.outputAudioMixerGroup = audioMixerGroup;
                     audioSource.clip = audioClip;
                     audioSource.Play();
                     Array.ForEach(modifiers, e => e.ModifyAudioSource(audioSource));
@@ -52,6 +60,7 @@ namespace Additions.Components.ScriptableSound
         private void BackToNormalAudioSource()
         {
             AudioSource audioSource = soundConfiguration.audioSource;
+            audioSource.outputAudioMixerGroup = oldAudioMixerGroup;
             for (int i = modifiers.Length - 1; i >= 0; i--)
                 modifiers[i].BackToNormalAudioSource(audioSource);
             soundConfiguration.EndCallback();
@@ -79,6 +88,7 @@ namespace Additions.Components.ScriptableSound
             prototype.audioClip = audioClip;
             prototype.modifiers = modifiers.Select(e => e.CreatePrototype()).ToArray();
             prototype.playsAmount = playsAmount;
+            prototype.audioMixerGroup = audioMixerGroup;
             return prototype;
         }
 

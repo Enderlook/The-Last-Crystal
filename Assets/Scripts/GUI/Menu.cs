@@ -2,8 +2,10 @@
 using Additions.Components.ScriptableSound;
 using Additions.Serializables.PolySwitcher;
 using Master;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -51,11 +53,30 @@ public class Menu : MonoBehaviour
     [SerializeField, Tooltip("Difficulty text.")]
     private Text difficultyText;
 
+    [SerializeField, Tooltip("Audio mixer used to handle sound.")]
+    private AudioMixer soundMixer;
+
+    [SerializeField, Tooltip("Audio mixer used to handle music.")]
+    private AudioMixer musicMixer;
+
+    [SerializeField, Tooltip("Master volume slider.")]
+    private Slider masterVolumeSlider;
+
+    [SerializeField, Tooltip("Master music slider.")]
+    private Slider musicVolumeSlider;
+
+    [SerializeField, Tooltip("Master sound slider.")]
+    private Slider soundVolumeSlider;
+
     [Header("Animation")]
     [SerializeField, Tooltip("Animator component.")]
     private Animator animator;
 
     private Resolution[] resolutions; // Variable to store all detected resolutions.
+
+    private float masterVolume = 0.8f;
+    private float soundVolume = 0.8f;
+    private float musicVolume = 0.8f;
 
     // Statics variables.
     private static int currentResolutionIndex;
@@ -75,6 +96,10 @@ public class Menu : MonoBehaviour
         SetResolutionsInDropdown();
         DisplayMenuPause(false);
         ShowDifficulty();
+
+        masterVolumeSlider.value = masterVolume;
+        musicVolumeSlider.value = musicVolume;
+        soundVolumeSlider.value = soundVolume;
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Code Quality", "IDE0051:Remove unused private members", Justification = "Used by Unity.")]
@@ -251,23 +276,37 @@ public class Menu : MonoBehaviour
         Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
     }
 
+    private float CalculateVolume(float volume) => Mathf.Lerp(-80, 20, masterVolume * soundVolume);
+
     /// <summary>
     /// Set master volume.
     /// </summary>
     /// <param name="volume">New volume value.</param>
-    public void SetMasterVolume(float volume) => Settings.MasterVolume = volume;
+    public void SetMasterVolume(float volume)
+    {
+        masterVolume = volume;
+        soundMixer.SetFloat("Volume", CalculateVolume(soundVolume));
+        musicMixer.SetFloat("Volume", CalculateVolume(musicVolume));
+    }
 
     /// <summary>
     /// Set sound volume.
     /// </summary>
     /// <param name="volume">New volume value.</param>
-    public void SetSoundVolume(float volume) => Settings.SoundVolume = volume;
+    public void SetSoundVolume(float volume)
+    {
+        soundVolume = volume;
+        soundMixer.SetFloat("Volume", CalculateVolume(soundVolume));
+    }
 
     /// <summary>
     /// Set music volume.
     /// </summary>
     /// <param name="volume">New volume value.</param>
-    public void SetMusicVolume(float volume) => Settings.MusicVolume = volume;
-
+    public void SetMusicVolume(float volume)
+    {
+        musicVolume = volume;
+        musicMixer.SetFloat("Volume", CalculateVolume(musicVolume));
+    }
 #pragma warning restore CA1822 // Unity Editor can't assign static methods to buttons
 }

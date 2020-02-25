@@ -12147,6 +12147,11 @@ MonoBehaviour:
   loseIndex: 3
   difficulty: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
   difficultyText: {fileID: 2998185546675287040}
+  soundMixer: {fileID: 0}
+  musicMixer: {fileID: 0}
+  masterVolumeSlider: {fileID: 9214741038537813052}
+  musicVolumeSlider: {fileID: 1102008662003297804}
+  soundVolumeSlider: {fileID: 3432207404488292075}
   animator: {fileID: 0}
 --- !u!114 &127513567015536371
 MonoBehaviour:

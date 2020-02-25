@@ -15,3 +15,4 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 68d0550f1a1013e46946e2f77d3ec928, type: 3}
   playsAmount: -1
   modifiers: []
+  audioMixerGroup: {fileID: 24300002, guid: 1ff7023419314094782eeb6dee81b844, type: 2}

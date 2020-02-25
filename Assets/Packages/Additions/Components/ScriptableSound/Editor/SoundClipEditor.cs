@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 using UnityObject = UnityEngine.Object;
+
 namespace Additions.Components.ScriptableSound
 {
     [CustomEditor(typeof(SoundClip))]
@@ -28,6 +29,7 @@ namespace Additions.Components.ScriptableSound
                 EditorGUI.EndDisabledGroup();
             }
             EditorGUILayout.PropertyField(serializedObject.FindProperty("modifiers"), true);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("audioMixerGroup"), true);
             SoundPlayerEditor.DrawAmountField(serializedObject.FindProperty("playsAmount"));
 
             if (EditorGUI.EndChangeCheck())

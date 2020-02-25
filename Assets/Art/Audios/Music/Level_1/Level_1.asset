@@ -33,6 +33,7 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 06803b4e1f895e64184ffa8eb1d2af58, type: 3}
   playsAmount: 1
   modifiers: []
+  audioMixerGroup: {fileID: 24300002, guid: 1ff7023419314094782eeb6dee81b844, type: 2}
 --- !u!114 &114663805569497840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,3 +49,4 @@ MonoBehaviour:
   audioClip: {fileID: 8300000, guid: 2b82113b675b4974ea185897f7958ff2, type: 3}
   playsAmount: 1
   modifiers: []
+  audioMixerGroup: {fileID: 24300002, guid: 1ff7023419314094782eeb6dee81b844, type: 2}

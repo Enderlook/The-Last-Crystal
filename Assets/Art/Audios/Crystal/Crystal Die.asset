@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a8902e3d84d4c5489b552ac56627c71, type: 2}
   - {fileID: 11400000, guid: 06c35ec05a694cc4a8b21191e5f2e1b5, type: 2}
   - {fileID: 11400000, guid: f584d585936f3274f918a05421851bb6, type: 2}
+  audioMixerGroup: {fileID: 24300002, guid: 2856b9ed91ad71b4db7c0f3f403d6b94, type: 2}
