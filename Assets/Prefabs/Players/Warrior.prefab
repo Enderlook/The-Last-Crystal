@@ -342,6 +342,7 @@ MonoBehaviour:
   dashSound:
     audioSource: {fileID: 4745914529729984847}
     sound: {fileID: 11400000, guid: 3c66b8da460e09e47a64bb04d1387dca, type: 2}
+  animationState: Dash
 --- !u!114 &9047649054987026332
 MonoBehaviour:
   m_ObjectHideFlags: 0

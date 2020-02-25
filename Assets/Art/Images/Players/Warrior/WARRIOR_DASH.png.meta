@@ -1,0 +1,458 @@
+fileFormatVersion: 2
+guid: 84e8cb535caf0ec40bef5dcf681c16fb
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: WARRIOR_DASH_0
+    21300002: WARRIOR_DASH_1
+    21300004: WARRIOR_DASH_2
+    21300006: WARRIOR_DASH_3
+    21300008: WARRIOR_DASH_4
+    21300010: WARRIOR_DASH_5
+    21300012: WARRIOR_DASH_6
+    21300014: WARRIOR_DASH_7
+    21300016: WARRIOR_DASH_8
+    21300018: WARRIOR_DASH_9
+    21300020: WARRIOR_DASH_10
+    21300022: WARRIOR_DASH_11
+    21300024: WARRIOR_DASH_12
+    21300026: WARRIOR_DASH_13
+    21300028: WARRIOR_DASH_14
+  externalObjects: {}
+  serializedVersion: 7
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WARRIOR_DASH_0
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 2104
+        width: 165
+        height: 292
+      alignment: 9
+      pivot: {x: 0.47818184, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f129857285782a84abef950673326f33
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_1
+      rect:
+        serializedVersion: 2
+        x: 653
+        y: 2103
+        width: 170
+        height: 285
+      alignment: 9
+      pivot: {x: 0.4817647, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c559f9353375f542a4ac2857e363826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_2
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 2103
+        width: 172
+        height: 277
+      alignment: 9
+      pivot: {x: 0.48255813, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 990a1a9ab73faf345b28ebcf9f14fa43
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_3
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 1603
+        width: 176
+        height: 272
+      alignment: 9
+      pivot: {x: 0.43920457, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcbe5ca93e8e3f24ea44fb36231987a9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_4
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 1604
+        width: 225
+        height: 260
+      alignment: 9
+      pivot: {x: 0.36666667, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a17b49aa38fac9540a31f2de95a6b515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_5
+      rect:
+        serializedVersion: 2
+        x: 1116
+        y: 1603
+        width: 278
+        height: 251
+      alignment: 9
+      pivot: {x: 0.35647482, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd1695de6beb69f489d2ab78c6a57f46
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_6
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 1102
+        width: 294
+        height: 252
+      alignment: 9
+      pivot: {x: 0.31156462, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f59213855f77cc04f9e7da1d2cabdfa6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_7
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 1101
+        width: 309
+        height: 252
+      alignment: 9
+      pivot: {x: 0.3355987, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f5d34d733e55af45a058e2c7e84eea0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_8
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1098
+        width: 327
+        height: 255
+      alignment: 9
+      pivot: {x: 0.30458716, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8c5e8c6ef2590d4681fa652eec8d996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_9
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 598
+        width: 336
+        height: 255
+      alignment: 9
+      pivot: {x: 0.30208334, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df127e4bda52cec499becfc688106221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_10
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 597
+        width: 347
+        height: 256
+      alignment: 9
+      pivot: {x: 0.3201729, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 434e0d0172faec14bb626c3e788c7233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_11
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 597
+        width: 358
+        height: 256
+      alignment: 9
+      pivot: {x: 0.2840782, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03f77d2d0985cdc4899ae492722d3901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_12
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 95
+        width: 370
+        height: 258
+      alignment: 9
+      pivot: {x: 0.30135134, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a99d8888da1dab41be6f07896b65e5c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_13
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 95
+        width: 390
+        height: 258
+      alignment: 9
+      pivot: {x: 0.32000002, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c2cc04cf994d74c9189eedaf90bdfc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WARRIOR_DASH_14
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 95
+        width: 409
+        height: 258
+      alignment: 9
+      pivot: {x: 0.301956, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec697e1198425ce46bb4a6da69375162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c68d97050a0e65b418b778d8c34c2f7d
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
