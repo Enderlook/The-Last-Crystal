@@ -8,14 +8,6 @@ namespace Master
     {
 #pragma warning disable IDE0051
 #pragma warning disable CS0649
-        [Header("Configuration")]
-        [SerializeField, Tooltip("Stating money.")]
-        private int startingMoney;
-
-        //[Header("Menu")]
-        //[SerializeField, Tooltip("Money controller script.")]
-        //private CoinMeter coinMeter;
-
         [Header("Setup")]
         [SerializeField, Tooltip("Crystal.")]
         private Transform crystal;

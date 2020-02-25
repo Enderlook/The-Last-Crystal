@@ -229,20 +229,42 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5661098376369262265, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1641866928}
     - target: {fileID: 127513567015536371, guid: 5812cbf50c688b74191c2070a027dbec,
         type: 3}
       propertyPath: sounds.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: bc5f6d57e9b820c4d8929cd0517c2ea3,
         type: 2}
-    - target: {fileID: 5661098376369262265, guid: 5812cbf50c688b74191c2070a027dbec,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1641866928}
+    - target: {fileID: 298930128, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.7001343
+      objectReference: {fileID: 0}
+    - target: {fileID: 298930128, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2.7400494
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158652782, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.60009766
+      objectReference: {fileID: 0}
     - target: {fileID: 47113620, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Level_3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592903612655610797, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076248622362769634, guid: 5812cbf50c688b74191c2070a027dbec,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5812cbf50c688b74191c2070a027dbec, type: 3}
@@ -1928,7 +1950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b663d5432e5de04aa0dd5593f692f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 0
   crystal: {fileID: 6981132073293583962}
   menu: {fileID: 0}
 --- !u!4 &1160684985
@@ -3842,6 +3863,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615058117619488972, guid: dfd10e4d85ea6f345a4d3a1665d50487,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd10e4d85ea6f345a4d3a1665d50487, type: 3}

@@ -274,6 +274,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2615058117619488972, guid: dfd10e4d85ea6f345a4d3a1665d50487,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.000061035156
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd10e4d85ea6f345a4d3a1665d50487, type: 3}
 --- !u!224 &16820985 stripped
@@ -2596,7 +2601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b663d5432e5de04aa0dd5593f692f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 0
   crystal: {fileID: 803465699}
   menu: {fileID: 0}
 --- !u!4 &1160684985

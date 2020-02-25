@@ -2598,7 +2598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b663d5432e5de04aa0dd5593f692f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 0
   crystal: {fileID: 0}
   menu: {fileID: 0}
 --- !u!4 &1218858288
