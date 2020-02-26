@@ -88,7 +88,7 @@ namespace Creatures.Weapons
             }
         }
 
-        private void Cast()
+        public void Cast()
         {
             shootingSound.Play();
             GameObject go = new GameObject($"{nameof(FreezingClick)} Cloud");

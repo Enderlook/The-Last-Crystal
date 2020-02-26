@@ -216,7 +216,7 @@ MonoBehaviour:
   shootingSound:
     audioSource: {fileID: 1038400828636867941}
     sound: {fileID: 11400000, guid: 6160d497053f73041b0e4b75a2726e53, type: 2}
-  animationName: 
+  animationName: Freeze
   cloudAnimation: {fileID: 9100000, guid: 2192842ddf43e214b942efe0fcbd1270, type: 2}
   energyPool: {fileID: 9170215451842570928}
 --- !u!114 &5110240747096253620
