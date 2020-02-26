@@ -45,8 +45,6 @@ namespace Creatures
 
         private EffectManager<Creature> effectManager;
 
-        private const string ANIMATION_STATE_HURT = "Hurt";
-
         [NonSerialized]
         public bool isStunned;
 
