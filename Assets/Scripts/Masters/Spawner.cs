@@ -9,6 +9,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 
+using Additions.Serializables.Atoms;
+
 public class Spawner : MonoBehaviour
 {
 #pragma warning disable CS0649
@@ -19,8 +21,10 @@ public class Spawner : MonoBehaviour
     [SerializeField, Tooltip("Maximum amount of enemies at the same time")]
     private int simultaneousEnemies;
 
-    [SerializeField, Tooltip("Total enemies to spawn.")]
-    private int enemiesToSpawn;
+    [SerializeField, Tooltip("Total enemies to spawn."), Expandable, RestrictType(typeof(IGet<int>))]
+    private Atom enemiesToSpawn;
+
+    private IGet<int> enemiesToSpawnGetter;
 
     [SerializeField, Tooltip("Time between spawn enemies.")]
     private float timeBtwSpawn;
@@ -69,7 +73,13 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void Awake() => instance = this;
+    private int spawnedEnemies;
+
+    private void Awake()
+    {
+        instance = this;
+        enemiesToSpawnGetter = (IGet<int>)enemiesToSpawn;
+    }
 
     // Function called by ReadyTextAnimation.cs
     public void InitializeWave()
@@ -90,7 +100,7 @@ public class Spawner : MonoBehaviour
     private IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(startSpawn);
-        for (; enemiesToSpawn > 0; enemiesToSpawn--)
+        for (; spawnedEnemies < enemiesToSpawnGetter.Value; spawnedEnemies++)
         {
             yield return new WaitUntil(() => enemiesAlive < simultaneousEnemies);
             yield return new WaitWhile(() => Settings.IsPause);
