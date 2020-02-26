@@ -46,7 +46,6 @@ GameObject:
   - component: {fileID: 843876848762180787}
   - component: {fileID: 2679576587458712375}
   - component: {fileID: 2922834967895029636}
-  - component: {fileID: 371628961907377835}
   - component: {fileID: 1549091846290657791}
   - component: {fileID: 1717894949730967846}
   - component: {fileID: 3490750178117718918}
@@ -54,6 +53,7 @@ GameObject:
   - component: {fileID: 8597921017496991690}
   - component: {fileID: 7802901863001622724}
   - component: {fileID: 8471697138206256346}
+  - component: {fileID: 3261144855731892122}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -331,36 +331,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!60 &371628961907377835
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5794628492074983519}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.95105654, y: 0.30901697}
-      - {x: -0.5877852, y: -0.80901706}
-      - {x: 0.58778536, y: -0.80901694}
-      - {x: 0.9510565, y: 0.30901712}
 --- !u!114 &1549091846290657791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,46 +362,34 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
   hasFullCallback: 0
   fullCallback:
     callback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
   hasChangeCallback: 0
   changeCallback:
     callback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
   hasBar: 1
   bar:
     bar: {fileID: 4711836830630950327}
   hasRecharger: 0
   recharger:
-    rechargeRate: 0
-    rechargingDelay: 0
+    rechargeRate: {fileID: 0}
+    rechargingDelay: {fileID: 0}
     playlist: {fileID: 0}
     audioSource: {fileID: 0}
     startCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     endCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
-        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     activeCallback:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: Additions.Components.FloatPool.Decorators.RechargerDecorator+UnityEventBoolean,
-        Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   hasDecreaseReduction: 0
   decreaseReduction:
     reductionFormula:
@@ -533,6 +491,22 @@ MonoBehaviour:
     weightedElements: []
     emptyWeight: 0
   deathCondition: 6
+--- !u!70 &3261144855731892122
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5794628492074983519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1001 &2914788185493605554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -540,11 +514,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6140415168490267451}
     m_Modifications:
-    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
-        type: 3}
-      propertyPath: m_Name
-      value: Health Bar with Canvas
-      objectReference: {fileID: 0}
     - target: {fileID: 4464618227662975336, guid: 6969e2527261f0045bc3f1b1a0c7b153,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -649,6 +618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7506624220066418789, guid: 6969e2527261f0045bc3f1b1a0c7b153,
+        type: 3}
+      propertyPath: m_Name
+      value: Health Bar with Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6969e2527261f0045bc3f1b1a0c7b153, type: 3}
