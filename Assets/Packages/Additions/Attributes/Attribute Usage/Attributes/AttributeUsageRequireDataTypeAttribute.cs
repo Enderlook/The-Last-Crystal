@@ -47,6 +47,6 @@ namespace Additions.Attributes.AttributeUsage
         /// <param name="attributeName"></param>
         /// <remarks>Only use in Unity Editor.</remarks>
         public void CheckAllowance(Type toCheckType, string toCheckName, string attributeName) => AttributeUsageHelper.CheckContains(nameof(AttributeUsageRequireDataTypeAttribute), Types, typeFlags, isBlackList, AllowedTypes, toCheckType, attributeName, toCheckName);
-    }
 #endif
+    }
 }

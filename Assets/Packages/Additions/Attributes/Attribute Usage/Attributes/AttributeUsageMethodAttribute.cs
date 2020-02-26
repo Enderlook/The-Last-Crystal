@@ -159,6 +159,6 @@ namespace Additions.Attributes.AttributeUsage
                     AttributeUsageHelper.CheckContains(nameof(AttributeUsageMethodAttribute), Types, checkingFlags, false, AllowedTypes, parameterInfo.ParameterType, $"{attributeName} parameter {parameterInfo.Name} in position {parameterInfo.Position}", $"Parameter");
             }
         }
-    }
 #endif
+    }
 }
