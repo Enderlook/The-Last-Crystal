@@ -2023,21 +2023,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5994267738088269142, guid: 01958389fff87d641a04c253efbced89,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994267738088269225, guid: 01958389fff87d641a04c253efbced89,
-        type: 3}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5994267738088269225, guid: 01958389fff87d641a04c253efbced89,
-        type: 3}
-      propertyPath: orthographic size
-      value: 5.4
-      objectReference: {fileID: 0}
     - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: simultaneousEnemies
@@ -2058,6 +2043,36 @@ PrefabInstance:
       propertyPath: navigationGraph
       value: 
       objectReference: {fileID: 1307858829}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: points.Array.data[0].x
+      value: 6.526817
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: points.Array.data[0].y
+      value: -2.1524217
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: points.Array.data[1].x
+      value: -3.7474368
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: points.Array.data[1].y
+      value: 0.85217834
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: points.Array.data[2].x
+      value: -7.330853
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: points.Array.data[2].y
+      value: -2.386738
+      objectReference: {fileID: 0}
     - target: {fileID: 5994267739241167643, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2093,16 +2108,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.6635437
       objectReference: {fileID: 0}
-    - target: {fileID: 5994267738519803469, guid: 01958389fff87d641a04c253efbced89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7033675137452564069, guid: 01958389fff87d641a04c253efbced89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1179238203830909553, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2118,6 +2123,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.09741211
       objectReference: {fileID: 0}
+    - target: {fileID: 5994267738088269142, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.09
+      objectReference: {fileID: 0}
     - target: {fileID: 5994267739153083650, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2127,6 +2137,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -4.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267738519803469, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267738088269225, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: orthographic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267738088269225, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7033675137452564069, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01958389fff87d641a04c253efbced89, type: 3}
