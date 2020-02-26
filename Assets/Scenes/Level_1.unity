@@ -1781,9 +1781,9 @@ MonoBehaviour:
   readyTextAnimator: {fileID: 1735340518}
   navigationGraph: {fileID: 267235809}
   points:
-  - {x: 5.228639, y: -0.83387804}
-  - {x: -8.316242, y: 2.5692453}
-  - {x: 5.9949055, y: 2.2537239}
+  - {x: 4.4548182, y: -0.8338778}
+  - {x: -4.199509, y: 1.4549414}
+  - {x: 4.385357, y: 2.2846766}
 --- !u!114 &1160684988
 MonoBehaviour:
   m_ObjectHideFlags: 0
