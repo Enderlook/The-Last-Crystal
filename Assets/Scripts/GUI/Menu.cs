@@ -75,8 +75,8 @@ public class Menu : MonoBehaviour
     private Resolution[] resolutions; // Variable to store all detected resolutions.
 
     private float masterVolume = 0.8f;
-    private float soundVolume = 0.8f;
-    private float musicVolume = 0.8f;
+    private float soundVolume = 1f;
+    private float musicVolume = 1f;
 
     // Statics variables.
     private static int currentResolutionIndex;
