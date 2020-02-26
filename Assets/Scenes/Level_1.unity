@@ -2521,6 +2521,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2009531003835833022, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009531003835833022, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00012207031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1397234590127441673, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1397234590127441673, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000030517578
+      objectReference: {fileID: 0}
     - target: {fileID: 2123505444938431851, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_Name
@@ -2621,11 +2641,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.6635437
       objectReference: {fileID: 0}
-    - target: {fileID: 1179238203830909553, guid: 01958389fff87d641a04c253efbced89,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.8300781
-      objectReference: {fileID: 0}
     - target: {fileID: 833355200102685460, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2655,6 +2670,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -4.9999695
+      objectReference: {fileID: 0}
+    - target: {fileID: 4692605661486079032, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5994267738296527226, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7033675137554339783, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01958389fff87d641a04c253efbced89, type: 3}
