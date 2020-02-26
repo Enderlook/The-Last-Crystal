@@ -12147,8 +12147,8 @@ MonoBehaviour:
   loseIndex: 3
   difficulty: {fileID: 11400000, guid: cb773397107532a4aaa856c7ef578ca3, type: 2}
   difficultyText: {fileID: 2998185546675287040}
-  soundMixer: {fileID: 0}
-  musicMixer: {fileID: 0}
+  soundMixer: {fileID: 24100000, guid: 2856b9ed91ad71b4db7c0f3f403d6b94, type: 2}
+  musicMixer: {fileID: 24100000, guid: 1ff7023419314094782eeb6dee81b844, type: 2}
   masterVolumeSlider: {fileID: 9214741038537813052}
   musicVolumeSlider: {fileID: 1102008662003297804}
   soundVolumeSlider: {fileID: 3432207404488292075}

@@ -1,0 +1,275 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1378896960543660293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1378896960543660298}
+  - component: {fileID: 1378896960543660299}
+  - component: {fileID: 1378896960543660292}
+  - component: {fileID: 1378896960543660297}
+  - component: {fileID: 1378896960543660296}
+  - component: {fileID: 1378896960543660303}
+  - component: {fileID: 1378896960543660301}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1378896960543660298
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1378896960543660299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b663d5432e5de04aa0dd5593f692f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crystal: {fileID: 0}
+  menu: {fileID: 0}
+--- !u!114 &1378896960543660292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fed821127967a4a49896772be3164468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1378896960543660297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3812e033387a0a499e3f506b117d662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  creatures:
+  - prefab: {fileID: 8573732952227708787, guid: 09b7f3303549141429131ad61f5971e0,
+      type: 3}
+    spawningPoint: {fileID: 0}
+    respawningTime: 5
+    spawnOnStart: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1378896960543660303}
+          m_MethodName: InitializeWarrior
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    image: {fileID: 0}
+  - prefab: {fileID: 5740122355429531057, guid: 442861c165a316e4792b7d326a0610d4,
+      type: 3}
+    spawningPoint: {fileID: 0}
+    respawningTime: 5
+    spawnOnStart: 1
+    action:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1378896960543660303}
+          m_MethodName: InitializeWizard
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: CreatureSpawn+CreatureSpawnToken+UnityEventGameObject, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    image: {fileID: 0}
+--- !u!114 &1378896960543660296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b75f49ddb863184dabddb1b62853434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - prefabEnemy: {fileID: 5637262392555047084, guid: a9ccf80e703a2cf4998b10093547db6a,
+      type: 3}
+    probability: 5
+  - prefabEnemy: {fileID: 4598965145827479676, guid: 1e7ac38d2f7c10347b05de7b74971f01,
+      type: 3}
+    probability: 50
+  - prefabEnemy: {fileID: 7404249357495629987, guid: 46a0782705ddbe2489edb97408bbc928,
+      type: 3}
+    probability: 80
+  - prefabEnemy: {fileID: 7404249357495629987, guid: 46a0782705ddbe2489edb97408bbc928,
+      type: 3}
+    probability: 30
+  - prefabEnemy: {fileID: 4598965145827479676, guid: 1e7ac38d2f7c10347b05de7b74971f01,
+      type: 3}
+    probability: 45
+  simultaneousEnemies: 4
+  enemiesToSpawn: 14
+  timeBtwSpawn: 2
+  startSpawn: 2
+  boss: {fileID: 5363415117319019817, guid: 68bf06f97f8991f4584e3e4ce3ed5305, type: 3}
+  portal: {fileID: 558978172750866583, guid: bdb66e4197fa0bd4ea34b2311559aaf0, type: 3}
+  particle: {fileID: 6477713787646980818, guid: b40b703b9eaf73a409911f45eaf0db3b,
+    type: 3}
+  readyTextAnimator: {fileID: 0}
+  navigationGraph: {fileID: 0}
+  points:
+  - {x: 4.4548182, y: -0.8338778}
+  - {x: -4.199509, y: 1.4549414}
+  - {x: 4.385357, y: 2.2846766}
+--- !u!114 &1378896960543660303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a46051eb105e64e84fbbafa57ed742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warriorHealthBar: {fileID: 0}
+  warriorEnergyBar: {fileID: 0}
+  wizardHealthBar: {fileID: 0}
+  wizardEnergyBar: {fileID: 0}
+--- !u!82 &1378896960543660301
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378896960543660293}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
