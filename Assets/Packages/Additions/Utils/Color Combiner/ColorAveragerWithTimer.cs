@@ -222,6 +222,7 @@ namespace Additions.Utils.ColorCombiner
         {
             HasChanged = true;
             colors.Clear();
+            expirationOrder.Clear();
         }
 
         /// <inheritdoc />
