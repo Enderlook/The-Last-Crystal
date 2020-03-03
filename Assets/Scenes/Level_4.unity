@@ -1899,6 +1899,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 1.8300781
       objectReference: {fileID: 0}
+    - target: {fileID: 1397234590127441673, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2123505444938431851, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_Name
@@ -2245,6 +2250,12 @@ PrefabInstance:
       propertyPath: points.Array.data[22].y
       value: -0.24518864
       objectReference: {fileID: 0}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1213234362491163374, guid: ef70a1cfcb0c11a4f8afcbc57d7b2c18,
+        type: 3}
     - target: {fileID: 5994267739153083650, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,0 +1,1381 @@
+fileFormatVersion: 2
+guid: a3719a6a55329ee4380a64005b8ae5e1
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: RUN_SPRITE_GOLEM_0
+    21300002: RUN_SPRITE_GOLEM_1
+    21300004: RUN_SPRITE_GOLEM_2
+    21300006: RUN_SPRITE_GOLEM_3
+    21300008: RUN_SPRITE_GOLEM_4
+    21300010: RUN_SPRITE_GOLEM_5
+    21300012: RUN_SPRITE_GOLEM_6
+    21300014: RUN_SPRITE_GOLEM_7
+    21300016: RUN_SPRITE_GOLEM_8
+    21300018: RUN_SPRITE_GOLEM_9
+    21300020: RUN_SPRITE_GOLEM_10
+    21300022: RUN_SPRITE_GOLEM_11
+    21300024: RUN_SPRITE_GOLEM_12
+    21300026: RUN_SPRITE_GOLEM_13
+    21300028: RUN_SPRITE_GOLEM_14
+    21300030: RUN_SPRITE_GOLEM_15
+    21300032: RUN_SPRITE_GOLEM_16
+    21300034: RUN_SPRITE_GOLEM_17
+    21300036: RUN_SPRITE_GOLEM_18
+    21300038: RUN_SPRITE_GOLEM_19
+    21300040: RUN_SPRITE_GOLEM_20
+    21300042: RUN_SPRITE_GOLEM_21
+    21300044: RUN_SPRITE_GOLEM_22
+    21300046: RUN_SPRITE_GOLEM_23
+    21300048: RUN_SPRITE_GOLEM_24
+    21300050: RUN_SPRITE_GOLEM_25
+    21300052: RUN_SPRITE_GOLEM_26
+    21300054: RUN_SPRITE_GOLEM_27
+    21300056: RUN_SPRITE_GOLEM_28
+    21300058: RUN_SPRITE_GOLEM_29
+    21300060: RUN_SPRITE_GOLEM_30
+    21300062: RUN_SPRITE_GOLEM_31
+    21300064: RUN_SPRITE_GOLEM_32
+    21300066: RUN_SPRITE_GOLEM_33
+    21300068: RUN_SPRITE_GOLEM_34
+    21300070: RUN_SPRITE_GOLEM_35
+    21300072: RUN_SPRITE_GOLEM_36
+    21300074: RUN_SPRITE_GOLEM_37
+    21300076: RUN_SPRITE_GOLEM_38
+    21300078: RUN_SPRITE_GOLEM_39
+    21300080: RUN_SPRITE_GOLEM_40
+    21300082: RUN_SPRITE_GOLEM_41
+    21300084: RUN_SPRITE_GOLEM_42
+    21300086: RUN_SPRITE_GOLEM_43
+    21300088: RUN_SPRITE_GOLEM_44
+    21300090: RUN_SPRITE_GOLEM_45
+    21300092: RUN_SPRITE_GOLEM_46
+    21300094: RUN_SPRITE_GOLEM_47
+    21300096: RUN_SPRITE_GOLEM_48
+    21300098: RUN_SPRITE_GOLEM_49
+    21300100: RUN_SPRITE_GOLEM_50
+    21300102: RUN_SPRITE_GOLEM_51
+    21300104: RUN_SPRITE_GOLEM_52
+    21300106: RUN_SPRITE_GOLEM_53
+    21300108: RUN_SPRITE_GOLEM_54
+    21300110: RUN_SPRITE_GOLEM_55
+    21300112: RUN_SPRITE_GOLEM_56
+    21300114: RUN_SPRITE_GOLEM_57
+    21300116: RUN_SPRITE_GOLEM_58
+    21300118: RUN_SPRITE_GOLEM_59
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_0
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 5666
+        width: 502
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80193fb7319ec484ab25f2f1e4ac7755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_1
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 5666
+        width: 495
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a28a8877a3cc9847aeeeda2a30bb5c8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_2
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 5669
+        width: 486
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1914e8e450c718143a62b02febddbf80
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_3
+      rect:
+        serializedVersion: 2
+        x: 2215
+        y: 5669
+        width: 476
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6247f4c28215ce5429e760ed1002ff97
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_4
+      rect:
+        serializedVersion: 2
+        x: 2925
+        y: 5666
+        width: 465
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db22d004dcc126c4ebc5826d57cf73f5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_5
+      rect:
+        serializedVersion: 2
+        x: 3636
+        y: 5669
+        width: 449
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62c3e57858cb5324e857bf02663bc15f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_6
+      rect:
+        serializedVersion: 2
+        x: 4352
+        y: 5666
+        width: 428
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1be80608f820054d95b60635f78cbc3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_7
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 4968
+        width: 409
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86e31babe8425cb4fb455c5ead6199bc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_8
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 4971
+        width: 384
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ecb319c4df1a6f479a54dd640ac74fc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_9
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 4971
+        width: 360
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4fd8d58add6e4c43b309f5d7ced80aa
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_10
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 4971
+        width: 335
+        height: 532
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b91b676014d8d7428b850d5dff20e82
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_11
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 4965
+        width: 311
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d02a811afc8a2b447a0219a1fa9e9d0d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_12
+      rect:
+        serializedVersion: 2
+        x: 3716
+        y: 4965
+        width: 280
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c74e6e886a9a9534ba35da15ae28418c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_13
+      rect:
+        serializedVersion: 2
+        x: 4423
+        y: 4965
+        width: 246
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4536a927c09da4a4b99db6b515133144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_14
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 4267
+        width: 239
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e667446c7b3b10b488c600e5d2a34692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_15
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 4270
+        width: 243
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28b750544d185ff4385463eeb8297b89
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_16
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 4273
+        width: 243
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43d826b2158bacd4fa108c1bce80bc00
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_17
+      rect:
+        serializedVersion: 2
+        x: 2313
+        y: 4273
+        width: 252
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0bc6d8f977f62d499b0304ea724be37
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_18
+      rect:
+        serializedVersion: 2
+        x: 3018
+        y: 4273
+        width: 255
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f6f48dd2a0bf0d4aaa60fd252d0d3c7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_19
+      rect:
+        serializedVersion: 2
+        x: 3719
+        y: 4276
+        width: 261
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d18b3ab309aaa1a43966e6b3257669a1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_20
+      rect:
+        serializedVersion: 2
+        x: 4417
+        y: 4276
+        width: 274
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 232db7e21a9b3274798eaff9219f3309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_21
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 3581
+        width: 292
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39e746ffa367b834692feaf7db543ca3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_22
+      rect:
+        serializedVersion: 2
+        x: 901
+        y: 3581
+        width: 302
+        height: 535
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0975b0256cd8b294284cd46ee4c17e90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_23
+      rect:
+        serializedVersion: 2
+        x: 1599
+        y: 3584
+        width: 308
+        height: 532
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e74d059718ad9dd4399b544951d7e303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_24
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 3590
+        width: 313
+        height: 526
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98bc8dccaca1e2c408e3cf5ad28011db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_25
+      rect:
+        serializedVersion: 2
+        x: 2996
+        y: 3593
+        width: 320
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb1c078b0051b324cb888eadf0bb7418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_26
+      rect:
+        serializedVersion: 2
+        x: 3694
+        y: 3602
+        width: 326
+        height: 511
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4119fbc63d5cec14c9534379ff5f1469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_27
+      rect:
+        serializedVersion: 2
+        x: 4392
+        y: 3593
+        width: 330
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae92f52aeb3d0fe4b8b9ef03c1e58392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_28
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 2889
+        width: 332
+        height: 522
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce388b5f5f373214cb9f8c4512dcb741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_29
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 2882
+        width: 338
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42328a56214d217459685312ec3070b5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_30
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 2876
+        width: 348
+        height: 535
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae7de2c0df2a2042a8f1269a1aa509f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_31
+      rect:
+        serializedVersion: 2
+        x: 2282
+        y: 2876
+        width: 348
+        height: 532
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccf17a2b5522320418f2173ee7058979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_32
+      rect:
+        serializedVersion: 2
+        x: 2987
+        y: 2867
+        width: 341
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7af64f3607e930a418ba43b6f1fcf05d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_33
+      rect:
+        serializedVersion: 2
+        x: 3691
+        y: 2867
+        width: 335
+        height: 535
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b5886717c62f1f4eb7c3094cb678775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_34
+      rect:
+        serializedVersion: 2
+        x: 4396
+        y: 2864
+        width: 326
+        height: 535
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2faed727f0f81e2478caa5aba6e9c2b1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_35
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 2166
+        width: 320
+        height: 529
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f4be9bb8cd20cb4cafb464f29f8986e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_36
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 2163
+        width: 292
+        height: 535
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d05fadba99ec10643a7705ae3b20585c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_37
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 2163
+        width: 274
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec7bdacc6e1a222488cbc0a7b7c1f34e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_38
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 2163
+        width: 259
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 423e83eae8c1a3b4ba2004fd2721699c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_39
+      rect:
+        serializedVersion: 2
+        x: 3021
+        y: 2166
+        width: 246
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84142d9ea87d760439153afcd659d7cf
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_40
+      rect:
+        serializedVersion: 2
+        x: 3722
+        y: 2166
+        width: 252
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebfbb5702ead5364286dcc483c36fbde
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_41
+      rect:
+        serializedVersion: 2
+        x: 4423
+        y: 2169
+        width: 271
+        height: 541
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 708e06287beb325449021f171bc8e6dd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_42
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 1470
+        width: 296
+        height: 542
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6e822e0ccaa606428bf80874bd66dd5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_43
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 1473
+        width: 320
+        height: 539
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 149a626380e9d2144b4e5cfe3e27783b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_44
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 1477
+        width: 345
+        height: 535
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c05b4e9de3821ee429b7c1859ae94c90
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_45
+      rect:
+        serializedVersion: 2
+        x: 2282
+        y: 1477
+        width: 369
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d94d4326d9218740a827755f1d88bde
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_46
+      rect:
+        serializedVersion: 2
+        x: 2978
+        y: 1477
+        width: 378
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0edb28a168b88f84fa597d044e150e06
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_47
+      rect:
+        serializedVersion: 2
+        x: 3673
+        y: 1477
+        width: 387
+        height: 538
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 517415f220620ad488c6e51c6ee97ddb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_48
+      rect:
+        serializedVersion: 2
+        x: 4368
+        y: 1473
+        width: 394
+        height: 545
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00d51964f59cb624c845de61cbd7e94a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_49
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 772
+        width: 403
+        height: 545
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 303b092151be46e4992ca7191f100e3d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_50
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 775
+        width: 412
+        height: 545
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 367e5bf706645b846b72a47492c467d7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_51
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 775
+        width: 416
+        height: 542
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6e4384deda23a1418aab8d725cad6d1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_52
+      rect:
+        serializedVersion: 2
+        x: 2252
+        y: 775
+        width: 424
+        height: 542
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7863adf4464fbeb499cc903c77644985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_53
+      rect:
+        serializedVersion: 2
+        x: 2947
+        y: 781
+        width: 430
+        height: 536
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba2750ca1a60e094c8f888c6603ac7bb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_54
+      rect:
+        serializedVersion: 2
+        x: 3645
+        y: 797
+        width: 437
+        height: 517
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f974af495f5546e498f9662c98133686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_55
+      rect:
+        serializedVersion: 2
+        x: 4343
+        y: 803
+        width: 440
+        height: 511
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec2300362c1fa594c8ebe4c6786d4b54
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_56
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 117
+        width: 447
+        height: 495
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 617dbc541bf533d43b80329df8a6991e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_57
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 111
+        width: 449
+        height: 501
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea2ca8c0b26cac4e8040ae52d2659e9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_58
+      rect:
+        serializedVersion: 2
+        x: 1523
+        y: 95
+        width: 470
+        height: 517
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c77394aa8b3dd74aa264300ab565f7e
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RUN_SPRITE_GOLEM_59
+      rect:
+        serializedVersion: 2
+        x: 2202
+        y: 89
+        width: 496
+        height: 520
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49d7491e96a06ae459ab20b012b03fd8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 2596923b27056164686b583afd69f409
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
