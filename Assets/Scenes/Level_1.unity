@@ -2647,6 +2647,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 950c0d3c32d134443a2eb05f4521aecd,
         type: 2}
+    - target: {fileID: 5994267739048310893, guid: 01958389fff87d641a04c253efbced89,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1213234362491163374, guid: ef70a1cfcb0c11a4f8afcbc57d7b2c18,
+        type: 3}
     - target: {fileID: 5994267739241167643, guid: 01958389fff87d641a04c253efbced89,
         type: 3}
       propertyPath: m_AnchoredPosition.y

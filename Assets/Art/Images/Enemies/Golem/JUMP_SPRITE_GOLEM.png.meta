@@ -1,0 +1,1717 @@
+fileFormatVersion: 2
+guid: 18ade1c6ff481eb48887227a7be65962
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: JUMP_SPRITE_GOLEM_0
+    21300002: JUMP_SPRITE_GOLEM_1
+    21300004: JUMP_SPRITE_GOLEM_2
+    21300006: JUMP_SPRITE_GOLEM_3
+    21300008: JUMP_SPRITE_GOLEM_4
+    21300010: JUMP_SPRITE_GOLEM_5
+    21300012: JUMP_SPRITE_GOLEM_6
+    21300014: JUMP_SPRITE_GOLEM_7
+    21300016: JUMP_SPRITE_GOLEM_8
+    21300018: JUMP_SPRITE_GOLEM_9
+    21300020: JUMP_SPRITE_GOLEM_10
+    21300022: JUMP_SPRITE_GOLEM_11
+    21300024: JUMP_SPRITE_GOLEM_12
+    21300026: JUMP_SPRITE_GOLEM_13
+    21300028: JUMP_SPRITE_GOLEM_14
+    21300030: JUMP_SPRITE_GOLEM_15
+    21300032: JUMP_SPRITE_GOLEM_16
+    21300034: JUMP_SPRITE_GOLEM_17
+    21300036: JUMP_SPRITE_GOLEM_18
+    21300038: JUMP_SPRITE_GOLEM_19
+    21300040: JUMP_SPRITE_GOLEM_20
+    21300042: JUMP_SPRITE_GOLEM_21
+    21300044: JUMP_SPRITE_GOLEM_22
+    21300046: JUMP_SPRITE_GOLEM_23
+    21300048: JUMP_SPRITE_GOLEM_24
+    21300050: JUMP_SPRITE_GOLEM_25
+    21300052: JUMP_SPRITE_GOLEM_26
+    21300054: JUMP_SPRITE_GOLEM_27
+    21300056: JUMP_SPRITE_GOLEM_28
+    21300058: JUMP_SPRITE_GOLEM_29
+    21300060: JUMP_SPRITE_GOLEM_30
+    21300062: JUMP_SPRITE_GOLEM_31
+    21300064: JUMP_SPRITE_GOLEM_32
+    21300066: JUMP_SPRITE_GOLEM_33
+    21300068: JUMP_SPRITE_GOLEM_34
+    21300070: JUMP_SPRITE_GOLEM_35
+    21300072: JUMP_SPRITE_GOLEM_36
+    21300074: JUMP_SPRITE_GOLEM_37
+    21300076: JUMP_SPRITE_GOLEM_38
+    21300078: JUMP_SPRITE_GOLEM_39
+    21300080: JUMP_SPRITE_GOLEM_40
+    21300082: JUMP_SPRITE_GOLEM_41
+    21300084: JUMP_SPRITE_GOLEM_42
+    21300086: JUMP_SPRITE_GOLEM_43
+    21300088: JUMP_SPRITE_GOLEM_44
+    21300090: JUMP_SPRITE_GOLEM_45
+    21300092: JUMP_SPRITE_GOLEM_46
+    21300094: JUMP_SPRITE_GOLEM_47
+    21300096: JUMP_SPRITE_GOLEM_48
+    21300098: JUMP_SPRITE_GOLEM_49
+    21300100: JUMP_SPRITE_GOLEM_50
+    21300102: JUMP_SPRITE_GOLEM_51
+    21300104: JUMP_SPRITE_GOLEM_52
+    21300106: JUMP_SPRITE_GOLEM_53
+    21300108: JUMP_SPRITE_GOLEM_54
+    21300110: JUMP_SPRITE_GOLEM_55
+    21300112: JUMP_SPRITE_GOLEM_56
+    21300114: JUMP_SPRITE_GOLEM_57
+    21300116: JUMP_SPRITE_GOLEM_58
+    21300118: JUMP_SPRITE_GOLEM_59
+    21300120: JUMP_SPRITE_GOLEM_60
+    21300122: JUMP_SPRITE_GOLEM_61
+    21300124: JUMP_SPRITE_GOLEM_62
+    21300126: JUMP_SPRITE_GOLEM_63
+    21300128: JUMP_SPRITE_GOLEM_64
+    21300130: JUMP_SPRITE_GOLEM_65
+    21300132: JUMP_SPRITE_GOLEM_66
+    21300134: JUMP_SPRITE_GOLEM_67
+    21300136: JUMP_SPRITE_GOLEM_68
+    21300138: JUMP_SPRITE_GOLEM_69
+    21300140: JUMP_SPRITE_GOLEM_70
+    21300142: JUMP_SPRITE_GOLEM_71
+    21300144: JUMP_SPRITE_GOLEM_72
+    21300146: JUMP_SPRITE_GOLEM_73
+    21300148: JUMP_SPRITE_GOLEM_74
+    21300150: JUMP_SPRITE_GOLEM_75
+  externalObjects: {}
+  serializedVersion: 9
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_0
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 6361
+        width: 325
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f066ad1e030a045409296b87be80a316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_1
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 6361
+        width: 324
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38aa46ea6abbe3c43afe6c704691c376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_2
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 6357
+        width: 328
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c6b6867366f8034c93c13660721e826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_3
+      rect:
+        serializedVersion: 2
+        x: 2318
+        y: 6357
+        width: 328
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5c1c9db3ae231946b91050b7d37a023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_4
+      rect:
+        serializedVersion: 2
+        x: 3015
+        y: 6357
+        width: 332
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d316051d8b31a8d408a6dd6926deffdb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_5
+      rect:
+        serializedVersion: 2
+        x: 3716
+        y: 6357
+        width: 332
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c42572c7d71ba0f4bb41d782800982e4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_6
+      rect:
+        serializedVersion: 2
+        x: 4417
+        y: 6357
+        width: 328
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aee07617cf1c55438b9c8cbf94ff523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_7
+      rect:
+        serializedVersion: 2
+        x: 5115
+        y: 6357
+        width: 331
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9fb3df8b60b4944ca538c3906d8aaf3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_8
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 5657
+        width: 332
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac9f6903a9b4c6f40841e1712f273693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_9
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 5657
+        width: 335
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93c4e51ae3701a4491fa270d62a0b65
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_10
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 5657
+        width: 335
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bf0b54595712be40a626c884d265f58
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_11
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 5657
+        width: 335
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f60c4680b30f2db40abfb8cd4ee6c2b0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_12
+      rect:
+        serializedVersion: 2
+        x: 3012
+        y: 5657
+        width: 335
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60bcea7846c57a348a245a9e117e4614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_13
+      rect:
+        serializedVersion: 2
+        x: 3709
+        y: 5657
+        width: 339
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4834e9341930c24287e2aac7c304ca3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_14
+      rect:
+        serializedVersion: 2
+        x: 4410
+        y: 5657
+        width: 335
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d104d99310d229a4ea7e20bbe36deee1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_15
+      rect:
+        serializedVersion: 2
+        x: 5111
+        y: 5660
+        width: 335
+        height: 533
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 309a7cd567c5c9b43a8612c120847c8c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_16
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 4959
+        width: 338
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62d602027e4f119408c2ce06d54c20f8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_17
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 4959
+        width: 339
+        height: 534
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87acab750c44e1c469099eada9e6c992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_18
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 4959
+        width: 338
+        height: 534
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7ac563727f1da4bac76cdece68c053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_19
+      rect:
+        serializedVersion: 2
+        x: 2308
+        y: 4959
+        width: 335
+        height: 534
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f47209aa906f7a4e919c12775d51d10
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_20
+      rect:
+        serializedVersion: 2
+        x: 3005
+        y: 4963
+        width: 335
+        height: 530
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fcac6383e000364ba339829892033b4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_21
+      rect:
+        serializedVersion: 2
+        x: 3709
+        y: 4963
+        width: 332
+        height: 530
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 717307efef0d80146af409faa69e41c0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_22
+      rect:
+        serializedVersion: 2
+        x: 4410
+        y: 4963
+        width: 332
+        height: 533
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbe1a60c28ddd844fbc49d52e84d4f41
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_23
+      rect:
+        serializedVersion: 2
+        x: 5111
+        y: 4963
+        width: 328
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0838d35e05438534ba1052e09ba0622d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_24
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 4262
+        width: 321
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb16b2ba783ca6a4fae994cac47ac824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_25
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 4262
+        width: 314
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19295faa260d215459969b882823506f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_26
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 4262
+        width: 304
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86246f34c4ff8af4d801c850428fc99f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_27
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 4266
+        width: 287
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af18e6d2e8ce4e94badd693206d33993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_28
+      rect:
+        serializedVersion: 2
+        x: 3015
+        y: 4266
+        width: 260
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 882d2cc2a6dbc674cb3d5c3de68aa4cc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_29
+      rect:
+        serializedVersion: 2
+        x: 3716
+        y: 4269
+        width: 243
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34e579d4f0c870149be13348802f1249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_30
+      rect:
+        serializedVersion: 2
+        x: 4417
+        y: 4269
+        width: 239
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87cee24564dcc294a82988a7bf068452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_31
+      rect:
+        serializedVersion: 2
+        x: 5118
+        y: 4269
+        width: 239
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9936d854311f8f745be7907c0cae44ba
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_32
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 3568
+        width: 239
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c34b65a638f6e94ea801d251be432b8
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_33
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 3568
+        width: 243
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f5075a4811cb7142b21c599eb1105f0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_34
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 3568
+        width: 246
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abc1e75e9cbd46d4fa16d268db5312fb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_35
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 3565
+        width: 246
+        height: 547
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 756aeab7a7a16c244818b88b8da3cb9a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_36
+      rect:
+        serializedVersion: 2
+        x: 3012
+        y: 3565
+        width: 246
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed474c9e7e025af4baaa79c8d89f2f12
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_37
+      rect:
+        serializedVersion: 2
+        x: 3709
+        y: 3565
+        width: 250
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d271310001bc80d41a7f29a5edb39c82
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_38
+      rect:
+        serializedVersion: 2
+        x: 4410
+        y: 3565
+        width: 246
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03e126ccfb3f13743afba0b46ff28d94
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_39
+      rect:
+        serializedVersion: 2
+        x: 5111
+        y: 3565
+        width: 246
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 812670ce44894534fa03a022ccb44540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_40
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 2864
+        width: 246
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d02c3756afd41d048a55c55261dfa468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_41
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 2864
+        width: 247
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c3594ccc06ef134fb1aa5320d7d9f3b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_42
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 2864
+        width: 246
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 412c079861e83e74c93ff87f3f3cc70f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_43
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 2864
+        width: 246
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97bd3e41ef46b8e489f1d4c47ff8e35a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_44
+      rect:
+        serializedVersion: 2
+        x: 3012
+        y: 2861
+        width: 260
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6f8ae9b208c96a4fb8ed03f674bed3d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_45
+      rect:
+        serializedVersion: 2
+        x: 3713
+        y: 2861
+        width: 277
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 844676a6e1a3cfd48aedf5f2be0a7682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_46
+      rect:
+        serializedVersion: 2
+        x: 4414
+        y: 2861
+        width: 287
+        height: 543
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bda4806088fb824a8fdc42a2431fa22
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_47
+      rect:
+        serializedVersion: 2
+        x: 5115
+        y: 2861
+        width: 297
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0b58675e5bca6419dbf5a5a9e8374d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_48
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 2160
+        width: 305
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2faae7b8932676240bd1a14a91b0764f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_49
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 2160
+        width: 311
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e26c023da2e92dc43a1ba731143f8933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_50
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 2160
+        width: 318
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 926a7816990bbce43b532a80b76774ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_51
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 2160
+        width: 321
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04fe37fc7c27dcc45b74618240e40987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_52
+      rect:
+        serializedVersion: 2
+        x: 3012
+        y: 2160
+        width: 328
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74540c36e1d04d94689372256a8f871d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_53
+      rect:
+        serializedVersion: 2
+        x: 3713
+        y: 2160
+        width: 331
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b6193131ae67dc498669f8f72f1c443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_54
+      rect:
+        serializedVersion: 2
+        x: 4414
+        y: 2160
+        width: 331
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35924a779d4685743a873453590e5f38
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_55
+      rect:
+        serializedVersion: 2
+        x: 5111
+        y: 2160
+        width: 335
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08c98996d666a244c92990dc5c651514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_56
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 1459
+        width: 335
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac844c76c9c87044b69cc18ef6d65db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_57
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1459
+        width: 331
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b360e5cb8553274f8b73627853cd549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_58
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 1459
+        width: 335
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c2d7efe153c9a3449d62dbf19d51297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_59
+      rect:
+        serializedVersion: 2
+        x: 2311
+        y: 1459
+        width: 335
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df49e61c150cd0840b046ee7f1c5f8b6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_60
+      rect:
+        serializedVersion: 2
+        x: 3012
+        y: 1459
+        width: 335
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d7e9d309e776544abd91806cd7118e3
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_61
+      rect:
+        serializedVersion: 2
+        x: 3713
+        y: 1459
+        width: 331
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e9b54410cd729d4d8dc7f2e6b3eb87f
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_62
+      rect:
+        serializedVersion: 2
+        x: 4414
+        y: 1459
+        width: 331
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1aa7920ffcd0954d97e976821bb0f01
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_63
+      rect:
+        serializedVersion: 2
+        x: 5115
+        y: 1459
+        width: 331
+        height: 537
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515ac85b19845254a84fbbfe7bd1ff24
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_64
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 759
+        width: 332
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45156db4b4d67594d8627189dd1e8341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_65
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 759
+        width: 335
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 929ba83cf94ec3d4f9b1cb755a5eda00
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_66
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 759
+        width: 331
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e18041aff3aad14c823954426533f02
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_67
+      rect:
+        serializedVersion: 2
+        x: 2315
+        y: 759
+        width: 331
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e0538b2a938d3149a413036eb0c0da2
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_68
+      rect:
+        serializedVersion: 2
+        x: 3015
+        y: 759
+        width: 332
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a3eb77f0b2a47949b0fda54669386cd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_69
+      rect:
+        serializedVersion: 2
+        x: 3716
+        y: 759
+        width: 332
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b44cd464de014047bcb57071acd87ac
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_70
+      rect:
+        serializedVersion: 2
+        x: 4417
+        y: 759
+        width: 328
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624603393ff058d4980d5cfdede36495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_71
+      rect:
+        serializedVersion: 2
+        x: 5118
+        y: 759
+        width: 328
+        height: 540
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1ff9454c6d651940abb66d3e786e3cd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_72
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 58
+        width: 328
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2282708d96e49646b2d07718ef25aa7
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_73
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 58
+        width: 328
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76a1e9af2feaed345a0d630aa17f3a42
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_74
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 58
+        width: 328
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b8caf412bb8e746b4faca24cc87c20
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JUMP_SPRITE_GOLEM_75
+      rect:
+        serializedVersion: 2
+        x: 2318
+        y: 58
+        width: 325
+        height: 544
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a9ed596df92c7f44b2f91c8937e19b1
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a44636253e65ab845b47b43bb9f591f2
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
